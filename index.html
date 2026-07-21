@@ -19,66 +19,92 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei","Helvetica Neue",sans-serif; background:var(--bg); color:var(--ink); line-height:1.65; -webkit-font-smoothing:antialiased; }
 
-/* Topbar */
+/* ── Topbar ── */
 .topbar { background:linear-gradient(135deg, var(--brand) 0%, #1a3a5c 100%); color:#fff; padding:16px 24px; position:sticky; top:0; z-index:100; box-shadow:var(--shadow-lg); }
 .topbar h1 { font-size:18px; font-weight:700; letter-spacing:0.3px; }
 .topbar .sub { font-size:12px; opacity:0.85; margin-top:3px; }
 .topbar .sub-en { font-size:11px; opacity:0.6; margin-top:1px; }
 
-/* Tabs */
-.tabs { display:flex; gap:0; background:var(--card); border-bottom:2px solid var(--border); padding:0 12px; overflow-x:auto; position:sticky; top:58px; z-index:99; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
-.tab { padding:11px 16px; font-size:12px; font-weight:600; color:var(--muted); cursor:pointer; border:none; background:none; border-bottom:3px solid transparent; white-space:nowrap; transition:all 0.2s ease; }
+/* ── Today Strip ── */
+.today-strip { background:linear-gradient(135deg, #fff 0%, #fafbfc 100%); border-bottom:2px solid var(--border); padding:10px 16px; position:sticky; top:58px; z-index:99; display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+.today-label { font-size:11px; font-weight:700; color:var(--brand); text-transform:uppercase; letter-spacing:0.5px; margin-right:4px; }
+.today-chip { display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:600; cursor:default; transition:transform 0.15s; }
+.today-chip:hover { transform:translateY(-1px); }
+.today-chip.red { background:var(--red-bg); color:var(--red); }
+.today-chip.yellow { background:var(--yellow-bg); color:var(--yellow); }
+.today-chip.blue { background:var(--blue-bg); color:var(--blue); }
+.today-chip.green { background:var(--green-bg); color:var(--green); }
+
+/* ── Tabs ── */
+.tabs { display:flex; gap:0; background:var(--card); border-bottom:2px solid var(--border); padding:0 8px; overflow-x:auto; position:sticky; top:108px; z-index:98; }
+.tab { padding:10px 14px; font-size:12px; font-weight:600; color:var(--muted); cursor:pointer; border:none; background:none; border-bottom:3px solid transparent; white-space:nowrap; transition:all 0.2s ease; }
 .tab:hover { color:var(--ink); background:rgba(13,43,78,0.03); }
 .tab.active { color:var(--brand); border-bottom-color:var(--brand); font-weight:700; }
 
-/* Content */
-.content { max-width:960px; margin:0 auto; padding:24px 16px 60px; }
+/* ── Content ── */
+.content { max-width:960px; margin:0 auto; padding:20px 16px 60px; }
 .page { display:none; animation:fadeIn 0.3s ease; }
 .page.active { display:block; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
 
-/* Cards */
-.card { background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px; margin-bottom:16px; transition:box-shadow 0.2s; }
+/* ── Cards ── */
+.card { background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; margin-bottom:12px; transition:box-shadow 0.2s; }
 .card:hover { box-shadow:var(--shadow-hover); }
 .card-title { font-size:17px; font-weight:700; color:var(--brand); margin-bottom:2px; }
 .card-title-en { font-size:12px; color:var(--muted); margin-bottom:8px; }
-.card-sub { font-size:12px; color:var(--muted); margin-bottom:12px; }
 
-/* 80/20 callout */
-.pareto { background:linear-gradient(135deg, var(--blue-bg) 0%, #edf4ff 100%); border-radius:10px; padding:14px 16px; margin-bottom:16px; font-size:13px; line-height:1.55; border:1px solid rgba(37,99,235,0.1); }
+/* ── 80/20 callout ── */
+.pareto { background:linear-gradient(135deg, var(--blue-bg) 0%, #edf4ff 100%); border-radius:10px; padding:14px 16px; margin-bottom:14px; font-size:13px; line-height:1.55; border:1px solid rgba(37,99,235,0.1); }
 .pareto strong { color:var(--brand); }
 .pareto-en { font-size:11px; color:var(--muted); margin-top:5px; background:none; border:none; padding:0; }
 
-/* Section titles */
-.sec-title { font-size:14px; font-weight:700; color:var(--brand); border-bottom:2px solid var(--brand); padding-bottom:4px; margin:18px 0 8px; display:flex; align-items:baseline; gap:6px; }
+/* ── Section titles ── */
+.sec-title { font-size:13px; font-weight:700; color:var(--brand); border-bottom:2px solid var(--brand); padding-bottom:3px; margin:16px 0 6px; display:flex; align-items:baseline; gap:6px; }
 .sec-title-en { font-size:11px; color:var(--muted); font-weight:400; }
 
-/* Tables */
-table { width:100%; border-collapse:collapse; font-size:12px; margin-bottom:12px; border-radius:8px; overflow:hidden; }
+/* ── Info cards (Owner / Approve / Check / Auto) ── */
+.info-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:10px; margin-bottom:12px; }
+.info-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px 14px; transition:box-shadow 0.2s; }
+.info-card:hover { box-shadow:var(--shadow); }
+.info-card-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+.info-card-label.owner { color:var(--blue); }
+.info-card-label.approve { color:var(--red); }
+.info-card-label.check { color:var(--green); }
+.info-card-label.auto { color:var(--accent); }
+.info-card-body { font-size:12px; line-height:1.5; color:var(--ink); }
+
+/* ── Tables ── */
+table { width:100%; border-collapse:collapse; font-size:12px; margin-bottom:10px; border-radius:8px; overflow:hidden; }
 th { background:var(--brand); color:#fff; padding:8px 10px; text-align:left; font-weight:600; font-size:11px; letter-spacing:0.2px; }
 td { border:1px solid var(--border); padding:7px 10px; vertical-align:top; }
 tr:nth-child(even) { background:#fafbfc; }
 tr:hover { background:#f0f4f8; }
 
-/* Boxes */
-.box { border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:12px; line-height:1.5; transition:transform 0.15s; }
+/* ── Boxes ── */
+.box { border-radius:8px; padding:10px 14px; margin-bottom:7px; font-size:12px; line-height:1.5; transition:transform 0.15s; }
 .box:hover { transform:translateX(2px); }
 .box-rule { background:var(--yellow-bg); border-left:4px solid var(--yellow); }
 .box-auto { background:var(--blue-bg); border-left:4px solid var(--blue); }
-.box-en { font-size:11px; color:var(--muted); margin-top:2px; }
 
-/* Lists */
-ol, ul { margin-left:20px; font-size:12.5px; }
-li { margin-bottom:6px; line-height:1.55; }
+/* ── Workflow steps ── */
+.workflow { counter-reset:step; list-style:none; margin:0; padding:0; }
+.workflow li { counter-increment:step; position:relative; padding:10px 0 10px 40px; border-bottom:1px solid var(--border); font-size:12.5px; line-height:1.55; }
+.workflow li:last-child { border-bottom:none; }
+.workflow li::before { content:counter(step); position:absolute; left:0; top:10px; width:26px; height:26px; border-radius:50%; background:var(--brand); color:#fff; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; }
 
-/* Badges */
+/* ── Clickable Slack phrase ── */
+.say { display:inline-block; background:var(--brand-light); color:var(--brand); padding:2px 8px; border-radius:4px; font-size:11.5px; font-weight:600; cursor:pointer; border:1px solid rgba(13,43,78,0.15); transition:all 0.15s; }
+.say:hover { background:var(--brand); color:#fff; }
+.say:active { transform:scale(0.95); }
+
+/* ── Badges ── */
 .badge { display:inline-block; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:600; }
 .badge-green { background:var(--green-bg); color:var(--green); }
 .badge-yellow { background:var(--yellow-bg); color:var(--yellow); }
 .badge-red { background:var(--red-bg); color:var(--red); }
 .badge-blue { background:var(--blue-bg); color:var(--blue); }
 
-/* Timeline */
+/* ── Timeline ── */
 .timeline { display:flex; flex-direction:column; gap:0; }
 .tl-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); transition:background 0.15s; }
 .tl-item:hover { background:rgba(13,43,78,0.02); }
@@ -89,28 +115,25 @@ li { margin-bottom:6px; line-height:1.55; }
 .tl-body .what-en { font-size:11px; color:var(--muted); }
 .tl-body .action { font-size:12px; color:var(--accent); margin-top:3px; font-weight:500; }
 
-/* Workflow steps */
-.workflow { counter-reset:step; list-style:none; margin-left:0; padding-left:0; }
-.workflow li { counter-increment:step; position:relative; padding:10px 0 10px 44px; border-bottom:1px solid var(--border); font-size:12.5px; line-height:1.55; }
-.workflow li:last-child { border-bottom:none; }
-.workflow li::before { content:counter(step); position:absolute; left:0; top:10px; width:28px; height:28px; border-radius:50%; background:var(--brand); color:#fff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; }
-
-/* Footer */
+/* ── Footer ── */
 .footer { text-align:center; font-size:10px; color:var(--muted); padding:20px 0; }
 
-/* Mobile */
+/* ── Mobile ── */
 @media(max-width:640px) {
   table { font-size:11px; }
   th,td { padding:5px 6px; }
-  .content { padding:16px 10px 40px; }
-  .card { padding:16px; }
+  .content { padding:14px 10px 40px; }
+  .card { padding:14px; }
   .topbar { padding:12px 14px; }
   .topbar h1 { font-size:15px; }
+  .info-grid { grid-template-columns:1fr; }
+  .today-strip { top:54px; padding:8px 10px; }
+  .tabs { top:100px; }
 }
 @media print {
-  .topbar,.tabs { position:static; }
+  .topbar,.today-strip,.tabs { position:static; }
   .page { display:block !important; page-break-after:always; }
-  .tab { display:none; }
+  .tab,.today-strip { display:none; }
   .card { box-shadow:none; border:1px solid #ccc; }
 }
 </style>
@@ -121,6 +144,15 @@ li { margin-bottom:6px; line-height:1.55; }
   <h1>📋 Wiserise 公司管理 Roadmap · Company Management Roadmap</h1>
   <div class="sub">老板 + 部门主管用 · 2026年7月 · 5家店（00001–00005）· 80/20 法则</div>
   <div class="sub-en">For Owner + Department Heads · July 2026 · 5 Stores · 80/20 Rule</div>
+</div>
+
+<!-- ── Today Strip: what boss needs to look at ── -->
+<div class="today-strip">
+  <span class="today-label">今天看 · Today</span>
+  <span class="today-chip red">💰 钱 Money</span>
+  <span class="today-chip yellow">🔥 人 People</span>
+  <span class="today-chip blue">⚖️ 规 Rules</span>
+  <span class="today-chip green">✅ 查 Check</span>
 </div>
 
 <div class="tabs">
@@ -137,7 +169,7 @@ li { margin-bottom:6px; line-height:1.55; }
 
 <div class="content">
 
-<!-- PAGE 0: Overview -->
+<!-- ════════ PAGE 0: Overview ════════ -->
 <div class="page active" id="p0">
   <div class="pareto"><strong>80/20 核心思路：</strong>80%的事 Hermes 自动做，你只管那 20% 需要人拍板的。正常运转不打扰你，只有钱、人、规、坏了的事推到你面前。</div>
   <div class="pareto pareto-en"><strong>80/20 Core:</strong> Hermes handles 80% automatically. You only decide the 20% that needs a human — money, people, rules, broken things.</div>
@@ -145,14 +177,14 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="sec-title">8 个部门一览 <span class="sec-title-en">· 8 Departments at a Glance</span></div>
   <table>
     <tr><th style="width:7%">Dept</th><th style="width:18%">Main Work · 主要工作</th><th style="width:12%">Owner · 负责人</th><th style="width:12%">Slack Ch</th><th style="width:14%">You Approve · 你批什么</th><th style="width:14%">How to Check · 怎么查</th><th style="width:14%">Automated · 自动跑</th></tr>
-    <tr><td><strong>👥 People<br>人事</strong></td><td>Hiring→Onboarding→Scheduling→Discipline→Exit<br>招人·入职·排班·纪律·离职</td><td>Coach Sally<br>GM (store)</td><td>Store ch<br>#06-people</td><td>Fire manager<br>Promote / Pay</td><td>"roster 00003"<br>"how many servers"</td><td>6AM roster sync<br>11PM data check<br>10:30PM chat log</td></tr>
+    <tr><td><strong>👥 People<br>人事</strong></td><td>Hiring→Onboarding→Scheduling→Discipline→Exit<br>招人·入职·排班·纪律·离职</td><td>Coach Sally<br>GM (store)</td><td>Store ch<br>#06-people</td><td>Fire manager<br>Promote / Pay</td><td><span class="say" onclick="copySay(this)">roster 00003</span><br><span class="say" onclick="copySay(this)">how many servers</span></td><td>6AM roster sync<br>11PM data check<br>10:30PM chat log</td></tr>
     <tr><td><strong>💵 Finance<br>财务</strong></td><td>Bank reconcile→Payments→Payroll→AP<br>银行对账·付款·工资·采购付款</td><td>Yumi<br>Louis+Luna</td><td>#04-finance<br>#02-exec</td><td>Bank/wire/ACH<br>Purchase ≥$500<br>Tax</td><td>9PM email digest<br>auto to your DM</td><td>9PM email digest<br>30min auto-reply<br>8AM AI cost alert</td></tr>
-    <tr><td><strong>🔧 Ops<br>运营</strong></td><td>Daily ops→POS data→Fraud detect→Equipment repair<br>每日营业·POS数据·作弊检测·设备维修</td><td>GM (store)<br>WISE OPS</td><td>#03-ops<br>Store ch</td><td>High repair cost<br>Replace equipment</td><td>"store health 00003"<br>"which store is worst"<br>"fraud check"</td><td>12AM POS→Brain<br>12:15AM fraud check<br>1AM form rollup</td></tr>
-    <tr><td><strong>📦 Proc<br>采购</strong></td><td>Request→Review→Approve→Order<br>提需求→审→批→下单</td><td>Yumi (review)<br>Louis (≥$500)</td><td>#04-finance<br>🛒Procurement</td><td>≥$500<br>&lt;$500 = Yumi</td><td>"买一个冰箱"<br>auto-create order</td><td>Hermes creates<br>Yumi locks tax/total</td></tr>
-    <tr><td><strong>↗️ Growth<br>扩张</strong></td><td>Site selection→LOI→Lease→Open store<br>新店选址→LOI→租约→开店</td><td>Louis only</td><td>#02-exec</td><td>Every step<br>Site·LOI·Lease</td><td>"LOI [address]"<br>auto-generate</td><td>Hermes generates LOI<br>you review→send</td></tr>
-    <tr><td><strong>📣 Mkt<br>市场</strong></td><td>Google reviews→Brand promotion<br>Google评论·品牌推广</td><td>WISE OPS<br>Louis</td><td>#02-exec</td><td>Marketing budget</td><td>"reviews 00003"</td><td>Pull reviews<br>periodic check</td></tr>
-    <tr><td><strong>🖥️ IT<br>技术</strong></td><td>Hermes ops→Slack mgmt→Keys→DB→Security<br>Hermes运行·Slack管理·密钥·数据库</td><td>Louis only</td><td>WISE BRAIN DM</td><td>Change settings/code<br>Add/remove access</td><td>"hermes status"<br>"check my work"</td><td>6h key sync<br>6h Slack mgr check<br>1AM work quality</td></tr>
-    <tr><td><strong>📋 Admin<br>管理</strong></td><td>Is the boss doing boss work?<br>老板有没有在做老板的事</td><td>Louis</td><td>Your DM</td><td>—</td><td>9PM auto-send<br>"daily duty check"</td><td>9PM boss duty check</td></tr>
+    <tr><td><strong>🔧 Ops<br>运营</strong></td><td>Daily ops→POS data→Fraud detect→Equipment repair<br>每日营业·POS数据·作弊检测·设备维修</td><td>GM (store)<br>WISE OPS</td><td>#03-ops<br>Store ch</td><td>High repair cost<br>Replace equipment</td><td><span class="say" onclick="copySay(this)">store health 00003</span><br><span class="say" onclick="copySay(this)">which store is worst</span><br><span class="say" onclick="copySay(this)">fraud check</span></td><td>12AM POS→Brain<br>12:15AM fraud check<br>1AM form rollup</td></tr>
+    <tr><td><strong>📦 Proc<br>采购</strong></td><td>Request→Review→Approve→Order<br>提需求→审→批→下单</td><td>Yumi (review)<br>Louis (≥$500)</td><td>#04-finance<br>🛒Procurement</td><td>≥$500<br>&lt;$500 = Yumi</td><td><span class="say" onclick="copySay(this)">买一个冰箱</span><br>auto-create order</td><td>Hermes creates<br>Yumi locks tax/total</td></tr>
+    <tr><td><strong>↗️ Growth<br>扩张</strong></td><td>Site selection→LOI→Lease→Open store<br>新店选址→LOI→租约→开店</td><td>Louis only</td><td>#02-exec</td><td>Every step<br>Site·LOI·Lease</td><td><span class="say" onclick="copySay(this)">LOI [address]</span><br>auto-generate</td><td>Hermes generates LOI<br>you review→send</td></tr>
+    <tr><td><strong>📣 Mkt<br>市场</strong></td><td>Google reviews→Brand promotion<br>Google评论·品牌推广</td><td>WISE OPS<br>Louis</td><td>#02-exec</td><td>Marketing budget</td><td><span class="say" onclick="copySay(this)">reviews 00003</span></td><td>Pull reviews<br>periodic check</td></tr>
+    <tr><td><strong>🖥️ IT<br>技术</strong></td><td>Hermes ops→Slack mgmt→Keys→DB→Security<br>Hermes运行·Slack管理·密钥·数据库</td><td>Louis only</td><td>WISE BRAIN DM</td><td>Change settings/code<br>Add/remove access</td><td><span class="say" onclick="copySay(this)">hermes status</span><br><span class="say" onclick="copySay(this)">check my work</span></td><td>6h key sync<br>6h Slack mgr check<br>1AM work quality</td></tr>
+    <tr><td><strong>📋 Admin<br>管理</strong></td><td>Is the boss doing boss work?<br>老板有没有在做老板的事</td><td>Louis</td><td>Your DM</td><td>—</td><td>9PM auto-send<br><span class="say" onclick="copySay(this)">daily duty check</span></td><td>9PM boss duty check</td></tr>
   </table>
 
   <div class="sec-title">每天节奏 <span class="sec-title-en">· Daily Rhythm</span></div>
@@ -185,7 +217,7 @@ li { margin-bottom:6px; line-height:1.55; }
   </table>
 </div>
 
-<!-- PAGE 1: People -->
+<!-- ════════ PAGE 1: People ════════ -->
 <div class="page" id="p1">
   <div class="card">
     <div class="card-title">👥 People 人事部</div>
@@ -194,7 +226,14 @@ li { margin-bottom:6px; line-height:1.55; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of problems come from being understaffed or hiring the wrong people. Fix the hiring budget and onboarding process, and half your problems disappear.</div>
   </div>
 
-  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow (in order)</span></div>
+  <div class="info-grid">
+    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">Coach Sally<br>GM (store)</div></div>
+    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">Fire manager<br>Promote / Pay</div></div>
+    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">roster 00003</span><br><span class="say" onclick="copySay(this)">how many servers</span></div></div>
+    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">6AM roster sync<br>11PM data check<br>10:30PM chat log</div></div>
+  </div>
+
+  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
   <div class="card">
     <ol class="workflow">
       <li><strong>Hiring 招人</strong> — GM says "need 2 server" in store channel → Hermes checks budget → over budget = stop → OK = create job post</li>
@@ -227,11 +266,11 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check (say in Slack)</span></div>
   <table>
     <tr><th style="width:40%">Want to know · 你想知道</th><th style="width:60%">Say · 怎么说</th></tr>
-    <tr><td>How many people at a store</td><td>"roster 00003" or "how many servers at 00003"</td></tr>
-    <tr><td>Who's hiring / stuck</td><td>"hiring status"</td></tr>
-    <tr><td>Someone's job duties</td><td>"what does a server do"</td></tr>
-    <tr><td>Headcount vs budget</td><td>"headcount vs budget 00003"</td></tr>
-    <tr><td>Is a store staffed enough</td><td>"staffing 00003"</td></tr>
+    <tr><td>How many people at a store</td><td><span class="say" onclick="copySay(this)">roster 00003</span> or <span class="say" onclick="copySay(this)">how many servers at 00003</span></td></tr>
+    <tr><td>Who's hiring / stuck</td><td><span class="say" onclick="copySay(this)">hiring status</span></td></tr>
+    <tr><td>Someone's job duties</td><td><span class="say" onclick="copySay(this)">what does a server do</span></td></tr>
+    <tr><td>Headcount vs budget</td><td><span class="say" onclick="copySay(this)">headcount vs budget 00003</span></td></tr>
+    <tr><td>Is a store staffed enough</td><td><span class="say" onclick="copySay(this)">staffing 00003</span></td></tr>
   </table>
 
   <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
@@ -240,13 +279,20 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="box box-auto">⏰ <strong>10:30PM daily</strong> — Store Slack chat saved to Brain / 店里聊天存Brain</div>
 </div>
 
-<!-- PAGE 2: Finance -->
+<!-- ════════ PAGE 2: Finance ════════ -->
 <div class="page" id="p2">
   <div class="card">
     <div class="card-title">💵 Finance 财务部</div>
     <div class="card-title-en">Bank Reconcile · Payment Approval · Payroll · AP · All 5 stores</div>
     <div class="pareto"><strong>80/20 关键：</strong>80%的财务风险来自"未经审批的付款"。把付款审批流程管死，其他自然好。</div>
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of financial risk comes from unapproved payments. Lock down the payment approval process and everything else follows.</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">Yumi<br>Louis + Luna</div></div>
+    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">Bank/wire/ACH<br>Purchase ≥$500<br>Tax</div></div>
+    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">sales 00003 yesterday</span><br><span class="say" onclick="copySay(this)">budget vs actual 00003</span></div></div>
+    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">9PM email digest<br>30min auto-reply<br>8AM AI cost alert</div></div>
   </div>
 
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
@@ -284,9 +330,9 @@ li { margin-bottom:6px; line-height:1.55; }
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
     <tr><td>Any email to handle</td><td>9PM auto to your DM (don't need to ask)</td></tr>
-    <tr><td>Store sales</td><td>"sales 00003 yesterday"</td></tr>
+    <tr><td>Store sales</td><td><span class="say" onclick="copySay(this)">sales 00003 yesterday</span></td></tr>
     <tr><td>How much AI cost</td><td>8AM auto report (silent if OK)</td></tr>
-    <tr><td>Budget vs actual</td><td>"budget vs actual 00003"</td></tr>
+    <tr><td>Budget vs actual</td><td><span class="say" onclick="copySay(this)">budget vs actual 00003</span></td></tr>
   </table>
 
   <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
@@ -295,13 +341,20 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="box box-auto">⏰ <strong>8AM daily</strong> — AI cost check (alert only if >$200/mo) / AI花费报警</div>
 </div>
 
-<!-- PAGE 3: Operations -->
+<!-- ════════ PAGE 3: Operations ════════ -->
 <div class="page" id="p3">
   <div class="card">
     <div class="card-title">🔧 Operations 运营部</div>
     <div class="card-title-en">Daily Ops · POS Data · Fraud Detection · Equipment Repair · SOP Execution</div>
     <div class="pareto"><strong>80/20 关键：</strong>80%的运营问题来自"POS作弊"和"设备坏了没人修"。盯住这两件事，店就稳。</div>
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of ops problems come from POS fraud and broken equipment. Watch these two things and your stores are stable.</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">GM (store)<br>WISE OPS</div></div>
+    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">High repair cost<br>Replace equipment</div></div>
+    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">store health 00003</span><br><span class="say" onclick="copySay(this)">which store is worst</span><br><span class="say" onclick="copySay(this)">fraud check 00003</span></div></div>
+    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">12AM POS→Brain<br>12:15AM fraud check<br>1AM form rollup</div></div>
   </div>
 
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
@@ -340,12 +393,12 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>Store health</td><td>"store health 00003"</td></tr>
-    <tr><td>Which store is worst</td><td>"which store is worst"</td></tr>
-    <tr><td>POS fraud check</td><td>"fraud check 00003"</td></tr>
-    <tr><td>Store sales yesterday</td><td>"sales 00003 yesterday"</td></tr>
-    <tr><td>Look up SOP</td><td>"what's the SOP for onboarding"</td></tr>
-    <tr><td>Equipment broken</td><td>"冰箱坏了" (in store channel) → auto-ticket</td></tr>
+    <tr><td>Store health</td><td><span class="say" onclick="copySay(this)">store health 00003</span></td></tr>
+    <tr><td>Which store is worst</td><td><span class="say" onclick="copySay(this)">which store is worst</span></td></tr>
+    <tr><td>POS fraud check</td><td><span class="say" onclick="copySay(this)">fraud check 00003</span></td></tr>
+    <tr><td>Store sales yesterday</td><td><span class="say" onclick="copySay(this)">sales 00003 yesterday</span></td></tr>
+    <tr><td>Look up SOP</td><td><span class="say" onclick="copySay(this)">what's the SOP for onboarding</span></td></tr>
+    <tr><td>Equipment broken</td><td><span class="say" onclick="copySay(this)">冰箱坏了</span> (in store channel) → auto-ticket</td></tr>
   </table>
 
   <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
@@ -354,13 +407,20 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="box box-auto">⏰ <strong>1AM daily</strong> — Form rollup to Brain</div>
 </div>
 
-<!-- PAGE 4: Procurement -->
+<!-- ════════ PAGE 4: Procurement ════════ -->
 <div class="page" id="p4">
   <div class="card">
     <div class="card-title">📦 Procurement 采购部</div>
     <div class="card-title-en">Request → Review → Approve → Order</div>
     <div class="pareto"><strong>80/20 关键：</strong>80%的采购浪费来自"没说清楚就买了"。把需求→审批→下单的链条管死，浪费就少。</div>
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of procurement waste comes from unclear requests. Lock down the request→approve→order chain.</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">Yumi (review)<br>Louis (≥$500)</div></div>
+    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">≥$500 → Louis<br>&lt;$500 → Yumi</div></div>
+    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">purchases 00003</span><br><span class="say" onclick="copySay(this)">pending purchases</span></div></div>
+    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">Hermes creates order<br>Yumi locks tax/total</div></div>
   </div>
 
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
@@ -394,19 +454,26 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>What did a store buy</td><td>"purchases 00003"</td></tr>
-    <tr><td>Any pending approval</td><td>"pending purchases"</td></tr>
-    <tr><td>Buy something</td><td>"买一个冰箱" (in store channel)</td></tr>
+    <tr><td>What did a store buy</td><td><span class="say" onclick="copySay(this)">purchases 00003</span></td></tr>
+    <tr><td>Any pending approval</td><td><span class="say" onclick="copySay(this)">pending purchases</span></td></tr>
+    <tr><td>Buy something</td><td><span class="say" onclick="copySay(this)">买一个冰箱</span> (in store channel)</td></tr>
   </table>
 </div>
 
-<!-- PAGE 5: Growth -->
+<!-- ════════ PAGE 5: Growth ════════ -->
 <div class="page" id="p5">
   <div class="card">
     <div class="card-title">↗️ Growth 扩张部</div>
     <div class="card-title-en">Site Selection → LOI → Lease → Open Store</div>
     <div class="pareto"><strong>80/20 关键：</strong>80%的新店成败在选址。选错地方后面全错。选址和租约是唯一重要的事。</div>
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of new store success/failure is in site selection. Pick the wrong location and nothing else matters.</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">Louis only</div></div>
+    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">Every step<br>Site · LOI · Lease</div></div>
+    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">LOI [address]</span><br><span class="say" onclick="copySay(this)">lease 00003</span></div></div>
+    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">Hermes generates LOI<br>You review → send</div></div>
   </div>
 
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
@@ -441,9 +508,9 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>Open new store</td><td>"LOI 123 Main St Wilmington NC"</td></tr>
-    <tr><td>Existing lease</td><td>"lease 00003"</td></tr>
-    <tr><td>New store progress</td><td>"new store status"</td></tr>
+    <tr><td>Open new store</td><td><span class="say" onclick="copySay(this)">LOI 123 Main St Wilmington NC</span></td></tr>
+    <tr><td>Existing lease</td><td><span class="say" onclick="copySay(this)">lease 00003</span></td></tr>
+    <tr><td>New store progress</td><td><span class="say" onclick="copySay(this)">new store status</span></td></tr>
   </table>
 
   <div class="sec-title">当前店铺 <span class="sec-title-en">· Current Stores</span></div>
@@ -457,13 +524,20 @@ li { margin-bottom:6px; line-height:1.55; }
   </table>
 </div>
 
-<!-- PAGE 6: Marketing -->
+<!-- ════════ PAGE 6: Marketing ════════ -->
 <div class="page" id="p6">
   <div class="card">
     <div class="card-title">📣 Marketing 市场部</div>
     <div class="card-title-en">Google Reviews · Brand Promotion · 5 Stores</div>
     <div class="pareto"><strong>80/20 关键：</strong>80%的客人决定来自Google评论。管好评和差评比打广告有用10倍。</div>
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of customer decisions come from Google reviews. Managing reviews is 10× more effective than running ads.</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">WISE OPS<br>Louis</div></div>
+    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">Marketing budget</div></div>
+    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">reviews 00003</span><br><span class="say" onclick="copySay(this)">all reviews</span></div></div>
+    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">Pull reviews<br>Periodic check</div></div>
   </div>
 
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
@@ -495,19 +569,26 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>Store Google reviews</td><td>"reviews 00003"</td></tr>
-    <tr><td>All store reviews</td><td>"all reviews"</td></tr>
-    <tr><td>Store rating</td><td>"rating 00003"</td></tr>
+    <tr><td>Store Google reviews</td><td><span class="say" onclick="copySay(this)">reviews 00003</span></td></tr>
+    <tr><td>All store reviews</td><td><span class="say" onclick="copySay(this)">all reviews</span></td></tr>
+    <tr><td>Store rating</td><td><span class="say" onclick="copySay(this)">rating 00003</span></td></tr>
   </table>
 </div>
 
-<!-- PAGE 7: IT -->
+<!-- ════════ PAGE 7: IT ════════ -->
 <div class="page" id="p7">
   <div class="card">
     <div class="card-title">🖥️ IT 技术部</div>
     <div class="card-title-en">Hermes Operations · Slack Management · Keys · Database · Security</div>
     <div class="pareto"><strong>80/20 关键：</strong>80%的系统问题来自"权限给错了人"和"密钥过期"。管好权限和密钥，系统就稳。</div>
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of system issues come from wrong permissions and expired keys. Manage these two and the system is stable.</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">Louis only</div></div>
+    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">Change settings/code<br>Add/remove access</div></div>
+    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">hermes status</span><br><span class="say" onclick="copySay(this)">check my work</span></div></div>
+    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">6h key sync<br>6h Slack mgr check<br>1AM work quality</div></div>
   </div>
 
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
@@ -558,9 +639,9 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>Hermes health</td><td>"hermes status"</td></tr>
-    <tr><td>Any broken crons</td><td>"check my work" (auto 1AM)</td></tr>
-    <tr><td>Managers in channels</td><td>"check managers in slack"</td></tr>
+    <tr><td>Hermes health</td><td><span class="say" onclick="copySay(this)">hermes status</span></td></tr>
+    <tr><td>Any broken crons</td><td><span class="say" onclick="copySay(this)">check my work</span> (auto 1AM)</td></tr>
+    <tr><td>Managers in channels</td><td><span class="say" onclick="copySay(this)">check managers in slack</span></td></tr>
     <tr><td>AI cost</td><td>8AM auto report</td></tr>
   </table>
 
@@ -571,7 +652,7 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="box box-auto">⏰ <strong>8AM daily</strong> — AI cost alert (>$200/mo) / AI花费报警</div>
 </div>
 
-<!-- PAGE 8: Admin -->
+<!-- ════════ PAGE 8: Admin ════════ -->
 <div class="page" id="p8">
   <div class="card">
     <div class="card-title">📋 Admin 管理部</div>
@@ -603,8 +684,8 @@ li { margin-bottom:6px; line-height:1.55; }
   <div class="sec-title">每周想一次 <span class="sec-title-en">· Weekly Think</span></div>
   <div class="card">
     <ol class="workflow">
-      <li><strong>Which store is worst?</strong> → "which store is worst" → why → fix next week</li>
-      <li><strong>Who to hire / fire?</strong> → "hiring status" + "roster" → hire if short, manage if weak</li>
+      <li><strong>Which store is worst?</strong> → <span class="say" onclick="copySay(this)">which store is worst</span> → why → fix next week</li>
+      <li><strong>Who to hire / fire?</strong> → <span class="say" onclick="copySay(this)">hiring status</span> + <span class="say" onclick="copySay(this)">roster</span> → hire if short, manage if weak</li>
       <li><strong>Is money right?</strong> → check monthly report → investigate if over budget</li>
       <li><strong>What's next?</strong> → New store? New brand? Or fix current first?</li>
     </ol>
@@ -631,7 +712,7 @@ li { margin-bottom:6px; line-height:1.55; }
 
 </div>
 
-<div class="footer">Wiserise Hospitality Group · Internal Use · 2026-07-21 · Hermes Artifact · Bilingual EN/中文 · v3.0</div>
+<div class="footer">Wiserise Hospitality Group · Internal Use · 2026-07-21 · Hermes Artifact · Bilingual EN/中文 · v3.1</div>
 
 <script>
 function showPage(id, btn) {
@@ -648,6 +729,21 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' && idx < tabs.length-1) { tabs[idx+1].click(); }
   if (e.key === 'ArrowLeft' && idx > 0) { tabs[idx-1].click(); }
 });
+// Click to copy Slack phrase
+function copySay(el) {
+  const text = el.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = el.textContent;
+    el.textContent = '✓ Copied';
+    el.style.background = 'var(--green)';
+    el.style.color = '#fff';
+    setTimeout(() => {
+      el.textContent = orig;
+      el.style.background = '';
+      el.style.color = '';
+    }, 1000);
+  }).catch(() => {});
+}
 </script>
 
 </body>
