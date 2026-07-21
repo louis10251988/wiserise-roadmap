@@ -129,14 +129,14 @@ body.lang-both .en{display:inline}
   <button class="tab" onclick="showPage('start',this)">🎓 Build Start <span class="zh">怎么建</span></button>
   <button class="tab" onclick="showPage('kpi',this)">📈 KPI</button>
   <button class="tab" onclick="showPage('overview',this)">📊 Overview <span class="zh">总表</span></button>
-  <button class="tab" onclick="showPage('d_it',this)">1 IT ✅</button>
-  <button class="tab" onclick="showPage('d_people',this)">2 People 🚧</button>
-  <button class="tab" onclick="showPage('d_ops',this)">3 Ops 🚧</button>
-  <button class="tab" onclick="showPage('d_fin',this)">4 Finance 🚧</button>
-  <button class="tab" onclick="showPage('d_proc',this)">5 Proc ⬜</button>
-  <button class="tab" onclick="showPage('d_mkt',this)">6 Mkt ⬜</button>
-  <button class="tab" onclick="showPage('d_growth',this)">7 Growth ⬜</button>
-  <button class="tab" onclick="showPage('d_admin',this)">8 Admin ⬜</button>
+  <button class="tab" onclick="showPage('d_it',this)">1 💻 IT ✅</button>
+  <button class="tab" onclick="showPage('d_people',this)">2 🧑‍💼 People 🚧</button>
+  <button class="tab" onclick="showPage('d_ops',this)">3 🏪 Ops 🚧</button>
+  <button class="tab" onclick="showPage('d_fin',this)">4 💰 Finance 🚧</button>
+  <button class="tab" onclick="showPage('d_proc',this)">5 🛒 Proc ⬜</button>
+  <button class="tab" onclick="showPage('d_mkt',this)">6 ⭐ Mkt ⬜</button>
+  <button class="tab" onclick="showPage('d_growth',this)">7 🚀 Growth ⬜</button>
+  <button class="tab" onclick="showPage('d_admin',this)">8 🧭 Admin ⬜</button>
   <button class="tab" onclick="showPage('rules',this)">📋 Rules <span class="zh">规矩</span></button>
 </div>
 
@@ -296,26 +296,26 @@ body.lang-both .en{display:inline}
 
   <div class="sec-title"><span class="en">Build flow</span><span class="zh">建设流程</span></div>
   <div class="flow">
-    <div class="flow-step">IT ✅</div><div class="flow-arrow">→</div>
-    <div class="flow-step">People 🚧</div><div class="flow-arrow">→</div>
-    <div class="flow-step">Ops 🚧</div><div class="flow-arrow">→</div>
-    <div class="flow-step">Finance 🚧</div><div class="flow-arrow">→</div>
-    <div class="flow-step">Proc ⬜</div><div class="flow-arrow">→</div>
-    <div class="flow-step">Mkt ⬜</div><div class="flow-arrow">→</div>
-    <div class="flow-step">Growth ⬜</div><div class="flow-arrow">→</div>
-    <div class="flow-step">Admin ⬜</div>
+    <div class="flow-step">💻 IT ✅</div><div class="flow-arrow">→</div>
+    <div class="flow-step">🧑‍💼 People 🚧</div><div class="flow-arrow">→</div>
+    <div class="flow-step">🏪 Ops 🚧</div><div class="flow-arrow">→</div>
+    <div class="flow-step">💰 Finance 🚧</div><div class="flow-arrow">→</div>
+    <div class="flow-step">🛒 Proc ⬜</div><div class="flow-arrow">→</div>
+    <div class="flow-step">⭐ Mkt ⬜</div><div class="flow-arrow">→</div>
+    <div class="flow-step">🚀 Growth ⬜</div><div class="flow-arrow">→</div>
+    <div class="flow-step">🧭 Admin ⬜</div>
   </div>
 
   <div class="sec-title"><span class="en">Departments</span><span class="zh">部门卡片</span></div>
   <div class="stage-grid">
-    <div class="stage-card" onclick="goTab(4)"><div class="stage-num">1 · 100%</div><div class="stage-name">🖥️ IT</div><div class="stage-work"><span class="en">Foundation live</span><span class="zh">地基已上线</span></div><div class="stage-meta"><span class="badge badge-green">✅ Built</span></div></div>
-    <div class="stage-card" onclick="goTab(5)"><div class="stage-num">2 · 50%</div><div class="stage-name">👥 People</div><div class="stage-work"><span class="en">Skills+data live · auto/SOP gap</span><span class="zh">技能+数据有 · 自动/SOP缺口</span></div><div class="stage-meta"><span class="badge badge-blue">🚧 Next</span></div></div>
-    <div class="stage-card" onclick="goTab(6)"><div class="stage-num">3 · 50%</div><div class="stage-name">🔧 Ops</div><div class="stage-work"><span class="en">POS/fraud live · SOP gap</span><span class="zh">POS/作弊有 · SOP缺口</span></div><div class="stage-meta"><span class="badge badge-blue">🚧</span></div></div>
-    <div class="stage-card" onclick="goTab(7)"><div class="stage-num">4 · 25%</div><div class="stage-name">💵 Finance</div><div class="stage-work"><span class="en">Gates known · tables/SOP gap</span><span class="zh">门清楚 · 表/SOP缺口</span></div><div class="stage-meta"><span class="badge badge-blue">🚧</span></div></div>
-    <div class="stage-card" onclick="goTab(8)"><div class="stage-num">5 · 0%</div><div class="stage-name">📦 Proc</div><div class="stage-work"><span class="en">Not started</span><span class="zh">未开始</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
-    <div class="stage-card" onclick="goTab(9)"><div class="stage-num">6 · 25%</div><div class="stage-name">📣 Mkt</div><div class="stage-work"><span class="en">Reviews skill only</span><span class="zh">只有评论技能</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
-    <div class="stage-card" onclick="goTab(10)"><div class="stage-num">7 · 25%</div><div class="stage-name">↗️ Growth</div><div class="stage-work"><span class="en">LOI skill only</span><span class="zh">只有LOI技能</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
-    <div class="stage-card" onclick="goTab(11)"><div class="stage-num">8 · 25%</div><div class="stage-name">📋 Admin</div><div class="stage-work"><span class="en">Night checks early</span><span class="zh">夜间检查早期</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
+    <div class="stage-card" onclick="goTab(4)"><div class="stage-num">1 · 100%</div><div class="stage-name">💻 IT</div><div class="stage-work"><span class="en">Foundation live</span><span class="zh">地基已上线</span></div><div class="stage-meta"><span class="badge badge-green">✅ Built</span></div></div>
+    <div class="stage-card" onclick="goTab(5)"><div class="stage-num">2 · 50%</div><div class="stage-name">🧑‍💼 People</div><div class="stage-work"><span class="en">Skills+data live · auto/SOP gap</span><span class="zh">技能+数据有 · 自动/SOP缺口</span></div><div class="stage-meta"><span class="badge badge-blue">🚧 Next</span></div></div>
+    <div class="stage-card" onclick="goTab(6)"><div class="stage-num">3 · 50%</div><div class="stage-name">🏪 Ops</div><div class="stage-work"><span class="en">POS/fraud live · SOP gap</span><span class="zh">POS/作弊有 · SOP缺口</span></div><div class="stage-meta"><span class="badge badge-blue">🚧</span></div></div>
+    <div class="stage-card" onclick="goTab(7)"><div class="stage-num">4 · 25%</div><div class="stage-name">💰 Finance</div><div class="stage-work"><span class="en">Gates known · tables/SOP gap</span><span class="zh">门清楚 · 表/SOP缺口</span></div><div class="stage-meta"><span class="badge badge-blue">🚧</span></div></div>
+    <div class="stage-card" onclick="goTab(8)"><div class="stage-num">5 · 0%</div><div class="stage-name">🛒 Proc</div><div class="stage-work"><span class="en">Not started</span><span class="zh">未开始</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
+    <div class="stage-card" onclick="goTab(9)"><div class="stage-num">6 · 25%</div><div class="stage-name">⭐ Mkt</div><div class="stage-work"><span class="en">Reviews skill only</span><span class="zh">只有评论技能</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
+    <div class="stage-card" onclick="goTab(10)"><div class="stage-num">7 · 25%</div><div class="stage-name">🚀 Growth</div><div class="stage-work"><span class="en">LOI skill only</span><span class="zh">只有LOI技能</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
+    <div class="stage-card" onclick="goTab(11)"><div class="stage-num">8 · 25%</div><div class="stage-name">🧭 Admin</div><div class="stage-work"><span class="en">Night checks early</span><span class="zh">夜间检查早期</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
   </div>
 
   <div class="sec-title"><span class="en">Human gates (never auto)</span><span class="zh">人工门槛（永不自动）</span></div>
@@ -330,11 +330,11 @@ body.lang-both .en{display:inline}
   <table>
     <tr><th><span class="en">Dept</span><span class="zh">部门</span></th><th><span class="en">Depends on</span><span class="zh">依赖</span></th><th><span class="en">Why</span><span class="zh">为什么</span></th></tr>
     <tr><td>IT</td><td>—</td><td><span class="en">Foundation</span><span class="zh">地基</span></td></tr>
-    <tr><td>People</td><td>IT ✅</td><td><span class="en">Need Brain + Slack + skills</span><span class="zh">要Brain+Slack+技能</span></td></tr>
+    <tr><td>People</td><td>💻 IT ✅</td><td><span class="en">Need Brain + Slack + skills</span><span class="zh">要Brain+Slack+技能</span></td></tr>
     <tr><td>Ops</td><td>IT ✅ · People 🚧</td><td><span class="en">Need staffed stores + POS</span><span class="zh">要有人+POS</span></td></tr>
     <tr><td>Finance</td><td>IT ✅ · Ops 🚧</td><td><span class="en">Need sales flow</span><span class="zh">要销售流</span></td></tr>
-    <tr><td>Proc</td><td>Finance 🚧</td><td><span class="en">Need pay path</span><span class="zh">要付款路径</span></td></tr>
-    <tr><td>Mkt</td><td>Ops 🚧</td><td><span class="en">Need store/Google live</span><span class="zh">要店/Google活</span></td></tr>
+    <tr><td>Proc</td><td>💰 Finance 🚧</td><td><span class="en">Need pay path</span><span class="zh">要付款路径</span></td></tr>
+    <tr><td>Mkt</td><td>🏪 Ops 🚧</td><td><span class="en">Need store/Google live</span><span class="zh">要店/Google活</span></td></tr>
     <tr><td>Growth / Admin</td><td><span class="en">All above</span><span class="zh">以上全部</span></td><td><span class="en">Need whole system</span><span class="zh">要整系统</span></td></tr>
   </table>
 
@@ -360,7 +360,7 @@ body.lang-both .en{display:inline}
 </div>
 
 <div class="page" id="d_it">
-  <div class="page-h">🖥️ <span class="en">IT</span><span class="zh">技术</span></div>
+  <div class="page-h">💻 <span class="en">IT</span><span class="zh">技术</span></div>
   <div class="page-sub"><span class="en">Foundation · Hermes + Brain + Slack + Keys</span><span class="zh">地基 · Hermes + Brain + Slack + 密钥</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
   <div class="pareto"><strong>80/20:</strong> <span class="en">Most system pain = wrong access + expired keys. Fix those two first.</span><span class="zh">系统问题大多来自权限错+密钥过期。先管好这两件。</span></div>
@@ -391,7 +391,7 @@ body.lang-both .en{display:inline}
 </div>
 
 <div class="page" id="d_people">
-  <div class="page-h">👥 <span class="en">People</span><span class="zh">人事</span></div>
+  <div class="page-h">🧑‍💼 <span class="en">People</span><span class="zh">人事</span></div>
   <div class="page-sub"><span class="en">Hire → Onboard → Schedule → 1:1 → Discipline → Exit</span><span class="zh">招人→入职→排班→一对一→纪律→离职</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
   <div class="pareto"><strong>80/20:</strong> <span class="en">Most store pain = short staff + wrong hire. Fix budget gate + onboarding.</span><span class="zh">店的问题大多=缺人+招错人。先管预算门+入职。</span></div>
@@ -422,7 +422,7 @@ body.lang-both .en{display:inline}
 </div>
 
 <div class="page" id="d_ops">
-  <div class="page-h">🔧 <span class="en">Ops</span><span class="zh">运营</span></div>
+  <div class="page-h">🏪 <span class="en">Ops</span><span class="zh">运营</span></div>
   <div class="page-sub"><span class="en">POS · Fraud · Equipment · SOP</span><span class="zh">POS · 作弊 · 设备 · SOP</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
   <div class="pareto"><strong>80/20:</strong> <span class="en">Most ops pain = POS fraud + broken equipment. Watch those two.</span><span class="zh">运营问题大多=POS作弊+设备坏。盯住这两件。</span></div>
@@ -453,7 +453,7 @@ body.lang-both .en{display:inline}
 </div>
 
 <div class="page" id="d_fin">
-  <div class="page-h">💵 <span class="en">Finance</span><span class="zh">财务</span></div>
+  <div class="page-h">💰 <span class="en">Finance</span><span class="zh">财务</span></div>
   <div class="page-sub"><span class="en">Bank · Pay · Payroll · AP</span><span class="zh">银行 · 付款 · 工资 · 应付</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
   <div class="pareto"><strong>80/20:</strong> <span class="en">Most money risk = unapproved payments. Lock approval hard.</span><span class="zh">钱的风险大多=没审批就付。把审批锁死。</span></div>
@@ -484,7 +484,7 @@ body.lang-both .en{display:inline}
 </div>
 
 <div class="page" id="d_proc">
-  <div class="page-h">📦 <span class="en">Procurement</span><span class="zh">采购</span></div>
+  <div class="page-h">🛒 <span class="en">Procurement</span><span class="zh">采购</span></div>
   <div class="page-sub"><span class="en">Request → Review → Approve → Order</span><span class="zh">提需求→审→批→下单</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
   <div class="pareto"><strong>80/20:</strong> <span class="en">Most waste = unclear buy request. Lock request→approve chain.</span><span class="zh">浪费大多=没说清就买。锁死需求→审批链。</span></div>
@@ -515,7 +515,7 @@ body.lang-both .en{display:inline}
 </div>
 
 <div class="page" id="d_mkt">
-  <div class="page-h">📣 <span class="en">Marketing</span><span class="zh">市场</span></div>
+  <div class="page-h">⭐ <span class="en">Marketing</span><span class="zh">市场</span></div>
   <div class="page-sub"><span class="en">Google reviews · brand · campaigns</span><span class="zh">Google评论 · 品牌 · 活动</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
   <div class="pareto"><strong>80/20:</strong> <span class="en">Reviews beat ads. Manage bad reviews fast.</span><span class="zh">评论比广告管用。差评要快管。</span></div>
@@ -546,7 +546,7 @@ body.lang-both .en{display:inline}
 </div>
 
 <div class="page" id="d_growth">
-  <div class="page-h">↗️ <span class="en">Growth</span><span class="zh">扩张</span></div>
+  <div class="page-h">🚀 <span class="en">Growth</span><span class="zh">扩张</span></div>
   <div class="page-sub"><span class="en">Site → LOI → Lease → Open</span><span class="zh">选址→LOI→租约→开业</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
   <div class="pareto"><strong>80/20:</strong> <span class="en">Site choice decides most new-store success.</span><span class="zh">选址决定新店成败大半。</span></div>
@@ -577,7 +577,7 @@ body.lang-both .en{display:inline}
 </div>
 
 <div class="page" id="d_admin">
-  <div class="page-h">📋 <span class="en">Admin</span><span class="zh">管理</span></div>
+  <div class="page-h">🧭 <span class="en">Admin</span><span class="zh">管理</span></div>
   <div class="page-sub"><span class="en">Boss work only · not floor work</span><span class="zh">只做老板活 · 不做前厅活</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
   <div class="pareto"><strong>80/20:</strong> <span class="en">Boss time = hire/decide/direction. Floor work wastes owner time.</span><span class="zh">老板时间=选人/拍板/方向。做前厅活=浪费。</span></div>
