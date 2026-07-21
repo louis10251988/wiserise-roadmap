@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wiserise Build Roadmap · 建设路线图</title>
+<title>Wiserise Company Roadmap · 公司管理路线图</title>
 <style>
 :root {
   --bg:#fafbfc; --card:#fff; --ink:#111827; --muted:#6b7280; --muted-light:#9ca3af;
@@ -14,14 +14,15 @@
   --blue:#2563eb; --blue-bg:#eff6ff;
   --border:#e5e7eb; --border-light:#f3f4f6;
   --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.04); --shadow-lg:0 4px 16px rgba(0,0,0,.08);
+  --orange:#e75e2e;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
 .topbar{background:var(--brand);color:#fff;padding:16px 28px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
-.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto;gap:16px}
 .topbar h1{font-size:17px;font-weight:700}
 .topbar .sub{font-size:11.5px;opacity:.65;margin-top:2px}
-.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden;flex-shrink:0}
 .lang-btn{padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer}
 .lang-btn.active{background:rgba(255,255,255,.15);color:#fff}
 .tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto}
@@ -58,7 +59,6 @@ tr:hover td{background:#f9fafb}
 .flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px;font-size:12px}
 .flow-step{background:var(--brand);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
 .flow-arrow{color:var(--muted-light);font-size:18px}
-.flow-gate{background:var(--green);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
 .stage-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .15s}
 .stage-card:hover{box-shadow:var(--shadow-lg)}
@@ -66,15 +66,25 @@ tr:hover td{background:#f9fafb}
 .stage-name{font-size:16px;font-weight:700;color:var(--brand);margin-bottom:8px}
 .stage-work{font-size:12.5px;color:var(--ink);line-height:1.5;margin-bottom:10px}
 .stage-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted)}
+.stage-meta .owner{font-weight:600;color:var(--ink)}
 .gate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
 .gate-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
 .gate-card .g-badge{margin-bottom:8px}
 .gate-card .g-who{font-size:13px;font-weight:700;color:var(--brand);margin-bottom:4px}
 .gate-card .g-what{font-size:12px;color:var(--muted);line-height:1.4}
 .quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.kpi-link{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
+.ops-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.ops-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);text-align:center}
+.ops-card .oc-icon{font-size:28px;margin-bottom:8px}
+.ops-card .oc-title{font-size:14px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.ops-card .oc-sub{font-size:12px;color:var(--muted);line-height:1.45}
+.door-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.door-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.door-card h3{font-size:14px;font-weight:700;color:var(--brand);margin-bottom:6px}
+.door-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
+.kpi-link{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:12px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
 .kpi-link:hover{box-shadow:var(--shadow-lg)}
-.kpi-link .kl-icon{font-size:32px}
+.kpi-link .kl-icon{font-size:28px}
 .kpi-link .kl-text{flex:1}
 .kpi-link .kl-title{font-size:14px;font-weight:700;color:var(--brand)}
 .kpi-link .kl-sub{font-size:12px;color:var(--muted)}
@@ -85,17 +95,14 @@ tr:hover td{background:#f9fafb}
 .ask-brain{background:var(--card);border:1px dashed #93c5fd;border-radius:var(--radius);padding:12px 14px;margin-top:16px;font-size:12.5px}
 .ask-brain strong{color:var(--blue)}
 .ask-brain code{background:#eff6ff;padding:1px 6px;border-radius:4px;font-size:12px}
-.progress-bar{background:var(--border);border-radius:999px;height:10px;overflow:hidden;margin:8px 0 14px}
-.progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#2563eb,#3b82f6)}
-.progress-fill.done{background:linear-gradient(90deg,#059669,#10b981)}
-.progress-fill.low{background:linear-gradient(90deg,#d97706,#f59e0b)}
-.check{list-style:none;margin:0;padding:0}
-.check li{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border-light);font-size:12.5px}
-.check li:last-child{border-bottom:none}
-.ci{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
-.ci.ok{background:var(--green-bg);color:var(--green)}
-.ci.wip{background:var(--blue-bg);color:var(--blue)}
-.ci.todo{background:var(--yellow-bg);color:var(--yellow)}
+.timeline{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-light)}
+.tl-item:last-child{border-bottom:none}
+.tl-time{font-size:12px;font-weight:700;color:var(--brand);min-width:72px}
+.tl-body{flex:1}
+.tl-body .what{font-size:13px;font-weight:600}
+.tl-body .where{font-size:11px;color:var(--muted);margin-top:2px}
+.tl-body .action{font-size:12px;color:var(--orange);margin-top:2px}
 .footer{text-align:center;font-size:10px;color:var(--muted-light);padding:20px 0}
 .zh{display:none}
 body.lang-zh .zh{display:inline}
@@ -103,9 +110,12 @@ body.lang-zh .en{display:none}
 body.lang-both .zh{display:inline}
 body.lang-both .en{display:inline}
 .en{display:inline}
+code{background:#f3f4f6;padding:1px 5px;border-radius:4px;font-size:12px}
+ol,ul{margin-left:18px;font-size:13px}
+li{margin-bottom:6px}
 @media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab,.lang-toggle{display:none}}
-@media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}.gate-row{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr}}
-@media(max-width:500px){.stage-grid{grid-template-columns:1fr}.gate-row{grid-template-columns:1fr}}
+@media(max-width:800px){.stage-grid,.ops-grid{grid-template-columns:1fr 1fr}.gate-row,.quick-grid,.door-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.stage-grid,.ops-grid,.gate-row,.quick-grid,.door-grid{grid-template-columns:1fr}.topbar-row{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body class="lang-both">
@@ -113,8 +123,8 @@ body.lang-both .en{display:inline}
 <div class="topbar">
   <div class="topbar-row">
     <div>
-      <h1>📋 Wiserise Build Roadmap · <span class="zh">建设路线图</span></h1>
-      <div class="sub">One department at a time · 一个部门一个部门建 · July 2026 · 5 Stores</div>
+      <h1>📋 Wiserise Company Roadmap · <span class="zh">公司管理路线图</span></h1>
+      <div class="sub"><span class="en">Owner + department heads · July 2026 · 5 stores · 80/20</span><span class="zh">老板 + 部门主管 · 2026年7月 · 5家店 · 80/20</span></div>
     </div>
     <div class="lang-toggle">
       <button class="lang-btn" onclick="setLang('en',this)">EN</button>
@@ -126,557 +136,738 @@ body.lang-both .en{display:inline}
 
 <div class="tabs">
   <button class="tab active" onclick="showPage('ops',this)">💬 Slack OPS</button>
-  <button class="tab" onclick="showPage('start',this)">🎓 Build Start <span class="zh">怎么建</span></button>
   <button class="tab" onclick="showPage('kpi',this)">📈 KPI</button>
   <button class="tab" onclick="showPage('overview',this)">📊 Overview <span class="zh">总表</span></button>
-  <button class="tab" onclick="showPage('d_it',this)">1 💻 IT ✅</button>
-  <button class="tab" onclick="showPage('d_people',this)">2 🧑‍💼 People 🚧</button>
-  <button class="tab" onclick="showPage('d_ops',this)">3 🏪 Ops 🚧</button>
-  <button class="tab" onclick="showPage('d_fin',this)">4 💰 Finance 🚧</button>
-  <button class="tab" onclick="showPage('d_proc',this)">5 🛒 Proc ⬜</button>
-  <button class="tab" onclick="showPage('d_mkt',this)">6 ⭐ Mkt ⬜</button>
-  <button class="tab" onclick="showPage('d_growth',this)">7 🚀 Growth ⬜</button>
-  <button class="tab" onclick="showPage('d_admin',this)">8 🧭 Admin ⬜</button>
-  <button class="tab" onclick="showPage('rules',this)">📋 Rules <span class="zh">规矩</span></button>
+  <button class="tab" onclick="showPage('people',this)">👥 People <span class="zh">人事</span></button>
+  <button class="tab" onclick="showPage('finance',this)">💵 Finance <span class="zh">财务</span></button>
+  <button class="tab" onclick="showPage('opsdept',this)">🔧 Ops <span class="zh">运营</span></button>
+  <button class="tab" onclick="showPage('proc',this)">📦 Proc <span class="zh">采购</span></button>
+  <button class="tab" onclick="showPage('growth',this)">↗️ Growth <span class="zh">扩张</span></button>
+  <button class="tab" onclick="showPage('mkt',this)">📣 Mkt <span class="zh">市场</span></button>
+  <button class="tab" onclick="showPage('it',this)">🖥️ IT <span class="zh">技术</span></button>
+  <button class="tab" onclick="showPage('admin',this)">📋 Admin <span class="zh">管理</span></button>
+  <button class="tab" onclick="showPage('rules',this)">⚖️ Rules <span class="zh">规矩</span></button>
 </div>
 
 <div class="content">
 
+<!-- 0 Slack OPS -->
 <div class="page active" id="ops">
   <div class="page-h">💬 Slack OPS</div>
-  <div class="page-sub"><span class="en">How company work runs in Slack</span><span class="zh">公司怎么在Slack里干活</span></div>
+  <div class="page-sub"><span class="en">How the company runs day to day</span><span class="zh">公司日常怎么跑</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-  <div class="pareto"><strong><span class="en">1-line rule:</span><span class="zh">一句话：</span></strong> <span class="en">You talk in Slack → WISE OPS works → you only yes/no on money, fire, big rules.</span><span class="zh">你在Slack说 → WISE OPS干活 → 你只在钱/开除/大规矩上说yes/no。</span></div>
 
-  <div class="sec-title"><span class="en">3 pieces</span><span class="zh">3个零件</span></div>
-  <div class="stage-grid">
-    <div class="stage-card" style="cursor:default">
-      <div class="stage-num">1</div>
-      <div class="stage-name">💬 Slack</div>
-      <div class="stage-work"><span class="en">Only OS. Instruct / approve / read.</span><span class="zh">唯一操作系统。发指令/批/看。</span></div>
+  <div class="pareto"><strong><span class="en">One rule:</span><span class="zh">一句话：</span></strong>
+    <span class="en">Talk in Slack → WISE OPS works → you say yes/no only on money, fire, and big rules.</span>
+    <span class="zh">在Slack说话 → WISE OPS干活 → 你只在钱、开除、大规矩上说 yes/no。</span>
+  </div>
+
+  <div class="sec-title"><span class="en">3 pieces</span><span class="zh">3块积木</span></div>
+  <div class="ops-grid">
+    <div class="ops-card">
+      <div class="oc-icon">💬</div>
+      <div class="oc-title">Slack</div>
+      <div class="oc-sub"><span class="en">Only operating system. Type here.</span><span class="zh">唯一操作系统。在这里打字。</span></div>
     </div>
-    <div class="stage-card" style="cursor:default">
-      <div class="stage-num">2</div>
-      <div class="stage-name">⚡ WISE OPS</div>
-      <div class="stage-work"><span class="en">Worker for store day-to-day.</span><span class="zh">店日常工人。</span></div>
+    <div class="ops-card">
+      <div class="oc-icon">⚡</div>
+      <div class="oc-title">WISE OPS</div>
+      <div class="oc-sub"><span class="en">Store + day-to-day worker</span><span class="zh">店里 + 日常干活的机器人</span></div>
     </div>
-    <div class="stage-card" style="cursor:default">
-      <div class="stage-num">3</div>
-      <div class="stage-name">🧠 Brain</div>
-      <div class="stage-work"><span class="en">Supabase = truth ledger.</span><span class="zh">Supabase = 真相账本。</span></div>
+    <div class="ops-card">
+      <div class="oc-icon">🧠</div>
+      <div class="oc-title">Brain</div>
+      <div class="oc-sub"><span class="en">Single source of truth (Supabase)</span><span class="zh">唯一真相源（Supabase）</span></div>
     </div>
   </div>
 
-  <div class="sec-title"><span class="en">2 doors</span><span class="zh">2个门</span></div>
-  <table>
-    <tr><th><span class="en">Door</span><span class="zh">门</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">For</span><span class="zh">用途</span></th></tr>
-    <tr><td><strong>WISE OPS</strong></td><td><span class="en">Store managers / day work</span><span class="zh">店经理/日常</span></td><td><span class="en">Hire, SOP, fraud, equipment, roster</span><span class="zh">招人/SOP/作弊/设备/花名册</span></td></tr>
-    <tr><td><strong>WISE BRAIN</strong></td><td>Louis + Luna only</td><td><span class="en">Bank, fire decide, secrets, code</span><span class="zh">银行/开除决定/密钥/代码</span></td></tr>
-  </table>
+  <div class="sec-title"><span class="en">2 doors</span><span class="zh">2扇门</span></div>
+  <div class="door-grid">
+    <div class="door-card">
+      <h3>⚡ WISE OPS</h3>
+      <p><span class="en">Store channels + ops work. GMs use this door.</span><span class="zh">店里频道 + 日常运营。GM用这扇门。</span></p>
+    </div>
+    <div class="door-card">
+      <h3>🧠 WISE BRAIN</h3>
+      <p><span class="en">Louis + Luna only. Owner work, money, settings.</span><span class="zh">只有 Louis + Luna。老板活、钱、设置。</span></p>
+    </div>
+  </div>
 
   <div class="sec-title"><span class="en">Where to type</span><span class="zh">在哪打字</span></div>
   <table>
-    <tr><th><span class="en">Place</span><span class="zh">地方</span></th><th><span class="en">Use</span><span class="zh">用途</span></th></tr>
-    <tr><td><span class="en">Store channel</span><span class="zh">店频道</span></td><td><span class="en">need 2 server · 冰箱坏了 · own-store only</span><span class="zh">招人/设备/只看自己店</span></td></tr>
-    <tr><td>#06-people</td><td><span class="en">People company issues</span><span class="zh">人事公司问题</span></td></tr>
-    <tr><td>#04-finance</td><td><span class="en">Purchase / money review</span><span class="zh">采购/钱</span></td></tr>
-    <tr><td>#03-ops</td><td><span class="en">Equipment repair tickets</span><span class="zh">设备维修工单</span></td></tr>
-    <tr><td><span class="en">Your DM</span><span class="zh">你的DM</span></td><td><span class="en">9PM digest / owner decisions</span><span class="zh">晚9摘要/老板决定</span></td></tr>
+    <tr><th style="width:35%"><span class="en">Work</span><span class="zh">事</span></th><th style="width:65%"><span class="en">Channel</span><span class="zh">频道</span></th></tr>
+    <tr><td><span class="en">Store hire / staffing / SOP</span><span class="zh">店里招人/人手/SOP</span></td><td><span class="en">Own store channel</span><span class="zh">自己店频道</span></td></tr>
+    <tr><td><span class="en">People HQ</span><span class="zh">人事总部</span></td><td>#06-people</td></tr>
+    <tr><td><span class="en">Buy / pay / invoice</span><span class="zh">买东西/付款/发票</span></td><td>#04-finance</td></tr>
+    <tr><td><span class="en">Equipment repair</span><span class="zh">设备维修</span></td><td>#03-ops <span class="en">(+ short note in store ch)</span><span class="zh">（店频道短消息）</span></td></tr>
+    <tr><td><span class="en">Owner money / fire / lease</span><span class="zh">老板钱/开除/租约</span></td><td><span class="en">Louis DM / #02-executive (owner)</span><span class="zh">Louis私信 / #02-executive（老板）</span></td></tr>
   </table>
+  <div class="box box-red"><strong><span class="en">Managers:</span><span class="zh">经理：</span></strong>
+    <span class="en">Own store channel only. Never #02-executive.</span>
+    <span class="zh">只在自己店频道。绝不进 #02-executive。</span>
+  </div>
 
-  <div class="sec-title"><span class="en">Copy these lines</span><span class="zh">复制这些话</span></div>
+  <div class="sec-title"><span class="en">Copy-paste lines</span><span class="zh">直接复制说</span></div>
   <table>
-    <tr><th><span class="en">Want</span><span class="zh">想做</span></th><th><span class="en">Say</span><span class="zh">说</span></th></tr>
+    <tr><th style="width:40%"><span class="en">Want</span><span class="zh">想做</span></th><th style="width:60%"><span class="en">Say</span><span class="zh">怎么说</span></th></tr>
     <tr><td><span class="en">Hire</span><span class="zh">招人</span></td><td><code>need 2 server</code></td></tr>
-    <tr><td><span class="en">Roster</span><span class="zh">花名册</span></td><td><code>roster 00003</code></td></tr>
+    <tr><td><span class="en">Roster</span><span class="zh">人数</span></td><td><code>roster 00003</code></td></tr>
     <tr><td><span class="en">Store health</span><span class="zh">店健康</span></td><td><code>store health 00003</code></td></tr>
     <tr><td><span class="en">Fraud</span><span class="zh">作弊</span></td><td><code>fraud check 00003</code></td></tr>
-    <tr><td><span class="en">SOP</span><span class="zh">查SOP</span></td><td><code>what's the SOP for onboarding</code></td></tr>
-    <tr><td><span class="en">Buy</span><span class="zh">买东西</span></td><td><code>买一个冰箱</code></td></tr>
+    <tr><td><span class="en">Buy something</span><span class="zh">买东西</span></td><td><code>买一个冰箱</code> / <code>need 50lb flour</code></td></tr>
+    <tr><td><span class="en">SOP</span><span class="zh">查流程</span></td><td><code>what's the SOP for onboarding</code></td></tr>
+    <tr><td><span class="en">Reviews</span><span class="zh">评论</span></td><td><code>reviews 00003</code></td></tr>
+    <tr><td><span class="en">New store LOI</span><span class="zh">新店意向</span></td><td><code>LOI 123 Main St Wilmington NC</code></td></tr>
   </table>
 
-  <div class="sec-title"><span class="en">One example — hire</span><span class="zh">一个例子 — 招人</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">Step</span><span class="zh">步骤</span></th></tr>
-    <tr><td>1</td><td><span class="en">GM in store channel: need 2 server</span><span class="zh">店长在店频道：need 2 server</span></td></tr>
-    <tr><td>2</td><td><span class="en">WISE OPS checks budget</span><span class="zh">WISE OPS查预算</span></td></tr>
-    <tr><td>3</td><td><span class="en">Over budget = stop · OK = job post</span><span class="zh">超预算=停 · OK=发招聘</span></td></tr>
-    <tr><td>4</td><td><span class="en">GM picks · says hire</span><span class="zh">店长选人 · 说hire</span></td></tr>
-    <tr><td>5</td><td><span class="en">Brain updated · onboard starts</span><span class="zh">Brain更新 · 入职开始</span></td></tr>
-  </table>
+  <div class="sec-title"><span class="en">Worked example — hire</span><span class="zh">完整例子 — 招人</span></div>
+  <div class="card">
+    <ol>
+      <li><span class="en">GM in store channel:</span><span class="zh">GM在店频道说：</span> <code>need 2 server</code></li>
+      <li><span class="en">WISE OPS checks budget → posts job if OK</span><span class="zh">WISE OPS查预算 → 够就开招聘</span></li>
+      <li><span class="en">Scores candidates → GM picks in thread</span><span class="zh">打分 → GM在thread选人</span></li>
+      <li><span class="en">Onboard: I-9 + 7shifts + PIN → photo to Slack</span><span class="zh">入职：I-9 + 7shifts + PIN → 拍照发Slack</span></li>
+      <li><span class="en">Brain updated. Done.</span><span class="zh">Brain更新。完成。</span></li>
+    </ol>
+  </div>
 
-  <div class="sec-title"><span class="en">3 rules</span><span class="zh">3条规矩</span></div>
-  <div class="box box-rule"><strong>1.</strong> <span class="en">Same thread for one task</span><span class="zh">一件事一个thread</span></div>
-  <div class="box box-rule"><strong>2.</strong> <span class="en">Clear words · no half request</span><span class="zh">话说清楚 · 不说半句</span></div>
-  <div class="box box-rule"><strong>3.</strong> <span class="en">Money / fire never auto</span><span class="zh">钱/开除永不自动</span></div>
+  <div class="sec-title"><span class="en">3 hard rules</span><span class="zh">3条硬规矩</span></div>
+  <div class="box box-rule"><strong>1.</strong> <span class="en">Stay in the same thread.</span><span class="zh">同一件事留在同一个thread。</span></div>
+  <div class="box box-rule"><strong>2.</strong> <span class="en">Use clear words + store number.</span><span class="zh">说清楚 + 带店号。</span></div>
+  <div class="box box-rule"><strong>3.</strong> <span class="en">Money and fire never auto.</span><span class="zh">钱和开除永不自动。</span></div>
 
-  <div class="sec-title"><span class="en">Your day (5 min)</span><span class="zh">你的一天（5分钟）</span></div>
-  <table>
-    <tr><th><span class="en">When</span><span class="zh">何时</span></th><th><span class="en">Look</span><span class="zh">看</span></th><th><span class="en">Do</span><span class="zh">做</span></th></tr>
-    <tr><td>7AM</td><td><span class="en">Staffing</span><span class="zh">人手</span></td><td><span class="en">Hire if short</span><span class="zh">缺人就招</span></td></tr>
-    <tr><td><span class="en">Day</span><span class="zh">白天</span></td><td><span class="en">Red flags only</span><span class="zh">只看红旗</span></td><td>yes / no</td></tr>
-    <tr><td>9PM</td><td><span class="en">Email + duty</span><span class="zh">邮件+职责</span></td><td><span class="en">Reply what matters</span><span class="zh">该回的回</span></td></tr>
-  </table>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>roster 00003</code> · <code>store health 00003</code> · <code>hiring status</code></div>
+  <div class="sec-title"><span class="en">5-minute owner day</span><span class="zh">老板每天5分钟</span></div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-time">7 AM</div><div class="tl-body"><div class="what"><span class="en">Staffing OK?</span><span class="zh">人手够不够</span></div><div class="action">→ <span class="en">Hire if short</span><span class="zh">缺人就招</span></div></div></div>
+    <div class="tl-item"><div class="tl-time"><span class="en">Day</span><span class="zh">白天</span></div><div class="tl-body"><div class="what"><span class="en">Red flags only</span><span class="zh">只看红旗</span></div><div class="action">→ yes / no</div></div></div>
+    <div class="tl-item"><div class="tl-time">9 PM</div><div class="tl-body"><div class="what"><span class="en">Email digest + duty check</span><span class="zh">邮件摘要 + 职责检查</span></div><div class="action">→ <span class="en">Reply what matters</span><span class="zh">该回的回</span></div></div></div>
+  </div>
+
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>roster 00003</code> ·
+    <code>store health 00003</code> ·
+    <code>hiring status</code> ·
+    <code>pending purchases</code>
+  </div>
 </div>
 
-<div class="page" id="start">
-  <div class="page-h">🎓 <span class="en">Build Start Path</span><span class="zh">建设开始路径</span></div>
-  <div class="page-sub"><span class="en">How Louis builds departments one by one</span><span class="zh">Louis怎么一个部门一个部门建</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">Finish one department fully before starting the next. Done = Skill + Data + Auto + Rules.</span><span class="zh">一个部门建完再建下一个。建完=技能+数据+自动+规矩。</span></div>
-
-  <div class="sec-title"><span class="en">Day 1 — Map only</span><span class="zh">第1天 — 只看地图</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">Do</span><span class="zh">做</span></th><th><span class="en">Where</span><span class="zh">在哪</span></th></tr>
-    <tr><td>1</td><td><span class="en">Read Slack OPS</span><span class="zh">看Slack OPS</span></td><td>💬</td></tr>
-    <tr><td>2</td><td><span class="en">Read Overview build order</span><span class="zh">看总表建设顺序</span></td><td>📊</td></tr>
-    <tr><td>3</td><td><span class="en">Open live KPI sheet</span><span class="zh">打开实时KPI表</span></td><td>📈</td></tr>
-    <tr><td>4</td><td><span class="en">Pick current department</span><span class="zh">选定当前部门</span></td><td><span class="en">People next</span><span class="zh">下一步People</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Week 1 — Finish one dept gap</span><span class="zh">第1周 — 补完一个部门缺口</span></div>
-  <table>
-    <tr><th><span class="en">Focus</span><span class="zh">重点</span></th><th><span class="en">Read</span><span class="zh">看</span></th><th><span class="en">Ship</span><span class="zh">交付</span></th></tr>
-    <tr><td>People</td><td>2 People</td><td><span class="en">missing crons + SOPs</span><span class="zh">缺的定时任务+SOP</span></td></tr>
-    <tr><td>Ops</td><td>3 Ops</td><td><span class="en">fraud/repair SOPs</span><span class="zh">作弊/维修SOP</span></td></tr>
-    <tr><td>Finance</td><td>4 Finance</td><td><span class="en">payment approval path</span><span class="zh">付款审批路径</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Month 1 — Live system</span><span class="zh">第1月 — 系统能跑</span></div>
-  <table>
-    <tr><th><span class="en">Finish</span><span class="zh">完成</span></th><th><span class="en">Pass means</span><span class="zh">过关</span></th></tr>
-    <tr><td><span class="en">People 4/4</span><span class="zh">People 4/4</span></td><td><span class="en">hire→onboard works in Slack</span><span class="zh">Slack能跑招人→入职</span></td></tr>
-    <tr><td><span class="en">Ops 4/4</span><span class="zh">Ops 4/4</span></td><td><span class="en">fraud + health auto</span><span class="zh">作弊+健康自动</span></td></tr>
-    <tr><td><span class="en">Finance gate locked</span><span class="zh">财务门锁死</span></td><td><span class="en">≥$500 never bypasses Louis</span><span class="zh">≥$500永不绕过Louis</span></td></tr>
-  </table>
-
-  <div class="box box-red"><strong><span class="en">Never:</span><span class="zh">永不：</span></strong> <span class="en">build 8 depts at once · hardcode live counts in HTML · auto-fire · auto-pay</span><span class="zh">同时建8个部门 · 把实时人数写死在HTML · 自动开除 · 自动付款</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>check my work</code> · <code>hiring status</code> · <code>which store is worst</code></div>
-</div>
-
+<!-- 1 KPI -->
 <div class="page" id="kpi">
   <div class="page-h">📈 KPI</div>
-  <div class="page-sub"><span class="en">Live numbers live in Sheet/Slack — not this HTML</span><span class="zh">实时数字在Sheet/Slack — 不在这个HTML</span></div>
-  <div class="verified">✅ <span class="en">Live data path</span><span class="zh">实时数据路径</span> · Sheet + Slack · 2026-07-21</div>
-  <div class="pareto"><strong><span class="en">Rule:</span><span class="zh">规矩：</span></strong> <span class="en">HTML teaches process. Sheet/Slack hold today's counts. Never paste yesterday headcount here.</span><span class="zh">HTML教流程。Sheet/Slack放今天数字。永不把昨天人数贴在这里。</span></div>
+  <div class="page-sub"><span class="en">Live numbers live outside this HTML</span><span class="zh">实时数字不写在这个HTML里</span></div>
+  <div class="verified">✅ <span class="en">Live data rule</span><span class="zh">实时数据规则</span> · 2026-07-21</div>
+
+  <div class="pareto"><strong><span class="en">Rule:</span><span class="zh">规矩：</span></strong>
+    <span class="en">HTML = process + gates. Sheet + Slack = live truth. Never hardcode headcount here.</span>
+    <span class="zh">HTML = 流程+门。Sheet + Slack = 实时真相。这里不写死人数。</span>
+  </div>
 
   <a class="kpi-link" href="https://docs.google.com/spreadsheets/d/1o_IaNDbwvUbXLTTJusjMzqYBzvA1PaI0AUC0pauE0zc/edit" target="_blank" rel="noopener">
-    <div class="kl-icon">📊</div>
+    <div class="kl-icon">👥</div>
     <div class="kl-text">
-      <div class="kl-title"><span class="en">People KPI Sheet (live)</span><span class="zh">People KPI表（实时）</span></div>
-      <div class="kl-sub"><span class="en">Daily 7AM refresh from Brain</span><span class="zh">每天早7点从Brain刷新</span></div>
+      <div class="kl-title"><span class="en">People KPI Sheet</span><span class="zh">人事KPI表</span></div>
+      <div class="kl-sub"><span class="en">Daily 7AM refresh · Active / Recruiting / Hired / Coaching per store</span><span class="zh">每天7AM刷新 · 每店在职/招人/录用/教导</span></div>
     </div>
     <div class="kl-arrow">→</div>
   </a>
 
-  <div class="sec-title"><span class="en">What's in the sheet</span><span class="zh">表里有什么</span></div>
+  <div class="sec-title"><span class="en">Or check in Slack</span><span class="zh">或在Slack查</span></div>
   <table>
-    <tr><th><span class="en">Metric</span><span class="zh">指标</span></th><th><span class="en">Source</span><span class="zh">来源</span></th></tr>
-    <tr><td><span class="en">Active / Recruiting / Hired / Coaching</span><span class="zh">在职/招聘中/已录用/辅导中</span></td><td>Brain → Sheet</td></tr>
-    <tr><td><span class="en">Store headcount gaps</span><span class="zh">店人手缺口</span></td><td>Brain → Sheet</td></tr>
+    <tr><th style="width:40%"><span class="en">Want</span><span class="zh">想知道</span></th><th style="width:60%"><span class="en">Say</span><span class="zh">怎么说</span></th></tr>
+    <tr><td><span class="en">People full KPI</span><span class="zh">人事全KPI</span></td><td><code>people KPI</code></td></tr>
+    <tr><td><span class="en">One store roster</span><span class="zh">某店人数</span></td><td><code>roster 00003</code></td></tr>
+    <tr><td><span class="en">Store health</span><span class="zh">店健康</span></td><td><code>store health 00003</code></td></tr>
+    <tr><td><span class="en">Worst store</span><span class="zh">最差店</span></td><td><code>which store is worst</code></td></tr>
+    <tr><td><span class="en">Sales</span><span class="zh">销售</span></td><td><code>sales 00003 yesterday</code></td></tr>
+    <tr><td><span class="en">Pending buys</span><span class="zh">待批采购</span></td><td><code>pending purchases</code></td></tr>
+    <tr><td><span class="en">Reviews</span><span class="zh">评论</span></td><td><code>reviews 00003</code></td></tr>
   </table>
 
-  <div class="sec-title"><span class="en">If you need numbers now</span><span class="zh">现在就要数字</span></div>
-  <table>
-    <tr><th><span class="en">Want</span><span class="zh">想要</span></th><th><span class="en">Say</span><span class="zh">说</span></th></tr>
-    <tr><td><span class="en">People KPI</span><span class="zh">人事KPI</span></td><td><code>people KPI</code></td></tr>
-    <tr><td><span class="en">Roster</span><span class="zh">花名册</span></td><td><code>roster 00003</code></td></tr>
-    <tr><td><span class="en">Store health</span><span class="zh">店健康</span></td><td><code>store health 00003</code></td></tr>
-    <tr><td><span class="en">Sales</span><span class="zh">销售</span></td><td><code>sales 00003 yesterday</code></td></tr>
-  </table>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>people KPI</code> · <code>roster 00003</code> · <code>store health 00003</code></div>
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>people KPI</code> ·
+    <code>store health 00003</code> ·
+    <code>which store is worst</code>
+  </div>
 </div>
 
+<!-- 2 Overview -->
 <div class="page" id="overview">
-  <div class="page-h">📊 <span class="en">Company Overview</span><span class="zh">公司总表</span></div>
-  <div class="page-sub"><span class="en">Build order · dependencies · gates</span><span class="zh">建设顺序 · 依赖 · 门槛</span></div>
+  <div class="page-h">📊 <span class="en">Overview</span><span class="zh">总表</span></div>
+  <div class="page-sub"><span class="en">8 departments · click a card</span><span class="zh">8个部门 · 点卡片进详情</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Don't build all 8. Finish foundation, then People, then money/ops gates.</span><span class="zh">不要同时建8个。先地基，再People，再钱/运营门。</span></div>
 
-  <div class="sec-title"><span class="en">Build flow</span><span class="zh">建设流程</span></div>
+  <div class="pareto"><strong>80/20:</strong>
+    <span class="en">WISE OPS handles 80%. You only decide the 20% — money, people, rules, broken things.</span>
+    <span class="zh">80% WISE OPS自动做。你只管20%要拍板的：钱、人、规矩、坏了的事。</span>
+  </div>
+
+  <div class="sec-title"><span class="en">Company flow</span><span class="zh">公司主链</span></div>
   <div class="flow">
-    <div class="flow-step">💻 IT ✅</div><div class="flow-arrow">→</div>
-    <div class="flow-step">🧑‍💼 People 🚧</div><div class="flow-arrow">→</div>
-    <div class="flow-step">🏪 Ops 🚧</div><div class="flow-arrow">→</div>
-    <div class="flow-step">💰 Finance 🚧</div><div class="flow-arrow">→</div>
-    <div class="flow-step">🛒 Proc ⬜</div><div class="flow-arrow">→</div>
-    <div class="flow-step">⭐ Mkt ⬜</div><div class="flow-arrow">→</div>
-    <div class="flow-step">🚀 Growth ⬜</div><div class="flow-arrow">→</div>
-    <div class="flow-step">🧭 Admin ⬜</div>
+    <span class="flow-step">People</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Ops</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Finance</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Proc</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Growth</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Mkt</span><span class="flow-arrow">→</span>
+    <span class="flow-step">IT</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Admin</span>
   </div>
 
   <div class="sec-title"><span class="en">Departments</span><span class="zh">部门卡片</span></div>
   <div class="stage-grid">
-    <div class="stage-card" onclick="goTab(4)"><div class="stage-num">1 · 100%</div><div class="stage-name">💻 IT</div><div class="stage-work"><span class="en">Foundation live</span><span class="zh">地基已上线</span></div><div class="stage-meta"><span class="badge badge-green">✅ Built</span></div></div>
-    <div class="stage-card" onclick="goTab(5)"><div class="stage-num">2 · 50%</div><div class="stage-name">🧑‍💼 People</div><div class="stage-work"><span class="en">Skills+data live · auto/SOP gap</span><span class="zh">技能+数据有 · 自动/SOP缺口</span></div><div class="stage-meta"><span class="badge badge-blue">🚧 Next</span></div></div>
-    <div class="stage-card" onclick="goTab(6)"><div class="stage-num">3 · 50%</div><div class="stage-name">🏪 Ops</div><div class="stage-work"><span class="en">POS/fraud live · SOP gap</span><span class="zh">POS/作弊有 · SOP缺口</span></div><div class="stage-meta"><span class="badge badge-blue">🚧</span></div></div>
-    <div class="stage-card" onclick="goTab(7)"><div class="stage-num">4 · 25%</div><div class="stage-name">💰 Finance</div><div class="stage-work"><span class="en">Gates known · tables/SOP gap</span><span class="zh">门清楚 · 表/SOP缺口</span></div><div class="stage-meta"><span class="badge badge-blue">🚧</span></div></div>
-    <div class="stage-card" onclick="goTab(8)"><div class="stage-num">5 · 0%</div><div class="stage-name">🛒 Proc</div><div class="stage-work"><span class="en">Not started</span><span class="zh">未开始</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
-    <div class="stage-card" onclick="goTab(9)"><div class="stage-num">6 · 25%</div><div class="stage-name">⭐ Mkt</div><div class="stage-work"><span class="en">Reviews skill only</span><span class="zh">只有评论技能</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
-    <div class="stage-card" onclick="goTab(10)"><div class="stage-num">7 · 25%</div><div class="stage-name">🚀 Growth</div><div class="stage-work"><span class="en">LOI skill only</span><span class="zh">只有LOI技能</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
-    <div class="stage-card" onclick="goTab(11)"><div class="stage-num">8 · 25%</div><div class="stage-name">🧭 Admin</div><div class="stage-work"><span class="en">Night checks early</span><span class="zh">夜间检查早期</span></div><div class="stage-meta"><span class="badge badge-yellow">⬜</span></div></div>
+    <div class="stage-card" onclick="goTab(3)">
+      <div class="stage-num">Dept 1</div>
+      <div class="stage-name">👥 People <span class="zh">人事</span></div>
+      <div class="stage-work"><span class="en">Hire → onboard → schedule → 1:1 → discipline → exit</span><span class="zh">招人→入职→排班→1:1→纪律→离职</span></div>
+      <div class="stage-meta"><span class="owner">Coach Sally + GM</span> <span class="badge badge-gate">⭐ Fire mgr</span></div>
+    </div>
+    <div class="stage-card" onclick="goTab(4)">
+      <div class="stage-num">Dept 2</div>
+      <div class="stage-name">💵 Finance <span class="zh">财务</span></div>
+      <div class="stage-work"><span class="en">Bank · pay · payroll · tax</span><span class="zh">银行·付款·工资·税务</span></div>
+      <div class="stage-meta"><span class="owner">Yumi · Louis+Luna</span> <span class="badge badge-gate">⭐ ≥$500</span></div>
+    </div>
+    <div class="stage-card" onclick="goTab(5)">
+      <div class="stage-num">Dept 3</div>
+      <div class="stage-name">🔧 Ops <span class="zh">运营</span></div>
+      <div class="stage-work"><span class="en">Daily run · POS · fraud · repair</span><span class="zh">每日营业·POS·作弊·维修</span></div>
+      <div class="stage-meta"><span class="owner">GM + WISE OPS</span> <span class="badge badge-blue">⚡ Auto fraud</span></div>
+    </div>
+    <div class="stage-card" onclick="goTab(6)">
+      <div class="stage-num">Dept 4</div>
+      <div class="stage-name">📦 Proc <span class="zh">采购</span></div>
+      <div class="stage-work"><span class="en">Ask → review → approve → order</span><span class="zh">提需求→审→批→下单</span></div>
+      <div class="stage-meta"><span class="owner">Yumi + Louis</span> <span class="badge badge-gate">⭐ ≥$500</span></div>
+    </div>
+    <div class="stage-card" onclick="goTab(7)">
+      <div class="stage-num">Dept 5</div>
+      <div class="stage-name">↗️ Growth <span class="zh">扩张</span></div>
+      <div class="stage-work"><span class="en">Site → LOI → lease → open</span><span class="zh">选址→LOI→租约→开店</span></div>
+      <div class="stage-meta"><span class="owner">Louis only</span> <span class="badge badge-gate">⭐ Every step</span></div>
+    </div>
+    <div class="stage-card" onclick="goTab(8)">
+      <div class="stage-num">Dept 6</div>
+      <div class="stage-name">📣 Marketing <span class="zh">市场</span></div>
+      <div class="stage-work"><span class="en">Google reviews · brand · promos</span><span class="zh">Google评论·品牌·推广</span></div>
+      <div class="stage-meta"><span class="owner">GM + Louis</span> <span class="badge badge-gate">⭐ Budget</span></div>
+    </div>
+    <div class="stage-card" onclick="goTab(9)">
+      <div class="stage-num">Dept 7</div>
+      <div class="stage-name">🖥️ IT <span class="zh">技术</span></div>
+      <div class="stage-work"><span class="en">Hermes · Slack · keys · Brain</span><span class="zh">Hermes·Slack·密钥·Brain</span></div>
+      <div class="stage-meta"><span class="owner">Louis only</span> <span class="badge badge-gate">⭐ Code/settings</span></div>
+    </div>
+    <div class="stage-card" onclick="goTab(10)">
+      <div class="stage-num">Dept 8</div>
+      <div class="stage-name">📋 Admin <span class="zh">管理</span></div>
+      <div class="stage-work"><span class="en">Boss work only · 5-min day</span><span class="zh">只做老板活·每天5分钟</span></div>
+      <div class="stage-meta"><span class="owner">Louis</span> <span class="badge badge-blue">⚡ 9PM check</span></div>
+    </div>
   </div>
 
-  <div class="sec-title"><span class="en">Human gates (never auto)</span><span class="zh">人工门槛（永不自动）</span></div>
+  <div class="sec-title"><span class="en">4 human gates</span><span class="zh">4个人拍板</span></div>
   <div class="gate-row">
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">D1</span></div><div class="g-who">💰 Money</div><div class="g-what"><span class="en">Bank / ≥$500 / tax</span><span class="zh">银行/≥$500/税</span><br>Louis + Luna</div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">D2</span></div><div class="g-who">🔥 People</div><div class="g-what"><span class="en">Fire manager / pay / promote</span><span class="zh">开除经理/调薪/升职</span><br>Louis (+Yumi)</div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">D3</span></div><div class="g-who">⚖️ Rules</div><div class="g-what"><span class="en">SOP / architecture / new store</span><span class="zh">SOP/架构/新店</span><br>Louis only</div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">D4</span></div><div class="g-who">📋 Check</div><div class="g-what"><span class="en">Ask anytime</span><span class="zh">随时可查</span><br><span class="en">No approval</span><span class="zh">不用批</span></div></div>
+    <div class="gate-card">
+      <div class="g-badge"><span class="badge badge-red">💰</span></div>
+      <div class="g-who"><span class="en">Money</span><span class="zh">钱</span></div>
+      <div class="g-what">Bank / wire / ≥$500 / tax<br>Louis + Luna</div>
+    </div>
+    <div class="gate-card">
+      <div class="g-badge"><span class="badge badge-yellow">🔥</span></div>
+      <div class="g-who"><span class="en">People</span><span class="zh">人</span></div>
+      <div class="g-what"><span class="en">Fire manager / promote / pay</span><span class="zh">开除经理/升职/工资</span><br>Louis + Yumi</div>
+    </div>
+    <div class="gate-card">
+      <div class="g-badge"><span class="badge badge-blue">⚖️</span></div>
+      <div class="g-who"><span class="en">Rules</span><span class="zh">规</span></div>
+      <div class="g-what"><span class="en">SOP / architecture / new store</span><span class="zh">SOP/架构/新店</span><br>Louis only</div>
+    </div>
+    <div class="gate-card">
+      <div class="g-badge"><span class="badge badge-green">📋</span></div>
+      <div class="g-who"><span class="en">Check</span><span class="zh">查</span></div>
+      <div class="g-what">health / fraud / roster<br><span class="en">Ask anytime</span><span class="zh">随时问</span></div>
+    </div>
   </div>
 
-  <div class="sec-title"><span class="en">Dependencies</span><span class="zh">依赖</span></div>
-  <table>
-    <tr><th><span class="en">Dept</span><span class="zh">部门</span></th><th><span class="en">Depends on</span><span class="zh">依赖</span></th><th><span class="en">Why</span><span class="zh">为什么</span></th></tr>
-    <tr><td>IT</td><td>—</td><td><span class="en">Foundation</span><span class="zh">地基</span></td></tr>
-    <tr><td>People</td><td>💻 IT ✅</td><td><span class="en">Need Brain + Slack + skills</span><span class="zh">要Brain+Slack+技能</span></td></tr>
-    <tr><td>Ops</td><td>IT ✅ · People 🚧</td><td><span class="en">Need staffed stores + POS</span><span class="zh">要有人+POS</span></td></tr>
-    <tr><td>Finance</td><td>IT ✅ · Ops 🚧</td><td><span class="en">Need sales flow</span><span class="zh">要销售流</span></td></tr>
-    <tr><td>Proc</td><td>💰 Finance 🚧</td><td><span class="en">Need pay path</span><span class="zh">要付款路径</span></td></tr>
-    <tr><td>Mkt</td><td>🏪 Ops 🚧</td><td><span class="en">Need store/Google live</span><span class="zh">要店/Google活</span></td></tr>
-    <tr><td>Growth / Admin</td><td><span class="en">All above</span><span class="zh">以上全部</span></td><td><span class="en">Need whole system</span><span class="zh">要整系统</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Done = 4 pieces</span><span class="zh">建完=4件</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">Piece</span><span class="zh">零件</span></th><th><span class="en">Means</span><span class="zh">意思</span></th></tr>
-    <tr><td>1</td><td>Skill</td><td><span class="en">WISE OPS knows how</span><span class="zh">WISE OPS会做</span></td></tr>
-    <tr><td>2</td><td>Data</td><td><span class="en">Brain tables clean</span><span class="zh">Brain表干净</span></td></tr>
-    <tr><td>3</td><td>Auto</td><td><span class="en">Cron running</span><span class="zh">定时在跑</span></td></tr>
-    <tr><td>4</td><td>Rules</td><td><span class="en">SOP published + findable</span><span class="zh">SOP已发可查</span></td></tr>
-  </table>
+  <div class="sec-title"><span class="en">Daily rhythm</span><span class="zh">每天节奏</span></div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-time">7 AM</div><div class="tl-body"><div class="what"><span class="en">Staffing</span><span class="zh">人手</span></div><div class="where"><span class="en">Store channels</span><span class="zh">各店频道</span></div><div class="action">→ <span class="en">Hire if short</span><span class="zh">缺人说招</span></div></div></div>
+    <div class="tl-item"><div class="tl-time">8 AM</div><div class="tl-body"><div class="what"><span class="en">AI cost alert</span><span class="zh">AI花费</span></div><div class="where">#02-exec <span class="en">(silent if OK)</span><span class="zh">（没超静默）</span></div><div class="action">→ <span class="en">Only if over</span><span class="zh">超了才看</span></div></div></div>
+    <div class="tl-item"><div class="tl-time">9 PM</div><div class="tl-body"><div class="what"><span class="en">Email + duty check</span><span class="zh">邮件 + 职责检查</span></div><div class="where"><span class="en">Louis DM</span><span class="zh">Louis私信</span></div><div class="action">→ <span class="en">Reply what matters</span><span class="zh">该回的回</span></div></div></div>
+    <div class="tl-item"><div class="tl-time">10:30 PM</div><div class="tl-body"><div class="what"><span class="en">Store chat → Brain</span><span class="zh">店聊天存Brain</span></div><div class="where"><span class="en">Louis DM</span><span class="zh">Louis私信</span></div><div class="action">→ <span class="en">Issues tomorrow</span><span class="zh">问题明天处理</span></div></div></div>
+    <div class="tl-item"><div class="tl-time">11 PM</div><div class="tl-body"><div class="what"><span class="en">Dirty data check</span><span class="zh">脏数据检查</span></div><div class="where">#02-exec</div><div class="action">→ <span class="en">Fix tomorrow</span><span class="zh">明天修</span></div></div></div>
+    <div class="tl-item"><div class="tl-time">12–1 AM</div><div class="tl-body"><div class="what"><span class="en">POS + fraud + forms + quality</span><span class="zh">POS+作弊+表格+质量分</span></div><div class="where">#02-exec / store</div><div class="action">→ <span class="en">Flags only</span><span class="zh">有旗才看</span></div></div></div>
+  </div>
 
   <div class="sec-title"><span class="en">5 stores</span><span class="zh">5家店</span></div>
   <table>
-    <tr><th>#</th><th>Brand</th><th>City</th><th>Status</th></tr>
+    <tr><th>#</th><th><span class="en">Brand</span><span class="zh">品牌</span></th><th><span class="en">City</span><span class="zh">城市</span></th><th><span class="en">Status</span><span class="zh">状态</span></th></tr>
     <tr><td>00001</td><td>Gangnam</td><td>Fayetteville</td><td><span class="badge badge-green">✅ Open</span></td></tr>
     <tr><td>00002</td><td>Masa</td><td>Greenville</td><td><span class="badge badge-green">✅ Open</span></td></tr>
     <tr><td>00003</td><td>Gangnam</td><td>Wilmington</td><td><span class="badge badge-green">✅ Open</span></td></tr>
     <tr><td>00004</td><td>Low Country</td><td>Wilmington</td><td><span class="badge badge-green">✅ Open</span></td></tr>
     <tr><td>00005</td><td>Masa</td><td>Greenville</td><td><span class="badge badge-green">✅ Open</span></td></tr>
   </table>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>check my work</code> · <code>which store is worst</code> · <code>hiring status</code></div>
+
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>which store is worst</code> ·
+    <code>hiring status</code> ·
+    <code>store health 00003</code>
+  </div>
 </div>
 
-<div class="page" id="d_it">
-  <div class="page-h">💻 <span class="en">IT</span><span class="zh">技术</span></div>
-  <div class="page-sub"><span class="en">Foundation · Hermes + Brain + Slack + Keys</span><span class="zh">地基 · Hermes + Brain + Slack + 密钥</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Most system pain = wrong access + expired keys. Fix those two first.</span><span class="zh">系统问题大多来自权限错+密钥过期。先管好这两件。</span></div>
-  <div class="sec-title"><span class="en">Build progress</span><span class="zh">建设进度</span> · <span class="badge badge-green">✅ Built</span> · 100%</div>
-  <div class="progress-bar"><div class="progress-fill done" style="width:100%"></div></div>
-  <div class="sec-title"><span class="en">Done checklist (4 pieces)</span><span class="zh">建完清单（4件）</span></div>
-  <ul class="check"><li><div class="ci ok">✓</div><div><strong><span class="en">Skill</span><span class="zh">技能</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">Hermes + architecture skills live</span><span class="zh">Hermes+架构技能已上线</span></div></div></li><li><div class="ci ok">✓</div><div><strong><span class="en">Data</span><span class="zh">数据</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">Brain tables live + clean</span><span class="zh">Brain表已有且干净</span></div></div></li><li><div class="ci ok">✓</div><div><strong><span class="en">Auto</span><span class="zh">自动</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">Key sync / Slack check / quality score running</span><span class="zh">密钥同步/Slack检查/质量评分在跑</span></div></div></li><li><div class="ci ok">✓</div><div><strong><span class="en">Rules</span><span class="zh">规矩</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">10 work rules + owner gates</span><span class="zh">10条规矩+老板门</span></div></div></li></ul>
-  <div class="sec-title"><span class="en">Target workflow</span><span class="zh">目标流程</span></div>
+<!-- 3 People -->
+<div class="page" id="people">
+  <div class="page-h">👥 People <span class="zh">人事部</span></div>
+  <div class="page-sub"><span class="en">Hire → Onboard → Schedule → 1:1 → Discipline → Exit</span><span class="zh">招人→入职→排班→1:1→纪律→离职</span> · Coach Sally + GM</div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · handbook: People-Department.html</div>
+  <div class="pareto"><strong>80/20:</strong>
+    <span class="en">Most pain is understaffing or bad hires. Fix hiring budget + onboarding first.</span>
+    <span class="zh">大部分痛来自缺人或招错人。先管招人预算和入职。</span>
+  </div>
+
+  <div class="sec-title"><span class="en">Steps</span><span class="zh">步骤</span></div>
   <table>
-    <tr><th style="width:8%">#</th><th style="width:28%"><span class="en">Step</span><span class="zh">步骤</span></th><th style="width:22%"><span class="en">Who</span><span class="zh">谁</span></th><th style="width:42%"><span class="en">What happens</span><span class="zh">发生什么</span></th></tr>
-    <tr><td>1</td><td><span class="en">Hermes only worker</span><span class="zh">Hermes唯一工人</span></td><td>Louis</td><td><span class="en">Skills + cron = all work</span><span class="zh">技能+定时=全部工作</span></td></tr><tr><td>2</td><td><span class="en">Slack access</span><span class="zh">Slack权限</span></td><td>Louis</td><td><span class="en">Louis clicks · WISE OPS checks</span><span class="zh">Louis点 · WISE OPS查</span></td></tr><tr><td>3</td><td><span class="en">Keys</span><span class="zh">密钥</span></td><td>Louis</td><td><span class="en">1Password first → env sync</span><span class="zh">先1Password→再同步</span></td></tr><tr><td>4</td><td><span class="en">DB / security</span><span class="zh">库/安全</span></td><td>Louis</td><td><span class="en">Brain truth · 4-place permission changes</span><span class="zh">Brain真相 · 改权限4处</span></td></tr>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th>Gate</th></tr>
+    <tr><td>1</td><td><span class="en">GM: need N role</span><span class="zh">GM说 need N role</span></td><td>GM</td><td>—</td></tr>
+    <tr><td>2</td><td><span class="en">Budget check → job post</span><span class="zh">查预算→开招聘</span></td><td><span class="badge badge-blue">⚡ Auto</span></td><td><span class="badge badge-gate">⭐ Budget</span></td></tr>
+    <tr><td>3</td><td><span class="en">Score → GM pick</span><span class="zh">打分→GM选</span></td><td>GM</td><td><span class="badge badge-gate">⭐ D1</span></td></tr>
+    <tr><td>4</td><td><span class="en">I-9 + 7shifts + PIN + photo</span><span class="zh">I-9+7shifts+PIN+拍照</span></td><td>GM + Auto</td><td><span class="badge badge-gate">⭐ D2</span></td></tr>
+    <tr><td>5</td><td><span class="en">Schedule + 1:1 + discipline ladder</span><span class="zh">排班+1:1+纪律阶梯</span></td><td>GM</td><td>—</td></tr>
+    <tr><td>6</td><td><span class="en">Exit: floor→Coach · manager→Louis</span><span class="zh">离职：floor→Coach · 经理→Louis</span></td><td>Coach / Louis</td><td><span class="badge badge-gate">⭐ D3</span></td></tr>
   </table>
-  <div class="sec-title"><span class="en">Rules</span><span class="zh">规矩</span></div>
-  <div class="box box-rule"><strong>R1</strong> <span class="en">Code/settings = Louis only</span><span class="zh">改代码/设置=Louis only</span></div><div class="box box-rule"><strong>R2</strong> <span class="en">Permission change = 4 places + restart outside Slack</span><span class="zh">改权限=4处+Slack外重启</span></div><div class="box box-rule"><strong>R3</strong> <span class="en">Managers never enter #02-executive</span><span class="zh">经理永不进#02-executive</span></div><div class="box box-rule"><strong>R4</strong> <span class="en">New keys → 1Password first</span><span class="zh">新密钥→先1Password</span></div>
+
   <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
   <table>
-    <tr><th style="width:34%"><span class="en">Action</span><span class="zh">事</span></th><th style="width:28%"><span class="en">Decides</span><span class="zh">谁批</span></th><th style="width:38%"><span class="en">Note</span><span class="zh">备注</span></th></tr>
-    <tr><td><span class="en">Change code/settings</span><span class="zh">改代码/设置</span></td><td>Louis only</td><td>—</td></tr><tr><td><span class="en">Add/remove Slack people</span><span class="zh">加/删Slack人</span></td><td><span class="en">Louis clicks</span><span class="zh">Louis点</span></td><td><span class="en">WISE OPS executes</span><span class="zh">WISE OPS执行</span></td></tr><tr><td><span class="en">New API key</span><span class="zh">新API密钥</span></td><td>Louis</td><td><span class="en">1Password first</span><span class="zh">先1Password</span></td></tr>
+    <tr><th><span class="en">Action</span><span class="zh">事</span></th><th><span class="en">Decides</span><span class="zh">谁</span></th><th><span class="en">Note</span><span class="zh">备注</span></th></tr>
+    <tr><td><span class="en">Hire floor</span><span class="zh">招服务员</span></td><td>Coach + GM</td><td><span class="en">In budget</span><span class="zh">预算内</span></td></tr>
+    <tr><td><span class="en">Hire manager</span><span class="zh">招经理</span></td><td>Louis</td><td><span class="en">Interview</span><span class="zh">要面试</span></td></tr>
+    <tr><td><span class="en">Fire floor</span><span class="zh">开除服务员</span></td><td>Coach Sally</td><td><span class="en">Ladder</span><span class="zh">走阶梯</span></td></tr>
+    <tr><td><span class="en">Fire manager</span><span class="zh">开除经理</span></td><td>Louis + Yumi</td><td><span class="en">Full process</span><span class="zh">完整流程</span></td></tr>
+    <tr><td><span class="en">Raise / promote</span><span class="zh">涨薪/升职</span></td><td>Louis</td><td>—</td></tr>
   </table>
-  <div class="sec-title"><span class="en">How to check</span><span class="zh">怎么查</span></div>
-  <table>
-    <tr><th style="width:40%"><span class="en">Want</span><span class="zh">想知道</span></th><th style="width:60%"><span class="en">Say in Slack</span><span class="zh">在Slack说</span></th></tr>
-    <tr><td><span class="en">Hermes health</span><span class="zh">Hermes健康</span></td><td><code>hermes status</code></td></tr><tr><td><span class="en">Broken crons</span><span class="zh">坏定时任务</span></td><td><code>check my work</code></td></tr><tr><td><span class="en">Managers in channels</span><span class="zh">经理在频道吗</span></td><td><code>check managers in slack</code></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">Automated (target)</span><span class="zh">自动跑（目标）</span></div>
-  <div class="box box-auto">⏰ <span class="en">Every 6h — key sync</span><span class="zh">每6小时 — 密钥同步</span></div><div class="box box-auto">⏰ <span class="en">Every 6h — manager channel check</span><span class="zh">每6小时 — 经理频道检查</span></div><div class="box box-auto">⏰ <span class="en">1AM — work quality scorecard</span><span class="zh">凌晨1点 — 工作质量评分</span></div><div class="box box-auto">⏰ <span class="en">8AM — AI cost alert</span><span class="zh">早8点 — AI花费报警</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>hermes status</code> · <code>check my work</code></div>
+
+  <div class="box box-rule"><strong><span class="en">Rules:</span><span class="zh">规矩：</span></strong>
+    <span class="en">Budget first · I-9+7shifts+PIN required · coach before write-up · never auto-fire · GM own store only</span>
+    <span class="zh">先预算 · 必须I-9+7shifts+PIN · 先教后罚 · 永不自动开除 · GM只看自己店</span>
+  </div>
+  <div class="box box-auto">⏰ <strong>6AM</strong> roster sync · <strong>11PM</strong> dirty data · <strong>10:30PM</strong> store chat → Brain</div>
+  <div class="box box-gate"><strong><span class="en">Deep handbook:</span><span class="zh">详细手册：</span></strong> People-Department.html <span class="en">(Hire · Onboard · 1:1 · Discipline…)</span><span class="zh">（招人·入职·1:1·纪律…）</span></div>
+
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>need 2 server</code> ·
+    <code>roster 00003</code> ·
+    <code>hiring status</code> ·
+    <code>headcount vs budget 00003</code>
+  </div>
 </div>
 
-<div class="page" id="d_people">
-  <div class="page-h">🧑‍💼 <span class="en">People</span><span class="zh">人事</span></div>
-  <div class="page-sub"><span class="en">Hire → Onboard → Schedule → 1:1 → Discipline → Exit</span><span class="zh">招人→入职→排班→一对一→纪律→离职</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Most store pain = short staff + wrong hire. Fix budget gate + onboarding.</span><span class="zh">店的问题大多=缺人+招错人。先管预算门+入职。</span></div>
-  <div class="sec-title"><span class="en">Build progress</span><span class="zh">建设进度</span> · <span class="badge badge-blue">🚧 In progress</span> · 50%</div>
-  <div class="progress-bar"><div class="progress-fill " style="width:50%"></div></div>
-  <div class="sec-title"><span class="en">Done checklist (4 pieces)</span><span class="zh">建完清单（4件）</span></div>
-  <ul class="check"><li><div class="ci ok">✓</div><div><strong><span class="en">Skill</span><span class="zh">技能</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">people-recruiting / roster / my-job live</span><span class="zh">招人/花名册/岗位技能已上线</span></div></div></li><li><div class="ci ok">✓</div><div><strong><span class="en">Data</span><span class="zh">数据</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">people / roles / budgets tables</span><span class="zh">人员/岗位/预算表</span></div></div></li><li><div class="ci wip">🚧</div><div><strong><span class="en">Auto</span><span class="zh">自动</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">Roster sync / data health / chat log partial</span><span class="zh">花名册同步/数据健康/聊天日志部分</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Rules/SOP</span><span class="zh">规矩/SOP</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">Hire/onboard/discipline SOP still needed</span><span class="zh">招人/入职/纪律SOP还要写</span></div></div></li></ul>
-  <div class="sec-title"><span class="en">Target workflow</span><span class="zh">目标流程</span></div>
+<!-- 4 Finance -->
+<div class="page" id="finance">
+  <div class="page-h">💵 Finance <span class="zh">财务部</span></div>
+  <div class="page-sub"><span class="en">Bank · payments · payroll · tax · AP</span><span class="zh">银行·付款·工资·税务·应付</span> · Yumi · Louis+Luna</div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong>
+    <span class="en">Most finance risk is unapproved money out. Lock payment approval.</span>
+    <span class="zh">最大财务风险是没批就付钱。把付款审批管死。</span>
+  </div>
+
+  <div class="sec-title"><span class="en">Steps</span><span class="zh">步骤</span></div>
   <table>
-    <tr><th style="width:8%">#</th><th style="width:28%"><span class="en">Step</span><span class="zh">步骤</span></th><th style="width:22%"><span class="en">Who</span><span class="zh">谁</span></th><th style="width:42%"><span class="en">What happens</span><span class="zh">发生什么</span></th></tr>
-    <tr><td>1</td><td><span class="en">Hire request</span><span class="zh">招人需求</span></td><td>GM</td><td><span class="en">need 2 server → budget gate</span><span class="zh">need 2 server → 预算门</span></td></tr><tr><td>2</td><td><span class="en">Screen + hire</span><span class="zh">筛人+录用</span></td><td><span class="en">WISE OPS + GM</span><span class="zh">WISE OPS + GM</span></td><td><span class="en">score → interview → hire in Slack</span><span class="zh">打分→面试→Slack说hire</span></td></tr><tr><td>3</td><td><span class="en">Onboard</span><span class="zh">入职</span></td><td>GM</td><td><span class="en">I-9 + 7shifts + PIN</span><span class="zh">I-9 + 7shifts + PIN</span></td></tr><tr><td>4</td><td><span class="en">Schedule / 1:1 / discipline</span><span class="zh">排班/一对一/纪律</span></td><td>GM / Coach</td><td><span class="en">teach first · paper second</span><span class="zh">先教 · 再纸质</span></td></tr><tr><td>5</td><td><span class="en">Exit</span><span class="zh">离职</span></td><td><span class="en">Coach / Louis</span><span class="zh">Coach / Louis</span></td><td><span class="en">floor vs manager gate</span><span class="zh">floor vs 经理门</span></td></tr>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>1</td><td><span class="en">POS sales → Brain daily</span><span class="zh">POS销售每天进Brain</span></td><td><span class="badge badge-blue">⚡ Auto</span></td></tr>
+    <tr><td>2</td><td><span class="en">Bank vs Brain reconcile</span><span class="zh">银行对账</span></td><td>Yumi</td></tr>
+    <tr><td>3</td><td><span class="en">Purchase: Yumi tax/total → ≥$500 Louis</span><span class="zh">采购：Yumi锁税/总额 → ≥$500 Louis</span></td><td>Yumi / Louis</td></tr>
+    <tr><td>4</td><td><span class="en">Payroll via Gusto · anomalies up</span><span class="zh">Gusto发工资 · 异常上报</span></td><td>Yumi / Louis</td></tr>
+    <tr><td>5</td><td><span class="en">Tax / external docs → Louis first</span><span class="zh">税务/外发文件先过Louis</span></td><td>Louis</td></tr>
+    <tr><td>6</td><td><span class="en">Monthly P&L to owner DM</span><span class="zh">月报P&L发老板</span></td><td><span class="badge badge-blue">⚡ Auto</span></td></tr>
   </table>
-  <div class="sec-title"><span class="en">Rules</span><span class="zh">规矩</span></div>
-  <div class="box box-rule"><strong>R1</strong> <span class="en">Over budget hire = stop</span><span class="zh">超预算招人=停</span></div><div class="box box-rule"><strong>R2</strong> <span class="en">Onboard needs I-9 + 7shifts + PIN</span><span class="zh">入职必须I-9+7shifts+PIN</span></div><div class="box box-rule"><strong>R3</strong> <span class="en">Teach first, write-up second</span><span class="zh">先教后写</span></div><div class="box box-rule"><strong>R4</strong> <span class="en">Never auto-fire</span><span class="zh">永不自动开除</span></div><div class="box box-rule"><strong>R5</strong> <span class="en">GM sees own store only</span><span class="zh">GM只看自己店</span></div>
+
   <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
   <table>
-    <tr><th style="width:34%"><span class="en">Action</span><span class="zh">事</span></th><th style="width:28%"><span class="en">Decides</span><span class="zh">谁批</span></th><th style="width:38%"><span class="en">Note</span><span class="zh">备注</span></th></tr>
-    <tr><td><span class="en">Hire floor</span><span class="zh">招floor</span></td><td>Coach + GM</td><td><span class="en">In budget</span><span class="zh">预算内</span></td></tr><tr><td><span class="en">Hire manager</span><span class="zh">招经理</span></td><td>Louis</td><td><span class="en">Interview required</span><span class="zh">必须面试</span></td></tr><tr><td><span class="en">Fire floor</span><span class="zh">开除floor</span></td><td>Coach</td><td><span class="en">Ladder</span><span class="zh">阶梯</span></td></tr><tr><td><span class="en">Fire manager / pay change</span><span class="zh">开除经理/改薪</span></td><td>Louis (+Yumi fire)</td><td><span class="en">Full process</span><span class="zh">完整流程</span></td></tr>
+    <tr><th><span class="en">Action</span><span class="zh">事</span></th><th><span class="en">Decides</span><span class="zh">谁</span></th><th><span class="en">Note</span><span class="zh">备注</span></th></tr>
+    <tr><td>Bank / wire / ACH</td><td>Louis + Luna</td><td><span class="en">Equal</span><span class="zh">同权</span></td></tr>
+    <tr><td><span class="en">Buy ≥$500</span><span class="zh">采购≥$500</span></td><td>Louis</td><td>—</td></tr>
+    <tr><td><span class="en">Buy &lt;$500</span><span class="zh">采购&lt;$500</span></td><td>Yumi</td><td><span class="en">Locks tax+total</span><span class="zh">锁税+总额</span></td></tr>
+    <tr><td><span class="en">Payroll / raise</span><span class="zh">工资/涨薪</span></td><td>Louis</td><td>—</td></tr>
+    <tr><td>OpenBudget</td><td>Louis + Luna</td><td><span class="en">Others denied</span><span class="zh">别人拒绝</span></td></tr>
   </table>
-  <div class="sec-title"><span class="en">How to check</span><span class="zh">怎么查</span></div>
-  <table>
-    <tr><th style="width:40%"><span class="en">Want</span><span class="zh">想知道</span></th><th style="width:60%"><span class="en">Say in Slack</span><span class="zh">在Slack说</span></th></tr>
-    <tr><td><span class="en">Roster</span><span class="zh">花名册</span></td><td><code>roster 00003</code></td></tr><tr><td><span class="en">Hiring status</span><span class="zh">招人状态</span></td><td><code>hiring status</code></td></tr><tr><td><span class="en">Headcount vs budget</span><span class="zh">人数vs预算</span></td><td><code>headcount vs budget 00003</code></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">Automated (target)</span><span class="zh">自动跑（目标）</span></div>
-  <div class="box box-auto">⏰ <span class="en">6AM — roster sync</span><span class="zh">早6点 — 花名册同步</span></div><div class="box box-auto">⏰ <span class="en">11PM — dirty data check</span><span class="zh">晚11点 — 脏数据检查</span></div><div class="box box-auto">⏰ <span class="en">10:30PM — store chat → Brain</span><span class="zh">晚10:30 — 店聊天进Brain</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>roster 00003</code> · <code>hiring status</code> · <code>people KPI</code></div>
+
+  <div class="box box-rule"><strong><span class="en">Rules:</span><span class="zh">规矩：</span></strong>
+    <span class="en">No proof = no pay · Yumi never forwards full bank to personal chat · external tax/contract needs Louis</span>
+    <span class="zh">没凭证不付 · Yumi不转发完整银行流水到私人聊天 · 外发税务/合同要Louis</span>
+  </div>
+  <div class="box box-auto">⏰ <strong>9PM</strong> email digest · <strong>30min</strong> Gmail receipt · <strong>8AM</strong> AI cost alert</div>
+
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>sales 00003 yesterday</code> ·
+    <code>pending purchases</code> ·
+    <code>budget vs actual 00003</code>
+  </div>
 </div>
 
-<div class="page" id="d_ops">
-  <div class="page-h">🏪 <span class="en">Ops</span><span class="zh">运营</span></div>
-  <div class="page-sub"><span class="en">POS · Fraud · Equipment · SOP</span><span class="zh">POS · 作弊 · 设备 · SOP</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Most ops pain = POS fraud + broken equipment. Watch those two.</span><span class="zh">运营问题大多=POS作弊+设备坏。盯住这两件。</span></div>
-  <div class="sec-title"><span class="en">Build progress</span><span class="zh">建设进度</span> · <span class="badge badge-blue">🚧 In progress</span> · 50%</div>
-  <div class="progress-bar"><div class="progress-fill " style="width:50%"></div></div>
-  <div class="sec-title"><span class="en">Done checklist (4 pieces)</span><span class="zh">建完清单（4件）</span></div>
-  <ul class="check"><li><div class="ci ok">✓</div><div><strong><span class="en">Skill</span><span class="zh">技能</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">POS / fraud / store health / SOP lookup live</span><span class="zh">POS/作弊/店健康/SOP查询已上线</span></div></div></li><li><div class="ci ok">✓</div><div><strong><span class="en">Data</span><span class="zh">数据</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">chowbus_raw + fraud checks receiving</span><span class="zh">chowbus_raw+作弊检查在收数</span></div></div></li><li><div class="ci wip">🚧</div><div><strong><span class="en">Auto</span><span class="zh">自动</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">POS pull / fraud / form rollup partial</span><span class="zh">POS拉取/作弊/表格汇总部分</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Rules/SOP</span><span class="zh">规矩/SOP</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">Ops + repair + fraud response SOPs needed</span><span class="zh">运营+维修+作弊响应SOP还要写</span></div></div></li></ul>
-  <div class="sec-title"><span class="en">Target workflow</span><span class="zh">目标流程</span></div>
+<!-- 5 Ops -->
+<div class="page" id="opsdept">
+  <div class="page-h">🔧 Operations <span class="zh">运营部</span></div>
+  <div class="page-sub"><span class="en">Daily run · POS · fraud · equipment · SOP</span><span class="zh">每日营业·POS·作弊·设备·SOP</span> · GM + WISE OPS</div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong>
+    <span class="en">Watch POS fraud and broken equipment. Those two stabilize the store.</span>
+    <span class="zh">盯住POS作弊和设备坏了。这两件事稳住店。</span>
+  </div>
+
+  <div class="sec-title"><span class="en">Steps</span><span class="zh">步骤</span></div>
   <table>
-    <tr><th style="width:8%">#</th><th style="width:28%"><span class="en">Step</span><span class="zh">步骤</span></th><th style="width:22%"><span class="en">Who</span><span class="zh">谁</span></th><th style="width:42%"><span class="en">What happens</span><span class="zh">发生什么</span></th></tr>
-    <tr><td>1</td><td><span class="en">Daily open/close</span><span class="zh">每天开/关</span></td><td>GM</td><td><span class="en">Operate store</span><span class="zh">开店营业</span></td></tr><tr><td>2</td><td><span class="en">POS pull</span><span class="zh">POS拉取</span></td><td>WISE OPS</td><td><span class="en">12AM sales → Brain</span><span class="zh">零点销售进Brain</span></td></tr><tr><td>3</td><td><span class="en">Fraud 9 checks</span><span class="zh">作弊9项</span></td><td>WISE OPS</td><td><span class="en">12:15AM flags only</span><span class="zh">12:15只报红旗</span></td></tr><tr><td>4</td><td><span class="en">Equipment ticket</span><span class="zh">设备工单</span></td><td>WISE OPS</td><td><span class="en">E1 Ops CN · E2 store short</span><span class="zh">E1运维中文 · E2店短消息</span></td></tr><tr><td>5</td><td><span class="en">SOP ask</span><span class="zh">问SOP</span></td><td>Anyone</td><td><span class="en">PDF to Slack</span><span class="zh">PDF发Slack</span></td></tr>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>1</td><td><span class="en">Open → run → close</span><span class="zh">开门→营业→关门</span></td><td>GM</td></tr>
+    <tr><td>2</td><td><span class="en">12AM POS → Brain</span><span class="zh">12点POS进Brain</span></td><td><span class="badge badge-blue">⚡ Auto</span></td></tr>
+    <tr><td>3</td><td><span class="en">12:15AM 9 fraud checks</span><span class="zh">12:15 九项作弊检查</span></td><td><span class="badge badge-blue">⚡ Auto</span></td></tr>
+    <tr><td>4</td><td><span class="en">Equipment: E1 #03-ops (中文) · E2 store short note</span><span class="zh">设备：E1发#03-ops中文 · E2店里短消息</span></td><td>WISE OPS</td></tr>
+    <tr><td>5</td><td><span class="en">SOP lookup → PDF in Slack</span><span class="zh">查SOP→Slack发PDF</span></td><td>WISE OPS</td></tr>
   </table>
-  <div class="sec-title"><span class="en">Rules</span><span class="zh">规矩</span></div>
-  <div class="box box-rule"><strong>R1</strong> <span class="en">Repair posts to #03-ops not #02-exec</span><span class="zh">维修发#03-ops不进#02-exec</span></div><div class="box box-rule"><strong>R2</strong> <span class="en">High quote → Louis before pay</span><span class="zh">高报价→付款前Louis批</span></div><div class="box box-rule"><strong>R3</strong> <span class="en">Fraud: coach first, never auto-fire</span><span class="zh">作弊先教，永不自动开除</span></div><div class="box box-rule"><strong>R4</strong> <span class="en">Good stores silent</span><span class="zh">好店不打扰</span></div>
-  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
+
+  <div class="sec-title"><span class="en">Fraud 9 checks (red flags)</span><span class="zh">作弊9项（红旗）</span></div>
   <table>
-    <tr><th style="width:34%"><span class="en">Action</span><span class="zh">事</span></th><th style="width:28%"><span class="en">Decides</span><span class="zh">谁批</span></th><th style="width:38%"><span class="en">Note</span><span class="zh">备注</span></th></tr>
-    <tr><td><span class="en">High repair / replace</span><span class="zh">高维修/更换</span></td><td>Louis</td><td><span class="en">Before pay</span><span class="zh">付款前</span></td></tr><tr><td><span class="en">Daily fraud coach</span><span class="zh">日常作弊教导</span></td><td>GM / Coach</td><td><span class="en">Serious → write-up</span><span class="zh">严重→书面</span></td></tr>
+    <tr><th>#</th><th><span class="en">Check</span><span class="zh">检查</span></th><th>🔴</th><th>🟡</th></tr>
+    <tr><td>1</td><td>Void %</td><td>&gt;2%</td><td>&gt;1%</td></tr>
+    <tr><td>2</td><td>Discount %</td><td>&gt;5%</td><td>&gt;3%</td></tr>
+    <tr><td>3</td><td>Void count</td><td>&gt;3</td><td>&gt;2</td></tr>
+    <tr><td>4</td><td><span class="en">Cancel with $</span><span class="zh">取消有金额</span></td><td><span class="en">any</span><span class="zh">任何</span></td><td>—</td></tr>
+    <tr><td>5</td><td>Refund %</td><td>&gt;1%</td><td>&gt;0.5%</td></tr>
+    <tr><td>6</td><td>Cash share</td><td>&gt;40%</td><td>&gt;30%</td></tr>
+    <tr><td>7</td><td>Mgr comp abuse</td><td>2+</td><td>1</td></tr>
+    <tr><td>8</td><td>Tip vs store avg</td><td>&gt;2×</td><td>&gt;1.5×</td></tr>
+    <tr><td>9</td><td><span class="en">Gift card unpaid</span><span class="zh">礼品卡没付</span></td><td><span class="en">any</span><span class="zh">任何</span></td><td>—</td></tr>
   </table>
-  <div class="sec-title"><span class="en">How to check</span><span class="zh">怎么查</span></div>
-  <table>
-    <tr><th style="width:40%"><span class="en">Want</span><span class="zh">想知道</span></th><th style="width:60%"><span class="en">Say in Slack</span><span class="zh">在Slack说</span></th></tr>
-    <tr><td><span class="en">Store health</span><span class="zh">店健康</span></td><td><code>store health 00003</code></td></tr><tr><td><span class="en">Worst store</span><span class="zh">最差店</span></td><td><code>which store is worst</code></td></tr><tr><td><span class="en">Fraud check</span><span class="zh">作弊检查</span></td><td><code>fraud check 00003</code></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">Automated (target)</span><span class="zh">自动跑（目标）</span></div>
-  <div class="box box-auto">⏰ <span class="en">12AM — POS → Brain</span><span class="zh">零点 — POS进Brain</span></div><div class="box box-auto">⏰ <span class="en">12:15AM — fraud 9 checks</span><span class="zh">12:15 — 作弊9项</span></div><div class="box box-auto">⏰ <span class="en">1AM — form rollup</span><span class="zh">凌晨1点 — 表格汇总</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>store health 00003</code> · <code>fraud check 00003</code> · <code>which store is worst</code></div>
+
+  <div class="box box-rule"><strong><span class="en">Rules:</span><span class="zh">规矩：</span></strong>
+    <span class="en">Repair goes #03-ops not #02-exec · high quote needs Louis · fraud = coach first · GM own store only · daily push only score&lt;80</span>
+    <span class="zh">维修去#03-ops不进#02-exec · 高报价要Louis · 作弊先教 · GM只看自己店 · 日报只推&lt;80分店</span>
+  </div>
+  <div class="box box-auto">⏰ <strong>12AM</strong> POS · <strong>12:15AM</strong> fraud · <strong>1AM</strong> forms rollup</div>
+
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>store health 00003</code> ·
+    <code>fraud check 00003</code> ·
+    <code>which store is worst</code> ·
+    <code>what's the SOP for onboarding</code>
+  </div>
 </div>
 
-<div class="page" id="d_fin">
-  <div class="page-h">💰 <span class="en">Finance</span><span class="zh">财务</span></div>
-  <div class="page-sub"><span class="en">Bank · Pay · Payroll · AP</span><span class="zh">银行 · 付款 · 工资 · 应付</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Most money risk = unapproved payments. Lock approval hard.</span><span class="zh">钱的风险大多=没审批就付。把审批锁死。</span></div>
-  <div class="sec-title"><span class="en">Build progress</span><span class="zh">建设进度</span> · <span class="badge badge-blue">🚧 In progress</span> · 25%</div>
-  <div class="progress-bar"><div class="progress-fill low" style="width:25%"></div></div>
-  <div class="sec-title"><span class="en">Done checklist (4 pieces)</span><span class="zh">建完清单（4件）</span></div>
-  <ul class="check"><li><div class="ci ok">✓</div><div><strong><span class="en">Skill</span><span class="zh">技能</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">finance/banking + payroll route skills</span><span class="zh">财务/银行+工资路由技能</span></div></div></li><li><div class="ci wip">🚧</div><div><strong><span class="en">Data</span><span class="zh">数据</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">purchases/payroll/bank partial</span><span class="zh">采购/工资/银行部分</span></div></div></li><li><div class="ci wip">🚧</div><div><strong><span class="en">Auto</span><span class="zh">自动</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">email digest / auto-reply / AI cost live</span><span class="zh">邮件摘要/回执/AI花费在跑</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Rules/SOP</span><span class="zh">规矩/SOP</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">Payment + reconcile + payroll SOP needed</span><span class="zh">付款+对账+工资SOP还要写</span></div></div></li></ul>
-  <div class="sec-title"><span class="en">Target workflow</span><span class="zh">目标流程</span></div>
+<!-- 6 Proc -->
+<div class="page" id="proc">
+  <div class="page-h">📦 Procurement <span class="zh">采购部</span></div>
+  <div class="page-sub"><span class="en">Ask → review → approve → order → pay</span><span class="zh">提需求→审→批→下单→付款</span> · Yumi + Louis</div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong>
+    <span class="en">Waste comes from buying before the ask is clear. Force request → approve → order.</span>
+    <span class="zh">浪费来自没说清楚就买。强制：需求→审批→下单。</span>
+  </div>
+
+  <div class="sec-title"><span class="en">Steps</span><span class="zh">步骤</span></div>
   <table>
-    <tr><th style="width:8%">#</th><th style="width:28%"><span class="en">Step</span><span class="zh">步骤</span></th><th style="width:22%"><span class="en">Who</span><span class="zh">谁</span></th><th style="width:42%"><span class="en">What happens</span><span class="zh">发生什么</span></th></tr>
-    <tr><td>1</td><td><span class="en">Receive sales</span><span class="zh">收销售</span></td><td>WISE OPS</td><td><span class="en">POS → Brain</span><span class="zh">POS→Brain</span></td></tr><tr><td>2</td><td><span class="en">Reconcile</span><span class="zh">对账</span></td><td>Yumi</td><td><span class="en">Bank vs Brain</span><span class="zh">银行vs Brain</span></td></tr><tr><td>3</td><td><span class="en">Pay approve</span><span class="zh">付款批</span></td><td>Yumi / Louis</td><td><span class="en"><$500 Yumi · ≥$500 Louis</span><span class="zh"><$500 Yumi · ≥$500 Louis</span></td></tr><tr><td>4</td><td><span class="en">Payroll</span><span class="zh">工资</span></td><td>Louis</td><td><span class="en">Gusto + anomaly only</span><span class="zh">Gusto+只报异常</span></td></tr>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>1</td><td><span class="en">Store asks in Slack</span><span class="zh">店里Slack说要买</span></td><td>GM / staff</td></tr>
+    <tr><td>2</td><td><span class="en">Open PO</span><span class="zh">开采购单</span></td><td><span class="badge badge-blue">⚡ Auto</span></td></tr>
+    <tr><td>3</td><td><span class="en">Lock tax + total · cheaper option</span><span class="zh">锁税+总额·比价</span></td><td>Yumi</td></tr>
+    <tr><td>4</td><td>≥$500 Louis / &lt;$500 Yumi</td><td><span class="badge badge-gate">⭐ Gate</span></td></tr>
+    <tr><td>5</td><td><span class="en">Order · notify requester · receive confirm</span><span class="zh">下单·通知提需人·到货确认</span></td><td>Yumi + store</td></tr>
+    <tr><td>6</td><td><span class="en">Pay with invoice → Brain</span><span class="zh">凭发票付款→记Brain</span></td><td>Finance</td></tr>
   </table>
-  <div class="sec-title"><span class="en">Rules</span><span class="zh">规矩</span></div>
-  <div class="box box-rule"><strong>R1</strong> <span class="en">Bank/wire/ACH = Louis+Luna only</span><span class="zh">银行/wire/ACH=Louis+Luna only</span></div><div class="box box-rule"><strong>R2</strong> <span class="en">≥$500 Louis · <$500 Yumi</span><span class="zh">≥$500 Louis · <$500 Yumi</span></div><div class="box box-rule"><strong>R3</strong> <span class="en">External tax/lease send = Louis first</span><span class="zh">税务/租约外发先过Louis</span></div><div class="box box-rule"><strong>R4</strong> <span class="en">No proof = no pay</span><span class="zh">无凭证不付</span></div>
-  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
-  <table>
-    <tr><th style="width:34%"><span class="en">Action</span><span class="zh">事</span></th><th style="width:28%"><span class="en">Decides</span><span class="zh">谁批</span></th><th style="width:38%"><span class="en">Note</span><span class="zh">备注</span></th></tr>
-    <tr><td><span class="en">Bank transfer</span><span class="zh">银行转账</span></td><td>Louis + Luna</td><td><span class="en">Equal power</span><span class="zh">同等权限</span></td></tr><tr><td><span class="en">Purchase ≥$500</span><span class="zh">采购≥$500</span></td><td>Louis</td><td>—</td></tr><tr><td><span class="en">Purchase <$500</span><span class="zh">采购<$500</span></td><td>Yumi</td><td><span class="en">Locks tax+total</span><span class="zh">锁税+总额</span></td></tr><tr><td><span class="en">Payroll / raise</span><span class="zh">工资/加薪</span></td><td>Louis</td><td>—</td></tr>
-  </table>
-  <div class="sec-title"><span class="en">How to check</span><span class="zh">怎么查</span></div>
-  <table>
-    <tr><th style="width:40%"><span class="en">Want</span><span class="zh">想知道</span></th><th style="width:60%"><span class="en">Say in Slack</span><span class="zh">在Slack说</span></th></tr>
-    <tr><td><span class="en">Email to handle</span><span class="zh">要处理的邮件</span></td><td><span class="en">9PM DM auto</span><span class="zh">晚9点DM自动</span></td></tr><tr><td><span class="en">Sales</span><span class="zh">销售</span></td><td><code>sales 00003 yesterday</code></td></tr><tr><td><span class="en">Budget vs actual</span><span class="zh">预算vs实际</span></td><td><code>budget vs actual 00003</code></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">Automated (target)</span><span class="zh">自动跑（目标）</span></div>
-  <div class="box box-auto">⏰ <span class="en">9PM — email digest</span><span class="zh">晚9点 — 邮件摘要</span></div><div class="box box-auto">⏰ <span class="en">Every 30m — Gmail received reply</span><span class="zh">每30分 — Gmail已收回执</span></div><div class="box box-auto">⏰ <span class="en">8AM — AI cost alert</span><span class="zh">早8点 — AI花费报警</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>sales 00003 yesterday</code> · <code>budget vs actual 00003</code></div>
+
+  <div class="box box-rule"><strong><span class="en">Rules:</span><span class="zh">规矩：</span></strong>
+    <span class="en">No PO = no buy · ≥$500 Louis always · invoice required · Yumi locks totals · urgent ≤$200 GM can buy then backfill</span>
+    <span class="zh">没单不买 · ≥$500必须Louis · 要发票 · Yumi锁总额 · 紧急≤$200 GM可先买后补单</span>
+  </div>
+  <div class="box box-auto">#04-finance 🛒 <span class="en">All purchase talk / approve / track here</span><span class="zh">所有采购在这里说、批、查</span></div>
+
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>买一个冰箱</code> ·
+    <code>pending purchases</code> ·
+    <code>purchases 00003</code>
+  </div>
 </div>
 
-<div class="page" id="d_proc">
-  <div class="page-h">🛒 <span class="en">Procurement</span><span class="zh">采购</span></div>
-  <div class="page-sub"><span class="en">Request → Review → Approve → Order</span><span class="zh">提需求→审→批→下单</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Most waste = unclear buy request. Lock request→approve chain.</span><span class="zh">浪费大多=没说清就买。锁死需求→审批链。</span></div>
-  <div class="sec-title"><span class="en">Build progress</span><span class="zh">建设进度</span> · <span class="badge badge-yellow">⬜ Not started</span> · 0%</div>
-  <div class="progress-bar"><div class="progress-fill low" style="width:0%"></div></div>
-  <div class="sec-title"><span class="en">Done checklist (4 pieces)</span><span class="zh">建完清单（4件）</span></div>
-  <ul class="check"><li><div class="ci todo">⬜</div><div><strong><span class="en">Skill</span><span class="zh">技能</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">wiserise-purchase not complete</span><span class="zh">采购技能未完成</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Data</span><span class="zh">数据</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">purchases/suppliers tables needed</span><span class="zh">采购/供应商表要建</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Auto</span><span class="zh">自动</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">pending purchase reminder needed</span><span class="zh">待批提醒要建</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Rules/SOP</span><span class="zh">规矩/SOP</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">Purchase SOP needed</span><span class="zh">采购SOP要写</span></div></div></li></ul>
-  <div class="sec-title"><span class="en">Target workflow</span><span class="zh">目标流程</span></div>
+<!-- 7 Growth -->
+<div class="page" id="growth">
+  <div class="page-h">↗️ Growth <span class="zh">扩张部</span></div>
+  <div class="page-sub"><span class="en">Site → LOI → lease → build → open</span><span class="zh">选址→LOI→租约→装修→开店</span> · Louis only</div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong>
+    <span class="en">Site selection decides most of new-store success. Location + lease first.</span>
+    <span class="zh">新店成败80%在选址。先搞定位置和租约。</span>
+  </div>
+
+  <div class="sec-title"><span class="en">Steps</span><span class="zh">步骤</span></div>
   <table>
-    <tr><th style="width:8%">#</th><th style="width:28%"><span class="en">Step</span><span class="zh">步骤</span></th><th style="width:22%"><span class="en">Who</span><span class="zh">谁</span></th><th style="width:42%"><span class="en">What happens</span><span class="zh">发生什么</span></th></tr>
-    <tr><td>1</td><td><span class="en">Request</span><span class="zh">提需求</span></td><td>Store</td><td><span class="en">say buy in Slack</span><span class="zh">Slack说要买</span></td></tr><tr><td>2</td><td><span class="en">Review</span><span class="zh">审核</span></td><td>Yumi</td><td><span class="en">lock tax + total</span><span class="zh">锁税+总额</span></td></tr><tr><td>3</td><td><span class="en">Approve</span><span class="zh">审批</span></td><td>Yumi / Louis</td><td><span class="en">threshold gate</span><span class="zh">金额门槛</span></td></tr><tr><td>4</td><td><span class="en">Order + pay</span><span class="zh">下单+付</span></td><td>Yumi</td><td><span class="en">invoice required</span><span class="zh">要发票</span></td></tr>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th>Gate</th></tr>
+    <tr><td>1</td><td><span class="en">Find site →</span><span class="zh">找到地址 →</span> <code>LOI [address]</code></td><td>Louis</td></tr>
+    <tr><td>2</td><td><span class="en">Generate LOI → you edit → send</span><span class="zh">生成LOI→你改→发出</span></td><td><span class="badge badge-gate">⭐</span></td></tr>
+    <tr><td>3</td><td><span class="en">Negotiate each round</span><span class="zh">每轮谈判你批</span></td><td><span class="badge badge-gate">⭐</span></td></tr>
+    <tr><td>4</td><td><span class="en">Sign lease · original Drive · Brain lease_id</span><span class="zh">签租约·原件Drive·Brain只记lease_id</span></td><td><span class="badge badge-gate">⭐ Lawyer</span></td></tr>
+    <tr><td>5</td><td><span class="en">Build-out · over budget alerts</span><span class="zh">装修·超预算报警</span></td><td>Louis</td></tr>
+    <tr><td>6</td><td><span class="en">Staff + SOP + POS + 7shifts before open</span><span class="zh">开业前：人+SOP+POS+7shifts</span></td><td><span class="badge badge-gate">⭐ Open gate</span></td></tr>
   </table>
-  <div class="sec-title"><span class="en">Rules</span><span class="zh">规矩</span></div>
-  <div class="box box-rule"><strong>R1</strong> <span class="en">No PO = no buy</span><span class="zh">没采购单不能买</span></div><div class="box box-rule"><strong>R2</strong> <span class="en">≥$500 Louis</span><span class="zh">≥$500 Louis</span></div><div class="box box-rule"><strong>R3</strong> <span class="en">Proof required</span><span class="zh">要凭证</span></div><div class="box box-rule"><strong>R4</strong> <span class="en">Confirm delivery</span><span class="zh">到货要确认</span></div>
-  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
-  <table>
-    <tr><th style="width:34%"><span class="en">Action</span><span class="zh">事</span></th><th style="width:28%"><span class="en">Decides</span><span class="zh">谁批</span></th><th style="width:38%"><span class="en">Note</span><span class="zh">备注</span></th></tr>
-    <tr><td><span class="en">≥$500 buy</span><span class="zh">≥$500买</span></td><td>Louis</td><td>#04-finance</td></tr><tr><td><span class="en"><$500 buy</span><span class="zh"><$500买</span></td><td>Yumi</td><td><span class="en">tax+total lock</span><span class="zh">税+总额锁</span></td></tr><tr><td><span class="en">Emergency ≤$200</span><span class="zh">紧急≤$200</span></td><td>GM</td><td><span class="en">buy first, backfill</span><span class="zh">可先买再补单</span></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">How to check</span><span class="zh">怎么查</span></div>
-  <table>
-    <tr><th style="width:40%"><span class="en">Want</span><span class="zh">想知道</span></th><th style="width:60%"><span class="en">Say in Slack</span><span class="zh">在Slack说</span></th></tr>
-    <tr><td><span class="en">Store purchases</span><span class="zh">店采购</span></td><td><code>purchases 00003</code></td></tr><tr><td><span class="en">Pending approvals</span><span class="zh">待批</span></td><td><code>pending purchases</code></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">Automated (target)</span><span class="zh">自动跑（目标）</span></div>
-  <div class="box box-auto">⏰ <span class="en">Target: create PO from Slack request</span><span class="zh">目标：Slack需求自动建采购单</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>purchases 00003</code> · <code>pending purchases</code></div>
+
+  <div class="box box-rule"><strong><span class="en">Rules:</span><span class="zh">规矩：</span></strong>
+    <span class="en">Every step Louis · legal = lawyer · no PDF dump in Brain · open only when people+systems ready</span>
+    <span class="zh">每步Louis · 法律找律师 · Brain不堆PDF · 人+系统齐才能开</span>
+  </div>
+
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>LOI 123 Main St Wilmington NC</code> ·
+    <code>lease 00003</code> ·
+    <code>new store status</code>
+  </div>
 </div>
 
-<div class="page" id="d_mkt">
-  <div class="page-h">⭐ <span class="en">Marketing</span><span class="zh">市场</span></div>
-  <div class="page-sub"><span class="en">Google reviews · brand · campaigns</span><span class="zh">Google评论 · 品牌 · 活动</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Reviews beat ads. Manage bad reviews fast.</span><span class="zh">评论比广告管用。差评要快管。</span></div>
-  <div class="sec-title"><span class="en">Build progress</span><span class="zh">建设进度</span> · <span class="badge badge-yellow">⬜ Early</span> · 25%</div>
-  <div class="progress-bar"><div class="progress-fill low" style="width:25%"></div></div>
-  <div class="sec-title"><span class="en">Done checklist (4 pieces)</span><span class="zh">建完清单（4件）</span></div>
-  <ul class="check"><li><div class="ci ok">✓</div><div><strong><span class="en">Skill</span><span class="zh">技能</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">GBP reviews skill live</span><span class="zh">Google评论技能已上线</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Data</span><span class="zh">数据</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">reviews tables needed</span><span class="zh">评论表要建</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Auto</span><span class="zh">自动</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">periodic review pull needed</span><span class="zh">定期拉评论要建</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Rules/SOP</span><span class="zh">规矩/SOP</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">reply + brand SOP needed</span><span class="zh">回复+品牌SOP要写</span></div></div></li></ul>
-  <div class="sec-title"><span class="en">Target workflow</span><span class="zh">目标流程</span></div>
+<!-- 8 Mkt -->
+<div class="page" id="mkt">
+  <div class="page-h">📣 Marketing <span class="zh">市场部</span></div>
+  <div class="page-sub"><span class="en">Google reviews · brand · promos</span><span class="zh">Google评论·品牌·推广</span> · GM + Louis</div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong>
+    <span class="en">Google reviews drive most guest decisions. Fix bad reviews before ads.</span>
+    <span class="zh">客人决定80%看Google评论。先管好差评，再谈广告。</span>
+  </div>
+
+  <div class="sec-title"><span class="en">Steps</span><span class="zh">步骤</span></div>
   <table>
-    <tr><th style="width:8%">#</th><th style="width:28%"><span class="en">Step</span><span class="zh">步骤</span></th><th style="width:22%"><span class="en">Who</span><span class="zh">谁</span></th><th style="width:42%"><span class="en">What happens</span><span class="zh">发生什么</span></th></tr>
-    <tr><td>1</td><td><span class="en">Pull reviews</span><span class="zh">拉评论</span></td><td>WISE OPS</td><td><span class="en">on command / schedule</span><span class="zh">按命令/定时</span></td></tr><tr><td>2</td><td><span class="en">Bad review</span><span class="zh">差评</span></td><td>GM</td><td><span class="en">reply ≤48h</span><span class="zh">48小时内回</span></td></tr><tr><td>3</td><td><span class="en">Campaign / brand</span><span class="zh">活动/品牌</span></td><td>Louis</td><td><span class="en">budget + brand gate</span><span class="zh">预算+品牌门</span></td></tr>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>1</td><td><span class="en">Pull reviews</span><span class="zh">拉评论</span></td><td>WISE OPS</td></tr>
+    <tr><td>2</td><td><span class="en">≤3★ reply in 48h</span><span class="zh">≤3星48小时内回</span></td><td>GM</td></tr>
+    <tr><td>3</td><td><span class="en">Good reviews — GM replies, no owner ping</span><span class="zh">好评GM回，不吵老板</span></td><td>GM</td></tr>
+    <tr><td>4</td><td><span class="en">Ads / coupons / brand change</span><span class="zh">广告/优惠/改品牌</span></td><td>Louis</td></tr>
   </table>
-  <div class="sec-title"><span class="en">Rules</span><span class="zh">规矩</span></div>
-  <div class="box box-rule"><strong>R1</strong> <span class="en">≤3 stars reply in 48h</span><span class="zh">≤3星48小时回</span></div><div class="box box-rule"><strong>R2</strong> <span class="en">Polite, no argue</span><span class="zh">礼貌不吵</span></div><div class="box box-rule"><strong>R3</strong> <span class="en">Marketing spend = Louis</span><span class="zh">市场花费=Louis</span></div>
-  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
-  <table>
-    <tr><th style="width:34%"><span class="en">Action</span><span class="zh">事</span></th><th style="width:28%"><span class="en">Decides</span><span class="zh">谁批</span></th><th style="width:38%"><span class="en">Note</span><span class="zh">备注</span></th></tr>
-    <tr><td><span class="en">Marketing budget</span><span class="zh">市场预算</span></td><td>Louis</td><td>—</td></tr><tr><td><span class="en">Brand/logo/menu change</span><span class="zh">改品牌/菜单</span></td><td>Louis</td><td>—</td></tr><tr><td><span class="en">Bad review reply</span><span class="zh">差评回复</span></td><td>GM</td><td><span class="en">push content to Louis</span><span class="zh">内容推Louis</span></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">How to check</span><span class="zh">怎么查</span></div>
-  <table>
-    <tr><th style="width:40%"><span class="en">Want</span><span class="zh">想知道</span></th><th style="width:60%"><span class="en">Say in Slack</span><span class="zh">在Slack说</span></th></tr>
-    <tr><td><span class="en">Store reviews</span><span class="zh">店评论</span></td><td><code>reviews 00003</code></td></tr><tr><td><span class="en">All reviews</span><span class="zh">全部评论</span></td><td><code>all reviews</code></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">Automated (target)</span><span class="zh">自动跑（目标）</span></div>
-  <div class="box box-auto">⏰ <span class="en">Target: periodic review pull</span><span class="zh">目标：定期拉评论</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>reviews 00003</code> · <code>all reviews</code></div>
+
+  <div class="box box-rule"><strong><span class="en">Rules:</span><span class="zh">规矩：</span></strong>
+    <span class="en">Be polite on bad reviews · no argue · budget Louis only · brand/logo/menu change Louis only</span>
+    <span class="zh">差评要礼貌·不争辩·预算Louis·品牌/Logo/菜单改Louis</span>
+  </div>
+
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>reviews 00003</code> ·
+    <code>all reviews</code> ·
+    <code>rating 00003</code>
+  </div>
 </div>
 
-<div class="page" id="d_growth">
-  <div class="page-h">🚀 <span class="en">Growth</span><span class="zh">扩张</span></div>
-  <div class="page-sub"><span class="en">Site → LOI → Lease → Open</span><span class="zh">选址→LOI→租约→开业</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Site choice decides most new-store success.</span><span class="zh">选址决定新店成败大半。</span></div>
-  <div class="sec-title"><span class="en">Build progress</span><span class="zh">建设进度</span> · <span class="badge badge-yellow">⬜ Early</span> · 25%</div>
-  <div class="progress-bar"><div class="progress-fill low" style="width:25%"></div></div>
-  <div class="sec-title"><span class="en">Done checklist (4 pieces)</span><span class="zh">建完清单（4件）</span></div>
-  <ul class="check"><li><div class="ci ok">✓</div><div><strong><span class="en">Skill</span><span class="zh">技能</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">loi-agent live</span><span class="zh">LOI技能已上线</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Data</span><span class="zh">数据</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">leases/sites tables needed</span><span class="zh">租约/选址表要建</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Auto</span><span class="zh">自动</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">lease expiry reminder needed</span><span class="zh">租约到期提醒要建</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Rules/SOP</span><span class="zh">规矩/SOP</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">open-store SOP needed</span><span class="zh">开业SOP要写</span></div></div></li></ul>
-  <div class="sec-title"><span class="en">Target workflow</span><span class="zh">目标流程</span></div>
+<!-- 9 IT -->
+<div class="page" id="it">
+  <div class="page-h">🖥️ IT <span class="zh">技术部</span></div>
+  <div class="page-sub"><span class="en">Hermes · Slack · keys · Brain · security</span><span class="zh">Hermes·Slack·密钥·Brain·安全</span> · Louis only</div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong>
+    <span class="en">Most system pain is wrong access or expired keys. Guard permissions + secrets.</span>
+    <span class="zh">系统问题大多是权限给错或密钥过期。管好权限和密钥。</span>
+  </div>
+
+  <div class="sec-title"><span class="en">What runs the company</span><span class="zh">公司怎么跑技术</span></div>
   <table>
-    <tr><th style="width:8%">#</th><th style="width:28%"><span class="en">Step</span><span class="zh">步骤</span></th><th style="width:22%"><span class="en">Who</span><span class="zh">谁</span></th><th style="width:42%"><span class="en">What happens</span><span class="zh">发生什么</span></th></tr>
-    <tr><td>1</td><td><span class="en">Site</span><span class="zh">选址</span></td><td>Louis</td><td><span class="en">pick location</span><span class="zh">选点</span></td></tr><tr><td>2</td><td><span class="en">LOI</span><span class="zh">意向书</span></td><td>Louis + WISE OPS</td><td><span class="en">generate → review → send</span><span class="zh">生成→审→发</span></td></tr><tr><td>3</td><td><span class="en">Lease</span><span class="zh">租约</span></td><td>Louis</td><td><span class="en">lawyer first</span><span class="zh">先律师</span></td></tr><tr><td>4</td><td><span class="en">Open</span><span class="zh">开业</span></td><td>Louis</td><td><span class="en">people+SOP+POS+7shifts ready</span><span class="zh">人+SOP+POS+7shifts到位</span></td></tr>
+    <tr><th><span class="en">Piece</span><span class="zh">件</span></th><th><span class="en">Meaning</span><span class="zh">含义</span></th></tr>
+    <tr><td>🧠 Brain</td><td><span class="en">Supabase truth</span><span class="zh">Supabase真相</span></td></tr>
+    <tr><td>⚡ Hermes / WISE OPS</td><td><span class="en">Only worker · skills + cron</span><span class="zh">唯一工人·skills+cron</span></td></tr>
+    <tr><td>💬 Slack</td><td><span class="en">Only OS for humans</span><span class="zh">人唯一操作系统</span></td></tr>
+    <tr><td>1Password</td><td><span class="en">Master secrets → .env sync</span><span class="zh">密钥主库→同步.env</span></td></tr>
   </table>
-  <div class="sec-title"><span class="en">Rules</span><span class="zh">规矩</span></div>
-  <div class="box box-rule"><strong>R1</strong> <span class="en">Every growth step = Louis</span><span class="zh">扩张每步=Louis</span></div><div class="box box-rule"><strong>R2</strong> <span class="en">Original lease in Drive</span><span class="zh">租约原件存Drive</span></div><div class="box box-rule"><strong>R3</strong> <span class="en">Open only when all systems ready</span><span class="zh">系统全到位才开业</span></div>
-  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
-  <table>
-    <tr><th style="width:34%"><span class="en">Action</span><span class="zh">事</span></th><th style="width:28%"><span class="en">Decides</span><span class="zh">谁批</span></th><th style="width:38%"><span class="en">Note</span><span class="zh">备注</span></th></tr>
-    <tr><td><span class="en">Location / LOI / lease / open date</span><span class="zh">选址/LOI/租约/开业日</span></td><td>Louis</td><td>—</td></tr>
-  </table>
-  <div class="sec-title"><span class="en">How to check</span><span class="zh">怎么查</span></div>
-  <table>
-    <tr><th style="width:40%"><span class="en">Want</span><span class="zh">想知道</span></th><th style="width:60%"><span class="en">Say in Slack</span><span class="zh">在Slack说</span></th></tr>
-    <tr><td><span class="en">Start LOI</span><span class="zh">开始LOI</span></td><td><code>LOI 123 Main St Wilmington NC</code></td></tr><tr><td><span class="en">Lease lookup</span><span class="zh">查租约</span></td><td><code>lease 00003</code></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">Automated (target)</span><span class="zh">自动跑（目标）</span></div>
-  <div class="box box-auto">⏰ <span class="en">Target: lease expiry watch</span><span class="zh">目标：租约到期监控</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>LOI [address]</code> · <code>lease 00003</code></div>
+
+  <div class="sec-title"><span class="en">Louis 10 rules (nightly score)</span><span class="zh">Louis 10条规矩（每晚打分）</span></div>
+  <div class="card">
+    <ol>
+      <li><span class="en">Hermes only</span><span class="zh">只用Hermes</span></li>
+      <li><span class="en">Check data before work</span><span class="zh">做事前先查数据</span></li>
+      <li><span class="en">Patch, don't rebuild</span><span class="zh">改坏的，不推倒重来</span></li>
+      <li><span class="en">One session, one job</span><span class="zh">一个session一件事</span></li>
+      <li><span class="en">Roadmap first</span><span class="zh">先有roadmap</span></li>
+      <li><span class="en">Desktop=build · Slack=operate</span><span class="zh">Desktop做东西 · Slack管公司</span></li>
+      <li><span class="en">Don't guess data</span><span class="zh">别猜数据</span></li>
+      <li><span class="en">One fix at a time</span><span class="zh">一次改一个</span></li>
+      <li><span class="en">Brain is truth</span><span class="zh">Brain是真相</span></li>
+      <li><span class="en">Done = move on</span><span class="zh">做完就走</span></li>
+    </ol>
+  </div>
+
+  <div class="box box-rule"><strong><span class="en">Rules:</span><span class="zh">规矩：</span></strong>
+    <span class="en">Code/settings Louis only (Luna no code) · permission = 4 places + restart gateway outside Slack · managers never #02-exec · new key → 1Password first</span>
+    <span class="zh">改代码/设置Louis only（Luna不改代码）· 权限改4处+在Slack外重启gateway · 经理不进#02-exec · 新密钥先1Password</span>
+  </div>
+  <div class="box box-auto">⏰ <strong>every 6h</strong> key sync + manager channel check · <strong>1AM</strong> quality score · <strong>8AM</strong> AI cost</div>
+
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>hermes status</code> ·
+    <code>check my work</code> ·
+    <code>check managers in slack</code>
+  </div>
 </div>
 
-<div class="page" id="d_admin">
-  <div class="page-h">🧭 <span class="en">Admin</span><span class="zh">管理</span></div>
-  <div class="page-sub"><span class="en">Boss work only · not floor work</span><span class="zh">只做老板活 · 不做前厅活</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Boss time = hire/decide/direction. Floor work wastes owner time.</span><span class="zh">老板时间=选人/拍板/方向。做前厅活=浪费。</span></div>
-  <div class="sec-title"><span class="en">Build progress</span><span class="zh">建设进度</span> · <span class="badge badge-yellow">⬜ Early</span> · 25%</div>
-  <div class="progress-bar"><div class="progress-fill low" style="width:25%"></div></div>
-  <div class="sec-title"><span class="en">Done checklist (4 pieces)</span><span class="zh">建完清单（4件）</span></div>
-  <ul class="check"><li><div class="ci ok">✓</div><div><strong><span class="en">Skill</span><span class="zh">技能</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">nightly review live</span><span class="zh">夜间检查技能已上线</span></div></div></li><li><div class="ci wip">🚧</div><div><strong><span class="en">Data</span><span class="zh">数据</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">duty/quality tables partial</span><span class="zh">职责/质量表部分</span></div></div></li><li><div class="ci wip">🚧</div><div><strong><span class="en">Auto</span><span class="zh">自动</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">9PM duty + 1AM quality running</span><span class="zh">晚9职责+凌晨1质量在跑</span></div></div></li><li><div class="ci todo">⬜</div><div><strong><span class="en">Rules/SOP</span><span class="zh">规矩/SOP</span></strong><div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="en">boss routine SOP needed</span><span class="zh">老板日常SOP要写</span></div></div></li></ul>
-  <div class="sec-title"><span class="en">Target workflow</span><span class="zh">目标流程</span></div>
-  <table>
-    <tr><th style="width:8%">#</th><th style="width:28%"><span class="en">Step</span><span class="zh">步骤</span></th><th style="width:22%"><span class="en">Who</span><span class="zh">谁</span></th><th style="width:42%"><span class="en">What happens</span><span class="zh">发生什么</span></th></tr>
-    <tr><td>1</td><td><span class="en">Morning staffing</span><span class="zh">早上人手</span></td><td>Louis</td><td><span class="en">7AM check</span><span class="zh">早7点看</span></td></tr><tr><td>2</td><td><span class="en">Day red flags</span><span class="zh">白天红旗</span></td><td>Louis</td><td><span class="en">yes/no only</span><span class="zh">只说yes/no</span></td></tr><tr><td>3</td><td><span class="en">Night digest</span><span class="zh">晚上摘要</span></td><td>Louis</td><td><span class="en">9PM DM</span><span class="zh">晚9点DM</span></td></tr><tr><td>4</td><td><span class="en">Quality score</span><span class="zh">质量分</span></td><td>Louis</td><td><span class="en">only if low</span><span class="zh">低分才看</span></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">Rules</span><span class="zh">规矩</span></div>
-  <div class="box box-rule"><strong>R1</strong> <span class="en">Do boss work only</span><span class="zh">只做老板活</span></div><div class="box box-rule"><strong>R2</strong> <span class="en">Do not schedule / buy food / fix equipment yourself</span><span class="zh">不自己排班/买菜/修设备</span></div><div class="box box-rule"><strong>R3</strong> <span class="en">5–10 min/day manage via Slack</span><span class="zh">每天5–10分钟用Slack管</span></div>
-  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
-  <table>
-    <tr><th style="width:34%"><span class="en">Action</span><span class="zh">事</span></th><th style="width:28%"><span class="en">Decides</span><span class="zh">谁批</span></th><th style="width:38%"><span class="en">Note</span><span class="zh">备注</span></th></tr>
-    <tr><td><span class="en">Direction / managers / big money</span><span class="zh">方向/经理/大钱</span></td><td>Louis</td><td><span class="en">core boss work</span><span class="zh">核心老板活</span></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">How to check</span><span class="zh">怎么查</span></div>
-  <table>
-    <tr><th style="width:40%"><span class="en">Want</span><span class="zh">想知道</span></th><th style="width:60%"><span class="en">Say in Slack</span><span class="zh">在Slack说</span></th></tr>
-    <tr><td><span class="en">Duty check</span><span class="zh">职责检查</span></td><td><span class="en">9PM auto DM</span><span class="zh">晚9点自动DM</span></td></tr><tr><td><span class="en">Worst store</span><span class="zh">最差店</span></td><td><code>which store is worst</code></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">Automated (target)</span><span class="zh">自动跑（目标）</span></div>
-  <div class="box box-auto">⏰ <span class="en">9PM — boss duty check</span><span class="zh">晚9点 — 老板职责检查</span></div><div class="box box-auto">⏰ <span class="en">1AM — work quality scorecard</span><span class="zh">凌晨1点 — 工作质量评分</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>which store is worst</code> · <code>check my work</code></div>
+<!-- 10 Admin -->
+<div class="page" id="admin">
+  <div class="page-h">📋 Admin <span class="zh">管理部</span></div>
+  <div class="page-sub"><span class="en">Is the boss doing boss work?</span><span class="zh">老板有没有在做老板的事</span> · Louis</div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong>
+    <span class="en">Boss time = pick people + decide + set direction. Floor work wastes owner time.</span>
+    <span class="zh">老板时间应用在选人+拍板+看方向。做floor活是浪费。</span>
+  </div>
+
+  <div class="sec-title"><span class="en">Do vs don't</span><span class="zh">该做 vs 不该做</span></div>
+  <div class="quick-grid">
+    <div class="card">
+      <div class="card-title">✅ <span class="en">Boss work</span><span class="zh">老板活</span></div>
+      <ul>
+        <li><span class="en">Hire/fire managers</span><span class="zh">招/开除经理</span></li>
+        <li><span class="en">Money gates</span><span class="zh">钱的门</span></li>
+        <li><span class="en">New store / brand</span><span class="zh">新店/品牌</span></li>
+        <li><span class="en">Set SOP + rules</span><span class="zh">定SOP和规矩</span></li>
+        <li><span class="en">5-min Slack scan</span><span class="zh">每天扫5分钟Slack</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">❌ <span class="en">Not boss work</span><span class="zh">不是老板活</span></div>
+      <ul>
+        <li><span class="en">Scheduling</span><span class="zh">排班</span> (GM)</li>
+        <li><span class="en">Buying produce</span><span class="zh">买菜</span> (Yumi+GM)</li>
+        <li><span class="en">Guest complaints</span><span class="zh">客人投诉</span> (GM)</li>
+        <li><span class="en">Repair tickets</span><span class="zh">修设备</span> (Ops)</li>
+        <li><span class="en">Stare at POS all day</span><span class="zh">整天盯POS</span> (Auto)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="en">Weekly</span><span class="zh">每周想一次</span></div>
+  <div class="card">
+    <ol>
+      <li><span class="en">Worst store?</span><span class="zh">哪店最差？</span> → <code>which store is worst</code></li>
+      <li><span class="en">Who to hire/fire?</span><span class="zh">谁该招/管？</span> → <code>hiring status</code> · <code>roster</code></li>
+      <li><span class="en">Money OK?</span><span class="zh">钱对不对？</span> → monthly P&amp;L</li>
+      <li><span class="en">Next move?</span><span class="zh">下一步？</span> → new store / fix now</li>
+    </ol>
+  </div>
+
+  <div class="sec-title"><span class="en">Monthly</span><span class="zh">每月一次</span></div>
+  <div class="card">
+    <ol>
+      <li><span class="en">Company P&L by store</span><span class="zh">全公司按店P&L</span></li>
+      <li><span class="en">Manager performance</span><span class="zh">经理表现</span></li>
+      <li><span class="en">Lease renewals</span><span class="zh">租约到期</span></li>
+      <li><span class="en">System health</span><span class="zh">系统健康</span></li>
+    </ol>
+  </div>
+
+  <div class="box box-auto">⏰ <strong>9PM</strong> <span class="en">boss duty check → Louis DM</span><span class="zh">老板职责检查→Louis私信</span> · <strong>1AM</strong> <span class="en">quality score → #02-exec</span><span class="zh">质量分→#02-exec</span></div>
+
+  <div class="pareto"><strong><span class="en">One line:</span><span class="zh">一句话：</span></strong>
+    <span class="en">Normal work auto → only gates hit you → yes/no → stay in Slack → 5–10 min/day.</span>
+    <span class="zh">正常事自动做→只把要拍板的推给你→yes/no→不离开Slack→每天5–10分钟管公司。</span>
+  </div>
+
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>which store is worst</code> ·
+    <code>hiring status</code> ·
+    <code>check my work</code>
+  </div>
 </div>
 
+<!-- 11 Rules -->
 <div class="page" id="rules">
-  <div class="page-h">📋 <span class="en">Company Rules</span><span class="zh">公司规矩</span></div>
-  <div class="page-sub"><span class="en">Always on · all departments</span><span class="zh">一直生效 · 所有部门</span></div>
+  <div class="page-h">⚖️ <span class="en">Company Rules</span><span class="zh">公司规矩</span></div>
+  <div class="page-sub"><span class="en">Permissions · gates · automated jobs</span><span class="zh">权限·拍板门·自动任务</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
 
-  <div class="sec-title"><span class="en">Always-on gates</span><span class="zh">永远生效门槛</span></div>
-  <div class="box box-gate"><strong>💰 Money</strong> — <span class="en">Bank/wire/ACH = Louis+Luna only · Purchase ≥$500 = Louis</span><span class="zh">银行=Louis+Luna only · 采购≥$500=Louis</span></div>
-  <div class="box box-gate"><strong>🔥 People</strong> — <span class="en">Fire manager / pay / promote = Louis · Never auto-fire</span><span class="zh">开除经理/调薪/升职=Louis · 永不自动开除</span></div>
-  <div class="box box-gate"><strong>⚖️ Rules</strong> — <span class="en">SOP / architecture / new store = Louis only</span><span class="zh">SOP/架构/新店=Louis only</span></div>
-  <div class="box box-red"><strong><span class="en">Never</span><span class="zh">永不</span></strong> — <span class="en">Managers in #02-executive · secrets in HTML · stale KPI hardcodes</span><span class="zh">经理进#02-exec · HTML放密钥 · 写死过期KPI</span></div>
+  <div class="sec-title"><span class="en">Never auto</span><span class="zh">永不自动</span></div>
+  <div class="box box-red"><strong>🚫</strong>
+    <span class="en">Auto-fire · auto bank/wire · auto pay without invoice · skip discipline ladder · invent approval</span>
+    <span class="zh">自动开除 · 自动银行转账 · 没发票自动付 · 跳纪律阶梯 · 编造批准</span>
+  </div>
 
-  <div class="sec-title"><span class="en">10 work rules</span><span class="zh">10条工作规矩</span></div>
+  <div class="sec-title"><span class="en">Permission map</span><span class="zh">权限地图</span></div>
   <table>
-    <tr><th>#</th><th><span class="en">Rule</span><span class="zh">规矩</span></th></tr>
-    <tr><td>1</td><td><span class="en">Use Hermes/WISE OPS only</span><span class="zh">只用Hermes/WISE OPS</span></td></tr>
-    <tr><td>2</td><td><span class="en">Check data before building</span><span class="zh">先查数据再建设</span></td></tr>
-    <tr><td>3</td><td><span class="en">Patch, don't rebuild</span><span class="zh">补丁，不推倒重来</span></td></tr>
-    <tr><td>4</td><td><span class="en">One session = one task</span><span class="zh">一session一事</span></td></tr>
-    <tr><td>5</td><td><span class="en">Roadmap before building</span><span class="zh">先有roadmap再建设</span></td></tr>
-    <tr><td>6</td><td><span class="en">Desktop=build · Slack=operate</span><span class="zh">Desktop建 · Slack管</span></td></tr>
-    <tr><td>7</td><td><span class="en">Verify, don't assume</span><span class="zh">查证，别猜</span></td></tr>
-    <tr><td>8</td><td><span class="en">One fix at a time</span><span class="zh">一次改一个</span></td></tr>
-    <tr><td>9</td><td><span class="en">Brain is truth</span><span class="zh">Brain是真相</span></td></tr>
-    <tr><td>10</td><td><span class="en">Done means move on</span><span class="zh">做完就走</span></td></tr>
+    <tr><th><span class="en">Area</span><span class="zh">领域</span></th><th>Louis</th><th>Luna</th><th>Yumi</th><th>Coach</th><th>GM</th></tr>
+    <tr><td>Bank / wire / OpenBudget</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td></tr>
+    <tr><td><span class="en">Buy ≥$500</span><span class="zh">采购≥$500</span></td><td>✅</td><td>—</td><td>prepare</td><td>❌</td><td>request</td></tr>
+    <tr><td><span class="en">Buy &lt;$500</span><span class="zh">采购&lt;$500</span></td><td>—</td><td>—</td><td>✅</td><td>❌</td><td>request</td></tr>
+    <tr><td><span class="en">Fire floor</span><span class="zh">开除服务员</span></td><td>—</td><td>—</td><td>—</td><td>✅</td><td>ladder</td></tr>
+    <tr><td><span class="en">Fire manager</span><span class="zh">开除经理</span></td><td>✅</td><td>—</td><td>✅</td><td>❌</td><td>❌</td></tr>
+    <tr><td><span class="en">Code / settings</span><span class="zh">代码/设置</span></td><td>✅</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+    <tr><td>LOI / lease</td><td>✅</td><td>—</td><td>❌</td><td>❌</td><td>❌</td></tr>
+    <tr><td><span class="en">Own store ops</span><span class="zh">自己店运营</span></td><td>—</td><td>—</td><td>—</td><td>coach</td><td>✅</td></tr>
   </table>
 
-  <div class="sec-title"><span class="en">Permissions</span><span class="zh">权限</span></div>
+  <div class="sec-title"><span class="en">Channel rules</span><span class="zh">频道规矩</span></div>
+  <div class="box box-rule"><strong>1.</strong> <span class="en">Managers = own store channel only. Never #02-executive.</span><span class="zh">经理只在自己店频道。绝不进#02-executive。</span></div>
+  <div class="box box-rule"><strong>2.</strong> <span class="en">Equipment = #03-ops + short store note. Not owner spam.</span><span class="zh">设备=#03-ops+店里短消息。不刷老板。</span></div>
+  <div class="box box-rule"><strong>3.</strong> <span class="en">Purchases = #04-finance.</span><span class="zh">采购=#04-finance。</span></div>
+  <div class="box box-rule"><strong>4.</strong> <span class="en">People HQ = #06-people + store channel.</span><span class="zh">人事总部=#06-people+店频道。</span></div>
+  <div class="box box-rule"><strong>5.</strong> <span class="en">Owner door = Louis + Luna. Bank alerts to Louis if others try.</span><span class="zh">老板门=Louis+Luna。别人碰银行→告Louis。</span></div>
+
+  <div class="sec-title"><span class="en">Automated jobs</span><span class="zh">自动任务</span></div>
+  <div class="box box-auto">⏰ <strong>6AM</strong> — 7shifts roster → Brain</div>
+  <div class="box box-auto">⏰ <strong>7AM</strong> — People KPI Sheet refresh</div>
+  <div class="box box-auto">⏰ <strong>8AM</strong> — AI cost alert (only if over)</div>
+  <div class="box box-auto">⏰ <strong>9PM</strong> — Email digest + boss duty check → Louis DM</div>
+  <div class="box box-auto">⏰ <strong>10:30PM</strong> — Store Slack chat → Brain</div>
+  <div class="box box-auto">⏰ <strong>11PM</strong> — Dirty people data check</div>
+  <div class="box box-auto">⏰ <strong>12AM</strong> — POS → Brain</div>
+  <div class="box box-auto">⏰ <strong>12:15AM</strong> — Fraud 9 checks (flags only)</div>
+  <div class="box box-auto">⏰ <strong>1AM</strong> — Forms rollup + work quality score</div>
+  <div class="box box-auto">⏰ <strong>every 6h</strong> — 1Password keys + Slack manager channel check</div>
+  <div class="box box-auto">⏰ <strong>every 30min</strong> — Gmail auto receipt</div>
+
+  <div class="sec-title"><span class="en">World Brain map</span><span class="zh">World Brain地图</span></div>
   <table>
-    <tr><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">Can</span><span class="zh">可以</span></th><th><span class="en">Cannot</span><span class="zh">不可以</span></th></tr>
-    <tr><td>Louis + Luna</td><td><span class="en">All owner doors</span><span class="zh">所有老板门</span></td><td>—</td></tr>
-    <tr><td>Yumi</td><td><span class="en"><$500 + tax internal</span><span class="zh"><$500+内部税</span></td><td><span class="en">Bank forward / OpenBudget</span><span class="zh">转发银行/OpenBudget</span></td></tr>
-    <tr><td>Coach Sally</td><td><span class="en">Floor hire/fire ladder</span><span class="zh">floor招/开除阶梯</span></td><td><span class="en">Manager fire/pay</span><span class="zh">经理开除/调薪</span></td></tr>
-    <tr><td>GM</td><td><span class="en">Own store only</span><span class="zh">只自己店</span></td><td><span class="en">Other stores / #02-exec</span><span class="zh">别店/#02-exec</span></td></tr>
+    <tr><th><span class="en">Piece</span><span class="zh">件</span></th><th><span class="en">Job</span><span class="zh">干什么</span></th></tr>
+    <tr><td>🧠 Brain</td><td><span class="en">Live truth</span><span class="zh">实时真相</span></td></tr>
+    <tr><td>⚡ WISE OPS</td><td><span class="en">Store worker</span><span class="zh">店里工人</span></td></tr>
+    <tr><td>💬 Slack</td><td><span class="en">Human OS</span><span class="zh">人操作系统</span></td></tr>
+    <tr><td>📊 Sheets</td><td><span class="en">Views only</span><span class="zh">只看不写</span></td></tr>
+    <tr><td>📓 Obsidian</td><td><span class="en">Wiki / SOP knowledge</span><span class="zh">知识库/SOP</span></td></tr>
+    <tr><td>📁 Drive</td><td><span class="en">Original files</span><span class="zh">原件</span></td></tr>
   </table>
 
-  <div class="sec-title"><span class="en">Company automated jobs</span><span class="zh">公司自动任务</span></div>
-  <div class="box box-auto">⏰ 7AM — People KPI Sheet refresh</div>
-  <div class="box box-auto">⏰ 7AM — staffing signals</div>
-  <div class="box box-auto">⏰ 8AM — AI cost alert</div>
-  <div class="box box-auto">⏰ 9PM — email digest + duty check</div>
-  <div class="box box-auto">⏰ 10:30PM — store chat → Brain</div>
-  <div class="box box-auto">⏰ 11PM — dirty people data check</div>
-  <div class="box box-auto">⏰ 12AM — POS → Brain</div>
-  <div class="box box-auto">⏰ 12:15AM — fraud checks</div>
-  <div class="box box-auto">⏰ 1AM — form rollup + work quality</div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>check my work</code> · <code>hermes status</code></div>
+  <div class="ask-brain">
+    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>hermes status</code> ·
+    <code>check my work</code> ·
+    <code>store health 00003</code> ·
+    <code>roster 00003</code>
+  </div>
 </div>
 
 </div>
-<div class="footer">Wiserise Hospitality Group · Build Roadmap · wiserise-artifact v2 · 2026-07-21 · Bilingual EN/中文</div>
+
+<div class="footer">Wiserise Hospitality Group · Internal · 2026-07-21 · Artifact v3 · WISE OPS</div>
+
 <script>
-function showPage(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0, behavior:'smooth'});
 }
-function goTab(i){document.querySelectorAll('.tab')[i].click()}
-function setLang(lang,btn){
-  document.body.className='lang-'+lang;
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+function goTab(i){ document.querySelectorAll('.tab')[i].click(); }
+function setLang(lang, btn){
+  document.body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
-document.addEventListener('keydown',e=>{
-  const tabs=[...document.querySelectorAll('.tab')];
-  const active=document.querySelector('.tab.active');
-  let idx=tabs.indexOf(active);
-  if(e.key==='ArrowRight'&&idx<tabs.length-1) tabs[idx+1].click();
-  if(e.key==='ArrowLeft'&&idx>0) tabs[idx-1].click();
+document.addEventListener('keydown', e => {
+  const tabs = document.querySelectorAll('.tab');
+  const active = document.querySelector('.tab.active');
+  let idx = Array.from(tabs).indexOf(active);
+  if (e.key === 'ArrowRight' && idx < tabs.length-1) tabs[idx+1].click();
+  if (e.key === 'ArrowLeft' && idx > 0) tabs[idx-1].click();
 });
 </script>
 </body>
