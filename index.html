@@ -12,79 +12,107 @@
   --yellow: #ca8a04; --yellow-bg: #fef9c3;
   --red: #dc2626; --red-bg: #fee2e2;
   --blue: #2563eb; --blue-bg: #dbeafe;
-  --border: #e5e7eb; --radius: 10px;
-  --shadow: 0 1px 3px rgba(0,0,0,0.08); --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+  --border: #e5e7eb; --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06); --shadow-lg: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-hover: 0 8px 24px rgba(13,43,78,0.1);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei","Helvetica Neue",sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+body { font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei","Helvetica Neue",sans-serif; background:var(--bg); color:var(--ink); line-height:1.65; -webkit-font-smoothing:antialiased; }
 
-.topbar { background:var(--brand); color:#fff; padding:14px 24px; position:sticky; top:0; z-index:100; box-shadow:var(--shadow-lg); }
-.topbar h1 { font-size:18px; font-weight:700; }
-.topbar .sub { font-size:12px; opacity:0.8; margin-top:2px; }
+/* Topbar */
+.topbar { background:linear-gradient(135deg, var(--brand) 0%, #1a3a5c 100%); color:#fff; padding:16px 24px; position:sticky; top:0; z-index:100; box-shadow:var(--shadow-lg); }
+.topbar h1 { font-size:18px; font-weight:700; letter-spacing:0.3px; }
+.topbar .sub { font-size:12px; opacity:0.85; margin-top:3px; }
 .topbar .sub-en { font-size:11px; opacity:0.6; margin-top:1px; }
 
-.tabs { display:flex; gap:0; background:var(--card); border-bottom:2px solid var(--border); padding:0 16px; overflow-x:auto; position:sticky; top:56px; z-index:99; }
-.tab { padding:10px 14px; font-size:12px; font-weight:600; color:var(--muted); cursor:pointer; border:none; background:none; border-bottom:3px solid transparent; white-space:nowrap; transition:all 0.15s; }
-.tab:hover { color:var(--ink); }
-.tab.active { color:var(--brand); border-bottom-color:var(--brand); }
+/* Tabs */
+.tabs { display:flex; gap:0; background:var(--card); border-bottom:2px solid var(--border); padding:0 12px; overflow-x:auto; position:sticky; top:58px; z-index:99; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+.tab { padding:11px 16px; font-size:12px; font-weight:600; color:var(--muted); cursor:pointer; border:none; background:none; border-bottom:3px solid transparent; white-space:nowrap; transition:all 0.2s ease; }
+.tab:hover { color:var(--ink); background:rgba(13,43,78,0.03); }
+.tab.active { color:var(--brand); border-bottom-color:var(--brand); font-weight:700; }
 
-.content { max-width:1000px; margin:0 auto; padding:20px 16px 60px; }
-.page { display:none; }
+/* Content */
+.content { max-width:960px; margin:0 auto; padding:24px 16px 60px; }
+.page { display:none; animation:fadeIn 0.3s ease; }
 .page.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
 
-.card { background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; margin-bottom:16px; }
-.card-title { font-size:16px; font-weight:700; color:var(--brand); margin-bottom:2px; }
-.card-title-en { font-size:12px; color:var(--muted); margin-bottom:4px; }
+/* Cards */
+.card { background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px; margin-bottom:16px; transition:box-shadow 0.2s; }
+.card:hover { box-shadow:var(--shadow-hover); }
+.card-title { font-size:17px; font-weight:700; color:var(--brand); margin-bottom:2px; }
+.card-title-en { font-size:12px; color:var(--muted); margin-bottom:8px; }
 .card-sub { font-size:12px; color:var(--muted); margin-bottom:12px; }
 
-.pareto { background:var(--blue-bg); border-radius:8px; padding:12px 14px; margin-bottom:14px; font-size:13px; line-height:1.5; }
+/* 80/20 callout */
+.pareto { background:linear-gradient(135deg, var(--blue-bg) 0%, #edf4ff 100%); border-radius:10px; padding:14px 16px; margin-bottom:16px; font-size:13px; line-height:1.55; border:1px solid rgba(37,99,235,0.1); }
 .pareto strong { color:var(--brand); }
-.pareto-en { font-size:11px; color:var(--muted); margin-top:4px; }
+.pareto-en { font-size:11px; color:var(--muted); margin-top:5px; background:none; border:none; padding:0; }
 
-.sec-title { font-size:14px; font-weight:700; color:var(--brand); border-bottom:2px solid var(--brand); padding-bottom:3px; margin:14px 0 6px; }
+/* Section titles */
+.sec-title { font-size:14px; font-weight:700; color:var(--brand); border-bottom:2px solid var(--brand); padding-bottom:4px; margin:18px 0 8px; display:flex; align-items:baseline; gap:6px; }
 .sec-title-en { font-size:11px; color:var(--muted); font-weight:400; }
 
-table { width:100%; border-collapse:collapse; font-size:12px; margin-bottom:10px; }
-th { background:var(--brand); color:#fff; padding:7px 8px; text-align:left; font-weight:600; font-size:11px; }
-td { border:1px solid var(--border); padding:6px 8px; vertical-align:top; }
+/* Tables */
+table { width:100%; border-collapse:collapse; font-size:12px; margin-bottom:12px; border-radius:8px; overflow:hidden; }
+th { background:var(--brand); color:#fff; padding:8px 10px; text-align:left; font-weight:600; font-size:11px; letter-spacing:0.2px; }
+td { border:1px solid var(--border); padding:7px 10px; vertical-align:top; }
 tr:nth-child(even) { background:#fafbfc; }
+tr:hover { background:#f0f4f8; }
 
-.box { border-radius:6px; padding:8px 12px; margin-bottom:6px; font-size:12px; line-height:1.45; }
+/* Boxes */
+.box { border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:12px; line-height:1.5; transition:transform 0.15s; }
+.box:hover { transform:translateX(2px); }
 .box-rule { background:var(--yellow-bg); border-left:4px solid var(--yellow); }
 .box-auto { background:var(--blue-bg); border-left:4px solid var(--blue); }
 .box-en { font-size:11px; color:var(--muted); margin-top:2px; }
 
-ol, ul { margin-left:18px; font-size:12.5px; }
-li { margin-bottom:4px; }
+/* Lists */
+ol, ul { margin-left:20px; font-size:12.5px; }
+li { margin-bottom:6px; line-height:1.55; }
 
-.badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; }
+/* Badges */
+.badge { display:inline-block; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:600; }
 .badge-green { background:var(--green-bg); color:var(--green); }
 .badge-yellow { background:var(--yellow-bg); color:var(--yellow); }
 .badge-red { background:var(--red-bg); color:var(--red); }
 .badge-blue { background:var(--blue-bg); color:var(--blue); }
 
+/* Timeline */
 .timeline { display:flex; flex-direction:column; gap:0; }
-.tl-item { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.tl-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); transition:background 0.15s; }
+.tl-item:hover { background:rgba(13,43,78,0.02); }
 .tl-item:last-child { border-bottom:none; }
-.tl-time { font-size:12px; font-weight:700; color:var(--brand); min-width:70px; }
+.tl-time { font-size:12px; font-weight:700; color:var(--brand); min-width:75px; text-align:right; }
 .tl-body { flex:1; }
-.tl-body .what { font-size:12.5px; font-weight:600; }
+.tl-body .what { font-size:13px; font-weight:600; }
 .tl-body .what-en { font-size:11px; color:var(--muted); }
-.tl-body .action { font-size:12px; color:var(--accent); margin-top:2px; }
+.tl-body .action { font-size:12px; color:var(--accent); margin-top:3px; font-weight:500; }
 
-.footer { text-align:center; font-size:10px; color:var(--muted); padding:16px 0; }
+/* Workflow steps */
+.workflow { counter-reset:step; list-style:none; margin-left:0; padding-left:0; }
+.workflow li { counter-increment:step; position:relative; padding:10px 0 10px 44px; border-bottom:1px solid var(--border); font-size:12.5px; line-height:1.55; }
+.workflow li:last-child { border-bottom:none; }
+.workflow li::before { content:counter(step); position:absolute; left:0; top:10px; width:28px; height:28px; border-radius:50%; background:var(--brand); color:#fff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; }
 
-/* Excalidraw diagram embed */
-.diagram-card { background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; margin-bottom:16px; border:1px solid var(--border); }
-.diagram-title { font-size:13px; font-weight:700; color:var(--brand); margin-bottom:10px; }
-.diagram-img { display:block; width:100%; max-width:100%; height:auto; border-radius:8px; border:1px solid var(--border); background:#fff; }
-.diagram-meta { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:10px; }
-.diagram-link { font-size:12px; font-weight:600; color:var(--accent); text-decoration:none; }
-.diagram-link:hover { text-decoration:underline; }
-.diagram-note { font-size:11px; color:var(--muted); }
+/* Footer */
+.footer { text-align:center; font-size:10px; color:var(--muted); padding:20px 0; }
 
-@media(max-width:640px) { table { font-size:11px; } th,td { padding:5px 4px; } }
-@media print { .topbar,.tabs { position:static; } .page { display:block !important; page-break-after:always; } .tab { display:none; } .diagram-img { break-inside:avoid; } }
+/* Mobile */
+@media(max-width:640px) {
+  table { font-size:11px; }
+  th,td { padding:5px 6px; }
+  .content { padding:16px 10px 40px; }
+  .card { padding:16px; }
+  .topbar { padding:12px 14px; }
+  .topbar h1 { font-size:15px; }
+}
+@media print {
+  .topbar,.tabs { position:static; }
+  .page { display:block !important; page-break-after:always; }
+  .tab { display:none; }
+  .card { box-shadow:none; border:1px solid #ccc; }
+}
 </style>
 </head>
 <body>
@@ -113,16 +141,6 @@ li { margin-bottom:4px; }
 <div class="page active" id="p0">
   <div class="pareto"><strong>80/20 核心思路：</strong>80%的事 Hermes 自动做，你只管那 20% 需要人拍板的。正常运转不打扰你，只有钱、人、规、坏了的事推到你面前。</div>
   <div class="pareto pareto-en"><strong>80/20 Core:</strong> Hermes handles 80% automatically. You only decide the 20% that needs a human — money, people, rules, broken things.</div>
-
-  <div class="sec-title">系统总图 <span class="sec-title-en">· System Map</span></div>
-  <div class="diagram-card">
-    <div class="diagram-title">公司运转图 · Company Operating Map</div>
-    <img class="diagram-img" src="assets/overview-flow.png" alt="Company Operating Map">
-    <div class="diagram-meta">
-      <a class="diagram-link" href="https://app.excalidraw.com/s/34QYIeaGFPF/9SOKLtEKcXe" target="_blank" rel="noopener">✏️ 在 Excalidraw 打开 · Open in Excalidraw</a>
-      <span class="diagram-note">双语图 · Bilingual EN/中文 · editable</span>
-    </div>
-  </div>
 
   <div class="sec-title">8 个部门一览 <span class="sec-title-en">· 8 Departments at a Glance</span></div>
   <table>
@@ -176,19 +194,9 @@ li { margin-bottom:4px; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of problems come from being understaffed or hiring the wrong people. Fix the hiring budget and onboarding process, and half your problems disappear.</div>
   </div>
 
-  <div class="sec-title">流程图 <span class="sec-title-en">· Process Diagram</span></div>
-  <div class="diagram-card">
-    <div class="diagram-title">人事主流程 · People Main Workflow</div>
-    <img class="diagram-img" src="assets/people-flow.png" alt="People Main Workflow">
-    <div class="diagram-meta">
-      <a class="diagram-link" href="https://app.excalidraw.com/s/34QYIeaGFPF/9LrmEc832XJ" target="_blank" rel="noopener">✏️ 在 Excalidraw 打开 · Open in Excalidraw</a>
-      <span class="diagram-note">双语图 · Bilingual EN/中文 · editable</span>
-    </div>
-  </div>
-
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow (in order)</span></div>
   <div class="card">
-    <ol>
+    <ol class="workflow">
       <li><strong>Hiring 招人</strong> — GM says "need 2 server" in store channel → Hermes checks budget → over budget = stop → OK = create job post</li>
       <li><strong>Screening 筛人</strong> — Hermes scores & ranks candidates → GM picks for interview → GM says "hire" in Slack → writes to Brain</li>
       <li><strong>Onboarding 入职</strong> — Hermes generates I-9 / 7shifts account / PIN → GM helps new hire fill forms → photo to Slack → Hermes records Brain</li>
@@ -241,19 +249,9 @@ li { margin-bottom:4px; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of financial risk comes from unapproved payments. Lock down the payment approval process and everything else follows.</div>
   </div>
 
-  <div class="sec-title">流程图 <span class="sec-title-en">· Process Diagram</span></div>
-  <div class="diagram-card">
-    <div class="diagram-title">付款审批流程 · Finance Payment Approval</div>
-    <img class="diagram-img" src="assets/finance-flow.png" alt="Finance Payment Approval">
-    <div class="diagram-meta">
-      <a class="diagram-link" href="https://app.excalidraw.com/s/34QYIeaGFPF/6MabtaZbLre" target="_blank" rel="noopener">✏️ 在 Excalidraw 打开 · Open in Excalidraw</a>
-      <span class="diagram-note">双语图 · Bilingual EN/中文 · editable</span>
-    </div>
-  </div>
-
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
   <div class="card">
-    <ol>
+    <ol class="workflow">
       <li><strong>Receive 收钱</strong> — POS auto-pulls sales data to Brain daily → 00001/00002/00003 have POS → 00004/00005 pending</li>
       <li><strong>Reconcile 对账</strong> — Bank statements vs Brain records → Yumi reconciles → mismatch goes to you</li>
       <li><strong>Payment Approval 付款审批</strong> — Store needs to buy → Yumi reviews tax/total → ≥$500 → Louis approves → pay</li>
@@ -306,19 +304,9 @@ li { margin-bottom:4px; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of ops problems come from POS fraud and broken equipment. Watch these two things and your stores are stable.</div>
   </div>
 
-  <div class="sec-title">流程图 <span class="sec-title-en">· Process Diagram</span></div>
-  <div class="diagram-card">
-    <div class="diagram-title">运营+作弊检测 · Ops Daily + Fraud Detection</div>
-    <img class="diagram-img" src="assets/ops-flow.png" alt="Ops Daily + Fraud Detection">
-    <div class="diagram-meta">
-      <a class="diagram-link" href="https://app.excalidraw.com/s/34QYIeaGFPF/3pDpmVDDas5" target="_blank" rel="noopener">✏️ 在 Excalidraw 打开 · Open in Excalidraw</a>
-      <span class="diagram-note">双语图 · Bilingual EN/中文 · editable</span>
-    </div>
-  </div>
-
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
   <div class="card">
-    <ol>
+    <ol class="workflow">
       <li><strong>Daily Ops 每天营业</strong> — Open → operate → GM manages floor → close → POS auto-pulls</li>
       <li><strong>POS Data</strong> — 12AM auto-pulls sales to Brain → 00001/00002/00003 have POS</li>
       <li><strong>Fraud Detect 作弊检测</strong> — 12:15AM auto-runs 9 checks → red flags → posts to #02-exec + store channel</li>
@@ -363,7 +351,7 @@ li { margin-bottom:4px; }
   <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
   <div class="box box-auto">⏰ <strong>12AM daily</strong> — POS sales to Brain (00001/00002/00003)</div>
   <div class="box box-auto">⏰ <strong>12:15AM daily</strong> — Fraud detection 9 checks (flag only, silent if clean)</div>
-  <div class="box-auto">⏰ <strong>1AM daily</strong> — Form rollup to Brain</div>
+  <div class="box box-auto">⏰ <strong>1AM daily</strong> — Form rollup to Brain</div>
 </div>
 
 <!-- PAGE 4: Procurement -->
@@ -377,7 +365,7 @@ li { margin-bottom:4px; }
 
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
   <div class="card">
-    <ol>
+    <ol class="workflow">
       <li><strong>Request 提需求</strong> — Store says "买一个冰箱" / "need 50lb flour" in Slack → Hermes auto-creates purchase order</li>
       <li><strong>Review Yumi审</strong> — Yumi locks tax and total → checks for cheaper options → confirms amount</li>
       <li><strong>Approve 审批</strong> — ≥$500 → push to Louis → Louis says yes → order / <$500 → Yumi approves directly</li>
@@ -423,7 +411,7 @@ li { margin-bottom:4px; }
 
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
   <div class="card">
-    <ol>
+    <ol class="workflow">
       <li><strong>Site Selection 选址</strong> — Find a location → you say "LOI [address]" in Slack → Hermes starts working</li>
       <li><strong>LOI</strong> — Hermes auto-generates LOI doc → you review → edit → finalize → send</li>
       <li><strong>Negotiation 谈判</strong> — Back and forth → you approve each step → Hermes records</li>
@@ -436,7 +424,7 @@ li { margin-bottom:4px; }
   <div class="sec-title">规章制度 <span class="sec-title-en">· Rules</span></div>
   <div class="box box-rule"><strong>Rule 1:</strong> Every step needs Louis approval. Growth = Louis only. / 每步你批</div>
   <div class="box box-rule"><strong>Rule 2:</strong> LOI original to Drive. Brain stores lease_id only. / 原件存Drive</div>
-  <div class="box-rule"><strong>Rule 3:</strong> Lease terms → legal → Hermes for reference only → Louis gets lawyer. / 租约找律师</div>
+  <div class="box box-rule"><strong>Rule 3:</strong> Lease terms → legal → Hermes for reference only → Louis gets lawyer. / 租约找律师</div>
   <div class="box box-rule"><strong>Rule 4:</strong> Before opening: staff hired + SOP live + POS connected + 7shifts connected. / 开业前全到位</div>
   <div class="box box-rule"><strong>Rule 5:</strong> Buildout budget → over = push to you. Under = silent. / 超了推你</div>
 
@@ -480,7 +468,7 @@ li { margin-bottom:4px; }
 
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
   <div class="card">
-    <ol>
+    <ol class="workflow">
       <li><strong>Pull Reviews 拉评论</strong> — You say "reviews 00003" → Hermes pulls Google reviews → sends to you</li>
       <li><strong>Bad Reviews 差评</strong> — Bad review → Hermes alerts → GM replies → reply content pushed to you</li>
       <li><strong>Good Reviews 好评</strong> — Good review → GM replies → no need to push to you</li>
@@ -524,7 +512,7 @@ li { margin-bottom:4px; }
 
   <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
   <div class="card">
-    <ol>
+    <ol class="workflow">
       <li><strong>Hermes</strong> — The only worker. Skills = how to do work. Cron = when to do work. No other agents. / 唯一worker</li>
       <li><strong>Slack Management</strong> — Add/remove people → Louis clicks in Slack → Hermes checks managers in store channels</li>
       <li><strong>Key Management</strong> — New API key → save to 1Password → sync to .env → auto-check every 6 hrs</li>
@@ -536,7 +524,7 @@ li { margin-bottom:4px; }
 
   <div class="sec-title">10 条规矩 <span class="sec-title-en">· 10 Work Rules (auto-checked nightly)</span></div>
   <div class="card">
-    <ol>
+    <ol class="workflow">
       <li>Use Hermes only, not GLM web chat / 只用Hermes</li>
       <li>Check data before building / 先查数据</li>
       <li>Never rebuild from scratch, patch what's broken / 不推倒重来</li>
@@ -580,7 +568,7 @@ li { margin-bottom:4px; }
   <div class="box box-auto">⏰ <strong>Every 6 hrs</strong> — 1Password key sync / 密钥同步</div>
   <div class="box box-auto">⏰ <strong>Every 6 hrs</strong> — Slack manager channel check / 经理入频道检查</div>
   <div class="box box-auto">⏰ <strong>1AM nightly</strong> — Work quality scorecard (10 rules) / 工作质量评分</div>
-  <div class="box-auto">⏰ <strong>8AM daily</strong> — AI cost alert (>$200/mo) / AI花费报警</div>
+  <div class="box box-auto">⏰ <strong>8AM daily</strong> — AI cost alert (>$200/mo) / AI花费报警</div>
 </div>
 
 <!-- PAGE 8: Admin -->
@@ -606,15 +594,15 @@ li { margin-bottom:4px; }
 
   <div class="sec-title">每天 5 分钟老板节奏 <span class="sec-title-en">· 5-Min Daily Boss Routine</span></div>
   <div class="timeline">
-    <div class="tl-item"><div class="tl-time">Morning</div><div class="tl-body"><div class="what">Staffing OK? (7AM auto-send) <span class="what-en">/ 人手够不够</span><div class="action">→ Hire if short, ignore if OK / 缺人说招</div></div></div>
-    <div class="tl-item"><div class="tl-time">Daytime</div><div class="tl-body"><div class="what">Only look at red flags (fraud/equipment/purchase) <span class="what-en">/ 有红旗才看</span><div class="action">→ Say yes/no / 说yes/no</div></div></div>
-    <div class="tl-item"><div class="tl-time">9 PM</div><div class="tl-body"><div class="what">Email digest + duty check (auto to DM) <span class="what-en">/ 邮件+职责</span><div class="action">→ Reply what matters, rest tomorrow / 该回的回</div></div></div>
-    <div class="tl-item"><div class="tl-time">Night</div><div class="tl-body"><div class="what">Work quality score (1AM auto-send) <span class="what-en">/ 工作质量评分</span><div class="action">→ Only if low score / 分数低才看</div></div></div>
+    <div class="tl-item"><div class="tl-time">Morning</div><div class="tl-body"><div class="what">Staffing OK? (7AM auto-send) <span class="what-en">/ 人手够不够</span></div><div class="action">→ Hire if short, ignore if OK / 缺人说招</div></div></div>
+    <div class="tl-item"><div class="tl-time">Daytime</div><div class="tl-body"><div class="what">Only look at red flags (fraud/equipment/purchase) <span class="what-en">/ 有红旗才看</span></div><div class="action">→ Say yes/no / 说yes/no</div></div></div>
+    <div class="tl-item"><div class="tl-time">9 PM</div><div class="tl-body"><div class="what">Email digest + duty check (auto to DM) <span class="what-en">/ 邮件+职责</span></div><div class="action">→ Reply what matters, rest tomorrow / 该回的回</div></div></div>
+    <div class="tl-item"><div class="tl-time">Night</div><div class="tl-body"><div class="what">Work quality score (1AM auto-send) <span class="what-en">/ 工作质量评分</span></div><div class="action">→ Only if low score / 分数低才看</div></div></div>
   </div>
 
   <div class="sec-title">每周想一次 <span class="sec-title-en">· Weekly Think</span></div>
   <div class="card">
-    <ol>
+    <ol class="workflow">
       <li><strong>Which store is worst?</strong> → "which store is worst" → why → fix next week</li>
       <li><strong>Who to hire / fire?</strong> → "hiring status" + "roster" → hire if short, manage if weak</li>
       <li><strong>Is money right?</strong> → check monthly report → investigate if over budget</li>
@@ -624,7 +612,7 @@ li { margin-bottom:4px; }
 
   <div class="sec-title">每月做一次 <span class="sec-title-en">· Monthly Do</span></div>
   <div class="card">
-    <ol>
+    <ol class="workflow">
       <li>Review company P&L → which stores are profitable?</li>
       <li>Review all manager performance → reward good, manage weak</li>
       <li>Check lease expiry dates → renew early or relocate</li>
@@ -643,7 +631,7 @@ li { margin-bottom:4px; }
 
 </div>
 
-<div class="footer">Wiserise Hospitality Group · Internal Use · 2026-07-21 · Hermes Artifact · Bilingual EN/中文 · v2.0 with Excalidraw Diagrams</div>
+<div class="footer">Wiserise Hospitality Group · Internal Use · 2026-07-21 · Hermes Artifact · Bilingual EN/中文 · v3.0</div>
 
 <script>
 function showPage(id, btn) {
