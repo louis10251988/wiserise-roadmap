@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wiserise 公司管理 Roadmap · Company Management Roadmap</title>
+<title>Wiserise Build Roadmap · 建设路线图</title>
 <style>
 :root {
   --bg: #f5f7fa; --card: #fff; --ink: #1a1a2e; --muted: #6b7280;
@@ -19,194 +19,167 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei","Helvetica Neue",sans-serif; background:var(--bg); color:var(--ink); line-height:1.65; -webkit-font-smoothing:antialiased; }
 
-/* ── Topbar ── */
 .topbar { background:linear-gradient(135deg, var(--brand) 0%, #1a3a5c 100%); color:#fff; padding:16px 24px; position:sticky; top:0; z-index:100; box-shadow:var(--shadow-lg); }
 .topbar h1 { font-size:18px; font-weight:700; letter-spacing:0.3px; }
 .topbar .sub { font-size:12px; opacity:0.85; margin-top:3px; }
 .topbar .sub-en { font-size:11px; opacity:0.6; margin-top:1px; }
 
-/* ── Today Strip ── */
-.today-strip { background:linear-gradient(135deg, #fff 0%, #fafbfc 100%); border-bottom:2px solid var(--border); padding:10px 16px; position:sticky; top:58px; z-index:99; display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
-.today-label { font-size:11px; font-weight:700; color:var(--brand); text-transform:uppercase; letter-spacing:0.5px; margin-right:4px; }
-.today-chip { display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:600; cursor:default; transition:transform 0.15s; }
-.today-chip:hover { transform:translateY(-1px); }
-.today-chip.red { background:var(--red-bg); color:var(--red); }
-.today-chip.yellow { background:var(--yellow-bg); color:var(--yellow); }
-.today-chip.blue { background:var(--blue-bg); color:var(--blue); }
-.today-chip.green { background:var(--green-bg); color:var(--green); }
-
-/* ── Tabs ── */
-.tabs { display:flex; gap:0; background:var(--card); border-bottom:2px solid var(--border); padding:0 8px; overflow-x:auto; position:sticky; top:108px; z-index:98; }
+.tabs { display:flex; gap:0; background:var(--card); border-bottom:2px solid var(--border); padding:0 8px; overflow-x:auto; position:sticky; top:58px; z-index:99; }
 .tab { padding:10px 14px; font-size:12px; font-weight:600; color:var(--muted); cursor:pointer; border:none; background:none; border-bottom:3px solid transparent; white-space:nowrap; transition:all 0.2s ease; }
 .tab:hover { color:var(--ink); background:rgba(13,43,78,0.03); }
 .tab.active { color:var(--brand); border-bottom-color:var(--brand); font-weight:700; }
+.tab .tab-status { font-size:10px; margin-left:4px; }
 
-/* ── Content ── */
 .content { max-width:960px; margin:0 auto; padding:20px 16px 60px; }
 .page { display:none; animation:fadeIn 0.3s ease; }
 .page.active { display:block; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
 
-/* ── Cards ── */
 .card { background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; margin-bottom:12px; transition:box-shadow 0.2s; }
 .card:hover { box-shadow:var(--shadow-hover); }
 .card-title { font-size:17px; font-weight:700; color:var(--brand); margin-bottom:2px; }
 .card-title-en { font-size:12px; color:var(--muted); margin-bottom:8px; }
-.bi { display:block; }
-.bi-en { display:block; font-size:11px; color:var(--muted); margin-top:2px; }
-.td-en { display:block; font-size:11px; color:var(--muted); margin-top:2px; }
 
-/* ── 80/20 callout ── */
 .pareto { background:linear-gradient(135deg, var(--blue-bg) 0%, #edf4ff 100%); border-radius:10px; padding:14px 16px; margin-bottom:14px; font-size:13px; line-height:1.55; border:1px solid rgba(37,99,235,0.1); }
 .pareto strong { color:var(--brand); }
 .pareto-en { font-size:11px; color:var(--muted); margin-top:5px; background:none; border:none; padding:0; }
 
-/* ── Section titles ── */
 .sec-title { font-size:13px; font-weight:700; color:var(--brand); border-bottom:2px solid var(--brand); padding-bottom:3px; margin:16px 0 6px; display:flex; align-items:baseline; gap:6px; }
 .sec-title-en { font-size:11px; color:var(--muted); font-weight:400; }
 
-/* ── Info cards (Owner / Approve / Check / Auto) ── */
-.info-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:10px; margin-bottom:12px; }
-.info-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px 14px; transition:box-shadow 0.2s; }
-.info-card:hover { box-shadow:var(--shadow); }
-.info-card-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
-.info-card-label.owner { color:var(--blue); }
-.info-card-label.approve { color:var(--red); }
-.info-card-label.check { color:var(--green); }
-.info-card-label.auto { color:var(--accent); }
-.info-card-body { font-size:12px; line-height:1.5; color:var(--ink); }
+/* Progress bar */
+.progress-bar { background:var(--border); border-radius:20px; height:24px; overflow:hidden; margin:8px 0 4px; position:relative; }
+.progress-fill { height:100%; border-radius:20px; transition:width 0.5s ease; display:flex; align-items:center; justify-content:flex-end; padding-right:10px; font-size:11px; font-weight:700; color:#fff; }
+.progress-100 { background:linear-gradient(90deg, #16a34a, #22c55e); }
+.progress-66 { background:linear-gradient(90deg, #2563eb, #3b82f6); }
+.progress-33 { background:linear-gradient(90deg, #ca8a04, #eab308); }
+.progress-0 { background:linear-gradient(90deg, #dc2626, #ef4444); }
+.progress-label { font-size:12px; color:var(--muted); margin-bottom:6px; display:flex; justify-content:space-between; }
 
-/* ── Tables ── */
+/* Build checklist */
+.checklist { list-style:none; margin:0; padding:0; }
+.checklist li { display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); font-size:12.5px; line-height:1.55; }
+.checklist li:last-child { border-bottom:none; }
+.check-icon { width:24px; height:24px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; margin-top:1px; }
+.check-done { background:var(--green-bg); color:var(--green); }
+.check-progress { background:var(--blue-bg); color:var(--blue); }
+.check-todo { background:var(--yellow-bg); color:var(--yellow); }
+.check-blocked { background:var(--red-bg); color:var(--red); }
+.check-text { flex:1; }
+.check-text .check-label { font-weight:600; }
+.check-text .check-desc { font-size:11px; color:var(--muted); margin-top:2px; }
+
+/* Build order */
+.build-order { display:flex; flex-direction:column; gap:0; margin:8px 0; }
+.bo-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.bo-item:last-child { border-bottom:none; }
+.bo-num { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; }
+.bo-num.done { background:var(--green); color:#fff; }
+.bo-num.active { background:var(--blue); color:#fff; }
+.bo-num.todo { background:var(--border); color:var(--muted); }
+.bo-body { flex:1; }
+.bo-body .bo-title { font-size:13px; font-weight:600; }
+.bo-body .bo-status { font-size:11px; margin-left:6px; }
+.bo-body .bo-desc { font-size:11px; color:var(--muted); margin-top:2px; }
+
 table { width:100%; border-collapse:collapse; font-size:12px; margin-bottom:10px; border-radius:8px; overflow:hidden; }
-th { background:var(--brand); color:#fff; padding:8px 10px; text-align:left; font-weight:600; font-size:11px; letter-spacing:0.2px; }
+th { background:var(--brand); color:#fff; padding:8px 10px; text-align:left; font-weight:600; font-size:11px; }
 td { border:1px solid var(--border); padding:7px 10px; vertical-align:top; }
 tr:nth-child(even) { background:#fafbfc; }
 tr:hover { background:#f0f4f8; }
 
-/* ── Boxes ── */
-.box { border-radius:8px; padding:10px 14px; margin-bottom:7px; font-size:12px; line-height:1.5; transition:transform 0.15s; }
-.box:hover { transform:translateX(2px); }
+.box { border-radius:8px; padding:10px 14px; margin-bottom:7px; font-size:12px; line-height:1.5; }
 .box-rule { background:var(--yellow-bg); border-left:4px solid var(--yellow); }
 .box-auto { background:var(--blue-bg); border-left:4px solid var(--blue); }
+.box-en { font-size:11px; color:var(--muted); margin-top:2px; }
 
-/* ── Workflow steps ── */
 .workflow { counter-reset:step; list-style:none; margin:0; padding:0; }
 .workflow li { counter-increment:step; position:relative; padding:10px 0 10px 40px; border-bottom:1px solid var(--border); font-size:12.5px; line-height:1.55; }
 .workflow li:last-child { border-bottom:none; }
 .workflow li::before { content:counter(step); position:absolute; left:0; top:10px; width:26px; height:26px; border-radius:50%; background:var(--brand); color:#fff; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; }
 
-/* ── Clickable Slack phrase ── */
 .say { display:inline-block; background:var(--brand-light); color:var(--brand); padding:2px 8px; border-radius:4px; font-size:11.5px; font-weight:600; cursor:pointer; border:1px solid rgba(13,43,78,0.15); transition:all 0.15s; }
 .say:hover { background:var(--brand); color:#fff; }
 .say:active { transform:scale(0.95); }
 
-/* ── Badges ── */
 .badge { display:inline-block; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:600; }
 .badge-green { background:var(--green-bg); color:var(--green); }
 .badge-yellow { background:var(--yellow-bg); color:var(--yellow); }
 .badge-red { background:var(--red-bg); color:var(--red); }
 .badge-blue { background:var(--blue-bg); color:var(--blue); }
 
-/* ── Timeline ── */
-.timeline { display:flex; flex-direction:column; gap:0; }
-.tl-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); transition:background 0.15s; }
-.tl-item:hover { background:rgba(13,43,78,0.02); }
-.tl-item:last-child { border-bottom:none; }
-.tl-time { font-size:12px; font-weight:700; color:var(--brand); min-width:75px; text-align:right; }
-.tl-body { flex:1; }
-.tl-body .what { font-size:13px; font-weight:600; }
-.tl-body .what-en { font-size:11px; color:var(--muted); }
-.tl-body .action { font-size:12px; color:var(--accent); margin-top:3px; font-weight:500; }
+.td-en { display:block; font-size:11px; color:var(--muted); margin-top:2px; }
+.bi-en { display:block; font-size:11px; color:var(--muted); margin-top:2px; }
 
-/* ── Footer ── */
 .footer { text-align:center; font-size:10px; color:var(--muted); padding:20px 0; }
 
-/* ── Mobile ── */
-@media(max-width:640px) {
-  table { font-size:11px; }
-  th,td { padding:5px 6px; }
-  .content { padding:14px 10px 40px; }
-  .card { padding:14px; }
-  .topbar { padding:12px 14px; }
-  .topbar h1 { font-size:15px; }
-  .info-grid { grid-template-columns:1fr; }
-  .today-strip { top:54px; padding:8px 10px; }
-  .tabs { top:100px; }
-}
-@media print {
-  .topbar,.today-strip,.tabs { position:static; }
-  .page { display:block !important; page-break-after:always; }
-  .tab,.today-strip { display:none; }
-  .card { box-shadow:none; border:1px solid #ccc; }
-}
+@media(max-width:640px) { table { font-size:11px; } th,td { padding:5px 6px; } .content { padding:14px 10px 40px; } .card { padding:14px; } .topbar { padding:12px 14px; } .topbar h1 { font-size:15px; } }
+@media print { .topbar,.tabs { position:static; } .page { display:block !important; page-break-after:always; } .tab { display:none; } .card { box-shadow:none; border:1px solid #ccc; } }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <h1>📋 Wiserise 公司管理 Roadmap · Company Management Roadmap</h1>
-  <div class="sub">老板 + 部门主管用 · 2026年7月 · 5家店（00001–00005）· 80/20 法则</div>
-  <div class="sub-en">For Owner + Department Heads · July 2026 · 5 Stores · 80/20 Rule</div>
-</div>
-
-<!-- ── Today Strip: what boss needs to look at ── -->
-<div class="today-strip">
-  <span class="today-label">今天看 · Today</span>
-  <span class="today-chip red">💰 钱 Money</span>
-  <span class="today-chip yellow">🔥 人 People</span>
-  <span class="today-chip blue">⚖️ 规 Rules</span>
-  <span class="today-chip green">✅ 查 Check</span>
+  <h1>📋 Wiserise Build Roadmap · 建设路线图</h1>
+  <div class="sub">一个部门一个部门建 · Build one department at a time · 2026年7月 · 5家店</div>
+  <div class="sub-en">Build each department one by one · July 2026 · 5 Stores</div>
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="showPage('p0',this)">📊 总表 Overview</button>
-  <button class="tab" onclick="showPage('p1',this)">👥 People 人事</button>
-  <button class="tab" onclick="showPage('p2',this)">💵 Finance 财务</button>
-  <button class="tab" onclick="showPage('p3',this)">🔧 Ops 运营</button>
-  <button class="tab" onclick="showPage('p4',this)">📦 Proc 采购</button>
-  <button class="tab" onclick="showPage('p5',this)">↗️ Growth 扩张</button>
-  <button class="tab" onclick="showPage('p6',this)">📣 Mkt 市场</button>
-  <button class="tab" onclick="showPage('p7',this)">🖥️ IT 技术</button>
-  <button class="tab" onclick="showPage('p8',this)">📋 Admin 管理</button>
+  <button class="tab active" onclick="showPage('p0',this)">📊 总表 Roadmap</button>
+  <button class="tab" onclick="showPage('p1',this)">👥 People <span class="tab-status">🚧</span></button>
+  <button class="tab" onclick="showPage('p2',this)">💵 Finance <span class="tab-status">🚧</span></button>
+  <button class="tab" onclick="showPage('p3',this)">🔧 Ops <span class="tab-status">🚧</span></button>
+  <button class="tab" onclick="showPage('p4',this)">📦 Proc <span class="tab-status">⬜</span></button>
+  <button class="tab" onclick="showPage('p5',this)">↗️ Growth <span class="tab-status">⬜</span></button>
+  <button class="tab" onclick="showPage('p6',this)">📣 Mkt <span class="tab-status">⬜</span></button>
+  <button class="tab" onclick="showPage('p7',this)">🖥️ IT <span class="tab-status">🚧</span></button>
+  <button class="tab" onclick="showPage('p8',this)">📋 Admin <span class="tab-status">⬜</span></button>
 </div>
 
 <div class="content">
 
-<!-- ════════ PAGE 0: Overview ════════ -->
+<!-- ════════ PAGE 0: BUILD ROADMAP ════════ -->
 <div class="page active" id="p0">
-  <div class="pareto"><strong>80/20 核心思路：</strong>80%的事 Hermes 自动做，你只管那 20% 需要人拍板的。正常运转不打扰你，只有钱、人、规、坏了的事推到你面前。</div>
-  <div class="pareto pareto-en"><strong>80/20 Core:</strong> Hermes handles 80% automatically. You only decide the 20% that needs a human — money, people, rules, broken things.</div>
+  <div class="pareto"><strong>建设思路：</strong>不要同时建8个部门。按顺序，一个建完再建下一个。每个部门 = 技能 + 数据 + 自动 + 规矩。全部到位才算建完。</div>
+  <div class="pareto pareto-en"><strong>Build Strategy:</strong> Don't build all 8 departments at once. Go in order, finish one before starting the next. Each department = Skills + Data + Automation + Rules. All must be live to count as "done."</div>
 
-  <div class="sec-title">8 个部门一览 <span class="sec-title-en">· 8 Departments at a Glance</span></div>
-  <table>
-    <tr><th style="width:7%">Dept</th><th style="width:18%">Main Work · 主要工作</th><th style="width:12%">Owner · 负责人</th><th style="width:12%">Slack Ch</th><th style="width:14%">You Approve · 你批什么</th><th style="width:14%">How to Check · 怎么查</th><th style="width:14%">Automated · 自动跑</th></tr>
-    <tr><td><strong>👥 People<br>人事</strong></td><td>Hiring→Onboarding→Scheduling→Discipline→Exit<br>招人·入职·排班·纪律·离职</td><td>Coach Sally<br>GM (store)</td><td>Store ch<br>#06-people</td><td>Fire manager<br>Promote / Pay</td><td><span class="say" onclick="copySay(this)">roster 00003</span><br><span class="say" onclick="copySay(this)">how many servers</span></td><td>6AM roster sync<br>11PM data check<br>10:30PM chat log</td></tr>
-    <tr><td><strong>💵 Finance<br>财务</strong></td><td>Bank reconcile→Payments→Payroll→AP<br>银行对账·付款·工资·采购付款</td><td>Yumi<br>Louis+Luna</td><td>#04-finance<br>#02-exec</td><td>Bank/wire/ACH<br>Purchase ≥$500<br>Tax</td><td>9PM email digest<br>auto to your DM</td><td>9PM email digest<br>30min auto-reply<br>8AM AI cost alert</td></tr>
-    <tr><td><strong>🔧 Ops<br>运营</strong></td><td>Daily ops→POS data→Fraud detect→Equipment repair<br>每日营业·POS数据·作弊检测·设备维修</td><td>GM (store)<br>WISE OPS</td><td>#03-ops<br>Store ch</td><td>High repair cost<br>Replace equipment</td><td><span class="say" onclick="copySay(this)">store health 00003</span><br><span class="say" onclick="copySay(this)">which store is worst</span><br><span class="say" onclick="copySay(this)">fraud check</span></td><td>12AM POS→Brain<br>12:15AM fraud check<br>1AM form rollup</td></tr>
-    <tr><td><strong>📦 Proc<br>采购</strong></td><td>Request→Review→Approve→Order<br>提需求→审→批→下单</td><td>Yumi (review)<br>Louis (≥$500)</td><td>#04-finance<br>🛒Procurement</td><td>≥$500<br>&lt;$500 = Yumi</td><td><span class="say" onclick="copySay(this)">买一个冰箱</span><br>auto-create order</td><td>Hermes creates<br>Yumi locks tax/total</td></tr>
-    <tr><td><strong>↗️ Growth<br>扩张</strong></td><td>Site selection→LOI→Lease→Open store<br>新店选址→LOI→租约→开店</td><td>Louis only</td><td>#02-exec</td><td>Every step<br>Site·LOI·Lease</td><td><span class="say" onclick="copySay(this)">LOI [address]</span><br>auto-generate</td><td>Hermes generates LOI<br>you review→send</td></tr>
-    <tr><td><strong>📣 Mkt<br>市场</strong></td><td>Google reviews→Brand promotion<br>Google评论·品牌推广</td><td>WISE OPS<br>Louis</td><td>#02-exec</td><td>Marketing budget</td><td><span class="say" onclick="copySay(this)">reviews 00003</span></td><td>Pull reviews<br>periodic check</td></tr>
-    <tr><td><strong>🖥️ IT<br>技术</strong></td><td>Hermes ops→Slack mgmt→Keys→DB→Security<br>Hermes运行·Slack管理·密钥·数据库</td><td>Louis only</td><td>WISE BRAIN DM</td><td>Change settings/code<br>Add/remove access</td><td><span class="say" onclick="copySay(this)">hermes status</span><br><span class="say" onclick="copySay(this)">check my work</span></td><td>6h key sync<br>6h Slack mgr check<br>1AM work quality</td></tr>
-    <tr><td><strong>📋 Admin<br>管理</strong></td><td>Is the boss doing boss work?<br>老板有没有在做老板的事</td><td>Louis</td><td>Your DM</td><td>—</td><td>9PM auto-send<br><span class="say" onclick="copySay(this)">daily duty check</span></td><td>9PM boss duty check</td></tr>
-  </table>
+  <div class="sec-title">总进度 <span class="sec-title-en">· Overall Progress</span></div>
+  <div class="progress-label"><span>8 个部门 · 8 Departments</span><span>3 built · 3 in progress · 2 not started</span></div>
+  <div class="progress-bar"><div class="progress-fill progress-33" style="width:37.5%">37.5%</div></div>
 
-  <div class="sec-title">每天节奏 <span class="sec-title-en">· Daily Rhythm</span></div>
-  <div class="timeline">
-    <div class="tl-item"><div class="tl-time">7 AM</div><div class="tl-body"><div class="what">人手够不够 <span class="what-en">/ Staffing OK?</span></div><div class="where" style="font-size:11px;color:var(--muted)">各店频道 / Store channels</div><div class="action">→ 看，缺人说招 / Check, hire if short</div></div></div>
-    <div class="tl-item"><div class="tl-time">8 AM</div><div class="tl-body"><div class="what">AI花费超了吗 <span class="what-en">/ AI cost over?</span></div><div class="where" style="font-size:11px;color:var(--muted)">#02-exec (silent if OK)</div><div class="action">→ 超了才看 / Only if exceeded</div></div></div>
-    <div class="tl-item"><div class="tl-time">9 PM</div><div class="tl-body"><div class="what">邮件摘要 + 你今天做了啥 <span class="what-en">/ Email digest + duty check</span></div><div class="where" style="font-size:11px;color:var(--muted)">你DM / Your DM</div><div class="action">→ 该回的回 / Reply what matters</div></div></div>
-    <div class="tl-item"><div class="tl-time">10:30 PM</div><div class="tl-body"><div class="what">店里聊天存Brain <span class="what-en">/ Store chat → Brain</span></div><div class="where" style="font-size:11px;color:var(--muted)">你DM / Your DM</div><div class="action">→ 有问题明天处理 / Issues tomorrow</div></div></div>
-    <div class="tl-item"><div class="tl-time">11 PM</div><div class="tl-body"><div class="what">脏数据检查 <span class="what-en">/ Bad data check</span></div><div class="where" style="font-size:11px;color:var(--muted)">#02-exec</div><div class="action">→ 有问题明天修 / Fix tomorrow</div></div></div>
-    <div class="tl-item"><div class="tl-time">1 AM</div><div class="tl-body"><div class="what">工作质量评分（10条规矩）<span class="what-en">/ Work quality score (10 rules)</span></div><div class="where" style="font-size:11px;color:var(--muted)">#02-exec</div><div class="action">→ 分数低才看 / Only if low</div></div></div>
+  <div class="sec-title">建设顺序 <span class="sec-title-en">· Build Order (do in this sequence)</span></div>
+  <div class="build-order">
+    <div class="bo-item"><div class="bo-num done">1</div><div class="bo-body"><div class="bo-title">🖥️ IT 技术<span class="bo-status"><span class="badge badge-green">✅ Built</span></span></div><div class="bo-desc">Hermes + Brain + Slack + Keys + Cron — foundation for everything else / 地基，所有部门都靠它</div></div></div>
+    <div class="bo-item"><div class="bo-num active">2</div><div class="bo-body"><div class="bo-title">👥 People 人事<span class="bo-status"><span class="badge badge-blue">🚧 In Progress</span></span></div><div class="bo-desc">Hiring → Onboarding → Scheduling → Discipline → Exit / 招人→入职→排班→纪律→离职</div></div></div>
+    <div class="bo-item"><div class="bo-num active">3</div><div class="bo-body"><div class="bo-title">🔧 Ops 运营<span class="bo-status"><span class="badge badge-blue">🚧 In Progress</span></span></div><div class="bo-desc">POS data → Fraud detection → Equipment → SOPs / POS数据→作弊检测→设备→SOP</div></div></div>
+    <div class="bo-item"><div class="bo-num active">4</div><div class="bo-body"><div class="bo-title">💵 Finance 财务<span class="bo-status"><span class="badge badge-blue">🚧 In Progress</span></span></div><div class="bo-desc">Bank reconcile → Payments → Payroll → AP / 银行对账→付款→工资→采购付款</div></div></div>
+    <div class="bo-item"><div class="bo-num todo">5</div><div class="bo-body"><div class="bo-title">📦 Proc 采购<span class="bo-status"><span class="badge badge-yellow">⬜ Not Started</span></span></div><div class="bo-desc">Request → Review → Approve → Order / 提需求→审→批→下单</div></div></div>
+    <div class="bo-item"><div class="bo-num todo">6</div><div class="bo-body"><div class="bo-title">📣 Mkt 市场<span class="bo-status"><span class="badge badge-yellow">⬜ Not Started</span></span></div><div class="bo-desc">Google reviews → Brand promotion / Google评论→品牌推广</div></div></div>
+    <div class="bo-item"><div class="bo-num todo">7</div><div class="bo-body"><div class="bo-title">↗️ Growth 扩张<span class="bo-status"><span class="badge badge-yellow">⬜ Not Started</span></span></div><div class="bo-desc">Site selection → LOI → Lease → Open store / 选址→LOI→租约→开店</div></div></div>
+    <div class="bo-item"><div class="bo-num todo">8</div><div class="bo-body"><div class="bo-title">📋 Admin 管理<span class="bo-status"><span class="badge badge-yellow">⬜ Not Started</span></span></div><div class="bo-desc">Boss duty check → work quality score / 老板职责检查→工作质量评分</div></div></div>
   </div>
 
-  <div class="sec-title">4 个只管拍板 <span class="sec-title-en">· 4 Things Only You Decide</span></div>
+  <div class="sec-title">每个部门的建完标准 <span class="sec-title-en">· "Done" = 4 things live</span></div>
   <table>
-    <tr><th style="width:12%">Type</th><th style="width:45%">What needs your YES · 什么要你 yes</th><th style="width:25%">Who can do · 谁可以做</th><th style="width:18%">Note</th></tr>
-    <tr><td><span class="badge badge-red">💰 Money 钱</span></td><td>Bank / wire / purchase ≥$500 / tax</td><td>Louis + Luna</td><td>Equal power</td></tr>
-    <tr><td><span class="badge badge-yellow">🔥 People 人</span></td><td>Fire manager / promote / pay change</td><td>Louis + Yumi</td><td>Floor staff → Coach</td></tr>
-    <tr><td><span class="badge badge-blue">⚖️ Rules 规</span></td><td>Change SOP / change architecture / new store</td><td>Louis only</td><td>—</td></tr>
-    <tr><td><span class="badge badge-green">📋 Check 查</span></td><td>Any "store health / fraud / roster"</td><td>Ask anytime</td><td>No approval needed</td></tr>
+    <tr><th style="width:15%">Component · 组件</th><th style="width:35%">What it means · 什么意思</th><th style="width:25%">How to verify · 怎么验证</th><th style="width:25%">Example · 例子</th></tr>
+    <tr><td><strong>1. Skill 技能</strong><div class="td-en">Hermes skill</div></td><td>Hermes has a skill that knows how to do this department's work / Hermes有技能能做这个部门的活</td><td><span class="say" onclick="copySay(this)">skills list</span> shows the skill</td><td>people-recruiting skill loaded</td></tr>
+    <tr><td><strong>2. Data 数据</strong><div class="td-en">Brain tables</div></td><td>Supabase has the tables this department needs / Supabase有这个部门需要的表</td><td>Query Brain → data exists + clean</td><td>stores, people, roles tables live</td></tr>
+    <tr><td><strong>3. Auto 自动</strong><div class="td-en">Cron jobs</div></td><td>Scheduled jobs run for this department / 有定时任务在跑</td><td><span class="say" onclick="copySay(this)">check my work</span> → crons listed</td><td>6AM roster sync running</td></tr>
+    <tr><td><strong>4. Rules 规矩</strong><div class="td-en">SOPs + policies</div></td><td>SOPs written, approved, and accessible / SOP写好、批准、可查</td><td><span class="say" onclick="copySay(this)">what's the SOP for hiring</span> works</td><td>Onboarding SOP published</td></tr>
+  </table>
+
+  <div class="sec-title">依赖关系 <span class="sec-title-en">· Dependencies (what blocks what)</span></div>
+  <table>
+    <tr><th style="width:25%">Department · 部门</th><th style="width:35%">Depends on · 依赖谁</th><th style="width:40%">Why · 为什么</th></tr>
+    <tr><td>IT 技术</td><td>— (foundation · 地基)</td><td>Everything runs on Hermes + Brain + Slack / 一切靠Hermes+Brain+Slack</td></tr>
+    <tr><td>People 人事</td><td>IT ✅</td><td>Need Brain tables + Slack channels + skills / 要Brain表+Slack频道+技能</td></tr>
+    <tr><td>Ops 运营</td><td>IT ✅, People 🚧</td><td>Need staff in stores + POS connected / 要人到+POS连上</td></tr>
+    <tr><td>Finance 财务</td><td>IT ✅, Ops 🚧</td><td>Need sales data flowing + purchase records / 要销售数据+采购记录</td></tr>
+    <tr><td>Proc 采购</td><td>IT ✅, Finance 🚧</td><td>Need payment flow + approval rules / 要付款流程+审批规矩</td></tr>
+    <tr><td>Mkt 市场</td><td>IT ✅, Ops 🚧</td><td>Need store data + Google accounts / 要店数据+Google账号</td></tr>
+    <tr><td>Growth 扩张</td><td>All above · 以上全部</td><td>New store needs everything working / 新店要一切就绪</td></tr>
+    <tr><td>Admin 管理</td><td>All above · 以上全部</td><td>Boss check only works if all depts live / 所有部门活了老板检查才有意义</td></tr>
   </table>
 
   <div class="sec-title">5 家店 <span class="sec-title-en">· 5 Stores</span></div>
@@ -229,39 +202,44 @@ tr:hover { background:#f0f4f8; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of problems come from being understaffed or hiring the wrong people. Fix the hiring budget and onboarding process, and half your problems disappear.</div>
   </div>
 
-  <div class="info-grid">
-    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">Coach Sally<br>GM (store)</div></div>
-    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">Fire manager<br>Promote / Pay</div></div>
-    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">roster 00003</span><br><span class="say" onclick="copySay(this)">how many servers</span></div></div>
-    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">6AM roster sync<br>11PM data check<br>10:30PM chat log</div></div>
-  </div>
+  <div class="sec-title">建设进度 <span class="sec-title-en">· Build Progress</span></div>
+  <div class="progress-label"><span>People 人事</span><span>2/4 live</span></div>
+  <div class="progress-bar"><div class="progress-fill progress-33" style="width:50%">50%</div></div>
 
-  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
+  <div class="sec-title">建完清单 <span class="sec-title-en">· Build Checklist</span></div>
+  <ul class="checklist">
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">1. Skill loaded · 技能已加载</div><div class="check-desc">people-recruiting skill + people-roster-sync + people-my-job + people-data-health / 招人+花名册+岗位职责+数据健康技能</div></div></li>
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">2. Brain tables · 数据表</div><div class="check-desc">stores, people, roles, budgets tables exist + clean / 店铺、人员、岗位、预算表存在且干净</div></div></li>
+    <li><div class="check-icon check-progress">🚧</div><div class="check-text"><div class="check-label">3. Cron jobs · 定时任务</div><div class="check-desc">6AM roster sync + 11PM data check + 10:30PM chat log — some running, some not / 6AM花名册同步+11PM数据检查+10:30PM聊天存Brain — 部分在跑</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">4. SOPs published · SOP发布</div><div class="check-desc">Hiring SOP + Onboarding SOP + Discipline SOP + Exit SOP — not yet written / 招人SOP+入职SOP+纪律SOP+离职SOP — 还没写</div></div></li>
+  </ul>
+
+  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Target Workflow (what we're building toward)</span></div>
   <div class="card">
     <ol class="workflow">
-      <li><strong>Hiring 招人</strong> — GM says "need 2 server" in store channel → Hermes checks budget → over budget = stop → OK = create job post</li>
-      <li><strong>Screening 筛人</strong> — Hermes scores & ranks candidates → GM picks for interview → GM says "hire" in Slack → writes to Brain</li>
-      <li><strong>Onboarding 入职</strong> — Hermes generates I-9 / 7shifts account / PIN → GM helps new hire fill forms → photo to Slack → Hermes records Brain</li>
-      <li><strong>Scheduling 排班</strong> — GM schedules in 7shifts (own store) → system sends to staff → Hermes checks staffing → short = 7AM alert to you</li>
-      <li><strong>Daily Mgmt 日常管理</strong> — GM manages attendance/discipline → minor issues = coach (teach first) → repeat = write-up (paper + photo to Slack)</li>
-      <li><strong>Exit 离职</strong> — floor staff exit → Coach Sally approves → manager exit → Louis approves → Hermes generates exit docs</li>
+      <li><strong>Hiring 招人</strong> — GM says "need 2 server" in store channel → Hermes checks budget → over budget = stop → OK = create job post / 店长在店频道说"need 2 server"→Hermes查预算→超了停→OK发招聘</li>
+      <li><strong>Screening 筛人</strong> — Hermes scores & ranks candidates → GM picks for interview → GM says "hire" in Slack → writes to Brain / Hermes打分排名→店长选人面试→Slack说"hire"→写入Brain</li>
+      <li><strong>Onboarding 入职</strong> — Hermes generates I-9 / 7shifts account / PIN → GM helps new hire fill forms → photo to Slack → Hermes records Brain / Hermes生成I-9+7shifts+PIN→店长帮填表→拍照发Slack→Hermes存Brain</li>
+      <li><strong>Scheduling 排班</strong> — GM schedules in 7shifts (own store) → system sends to staff → Hermes checks staffing → short = 7AM alert to you / 店长在7shifts排班→系统发员工→Hermes查人手→缺人早7点推你</li>
+      <li><strong>Daily Mgmt 日常管理</strong> — GM manages attendance/discipline → minor = coach (teach first) → repeat = write-up (paper + photo to Slack) / 店长管出勤纪律→小问题先教→再犯书面警告</li>
+      <li><strong>Exit 离职</strong> — floor staff exit → Coach Sally approves → manager exit → Louis approves → Hermes generates exit docs / floor离职Coach批→经理离职Louis批→Hermes生成离职文件</li>
     </ol>
   </div>
 
   <div class="sec-title">规章制度 <span class="sec-title-en">· Rules</span></div>
   <div class="box box-rule"><strong>Rule 1 / 规矩1：</strong>Check budget before hiring. Over budget = stop, no discussion. / 招人先查预算。超预算 = 停。</div>
   <div class="box box-rule"><strong>Rule 2 / 规矩2：</strong>Onboarding must include I-9 + 7shifts account + PIN. Missing any = not onboarded. / 入职必须填I-9 + 7shifts + PIN。</div>
-  <div class="box box-rule"><strong>Rule 3 / 规矩3：</strong>Discipline: teach first, punish second. 1st = coach (verbal), 2nd = write-up (paper + photo), serious = direct write-up. / 纪律先教后罚。</div>
+  <div class="box box-rule"><strong>Rule 3 / 规矩3：</strong>Discipline: teach first, punish second. 1st = coach, 2nd = write-up, serious = direct write-up. / 纪律先教后罚。</div>
   <div class="box box-rule"><strong>Rule 4 / 规矩4：</strong>Fire floor staff → Coach Sally can decide. Fire manager → Louis decides. Never auto-fire. / 开除floor→Coach，开除manager→Louis。</div>
   <div class="box box-rule"><strong>Rule 5 / 规矩5：</strong>GM sees own store only. Other stores = denied. / GM只看自己店。</div>
 
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
     <tr><th style="width:35%">Action · 事</th><th style="width:30%">Decides · 谁拍板</th><th style="width:35%">Note · 备注</th></tr>
-    <tr><td>Hire floor staff (server/host etc)<div class="td-en">招 floor 员工（server/host 等）</div></td><td>Coach Sally + GM</td><td>Within budget · 预算内</td></tr>
-    <tr><td>Hire manager (GM/AGM)<div class="td-en">招经理（GM/AGM）</div></td><td>Louis</td><td>Requires interview · 需要面试</td></tr>
-    <tr><td>Fire floor staff<div class="td-en">开除 floor 员工</div></td><td>Coach Sally</td><td>Ladder process · 按纪律阶梯</td></tr>
-    <tr><td>Fire manager<div class="td-en">开除经理</div></td><td>Louis + Yumi</td><td>Full process required · 完整流程</td></tr>
+    <tr><td>Hire floor staff (server/host etc)<div class="td-en">招 floor 员工</div></td><td>Coach Sally + GM</td><td>Within budget · 预算内</td></tr>
+    <tr><td>Hire manager (GM/AGM)<div class="td-en">招经理</div></td><td>Louis</td><td>Requires interview · 需面试</td></tr>
+    <tr><td>Fire floor staff<div class="td-en">开除 floor 员工</div></td><td>Coach Sally</td><td>Ladder process · 阶梯流程</td></tr>
+    <tr><td>Fire manager<div class="td-en">开除经理</div></td><td>Louis + Yumi</td><td>Full process · 完整流程</td></tr>
     <tr><td>Raise / change pay<div class="td-en">加薪 / 调薪</div></td><td>Louis</td><td>—</td></tr>
     <tr><td>Promotion<div class="td-en">升职</div></td><td>Louis</td><td>—</td></tr>
   </table>
@@ -276,7 +254,7 @@ tr:hover { background:#f0f4f8; }
     <tr><td>Is a store staffed enough<div class="td-en">人手够不够</div></td><td><span class="say" onclick="copySay(this)">staffing 00003</span></td></tr>
   </table>
 
-  <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
+  <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated (target)</span></div>
   <div class="box box-auto">⏰ <strong>6AM daily</strong> — Sync roster from 7shifts to Brain / 从7shifts同步花名册</div>
   <div class="box box-auto">⏰ <strong>11PM daily</strong> — Check dirty data / duplicates / stuck people / 查脏数据/重复/卡住</div>
   <div class="box box-auto">⏰ <strong>10:30PM daily</strong> — Store Slack chat saved to Brain / 店里聊天存Brain</div>
@@ -291,60 +269,65 @@ tr:hover { background:#f0f4f8; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of financial risk comes from unapproved payments. Lock down the payment approval process and everything else follows.</div>
   </div>
 
-  <div class="info-grid">
-    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">Yumi<br>Louis + Luna</div></div>
-    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">Bank/wire/ACH<br>Purchase ≥$500<br>Tax</div></div>
-    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">sales 00003 yesterday</span><br><span class="say" onclick="copySay(this)">budget vs actual 00003</span></div></div>
-    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">9PM email digest<br>30min auto-reply<br>8AM AI cost alert</div></div>
-  </div>
+  <div class="sec-title">建设进度 <span class="sec-title-en">· Build Progress</span></div>
+  <div class="progress-label"><span>Finance 财务</span><span>1/4 live</span></div>
+  <div class="progress-bar"><div class="progress-fill progress-33" style="width:25%">25%</div></div>
 
-  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
+  <div class="sec-title">建完清单 <span class="sec-title-en">· Build Checklist</span></div>
+  <ul class="checklist">
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">1. Skill loaded · 技能已加载</div><div class="check-desc">wiserise-people (payroll sub-skill) + finance-banking skill / 财务相关技能已加载</div></div></li>
+    <li><div class="check-icon check-progress">🚧</div><div class="check-text"><div class="check-label">2. Brain tables · 数据表</div><div class="check-desc">purchases, payroll, bank_transactions — some exist, some missing / 采购、工资、银行交易表 — 部分有部分缺</div></div></li>
+    <li><div class="check-icon check-progress">🚧</div><div class="check-text"><div class="check-label">3. Cron jobs · 定时任务</div><div class="check-desc">9PM email digest running · 30min auto-reply running · 8AM AI cost alert running / 邮件摘要+自动回执+AI花费报警在跑</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">4. SOPs published · SOP发布</div><div class="check-desc">Payment approval SOP + Bank reconcile SOP + Payroll SOP — not yet written / 付款审批SOP+对账SOP+工资SOP — 还没写</div></div></li>
+  </ul>
+
+  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Target Workflow</span></div>
   <div class="card">
     <ol class="workflow">
-      <li><strong>Receive 收钱</strong> — POS auto-pulls sales data to Brain daily → 00001/00002/00003 have POS → 00004/00005 pending</li>
-      <li><strong>Reconcile 对账</strong> — Bank statements vs Brain records → Yumi reconciles → mismatch goes to you</li>
-      <li><strong>Payment Approval 付款审批</strong> — Store needs to buy → Yumi reviews tax/total → ≥$500 → Louis approves → pay</li>
-      <li><strong>Payroll 工资</strong> — Gusto runs payroll → Hermes checks timesheets → anomalies → you → normal = silent</li>
-      <li><strong>Tax 税务</strong> — Tax docs → Yumi handles → involves bank/IRS → Louis approves</li>
-      <li><strong>Monthly Report 月报</strong> — P&L → Hermes pulls from Brain → sends to your DM</li>
+      <li><strong>Receive 收钱</strong> — POS auto-pulls sales to Brain → 00001/00002/00003 have POS → 00004/00005 pending / POS自动拉销售进Brain→00001-03有POS→00004-05待连</li>
+      <li><strong>Reconcile 对账</strong> — Bank vs Brain → Yumi reconciles → mismatch to you / 银行vs Brain→Yumi对账→不对推你</li>
+      <li><strong>Payment Approval 付款审批</strong> — Store needs to buy → Yumi reviews tax/total → ≥$500 → Louis approves → pay / 店要买→Yumi审税+总额→≥$500→Louis批→付</li>
+      <li><strong>Payroll 工资</strong> — Gusto runs payroll → Hermes checks timesheets → anomalies → you → normal = silent / Gusto发工资→Hermes查工时→异常推你→正常静默</li>
+      <li><strong>Tax 税务</strong> — Tax docs → Yumi handles → involves bank/IRS → Louis approves / 税务文件→Yumi处理→涉及银行/IRS→Louis批</li>
+      <li><strong>Monthly Report 月报</strong> — P&L → Hermes pulls from Brain → sends to your DM / P&L→Hermes从Brain拉→发你DM</li>
     </ol>
   </div>
 
   <div class="sec-title">规章制度 <span class="sec-title-en">· Rules</span></div>
-  <div class="box box-rule"><strong>Rule 1:</strong> Bank/wire/ACH → Louis + Luna only. No one else. / 银行→Louis+Luna only</div>
-  <div class="box box-rule"><strong>Rule 2:</strong> Purchase ≥$500 → Louis. <$500 → Yumi. No exceptions. / 采购≥$500→Louis</div>
-  <div class="box box-rule"><strong>Rule 3:</strong> Tax/W-2/lease/contract → sending externally needs Louis first. Yumi can use internally. / 税务发外面→先过Louis</div>
-  <div class="box box-rule"><strong>Rule 4:</strong> Bank statements / full balance → Yumi cannot forward to personal WeChat/email. / 银行流水Yumi不能转发</div>
-  <div class="box box-rule"><strong>Rule 5:</strong> OpenBudget → Louis + Luna only. Others = denied. / OpenBudget→Louis+Luna</div>
-  <div class="box box-rule"><strong>Rule 6:</strong> All payments need proof (invoice/receipt). No proof = no pay. / 凭证才能付</div>
+  <div class="box box-rule"><strong>Rule 1:</strong> Bank/wire/ACH → Louis + Luna only. / 银行→Louis+Luna only</div>
+  <div class="box box-rule"><strong>Rule 2:</strong> Purchase ≥$500 → Louis. <$500 → Yumi. / 采购≥$500→Louis</div>
+  <div class="box box-rule"><strong>Rule 3:</strong> Tax/lease/contract sent externally → Louis first. / 税务发外面→先过Louis</div>
+  <div class="box box-rule"><strong>Rule 4:</strong> Bank statements → Yumi cannot forward. / 银行流水Yumi不能转发</div>
+  <div class="box box-rule"><strong>Rule 5:</strong> OpenBudget → Louis + Luna only. / OpenBudget→Louis+Luna</div>
+  <div class="box box-rule"><strong>Rule 6:</strong> All payments need proof. No proof = no pay. / 凭证才能付</div>
 
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
     <tr><th style="width:30%">Action</th><th style="width:30%">Decides</th><th style="width:40%">Note</th></tr>
-    <tr><td>Bank transfer / wire / ACH<div class="td-en">银行转账 / wire / ACH</div></td><td>Louis + Luna</td><td>Equal power · 同等权限</td></tr>
+    <tr><td>Bank transfer / wire / ACH<div class="td-en">银行转账</div></td><td>Louis + Luna</td><td>Equal power · 同等权限</td></tr>
     <tr><td>Purchase ≥$500<div class="td-en">采购 ≥$500</div></td><td>Louis</td><td>—</td></tr>
     <tr><td>Purchase <$500<div class="td-en">采购 <$500</div></td><td>Yumi</td><td>Yumi locks tax + total · Yumi锁税+总额</td></tr>
     <tr><td>Payroll / raise<div class="td-en">工资 / 加薪</div></td><td>Louis</td><td>—</td></tr>
-    <tr><td>Tax docs sent externally<div class="td-en">税务文件发外面</div></td><td>Louis</td><td>—</td></tr>
-    <tr><td>View bank full statement<div class="td-en">查看完整银行流水</div></td><td>Louis + Luna</td><td>Yumi cannot forward · Yumi不能转发</td></tr>
+    <tr><td>Tax docs sent externally<div class="td-en">税务发外面</div></td><td>Louis</td><td>—</td></tr>
+    <tr><td>View bank full statement<div class="td-en">查完整银行流水</div></td><td>Louis + Luna</td><td>Yumi cannot forward · Yumi不能转发</td></tr>
   </table>
 
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>Any email to handle<div class="td-en">有没有邮件要处理</div></td><td>9PM auto to your DM · 晚9点自动发你DM（不用问）</td></tr>
+    <tr><td>Any email to handle<div class="td-en">有没有邮件</div></td><td>9PM auto to your DM · 晚9点自动发你DM</td></tr>
     <tr><td>Store sales<div class="td-en">店销售</div></td><td><span class="say" onclick="copySay(this)">sales 00003 yesterday</span></td></tr>
-    <tr><td>How much AI cost<div class="td-en">AI花了多少</div></td><td>8AM auto report · 早8点自动报（正常则静默）</td></tr>
+    <tr><td>How much AI cost<div class="td-en">AI花了多少</div></td><td>8AM auto report · 早8点自动报</td></tr>
     <tr><td>Budget vs actual<div class="td-en">预算 vs 实际</div></td><td><span class="say" onclick="copySay(this)">budget vs actual 00003</span></td></tr>
   </table>
 
-  <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
-  <div class="box box-auto">⏰ <strong>9PM daily</strong> — Email digest to your DM (only money/legal/fire) / 邮件摘要</div>
+  <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated (target)</span></div>
+  <div class="box box-auto">⏰ <strong>9PM daily</strong> — Email digest to your DM (money/legal/fire) / 邮件摘要</div>
   <div class="box box-auto">⏰ <strong>Every 30 min</strong> — Gmail auto-reply ("received") / 自动回执</div>
-  <div class="box box-auto">⏰ <strong>8AM daily</strong> — AI cost check (alert only if >$200/mo) / AI花费报警</div>
+  <div class="box box-auto">⏰ <strong>8AM daily</strong> — AI cost check (>$200/mo) / AI花费报警</div>
 </div>
 
-<!-- ════════ PAGE 3: Operations ════════ -->
+<!-- ════════ PAGE 3: Ops ════════ -->
 <div class="page" id="p3">
   <div class="card">
     <div class="card-title">🔧 Operations 运营部</div>
@@ -353,22 +336,27 @@ tr:hover { background:#f0f4f8; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of ops problems come from POS fraud and broken equipment. Watch these two things and your stores are stable.</div>
   </div>
 
-  <div class="info-grid">
-    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">GM (store)<br>WISE OPS</div></div>
-    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">High repair cost<br>Replace equipment</div></div>
-    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">store health 00003</span><br><span class="say" onclick="copySay(this)">which store is worst</span><br><span class="say" onclick="copySay(this)">fraud check 00003</span></div></div>
-    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">12AM POS→Brain<br>12:15AM fraud check<br>1AM form rollup</div></div>
-  </div>
+  <div class="sec-title">建设进度 <span class="sec-title-en">· Build Progress</span></div>
+  <div class="progress-label"><span>Ops 运营</span><span>2/4 live</span></div>
+  <div class="progress-bar"><div class="progress-fill progress-33" style="width:50%">50%</div></div>
 
-  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
+  <div class="sec-title">建完清单 <span class="sec-title-en">· Build Checklist</span></div>
+  <ul class="checklist">
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">1. Skills loaded · 技能已加载</div><div class="check-desc">pos-chowbus + pos-fraud + store-health-review + wiserise-playbook-lookup / POS+作弊检测+店健康+SOP查询技能</div></div></li>
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">2. Brain tables · 数据表</div><div class="check-desc">chowbus_raw, fraud_checks, store_health scores — exist + receiving data / Chowbus原始数据+作弊检测+店健康分 — 有且在收数据</div></div></li>
+    <li><div class="check-icon check-progress">🚧</div><div class="check-text"><div class="check-label">3. Cron jobs · 定时任务</div><div class="check-desc">12AM POS pull + 12:15AM fraud check + 1AM form rollup — partially running / POS拉取+作弊检测+表格汇总 — 部分在跑</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">4. SOPs published · SOP发布</div><div class="check-desc">Daily ops SOP + Equipment repair SOP + Fraud response SOP — not yet written / 每日运营SOP+设备维修SOP+作弊响应SOP — 还没写</div></div></li>
+  </ul>
+
+  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Target Workflow</span></div>
   <div class="card">
     <ol class="workflow">
-      <li><strong>Daily Ops 每天营业</strong> — Open → operate → GM manages floor → close → POS auto-pulls</li>
-      <li><strong>POS Data · POS数据</strong> — 12AM auto-pulls sales to Brain → 00001/00002/00003 have POS / 零点自动拉销售进Brain</li>
-      <li><strong>Fraud Detect 作弊检测</strong> — 12:15AM auto-runs 9 checks → red flags → posts to #02-exec + store channel</li>
-      <li><strong>Equipment 设备维修</strong> — Store says "fridge broken" → Hermes creates E1 ticket (Chinese to Ops) → E2 short msg to store → high quote → Louis</li>
-      <li><strong>SOP Execution · SOP执行</strong> — Store asks "what's the SOP for..." → Hermes pulls SOP → sends PDF to Slack / 店问SOP，Hermes发PDF</li>
-      <li><strong>Form Rollup 表格汇总</strong> — 1AM auto-pulls all store forms → saves to Brain</li>
+      <li><strong>Daily Ops 每天营业</strong> — Open → operate → GM manages floor → close → POS auto-pulls / 开门→营业→店长管前厅→关门→POS自动拉</li>
+      <li><strong>POS Data · POS数据</strong> — 12AM auto-pulls sales to Brain → 00001/00002/00003 have POS / 零点自动拉销售进Brain→00001-03有POS</li>
+      <li><strong>Fraud Detect 作弊检测</strong> — 12:15AM auto-runs 9 checks → red flags → posts to #02-exec + store channel / 凌晨12:15跑9项检测→红旗→发#02-exec+店频道</li>
+      <li><strong>Equipment 设备维修</strong> — Store says "fridge broken" → Hermes creates E1 ticket (Chinese to Ops) → E2 short msg to store → high quote → Louis / 店说"冰箱坏了"→Hermes建E1工单(中文给Ops)→E2短消息给店→报价高→Louis</li>
+      <li><strong>SOP Execution · SOP执行</strong> — Store asks "what's the SOP for..." → Hermes pulls SOP → sends PDF to Slack / 店问SOP→Hermes发PDF</li>
+      <li><strong>Form Rollup 表格汇总</strong> — 1AM auto-pulls all store forms → saves to Brain / 凌晨1点拉所有店表格→存Brain</li>
     </ol>
   </div>
 
@@ -387,11 +375,11 @@ tr:hover { background:#f0f4f8; }
   </table>
 
   <div class="sec-title">规章制度 <span class="sec-title-en">· Rules</span></div>
-  <div class="box box-rule"><strong>Rule 1:</strong> Equipment repair → post to #03-ops, not #02-exec. E1 = Chinese, E2 = English. / 维修发#03-ops</div>
-  <div class="box box-rule"><strong>Rule 2:</strong> High repair quote (compressor/replace/unclear) → Louis approves before pay. / 报价高→Louis批</div>
+  <div class="box box-rule"><strong>Rule 1:</strong> Equipment repair → post to #03-ops, not #02-exec. / 维修发#03-ops</div>
+  <div class="box box-rule"><strong>Rule 2:</strong> High repair quote → Louis approves before pay. / 报价高→Louis批</div>
   <div class="box box-rule"><strong>Rule 3:</strong> POS fraud → coach first, write-up if serious. Never auto-fire. / 作弊先教</div>
-  <div class="box box-rule"><strong>Rule 4:</strong> GM sees own store data only. Other stores = denied. / GM只看自己店</div>
-  <div class="box box-rule"><strong>Rule 5:</strong> Daily report only pushes stores with score <80. Good stores = silent. / 好店不打扰</div>
+  <div class="box box-rule"><strong>Rule 4:</strong> GM sees own store data only. / GM只看自己店</div>
+  <div class="box box-rule"><strong>Rule 5:</strong> Daily report only pushes stores with score <80. / 好店不打扰</div>
 
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
@@ -401,16 +389,16 @@ tr:hover { background:#f0f4f8; }
     <tr><td>POS fraud check<div class="td-en">POS作弊检查</div></td><td><span class="say" onclick="copySay(this)">fraud check 00003</span></td></tr>
     <tr><td>Store sales yesterday<div class="td-en">昨天销售</div></td><td><span class="say" onclick="copySay(this)">sales 00003 yesterday</span></td></tr>
     <tr><td>Look up SOP<div class="td-en">查SOP</div></td><td><span class="say" onclick="copySay(this)">what's the SOP for onboarding</span></td></tr>
-    <tr><td>Equipment broken<div class="td-en">设备坏了</div></td><td><span class="say" onclick="copySay(this)">冰箱坏了</span> (in store channel) → auto-ticket</td></tr>
+    <tr><td>Equipment broken<div class="td-en">设备坏了</div></td><td><span class="say" onclick="copySay(this)">冰箱坏了</span> (in store channel)</td></tr>
   </table>
 
-  <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
-  <div class="box box-auto">⏰ <strong>12AM daily</strong> — POS sales to Brain (00001/00002/00003) / POS销售进Brain</div>
-  <div class="box box-auto">⏰ <strong>12:15AM daily</strong> — Fraud detection 9 checks (flag only, silent if clean) / 作弊检测9项（有问题才报）</div>
+  <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated (target)</span></div>
+  <div class="box box-auto">⏰ <strong>12AM daily</strong> — POS sales to Brain / POS销售进Brain</div>
+  <div class="box box-auto">⏰ <strong>12:15AM daily</strong> — Fraud detection 9 checks / 作弊检测9项</div>
   <div class="box box-auto">⏰ <strong>1AM daily</strong> — Form rollup to Brain / 表格汇总进Brain</div>
 </div>
 
-<!-- ════════ PAGE 4: Procurement ════════ -->
+<!-- ════════ PAGE 4: Proc ════════ -->
 <div class="page" id="p4">
   <div class="card">
     <div class="card-title">📦 Procurement 采购部</div>
@@ -419,31 +407,36 @@ tr:hover { background:#f0f4f8; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of procurement waste comes from unclear requests. Lock down the request→approve→order chain.</div>
   </div>
 
-  <div class="info-grid">
-    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">Yumi (review)<br>Louis (≥$500)</div></div>
-    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">≥$500 → Louis<br>&lt;$500 → Yumi</div></div>
-    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">purchases 00003</span><br><span class="say" onclick="copySay(this)">pending purchases</span></div></div>
-    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">Hermes creates order<br>Yumi locks tax/total</div></div>
-  </div>
+  <div class="sec-title">建设进度 <span class="sec-title-en">· Build Progress</span></div>
+  <div class="progress-label"><span>Proc 采购</span><span>0/4 live</span></div>
+  <div class="progress-bar"><div class="progress-fill progress-0" style="width:0%">0%</div></div>
 
-  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
+  <div class="sec-title">建完清单 <span class="sec-title-en">· Build Checklist</span></div>
+  <ul class="checklist">
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">1. Skill loaded · 技能</div><div class="check-desc">wiserise-purchase skill — not yet created / 采购技能 — 还没建</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">2. Brain tables · 数据表</div><div class="check-desc">purchases, suppliers, purchase_approvals — not yet created / 采购、供应商、审批表 — 还没建</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">3. Cron jobs · 定时任务</div><div class="check-desc">No cron jobs yet — needs pending purchase reminder / 还没有定时任务 — 需要待批采购提醒</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">4. SOPs published · SOP</div><div class="check-desc">Purchase approval SOP — not yet written / 采购审批SOP — 还没写</div></div></li>
+  </ul>
+
+  <div class="sec-title">目标工作流程 <span class="sec-title-en">· Target Workflow</span></div>
   <div class="card">
     <ol class="workflow">
-      <li><strong>Request 提需求</strong> — Store says "买一个冰箱" / "need 50lb flour" in Slack → Hermes auto-creates purchase order</li>
-      <li><strong>Review Yumi审</strong> — Yumi locks tax and total → checks for cheaper options → confirms amount</li>
-      <li><strong>Approve 审批</strong> — ≥$500 → push to Louis → Louis says yes → order / <$500 → Yumi approves directly</li>
-      <li><strong>Order 下单</strong> — Hermes records → notifies store "ordered" → arrives → store confirms</li>
-      <li><strong>Pay 付款</strong> — Pay with invoice → record in Brain → reconcile</li>
-      <li><strong>Notify 通知</strong> — Every step notifies the requester (status, ETA)</li>
+      <li><strong>Request 提需求</strong> — Store says "买一个冰箱" in Slack → Hermes auto-creates purchase order / 店在Slack说→Hermes自动建采购单</li>
+      <li><strong>Review Yumi审</strong> — Yumi locks tax and total → checks cheaper options → confirms amount / Yumi锁税+总额→比价→确认金额</li>
+      <li><strong>Approve 审批</strong> — ≥$500 → Louis → yes → order / <$500 → Yumi approves directly / ≥$500→Louis批→下单 / <$500→Yumi直接批</li>
+      <li><strong>Order 下单</strong> — Hermes records → notifies store "ordered" → arrives → store confirms / Hermes记录→通知店"已下单"→到货→店确认</li>
+      <li><strong>Pay 付款</strong> — Pay with invoice → record in Brain → reconcile / 凭发票付款→记录Brain→对账</li>
+      <li><strong>Notify 通知</strong> — Every step notifies the requester (status, ETA) / 每步通知提需求的人（状态、到货时间）</li>
     </ol>
   </div>
 
-  <div class="sec-title">规章制度 <span class="sec-title-en">· Rules</span></div>
-  <div class="box box-rule"><strong>Rule 1:</strong> No purchase order = no buy. Create order first. / 没采购单不能买</div>
-  <div class="box box-rule"><strong>Rule 2:</strong> ≥$500 → Louis. No exceptions. <$500 → Yumi. / ≥$500→Louis</div>
-  <div class="box box-rule"><strong>Rule 3:</strong> Every purchase needs invoice/receipt. No proof = no pay. / 凭证才能付</div>
-  <div class="box box-rule"><strong>Rule 4:</strong> Yumi locks tax and total. Cannot change amount randomly. / Yumi锁税+总额</div>
-  <div class="box box-rule"><strong>Rule 5:</strong> Delivery must be confirmed. Not arrived = chase. / 到货要确认</div>
+  <div class="sec-title">规章制度 <span class="sec-title-en">· Rules (target)</span></div>
+  <div class="box box-rule"><strong>Rule 1:</strong> No purchase order = no buy. / 没采购单不能买</div>
+  <div class="box box-rule"><strong>Rule 2:</strong> ≥$500 → Louis. <$500 → Yumi. / ≥$500→Louis</div>
+  <div class="box box-rule"><strong>Rule 3:</strong> Every purchase needs invoice/receipt. / 凭证才能付</div>
+  <div class="box box-rule"><strong>Rule 4:</strong> Yumi locks tax and total. / Yumi锁税+总额</div>
+  <div class="box box-rule"><strong>Rule 5:</strong> Delivery must be confirmed. / 到货要确认</div>
 
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
@@ -454,11 +447,11 @@ tr:hover { background:#f0f4f8; }
     <tr><td>Emergency purchase<div class="td-en">紧急采购</div></td><td>GM can buy first → backfill · GM可先买再补单</td><td>≤$200, over needs approval · 超$200要批</td></tr>
   </table>
 
-  <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
+  <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check (target)</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
     <tr><td>What did a store buy<div class="td-en">店买了什么</div></td><td><span class="say" onclick="copySay(this)">purchases 00003</span></td></tr>
-    <tr><td>Any pending approval<div class="td-en">有没有待批采购</div></td><td><span class="say" onclick="copySay(this)">pending purchases</span></td></tr>
+    <tr><td>Any pending approval<div class="td-en">有没有待批</div></td><td><span class="say" onclick="copySay(this)">pending purchases</span></td></tr>
     <tr><td>Buy something<div class="td-en">买东西</div></td><td><span class="say" onclick="copySay(this)">买一个冰箱</span> (in store channel)</td></tr>
   </table>
 </div>
@@ -472,31 +465,36 @@ tr:hover { background:#f0f4f8; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of new store success/failure is in site selection. Pick the wrong location and nothing else matters.</div>
   </div>
 
-  <div class="info-grid">
-    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">Louis only</div></div>
-    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">Every step<br>Site · LOI · Lease</div></div>
-    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">LOI [address]</span><br><span class="say" onclick="copySay(this)">lease 00003</span></div></div>
-    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">Hermes generates LOI<br>You review → send</div></div>
-  </div>
+  <div class="sec-title">建设进度 <span class="sec-title-en">· Build Progress</span></div>
+  <div class="progress-label"><span>Growth 扩张</span><span>1/4 live</span></div>
+  <div class="progress-bar"><div class="progress-fill progress-33" style="width:25%">25%</div></div>
 
-  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
+  <div class="sec-title">建完清单 <span class="sec-title-en">· Build Checklist</span></div>
+  <ul class="checklist">
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">1. Skill loaded · 技能</div><div class="check-desc">loi-agent skill loaded — can generate LOI from address / LOI技能已加载 — 能从地址生成LOI</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">2. Brain tables · 数据表</div><div class="check-desc">leases, sites, buildout_progress — not yet created / 租约、选址、装修进度表 — 还没建</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">3. Cron jobs · 定时任务</div><div class="check-desc">No cron jobs — needs lease expiry reminder / 无定时任务 — 需要租约到期提醒</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">4. SOPs published · SOP</div><div class="check-desc">New store opening SOP + LOI process SOP — not yet written / 新店开业SOP+LOI流程SOP — 还没写</div></div></li>
+  </ul>
+
+  <div class="sec-title">目标工作流程 <span class="sec-title-en">· Target Workflow</span></div>
   <div class="card">
     <ol class="workflow">
-      <li><strong>Site Selection 选址</strong> — Find a location → you say "LOI [address]" in Slack → Hermes starts working</li>
-      <li><strong>LOI · 意向书</strong> — Hermes auto-generates LOI doc → you review → edit → finalize → send / Hermes生成，你审改后发</li>
-      <li><strong>Negotiation 谈判</strong> — Back and forth → you approve each step → Hermes records</li>
-      <li><strong>Sign Lease 签租约</strong> — Louis signs → original to Drive → Brain records lease_id</li>
-      <li><strong>Buildout 装修</strong> — Construction starts → progress to Brain → over budget → push to you</li>
-      <li><strong>Opening 开业</strong> — Hire → train → open → new store enters system</li>
+      <li><strong>Site Selection 选址</strong> — Find a location → you say "LOI [address]" in Slack → Hermes starts working / 找到位置→你在Slack说"LOI [地址]"→Hermes开始</li>
+      <li><strong>LOI · 意向书</strong> — Hermes auto-generates LOI doc → you review → edit → finalize → send / Hermes生成→你审→改→定→发</li>
+      <li><strong>Negotiation 谈判</strong> — Back and forth → you approve each step → Hermes records / 来回谈→每步你批→Hermes记录</li>
+      <li><strong>Sign Lease 签租约</strong> — Louis signs → original to Drive → Brain records lease_id / Louis签→原件存Drive→Brain记录租约ID</li>
+      <li><strong>Buildout 装修</strong> — Construction → progress to Brain → over budget → push to you / 装修→进度存Brain→超预算推你</li>
+      <li><strong>Opening 开业</strong> — Hire → train → open → new store enters system / 招人→培训→开业→新店进入系统</li>
     </ol>
   </div>
 
-  <div class="sec-title">规章制度 <span class="sec-title-en">· Rules</span></div>
-  <div class="box box-rule"><strong>Rule 1:</strong> Every step needs Louis approval. Growth = Louis only. / 每步你批</div>
+  <div class="sec-title">规章制度 <span class="sec-title-en">· Rules (target)</span></div>
+  <div class="box box-rule"><strong>Rule 1:</strong> Every step needs Louis approval. / 每步你批</div>
   <div class="box box-rule"><strong>Rule 2:</strong> LOI original to Drive. Brain stores lease_id only. / 原件存Drive</div>
-  <div class="box box-rule"><strong>Rule 3:</strong> Lease terms → legal → Hermes for reference only → Louis gets lawyer. / 租约找律师</div>
-  <div class="box box-rule"><strong>Rule 4:</strong> Before opening: staff hired + SOP live + POS connected + 7shifts connected. / 开业前全到位</div>
-  <div class="box box-rule"><strong>Rule 5:</strong> Buildout budget → over = push to you. Under = silent. / 超了推你</div>
+  <div class="box box-rule"><strong>Rule 3:</strong> Lease terms → Louis gets lawyer. / 租约找律师</div>
+  <div class="box box-rule"><strong>Rule 4:</strong> Before opening: staff + SOP + POS + 7shifts all ready. / 开业前全到位</div>
+  <div class="box box-rule"><strong>Rule 5:</strong> Buildout over budget → push to you. / 超了推你</div>
 
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
@@ -508,22 +506,12 @@ tr:hover { background:#f0f4f8; }
     <tr><td>Opening date<div class="td-en">开业日期</div></td><td>Louis</td><td>—</td></tr>
   </table>
 
-  <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
+  <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check (target)</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
     <tr><td>Open new store<div class="td-en">开新店</div></td><td><span class="say" onclick="copySay(this)">LOI 123 Main St Wilmington NC</span></td></tr>
     <tr><td>Existing lease<div class="td-en">现有租约</div></td><td><span class="say" onclick="copySay(this)">lease 00003</span></td></tr>
     <tr><td>New store progress<div class="td-en">新店进度</div></td><td><span class="say" onclick="copySay(this)">new store status</span></td></tr>
-  </table>
-
-  <div class="sec-title">当前店铺 <span class="sec-title-en">· Current Stores</span></div>
-  <table>
-    <tr><th>#</th><th>Brand · 品牌</th><th>City · 城市</th><th>Status · 状态</th></tr>
-    <tr><td>00001</td><td>Gangnam</td><td>Fayetteville</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
-    <tr><td>00002</td><td>Masa</td><td>Greenville</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
-    <tr><td>00003</td><td>Gangnam</td><td>Wilmington</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
-    <tr><td>00004</td><td>Low Country</td><td>Wilmington</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
-    <tr><td>00005</td><td>Masa</td><td>Greenville</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
   </table>
 </div>
 
@@ -536,29 +524,34 @@ tr:hover { background:#f0f4f8; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of customer decisions come from Google reviews. Managing reviews is 10× more effective than running ads.</div>
   </div>
 
-  <div class="info-grid">
-    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">WISE OPS<br>Louis</div></div>
-    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">Marketing budget</div></div>
-    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">reviews 00003</span><br><span class="say" onclick="copySay(this)">all reviews</span></div></div>
-    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">Pull reviews<br>Periodic check</div></div>
-  </div>
+  <div class="sec-title">建设进度 <span class="sec-title-en">· Build Progress</span></div>
+  <div class="progress-label"><span>Mkt 市场</span><span>1/4 live</span></div>
+  <div class="progress-bar"><div class="progress-fill progress-33" style="width:25%">25%</div></div>
 
-  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
+  <div class="sec-title">建完清单 <span class="sec-title-en">· Build Checklist</span></div>
+  <ul class="checklist">
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">1. Skill loaded · 技能</div><div class="check-desc">google-business-profile-reviews skill loaded — can pull reviews / Google评论技能已加载 — 能拉评论</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">2. Brain tables · 数据表</div><div class="check-desc">reviews, review_replies, marketing_campaigns — not yet created / 评论、回复、推广活动表 — 还没建</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">3. Cron jobs · 定时任务</div><div class="check-desc">No cron — needs periodic review pull (daily/weekly) / 无定时任务 — 需要定期拉评论</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">4. SOPs published · SOP</div><div class="check-desc">Review response SOP + Brand guideline SOP — not yet written / 回复评论SOP+品牌指南SOP — 还没写</div></div></li>
+  </ul>
+
+  <div class="sec-title">目标工作流程 <span class="sec-title-en">· Target Workflow</span></div>
   <div class="card">
     <ol class="workflow">
-      <li><strong>Pull Reviews 拉评论</strong> — You say "reviews 00003" → Hermes pulls Google reviews → sends to you</li>
-      <li><strong>Bad Reviews 差评</strong> — Bad review → Hermes alerts → GM replies → reply content pushed to you</li>
-      <li><strong>Good Reviews 好评</strong> — Good review → GM replies → no need to push to you</li>
-      <li><strong>Promotion 推广</strong> — Louis decides what to run → Hermes records → tracks results</li>
-      <li><strong>Brand Consistency 品牌一致</strong> — Brand name / Logo / menu changes → Louis approves</li>
+      <li><strong>Pull Reviews 拉评论</strong> — You say "reviews 00003" → Hermes pulls Google reviews → sends to you / 你说→Hermes拉评论→发你</li>
+      <li><strong>Bad Reviews 差评</strong> — Bad review → Hermes alerts → GM replies → reply pushed to you / 差评→Hermes警报→店长回→内容推你</li>
+      <li><strong>Good Reviews 好评</strong> — Good review → GM replies → no push to you / 好评→店长回→不推你</li>
+      <li><strong>Promotion 推广</strong> — Louis decides what to run → Hermes records → tracks results / Louis决定→Hermes记录→追踪结果</li>
+      <li><strong>Brand Consistency 品牌一致</strong> — Brand/Logo/menu changes → Louis approves / 改品牌/Logo/菜单→Louis批</li>
     </ol>
   </div>
 
-  <div class="sec-title">规章制度 <span class="sec-title-en">· Rules</span></div>
-  <div class="box box-rule"><strong>Rule 1:</strong> Review ≤3 stars → GM must reply within 48 hrs. Late → Hermes reminds. / 差评48小时回</div>
-  <div class="box box-rule"><strong>Rule 2:</strong> Reply politely. Don't argue. Say "contact us to resolve." / 回复要礼貌</div>
-  <div class="box box-rule"><strong>Rule 3:</strong> Marketing budget → Louis approves. GM cannot spend on ads. / 推广Louis批</div>
-  <div class="box box-rule"><strong>Rule 4:</strong> Brand/Logo/menu changes → Louis approves. GM cannot change. / 改品牌Louis批</div>
+  <div class="sec-title">规章制度 <span class="sec-title-en">· Rules (target)</span></div>
+  <div class="box box-rule"><strong>Rule 1:</strong> Review ≤3 stars → GM replies within 48 hrs. / 差评48小时回</div>
+  <div class="box box-rule"><strong>Rule 2:</strong> Reply politely. Don't argue. / 回复要礼貌</div>
+  <div class="box box-rule"><strong>Rule 3:</strong> Marketing budget → Louis approves. / 推广Louis批</div>
+  <div class="box box-rule"><strong>Rule 4:</strong> Brand/Logo/menu changes → Louis approves. / 改品牌Louis批</div>
 
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
@@ -569,7 +562,7 @@ tr:hover { background:#f0f4f8; }
     <tr><td>Coupons / campaigns<div class="td-en">优惠券 / 活动</div></td><td>Louis</td><td>—</td></tr>
   </table>
 
-  <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
+  <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check (target)</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
     <tr><td>Store Google reviews<div class="td-en">店Google评论</div></td><td><span class="say" onclick="copySay(this)">reviews 00003</span></td></tr>
@@ -587,24 +580,17 @@ tr:hover { background:#f0f4f8; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of system issues come from wrong permissions and expired keys. Manage these two and the system is stable.</div>
   </div>
 
-  <div class="info-grid">
-    <div class="info-card"><div class="info-card-label owner">👤 Owner · 负责人</div><div class="info-card-body">Louis only</div></div>
-    <div class="info-card"><div class="info-card-label approve">✅ You Approve · 你批</div><div class="info-card-body">Change settings/code<br>Add/remove access</div></div>
-    <div class="info-card"><div class="info-card-label check">🔎 Say · 怎么查</div><div class="info-card-body"><span class="say" onclick="copySay(this)">hermes status</span><br><span class="say" onclick="copySay(this)">check my work</span></div></div>
-    <div class="info-card"><div class="info-card-label auto">⏰ Auto · 自动跑</div><div class="info-card-body">6h key sync<br>6h Slack mgr check<br>1AM work quality</div></div>
-  </div>
+  <div class="sec-title">建设进度 <span class="sec-title-en">· Build Progress</span></div>
+  <div class="progress-label"><span>IT 技术</span><span>4/4 live ✅</span></div>
+  <div class="progress-bar"><div class="progress-fill progress-100" style="width:100%">100%</div></div>
 
-  <div class="sec-title">主要工作流程 <span class="sec-title-en">· Main Workflow</span></div>
-  <div class="card">
-    <ol class="workflow">
-      <li><strong>Hermes</strong> — The only worker. Skills = how to do work. Cron = when to do work. No other agents. / 唯一worker</li>
-      <li><strong>Slack Management · Slack管理</strong> — Add/remove people → Louis clicks in Slack → Hermes checks managers in store channels / 加人删人Louis点，Hermes查经理频道</li>
-      <li><strong>Key Management · 密钥管理</strong> — New API key → save to 1Password → sync to .env → auto-check every 6 hrs / 新密钥先存1Password再同步</li>
-      <li><strong>Database · 数据库</strong> — Brain (Supabase) = single source of truth → schema changes via supabase CLI → never hand-edit / Brain唯一真相，改结构用CLI</li>
-      <li><strong>Security · 安全</strong> — Unknown sender → ignored ($0) → permission changes in 4 places → restart gateway / 陌生人忽略，改权限4处+重启</li>
-      <li><strong>Work Quality · 工作质量</strong> — 1AM auto-runs 10 rules scorecard → posts to #02-exec / 凌晨1点跑10条规矩评分</li>
-    </ol>
-  </div>
+  <div class="sec-title">建完清单 <span class="sec-title-en">· Build Checklist</span></div>
+  <ul class="checklist">
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">1. Skills loaded · 技能已加载</div><div class="check-desc">hermes-agent + wiserise-architecture + all department skills / Hermes自身技能+架构技能+所有部门技能</div></div></li>
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">2. Brain tables · 数据表</div><div class="check-desc">stores, people, roles, sops, crons, people_roster — all exist + clean / 店铺、人员、岗位、SOP、定时任务、花名册 — 全部存在且干净</div></div></li>
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">3. Cron jobs · 定时任务</div><div class="check-desc">6h key sync + 6h Slack check + 1AM work quality + 8AM AI cost — all running / 密钥同步+Slack检查+工作质量+AI花费 — 全部在跑</div></div></li>
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">4. SOPs published · SOP已发布</div><div class="check-desc">10 Work Rules + Architecture doc + all skill SKILL.md files / 10条规矩+架构文档+所有技能文件</div></div></li>
+  </ul>
 
   <div class="sec-title">10 条规矩 <span class="sec-title-en">· 10 Work Rules (auto-checked nightly)</span></div>
   <div class="card">
@@ -623,27 +609,27 @@ tr:hover { background:#f0f4f8; }
   </div>
 
   <div class="sec-title">规章制度 <span class="sec-title-en">· Rules</span></div>
-  <div class="box box-rule"><strong>Rule 1:</strong> Change settings/code → Louis only. Luna has all other rights except code. / 改代码→Louis only</div>
-  <div class="box box-rule"><strong>Rule 2:</strong> Permission changes in 4 places: owner-gate → openbudget-guard → config.yaml → .env. Miss one = half-broken. / 改4个地方</div>
-  <div class="box box-rule"><strong>Rule 3:</strong> After permission change, restart gateway from OUTSIDE Slack (restart inside = kills itself). / 外面重启</div>
-  <div class="box box-rule"><strong>Rule 4:</strong> Managers in store channel + company workspace only. Never in #02-executive. / 经理不进#02-exec</div>
-  <div class="box box-rule"><strong>Rule 5:</strong> New keys → save to 1Password first → then sync to .env. Never edit .env directly. / 先存1Password</div>
+  <div class="box box-rule"><strong>Rule 1:</strong> Change settings/code → Louis only. / 改代码→Louis only</div>
+  <div class="box box-rule"><strong>Rule 2:</strong> Permission changes in 4 places: owner-gate → openbudget-guard → config.yaml → .env. / 改4个地方</div>
+  <div class="box box-rule"><strong>Rule 3:</strong> After permission change, restart gateway from OUTSIDE Slack. / 外面重启</div>
+  <div class="box box-rule"><strong>Rule 4:</strong> Managers in store channel + company workspace only. Never #02-exec. / 经理不进#02-exec</div>
+  <div class="box box-rule"><strong>Rule 5:</strong> New keys → 1Password first → then .env. / 先存1Password</div>
 
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
     <tr><th style="width:30%">Action</th><th style="width:30%">Decides</th><th style="width:40%">Note</th></tr>
     <tr><td>Change settings/code<div class="td-en">改设置/代码</div></td><td>Louis only</td><td>—</td></tr>
-    <tr><td>Add/remove Slack people<div class="td-en">加/删 Slack 人</div></td><td>Louis clicks → Hermes executes · Louis点，Hermes执行</td><td>—</td></tr>
-    <tr><td>Change permissions<div class="td-en">改权限</div></td><td>Louis</td><td>4 places + restart · 4个地方+重启</td></tr>
-    <tr><td>New API key<div class="td-en">新API密钥</div></td><td>Louis</td><td>Save to 1Password · 先存1Password</td></tr>
-    <tr><td>Change DB schema<div class="td-en">改数据库结构</div></td><td>Louis</td><td>Use supabase CLI · 用supabase CLI</td></tr>
+    <tr><td>Add/remove Slack people<div class="td-en">加/删 Slack 人</div></td><td>Louis clicks → Hermes executes · Louis点Hermes执行</td><td>—</td></tr>
+    <tr><td>Change permissions<div class="td-en">改权限</div></td><td>Louis</td><td>4 places + restart · 4处+重启</td></tr>
+    <tr><td>New API key<div class="td-en">新API密钥</div></td><td>Louis</td><td>Save to 1Password · 存1Password</td></tr>
+    <tr><td>Change DB schema<div class="td-en">改数据库结构</div></td><td>Louis</td><td>Use supabase CLI · 用CLI</td></tr>
   </table>
 
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
     <tr><td>Hermes health<div class="td-en">Hermes健康</div></td><td><span class="say" onclick="copySay(this)">hermes status</span></td></tr>
-    <tr><td>Any broken crons<div class="td-en">有没有坏定时任务</div></td><td><span class="say" onclick="copySay(this)">check my work</span> (auto 1AM)</td></tr>
+    <tr><td>Any broken crons<div class="td-en">有没有坏任务</div></td><td><span class="say" onclick="copySay(this)">check my work</span></td></tr>
     <tr><td>Managers in channels<div class="td-en">经理在不在频道</div></td><td><span class="say" onclick="copySay(this)">check managers in slack</span></td></tr>
     <tr><td>AI cost<div class="td-en">AI花费</div></td><td>8AM auto report · 早8点自动报</td></tr>
   </table>
@@ -664,31 +650,45 @@ tr:hover { background:#f0f4f8; }
     <div class="pareto pareto-en"><strong>80/20 Core:</strong> 80% of boss time should go to "hiring + deciding + setting direction." Doing floor work = wasting your time.</div>
   </div>
 
+  <div class="sec-title">建设进度 <span class="sec-title-en">· Build Progress</span></div>
+  <div class="progress-label"><span>Admin 管理</span><span>1/4 live</span></div>
+  <div class="progress-bar"><div class="progress-fill progress-33" style="width:25%">25%</div></div>
+
+  <div class="sec-title">建完清单 <span class="sec-title-en">· Build Checklist</span></div>
+  <ul class="checklist">
+    <li><div class="check-icon check-done">✓</div><div class="check-text"><div class="check-label">1. Skill loaded · 技能</div><div class="check-desc">wiserise-nightly-review skill loaded — checks all work nightly / 夜间检查技能已加载</div></div></li>
+    <li><div class="check-icon check-progress">🚧</div><div class="check-text"><div class="check-label">2. Brain tables · 数据表</div><div class="check-desc">work_quality_scores, boss_duty_checks — partially exist / 工作质量分、老板职责检查 — 部分有</div></div></li>
+    <li><div class="check-icon check-progress">🚧</div><div class="check-text"><div class="check-label">3. Cron jobs · 定时任务</div><div class="check-desc">9PM boss duty check + 1AM work quality — running / 老板职责检查+工作质量评分 — 在跑</div></div></li>
+    <li><div class="check-icon check-todo">⬜</div><div class="check-text"><div class="check-label">4. SOPs published · SOP</div><div class="check-desc">Boss routine SOP + Monthly review SOP — not yet written / 老板日常SOP+月度检查SOP — 还没写</div></div></li>
+  </ul>
+
   <div class="sec-title">老板该做 vs 不该做 <span class="sec-title-en">· Boss Should vs Should Not Do</span></div>
   <table>
-    <tr><th style="width:50%">✅ Should Do · 该做 (Boss Work · 老板活)</th><th style="width:50%">❌ Should Not Do · 不该做 (GM/Floor Work · 店长/前厅活)</th></tr>
+    <tr><th style="width:50%">✅ Should Do · 该做 (Boss Work · 老板活)</th><th style="width:50%">❌ Should Not Do · 不该做 (GM/Floor Work · 店长活)</th></tr>
     <tr><td>Hire & recruit managers · 招/培养经理</td><td>Scheduling · 排班（GM做）</td></tr>
     <tr><td>Approve money (≥$500, bank, tax) · 批钱</td><td>Buy food · 买食材（Yumi+GM做）</td></tr>
     <tr><td>Set direction (new stores, brands) · 定方向</td><td>Handle customer complaints · 处理客诉（GM做）</td></tr>
-    <tr><td>Read reports (5 min/day scan Slack) · 看报告</td><td>Fix equipment · 修设备（Ops做）</td></tr>
+    <tr><td>Read reports (5 min/day) · 看报告</td><td>Fix equipment · 修设备（Ops做）</td></tr>
     <tr><td>Set SOPs & rules · 定SOP和规矩</td><td>Watch POS daily · 天天盯POS（Hermes自动）</td></tr>
-    <tr><td>Fire/promote decisions · 开除/升职决定</td><td>Coach staff · 带员工（Coach Sally做）</td></tr>
-    <tr><td>Sign leases, negotiate landlords · 签租约/谈房东</td><td>Reply to Google reviews · 回Google评论（GM做）</td></tr>
+    <tr><td>Fire/promote decisions · 开除/升职</td><td>Coach staff · 带员工（Coach Sally做）</td></tr>
+    <tr><td>Sign leases, negotiate landlords · 签租约/谈房东</td><td>Reply to Google reviews · 回评论（GM做）</td></tr>
   </table>
 
   <div class="sec-title">每天 5 分钟老板节奏 <span class="sec-title-en">· 5-Min Daily Boss Routine</span></div>
-  <div class="timeline">
-    <div class="tl-item"><div class="tl-time">Morning</div><div class="tl-body"><div class="what">Staffing OK? (7AM auto-send) <span class="what-en">/ 人手够不够</span></div><div class="action">→ Hire if short, ignore if OK / 缺人说招</div></div></div>
-    <div class="tl-item"><div class="tl-time">Daytime</div><div class="tl-body"><div class="what">Only look at red flags (fraud/equipment/purchase) <span class="what-en">/ 有红旗才看</span></div><div class="action">→ Say yes/no / 说yes/no</div></div></div>
-    <div class="tl-item"><div class="tl-time">9 PM</div><div class="tl-body"><div class="what">Email digest + duty check (auto to DM) <span class="what-en">/ 邮件+职责</span></div><div class="action">→ Reply what matters, rest tomorrow / 该回的回</div></div></div>
-    <div class="tl-item"><div class="tl-time">Night</div><div class="tl-body"><div class="what">Work quality score (1AM auto-send) <span class="what-en">/ 工作质量评分</span></div><div class="action">→ Only if low score / 分数低才看</div></div></div>
+  <div class="card">
+    <ol class="workflow">
+      <li><strong>Morning 早</strong> — Staffing OK? (7AM auto) → hire if short, ignore if OK / 人手够不够？缺人招，够不管</li>
+      <li><strong>Daytime 白天</strong> — Only red flags (fraud/equipment/purchase) → say yes/no / 只看红旗 → 说yes/no</li>
+      <li><strong>9 PM</strong> — Email digest + duty check (auto to DM) → reply what matters / 邮件+职责 → 该回的回</li>
+      <li><strong>Night 夜</strong> — Work quality score (1AM auto) → only if low / 工作质量评分 → 分数低才看</li>
+    </ol>
   </div>
 
   <div class="sec-title">每周想一次 <span class="sec-title-en">· Weekly Think</span></div>
   <div class="card">
     <ol class="workflow">
-      <li><strong>Which store is worst?</strong> → <span class="say" onclick="copySay(this)">which store is worst</span> → why → fix next week</li>
-      <li><strong>Who to hire / fire?</strong> → <span class="say" onclick="copySay(this)">hiring status</span> + <span class="say" onclick="copySay(this)">roster</span> → hire if short, manage if weak</li>
+      <li><strong>Which store is worst? · 哪家店最差</strong> → <span class="say" onclick="copySay(this)">which store is worst</span> → why → fix next week / 为什么 → 下周修</li>
+      <li><strong>Who to hire / fire? · 招谁/开除谁</strong> → <span class="say" onclick="copySay(this)">hiring status</span> + <span class="say" onclick="copySay(this)">roster</span> → hire if short, manage if weak / 缺人招，弱的管理</li>
       <li><strong>Is money right? · 钱对不对</strong> — check monthly report → investigate if over budget / 看月报，超了就查</li>
       <li><strong>What's next? · 下一步</strong> — New store? New brand? Or fix current first? / 新店？新品牌？还是先修现有？</li>
     </ol>
@@ -698,15 +698,11 @@ tr:hover { background:#f0f4f8; }
   <div class="card">
     <ol class="workflow">
       <li><strong>Review company P&L · 看公司盈亏</strong> — which stores are profitable? / 哪家店赚钱？</li>
-      <li><strong>Review all manager performance · 看所有经理表现</strong> — reward good, manage weak / 好的奖，弱的管</li>
+      <li><strong>Review all manager performance · 看经理表现</strong> — reward good, manage weak / 好的奖，弱的管</li>
       <li><strong>Check lease expiry dates · 查租约到期</strong> — renew early or relocate / 提前续约或换址</li>
-      <li><strong>Review Hermes monthly report · 看Hermes月报</strong> — system health / 系统健康</li>
+      <li><strong>Review Hermes monthly report · 看 Hermes 月报</strong> — system health / 系统健康</li>
     </ol>
   </div>
-
-  <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
-  <div class="box box-auto">⏰ <strong>9PM nightly</strong> — Boss duty check → your DM (did you do boss work or floor work today?) / 老板职责检查</div>
-  <div class="box box-auto">⏰ <strong>1AM nightly</strong> — Work quality scorecard → #02-exec / 工作质量评分</div>
 
   <div class="sec-title">一句话总结 <span class="sec-title-en">· One Sentence</span></div>
   <div class="pareto">Hermes does the normal work → only pushes decisions to you → you say yes/no → auto-execute → never leave Slack → 5-10 min/day managing the company.</div>
@@ -715,7 +711,7 @@ tr:hover { background:#f0f4f8; }
 
 </div>
 
-<div class="footer">Wiserise Hospitality Group · Internal Use · 2026-07-21 · Hermes Artifact · Bilingual EN/中文 · v3.2 full bilingual</div>
+<div class="footer">Wiserise Hospitality Group · Build Roadmap v4.0 · 2026-07-21 · Bilingual EN/中文 · One department at a time</div>
 
 <script>
 function showPage(id, btn) {
@@ -732,19 +728,13 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' && idx < tabs.length-1) { tabs[idx+1].click(); }
   if (e.key === 'ArrowLeft' && idx > 0) { tabs[idx-1].click(); }
 });
-// Click to copy Slack phrase
 function copySay(el) {
-  const text = el.textContent;
-  navigator.clipboard.writeText(text).then(() => {
+  navigator.clipboard.writeText(el.textContent).then(() => {
     const orig = el.textContent;
-    el.textContent = '✓ Copied';
+    el.textContent = '✓';
     el.style.background = 'var(--green)';
     el.style.color = '#fff';
-    setTimeout(() => {
-      el.textContent = orig;
-      el.style.background = '';
-      el.style.color = '';
-    }, 1000);
+    setTimeout(() => { el.textContent = orig; el.style.background = ''; el.style.color = ''; }, 800);
   }).catch(() => {});
 }
 </script>
