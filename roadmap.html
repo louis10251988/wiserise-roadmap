@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiserise 公司管理 Roadmap</title>
+<style>
+@page { size: A4; margin: 10mm; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif; color: #1a1a1a; line-height: 1.6; }
+.page { page-break-after: always; padding: 5mm 8mm; max-width: 100%; }
+.page:last-child { page-break-after: auto; }
+
+/* Cover / Summary page */
+.cover-title { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 4px; color: #0d2b4e; }
+.cover-sub { font-size: 12px; text-align: center; margin-bottom: 14px; color: #666; }
+table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 10px; }
+th { background: #0d2b4e; color: white; padding: 6px 5px; text-align: left; font-weight: 600; font-size: 11px; }
+td { border: 1px solid #ddd; padding: 5px 5px; vertical-align: top; }
+tr:nth-child(even) { background: #f8f9fa; }
+
+/* Department pages */
+.dept-header { font-size: 18px; font-weight: 700; color: #0d2b4e; margin-bottom: 2px; }
+.dept-sub { font-size: 11px; color: #666; margin-bottom: 10px; }
+
+.section { margin-bottom: 10px; }
+.section-title { font-size: 13px; font-weight: 700; color: #0d2b4e; border-bottom: 2px solid #0d2b4e; padding-bottom: 2px; margin-bottom: 4px; }
+
+ol, ul { margin-left: 16px; font-size: 12px; }
+li { margin-bottom: 3px; }
+
+.rule-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 6px 10px; margin-bottom: 6px; font-size: 12px; }
+.gate-box { background: #d4edda; border-left: 4px solid #28a745; padding: 6px 10px; margin-bottom: 6px; font-size: 12px; }
+.auto-box { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 6px 10px; margin-bottom: 6px; font-size: 12px; }
+
+.pareto { background: #f0f7ff; border: 1px solid #b3d9ff; border-radius: 4px; padding: 6px 10px; margin-bottom: 8px; font-size: 12px; }
+.pareto strong { color: #0d2b4e; }
+
+.footer { font-size: 9px; color: #999; text-align: center; margin-top: 10px; }
+
+/* compact two-column for summary table */
+.summary-table td { font-size: 10.5px; line-height: 1.4; }
+
+.small { font-size: 11px; color: #555; }
+strong { color: #0d2b4e; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: 总表 -->
+<div class="page">
+  <div class="cover-title">Wiserise 公司管理 Roadmap</div>
+  <div class="cover-sub">老板 + 部门主管用 · 2026年7月 · 5家店（00001–00005）</div>
+
+  <div class="section">
+    <div class="section-title">一页看全公司</div>
+    <table class="summary-table">
+      <tr>
+        <th style="width:8%">部门</th>
+        <th style="width:20%">主要工作（80/20关键）</th>
+        <th style="width:14%">谁负责</th>
+        <th style="width:14%">Slack频道</th>
+        <th style="width:14%">你要批什么</th>
+        <th style="width:14%">怎么查</th>
+        <th style="width:16%">自动跑的</th>
+      </tr>
+      <tr>
+        <td><strong>👥 People<br>人事</strong></td>
+        <td>招人·入职·排班·纪律·离职</td>
+        <td>Coach Sally（团队）<br>GM（店里）</td>
+        <td>店里频道<br>#06-people</td>
+        <td>开除manager<br>升职·工资</td>
+        <td>"roster 00003"<br>"how many servers"</td>
+        <td>6AM同步花名册<br>11PM查脏数据<br>10:30PM存聊天</td>
+      </tr>
+      <tr>
+        <td><strong>💵 Finance<br>财务</strong></td>
+        <td>银行对账·付款·工资·采购付款</td>
+        <td>Yumi<br>Louis+Luna</td>
+        <td>#04-finance<br>#02-exec</td>
+        <td>银行/wire/ACH<br>采购≥$500<br>税务</td>
+        <td>每晚9PM邮件摘要<br>自动发你DM</td>
+        <td>9PM邮件摘要<br>30min自动回执<br>8AM AI花费报警</td>
+      </tr>
+      <tr>
+        <td><strong>🔧 Ops<br>运营</strong></td>
+        <td>每日营业·POS数据·作弊检测·设备维修</td>
+        <td>GM（店里）<br>WISE OPS</td>
+        <td>#03-ops<br>店里频道</td>
+        <td>维修费高<br>换设备</td>
+        <td>"store health 00003"<br>"which store is worst"<br>"fraud check"</td>
+        <td>12AM POS存Brain<br>12:15AM作弊检测<br>1AM表格汇总</td>
+      </tr>
+      <tr>
+        <td><strong>📦 Proc<br>采购</strong></td>
+        <td>店里要东西→审→批→下单</td>
+        <td>Yumi（审）<br>Louis（≥$500）</td>
+        <td>#04-finance<br>🛒采购</td>
+        <td>≥$500<br><$500 Yumi批</td>
+        <td>"买一个冰箱"<br>自动开单</td>
+        <td>Hermes开单<br>Yumi锁税/总额</td>
+      </tr>
+      <tr>
+        <td><strong>↗️ Growth<br>扩张</strong></td>
+        <td>新店选址→LOI→租约→开店</td>
+        <td>Louis only</td>
+        <td>#02-exec</td>
+        <td>每步都你批<br>选址·LOI·签租约</td>
+        <td>"LOI [地址]"<br>自动生成</td>
+        <td>Hermes生成LOI<br>你审→发出</td>
+      </tr>
+      <tr>
+        <td><strong>📣 Mkt<br>市场</strong></td>
+        <td>Google评论·品牌推广</td>
+        <td>WISE OPS<br>Louis</td>
+        <td>#02-exec</td>
+        <td>推广预算</td>
+        <td>"reviews 00003"</td>
+        <td>拉Google评论<br>定期检查</td>
+      </tr>
+      <tr>
+        <td><strong>🖥️ IT<br>技术</strong></td>
+        <td>Hermes运行·Slack管理·密钥·数据库</td>
+        <td>Louis only</td>
+        <td>WISE BRAIN DM</td>
+        <td>改设置/代码<br>加人/删人权限</td>
+        <td>"hermes status"<br>"check my work"</td>
+        <td>6h密钥同步<br>6h Slack经理检查<br>1AM工作质量评分</td>
+      </tr>
+      <tr>
+        <td><strong>📋 Admin<br>管理</strong></td>
+        <td>老板有没有在做老板的事</td>
+        <td>Louis</td>
+        <td>你DM</td>
+        <td>—</td>
+        <td>每晚9PM自动发<br>"每日职责检查"</td>
+        <td>9PM老板职责检查</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">每天节奏</div>
+    <table>
+      <tr><th style="width:15%">时间</th><th style="width:45%">发什么</th><th style="width:20%">到哪</th><th style="width:20%">你要做</th></tr>
+      <tr><td>早上7AM</td><td>人手够不够</td><td>各店频道</td><td>看，缺人说招</td></tr>
+      <tr><td>上午8AM</td><td>AI花费超了吗</td><td>#02-exec（没超就静默）</td><td>超了才看</td></tr>
+      <tr><td>晚上9PM</td><td>邮件摘要 + 你今天做了啥</td><td>你DM</td><td>看，该回复的回复</td></tr>
+      <tr><td>晚上10:30PM</td><td>店里聊天存Brain</td><td>你DM</td><td>看，有问题明天处理</td></tr>
+      <tr><td>晚上11PM</td><td>脏数据检查</td><td>#02-exec</td><td>有问题明天修</td></tr>
+      <tr><td>凌晨1AM</td><td>工作质量评分（10条规矩）</td><td>#02-exec</td><td>分数低才看</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">4个只管拍板</div>
+    <table>
+      <tr><th style="width:15%">类型</th><th style="width:40%">什么要你 yes</th><th style="width:25%">谁可以做</th><th style="width:20%">备注</th></tr>
+      <tr><td>💰 钱</td><td>银行/wire/采购≥$500/税务</td><td>Louis + Luna</td><td>两人同权</td></tr>
+      <tr><td>🔥 人</td><td>开除manager/升职/工资</td><td>Louis + Yumi</td><td>floor staff → Coach</td></tr>
+      <tr><td>⚖️ 规</td><td>改SOP/改架构/新店</td><td>Louis only</td><td>—</td></tr>
+      <tr><td>📋 查</td><td>任何"store health/fraud/roster"</td><td>随时问</td><td>不用批，直接问</td></tr>
+    </table>
+  </div>
+
+  <div class="pareto">
+    <strong>80/20 核心思路：</strong>80%的事 Hermes 自动做，你只管那 20% 需要人拍板的。正常运转不打扰你，只有钱、人、规、坏了的事推到你面前。
+  </div>
+
+  <div class="footer">Wiserise Hospitality Group · 内部使用 · 2026-07-21</div>
+</div>
+
+<!-- PAGE 2: People -->
+<div class="page">
+  <div class="dept-header">👥 People 人事部</div>
+  <div class="dept-sub">招人 → 入职 → 排班 → 纪律 → 离职 · 5家店全部</div>
+
+  <div class="pareto">
+    <strong>80/20 关键：</strong>80%的问题来自"缺人"和"招错人"。把招人预算和入职流程管好，其他事少一半。
+  </div>
+
+  <div class="section">
+    <div class="section-title">主要工作流程（按顺序）</div>
+    <ol>
+      <li><strong>招人</strong> — GM在店里频道说"need 2 server" → Hermes查预算 → 不够就停 → 够就开招聘帖</li>
+      <li><strong>筛人</strong> — Hermes打分排名 → GM挑人面试 → 面试完在Slack说"hire" → 写Brain</li>
+      <li><strong>入职</strong> — Hermes生成I-9/7shifts账号/PIN → GM带新人填表 → 填完拍照发Slack → Hermes记Brain</li>
+      <li><strong>排班</strong> — GM在7shifts排班（自己店）→ 系统发排班给员工 → Hermes看人手够不够 → 不够7AM报你</li>
+      <li><strong>日常管理</strong> — GM管出勤/纪律 → 小事coach（先教）→ 重复犯错写警告（要纸质+拍照发Slack）</li>
+      <li><strong>离职</strong> — floor staff离职 → Coach Sally批 → manager离职 → Louis批 → Hermes做离职文件</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">规章制度</div>
+    <div class="rule-box"><strong>规矩1：</strong>招人先查预算。超预算 = 停，不商量。</div>
+    <div class="rule-box"><strong>规矩2：</strong>入职必须填I-9 + 7shifts账号 + PIN。缺一样 = 没入职完。</div>
+    <div class="rule-box"><strong>规矩3：</strong>纪律先教后罚。第一次coach（口头教），第二次写警告（纸质+拍照），严重的事直接写警告。</div>
+    <div class="rule-box"><strong>规矩4：</strong>开除floor staff → Coach Sally可以决定。开除manager → Louis决定。永远不自动开除。</div>
+    <div class="rule-box"><strong>规矩5：</strong>GM只看自己店。查别的店 = 拒绝。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">谁拍板什么</div>
+    <table>
+      <tr><th style="width:30%">事</th><th style="width:30%">谁拍板</th><th style="width:40%">备注</th></tr>
+      <tr><td>招floor staff（server/host等）</td><td>Coach Sally + GM</td><td>预算内就行</td></tr>
+      <tr><td>招manager（GM/AGM）</td><td>Louis</td><td>要面试</td></tr>
+      <tr><td>开除floor staff</td><td>Coach Sally</td><td>走ladder流程</td></tr>
+      <tr><td>开除manager</td><td>Louis + Yumi</td><td>要走完整流程</td></tr>
+      <tr><td>涨工资/改工资</td><td>Louis</td><td>—</td></tr>
+      <tr><td>升职</td><td>Louis</td><td>—</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">怎么查（Slack 里说）</div>
+    <table>
+      <tr><th style="width:40%">你想知道</th><th style="width:60%">怎么说</th></tr>
+      <tr><td>某店几个人</td><td>"roster 00003" 或 "how many servers at 00003"</td></tr>
+      <tr><td>谁在招/卡住了</td><td>"hiring status"</td></tr>
+      <tr><td>某人工作职责</td><td>"what does a server do"</td></tr>
+      <tr><td>人头vs预算</td><td>"headcount vs budget 00003"</td></tr>
+      <tr><td>某店人手够不够</td><td>"staffing 00003"</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">自动跑的</div>
+    <div class="auto-box">⏰ 每天6AM — 从7shifts同步花名册到Brain</div>
+    <div class="auto-box">⏰ 每天11PM — 查脏数据/重复记录/卡住的人</div>
+    <div class="auto-box">⏰ 每天10:30PM — 店里Slack聊天存Brain</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">涉及店铺</div>
+    <table>
+      <tr><th>店号</th><th>品牌</th><th>城市</th><th>频道</th></tr>
+      <tr><td>00001</td><td>Gangnam</td><td>Fayetteville</td><td>store-00001</td></tr>
+      <tr><td>00002</td><td>Masa</td><td>Greenville</td><td>store-00002</td></tr>
+      <tr><td>00003</td><td>Gangnam</td><td>Wilmington</td><td>store-00003</td></tr>
+      <tr><td>00004</td><td>Low Country</td><td>Wilmington</td><td>store-00004</td></tr>
+      <tr><td>00005</td><td>Masa</td><td>Greenville</td><td>store-00005</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">Wiserise Hospitality Group · 人事部 Roadmap · 第2页/共9页</div>
+</div>
+
+<!-- PAGE 3: Finance -->
+<div class="page">
+  <div class="dept-header">💵 Finance 财务部</div>
+  <div class="dept-sub">银行对账 · 付款审批 · 工资 · 采购付款 · 5家店全部</div>
+
+  <div class="pareto">
+    <strong>80/20 关键：</strong>80%的财务风险来自"未经审批的付款"。把付款审批流程管死，其他自然好。
+  </div>
+
+  <div class="section">
+    <div class="section-title">主要工作流程</div>
+    <ol>
+      <li><strong>收钱</strong> — POS每天自动拉销售数据存Brain → 00001/00002/00003有POS → 00004/00005待接</li>
+      <li><strong>对账</strong> — 银行流水 vs Brain记录 → Yumi对 → 对不上推给你</li>
+      <li><strong>付款审批</strong> — 店里要买东西 → Yumi审税/总额 → ≥$500推Louis → Louis说yes → 付款</li>
+      <li><strong>工资</strong> — Gusto发工资 → Hermes看时间表 → 异常推你 → 正常不打扰</li>
+      <li><strong>税务</strong> — 税务文件 → Yumi处理 → 涉及银行/IRS → Louis批</li>
+      <li><strong>月报</strong> — 每月P&L → Hermes从Brain拉数据 → 发你DM</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">规章制度</div>
+    <div class="rule-box"><strong>规矩1：</strong>银行/wire/ACH → Louis + Luna两个人有权限。别人不行。</div>
+    <div class="rule-box"><strong>规矩2：</strong>采购 ≥$500 → Louis批。<$500 → Yumi批。没有例外。</div>
+    <div class="rule-box"><strong>规矩3：</strong>税务/W-2/租约/合同 → 发到外面要先过Louis。Yumi在公司内部用可以。</div>
+    <div class="rule-box"><strong>规矩4：</strong>银行流水/full balance → Yumi不能转发到个人微信/邮件。</div>
+    <div class="rule-box"><strong>规矩5：</strong>OpenBudget → 只有Louis + Luna能用。其他人 → 拒绝。</div>
+    <div class="rule-box"><strong>规矩6：</strong>所有付款要有凭证（发票/收据）。没凭证 = 不能付。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">谁拍板什么</div>
+    <table>
+      <tr><th style="width:30%">事</th><th style="width:30%">谁拍板</th><th style="width:40%">备注</th></tr>
+      <tr><td>银行转账/wire/ACH</td><td>Louis + Luna</td><td>两人同权</td></tr>
+      <tr><td>采购 ≥$500</td><td>Louis</td><td>—</td></tr>
+      <tr><td>采购 <$500</td><td>Yumi</td><td>Yumi锁税和总额</td></tr>
+      <tr><td>工资/涨工资</td><td>Louis</td><td>—</td></tr>
+      <tr><td>税务文件发外面</td><td>Louis</td><td>—</td></tr>
+      <tr><td>看银行full statement</td><td>Louis + Luna</td><td>Yumi不能转发</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">怎么查</div>
+    <table>
+      <tr><th style="width:40%">你想知道</th><th style="width:60%">怎么说</th></tr>
+      <tr><td>邮件有什么要处理</td><td>每晚9PM自动发你DM（不用问）</td></tr>
+      <tr><td>某店销售</td><td>"sales 00003 yesterday"</td></tr>
+      <tr><td>AI花了多少钱</td><td>每天8AM自动报（没超就不打扰）</td></tr>
+      <tr><td>预算vs实际</td><td>"budget vs actual 00003"</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">自动跑的</div>
+    <div class="auto-box">⏰ 每天9PM — 邮件摘要发你DM（只有钱/法务/火的才推）</div>
+    <div class="auto-box">⏰ 每30分钟 — Gmail自动回执（收到邮件自动回复"已收到"）</div>
+    <div class="auto-box">⏰ 每天8AM — AI花费检查（超$200/月才报警）</div>
+  </div>
+
+  <div class="footer">Wiserise Hospitality Group · 财务部 Roadmap · 第3页/共9页</div>
+</div>
+
+<!-- PAGE 4: Operations -->
+<div class="page">
+  <div class="dept-header">🔧 Operations 运营部</div>
+  <div class="dept-sub">每日营业 · POS数据 · 作弊检测 · 设备维修 · SOP执行</div>
+
+  <div class="pareto">
+    <strong>80/20 关键：</strong>80%的运营问题来自"POS作弊"和"设备坏了没人修"。盯住这两件事，店就稳。
+  </div>
+
+  <div class="section">
+    <div class="section-title">主要工作流程</div>
+    <ol>
+      <li><strong>每天营业</strong> — 开门 → 营业 → GM管现场 → 关门 → POS数据自动拉</li>
+      <li><strong>POS数据</strong> — 每天12AM自动拉销售存Brain → 00001/00002/00003有POS</li>
+      <li><strong>作弊检测</strong> — 每天12:15AM自动跑9项检查 → 有红旗 → 发#02-exec + 店里频道</li>
+      <li><strong>设备维修</strong> — 店里说"冰箱坏了" → Hermes开E1工单（中文发运营部）→ E2短消息发店里 → 报价高推Louis</li>
+      <li><strong>SOP执行</strong> — 店里问"what's the SOP for..." → Hermes拉SOP → 发PDF到Slack</li>
+      <li><strong>表格汇总</strong> — 每天1AM自动拉各店表格 → 存Brain</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">作弊检测9项检查</div>
+    <table>
+      <tr><th style="width:5%">#</th><th style="width:30%">检查项</th><th style="width:25%">红旗(🔴)</th><th style="width:25%">黄旗(🟡)</th><th style="width:15%">怎么处理</th></tr>
+      <tr><td>1</td><td>Void金额%</td><td>>2% of gross</td><td>>1%</td><td>查人</td></tr>
+      <tr><td>2</td><td>Discount%</td><td>>5% of gross</td><td>>3%</td><td>查人</td></tr>
+      <tr><td>3</td><td>Void单数</td><td>>3单</td><td>>2单</td><td>查人</td></tr>
+      <tr><td>4</td><td>取消订单有金额</td><td>任何一笔</td><td>—</td><td>查人</td></tr>
+      <tr><td>5</td><td>Refund%</td><td>>1% of gross</td><td>>0.5%</td><td>查人</td></tr>
+      <tr><td>6</td><td>现金占比高</td><td>>40%</td><td>>30%</td><td>查人</td></tr>
+      <tr><td>7</td><td>Manager comp滥用</td><td>同人comp 2+次</td><td>1次</td><td>coach</td></tr>
+      <tr><td>8</td><td>Tip manipulation</td><td>>2×店里平均</td><td>>1.5×</td><td>查人</td></tr>
+      <tr><td>9</td><td>Gift card没付款</td><td>任何一笔</td><td>—</td><td>查人</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">规章制度</div>
+    <div class="rule-box"><strong>规矩1：</strong>设备维修 → 发运营部（#03-ops），不发#02-exec。E1中文，E2英文。</div>
+    <div class="rule-box"><strong>规矩2：</strong>维修报价高（换压缩机/换整机/诊断不清）→ Louis批才付钱。</div>
+    <div class="rule-box"><strong>规矩3：</strong>POS作弊 → coach（先教），严重 → 写警告。不自动开除。</div>
+    <div class="rule-box"><strong>规矩4：</strong>GM只看自己店数据。查别的店 = 拒绝。</div>
+    <div class="rule-box"><strong>规矩5：</strong>日报只推 score<80 的店。好店不打扰。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">怎么查</div>
+    <table>
+      <tr><th style="width:40%">你想知道</th><th style="width:60%">怎么说</th></tr>
+      <tr><td>某店健康度</td><td>"store health 00003"</td></tr>
+      <tr><td>哪个店最差</td><td>"which store is worst"</td></tr>
+      <tr><td>POS有作弊吗</td><td>"fraud check 00003"</td></tr>
+      <tr><td>某店昨天销售</td><td>"sales 00003 yesterday"</td></tr>
+      <tr><td>查SOP</td><td>"what's the SOP for onboarding"</td></tr>
+      <tr><td>设备坏了</td><td>"冰箱坏了"（店里频道说）→ 自动开工单</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">自动跑的</div>
+    <div class="auto-box">⏰ 每天12AM — POS销售存Brain（00001/00002/00003）</div>
+    <div class="auto-box">⏰ 每天12:15AM — 作弊检测9项（有旗才推，没旗静默）</div>
+    <div class="auto-box">⏰ 每天1AM — 表格汇总存Brain</div>
+  </div>
+
+  <div class="footer">Wiserise Hospitality Group · 运营部 Roadmap · 第4页/共9页</div>
+</div>
+
+<!-- PAGE 5: Procurement -->
+<div class="page">
+  <div class="dept-header">📦 Procurement 采购部</div>
+  <div class="dept-sub">店里要东西 → 审 → 批 → 下单</div>
+
+  <div class="pareto">
+    <strong>80/20 关键：</strong>80%的采购浪费来自"没说清楚就买了"。把需求→审批→下单的链条管死，浪费就少。
+  </div>
+
+  <div class="section">
+    <div class="section-title">主要工作流程</div>
+    <ol>
+      <li><strong>提需求</strong> — 店里在Slack说"买一个冰箱" / "need 50lb flour" → Hermes自动开采购单</li>
+      <li><strong>Yumi审</strong> — Yumi锁税和总额 → 查有没有更便宜的 → 确认金额</li>
+      <li><strong>审批</strong> — ≥$500 → 推Louis → Louis说yes → 下单 / <$500 → Yumi直接批 → 下单</li>
+      <li><strong>下单</strong> — Hermes记录 → 通知店里"已下单" → 到货 → 店里确认</li>
+      <li><strong>付款</strong> — 凭发票付 → 记Brain → 对账</li>
+      <li><strong>通知</strong> — 每一步都通知提需求的人（到哪了、什么时候到）</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">规章制度</div>
+    <div class="rule-box"><strong>规矩1：</strong>没有采购单 = 不能买。先开单再买。</div>
+    <div class="rule-box"><strong>规矩2：</strong>≥$500 → Louis批。没有例外。<$500 → Yumi批。</div>
+    <div class="rule-box"><strong>规矩3：</strong>每笔采购要有发票/收据。没凭证 = 不能付钱。</div>
+    <div class="rule-box"><strong>规矩4：</strong>Yumi锁税和总额。不准随便改金额。</div>
+    <div class="rule-box"><strong>规矩5：</strong>到货要确认。没到 = 追。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">谁拍板什么</div>
+    <table>
+      <tr><th style="width:30%">事</th><th style="width:30%">谁拍板</th><th style="width:40%">备注</th></tr>
+      <tr><td>采购 ≥$500</td><td>Louis</td><td>推到#04-finance</td></tr>
+      <tr><td>采购 <$500</td><td>Yumi</td><td>Yumi审税+总额</td></tr>
+      <tr><td>换供应商</td><td>Yumi + Louis</td><td>大换要Louis同意</td></tr>
+      <tr><td>紧急采购（等不了）</td><td>GM可以先买 → 事后补单</td><td>≤$200，超了要批</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">怎么查</div>
+    <table>
+      <tr><th style="width:40%">你想知道</th><th style="width:60%">怎么说</th></tr>
+      <tr><td>某店采购了什么</td><td>"purchases 00003"</td></tr>
+      <tr><td>有没有等批的</td><td>"pending purchases"</td></tr>
+      <tr><td>买一个东西</td><td>"买一个冰箱"（店里频道说）</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">频道</div>
+    <p class="small">#04-finance 🛒采购 — 所有采购在这里说、批、查</p>
+  </div>
+
+  <div class="footer">Wiserise Hospitality Group · 采购部 Roadmap · 第5页/共9页</div>
+</div>
+
+<!-- PAGE 6: Growth -->
+<div class="page">
+  <div class="dept-header">↗️ Growth 扩张部</div>
+  <div class="dept-sub">新店选址 → LOI → 租约 → 开店</div>
+
+  <div class="pareto">
+    <strong>80/20 关键：</strong>80%的新店成败在选址。选错地方后面全错。选址和租约是唯一重要的事。
+  </div>
+
+  <div class="section">
+    <div class="section-title">主要工作流程</div>
+    <ol>
+      <li><strong>选址</strong> — 找到地方 → 你在Slack说"LOI [地址]" → Hermes开始工作</li>
+      <li><strong>LOI</strong> — Hermes自动生成LOI文件 → 你审 → 改 → 定稿 → 发出</li>
+      <li><strong>谈判</strong> — 来回谈 → 你批每一步 → Hermes记录</li>
+      <li><strong>签租约</strong> — Louis签字 → 原件存Drive → Brain记lease_id</li>
+      <li><strong>装修</strong> — 开工 → 进度存Brain → 超预算推你</li>
+      <li><strong>开业</strong> — 招人 → 培训 → 开门 → 新店进系统</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">规章制度</div>
+    <div class="rule-box"><strong>规矩1：</strong>每一步都你批。扩张是Louis only的事。</div>
+    <div class="rule-box"><strong>规矩2：</strong>LOI原件存Drive。Brain只存lease_id（不要存PDF在Brain里）。</div>
+    <div class="rule-box"><strong>规矩3：</strong>租约条款 → 涉及法律 → Hermes只做参考 → Louis找律师看。</div>
+    <div class="rule-box"><strong>规矩4：</strong>新店开业前必须：人招齐 + SOP上线 + POS接好 + 7shifts接好。</div>
+    <div class="rule-box"><strong>规矩5：</strong>装修预算 → 超了推你。没超不打扰。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">谁拍板什么</div>
+    <table>
+      <tr><th style="width:30%">事</th><th style="width:30%">谁拍板</th><th style="width:40%">备注</th></tr>
+      <tr><td>选哪个地方</td><td>Louis</td><td>—</td></tr>
+      <tr><td>LOI发出去</td><td>Louis</td><td>Hermes生成，你审</td></tr>
+      <tr><td>签租约</td><td>Louis</td><td>要律师看过</td></tr>
+      <tr><td>装修预算</td><td>Louis</td><td>超了推你</td></tr>
+      <tr><td>开业时间</td><td>Louis</td><td>—</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">怎么查</div>
+    <table>
+      <tr><th style="width:40%">你想知道</th><th style="width:60%">怎么说</th></tr>
+      <tr><td>开新店</td><td>"LOI 123 Main St Wilmington NC"</td></tr>
+      <tr><td>现有租约</td><td>"lease 00003"</td></tr>
+      <tr><td>新店进度</td><td>"new store status"</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">当前店铺</div>
+    <table>
+      <tr><th>店号</th><th>品牌</th><th>城市</th><th>状态</th></tr>
+      <tr><td>00001</td><td>Gangnam</td><td>Fayetteville</td><td>✅ 营业中</td></tr>
+      <tr><td>00002</td><td>Masa</td><td>Greenville</td><td>✅ 营业中</td></tr>
+      <tr><td>00003</td><td>Gangnam</td><td>Wilmington</td><td>✅ 营业中</td></tr>
+      <tr><td>00004</td><td>Low Country</td><td>Wilmington</td><td>✅ 营业中</td></tr>
+      <tr><td>00005</td><td>Masa</td><td>Greenville</td><td>✅ 营业中</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">Wiserise Hospitality Group · 扩张部 Roadmap · 第6页/共9页</div>
+</div>
+
+<!-- PAGE 7: Marketing -->
+<div class="page">
+  <div class="dept-header">📣 Marketing 市场部</div>
+  <div class="dept-sub">Google评论管理 · 品牌推广 · 5家店</div>
+
+  <div class="pareto">
+    <strong>80/20 关键：</strong>80%的客人决定来自Google评论。管好评和差评比打广告有用10倍。
+  </div>
+
+  <div class="section">
+    <div class="section-title">主要工作流程</div>
+    <ol>
+      <li><strong>拉评论</strong> — 你说"reviews 00003" → Hermes拉Google评论 → 发你</li>
+      <li><strong>看差评</strong> — 有差评 → Hermes提醒 → GM回复 → 回复内容推你</li>
+      <li><strong>回好评</strong> — 好评 → GM回 → 不用推你</li>
+      <li><strong>推广</strong> — Louis决定投什么 → Hermes记录 → 看效果</li>
+      <li><strong>品牌一致</strong> — 各店品牌名/Logo/菜单 → 改了要Louis批</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">规章制度</div>
+    <div class="rule-box"><strong>规矩1：</strong>差评 ≤3星 → GM必须48小时内回复。超时 → Hermes提醒。</div>
+    <div class="rule-box"><strong>规矩2：</strong>回复差评要礼貌。不争辩。说"联系我们解决"。</div>
+    <div class="rule-box"><strong>规矩3：</strong>推广预算 → Louis批。GM不能自己花钱打广告。</div>
+    <div class="rule-box"><strong>规矩4：</strong>品牌名/Logo/菜单改 → Louis批。GM不能自己改。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">谁拍板什么</div>
+    <table>
+      <tr><th style="width:30%">事</th><th style="width:30%">谁拍板</th><th style="width:40%">备注</th></tr>
+      <tr><td>推广预算</td><td>Louis</td><td>—</td></tr>
+      <tr><td>回复差评</td><td>GM</td><td>内容推Louis看</td></tr>
+      <tr><td>改品牌/Logo/菜单</td><td>Louis</td><td>—</td></tr>
+      <tr><td>发优惠券/活动</td><td>Louis</td><td>—</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">怎么查</div>
+    <table>
+      <tr><th style="width:40%">你想知道</th><th style="width:60%">怎么说</th></tr>
+      <tr><td>某店Google评论</td><td>"reviews 00003"</td></tr>
+      <tr><td>所有店评论</td><td>"all reviews"</td></tr>
+      <tr><td>某店评分</td><td>"rating 00003"</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">Wiserise Hospitality Group · 市场部 Roadmap · 第7页/共9页</div>
+</div>
+
+<!-- PAGE 8: IT -->
+<div class="page">
+  <div class="dept-header">🖥️ IT 技术部</div>
+  <div class="dept-sub">Hermes运行 · Slack管理 · 密钥 · 数据库 · 安全</div>
+
+  <div class="pareto">
+    <strong>80/20 关键：</strong>80%的系统问题来自"权限给错了人"和"密钥过期"。管好权限和密钥，系统就稳。
+  </div>
+
+  <div class="section">
+    <div class="section-title">主要工作流程</div>
+    <ol>
+      <li><strong>Hermes运行</strong> — Hermes是唯一的worker → Skills = 怎么做 → Cron = 什么时候做 → 没有别的agent</li>
+      <li><strong>Slack管理</strong> — 加人/删人 → Louis在Slack点 → Hermes检查经理在不在自己店频道</li>
+      <li><strong>密钥管理</strong> — 新API密钥 → 存1Password → 同步到.env → 每6小时自动检查</li>
+      <li><strong>数据库</strong> — Brain（Supabase）= 唯一数据源 → 改表结构 → supabase CLI → 不手改</li>
+      <li><strong>安全</strong> — 未知人发消息 → 忽略（$0）→ 权限4个地方改全 → 重启gateway</li>
+      <li><strong>工作质量</strong> — 每晚1AM自动跑10条规矩评分 → 发#02-exec</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">10条规矩（每晚自动检查）</div>
+    <ol>
+      <li>只用Hermes，不用GLM网页版</li>
+      <li>做事前先查数据（别重复做）</li>
+      <li>不推倒重来，改坏的就行</li>
+      <li>一个session做一件事，做完关掉</li>
+      <li>先有roadmap再动手</li>
+      <li>Desktop = 做东西，Slack = 管公司，别混</li>
+      <li>查数据，别猜</li>
+      <li>一次改一个东西，测好再下一个</li>
+      <li>Brain是真相，文档会骗人</li>
+      <li>做完就走，别反复看</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">规章制度</div>
+    <div class="rule-box"><strong>规矩1：</strong>改设置/代码 → Louis only。Luna不能改代码（其他同权）。</div>
+    <div class="rule-box"><strong>规矩2：</strong>改权限要改4个地方：owner-gate → openbudget-guard → config.yaml → .env。漏一个 = 半坏。</div>
+    <div class="rule-box"><strong>规矩3：</strong>改完权限要重启gateway → 必须在Slack外面重启（在Slack里重启会杀掉自己）。</div>
+    <div class="rule-box"><strong>规矩4：</strong>Slack经理只在店里频道 + 公司workspace。不准进#02-executive。</div>
+    <div class="rule-box"><strong>规矩5：</strong>新密钥 → 先存1Password → 再同步到.env。不直接改.env。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">谁拍板什么</div>
+    <table>
+      <tr><th style="width:30%">事</th><th style="width:30%">谁拍板</th><th style="width:40%">备注</th></tr>
+      <tr><td>改设置/代码</td><td>Louis only</td><td>—</td></tr>
+      <tr><td>加/删Slack人</td><td>Louis点 → Hermes执行</td><td>—</td></tr>
+      <tr><td>改权限</td><td>Louis</td><td>改4个地方+重启</td></tr>
+      <tr><td>新API密钥</td><td>Louis</td><td>存1Password</td></tr>
+      <tr><td>改数据库表</td><td>Louis</td><td>用supabase CLI</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">怎么查</div>
+    <table>
+      <tr><th style="width:40%">你想知道</th><th style="width:60%">怎么说</th></tr>
+      <tr><td>Hermes健康</td><td>"hermes status"</td></tr>
+      <tr><td>Cron有没有坏</td><td>"check my work"（每晚1AM自动跑）</td></tr>
+      <tr><td>经理在不在频道</td><td>"check managers in slack"</td></tr>
+      <tr><td>AI花了多少</td><td>每天8AM自动报</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">自动跑的</div>
+    <div class="auto-box">⏰ 每6小时 — 1Password密钥同步</div>
+    <div class="auto-box">⏰ 每6小时 — Slack经理入频道检查</div>
+    <div class="auto-box">⏰ 每晚1AM — 工作质量评分（10条规矩）</div>
+    <div class="auto-box">⏰ 每天8AM — AI花费超$200报警</div>
+  </div>
+
+  <div class="footer">Wiserise Hospitality Group · 技术部 Roadmap · 第8页/共9页</div>
+</div>
+
+<!-- PAGE 9: Admin -->
+<div class="page">
+  <div class="dept-header">📋 Admin 管理部</div>
+  <div class="dept-sub">老板有没有在做老板的事 · 不是在做GM/floor的活</div>
+
+  <div class="pareto">
+    <strong>80/20 关键：</strong>80%的老板时间应该花在"选人 + 拍板 + 看方向"上。做floor的活 = 浪费你的时间。
+  </div>
+
+  <div class="section">
+    <div class="section-title">老板该做的 vs 不该做的</div>
+    <table>
+      <tr><th style="width:50%">✅ 你该做的（老板活）</th><th style="width:50%">❌ 你不该做的（GM/floor活）</th></tr>
+      <tr><td>选人、招manager</td><td>排班（GM做）</td></tr>
+      <tr><td>批钱（≥$500、银行、税务）</td><td>买菜（Yumi+GM做）</td></tr>
+      <tr><td>看方向（新店、品牌）</td><td>处理客人投诉（GM做）</td></tr>
+      <tr><td>看报告（每天5分钟扫Slack）</td><td>修设备（运营部做）</td></tr>
+      <tr><td>定SOP、定规矩</td><td>每天盯POS（Hermes自动做）</td></tr>
+      <tr><td>开除/升职决定</td><td>教练员工（Coach Sally做）</td></tr>
+      <tr><td>签租约、谈房东</td><td>回Google评论（GM做）</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">每天5分钟老板节奏</div>
+    <table>
+      <tr><th style="width:15%">时间</th><th style="width:50%">看什么</th><th style="width:35%">做什么</th></tr>
+      <tr><td>早上</td><td>各店人手够不够（7AM自动发）</td><td>缺人说招，够就不用管</td></tr>
+      <tr><td>白天</td><td>有红旗才看（POS作弊/设备/采购）</td><td>说yes/no</td></tr>
+      <tr><td>晚上9PM</td><td>邮件摘要 + 职责检查（自动发DM）</td><td>该回的回，其他明天</td></tr>
+      <tr><td>晚上</td><td>工作质量评分（1AM自动发）</td><td>分数低才看</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">每周该想一次的事</div>
+    <ol>
+      <li><strong>哪店最差？</strong> → "which store is worst" → 看为什么 → 下周处理</li>
+      <li><strong>谁该招/该开？</strong> → "hiring status" + "roster" → 缺人招、差人管</li>
+      <li><strong>钱对不对？</strong> → 看月报 → 超预算查为什么</li>
+      <li><strong>下一步是什么？</strong> → 新店？新品牌？还是先修好现在的？</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">每月该做一次的事</div>
+    <ol>
+      <li>看全公司P&L → 每店赚了还是亏了</li>
+      <li>看全部经理表现 → 好的奖、差的管</li>
+      <li>看租约到期日 → 提前续 or 搬</li>
+      <li>看Hermes月报 → 系统有没有变慢/坏</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">自动跑的</div>
+    <div class="auto-box">⏰ 每晚9PM — 老板职责检查 → 发你DM（你今天做了老板活还是floor活？）</div>
+    <div class="auto-box">⏰ 每晚1AM — 工作质量评分 → 发#02-exec</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">一句话总结</div>
+    <div class="pareto">
+      正常的事 Hermes 自动做 → 只把需要你拍板的推到你面前 → 你说 yes/no → 自动执行 → 你不离开 Slack → 每天花5-10分钟管公司
+    </div>
+  </div>
+
+  <div class="footer">Wiserise Hospitality Group · 管理部 Roadmap · 第9页/共9页</div>
+</div>
+
+</body>
+</html>
