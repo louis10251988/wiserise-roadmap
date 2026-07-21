@@ -52,6 +52,9 @@ body { font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei","Helvetica Neu
 .card:hover { box-shadow:var(--shadow-hover); }
 .card-title { font-size:17px; font-weight:700; color:var(--brand); margin-bottom:2px; }
 .card-title-en { font-size:12px; color:var(--muted); margin-bottom:8px; }
+.bi { display:block; }
+.bi-en { display:block; font-size:11px; color:var(--muted); margin-top:2px; }
+.td-en { display:block; font-size:11px; color:var(--muted); margin-top:2px; }
 
 /* ── 80/20 callout ── */
 .pareto { background:linear-gradient(135deg, var(--blue-bg) 0%, #edf4ff 100%); border-radius:10px; padding:14px 16px; margin-bottom:14px; font-size:13px; line-height:1.55; border:1px solid rgba(37,99,235,0.1); }
@@ -208,7 +211,7 @@ tr:hover { background:#f0f4f8; }
 
   <div class="sec-title">5 家店 <span class="sec-title-en">· 5 Stores</span></div>
   <table>
-    <tr><th>#</th><th>Brand</th><th>City</th><th>Status</th></tr>
+    <tr><th>#</th><th>Brand · 品牌</th><th>City · 城市</th><th>Status · 状态</th></tr>
     <tr><td>00001</td><td>Gangnam</td><td>Fayetteville</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
     <tr><td>00002</td><td>Masa</td><td>Greenville</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
     <tr><td>00003</td><td>Gangnam</td><td>Wilmington</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
@@ -255,22 +258,22 @@ tr:hover { background:#f0f4f8; }
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
     <tr><th style="width:35%">Action · 事</th><th style="width:30%">Decides · 谁拍板</th><th style="width:35%">Note · 备注</th></tr>
-    <tr><td>Hire floor staff (server/host etc)</td><td>Coach Sally + GM</td><td>Within budget</td></tr>
-    <tr><td>Hire manager (GM/AGM)</td><td>Louis</td><td>Requires interview</td></tr>
-    <tr><td>Fire floor staff</td><td>Coach Sally</td><td>Ladder process</td></tr>
-    <tr><td>Fire manager</td><td>Louis + Yumi</td><td>Full process required</td></tr>
-    <tr><td>Raise / change pay</td><td>Louis</td><td>—</td></tr>
-    <tr><td>Promotion</td><td>Louis</td><td>—</td></tr>
+    <tr><td>Hire floor staff (server/host etc)<div class="td-en">招 floor 员工（server/host 等）</div></td><td>Coach Sally + GM</td><td>Within budget · 预算内</td></tr>
+    <tr><td>Hire manager (GM/AGM)<div class="td-en">招经理（GM/AGM）</div></td><td>Louis</td><td>Requires interview · 需要面试</td></tr>
+    <tr><td>Fire floor staff<div class="td-en">开除 floor 员工</div></td><td>Coach Sally</td><td>Ladder process · 按纪律阶梯</td></tr>
+    <tr><td>Fire manager<div class="td-en">开除经理</div></td><td>Louis + Yumi</td><td>Full process required · 完整流程</td></tr>
+    <tr><td>Raise / change pay<div class="td-en">加薪 / 调薪</div></td><td>Louis</td><td>—</td></tr>
+    <tr><td>Promotion<div class="td-en">升职</div></td><td>Louis</td><td>—</td></tr>
   </table>
 
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check (say in Slack)</span></div>
   <table>
     <tr><th style="width:40%">Want to know · 你想知道</th><th style="width:60%">Say · 怎么说</th></tr>
-    <tr><td>How many people at a store</td><td><span class="say" onclick="copySay(this)">roster 00003</span> or <span class="say" onclick="copySay(this)">how many servers at 00003</span></td></tr>
-    <tr><td>Who's hiring / stuck</td><td><span class="say" onclick="copySay(this)">hiring status</span></td></tr>
-    <tr><td>Someone's job duties</td><td><span class="say" onclick="copySay(this)">what does a server do</span></td></tr>
-    <tr><td>Headcount vs budget</td><td><span class="say" onclick="copySay(this)">headcount vs budget 00003</span></td></tr>
-    <tr><td>Is a store staffed enough</td><td><span class="say" onclick="copySay(this)">staffing 00003</span></td></tr>
+    <tr><td>How many people at a store<div class="td-en">店里多少人</div></td><td><span class="say" onclick="copySay(this)">roster 00003</span> or <span class="say" onclick="copySay(this)">how many servers at 00003</span></td></tr>
+    <tr><td>Who's hiring / stuck<div class="td-en">谁在招人/卡住</div></td><td><span class="say" onclick="copySay(this)">hiring status</span></td></tr>
+    <tr><td>Someone's job duties<div class="td-en">某人岗位职责</div></td><td><span class="say" onclick="copySay(this)">what does a server do</span></td></tr>
+    <tr><td>Headcount vs budget<div class="td-en">人数 vs 预算</div></td><td><span class="say" onclick="copySay(this)">headcount vs budget 00003</span></td></tr>
+    <tr><td>Is a store staffed enough<div class="td-en">人手够不够</div></td><td><span class="say" onclick="copySay(this)">staffing 00003</span></td></tr>
   </table>
 
   <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
@@ -318,21 +321,21 @@ tr:hover { background:#f0f4f8; }
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
     <tr><th style="width:30%">Action</th><th style="width:30%">Decides</th><th style="width:40%">Note</th></tr>
-    <tr><td>Bank transfer / wire / ACH</td><td>Louis + Luna</td><td>Equal power</td></tr>
-    <tr><td>Purchase ≥$500</td><td>Louis</td><td>—</td></tr>
-    <tr><td>Purchase <$500</td><td>Yumi</td><td>Yumi locks tax + total</td></tr>
-    <tr><td>Payroll / raise</td><td>Louis</td><td>—</td></tr>
-    <tr><td>Tax docs sent externally</td><td>Louis</td><td>—</td></tr>
-    <tr><td>View bank full statement</td><td>Louis + Luna</td><td>Yumi cannot forward</td></tr>
+    <tr><td>Bank transfer / wire / ACH<div class="td-en">银行转账 / wire / ACH</div></td><td>Louis + Luna</td><td>Equal power · 同等权限</td></tr>
+    <tr><td>Purchase ≥$500<div class="td-en">采购 ≥$500</div></td><td>Louis</td><td>—</td></tr>
+    <tr><td>Purchase <$500<div class="td-en">采购 <$500</div></td><td>Yumi</td><td>Yumi locks tax + total · Yumi锁税+总额</td></tr>
+    <tr><td>Payroll / raise<div class="td-en">工资 / 加薪</div></td><td>Louis</td><td>—</td></tr>
+    <tr><td>Tax docs sent externally<div class="td-en">税务文件发外面</div></td><td>Louis</td><td>—</td></tr>
+    <tr><td>View bank full statement<div class="td-en">查看完整银行流水</div></td><td>Louis + Luna</td><td>Yumi cannot forward · Yumi不能转发</td></tr>
   </table>
 
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>Any email to handle</td><td>9PM auto to your DM (don't need to ask)</td></tr>
-    <tr><td>Store sales</td><td><span class="say" onclick="copySay(this)">sales 00003 yesterday</span></td></tr>
-    <tr><td>How much AI cost</td><td>8AM auto report (silent if OK)</td></tr>
-    <tr><td>Budget vs actual</td><td><span class="say" onclick="copySay(this)">budget vs actual 00003</span></td></tr>
+    <tr><td>Any email to handle<div class="td-en">有没有邮件要处理</div></td><td>9PM auto to your DM · 晚9点自动发你DM（不用问）</td></tr>
+    <tr><td>Store sales<div class="td-en">店销售</div></td><td><span class="say" onclick="copySay(this)">sales 00003 yesterday</span></td></tr>
+    <tr><td>How much AI cost<div class="td-en">AI花了多少</div></td><td>8AM auto report · 早8点自动报（正常则静默）</td></tr>
+    <tr><td>Budget vs actual<div class="td-en">预算 vs 实际</div></td><td><span class="say" onclick="copySay(this)">budget vs actual 00003</span></td></tr>
   </table>
 
   <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
@@ -361,26 +364,26 @@ tr:hover { background:#f0f4f8; }
   <div class="card">
     <ol class="workflow">
       <li><strong>Daily Ops 每天营业</strong> — Open → operate → GM manages floor → close → POS auto-pulls</li>
-      <li><strong>POS Data</strong> — 12AM auto-pulls sales to Brain → 00001/00002/00003 have POS</li>
+      <li><strong>POS Data · POS数据</strong> — 12AM auto-pulls sales to Brain → 00001/00002/00003 have POS / 零点自动拉销售进Brain</li>
       <li><strong>Fraud Detect 作弊检测</strong> — 12:15AM auto-runs 9 checks → red flags → posts to #02-exec + store channel</li>
       <li><strong>Equipment 设备维修</strong> — Store says "fridge broken" → Hermes creates E1 ticket (Chinese to Ops) → E2 short msg to store → high quote → Louis</li>
-      <li><strong>SOP Execution</strong> — Store asks "what's the SOP for..." → Hermes pulls SOP → sends PDF to Slack</li>
+      <li><strong>SOP Execution · SOP执行</strong> — Store asks "what's the SOP for..." → Hermes pulls SOP → sends PDF to Slack / 店问SOP，Hermes发PDF</li>
       <li><strong>Form Rollup 表格汇总</strong> — 1AM auto-pulls all store forms → saves to Brain</li>
     </ol>
   </div>
 
   <div class="sec-title">作弊检测 9 项检查 <span class="sec-title-en">· Fraud Detection: 9 Checks</span></div>
   <table>
-    <tr><th style="width:4%">#</th><th style="width:26%">Check · 检查项</th><th style="width:22%">Red 🔴</th><th style="width:22%">Yellow 🟡</th><th style="width:14%">Action</th></tr>
-    <tr><td>1</td><td>Void value %</td><td>>2% of gross</td><td>>1%</td><td>Investigate</td></tr>
-    <tr><td>2</td><td>Discount %</td><td>>5% of gross</td><td>>3%</td><td>Investigate</td></tr>
-    <tr><td>3</td><td>Void count</td><td>>3 voids</td><td>>2 voids</td><td>Investigate</td></tr>
-    <tr><td>4</td><td>Canceled w/ value</td><td>Any one</td><td>—</td><td>Investigate</td></tr>
-    <tr><td>5</td><td>Refund %</td><td>>1% of gross</td><td>>0.5%</td><td>Investigate</td></tr>
-    <tr><td>6</td><td>Cash spike</td><td>>40%</td><td>>30%</td><td>Investigate</td></tr>
-    <tr><td>7</td><td>Manager comp abuse</td><td>Same person 2+ times</td><td>1 time</td><td>Coach</td></tr>
-    <tr><td>8</td><td>Tip manipulation</td><td>>2× store avg</td><td>>1.5×</td><td>Investigate</td></tr>
-    <tr><td>9</td><td>Gift card no payment</td><td>Any one</td><td>—</td><td>Investigate</td></tr>
+    <tr><th style="width:4%">#</th><th style="width:26%">Check · 检查项</th><th style="width:22%">Red 🔴</th><th style="width:22%">Yellow 🟡</th><th style="width:14%">Action · 动作</th></tr>
+    <tr><td>1</td><td>Void value % · 作废金额%</td><td>>2% of gross · 超营业额2%</td><td>>1%</td><td>Investigate · 调查</td></tr>
+    <tr><td>2</td><td>Discount % · 折扣%</td><td>>5% of gross · 超营业额5%</td><td>>3%</td><td>Investigate · 调查</td></tr>
+    <tr><td>3</td><td>Void count · 作废次数</td><td>>3 voids · 超3次</td><td>>2 voids · 超2次</td><td>Investigate · 调查</td></tr>
+    <tr><td>4</td><td>Canceled w/ value · 有金额取消单</td><td>Any one · 任意1笔</td><td>—</td><td>Investigate · 调查</td></tr>
+    <tr><td>5</td><td>Refund % · 退款%</td><td>>1% of gross · 超营业额1%</td><td>>0.5%</td><td>Investigate · 调查</td></tr>
+    <tr><td>6</td><td>Cash spike · 现金占比异常</td><td>>40%</td><td>>30%</td><td>Investigate · 调查</td></tr>
+    <tr><td>7</td><td>Manager comp abuse · 经理免单滥用</td><td>Same person 2+ times · 同一人2次+</td><td>1 time · 1次</td><td>Coach · 先教</td></tr>
+    <tr><td>8</td><td>Tip manipulation · 小费操纵</td><td>>2× store avg · 超店均2倍</td><td>>1.5×</td><td>Investigate · 调查</td></tr>
+    <tr><td>9</td><td>Gift card no payment · 礼卡无付款</td><td>Any one · 任意1笔</td><td>—</td><td>Investigate · 调查</td></tr>
   </table>
 
   <div class="sec-title">规章制度 <span class="sec-title-en">· Rules</span></div>
@@ -393,18 +396,18 @@ tr:hover { background:#f0f4f8; }
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>Store health</td><td><span class="say" onclick="copySay(this)">store health 00003</span></td></tr>
-    <tr><td>Which store is worst</td><td><span class="say" onclick="copySay(this)">which store is worst</span></td></tr>
-    <tr><td>POS fraud check</td><td><span class="say" onclick="copySay(this)">fraud check 00003</span></td></tr>
-    <tr><td>Store sales yesterday</td><td><span class="say" onclick="copySay(this)">sales 00003 yesterday</span></td></tr>
-    <tr><td>Look up SOP</td><td><span class="say" onclick="copySay(this)">what's the SOP for onboarding</span></td></tr>
-    <tr><td>Equipment broken</td><td><span class="say" onclick="copySay(this)">冰箱坏了</span> (in store channel) → auto-ticket</td></tr>
+    <tr><td>Store health<div class="td-en">店健康</div></td><td><span class="say" onclick="copySay(this)">store health 00003</span></td></tr>
+    <tr><td>Which store is worst<div class="td-en">哪家店最差</div></td><td><span class="say" onclick="copySay(this)">which store is worst</span></td></tr>
+    <tr><td>POS fraud check<div class="td-en">POS作弊检查</div></td><td><span class="say" onclick="copySay(this)">fraud check 00003</span></td></tr>
+    <tr><td>Store sales yesterday<div class="td-en">昨天销售</div></td><td><span class="say" onclick="copySay(this)">sales 00003 yesterday</span></td></tr>
+    <tr><td>Look up SOP<div class="td-en">查SOP</div></td><td><span class="say" onclick="copySay(this)">what's the SOP for onboarding</span></td></tr>
+    <tr><td>Equipment broken<div class="td-en">设备坏了</div></td><td><span class="say" onclick="copySay(this)">冰箱坏了</span> (in store channel) → auto-ticket</td></tr>
   </table>
 
   <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
-  <div class="box box-auto">⏰ <strong>12AM daily</strong> — POS sales to Brain (00001/00002/00003)</div>
-  <div class="box box-auto">⏰ <strong>12:15AM daily</strong> — Fraud detection 9 checks (flag only, silent if clean)</div>
-  <div class="box box-auto">⏰ <strong>1AM daily</strong> — Form rollup to Brain</div>
+  <div class="box box-auto">⏰ <strong>12AM daily</strong> — POS sales to Brain (00001/00002/00003) / POS销售进Brain</div>
+  <div class="box box-auto">⏰ <strong>12:15AM daily</strong> — Fraud detection 9 checks (flag only, silent if clean) / 作弊检测9项（有问题才报）</div>
+  <div class="box box-auto">⏰ <strong>1AM daily</strong> — Form rollup to Brain / 表格汇总进Brain</div>
 </div>
 
 <!-- ════════ PAGE 4: Procurement ════════ -->
@@ -445,18 +448,18 @@ tr:hover { background:#f0f4f8; }
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
     <tr><th style="width:35%">Action</th><th style="width:30%">Decides</th><th style="width:35%">Note</th></tr>
-    <tr><td>Purchase ≥$500</td><td>Louis</td><td>Push to #04-finance</td></tr>
-    <tr><td>Purchase <$500</td><td>Yumi</td><td>Yumi reviews tax + total</td></tr>
-    <tr><td>Change supplier</td><td>Yumi + Louis</td><td>Major change needs Louis</td></tr>
-    <tr><td>Emergency purchase</td><td>GM can buy first → backfill</td><td>≤$200, over needs approval</td></tr>
+    <tr><td>Purchase ≥$500<div class="td-en">采购 ≥$500</div></td><td>Louis</td><td>Push to #04-finance · 推到#04-finance</td></tr>
+    <tr><td>Purchase <$500<div class="td-en">采购 <$500</div></td><td>Yumi</td><td>Yumi reviews tax + total · Yumi审税+总额</td></tr>
+    <tr><td>Change supplier<div class="td-en">换供应商</div></td><td>Yumi + Louis</td><td>Major change needs Louis · 重大变更要Louis</td></tr>
+    <tr><td>Emergency purchase<div class="td-en">紧急采购</div></td><td>GM can buy first → backfill · GM可先买再补单</td><td>≤$200, over needs approval · 超$200要批</td></tr>
   </table>
 
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>What did a store buy</td><td><span class="say" onclick="copySay(this)">purchases 00003</span></td></tr>
-    <tr><td>Any pending approval</td><td><span class="say" onclick="copySay(this)">pending purchases</span></td></tr>
-    <tr><td>Buy something</td><td><span class="say" onclick="copySay(this)">买一个冰箱</span> (in store channel)</td></tr>
+    <tr><td>What did a store buy<div class="td-en">店买了什么</div></td><td><span class="say" onclick="copySay(this)">purchases 00003</span></td></tr>
+    <tr><td>Any pending approval<div class="td-en">有没有待批采购</div></td><td><span class="say" onclick="copySay(this)">pending purchases</span></td></tr>
+    <tr><td>Buy something<div class="td-en">买东西</div></td><td><span class="say" onclick="copySay(this)">买一个冰箱</span> (in store channel)</td></tr>
   </table>
 </div>
 
@@ -480,7 +483,7 @@ tr:hover { background:#f0f4f8; }
   <div class="card">
     <ol class="workflow">
       <li><strong>Site Selection 选址</strong> — Find a location → you say "LOI [address]" in Slack → Hermes starts working</li>
-      <li><strong>LOI</strong> — Hermes auto-generates LOI doc → you review → edit → finalize → send</li>
+      <li><strong>LOI · 意向书</strong> — Hermes auto-generates LOI doc → you review → edit → finalize → send / Hermes生成，你审改后发</li>
       <li><strong>Negotiation 谈判</strong> — Back and forth → you approve each step → Hermes records</li>
       <li><strong>Sign Lease 签租约</strong> — Louis signs → original to Drive → Brain records lease_id</li>
       <li><strong>Buildout 装修</strong> — Construction starts → progress to Brain → over budget → push to you</li>
@@ -498,29 +501,29 @@ tr:hover { background:#f0f4f8; }
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
     <tr><th style="width:30%">Action</th><th style="width:30%">Decides</th><th style="width:40%">Note</th></tr>
-    <tr><td>Which location</td><td>Louis</td><td>—</td></tr>
-    <tr><td>Send LOI</td><td>Louis</td><td>Hermes generates, you review</td></tr>
-    <tr><td>Sign lease</td><td>Louis</td><td>Lawyer review first</td></tr>
-    <tr><td>Buildout budget</td><td>Louis</td><td>Over budget = push to you</td></tr>
-    <tr><td>Opening date</td><td>Louis</td><td>—</td></tr>
+    <tr><td>Which location<div class="td-en">选哪个点</div></td><td>Louis</td><td>—</td></tr>
+    <tr><td>Send LOI<div class="td-en">发LOI</div></td><td>Louis</td><td>Hermes generates, you review · Hermes生成你审</td></tr>
+    <tr><td>Sign lease<div class="td-en">签租约</div></td><td>Louis</td><td>Lawyer review first · 先过律师</td></tr>
+    <tr><td>Buildout budget<div class="td-en">装修预算</div></td><td>Louis</td><td>Over budget = push to you · 超预算推你</td></tr>
+    <tr><td>Opening date<div class="td-en">开业日期</div></td><td>Louis</td><td>—</td></tr>
   </table>
 
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>Open new store</td><td><span class="say" onclick="copySay(this)">LOI 123 Main St Wilmington NC</span></td></tr>
-    <tr><td>Existing lease</td><td><span class="say" onclick="copySay(this)">lease 00003</span></td></tr>
-    <tr><td>New store progress</td><td><span class="say" onclick="copySay(this)">new store status</span></td></tr>
+    <tr><td>Open new store<div class="td-en">开新店</div></td><td><span class="say" onclick="copySay(this)">LOI 123 Main St Wilmington NC</span></td></tr>
+    <tr><td>Existing lease<div class="td-en">现有租约</div></td><td><span class="say" onclick="copySay(this)">lease 00003</span></td></tr>
+    <tr><td>New store progress<div class="td-en">新店进度</div></td><td><span class="say" onclick="copySay(this)">new store status</span></td></tr>
   </table>
 
   <div class="sec-title">当前店铺 <span class="sec-title-en">· Current Stores</span></div>
   <table>
-    <tr><th>#</th><th>Brand</th><th>City</th><th>Status</th></tr>
-    <tr><td>00001</td><td>Gangnam</td><td>Fayetteville</td><td><span class="badge badge-green">✅ Open</span></td></tr>
-    <tr><td>00002</td><td>Masa</td><td>Greenville</td><td><span class="badge badge-green">✅ Open</span></td></tr>
-    <tr><td>00003</td><td>Gangnam</td><td>Wilmington</td><td><span class="badge badge-green">✅ Open</span></td></tr>
-    <tr><td>00004</td><td>Low Country</td><td>Wilmington</td><td><span class="badge badge-green">✅ Open</span></td></tr>
-    <tr><td>00005</td><td>Masa</td><td>Greenville</td><td><span class="badge badge-green">✅ Open</span></td></tr>
+    <tr><th>#</th><th>Brand · 品牌</th><th>City · 城市</th><th>Status · 状态</th></tr>
+    <tr><td>00001</td><td>Gangnam</td><td>Fayetteville</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
+    <tr><td>00002</td><td>Masa</td><td>Greenville</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
+    <tr><td>00003</td><td>Gangnam</td><td>Wilmington</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
+    <tr><td>00004</td><td>Low Country</td><td>Wilmington</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
+    <tr><td>00005</td><td>Masa</td><td>Greenville</td><td><span class="badge badge-green">✅ Open 营业中</span></td></tr>
   </table>
 </div>
 
@@ -560,18 +563,18 @@ tr:hover { background:#f0f4f8; }
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
     <tr><th style="width:30%">Action</th><th style="width:30%">Decides</th><th style="width:40%">Note</th></tr>
-    <tr><td>Marketing budget</td><td>Louis</td><td>—</td></tr>
-    <tr><td>Reply to bad review</td><td>GM</td><td>Content pushed to Louis</td></tr>
-    <tr><td>Change brand/Logo/menu</td><td>Louis</td><td>—</td></tr>
-    <tr><td>Coupons / campaigns</td><td>Louis</td><td>—</td></tr>
+    <tr><td>Marketing budget<div class="td-en">市场预算</div></td><td>Louis</td><td>—</td></tr>
+    <tr><td>Reply to bad review<div class="td-en">回差评</div></td><td>GM</td><td>Content pushed to Louis · 内容推Louis</td></tr>
+    <tr><td>Change brand/Logo/menu<div class="td-en">改品牌/Logo/菜单</div></td><td>Louis</td><td>—</td></tr>
+    <tr><td>Coupons / campaigns<div class="td-en">优惠券 / 活动</div></td><td>Louis</td><td>—</td></tr>
   </table>
 
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>Store Google reviews</td><td><span class="say" onclick="copySay(this)">reviews 00003</span></td></tr>
-    <tr><td>All store reviews</td><td><span class="say" onclick="copySay(this)">all reviews</span></td></tr>
-    <tr><td>Store rating</td><td><span class="say" onclick="copySay(this)">rating 00003</span></td></tr>
+    <tr><td>Store Google reviews<div class="td-en">店Google评论</div></td><td><span class="say" onclick="copySay(this)">reviews 00003</span></td></tr>
+    <tr><td>All store reviews<div class="td-en">所有店评论</div></td><td><span class="say" onclick="copySay(this)">all reviews</span></td></tr>
+    <tr><td>Store rating<div class="td-en">店评分</div></td><td><span class="say" onclick="copySay(this)">rating 00003</span></td></tr>
   </table>
 </div>
 
@@ -595,11 +598,11 @@ tr:hover { background:#f0f4f8; }
   <div class="card">
     <ol class="workflow">
       <li><strong>Hermes</strong> — The only worker. Skills = how to do work. Cron = when to do work. No other agents. / 唯一worker</li>
-      <li><strong>Slack Management</strong> — Add/remove people → Louis clicks in Slack → Hermes checks managers in store channels</li>
-      <li><strong>Key Management</strong> — New API key → save to 1Password → sync to .env → auto-check every 6 hrs</li>
-      <li><strong>Database</strong> — Brain (Supabase) = single source of truth → schema changes via supabase CLI → never hand-edit</li>
-      <li><strong>Security</strong> — Unknown sender → ignored ($0) → permission changes in 4 places → restart gateway</li>
-      <li><strong>Work Quality</strong> — 1AM auto-runs 10 rules scorecard → posts to #02-exec</li>
+      <li><strong>Slack Management · Slack管理</strong> — Add/remove people → Louis clicks in Slack → Hermes checks managers in store channels / 加人删人Louis点，Hermes查经理频道</li>
+      <li><strong>Key Management · 密钥管理</strong> — New API key → save to 1Password → sync to .env → auto-check every 6 hrs / 新密钥先存1Password再同步</li>
+      <li><strong>Database · 数据库</strong> — Brain (Supabase) = single source of truth → schema changes via supabase CLI → never hand-edit / Brain唯一真相，改结构用CLI</li>
+      <li><strong>Security · 安全</strong> — Unknown sender → ignored ($0) → permission changes in 4 places → restart gateway / 陌生人忽略，改权限4处+重启</li>
+      <li><strong>Work Quality · 工作质量</strong> — 1AM auto-runs 10 rules scorecard → posts to #02-exec / 凌晨1点跑10条规矩评分</li>
     </ol>
   </div>
 
@@ -629,20 +632,20 @@ tr:hover { background:#f0f4f8; }
   <div class="sec-title">谁拍板什么 <span class="sec-title-en">· Who Decides What</span></div>
   <table>
     <tr><th style="width:30%">Action</th><th style="width:30%">Decides</th><th style="width:40%">Note</th></tr>
-    <tr><td>Change settings/code</td><td>Louis only</td><td>—</td></tr>
-    <tr><td>Add/remove Slack people</td><td>Louis clicks → Hermes executes</td><td>—</td></tr>
-    <tr><td>Change permissions</td><td>Louis</td><td>4 places + restart</td></tr>
-    <tr><td>New API key</td><td>Louis</td><td>Save to 1Password</td></tr>
-    <tr><td>Change DB schema</td><td>Louis</td><td>Use supabase CLI</td></tr>
+    <tr><td>Change settings/code<div class="td-en">改设置/代码</div></td><td>Louis only</td><td>—</td></tr>
+    <tr><td>Add/remove Slack people<div class="td-en">加/删 Slack 人</div></td><td>Louis clicks → Hermes executes · Louis点，Hermes执行</td><td>—</td></tr>
+    <tr><td>Change permissions<div class="td-en">改权限</div></td><td>Louis</td><td>4 places + restart · 4个地方+重启</td></tr>
+    <tr><td>New API key<div class="td-en">新API密钥</div></td><td>Louis</td><td>Save to 1Password · 先存1Password</td></tr>
+    <tr><td>Change DB schema<div class="td-en">改数据库结构</div></td><td>Louis</td><td>Use supabase CLI · 用supabase CLI</td></tr>
   </table>
 
   <div class="sec-title">怎么查 <span class="sec-title-en">· How to Check</span></div>
   <table>
     <tr><th style="width:40%">Want to know</th><th style="width:60%">Say</th></tr>
-    <tr><td>Hermes health</td><td><span class="say" onclick="copySay(this)">hermes status</span></td></tr>
-    <tr><td>Any broken crons</td><td><span class="say" onclick="copySay(this)">check my work</span> (auto 1AM)</td></tr>
-    <tr><td>Managers in channels</td><td><span class="say" onclick="copySay(this)">check managers in slack</span></td></tr>
-    <tr><td>AI cost</td><td>8AM auto report</td></tr>
+    <tr><td>Hermes health<div class="td-en">Hermes健康</div></td><td><span class="say" onclick="copySay(this)">hermes status</span></td></tr>
+    <tr><td>Any broken crons<div class="td-en">有没有坏定时任务</div></td><td><span class="say" onclick="copySay(this)">check my work</span> (auto 1AM)</td></tr>
+    <tr><td>Managers in channels<div class="td-en">经理在不在频道</div></td><td><span class="say" onclick="copySay(this)">check managers in slack</span></td></tr>
+    <tr><td>AI cost<div class="td-en">AI花费</div></td><td>8AM auto report · 早8点自动报</td></tr>
   </table>
 
   <div class="sec-title">自动跑的 <span class="sec-title-en">· Automated</span></div>
@@ -663,14 +666,14 @@ tr:hover { background:#f0f4f8; }
 
   <div class="sec-title">老板该做 vs 不该做 <span class="sec-title-en">· Boss Should vs Should Not Do</span></div>
   <table>
-    <tr><th style="width:50%">✅ Should Do (Boss Work)</th><th style="width:50%">❌ Should Not Do (GM/Floor Work)</th></tr>
-    <tr><td>Hire & recruit managers</td><td>Scheduling (GM does this)</td></tr>
-    <tr><td>Approve money (≥$500, bank, tax)</td><td>Buy food (Yumi + GM do this)</td></tr>
-    <tr><td>Set direction (new stores, brands)</td><td>Handle customer complaints (GM does this)</td></tr>
-    <tr><td>Read reports (5 min/day scan Slack)</td><td>Fix equipment (Ops does this)</td></tr>
-    <tr><td>Set SOPs & rules</td><td>Watch POS daily (Hermes auto does this)</td></tr>
-    <tr><td>Fire/promote decisions</td><td>Coach staff (Coach Sally does this)</td></tr>
-    <tr><td>Sign leases, negotiate landlords</td><td>Reply to Google reviews (GM does this)</td></tr>
+    <tr><th style="width:50%">✅ Should Do · 该做 (Boss Work · 老板活)</th><th style="width:50%">❌ Should Not Do · 不该做 (GM/Floor Work · 店长/前厅活)</th></tr>
+    <tr><td>Hire & recruit managers · 招/培养经理</td><td>Scheduling · 排班（GM做）</td></tr>
+    <tr><td>Approve money (≥$500, bank, tax) · 批钱</td><td>Buy food · 买食材（Yumi+GM做）</td></tr>
+    <tr><td>Set direction (new stores, brands) · 定方向</td><td>Handle customer complaints · 处理客诉（GM做）</td></tr>
+    <tr><td>Read reports (5 min/day scan Slack) · 看报告</td><td>Fix equipment · 修设备（Ops做）</td></tr>
+    <tr><td>Set SOPs & rules · 定SOP和规矩</td><td>Watch POS daily · 天天盯POS（Hermes自动）</td></tr>
+    <tr><td>Fire/promote decisions · 开除/升职决定</td><td>Coach staff · 带员工（Coach Sally做）</td></tr>
+    <tr><td>Sign leases, negotiate landlords · 签租约/谈房东</td><td>Reply to Google reviews · 回Google评论（GM做）</td></tr>
   </table>
 
   <div class="sec-title">每天 5 分钟老板节奏 <span class="sec-title-en">· 5-Min Daily Boss Routine</span></div>
@@ -686,18 +689,18 @@ tr:hover { background:#f0f4f8; }
     <ol class="workflow">
       <li><strong>Which store is worst?</strong> → <span class="say" onclick="copySay(this)">which store is worst</span> → why → fix next week</li>
       <li><strong>Who to hire / fire?</strong> → <span class="say" onclick="copySay(this)">hiring status</span> + <span class="say" onclick="copySay(this)">roster</span> → hire if short, manage if weak</li>
-      <li><strong>Is money right?</strong> → check monthly report → investigate if over budget</li>
-      <li><strong>What's next?</strong> → New store? New brand? Or fix current first?</li>
+      <li><strong>Is money right? · 钱对不对</strong> — check monthly report → investigate if over budget / 看月报，超了就查</li>
+      <li><strong>What's next? · 下一步</strong> — New store? New brand? Or fix current first? / 新店？新品牌？还是先修现有？</li>
     </ol>
   </div>
 
   <div class="sec-title">每月做一次 <span class="sec-title-en">· Monthly Do</span></div>
   <div class="card">
     <ol class="workflow">
-      <li>Review company P&L → which stores are profitable?</li>
-      <li>Review all manager performance → reward good, manage weak</li>
-      <li>Check lease expiry dates → renew early or relocate</li>
-      <li>Review Hermes monthly report → system health</li>
+      <li><strong>Review company P&L · 看公司盈亏</strong> — which stores are profitable? / 哪家店赚钱？</li>
+      <li><strong>Review all manager performance · 看所有经理表现</strong> — reward good, manage weak / 好的奖，弱的管</li>
+      <li><strong>Check lease expiry dates · 查租约到期</strong> — renew early or relocate / 提前续约或换址</li>
+      <li><strong>Review Hermes monthly report · 看Hermes月报</strong> — system health / 系统健康</li>
     </ol>
   </div>
 
@@ -712,7 +715,7 @@ tr:hover { background:#f0f4f8; }
 
 </div>
 
-<div class="footer">Wiserise Hospitality Group · Internal Use · 2026-07-21 · Hermes Artifact · Bilingual EN/中文 · v3.1</div>
+<div class="footer">Wiserise Hospitality Group · Internal Use · 2026-07-21 · Hermes Artifact · Bilingual EN/中文 · v3.2 full bilingual</div>
 
 <script>
 function showPage(id, btn) {
