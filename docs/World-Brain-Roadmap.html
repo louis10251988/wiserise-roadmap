@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiserise World Brain Roadmap · 公司大脑架构路线图</title>
+<style>
+:root {
+  --bg:#fafbfc; --card:#fff; --ink:#111827; --muted:#6b7280; --muted-light:#9ca3af;
+  --brand:#0f172a; --accent:#3b82f6;
+  --green:#059669; --green-bg:#ecfdf5;
+  --yellow:#d97706; --yellow-bg:#fffbeb;
+  --red:#dc2626; --red-bg:#fef2f2;
+  --blue:#2563eb; --blue-bg:#eff6ff;
+  --purple:#7c3aed; --purple-bg:#f5f3ff;
+  --border:#e5e7eb; --border-light:#f3f4f6;
+  --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.04); --shadow-lg:0 4px 16px rgba(0,0,0,.08);
+  --orange:#e75e2e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.zh{display:none}
+body.lang-zh .zh{display:inline}
+body.lang-zh .en{display:none}
+body.lang-both .zh{display:inline}
+body.lang-both .en{display:inline}
+.en{display:inline}
+
+.topbar{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;padding:16px 28px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto;gap:16px}
+.topbar h1{font-size:17px;font-weight:700}
+.topbar .sub{font-size:11.5px;opacity:.65;margin-top:2px}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden;flex-shrink:0}
+.lang-btn{padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer;transition:.15s}
+.lang-btn.active{background:rgba(255,255,255,.15);color:#fff}
+.lang-btn:hover{color:#fff}
+
+.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto}
+.tab{padding:11px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap;transition:.15s}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--brand);border-bottom-color:var(--brand)}
+
+.content{max-width:1040px;margin:0 auto;padding:24px 20px 80px}
+.page{display:none;animation:fadeIn .2s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+.page-h{font-size:22px;font-weight:800;color:var(--brand);margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.pareto{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:16px 18px;margin-bottom:18px;font-size:13.5px}
+.pareto strong{color:var(--brand)}
+.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+th{background:var(--brand);color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:11.5px}
+td{border-bottom:1px solid var(--border-light);padding:9px 10px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f9fafb}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card-title{font-size:15px;font-weight:700;color:var(--brand);margin-bottom:6px}
+
+.box{border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:12.5px;line-height:1.5;border:1px solid}
+.box-rule{background:var(--yellow-bg);border-color:#fde68a}
+.box-auto{background:var(--blue-bg);border-color:#bfdbfe}
+.box-gate{background:var(--green-bg);border-color:#a7f3d0}
+.box-red{background:var(--red-bg);border-color:#fecaca}
+.box-purple{background:var(--purple-bg);border-color:#ddd6fe}
+
+.badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:600}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-yellow{background:var(--yellow-bg);color:var(--yellow)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-purple{background:var(--purple-bg);color:var(--purple)}
+.badge-gate{background:#fff;border:1.5px solid var(--green);color:var(--green)}
+
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px;font-size:12px}
+.flow-step{background:var(--brand);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap;border:none}
+.flow-arrow{color:var(--muted-light);font-size:14px}
+.flow-gate{background:var(--green);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+
+.layer-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+.layer-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);cursor:pointer;transition:.15s}
+.layer-card:hover{box-shadow:var(--shadow-lg);border-color:var(--accent)}
+.layer-num{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:4px}
+.layer-name{font-size:16px;font-weight:800;color:var(--brand);margin-bottom:6px}
+.layer-desc{font-size:12.5px;color:var(--ink);line-height:1.45;margin-bottom:8px}
+
+.id-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.id-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);text-align:center}
+.id-card .id-icon{font-size:32px;margin-bottom:8px}
+.id-card .id-title{font-size:15px;font-weight:800;color:var(--brand);margin-bottom:4px}
+.id-card .id-q{font-size:11px;color:var(--muted);font-style:italic;margin-bottom:8px}
+.id-card .id-body{font-size:12px;color:var(--ink);line-height:1.45;text-align:left}
+
+.phase-timeline{position:relative;padding-left:24px;margin-bottom:20px}
+.phase-timeline::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+.phase-item{position:relative;margin-bottom:16px}
+.phase-item::before{content:"";position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--brand);border:2px solid #fff;box-shadow:0 0 0 2px var(--border)}
+.phase-item.active::before{background:var(--green)}
+.phase-item.future::before{background:var(--muted-light)}
+.phase-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.phase-tag{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase}
+.phase-name{font-size:14px;font-weight:700;color:var(--brand)}
+.phase-body{font-size:12px;color:var(--ink);line-height:1.5}
+.phase-deliver{font-size:11.5px;color:var(--muted);margin-top:4px}
+.phase-gate{font-size:11.5px;color:var(--green);font-weight:600;margin-top:2px}
+
+.score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
+/* Phase checklist cards */
+.pcheck-card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--green);border-radius:10px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.pcheck-card.done{border-left-color:var(--green)}
+.pcheck-card.active{border-left-color:var(--blue)}
+.pcheck-card.next{border-left-color:var(--yellow)}
+.pcheck-card.future{border-left-color:var(--muted-light)}
+.pcheck-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px}
+.pcheck-title{font-size:15px;font-weight:800;color:var(--brand)}
+.pcheck-status{font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px}
+.pcheck-list{list-style:none;padding:0;margin:0}
+.pcheck-list li{display:flex;align-items:flex-start;gap:8px;padding:5px 0;font-size:12.5px;line-height:1.5;border-bottom:1px solid var(--border-light)}
+.pcheck-list li:last-child{border-bottom:none}
+.pcheck-box{width:18px;height:18px;border-radius:4px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px;cursor:pointer;user-select:none;transition:.15s}
+.pcheck-box.checked{background:var(--green);border-color:var(--green);color:#fff}
+.pcheck-box.todo{border-color:var(--muted-light);color:transparent}
+.pcheck-box.todo:hover{border-color:var(--accent)}
+.pcheck-text{flex:1}
+.pcheck-text.done{color:var(--muted);text-decoration:line-through}
+.pcheck-gate{margin-top:10px;padding:8px 12px;background:var(--green-bg);border:1px solid #a7f3d0;border-radius:8px;font-size:12px;font-weight:600;color:var(--green)}
+.score-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;display:flex;align-items:center;gap:12px}
+.score-circle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0}
+.score-text{flex:1}
+.score-name{font-size:13px;font-weight:700;color:var(--brand)}
+.score-pts{font-size:11px;color:var(--muted)}
+
+.ops-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.ops-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);text-align:center}
+.ops-card .oc-icon{font-size:28px;margin-bottom:8px}
+.ops-card .oc-title{font-size:14px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.ops-card .oc-sub{font-size:12px;color:var(--muted);line-height:1.45}
+
+.entity-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:16px}
+.entity-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:11.5px;text-align:center;transition:.15s}
+.entity-chip:hover{border-color:var(--accent);background:var(--blue-bg)}
+.entity-chip .e-name{font-weight:600;color:var(--brand)}
+.entity-chip .e-zh{font-size:10px;color:var(--muted)}
+
+.skill-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:16px}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.skill-card .sk-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.skill-card .sk-name{font-size:14px;font-weight:700;color:var(--brand);font-family:monospace}
+.skill-card .sk-goal{font-size:12px;color:var(--ink);line-height:1.45}
+.skill-card .sk-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+
+.verified{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);background:#f3f4f6;border-radius:999px;padding:3px 10px;margin:0 0 14px}
+.ask-brain{background:#fff;border:1px dashed #93c5fd;border-radius:12px;padding:12px 14px;margin-top:16px;font-size:12.5px}
+.ask-brain strong{color:#2563eb}
+.ask-brain code{background:#eff6ff;padding:1px 6px;border-radius:4px;font-size:12px}
+
+.loop-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.loop-cycle{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:12px;font-size:11.5px}
+.loop-cycle .lc-step{background:var(--brand);color:#fff;padding:5px 10px;border-radius:6px;font-weight:600}
+.loop-cycle .lc-arrow{color:var(--muted-light)}
+
+.success-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.success-card{background:linear-gradient(135deg,var(--blue-bg),var(--purple-bg));border:1px solid #bfdbfe;border-radius:12px;padding:16px;text-align:center}
+.success-card .sc-icon{font-size:28px;margin-bottom:6px}
+.success-card .sc-title{font-size:14px;font-weight:800;color:var(--brand)}
+.success-card .sc-sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+@media(max-width:700px){
+  .layer-grid,.id-grid,.success-grid{grid-template-columns:1fr}
+  .ops-grid,.score-grid{grid-template-columns:1fr 1fr}
+}
+@media print{.tabs,.lang-toggle,.topbar{display:none}.page{display:block!important}}
+</style>
+</head>
+<body class="lang-both">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-row">
+    <div>
+      <h1>🌐 <span class="en">World Brain Roadmap</span><span class="zh">公司大脑架构路线图</span></h1>
+      <div class="sub"><span class="en">Wiserise Hospitality Group · From Hierarchy to Intelligence</span><span class="zh">Wiserise Hospitality Group · 从层级到智能</span></div>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn" onclick="setLang('zh',this)">中文</button>
+      <button class="lang-btn active" onclick="setLang('both',this)">EN+中文</button>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="showPage('slack',this)">💬 <span class="en">Slack</span><span class="zh">Slack</span></button>
+  <button class="tab" onclick="showPage('overview',this)">🌐 <span class="en">Overview</span><span class="zh">总览</span></button>
+  <button class="tab" onclick="showPage('model',this)">🧱 <span class="en">World Model</span><span class="zh">世界模型</span></button>
+  <button class="tab" onclick="showPage('intel',this)">⚡ <span class="en">Intelligence</span><span class="zh">智能层</span></button>
+  <button class="tab" onclick="showPage('caps',this)">🛠️ <span class="en">Capabilities</span><span class="zh">能力层</span></button>
+  <button class="tab" onclick="showPage('surfaces',this)">📱 <span class="en">Surfaces</span><span class="zh">界面层</span></button>
+  <button class="tab" onclick="showPage('identities',this)">👥 <span class="en">Identities</span><span class="zh">三种身份</span></button>
+  <button class="tab" onclick="showPage('roadmap',this)">📅 <span class="en">Roadmap & Checklist</span><span class="zh">路线图+进度</span></button>
+  <button class="tab" onclick="showPage('quality',this)">📋 <span class="en">Quality</span><span class="zh">质量标准</span></button>
+  <button class="tab" onclick="showPage('rules',this)">⚖️ <span class="en">Rules</span><span class="zh">铁律</span></button>
+</div>
+
+<div class="content">
+
+<!-- ════════ SLACK OPS ════════ -->
+<div class="page active" id="slack">
+  <div class="page-h">💬 <span class="en">Slack = the only OS</span><span class="zh">Slack = 唯一操作系统</span></div>
+  <div class="page-sub"><span class="en">Where humans talk to the World Brain</span><span class="zh">人跟公司大脑说话的地方</span></div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
+  <div class="pareto"><strong><span class="en">One rule:</span><span class="zh">一条规矩：</span></strong>
+    <span class="en">Talk in Slack → Brain works → you yes/no on money, fire, big rules.</span>
+    <span class="zh">在Slack说→Brain干活→你拍板钱、人、大规矩。</span></div>
+
+  <div class="sec-title"><span class="en">3 pieces</span><span class="zh">3个件</span></div>
+  <div class="ops-grid">
+    <div class="ops-card">
+      <div class="oc-icon">💬</div>
+      <div class="oc-title"><span class="en">Slack</span><span class="zh">Slack</span></div>
+      <div class="oc-sub"><span class="en">Where you type. Store channels + DM.</span><span class="zh">你打字的地方。店频道+私信。</span></div>
+    </div>
+    <div class="ops-card">
+      <div class="oc-icon">⚡</div>
+      <div class="oc-title"><span class="en">WISE OPS</span><span class="zh">WISE OPS</span></div>
+      <div class="oc-sub"><span class="en">The worker. Skills + cron. Never sleeps.</span><span class="zh">工人。技能+定时。不睡觉。</span></div>
+    </div>
+    <div class="ops-card">
+      <div class="oc-icon">🧠</div>
+      <div class="oc-title"><span class="en">Brain</span><span class="zh">大脑</span></div>
+      <div class="oc-sub"><span class="en">Supabase. The one truth. Every fact.</span><span class="zh">Supabase。唯一真相。每个事实。</span></div>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="en">2 doors</span><span class="zh">2扇门</span></div>
+  <div class="box box-auto"><strong>⚡ WISE OPS</strong> — <span class="en">Store channels. GMs, coaches, staff. Day-to-day work.</span><span class="zh">店频道。GM、教练、员工。日常活。</span></div>
+  <div class="box box-purple"><strong>🧠 WISE BRAIN</strong> — <span class="en">Louis + Luna only. Money, fire, settings, all-store finance.</span><span class="zh">仅Louis+Luna。钱、开除、设置、全公司财务。</span></div>
+
+  <div class="sec-title"><span class="en">The loop (never breaks)</span><span class="zh">循环（永不打破）</span></div>
+  <div class="flow">
+    <span class="flow-step"><span class="en">Event</span><span class="zh">事情发生</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Brain records</span><span class="zh">Brain记录</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Hermes detects</span><span class="zh">Hermes发现</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Slack posts</span><span class="zh">Slack通知</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-gate"><span class="en">Human gate?</span><span class="zh">人拍板?</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Execute</span><span class="zh">执行</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Brain updated</span><span class="zh">Brain更新</span></span>
+  </div>
+
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>store health 00003</code> · <code>which store is worst</code> · <code>roster 00003</code></div>
+</div>
+
+<!-- ════════ OVERVIEW ════════ -->
+<div class="page" id="overview">
+  <div class="page-h">🌐 <span class="en">World Brain Overview</span><span class="zh">公司大脑总览</span></div>
+  <div class="page-sub"><span class="en">4 layers · 3 identities · 1 loop</span><span class="zh">4层架构 · 3种身份 · 1个循环</span></div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
+  <div class="pareto"><strong><span class="en">Core principle:</span><span class="zh">核心原则：</span></strong>
+    <span class="en">AI manages information, analysis, coordination. Humans own judgment, relationships, responsibility, real-world results.</span>
+    <span class="zh">AI管理信息、分析和协调。人负责判断、关系、责任和现实结果。</span></div>
+
+  <div class="sec-title"><span class="en">4-Layer Architecture</span><span class="zh">四层架构</span></div>
+  <div class="layer-grid">
+    <div class="layer-card" onclick="goTab(2)">
+      <div class="layer-num"><span class="en">Layer 1 — Foundation</span><span class="zh">第1层 — 基础</span></div>
+      <div class="layer-name">🧱 <span class="en">World Model</span><span class="zh">世界模型</span></div>
+      <div class="layer-desc"><span class="en">The company's complete state: entities, relationships, history, trust levels. Not a database — a living model of reality.</span><span class="zh">公司的完整状态：实体、关系、历史、可信度。不是数据库——是活着的现实模型。</span></div>
+    </div>
+    <div class="layer-card" onclick="goTab(3)">
+      <div class="layer-num"><span class="en">Layer 2 — Thinking</span><span class="zh">第2层 — 思考</span></div>
+      <div class="layer-name">⚡ <span class="en">Intelligence Layer</span><span class="zh">智能层</span></div>
+      <div class="layer-desc"><span class="en">Detects anomalies, judges severity, finds causes, recommends actions. Knows when to act alone vs. ask humans.</span><span class="zh">发现异常、判断严重程度、找原因、推荐行动。知道什么时候自己做、什么时候问人。</span></div>
+    </div>
+    <div class="layer-card" onclick="goTab(4)">
+      <div class="layer-num"><span class="en">Layer 3 — Doing</span><span class="zh">第3层 — 行动</span></div>
+      <div class="layer-name">🛠️ <span class="en">Capabilities</span><span class="zh">能力层</span></div>
+      <div class="layer-desc"><span class="en">Repeatable abilities: hire, onboard, schedule, analyze, control cost. Not departments — skills that cross org lines.</span><span class="zh">可重复的能力：招聘、入职、排班、分析、控成本。不是部门——是跨组织的能力。</span></div>
+    </div>
+    <div class="layer-card" onclick="goTab(5)">
+      <div class="layer-num"><span class="en">Layer 4 — Interface</span><span class="zh">第4层 — 界面</span></div>
+      <div class="layer-name">📱 <span class="en">Surfaces</span><span class="zh">界面层</span></div>
+      <div class="layer-desc"><span class="en">Where humans interact: Slack channels, DMs, forms, alerts, approvals, daily reports, weekly reviews.</span><span class="zh">人互动的地方：Slack频道、私信、表单、提醒、审批、日报、周报。</span></div>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="en">3 Responsibility Identities</span><span class="zh">3种责任身份</span></div>
+  <div class="id-grid">
+    <div class="id-card" onclick="goTab(6)">
+      <div class="id-icon">🔧</div>
+      <div class="id-title"><span class="en">IC</span><span class="zh">执行者</span></div>
+      <div class="id-q"><span class="en">"Who actually does the work?"</span><span class="zh">"谁真正干活？"</span></div>
+      <div class="id-body"><span class="en">Server, cook, recruiter, accountant, AGM, AI Agent. Every action has a clear executor.</span><span class="zh">服务员、厨师、招聘员、会计、AGM、AI Agent。每个动作有明确执行者。</span></div>
+    </div>
+    <div class="id-card" onclick="goTab(6)">
+      <div class="id-icon">🎯</div>
+      <div class="id-title"><span class="en">DRI</span><span class="zh">结果负责人</span></div>
+      <div class="id-q"><span class="en">"If it's not done, who's accountable?"</span><span class="zh">"没完成，最后找谁？"</span></div>
+      <div class="id-body"><span class="en">Only ONE per result. Owns outcome, not just task. Has goal, deadline, metric, authority.</span><span class="zh">每个结果只有一个。对结果负责，不只对动作。有目标、截止、指标、权限。</span></div>
+    </div>
+    <div class="id-card" onclick="goTab(6)">
+      <div class="id-icon">🎓</div>
+      <div class="id-title"><span class="en">Player-Coach</span><span class="zh">教练型领导</span></div>
+      <div class="id-q"><span class="en">"When they can't, who teaches them?"</span><span class="zh">"不会做时，谁教？"</span></div>
+      <div class="id-body"><span class="en">Knows the work, observes, finds gaps, demonstrates, lets them practice, checks mastery.</span><span class="zh">懂这活、会观察、找缺口、亲自示范、让对方练、检查是否学会。</span></div>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="en">The One Loop</span><span class="zh">唯一循环</span></div>
+  <div class="flow">
+    <span class="flow-step"><span class="en">Business event</span><span class="zh">业务发生</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Data enters Brain</span><span class="zh">数据进Brain</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">AI finds issue/opportunity</span><span class="zh">AI发现机会/问题</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Finds the one DRI</span><span class="zh">找到唯一负责人</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Human or Agent acts</span><span class="zh">人或Agent执行</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Coach corrects</span><span class="zh">教练纠正</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Check result</span><span class="zh">检查结果</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Write back to Brain</span><span class="zh">经验写回Brain</span></span>
+  </div>
+
+  <div class="sec-title"><span class="en">Ultimate success state</span><span class="zh">最终成功状态</span></div>
+  <div class="success-grid">
+    <div class="success-card"><div class="sc-icon">👁️</div><div class="sc-title"><span class="en">See clearly</span><span class="zh">看得见</span></div><div class="sc-sub"><span class="en">What's happening now</span><span class="zh">现在发生什么</span></div></div>
+    <div class="success-card"><div class="sc-icon">🧠</div><div class="sc-title"><span class="en">Think clearly</span><span class="zh">想得清</span></div><div class="sc-sub"><span class="en">Why it's happening</span><span class="zh">为什么发生</span></div></div>
+    <div class="success-card"><div class="sc-icon">🎯</div><div class="sc-title"><span class="en">Find the one</span><span class="zh">找对人</span></div><div class="sc-sub"><span class="en">Who owns it</span><span class="zh">谁负责</span></div></div>
+    <div class="success-card"><div class="sc-icon">⚡</div><div class="sc-title"><span class="en">Act</span><span class="zh">做得动</span></div><div class="sc-sub"><span class="en">Move on it</span><span class="zh">行动起来</span></div></div>
+    <div class="success-card"><div class="sc-icon">✅</div><div class="sc-title"><span class="en">Check results</span><span class="zh">查结果</span></div><div class="sc-sub"><span class="en">Did it work?</span><span class="zh">有效吗？</span></div></div>
+    <div class="success-card"><div class="sc-icon">📚</div><div class="sc-title"><span class="en">Learn</span><span class="zh">学得会</span></div><div class="sc-sub"><span class="en">Get smarter</span><span class="zh">越做越聪明</span></div></div>
+  </div>
+
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>what is the world model</code> · <code>show me the 4 layers</code></div>
+</div>
+
+<!-- ════════ WORLD MODEL ════════ -->
+<div class="page" id="model">
+  <div class="page-h">🧱 <span class="en">World Model</span><span class="zh">世界模型</span></div>
+  <div class="page-sub"><span class="en">Layer 1 — The company's living reality</span><span class="zh">第1层 — 公司活着的现实</span></div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
+  <div class="pareto"><strong><span class="en">Not a database.</span><span class="zh">不是数据库。</span></strong>
+    <span class="en">A world model knows entities, relationships, current state, history, trust, and staleness. It's how the company "sees" itself.</span>
+    <span class="zh">世界模型知道实体、关系、当前状态、历史、可信度、过期。是公司"看自己"的方式。</span></div>
+
+  <div class="sec-title"><span class="en">8 questions a world model answers</span><span class="zh">世界模型回答8个问题</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">Question</span><span class="zh">问题</span></th><th><span class="en">WiseRise example</span><span class="zh">餐厅例子</span></th></tr>
+    <tr><td>1</td><td><span class="en">What entities exist?</span><span class="zh">有哪些实体？</span></td><td><span class="en">Store 00003, Server Priya, Shift Tue-PM</span><span class="zh">00003店、服务员小美、周二晚班</span></td></tr>
+    <tr><td>2</td><td><span class="en">How are they related?</span><span class="zh">什么关系？</span></td><td><span class="en">Priya → reports to → GM Levi → Store 00003</span><span class="zh">小美→汇报→GM Levi→00003店</span></td></tr>
+    <tr><td>3</td><td><span class="en">What's the current state?</span><span class="zh">当前状态？</span></td><td><span class="en">00003 labor = 19.2% (target 18%)</span><span class="zh">00003人工=19.2%（目标18%）</span></td></tr>
+    <tr><td>4</td><td><span class="en">What changed?</span><span class="zh">变化历史？</span></td><td><span class="en">Labor was 17.8% last week → 19.2% this week</span><span class="zh">人工上周17.8%→本周19.2%</span></td></tr>
+    <tr><td>5</td><td><span class="en">Is this data trusted?</span><span class="zh">数据可信吗？</span></td><td><span class="en">POS sales = trusted (auto). Slack rumor = unverified.</span><span class="zh">POS销售=可信(自动)。Slack传闻=未验证。</span></td></tr>
+    <tr><td>6</td><td><span class="en">Is there conflict?</span><span class="zh">有冲突吗？</span></td><td><span class="en">7shifts says 5 servers, Brain says 4 active</span><span class="zh">7shifts说5个服务员，Brain说4个在职</span></td></tr>
+    <tr><td>7</td><td><span class="en">Is data stale?</span><span class="zh">数据过期吗？</span></td><td><span class="en">Roster last synced 3 days ago → stale</span><span class="zh">人数上次同步3天前→过期</span></td></tr>
+    <tr><td>8</td><td><span class="en">Who owns this?</span><span class="zh">谁负责？</span></td><td><span class="en">Labor % → DRI = GM Levi</span><span class="zh">人工%→负责人=GM Levi</span></td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">Core entities (25+)</span><span class="zh">核心实体（25+）</span></div>
+  <div class="entity-grid">
+    <div class="entity-chip"><div class="e-name">Organization</div><div class="e-zh"><span class="zh">组织</span></div></div>
+    <div class="entity-chip"><div class="e-name">Brand</div><div class="e-zh"><span class="zh">品牌</span></div></div>
+    <div class="entity-chip"><div class="e-name">Region</div><div class="e-zh"><span class="zh">地区</span></div></div>
+    <div class="entity-chip"><div class="e-name">Area</div><div class="e-zh"><span class="zh">区域</span></div></div>
+    <div class="entity-chip"><div class="e-name">Location</div><div class="e-zh"><span class="zh">门店</span></div></div>
+    <div class="entity-chip"><div class="e-name">Department</div><div class="e-zh"><span class="zh">部门</span></div></div>
+    <div class="entity-chip"><div class="e-name">Employee</div><div class="e-zh"><span class="zh">员工</span></div></div>
+    <div class="entity-chip"><div class="e-name">Role</div><div class="e-zh"><span class="zh">岗位</span></div></div>
+    <div class="entity-chip"><div class="e-name">Permission</div><div class="e-zh"><span class="zh">权限</span></div></div>
+    <div class="entity-chip"><div class="e-name">Skill</div><div class="e-zh"><span class="zh">技能</span></div></div>
+    <div class="entity-chip"><div class="e-name">Certification</div><div class="e-zh"><span class="zh">证书</span></div></div>
+    <div class="entity-chip"><div class="e-name">Training</div><div class="e-zh"><span class="zh">培训</span></div></div>
+    <div class="entity-chip"><div class="e-name">Shift</div><div class="e-zh"><span class="zh">班次</span></div></div>
+    <div class="entity-chip"><div class="e-name">Attendance</div><div class="e-zh"><span class="zh">考勤</span></div></div>
+    <div class="entity-chip"><div class="e-name">SalesRecord</div><div class="e-zh"><span class="zh">销售记录</span></div></div>
+    <div class="entity-chip"><div class="e-name">LaborRecord</div><div class="e-zh"><span class="zh">人工记录</span></div></div>
+    <div class="entity-chip"><div class="e-name">Inventory</div><div class="e-zh"><span class="zh">库存</span></div></div>
+    <div class="entity-chip"><div class="e-name">CustomerComplaint</div><div class="e-zh"><span class="zh">客诉</span></div></div>
+    <div class="entity-chip"><div class="e-name">Equipment</div><div class="e-zh"><span class="zh">设备</span></div></div>
+    <div class="entity-chip"><div class="e-name">Task</div><div class="e-zh"><span class="zh">任务</span></div></div>
+    <div class="entity-chip"><div class="e-name">SOP</div><div class="e-zh"><span class="zh">SOP</span></div></div>
+    <div class="entity-chip"><div class="e-name">Policy</div><div class="e-zh"><span class="zh">政策</span></div></div>
+    <div class="entity-chip"><div class="e-name">Incident</div><div class="e-zh"><span class="zh">事件</span></div></div>
+    <div class="entity-chip"><div class="e-name">Risk</div><div class="e-zh"><span class="zh">风险</span></div></div>
+    <div class="entity-chip"><div class="e-name">Decision</div><div class="e-zh"><span class="zh">决策</span></div></div>
+    <div class="entity-chip"><div class="e-name">Goal</div><div class="e-zh"><span class="zh">目标</span></div></div>
+    <div class="entity-chip"><div class="e-name">Metric</div><div class="e-zh"><span class="zh">指标</span></div></div>
+    <div class="entity-chip"><div class="e-name">DRI</div><div class="e-zh"><span class="zh">负责人</span></div></div>
+    <div class="entity-chip"><div class="e-name">ExecutionLog</div><div class="e-zh"><span class="zh">执行记录</span></div></div>
+    <div class="entity-chip"><div class="e-name">Outcome</div><div class="e-zh"><span class="zh">最终结果</span></div></div>
+  </div>
+
+  <div class="sec-title"><span class="en">Single source of truth by data type</span><span class="zh">按数据类型的唯一真相源</span></div>
+  <table>
+    <tr><th><span class="en">Data type</span><span class="zh">数据类型</span></th><th><span class="en">Source of truth</span><span class="zh">真相源</span></th><th><span class="en">Rule</span><span class="zh">规矩</span></th></tr>
+    <tr><td><span class="en">Structured company data</span><span class="zh">结构化公司数据</span></td><td><strong>Supabase</strong></td><td><span class="en">Brain = one ledger</span><span class="zh">Brain=一本账</span></td></tr>
+    <tr><td><span class="en">Files / original evidence</span><span class="zh">文件/原始证据</span></td><td><strong>Google Drive</strong></td><td><span class="en">Originals only</span><span class="zh">只存原件</span></td></tr>
+    <tr><td><span class="en">SOPs / knowledge</span><span class="zh">SOP/知识</span></td><td><strong>Obsidian</strong></td><td><span class="en">Approved wiki</span><span class="zh">批准的知识库</span></td></tr>
+    <tr><td><span class="en">Schedule / attendance</span><span class="zh">排班/考勤</span></td><td><strong>7shifts</strong></td><td><span class="en">Authority system</span><span class="zh">权威系统</span></td></tr>
+    <tr><td><span class="en">Recruiting</span><span class="zh">招聘</span></td><td><strong>Workstream</strong></td><td><span class="en">Pipeline source</span><span class="zh">管道来源</span></td></tr>
+    <tr><td><span class="en">Payroll</span><span class="zh">工资</span></td><td><strong>Gusto</strong></td><td><span class="en">Pay authority</span><span class="zh">发薪权威</span></td></tr>
+    <tr><td><span class="en">Accounting</span><span class="zh">会计</span></td><td><strong>QuickBooks</strong></td><td><span class="en">Books authority</span><span class="zh">账本权威</span></td></tr>
+    <tr><td><span class="en">Inventory / food cost</span><span class="zh">库存/食材成本</span></td><td><strong>MarginEdge</strong></td><td><span class="en">Cost authority</span><span class="zh">成本权威</span></td></tr>
+    <tr><td><span class="en">Sales</span><span class="zh">销售</span></td><td><strong>POS</strong></td><td><span class="en">Auto-imported</span><span class="zh">自动导入</span></td></tr>
+    <tr><td><span class="en">Communication</span><span class="zh">沟通</span></td><td><strong>Slack</strong></td><td><span class="en">OS, NOT truth source</span><span class="zh">操作系统，非真相源</span></td></tr>
+  </table>
+  <div class="box box-red"><strong>⛔</strong> <span class="en">Slack chat is NEVER the final truth. It provides event clues — key data must be verified and written to the authority system.</span><span class="zh">Slack聊天永不是最终真相。它提供事件线索——关键数据必须验证后写入权威系统。</span></div>
+
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>show me store 00003 entities</code> · <code>data health check</code></div>
+</div>
+
+<!-- ════════ INTELLIGENCE LAYER ════════ -->
+<div class="page" id="intel">
+  <div class="page-h">⚡ <span class="en">Intelligence Layer</span><span class="zh">智能层</span></div>
+  <div class="page-sub"><span class="en">Layer 2 — How AI sees, thinks, decides</span><span class="zh">第2层 — AI怎么看、怎么想、怎么决定</span></div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
+  <div class="pareto"><strong><span class="en">The job:</span><span class="zh">任务：</span></strong>
+    <span class="en">Detect what matters. Ignore noise. Find the right person. Recommend the right action. Know when to act vs. ask.</span>
+    <span class="zh">发现重要的。忽略噪音。找对人。推荐对的事。知道何时做、何时问。</span></div>
+
+  <div class="sec-title"><span class="en">10 questions the intelligence layer answers</span><span class="zh">智能层回答10个问题</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">Question</span><span class="zh">问题</span></th><th><span class="en">How</span><span class="zh">怎么做</span></th></tr>
+    <tr><td>1</td><td><span class="en">How does AI find anomalies?</span><span class="zh">如何发现异常？</span></td><td><span class="en">Compare actual vs. expected (thresholds, trends, baselines)</span><span class="zh">实际对比预期（阈值、趋势、基线）</span></td></tr>
+    <tr><td>2</td><td><span class="en">Normal change vs. real problem?</span><span class="zh">正常变化还是真问题？</span></td><td><span class="en">Context: seasonality, events, one-off vs. pattern</span><span class="zh">上下文：季节性、事件、一次还是模式</span></td></tr>
+    <tr><td>3</td><td><span class="en">How severe?</span><span class="zh">多严重？</span></td><td><span class="en">Impact on revenue, safety, compliance, people</span><span class="zh">对收入、安全、合规、人的影响</span></td></tr>
+    <tr><td>4</td><td><span class="en">Possible causes?</span><span class="zh">可能原因？</span></td><td><span class="en">Correlate with schedule, menu, weather, staffing, history</span><span class="zh">关联排班、菜单、天气、人手、历史</span></td></tr>
+    <tr><td>5</td><td><span class="en">What action?</span><span class="zh">推荐什么？</span></td><td><span class="en">Match pattern to known solution. Rank options.</span><span class="zh">模式匹配已知方案。排序选项。</span></td></tr>
+    <tr><td>6</td><td><span class="en">Auto-execute?</span><span class="zh">自动执行？</span></td><td><span class="en">If no money, no fire, no rule break → yes</span><span class="zh">不碰钱、不开人、不坏规矩→可以</span></td></tr>
+    <tr><td>7</td><td><span class="en">Must ask human?</span><span class="zh">必须问人？</span></td><td><span class="en">Money, fire, broken rule, new pattern → always</span><span class="zh">钱、开除、坏了规矩、新模式→永远问</span></td></tr>
+    <tr><td>8</td><td><span class="en">Who's the DRI?</span><span class="zh">谁是负责人？</span></td><td><span class="en">Trace entity → role → person. One name only.</span><span class="zh">追溯实体→岗位→人。只有一个名字。</span></td></tr>
+    <tr><td>9</td><td><span class="en">Is it resolved?</span><span class="zh">解决了吗？</span></td><td><span class="en">Track to closure. Re-check metric after action.</span><span class="zh">跟踪到关闭。行动后复查指标。</span></td></tr>
+    <tr><td>10</td><td><span class="en">Learn from this?</span><span class="zh">学到什么？</span></td><td><span class="en">Store outcome. Pattern match next time.</span><span class="zh">存结果。下次模式匹配。</span></td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">Auto vs. Human gate</span><span class="zh">自动 vs 人工</span></div>
+  <div class="box box-auto"><strong>⚡ <span class="en">Auto-execute</span><span class="zh">自动执行</span></strong>
+    <span class="en">Daily reports · roster sync · data health check · POS import · fraud flag · form routing · SOP lookup</span>
+    <span class="zh">日报·人数同步·数据健康·POS导入·作弊标记·表单分发·SOP查询</span></div>
+  <div class="box box-gate"><strong>🛑 <span class="en">Human gate (always stop)</span><span class="zh">人工拍板（永远停）</span></strong>
+    <span class="en">Bank/wire · fire manager · $500+ purchase · promote/pay change · new SOP · lease signing · legal action</span>
+    <span class="zh">银行/汇款·开除经理·$500+采购·升职/调薪·新SOP·签租约·法务</span></div>
+
+  <div class="sec-title"><span class="en">Weekly learning loop</span><span class="zh">每周学习循环</span></div>
+  <div class="loop-card">
+    <div class="sec-title" style="margin-top:0"><span class="en">Input (what happened)</span><span class="zh">输入（发生了什么）</span></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:12px">
+      <span class="en">Exceptions · completed/missed goals · complaints · labor anomalies · food cost anomalies · turnover · training failures · agent errors · human-rejected suggestions</span>
+      <span class="zh">异常·完成/未完成目标·客诉·人工异常·食材成本异常·流失·培训失败·Agent错误·人类拒绝的建议</span>
+    </div>
+    <div class="sec-title"><span class="en">Output (what we learned)</span><span class="zh">输出（学到什么）</span></div>
+    <table>
+      <tr><th><span class="en">Output</span><span class="zh">输出</span></th><th><span class="en">Question answered</span><span class="zh">回答的问题</span></th></tr>
+      <tr><td><span class="en">What happened this week</span><span class="zh">本周发生了什么</span></td><td><span class="en">Summary</span><span class="zh">总结</span></td></tr>
+      <tr><td><span class="en">Top 5 issues</span><span class="zh">最重要的5个问题</span></td><td><span class="en">Priority</span><span class="zh">优先级</span></td></tr>
+      <tr><td><span class="en">Repeating problems</span><span class="zh">重复发生的问题</span></td><td><span class="en">Pattern detection</span><span class="zh">模式发现</span></td></tr>
+      <tr><td><span class="en">What actions worked</span><span class="zh">哪些行动有效</span></td><td><span class="en">Effectiveness</span><span class="zh">有效性</span></td></tr>
+      <tr><td><span class="en">Which skills underperformed</span><span class="zh">哪些技能表现不好</span></td><td><span class="en">Quality check</span><span class="zh">质量检查</span></td></tr>
+      <tr><td><span class="en">Rules to change</span><span class="zh">哪些规则需修改</span></td><td><span class="en">Policy update</span><span class="zh">政策更新</span></td></tr>
+      <tr><td><span class="en">SOPs to update</span><span class="zh">哪些SOP需更新</span></td><td><span class="en">Knowledge refresh</span><span class="zh">知识刷新</span></td></tr>
+      <tr><td><span class="en">Managers needing training</span><span class="zh">哪些经理需培训</span></td><td><span class="en">Coaching plan</span><span class="zh">教练计划</span></td></tr>
+      <tr><td><span class="en">Experiences worth copying</span><span class="zh">值得复制的经验</span></td><td><span class="en">Best practice</span><span class="zh">最佳实践</span></td></tr>
+      <tr><td><strong><span class="en">Top 3 goals next week</span><span class="zh">下周最重要的3个目标</span></strong></td><td><span class="en">Focus</span><span class="zh">聚焦</span></td></tr>
+    </table>
+    <div class="box box-red"><strong>⛔</strong> <span class="en">Agent may NEVER permanently change company rules from one case. Changes require: propose → explain → evidence → review → version → test → publish.</span><span class="zh">Agent永远不能因一次案例永久改公司规矩。修改需要：提出→说明→证据→审核→版本→测试→发布。</span></div>
+  </div>
+
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>which store is worst</code> · <code>store health 00003</code> · <code>weekly learning</code></div>
+</div>
+
+<!-- ════════ CAPABILITIES ════════ -->
+<div class="page" id="caps">
+  <div class="page-h">🛠️ <span class="en">Capabilities</span><span class="zh">能力层</span></div>
+  <div class="page-sub"><span class="en">Layer 3 — Repeatable abilities, not departments</span><span class="zh">第3层 — 可重复的能力，不是部门</span></div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
+  <div class="pareto"><strong><span class="en">Capability ≠ Department.</span><span class="zh">能力 ≠ 部门。</span></strong>
+    <span class="en">A capability is what the company can DO repeatedly. Hiring is a capability that crosses People, Ops, Finance. Each capability = people + tools + rules + data.</span>
+    <span class="zh">能力是公司能反复做的事。招聘是一个跨越人事、运营、财务的能力。每个能力=人+工具+规则+数据。</span></div>
+
+  <div class="sec-title"><span class="en">25 core capabilities</span><span class="zh">25个核心能力</span></div>
+  <table>
+    <tr><th><span class="en">Capability</span><span class="zh">能力</span></th><th><span class="en">Current state</span><span class="zh">当前状态</span></th><th><span class="en">Best as</span><span class="zh">适合做成</span></th></tr>
+    <tr><td><span class="en">Recruiting</span><span class="zh">招聘</span></td><td><span class="badge badge-green">Skill ✅</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Interviewing</span><span class="zh">面试</span></td><td><span class="badge badge-yellow">SOP</span></td><td>SOP</td></tr>
+    <tr><td><span class="en">Onboarding</span><span class="zh">入职</span></td><td><span class="badge badge-green">Skill ✅</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Document check</span><span class="zh">文件检查</span></td><td><span class="badge badge-green">Skill ✅</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Training</span><span class="zh">培训</span></td><td><span class="badge badge-yellow">SOP</span></td><td>SOP + Skill</td></tr>
+    <tr><td><span class="en">Scheduling</span><span class="zh">排班</span></td><td><span class="badge badge-blue">7shifts</span></td><td>Software</td></tr>
+    <tr><td><span class="en">Attendance</span><span class="zh">考勤</span></td><td><span class="badge badge-blue">7shifts</span></td><td>Software</td></tr>
+    <tr><td><span class="en">Performance mgmt</span><span class="zh">绩效管理</span></td><td><span class="badge badge-yellow">SOP</span></td><td>SOP</td></tr>
+    <tr><td><span class="en">Discipline</span><span class="zh">纪律</span></td><td><span class="badge badge-green">Skill ✅</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Customer complaints</span><span class="zh">客诉处理</span></td><td><span class="badge badge-yellow">Manual</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Sales analysis</span><span class="zh">销售分析</span></td><td><span class="badge badge-green">Skill ✅</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Labor control</span><span class="zh">人工控制</span></td><td><span class="badge badge-yellow">Manual</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Food cost control</span><span class="zh">食材成本控制</span></td><td><span class="badge badge-yellow">Manual</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Inventory mgmt</span><span class="zh">库存管理</span></td><td><span class="badge badge-blue">MarginEdge</span></td><td>Software</td></tr>
+    <tr><td><span class="en">Procurement</span><span class="zh">采购</span></td><td><span class="badge badge-green">Skill ✅</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Equipment repair</span><span class="zh">设备维修</span></td><td><span class="badge badge-yellow">Manual</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Food safety</span><span class="zh">食品安全</span></td><td><span class="badge badge-yellow">SOP</span></td><td>SOP</td></tr>
+    <tr><td><span class="en">Marketing</span><span class="zh">营销</span></td><td><span class="badge badge-green">Skill ✅</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Finance</span><span class="zh">财务</span></td><td><span class="badge badge-green">Skill ✅</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Payroll</span><span class="zh">工资</span></td><td><span class="badge badge-blue">Gusto</span></td><td>Software + Gate</td></tr>
+    <tr><td><span class="en">New store opening</span><span class="zh">新店开业</span></td><td><span class="badge badge-green">Skill ✅</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">GM development</span><span class="zh">GM培养</span></td><td><span class="badge badge-green">Skill ✅</span></td><td>Skill</td></tr>
+    <tr><td><span class="en">Area management</span><span class="zh">区域管理</span></td><td><span class="badge badge-red">Gap</span></td><td>Skill (future)</td></tr>
+    <tr><td><span class="en">Risk management</span><span class="zh">风险管理</span></td><td><span class="badge badge-red">Gap</span></td><td>Skill (future)</td></tr>
+    <tr><td><span class="en">Decision recording</span><span class="zh">决策记录</span></td><td><span class="badge badge-red">Gap</span></td><td>Skill (future)</td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">First 8 priority skills</span><span class="zh">首批8个优先技能</span></div>
+  <div class="skill-grid">
+    <div class="skill-card">
+      <div class="sk-head"><span class="sk-name">store-health-review</span><span class="badge badge-green">Priority 1</span></div>
+      <div class="sk-goal"><span class="en">Daily: is this store healthy? Sales, labor, staffing, complaints, incidents → one score + flags.</span><span class="zh">每日：这店健康吗？销售、人工、人手、客诉、事件→一个分数+标记。</span></div>
+      <div class="sk-meta"><span class="badge badge-blue">DRI: GM</span><span class="badge badge-yellow">Auto: daily report</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-head"><span class="sk-name">operational-exception-triage</span><span class="badge badge-green">Priority 2</span></div>
+      <div class="sk-goal"><span class="en">Detect anomalies across stores. Rank by severity. Route to the right DRI.</span><span class="zh">发现跨店异常。按严重程度排序。分发给对的负责人。</span></div>
+      <div class="sk-meta"><span class="badge badge-blue">DRI: Area Mgr</span><span class="badge badge-yellow">Auto: flag only</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-head"><span class="sk-name">goal-dri-manager</span><span class="badge badge-green">Priority 3</span></div>
+      <div class="sk-goal"><span class="en">Track every goal: who owns it, deadline, metric, progress. Alert when behind.</span><span class="zh">追踪每个目标：谁负责、截止、指标、进度。落后时提醒。</span></div>
+      <div class="sk-meta"><span class="badge badge-blue">DRI: varies</span><span class="badge badge-yellow">Auto: track</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-head"><span class="sk-name">manager-coaching</span><span class="badge badge-green">Priority 4</span></div>
+      <div class="sk-goal"><span class="en">Find GM capability gaps. Generate coaching plan. Track improvement.</span><span class="zh">发现GM能力缺口。生成教练计划。追踪进步。</span></div>
+      <div class="sk-meta"><span class="badge badge-blue">DRI: Coach/Area</span><span class="badge badge-gate">Human: coach</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-head"><span class="sk-name">labor-cost-control</span><span class="badge badge-yellow">Priority 5</span></div>
+      <div class="sk-goal"><span class="en">Monitor labor % vs target. Find causes. Recommend schedule changes.</span><span class="zh">监控人工%对比目标。找原因。推荐排班调整。</span></div>
+      <div class="sk-meta"><span class="badge badge-blue">DRI: GM</span><span class="badge badge-gate">Human: $ changes</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-head"><span class="sk-name">workforce-hiring-onboarding</span><span class="badge badge-green">Priority 6</span></div>
+      <div class="sk-goal"><span class="en">Full lifecycle: need → recruit → score → hire → onboard → Brain updated.</span><span class="zh">全周期：需求→招→打分→录用→入职→Brain更新。</span></div>
+      <div class="sk-meta"><span class="badge badge-blue">DRI: GM/Coach</span><span class="badge badge-gate">Human: hire decision</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-head"><span class="sk-name">sop-execution-learning</span><span class="badge badge-yellow">Priority 7</span></div>
+      <div class="sk-goal"><span class="en">Serve the right SOP at the right time. Track if it was followed. Learn from exceptions.</span><span class="zh">在对的时间给对的SOP。追踪是否执行。从异常中学习。</span></div>
+      <div class="sk-meta"><span class="badge badge-blue">DRI: GM</span><span class="badge badge-yellow">Auto: serve SOP</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="sk-head"><span class="sk-name">outcome-learning-review</span><span class="badge badge-purple">Priority 8</span></div>
+      <div class="sk-goal"><span class="en">Weekly: what worked, what didn't, what to change. Write lessons back to Brain.</span><span class="zh">每周：什么有效、什么没用、改什么。把经验写回Brain。</span></div>
+      <div class="sk-meta"><span class="badge badge-blue">DRI: Coach</span><span class="badge badge-yellow">Auto: weekly</span></div>
+    </div>
+  </div>
+
+  <div class="box box-rule"><strong>📋 <span class="en">14 questions before creating any skill:</span><span class="zh">创建任何技能前回答14个问题：</span></strong>
+    <span class="en">What problem? · Who uses? · When triggered? · Input? · Data source? · Output? · DRI? · Who executes? · Who coaches? · What needs approval? · What if fails? · How verify? · Duplicate? · REALLY need a skill?</span>
+    <span class="zh">解决什么问题？·谁用？·何时触发？·输入？·数据源？·输出？·负责人？·谁执行？·谁教练？·哪些需批准？·失败怎么办？·如何验证？·重复？·真的需要技能？</span>
+  </div>
+
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>what skills exist</code> · <code>store health 00003</code></div>
+</div>
+
+<!-- ════════ SURFACES ════════ -->
+<div class="page" id="surfaces">
+  <div class="page-h">📱 <span class="en">Surfaces</span><span class="zh">界面层</span></div>
+  <div class="page-sub"><span class="en">Layer 4 — Where humans meet the Brain</span><span class="zh">第4层 — 人跟大脑见面的地方</span></div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
+  <div class="pareto"><strong><span class="en">Slack is the primary surface.</span><span class="zh">Slack是主要界面。</span></strong>
+    <span class="en">But Slack is NOT the database and NOT the world model. Slack is where you talk; Brain is where truth lives.</span>
+    <span class="zh">但Slack不是数据库，也不是世界模型。Slack是你说话的地方；Brain是真相住的地方。</span></div>
+
+  <div class="sec-title"><span class="en">8 surface types</span><span class="zh">8种界面</span></div>
+  <table>
+    <tr><th><span class="en">Surface</span><span class="zh">界面</span></th><th><span class="en">Purpose</span><span class="zh">用途</span></th><th><span class="en">Example</span><span class="zh">例子</span></th></tr>
+    <tr><td><strong>💬 <span class="en">Slack channels</span><span class="zh">Slack频道</span></strong></td><td><span class="en">Team communication + commands</span><span class="zh">团队沟通+指令</span></td><td><code>store-00003-gangnam-wilmington</code></td></tr>
+    <tr><td><strong>📩 <span class="en">Slack DM</span><span class="zh">Slack私信</span></strong></td><td><span class="en">Private alerts, approvals</span><span class="zh">私有提醒、审批</span></td><td><span class="en">Louis DM: 9PM email digest</span><span class="zh">Louis私信：9PM邮件摘要</span></td></tr>
+    <tr><td><strong>📝 <span class="en">Slack forms</span><span class="zh">Slack表单</span></strong></td><td><span class="en">Structured data input</span><span class="zh">结构化数据输入</span></td><td><span class="en">Purchase request, incident report</span><span class="zh">采购申请、事件报告</span></td></tr>
+    <tr><td><strong>🔔 <span class="en">Auto alerts</span><span class="zh">自动提醒</span></strong></td><td><span class="en">Push notifications on anomalies</span><span class="zh">异常推送</span></td><td><span class="en">"00003 labor hit 21% — over target"</span><span class="zh">"00003人工到21%—超标"</span></td></tr>
+    <tr><td><strong>✅ <span class="en">Approval messages</span><span class="zh">审批消息</span></strong></td><td><span class="en">Human gate for money/fire/rules</span><span class="zh">钱/人/规矩的人工门</span></td><td><span class="en">"$340 fridge for 00003 — approve?"</span><span class="zh">"00003 $340冰箱—批吗？"</span></td></tr>
+    <tr><td><strong>📊 <span class="en">Daily reports</span><span class="zh">日报</span></strong></td><td><span class="en">Automated summaries</span><span class="zh">自动摘要</span></td><td><span class="en">7AM staffing, 9PM email, 12AM fraud</span><span class="zh">7AM人手、9PM邮件、12AM作弊</span></td></tr>
+    <tr><td><strong>📅 <span class="en">Weekly review</span><span class="zh">周报</span></strong></td><td><span class="en">Learning loop output</span><span class="zh">学习循环输出</span></td><td><span class="en">"Top 5 issues, 3 goals next week"</span><span class="zh">"5大问题、下周3目标"</span></td></tr>
+    <tr><td><strong>📱 <span class="en">Mobile</span><span class="zh">移动端</span></strong></td><td><span class="en">On-the-floor access</span><span class="zh">现场访问</span></td><td><span class="en">Slack mobile app</span><span class="zh">Slack手机App</span></td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">Where to type what</span><span class="zh">在哪里说什么</span></div>
+  <table>
+    <tr><th><span class="en">If you want...</span><span class="zh">如果你想…</span></th><th><span class="en">Type here</span><span class="zh">在这里说</span></th></tr>
+    <tr><td><span class="en">Hire someone</span><span class="zh">招人</span></td><td><span class="en">Store channel</span><span class="zh">店频道</span></td></tr>
+    <tr><td><span class="en">Check roster</span><span class="zh">查人数</span></td><td><span class="en">Store channel or DM</span><span class="zh">店频道或私信</span></td></tr>
+    <tr><td><span class="en">Buy something</span><span class="zh">买东西</span></td><td><span class="en">#04-finance</span><span class="zh">#04-财务</span></td></tr>
+    <tr><td><span class="en">People issue</span><span class="zh">人的问题</span></td><td><span class="en">#06-people</span><span class="zh">#06-人事</span></td></tr>
+    <tr><td><span class="en">Money/fire/settings</span><span class="zh">钱/开除/设置</span></td><td><span class="en">Louis DM (WISE BRAIN)</span><span class="zh">Louis私信 (WISE BRAIN)</span></td></tr>
+    <tr><td><span class="en">Store health</span><span class="zh">店健康</span></td><td><span class="en">Any channel</span><span class="zh">任何频道</span></td></tr>
+  </table>
+
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>need 2 server</code> · <code>roster 00003</code> · <code>store health 00003</code></div>
+</div>
+
+<!-- ════════ IDENTITIES ════════ -->
+<div class="page" id="identities">
+  <div class="page-h">👥 <span class="en">Three Responsibility Identities</span><span class="zh">三种责任身份</span></div>
+  <div class="page-sub"><span class="en">Not job titles — questions every task must answer</span><span class="zh">不是职位——是每项工作必须回答的问题</span></div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
+
+  <div class="sec-title"><span class="en">The 3 identities</span><span class="zh">3种身份</span></div>
+  <div class="id-grid">
+    <div class="id-card">
+      <div class="id-icon">🔧</div>
+      <div class="id-title"><span class="en">IC — Executor</span><span class="zh">IC — 执行者</span></div>
+      <div class="id-q"><span class="en">"Who actually does the work?"</span><span class="zh">"谁真正干活？"</span></div>
+      <div class="id-body"><span class="en">Every action has one clear executor. Can be employee, manager, specialist, software, or AI Agent.</span><span class="zh">每个动作有一个明确执行者。可以是员工、经理、专业人员、软件或AI Agent。</span></div>
+    </div>
+    <div class="id-card">
+      <div class="id-icon">🎯</div>
+      <div class="id-title"><span class="en">DRI — Result Owner</span><span class="zh">DRI — 结果负责人</span></div>
+      <div class="id-q"><span class="en">"If it's not done, who's accountable?"</span><span class="zh">"没完成，最后找谁？"</span></div>
+      <div class="id-body"><span class="en">Only ONE per result. Owns outcome not just task. Has goal, deadline, metric, authority. Tracks to the end.</span><span class="zh">每个结果只有一个。对结果负责不只对动作。有目标、截止、指标、权限。跟到底。</span></div>
+    </div>
+    <div class="id-card">
+      <div class="id-icon">🎓</div>
+      <div class="id-title"><span class="en">Player-Coach</span><span class="zh">教练型领导</span></div>
+      <div class="id-q"><span class="en">"When they can't, who teaches them?"</span><span class="zh">"不会做时，谁教？"</span></div>
+      <div class="id-body"><span class="en">Knows the work. Observes real performance. Finds capability gaps. Demonstrates. Lets them practice. Checks mastery. Builds next leaders.</span><span class="zh">懂这活。观察真实表现。找能力缺口。示范。让对方练。检查是否学会。培养下一层。</span></div>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="en">Example: labor over target</span><span class="zh">例子：人工超标</span></div>
+  <div class="box box-auto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">Store labor under 18% this month</span><span class="zh">本月门店人工低于18%</span></div>
+  <div class="box box-auto"><strong><span class="en">DRI:</span><span class="zh">负责人：</span></strong> <span class="en">GM Levi (owns the result, not just the schedule)</span><span class="zh">GM Levi（对结果负责，不只对排班）</span></div>
+  <div class="box box-auto"><strong><span class="en">IC:</span><span class="zh">执行者：</span></strong> <span class="en">AGM edits schedule, Floor Manager sends people home</span><span class="zh">AGM改排班，Floor Manager放人走</span></div>
+  <div class="box box-gate"><strong><span class="en">Player-Coach:</span><span class="zh">教练：</span></strong> <span class="en">Area Manager finds what GM can't do, teaches GM directly</span><span class="zh">区域经理找GM不会的地方，亲自教GM</span></div>
+  <div class="box box-rule"><strong><span class="en">Key:</span><span class="zh">关键：</span></strong> <span class="en">Area Manager does NOT just remind the GM. Area Manager finds the gap and teaches the skill.</span><span class="zh">区域经理不只提醒GM。区域经理找缺口并教技能。</span></div>
+
+  <div class="sec-title"><span class="en">WiseRise org mapping</span><span class="zh">Wiserise职位映射</span></div>
+  <table>
+    <tr><th><span class="en">Role</span><span class="zh">职位</span></th><th><span class="en">Primary IC</span><span class="zh">主要执行者</span></th><th><span class="en">DRI scope</span><span class="zh">负责人范围</span></th><th><span class="en">Player-Coach for</span><span class="zh">教谁</span></th></tr>
+    <tr><td><span class="en">Server / Cook / Host</span><span class="zh">服务员/厨师/Host</span></td><td>✅</td><td>—</td><td>—</td></tr>
+    <tr><td><span class="en">Lead Server / Kitchen Lead</span><span class="zh">领班</span></td><td>✅</td><td>—</td><td>✅ <span class="en">peers</span><span class="zh">同事</span></td></tr>
+    <tr><td><span class="en">Floor / Kitchen Manager</span><span class="zh">楼面/厨房经理</span></td><td>✅</td><td><span class="en">shift result</span><span class="zh">当班结果</span></td><td>✅ <span class="en">staff</span><span class="zh">员工</span></td></tr>
+    <tr><td><strong><span class="en">GM</span><span class="zh">GM</span></strong></td><td>✅</td><td><strong><span class="en">store total</span><span class="zh">全店</span></strong></td><td>✅ <span class="en">managers + staff</span><span class="zh">经理+员工</span></td></tr>
+    <tr><td><strong><span class="en">Area Manager</span><span class="zh">区域经理</span></strong></td><td>✅</td><td><strong><span class="en">area</span><span class="zh">区域</span></strong></td><td><strong>✅ <span class="en">GMs</span><span class="zh">GM</span></strong></td></tr>
+    <tr><td><span class="en">Dept Staff (HR, Acct)</span><span class="zh">部门员工</span></td><td>✅</td><td>—</td><td>—</td></tr>
+    <tr><td><strong><span class="en">Dept Head</span><span class="zh">部门负责人</span></strong></td><td>✅</td><td><strong><span class="en">dept result</span><span class="zh">部门结果</span></strong></td><td>✅ <span class="en">dept staff</span><span class="zh">部门员工</span></td></tr>
+  </table>
+  <div class="box box-red"><strong>⚠️</strong> <span class="en">Area Manager should NOT mainly collect reports and relay messages. The system auto-summarizes data. Area Manager should mainly: find risk stores, diagnose GM gaps, visit stores, train GMs, solve cross-store problems, copy best practices.</span><span class="zh">区域经理不应主要负责收报告和传话。系统自动汇总数据。区域经理应主要：找风险门店、诊断GM缺口、到店观察、训练GM、解决跨店问题、复制最佳实践。</span></div>
+
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>who is DRI for 00003 labor</code> · <code>GM coaching plan</code></div>
+</div>
+
+<!-- ════════ ROADMAP + CHECKLIST (merged, clean) ════════ -->
+<div class="page" id="roadmap">
+  <div class="page-h">📅 <span class="en">Roadmap & Checklist</span><span class="zh">路线图 + 进度</span></div>
+  <div class="page-sub"><span class="en">Phase 0 → 9 · Tap any checkbox to toggle</span><span class="zh">第0→9阶段 · 点复选框追踪</span></div>
+  <div class="verified">✅ <span class="en">Live</span><span class="zh">实时</span> · 2026-07-21 · Louis</div>
+
+<!-- AUTO:START — updated 2026-07-21 by world_brain_roadmap_update.py — DO NOT edit between these markers -->
+  <div class="sec-title"><span class="en">Where we are</span><span class="zh">现在在哪</span></div>
+  <table>
+    <tr><th><span class="en">Phase</span><span class="zh">阶段</span></th><th><span class="en">Name</span><span class="zh">名称</span></th><th><span class="en">Done</span><span class="zh">完成</span></th><th><span class="en">%</span></th></tr>
+    <tr><td><strong>P0</strong></td><td><span class="en">Task Definition</span><span class="zh">任务定义</span></td><td>4/4</td><td><span class="badge badge-green">100%</span></td></tr>
+    <tr><td><strong>P1</strong></td><td><span class="en">Research Framework</span><span class="zh">研究框架</span></td><td>4/4</td><td><span class="badge badge-green">100%</span></td></tr>
+    <tr><td><strong>P2</strong></td><td><span class="en">Business Discovery</span><span class="zh">业务发现</span></td><td>4/5</td><td><span class="badge badge-green">80%</span></td></tr>
+    <tr><td><strong>P3</strong></td><td><span class="en">World Model</span><span class="zh">世界模型</span></td><td>4/5</td><td><span class="badge badge-green">80%</span></td></tr>
+    <tr><td><strong>P4</strong></td><td><span class="en">Router Skill</span><span class="zh">总控技能</span></td><td>3/3</td><td><span class="badge badge-green">100%</span></td></tr>
+    <tr style="background:var(--blue-bg)"><td><strong>P5</strong></td><td><strong><span class="en">First 8 Skills</span><span class="zh">首批8技能</span></strong></td><td><strong>6/14</strong></td><td><span class="badge badge-yellow">⚡ 43%</span></td></tr>
+    <tr><td><strong>P6</strong></td><td><span class="en">Shadow Testing</span><span class="zh">影子测试</span></td><td>0/4</td><td><span class="badge badge-red">0%</span></td></tr>
+    <tr><td><strong>P7</strong></td><td><span class="en">Single Store Pilot</span><span class="zh">单店试点</span></td><td>0/4</td><td><span class="badge badge-red">0%</span></td></tr>
+    <tr><td><strong>P8</strong></td><td><span class="en">Area Pilot</span><span class="zh">区域试点</span></td><td>0/4</td><td><span class="badge badge-red">0%</span></td></tr>
+    <tr><td><strong>P9</strong></td><td><span class="en">Scale</span><span class="zh">扩展</span></td><td>0/4</td><td><span class="badge badge-red">0%</span></td></tr>
+  </table>
+  <div class="box box-gate"><strong><span class="en">Overall · You are at P5 — finish 2 missing skill(s), then start P6 shadow test.</span><span class="zh">你在P5 — 建完2个缺的技能，然后开始P6影子测试。</span></strong></div>
+
+  <!-- ══ P0 ══ -->
+  <div class="pcheck-card done">
+    <div class="pcheck-head"><div class="pcheck-title">P0 · <span class="en">Task Definition</span><span class="zh">任务定义</span></div><div class="pcheck-status" style="background:var(--green-bg);color:var(--green)">✅ DONE</div></div>
+    <ul class="pcheck-list">
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Define project goal (capability system, not chatbot)</span><span class="zh">定目标（能力系统，不是聊天机器人）</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Define scope — what's IN and what's NOT</span><span class="zh">定范围 — 做什么和不做什么</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Pick owner (Louis) + test store (00003)</span><span class="zh">选负责人（Louis）+ 测试店（00003）</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Define success criteria</span><span class="zh">定成功标准</span></li>
+    </ul>
+    <div class="pcheck-gate">🎯 <span class="en">Gate: everyone knows this is a capability system, not a chatbot</span><span class="zh">门：所有人知道这是能力系统</span></div>
+  </div>
+
+  <!-- ══ P1 ══ -->
+  <div class="pcheck-card done">
+    <div class="pcheck-head"><div class="pcheck-title">P1 · <span class="en">Research Framework</span><span class="zh">研究框架</span></div><div class="pcheck-status" style="background:var(--green-bg);color:var(--green)">✅ DONE</div></div>
+    <ul class="pcheck-list">
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Study World Brain framework (Jack Dorsey)</span><span class="zh">研究World Brain框架</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Document 4 layers + 3 identities</span><span class="zh">文档化四层架构+三种身份</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Compare traditional hierarchy vs intelligence model</span><span class="zh">比较传统层级 vs 智能模型</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Build this roadmap artifact</span><span class="zh">建好这个路线图文档</span></li>
+    </ul>
+    <div class="pcheck-gate">🎯 <span class="en">Gate: explain framework using one real restaurant problem</span><span class="zh">门：能用一个真实餐厅问题解释框架</span></div>
+  </div>
+
+  <!-- ══ P2 ══ -->
+  <div class="pcheck-card done">
+    <div class="pcheck-head"><div class="pcheck-title">P2 · <span class="en">Business Discovery</span><span class="zh">业务发现</span></div><div class="pcheck-status" style="background:var(--green-bg);color:var(--green)">✅ DONE</div></div>
+    <ul class="pcheck-list">
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Software inventory (Slack, 7shifts, Chowbus, Toast, Gusto, QBO, MarginEdge, Supabase)</span><span class="zh">软件清单</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Data source mapping (which system owns what)</span><span class="zh">数据源映射</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Process + role + permission inventory</span><span class="zh">流程+岗位+权限清单</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Pain points + duplicate work identified</span><span class="zh">痛点+重复工作识别</span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Document each process: trigger → steps → owner → output</span><span class="zh">每个流程记录：触发→步骤→负责人→输出</span></span></li>
+    </ul>
+    <div class="pcheck-gate">🎯 <span class="en">Gate: draw how WiseRise works today — no guessing</span><span class="zh">门：画出WiseRise今天怎么运转</span></div>
+  </div>
+
+  <!-- ══ P3 ══ -->
+  <div class="pcheck-card done">
+    <div class="pcheck-head"><div class="pcheck-title">P3 · <span class="en">World Model</span><span class="zh">世界模型</span></div><div class="pcheck-status" style="background:var(--green-bg);color:var(--green)">✅ LIVE</div></div>
+    <ul class="pcheck-list">
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Core entities + relationships designed</span><span class="zh">核心实体+关系设计</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Supabase Brain = one ledger (live)</span><span class="zh">Supabase Brain = 一本账（上线）</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Metric dictionary + data source table</span><span class="zh">指标字典+数据源表</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Permission matrix (S/C/O/A) + nightly health check</span><span class="zh">权限矩阵+每晚健康检查</span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Add conflict-resolution + staleness detection rules</span><span class="zh">加冲突解决+过期检测规则</span></span></li>
+    </ul>
+    <div class="pcheck-gate">🎯 <span class="en">Gate: any question finds store, person, metric, owner, history</span><span class="zh">门：任何问题找到门店、人员、指标、负责人、历史</span></div>
+  </div>
+
+  <!-- ══ P4 ══ -->
+  <div class="pcheck-card done">
+    <div class="pcheck-head"><div class="pcheck-title">P4 · <span class="en">Router Skill</span><span class="zh">总控技能</span></div><div class="pcheck-status" style="background:var(--green-bg);color:var(--green)">✅ BUILT</div></div>
+    <ul class="pcheck-list">
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en"><code>wiserise-world-brain-router</code> built</span><span class="zh"><code>wiserise-world-brain-router</code> 已建</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Request classification + permission check + skill routing</span><span class="zh">请求分类+权限检查+技能路由</span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en">Unified 9-line output + audit log</span><span class="zh">统一9行输出+审计日志</span></li>
+    </ul>
+    <div class="pcheck-gate">🎯 <span class="en">Gate: different questions route to correct specialist skill</span><span class="zh">门：不同问题路由到正确技能</span></div>
+  </div>
+
+  <!-- ══ P5 ══ -->
+  <div class="pcheck-card active">
+    <div class="pcheck-head"><div class="pcheck-title">P5 · <span class="en">First 8 Core Skills</span><span class="zh">首批8个核心技能</span></div><div class="pcheck-status" style="background:var(--blue-bg);color:var(--blue)">⚡ IN PROGRESS (6/8)</div></div>
+    <ul class="pcheck-list">
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en"><strong>1. store-health-review</strong> — daily store score + top 3 issues + DRI</span><span class="zh"><strong>1. 门店健康检查</strong> — 每日评分+前3问题</span></span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en"><strong>2. exception-triage</strong> — pos-fraud + brain-data-health built</span><span class="zh"><strong>2. 异常分流</strong> — pos-fraud+brain-data-health已建</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en"><strong>2. (cont)</strong> ⬜ Build unified cross-store triage view</span><span class="zh"><strong>2.（续）</strong> ⬜ 建统一跨店分流视图</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en"><strong>3. goal-dri-manager</strong> ⬜ — track goals, DRI, deadline, alert when behind</span><span class="zh"><strong>3. 目标追踪</strong> ⬜ — 追踪目标、负责人、截止、落后提醒</span></span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en"><strong>4. manager-coaching</strong> — people-gm-train + certification built</span><span class="zh"><strong>4. 经理教练</strong> — people-gm-train+认证已建</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en"><strong>4. (cont)</strong> ⬜ Auto-detect GM gaps + generate coaching plan</span><span class="zh"><strong>4.（续）</strong> ⬜ 自动发现GM缺口+生成教练计划</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en"><strong>5. labor-cost-control</strong> ⬜ — Monitor labor % vs 18% target + find causes + alert</span><span class="zh"><strong>5. 人工控制</strong> ⬜ — 监控人工%对比18%目标+找原因+提醒</span></span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en"><strong>6. hiring-onboarding</strong> — people-recruiting full lifecycle (14 steps)</span><span class="zh"><strong>6. 招聘入职</strong> — people-recruiting全周期（14步）</span></span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en"><strong>7. sop-execution-learning</strong> — playbook-lookup + sop + file-intake</span><span class="zh"><strong>7. SOP执行学习</strong> — playbook-lookup+sop+file-intake</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en"><strong>7. (cont)</strong> ⬜ Track SOP execution + learn from exceptions</span><span class="zh"><strong>7.（续）</strong> ⬜ 追踪SOP执行+从异常学习</span></span></li>
+      <li><span class="pcheck-box checked" onclick="togBox(this)">✓</span><span class="pcheck-text done"><span class="en"><strong>8. outcome-learning-review</strong> — nightly-review built</span><span class="zh"><strong>8. 结果复盘</strong> — nightly-review已建</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en"><strong>8. (cont)</strong> ⬜ Weekly learning loop (top 5 issues + 3 goals → Brain)</span><span class="zh"><strong>8.（续）</strong> ⬜ 每周学习循环（前5问题+3目标→Brain）</span></span></li>
+    </ul>
+    <div class="pcheck-gate">🎯 <span class="en">Gate: each skill has input, output, permissions, flow, exceptions, tests</span><span class="zh">门：每个技能有输入、输出、权限、流程、异常、测试</span></div>
+  </div>
+
+  <!-- ══ P6 ══ -->
+  <div class="pcheck-card next">
+    <div class="pcheck-head"><div class="pcheck-title">P6 · <span class="en">Shadow Testing</span><span class="zh">影子测试</span></div><div class="pcheck-status" style="background:var(--yellow-bg);color:var(--yellow)">⬜ NEXT</div></div>
+    <ul class="pcheck-list">
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Write 20+ test cases (hire, labor alert, fraud, data conflict)</span><span class="zh">写20+测试案例</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Run agent vs human on same cases</span><span class="zh">Agent vs 人跑同样案例</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Diff report + categorize errors (fabrication, overreach, missed)</span><span class="zh">差异报告+分类错误</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Fix → re-test → verify no fabricate / overreach / repeat</span><span class="zh">修→重测→验证不编造/不越权/不重复</span></span></li>
+    </ul>
+    <div class="pcheck-gate">🎯 <span class="en">Gate: agent doesn't fabricate, overreach, or repeat errors</span><span class="zh">门：Agent不编造、不越权、不重复</span></div>
+  </div>
+
+  <!-- ══ P7 ══ -->
+  <div class="pcheck-card future">
+    <div class="pcheck-head"><div class="pcheck-title">P7 · <span class="en">Single Store Pilot</span><span class="zh">单店试点</span></div><div class="pcheck-status" style="background:#f3f4f6;color:var(--muted)">⬜ FUTURE</div></div>
+    <ul class="pcheck-list">
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Pick pilot store (recommend 00003) + run 14 days</span><span class="zh">选试点店（建议00003）+跑14天</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Daily health report + exception alerts → GM Slack</span><span class="zh">每日健康+异常提醒→GM Slack</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">DRI tasks + coaching plan + weekly learning report</span><span class="zh">DRI任务+教练计划+每周学习</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Measure: management time saved + ≥1 result improved</span><span class="zh">测量：管理时间减少+≥1结果改善</span></span></li>
+    </ul>
+    <div class="pcheck-gate">🎯 <span class="en">Gate: less management time + ≥1 business result improved</span><span class="zh">门：管理时间减少+≥1结果改善</span></div>
+  </div>
+
+  <!-- ══ P8 ══ -->
+  <div class="pcheck-card future">
+    <div class="pcheck-head"><div class="pcheck-title">P8 · <span class="en">Area Pilot</span><span class="zh">区域试点</span></div><div class="pcheck-status" style="background:#f3f4f6;color:var(--muted)">⬜ FUTURE</div></div>
+    <ul class="pcheck-list">
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Expand to all 5 stores</span><span class="zh">扩展到全部5店</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Unified report + area priority + GM capability map</span><span class="zh">统一报告+区域优先+GM能力图</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Risk store list + best practice copy</span><span class="zh">风险门店列表+最佳实践复制</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Measure: Area Mgr shifts from data collection → coaching</span><span class="zh">测量：区域经理从收数据→教练</span></span></li>
+    </ul>
+    <div class="pcheck-gate">🎯 <span class="en">Gate: less data collection, more GM training</span><span class="zh">门：少收数据，多训练GM</span></div>
+  </div>
+
+  <!-- ══ P9 ══ -->
+  <div class="pcheck-card future">
+    <div class="pcheck-head"><div class="pcheck-title">P9 · <span class="en">Scale</span><span class="zh">扩展</span></div><div class="pcheck-status" style="background:#f3f4f6;color:var(--muted)">⬜ FUTURE</div></div>
+    <ul class="pcheck-list">
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Copy validated skills → new stores (config, not rebuild)</span><span class="zh">复制验证技能→新店（配置不重建）</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Store diff → config · Brand diff → references</span><span class="zh">店差异→配置 · 品牌差异→参考</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Unified permissions + version control</span><span class="zh">统一权限+版本控制</span></span></li>
+      <li><span class="pcheck-box todo" onclick="togBox(this)"></span><span class="pcheck-text"><span class="en">Multi-region / multi-language ready</span><span class="zh">多地区/多语言就绪</span></span></li>
+    </ul>
+    <div class="pcheck-gate">🎯 <span class="en">Gate: onboard store #6, #10, #100 without rebuilding</span><span class="zh">门：上线第6、10、100店不重建</span></div>
+  </div>
+<!-- AUTO:END — updated 2026-07-21 — DO NOT edit between these markers -->
+
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>what phase are we in</code> · <code>what skills are missing</code> · <code>build labor cost control</code></div>
+</div>
+
+<!-- ════════ QUALITY ════════ -->
+<div class="page" id="quality">
+  <div class="page-h">📋 <span class="en">Quality Standard</span><span class="zh">质量标准</span></div>
+  <div class="page-sub"><span class="en">100-point scoring before any skill goes live</span><span class="zh">任何技能上线前100分评分</span></div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
+  <div class="pareto"><strong><span class="en">No skill goes live without scoring.</span><span class="zh">不评分不上线。</span></strong></div>
+
+  <div class="sec-title"><span class="en">7 scoring dimensions (100 pts)</span><span class="zh">7个评分维度（100分）</span></div>
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="score-circle" style="background:var(--brand)">20</div>
+      <div class="score-text"><div class="score-name"><span class="en">Business understanding</span><span class="zh">业务理解</span></div>
+      <div class="score-pts"><span class="en">Real business? Right standard? No wrong conclusions?</span><span class="zh">真实业务？正确标准？不错误结论？</span></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-circle" style="background:var(--blue)">15</div>
+      <div class="score-text"><div class="score-name"><span class="en">Data reliability</span><span class="zh">数据可靠</span></div>
+      <div class="score-pts"><span class="en">Authoritative source? Gaps marked? Freshness checked?</span><span class="zh">权威来源？标记缺口？检查更新？</span></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-circle" style="background:var(--green)">15</div>
+      <div class="score-text"><div class="score-name"><span class="en">Responsibility clarity</span><span class="zh">责任清晰</span></div>
+      <div class="score-pts"><span class="en">One DRI? Clear executor? Clear coach?</span><span class="zh">一个负责人？明确执行者？明确教练？</span></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-circle" style="background:var(--yellow)">15</div>
+      <div class="score-text"><div class="score-name"><span class="en">Executability</span><span class="zh">可执行</span></div>
+      <div class="score-pts"><span class="en">Specific actions? Deadlines? Can check completion?</span><span class="zh">具体行动？截止？能查完成？</span></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-circle" style="background:var(--red)">15</div>
+      <div class="score-text"><div class="score-name"><span class="en">Permission & security</span><span class="zh">权限安全</span></div>
+      <div class="score-pts"><span class="en">Permissions checked? Approvals required? Sensitive protected?</span><span class="zh">检查权限？必要审批？保护敏感？</span></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-circle" style="background:var(--purple)">10</div>
+      <div class="score-text"><div class="score-name"><span class="en">Simplicity</span><span class="zh">简单易用</span></div>
+      <div class="score-pts"><span class="en">Frontline can understand? Short output? No jargon?</span><span class="zh">一线能看懂？输出短？没术语？</span></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-circle" style="background:var(--orange)">10</div>
+      <div class="score-text"><div class="score-name"><span class="en">Learning ability</span><span class="zh">学习能力</span></div>
+      <div class="score-pts"><span class="en">Records results? Reviews? Writes back to system?</span><span class="zh">记录结果？复盘？写回系统？</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="en">Go-live thresholds</span><span class="zh">上线标准</span></div>
+  <div class="box box-red"><strong>⛔ &lt; 80</strong> — <span class="en">No go. Do not deploy.</span><span class="zh">不上线。不部署。</span></div>
+  <div class="box box-yellow" style="background:var(--yellow-bg);border-color:#fde68a"><strong>⚠️ 80–89</strong> — <span class="en">Shadow mode only. Observe, don't act.</span><span class="zh">只影子模式。观察，不行动。</span></div>
+  <div class="box box-auto"><strong>⚡ 90+</strong> — <span class="en">Limited pilot with human oversight.</span><span class="zh">有限试点，有人监督。</span></div>
+  <div class="box box-gate"><strong>✅ Stable</strong> — <span class="en">Gradually expand scope after consecutive stable runs.</span><span class="zh">连续稳定后逐步扩大范围。</span></div>
+
+  <div class="sec-title"><span class="en">Skill file structure</span><span class="zh">技能文件结构</span></div>
+  <div class="box box-auto" style="font-family:monospace;font-size:11.5px;line-height:1.8">
+skill-name/<br>
+├── SKILL.md <span style="color:var(--muted)">(trigger · flow · rules · output · refs)</span><br>
+├── references/<br>
+│&nbsp;&nbsp; ├── business-rules.md<br>
+│&nbsp;&nbsp; ├── data-sources.md<br>
+│&nbsp;&nbsp; ├── permissions.md<br>
+│&nbsp;&nbsp; ├── examples.md<br>
+│&nbsp;&nbsp; └── escalation-rules.md<br>
+├── scripts/ <span style="color:var(--muted)">(deterministic scripts)</span><br>
+└── tests/<br>
+&nbsp;&nbsp;&nbsp; ├── normal-cases.md<br>
+&nbsp;&nbsp;&nbsp; ├── edge-cases.md<br>
+&nbsp;&nbsp;&nbsp; └── permission-cases.md
+  </div>
+  <div class="box box-rule"><strong>📋</strong> <span class="en">SKILL.md keeps only: trigger, core flow, rules, output format, reference pointers. Do NOT stuff all knowledge into SKILL.md. Keep it tight. Load details by reference.</span><span class="zh">SKILL.md只保留：触发条件、核心流程、规矩、输出格式、参考指针。不要把所有知识塞进SKILL.md。保持紧凑。按需加载详细内容。</span></div>
+
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>skill quality check</code> · <code>what skills pass 90</code></div>
+</div>
+
+<!-- ════════ RULES ════════ -->
+<div class="page" id="rules">
+  <div class="page-h">⚖️ <span class="en">Rules That Never Break</span><span class="zh">永不打破的铁律</span></div>
+  <div class="page-sub"><span class="en">5 structural rules + escalation + audit</span><span class="zh">5条结构铁律 + 升级 + 审计</span></div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
+
+  <div class="sec-title"><span class="en">5 structural rules</span><span class="zh">5条结构铁律</span></div>
+  <div class="box box-rule"><strong>1.</strong> <span class="en">The Brain is the one truth. Every tool feeds it. Nothing gets out of sync.</span><span class="zh">Brain是唯一真相。每个工具都喂它。不会不同步。</span></div>
+  <div class="box box-rule"><strong>2.</strong> <span class="en">Hermes touches only Slack + Brain. It never calls external tools directly — tools feed Brain, Brain feeds Hermes.</span><span class="zh">Hermes只碰Slack和Brain。不直接调外部工具——工具喂Brain，Brain喂Hermes。</span></div>
+  <div class="box box-rule"><strong>3.</strong> <span class="en">Money, firing, or a broken rule always stops for a human. Everything else, Hermes just does.</span><span class="zh">钱、开除、坏了规矩永远等人批。其他Hermes直接做。</span></div>
+  <div class="box box-rule"><strong>4.</strong> <span class="en">Approve by exception, not every time. Hermes handles normal cases; humans see only the weird ones.</span><span class="zh">异常才批，不是每次批。Hermes处理正常的；人只看奇怪的。</span></div>
+  <div class="box box-rule"><strong>5.</strong> <span class="en">Check freshness before money or firing. Stale data → stop and ask. Never guess.</span><span class="zh">花钱或开除前先查数据新不新。旧数据→停下问。绝不猜。</span></div>
+
+  <div class="sec-title"><span class="en">4 human gates</span><span class="zh">4个人拍板</span></div>
+  <table>
+    <tr><th><span class="en">Gate</span><span class="zh">门</span></th><th><span class="en">What stops</span><span class="zh">什么停</span></th><th><span class="en">Who decides</span><span class="zh">谁拍板</span></th></tr>
+    <tr><td>💰 <span class="en">Money</span><span class="zh">钱</span></td><td><span class="en">Bank, wire, $500+, tax</span><span class="zh">银行、汇款、$500+、税</span></td><td><strong>Louis + Luna</strong></td></tr>
+    <tr><td>🔥 <span class="en">People</span><span class="zh">人</span></td><td><span class="en">Fire manager, promote, pay change</span><span class="zh">开除经理、升职、调薪</span></td><td><strong>Louis + Yumi</strong></td></tr>
+    <tr><td>⚖️ <span class="en">Rules</span><span class="zh">规矩</span></td><td><span class="en">New SOP, architecture, new store</span><span class="zh">新SOP、架构、新店</span></td><td><strong>Louis only</strong></td></tr>
+    <tr><td>📋 <span class="en">Check</span><span class="zh">查</span></td><td><span class="en">Health, fraud, roster</span><span class="zh">健康、作弊、人数</span></td><td><span class="en">Anyone, anytime</span><span class="zh">任何人，随时</span></td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">Skill change protocol</span><span class="zh">技能修改协议</span></div>
+  <div class="flow">
+    <span class="flow-step"><span class="en">Propose</span><span class="zh">提出</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Explain why</span><span class="zh">说明原因</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Show evidence</span><span class="zh">展示证据</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-gate"><span class="en">Review</span><span class="zh">审核</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Version</span><span class="zh">版本</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Test</span><span class="zh">测试</span></span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-step"><span class="en">Publish</span><span class="zh">发布</span></span>
+  </div>
+  <div class="box box-red"><strong>⛔</strong> <span class="en">Agent may NEVER permanently modify company rules from one case.</span><span class="zh">Agent永远不能因一次案例永久改公司规矩。</span></div>
+
+  <div class="sec-title"><span class="en">Audit trail</span><span class="zh">审计追踪</span></div>
+  <table>
+    <tr><th><span class="en">Tag</span><span class="zh">标记</span></th><th><span class="en">Meaning</span><span class="zh">含义</span></th><th><span class="en">Who sees</span><span class="zh">谁看</span></th></tr>
+    <tr><td><span class="badge badge-blue">S</span> Store</td><td><span class="en">Has store_number</span><span class="zh">有店号</span></td><td><span class="en">GM/OPS: that store</span><span class="zh">GM/OPS：自己店</span></td></tr>
+    <tr><td><span class="badge badge-green">C</span> Company</td><td><span class="en">Playbooks / brand</span><span class="zh">公司/品牌</span></td><td><span class="en">GM read; Exec publish</span><span class="zh">GM读；高管发布</span></td></tr>
+    <tr><td><span class="badge badge-red">O</span> Owner</td><td><span class="en">Money, secrets, payroll, legal</span><span class="zh">钱、密钥、工资、法务</span></td><td><span class="en">Louis + Luna only</span><span class="zh">仅Louis+Luna</span></td></tr>
+    <tr><td><span class="badge badge-yellow">A</span> Audit</td><td><span class="en">Who changed what</span><span class="zh">谁改了什么</span></td><td><span class="en">System append; Exec read</span><span class="zh">系统追加；高管读</span></td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">Current system map</span><span class="zh">当前系统地图</span></div>
+  <table>
+    <tr><th><span class="en">Piece</span><span class="zh">件</span></th><th><span class="en">Role</span><span class="zh">角色</span></th><th><span class="en">Type</span><span class="zh">类型</span></th></tr>
+    <tr><td>🧠 Brain (Supabase)</td><td><span class="en">Live truth — one ledger</span><span class="zh">实时真相—一本账</span></td><td><span class="badge badge-blue">Pillar</span></td></tr>
+    <tr><td>⚡ Hermes / WISE OPS</td><td><span class="en">Sole worker</span><span class="zh">唯一工人</span></td><td><span class="badge badge-blue">Pillar</span></td></tr>
+    <tr><td>💬 Slack</td><td><span class="en">Human OS</span><span class="zh">人操作系统</span></td><td><span class="badge badge-blue">Pillar</span></td></tr>
+    <tr><td>📊 Google Sheets</td><td><span class="en">Views only</span><span class="zh">只看不写</span></td><td><span class="badge badge-yellow">Utility</span></td></tr>
+    <tr><td>📓 Obsidian</td><td><span class="en">Wiki / SOP</span><span class="zh">知识库/SOP</span></td><td><span class="badge badge-yellow">Utility</span></td></tr>
+    <tr><td>📁 Google Drive</td><td><span class="en">Original files</span><span class="zh">原件</span></td><td><span class="badge badge-yellow">Utility</span></td></tr>
+    <tr><td>🔬 NotebookLM</td><td><span class="en">Research reader</span><span class="zh">研究阅读</span></td><td><span class="badge badge-yellow">Utility</span></td></tr>
+    <tr><td>📲 7shifts</td><td><span class="en">Schedule authority</span><span class="zh">排班权威</span></td><td><span class="badge badge-green">Source</span></td></tr>
+    <tr><td>💳 POS (Chowbus/Toast)</td><td><span class="en">Sales authority</span><span class="zh">销售权威</span></td><td><span class="badge badge-green">Source</span></td></tr>
+    <tr><td>💵 Gusto</td><td><span class="en">Payroll authority</span><span class="zh">工资权威</span></td><td><span class="badge badge-green">Source</span></td></tr>
+    <tr><td>📒 QuickBooks</td><td><span class="en">Accounting authority</span><span class="zh">会计权威</span></td><td><span class="badge badge-green">Source</span></td></tr>
+    <tr><td>📦 MarginEdge</td><td><span class="en">Cost authority</span><span class="zh">成本权威</span></td><td><span class="badge badge-green">Source</span></td></tr>
+    <tr><td>🧑‍💼 Workstream</td><td><span class="en">Recruiting pipeline</span><span class="zh">招聘管道</span></td><td><span class="badge badge-green">Source</span></td></tr>
+  </table>
+
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
+    <code>data health check</code> · <code>show audit log</code> · <code>what are the 5 rules</code></div>
+</div>
+
+</div>
+
+<script>
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goTab(i){document.querySelectorAll('.tab')[i].click()}
+function setLang(lang,btn){
+  document.body.className='lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function togBox(el){
+  if(el.classList.contains('checked')){
+    el.classList.remove('checked');el.classList.add('todo');el.textContent='';
+    el.nextElementSibling.classList.remove('done');
+  }else{
+    el.classList.remove('todo');el.classList.add('checked');el.textContent='✓';
+    el.nextElementSibling.classList.add('done');
+  }
+}
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  const tabs=document.querySelectorAll('.tab');
+  const active=document.querySelector('.tab.active');
+  if(!active)return;
+  const idx=Array.from(tabs).indexOf(active);
+  if(e.key==='ArrowRight'&&idx<tabs.length-1){tabs[idx+1].click()}
+  if(e.key==='ArrowLeft'&&idx>0){tabs[idx-1].click()}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procurement · 采购部 · Wiserise</title>
+<style>
+:root {
+  --bg:#fafbfc; --card:#fff; --ink:#111827; --muted:#6b7280; --muted-light:#9ca3af;
+  --brand:#0f172a; --accent:#3b82f6;
+  --green:#059669; --green-bg:#ecfdf5;
+  --yellow:#d97706; --yellow-bg:#fffbeb;
+  --red:#dc2626; --red-bg:#fef2f2;
+  --blue:#2563eb; --blue-bg:#eff6ff;
+  --border:#e5e7eb; --border-light:#f3f4f6;
+  --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.04); --shadow-lg:0 4px 16px rgba(0,0,0,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.topbar{background:var(--brand);color:#fff;padding:16px 28px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto}
+.topbar h1{font-size:17px;font-weight:700}
+.topbar .sub{font-size:11.5px;opacity:.65;margin-top:2px}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden}
+.lang-btn{padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer}
+.lang-btn.active{background:rgba(255,255,255,.15);color:#fff}
+.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto}
+.tab{padding:11px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--brand);border-bottom-color:var(--brand)}
+.content{max-width:1040px;margin:0 auto;padding:24px 20px 80px}
+.page{display:none;animation:fadeIn .2s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.pareto{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:16px 18px;margin-bottom:18px;font-size:13.5px}
+.pareto strong{color:var(--brand)}
+.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+th{background:var(--brand);color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:11.5px}
+td{border-bottom:1px solid var(--border-light);padding:9px 10px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f9fafb}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card-title{font-size:15px;font-weight:700;color:var(--brand);margin-bottom:6px}
+.box{border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:12.5px;line-height:1.5;border:1px solid}
+.box-rule{background:var(--yellow-bg);border-color:#fde68a}
+.box-auto{background:var(--blue-bg);border-color:#bfdbfe}
+.box-gate{background:var(--green-bg);border-color:#a7f3d0}
+.box-red{background:var(--red-bg);border-color:#fecaca}
+.badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:600}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-yellow{background:var(--yellow-bg);color:var(--yellow)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-gray{background:#f3f4f6;color:#6b7280}
+.badge-gate{background:#fff;border:1.5px solid var(--green);color:var(--green)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px;font-size:12px}
+.flow-step{background:var(--brand);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+.flow-arrow{color:var(--muted-light);font-size:18px}
+.flow-gate{background:var(--green);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+.stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stage-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .15s}
+.stage-card:hover{box-shadow:var(--shadow-lg)}
+.stage-num{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.stage-name{font-size:16px;font-weight:700;color:var(--brand);margin-bottom:8px}
+.stage-work{font-size:12.5px;color:var(--ink);line-height:1.5;margin-bottom:10px}
+.stage-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted)}
+.stage-meta .owner{font-weight:600;color:var(--ink)}
+.gate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.gate-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
+.gate-card .g-badge{margin-bottom:8px}
+.gate-card .g-who{font-size:13px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.gate-card .g-what{font-size:12px;color:var(--muted);line-height:1.4}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.quick-list{list-style:none;margin:0;padding:0}
+.quick-list li{padding:8px 0;border-bottom:1px solid var(--border-light);font-size:12.5px;display:flex;justify-content:space-between;gap:12px}
+.quick-list li:last-child{border-bottom:none}
+.quick-list .q-label{color:var(--muted);flex-shrink:0}
+.quick-list .q-val{font-weight:600;color:var(--ink);text-align:right}
+.kpi-link{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
+.kpi-link:hover{box-shadow:var(--shadow-lg)}
+.kpi-link .kl-icon{font-size:32px}
+.kpi-link .kl-text{flex:1}
+.kpi-link .kl-title{font-size:14px;font-weight:700;color:var(--brand)}
+.kpi-link .kl-sub{font-size:12px;color:var(--muted)}
+.kpi-link .kl-arrow{font-size:20px;color:var(--accent)}
+.page-h{font-size:20px;font-weight:800;color:var(--brand);margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.verified{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);background:#f3f4f6;border-radius:999px;padding:3px 10px;margin:0 0 14px}
+.ask-brain{background:var(--card);border:1px dashed #93c5fd;border-radius:var(--radius);padding:12px 14px;margin-top:16px;font-size:12.5px}
+.ask-brain strong{color:var(--blue)}
+.ask-brain code{background:#eff6ff;padding:1px 6px;border-radius:4px;font-size:12px}
+.footer{text-align:center;font-size:10px;color:var(--muted-light);padding:20px 0}
+.zh{display:none}
+body.lang-zh .zh{display:inline}
+body.lang-zh .en{display:none}
+body.lang-both .zh{display:inline}
+body.lang-both .en{display:inline}
+.en{display:inline}
+@media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab{display:none}.lang-toggle{display:none}}
+@media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}.gate-row{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr}}
+@media(max-width:500px){.stage-grid{grid-template-columns:1fr}.gate-row{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body class="lang-both">
+<div class="topbar">
+  <div class="topbar-row">
+    <div>
+      <h1>📦 Procurement · <span class="zh">采购部</span></h1>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · Buy clear · Pay safe · Deliver right</div>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn" onclick="setLang('zh',this)">中文</button>
+      <button class="lang-btn active" onclick="setLang('both',this)">EN+中文</button>
+    </div>
+  </div>
+</div>
+<div class="tabs">
+  <button class="tab active" onclick="showPage('ops',this)">💬 Slack OPS</button>
+  <button class="tab" onclick="showPage('start',this)">🎓 Proc Start <span class="zh">入职</span></button>
+  <button class="tab" onclick="showPage('kpi',this)">📈 KPI</button>
+  <button class="tab" onclick="showPage('ov',this)">📊 Overview <span class="zh">总表</span></button>
+  <button class="tab" onclick="showPage('s1',this)">1 Request <span class="zh">需求</span></button>
+  <button class="tab" onclick="showPage('s2',this)">2 Catalog <span class="zh">清单</span></button>
+  <button class="tab" onclick="showPage('s3',this)">3 Approve <span class="zh">审批</span></button>
+  <button class="tab" onclick="showPage('s4',this)">4 Buy <span class="zh">下单</span></button>
+  <button class="tab" onclick="showPage('s5',this)">5 Pay <span class="zh">付款</span></button>
+  <button class="tab" onclick="showPage('s6',this)">6 Deliver <span class="zh">交付</span></button>
+  <button class="tab" onclick="showPage('s7',this)">7 Vendor <span class="zh">供应商</span></button>
+  <button class="tab" onclick="showPage('s8',this)">8 Close <span class="zh">结单</span></button>
+  <button class="tab" onclick="showPage('rules',this)">📋 Rules <span class="zh">规矩</span></button>
+</div>
+<div class="content">
+
+<div class="page active" id="ops">
+  <div class="page-h">💬 <span class="en">How to Work in Slack</span><span class="zh">在Slack怎么干活</span></div>
+  <div class="page-sub"><span class="en">Procurement simple only</span><span class="zh">采购只讲简单的</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong><span class="en">1 line:</span><span class="zh">1句：</span></strong> <span class="en">Store asks clear → #04-finance new post → Yumi buys → always tell requester → pay first then kitchen manager delivers.</span><span class="zh">店说清楚→#04-finance新帖→Yumi买→一定通知申请人→先付钱后后厨经理交付。</span></div>
+  <div class="sec-title"><span class="en">3 pieces</span><span class="zh">3个东西</span></div>
+  <div class="stage-grid">
+    <div class="stage-card"><div class="stage-name">💬 Slack</div><div class="stage-work"><span class="en">#04-finance is the buy office.</span><span class="zh">#04-finance是买东西办公室。</span></div></div>
+    <div class="stage-card"><div class="stage-name">⚡ WISE OPS</div><div class="stage-work"><span class="en">Forwards buys, nudges status.</span><span class="zh">转发采购、催进度。</span></div></div>
+    <div class="stage-card"><div class="stage-name">🧠 Brain</div><div class="stage-work"><span class="en">Forms + purchase notes.</span><span class="zh">表格+采购记录。</span></div></div>
+  </div>
+  <div class="sec-title"><span class="en">Where to type</span><span class="zh">在哪打字</span></div>
+  <table>
+    <tr><th><span class="en">Place</span><span class="zh">地方</span></th><th><span class="en">Say</span><span class="zh">说</span></th></tr>
+    <tr><td><strong>#04-finance</strong></td><td><span class="en">All buys · P1 new post</span><span class="zh">所有采购·P1新帖</span></td></tr>
+    <tr><td><strong><span class="en">Store channel</span><span class="zh">店频道</span></strong></td><td><span class="en">Ask buy → bot forwards</span><span class="zh">要买→机器人转发</span></td></tr>
+    <tr><td><strong>#03-ops</strong></td><td><span class="en">Repair only — not supply buy</span><span class="zh">只维修—不是买物资</span></td></tr>
+    <tr><td><strong>Louis DM</strong></td><td><span class="en">≥$500 / CapEx yes</span><span class="zh">≥$500/大件 yes</span></td></tr>
+  </table>
+  <div class="sec-title"><span class="en">Copy lines</span><span class="zh">复制这些话</span></div>
+  <table>
+    <tr><th><span class="en">Want</span><span class="zh">想做</span></th><th><span class="en">Type</span><span class="zh">打</span></th></tr>
+    <tr><td><span class="en">Store buy</span><span class="zh">店要买</span></td><td><code>🛒 采购 · 00003 · headset 10 · this week</code></td></tr>
+    <tr><td><span class="en">Progress</span><span class="zh">进度</span></td><td><code>ordered</code> / <code>partial</code> / <code>done</code> / <code>blocked</code></td></tr>
+    <tr><td><span class="en">Need Louis</span><span class="zh">要老板</span></td><td><code>≥$500 · need Louis yes</code></td></tr>
+    <tr><td><span class="en">Deliver</span><span class="zh">交付</span></td><td><code>请交付 · headset × 10</code></td></tr>
+    <tr><td><span class="en">Catalog</span><span class="zh">清单</span></td><td><code>shopping catalog</code></td></tr>
+  </table>
+  <div class="sec-title"><span class="en">One example</span><span class="zh">一个例子</span></div>
+  <div class="card"><div class="stage-work" style="margin:0;line-height:1.8">
+    <strong>1.</strong> <span class="en">New #04-finance post with store·who·item·when·$</span><span class="zh">#04-finance新帖：店·谁·物·何时·钱</span><br>
+    <strong>2.</strong> <span class="en">Yumi checks catalog unit price</span><span class="zh">Yumi查清单单价</span><br>
+    <strong>3.</strong> <span class="en">≥$500 → Louis yes first</span><span class="zh">≥$500→先Louis yes</span><br>
+    <strong>4.</strong> <span class="en">Pay, then @ kitchen manager deliver</span><span class="zh">付钱，再@后厨经理交付</span><br>
+    <strong>5.</strong> <span class="en">P2 notify requester thread + DM</span><span class="zh">P2通知申请人 thread+DM</span>
+  </div></div>
+  <div class="sec-title"><span class="en">3 rules</span><span class="zh">3条</span></div>
+  <div class="box box-gate"><strong>1.</strong> <span class="en">New buy = new #04-finance post.</span><span class="zh">新采购=新#04-finance帖。</span></div>
+  <div class="box box-gate"><strong>2.</strong> <span class="en">Always notify requester.</span><span class="zh">一定通知申请人。</span></div>
+  <div class="box box-red"><strong>3.</strong> <span class="en">Bot never pays. ≥$500 = Louis.</span><span class="zh">机器人永不付。≥$500=Louis。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>open purchases</code> · <code>shopping catalog</code> · <code>purchase status 00003</code></div>
+</div>
+
+<div class="page" id="start">
+  <div class="page-h">🎓 <span class="en">New Procurement Path</span><span class="zh">新采购入职路径</span></div>
+  <div class="page-sub">Yumi / buyer · 30 days</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">Run store supply buys end-to-end without messy threads — and never pay without the right yes.</span><span class="zh">能完整跑店物资采购且thread不乱 — 没对的yes绝不付钱。</span></div>
+  <div class="sec-title">Day 1</div>
+  <table>
+    <tr><th>#</th><th><span class="en">Do</span><span class="zh">做</span></th><th>Where</th></tr>
+    <tr><td>1</td><td><span class="en">Read Slack OPS + Overview</span><span class="zh">看Slack OPS+总表</span></td><td>💬 📊</td></tr>
+    <tr><td>2</td><td><span class="en">Open Shopping List Sheet</span><span class="zh">打开采购清单Sheet</span></td><td>Catalog</td></tr>
+    <tr><td>3</td><td><span class="en">Join #04-finance</span><span class="zh">进#04-finance</span></td><td>Slack</td></tr>
+  </table>
+  <div class="sec-title">Week 1</div>
+  <table>
+    <tr><th><span class="en">Learn</span><span class="zh">学</span></th><th>Tab</th><th>Ask</th></tr>
+    <tr><td>P1 format</td><td>1 Request</td><td><code>open purchases</code></td></tr>
+    <tr><td>Catalog prices</td><td>2 Catalog</td><td><code>shopping catalog</code></td></tr>
+    <tr><td>≥$500 gate</td><td>3 Approve</td><td><code>pending 500</code></td></tr>
+    <tr><td>Pay then deliver</td><td>5·6</td><td><code>handoff 00003</code></td></tr>
+  </table>
+  <div class="sec-title">Month 1</div>
+  <table>
+    <tr><th><span class="en">Finish</span><span class="zh">完成</span></th><th><span class="en">Pass</span><span class="zh">过关</span></th></tr>
+    <tr><td><span class="en">20 clean P1 buys</span><span class="zh">20次干净P1</span></td><td><span class="en">store·who·item·when each time</span><span class="zh">每次有店谁物何时</span></td></tr>
+    <tr><td><span class="en">3 × ≥$500 with Louis yes</span><span class="zh">3次≥$500有Louis yes</span></td><td><span class="en">yes before pay</span><span class="zh">付钱前有yes</span></td></tr>
+    <tr><td><span class="en">Every progress → P2 notify</span><span class="zh">每次进度→P2通知</span></td><td>thread + DM</td></tr>
+    <tr><td><span class="en">Update catalog when price changes</span><span class="zh">改价就更新清单</span></td><td>one Sheet only</td></tr>
+  </table>
+  <div class="box box-red"><strong>Never:</strong> <span class="en">auto-pay · second catalog Sheet · bury buy in wrong thread · deliver before pay</span><span class="zh">自动付·第二个清单·埋错thread·没付钱就交付</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>open purchases</code> · <code>shopping catalog</code></div>
+</div>
+
+<div class="page" id="kpi">
+  <div class="page-h">📈 KPI</div>
+  <div class="verified">✅ Sheet · 2026-07-21</div>
+  <div class="pareto"><strong><span class="en">Live buy queue in Sheet + #04-finance — not frozen HTML.</span><span class="zh">活采购队列在Sheet+#04-finance — 不冻HTML。</span></strong></div>
+  <a class="kpi-link" href="https://docs.google.com/spreadsheets/d/1dgi7xkwqU12voB4ndhuKD54rSaxzTMF8PCEfAiBBxps/edit" target="_blank">
+    <div class="kl-icon">📊</div>
+    <div class="kl-text">
+      <div class="kl-title"><span class="en">Procurement KPI (Google Sheet)</span><span class="zh">采购KPI（Google Sheet）</span></div>
+      <div class="kl-sub"><span class="en">Open buys · ≥$500 gate · handoff</span><span class="zh">开放采购·≥$500门·交付</span></div>
+    </div>
+    <div class="kl-arrow">→</div>
+  </a>
+  <a class="kpi-link" href="https://docs.google.com/spreadsheets/d/1T91-x8x2RWRggz5zzinxfFVmhk2XphA1OLGi-nNOg0k/edit" target="_blank">
+    <div class="kl-icon">🛒</div>
+    <div class="kl-text">
+      <div class="kl-title"><span class="en">Shopping List Catalog</span><span class="zh">采购清单 Catalog</span></div>
+      <div class="kl-sub">Headset $10 · Uniform $10 · Apron $5 · + more</div>
+    </div>
+    <div class="kl-arrow">→</div>
+  </a>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>open purchases</code> · <code>shopping catalog</code> · <code>pending louis buys</code></div>
+</div>
+
+<div class="page" id="ov">
+  <div class="verified">✅ Roadmap verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Unclear buys waste money. Force store · who · item · when · $ before anyone shops.</span><span class="zh">说不清就买=浪费钱。先强制店·谁·物·何时·钱。</span></div>
+  <div class="sec-title"><span class="en">Proc Flow</span><span class="zh">采购全流程</span></div>
+  <div class="flow">
+    <span class="flow-step">1 Request</span><span class="flow-arrow">→</span>
+    <span class="flow-step">2 Catalog</span><span class="flow-arrow">→</span>
+    <span class="flow-step">3 Approve</span><span class="flow-arrow">→</span>
+    <span class="flow-step">4 Buy</span><span class="flow-arrow">→</span>
+    <span class="flow-step">5 Pay</span><span class="flow-arrow">→</span>
+    <span class="flow-step">6 Deliver</span><span class="flow-arrow">→</span>
+    <span class="flow-step">7 Vendor</span><span class="flow-arrow">→</span>
+    <span class="flow-step">8 Close</span>
+  </div>
+  <div class="sec-title"><span class="en">8 Stages</span><span class="zh">8阶段</span></div>
+  <div class="stage-grid">
+    <div class="stage-card" onclick="goTab(4)"><div class="stage-num">1</div><div class="stage-name">Request</div><div class="stage-work"><span class="en">P1 new post #04-finance</span><span class="zh">P1新帖#04-finance</span></div><div class="stage-meta"><span class="owner">GM · Auto</span></div></div>
+    <div class="stage-card" onclick="goTab(5)"><div class="stage-num">2</div><div class="stage-name">Catalog</div><div class="stage-work"><span class="en">One Sheet prices/SKU</span><span class="zh">一个Sheet价/SKU</span></div><div class="stage-meta"><span class="owner">Yumi</span></div></div>
+    <div class="stage-card" onclick="goTab(6)"><div class="stage-num">3</div><div class="stage-name">Approve</div><div class="stage-work"><span class="en">&lt;$500 Yumi · ≥$500 Louis</span><span class="zh">&lt;$500 Yumi · ≥$500 Louis</span></div><div class="stage-meta"><span class="badge badge-gate">⭐</span></div></div>
+    <div class="stage-card" onclick="goTab(7)"><div class="stage-num">4</div><div class="stage-name">Buy / Order</div><div class="stage-work"><span class="en">Place order · order#</span><span class="zh">下单·订单号</span></div><div class="stage-meta"><span class="owner">Yumi</span></div></div>
+    <div class="stage-card" onclick="goTab(8)"><div class="stage-num">5</div><div class="stage-name">Pay</div><div class="stage-work"><span class="en">Pay first · proof</span><span class="zh">先付钱·留证明</span></div><div class="stage-meta"><span class="owner">Yumi · Louis bank</span></div></div>
+    <div class="stage-card" onclick="goTab(9)"><div class="stage-num">6</div><div class="stage-name">Deliver</div><div class="stage-work"><span class="en">@ Kitchen Manager after pay</span><span class="zh">付钱后@后厨经理</span></div><div class="stage-meta"><span class="owner">KM</span></div></div>
+    <div class="stage-card" onclick="goTab(10)"><div class="stage-num">7</div><div class="stage-name">Vendor</div><div class="stage-work"><span class="en">Food/ops vendors · PO if needed</span><span class="zh">食材/运营供应商·需要PO</span></div><div class="stage-meta"><span class="owner">Yumi</span></div></div>
+    <div class="stage-card" onclick="goTab(11)"><div class="stage-num">8</div><div class="stage-name">Close</div><div class="stage-work"><span class="en">P2 done · Brain note</span><span class="zh">P2完成·记Brain</span></div><div class="stage-meta"><span class="owner">Yumi · Auto</span></div></div>
+  </div>
+  <div class="sec-title"><span class="en">4 Gates</span><span class="zh">4个门</span></div>
+  <div class="gate-row">
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ P1</span></div><div class="g-who">Clear ask</div><div class="g-what"><span class="en">store·who·item·when</span><span class="zh">店·谁·物·何时</span></div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ P2</span></div><div class="g-who">Louis</div><div class="g-what">≥$500 / CapEx</div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ P3</span></div><div class="g-who">Pay first</div><div class="g-what"><span class="en">no deliver before pay</span><span class="zh">没付钱不交付</span></div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ P4</span></div><div class="g-who">Notify</div><div class="g-what"><span class="en">requester always</span><span class="zh">一定通知申请人</span></div></div>
+  </div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>open purchases</code> · <code>procurement roadmap</code></div>
+</div>
+
+<div class="page" id="s1">
+  <div class="page-h">1. <span class="en">Request</span><span class="zh">需求</span></div>
+  <div class="page-sub">P1 · #04-finance · GM</div>
+  <div class="verified">✅ Verified · 2026-07-21 · wiserise-purchase</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Missing store/who/item = Yumi cannot buy.</span><span class="zh">缺店/谁/物=Yumi买不了。</span></div>
+  <div class="box box-gate"><strong>P1</strong><br>
+  <code>🛒 采购 · {store} · {items} · {when}</code><br>
+  • <span class="en">Who</span><span class="zh">谁</span><br>
+  • item × qty<br>
+  • <span class="en">When</span><span class="zh">何时</span><br>
+  • $ or 未知<br>
+  👉 Yumi 请买
+  </div>
+  <div class="box box-rule"><strong><span class="en">Real example:</span><span class="zh">真例子：</span></strong> 🛒 采购 · 00003 · 耳机10 + 工衣M10 · 本周</div>
+  <div class="box box-red"><strong><span class="en">Wrong:</span><span class="zh">错：</span></strong> <span class="en">Bury inside another finance thread · route to AM</span><span class="zh">埋在别的财务thread·转给AM</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>need headsets 00003</code> · <code>open purchases</code></div>
+</div>
+
+<div class="page" id="s2">
+  <div class="page-h">2. <span class="en">Catalog</span><span class="zh">清单</span></div>
+  <div class="page-sub"><span class="en">One company Sheet only</span><span class="zh">全公司只有一个Sheet</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Second catalog = chaos. One Sheet.</span><span class="zh">第二个清单=乱。只要一个Sheet。</span></div>
+  <table>
+    <tr><th>item_id</th><th>EN</th><th>中文</th><th>$</th></tr>
+    <tr><td>HS-001</td><td>Headset</td><td>耳机</td><td>10</td></tr>
+    <tr><td>UN-001</td><td>Work uniform</td><td>工服</td><td>10</td></tr>
+    <tr><td>AP-001</td><td>Apron</td><td>围裙</td><td>5</td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">Columns:</span><span class="zh">列：</span></strong> item_id · en · cn · unit · unit_price_usd · vendor · notes · active · handoff</div>
+  <div class="box box-rule"><strong><span class="en">Language:</span><span class="zh">语言：</span></strong> <span class="en">US store “元” → treat as USD unit unless RMB said</span><span class="zh">美国店说“元”→当美元单价，除非写RMB</span></div>
+  <a class="kpi-link" href="https://docs.google.com/spreadsheets/d/1T91-x8x2RWRggz5zzinxfFVmhk2XphA1OLGi-nNOg0k/edit" target="_blank"><div class="kl-icon">🛒</div><div class="kl-text"><div class="kl-title">WiseRise Shopping List</div><div class="kl-sub">Catalog + Handoff tabs</div></div><div class="kl-arrow">→</div></a>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>shopping catalog</code> · <code>price headset</code></div>
+</div>
+
+<div class="page" id="s3">
+  <div class="page-h">3. <span class="en">Approve</span><span class="zh">审批</span></div>
+  <div class="page-sub">&lt;$500 Yumi · ≥$500 / CapEx Louis</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Money gate is simple. Don’t invent extra committees.</span><span class="zh">钱的门很简单。别发明更多委员会。</span></div>
+  <table>
+    <tr><th><span class="en">Case</span><span class="zh">情况</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td><span class="en">Normal supply under $500</span><span class="zh">普通物资&lt;$500</span></td><td>Yumi</td></tr>
+    <tr><td>≥$500</td><td>Louis ⭐</td></tr>
+    <tr><td>CapEx / equipment replace</td><td>Louis ⭐</td></tr>
+    <tr><td><span class="en">Unclear amount</span><span class="zh">金额不清</span></td><td><span class="en">Ask only if blocks buy; else 未知</span><span class="zh">挡买卖才问；否则未知</span></td></tr>
+  </table>
+  <div class="box box-red"><strong><span class="en">Bot never pays / never self-approves.</span><span class="zh">机器人永不付款/自批。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>pending louis buys</code> · <code>≥500 queue</code></div>
+</div>
+
+<div class="page" id="s4">
+  <div class="page-h">4. <span class="en">Buy / Order</span><span class="zh">下单</span></div>
+  <div class="page-sub">Yumi</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Order# + vendor + ETA beats long chat.</span><span class="zh">订单号+供应商+到货日比长聊天有用。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做</span></th></tr>
+    <tr><td>1</td><td><span class="en">Match catalog SKU / vendor</span><span class="zh">对清单SKU/供应商</span></td></tr>
+    <tr><td>2</td><td><span class="en">Place order · save order#</span><span class="zh">下单·存订单号</span></td></tr>
+    <tr><td>3</td><td><span class="en">Reply finance thread short status</span><span class="zh">财务thread短回状态</span></td></tr>
+    <tr><td>4</td><td><span class="en">P2 notify requester: ordered</span><span class="zh">P2通知申请人：已订</span></td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>order status 00003</code></div>
+</div>
+
+<div class="page" id="s5">
+  <div class="page-h">5. <span class="en">Pay</span><span class="zh">付款</span></div>
+  <div class="page-sub"><span class="en">Pay first · then deliver</span><span class="zh">先付钱·再交付</span></div>
+  <div class="verified">✅ Verified · 2026-07-21 · Yumi locked</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">No pay proof = no close. No deliver before pay.</span><span class="zh">没付款证明=不结。没付钱不交付。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>1</td><td><span class="en">Confirm gate passed</span><span class="zh">确认门过了</span></td><td>Yumi</td></tr>
+    <tr><td>2</td><td><span class="en">Pay vendor</span><span class="zh">付给供应商</span></td><td>Yumi / Louis bank if needed</td></tr>
+    <tr><td>3</td><td><span class="en">Save amount + proof</span><span class="zh">存金额+证明</span></td><td>Yumi → Brain/forms</td></tr>
+    <tr><td>4</td><td><span class="en">Status = paid → start handoff</span><span class="zh">状态=已付→开始交付</span></td><td>Yumi</td></tr>
+  </table>
+  <div class="box box-red"><strong>Never auto-pay.</strong></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>paid waiting deliver</code></div>
+</div>
+
+<div class="page" id="s6">
+  <div class="page-h">6. <span class="en">Deliver / Handoff</span><span class="zh">交付</span></div>
+  <div class="page-sub"><span class="en">Kitchen Manager after pay</span><span class="zh">付钱后后厨经理</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Wrong handoff person = lost boxes. Use Sheet Handoff tab.</span><span class="zh">交付人错=箱子丢。用Sheet Handoff页。</span></div>
+  <table>
+    <tr><th>store</th><th>role</th><th>note</th></tr>
+    <tr><td>00003</td><td>后厨经理</td><td>Slack U0BHY6H3YSU · set 2026-07-14</td></tr>
+    <tr><td>other</td><td>KM / GM</td><td><span class="en">Fill Handoff tab</span><span class="zh">填Handoff页</span></td></tr>
+  </table>
+  <div class="box box-gate"><strong><span class="en">After pay @KM:</span><span class="zh">付钱后@后厨：</span></strong> <code>请交付 · {item} × {qty}</code></div>
+  <div class="box box-rule"><strong>P2</strong> <span class="en">also DM + store thread to requester</span><span class="zh">也DM+店thread给申请人</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>handoff 00003</code> · <code>who delivers 00003</code></div>
+</div>
+
+<div class="page" id="s7">
+  <div class="page-h">7. <span class="en">Vendor</span><span class="zh">供应商</span></div>
+  <div class="page-sub">Food · ops supply · PO</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Repeat food vendors + clear PO beat random Amazon chaos.</span><span class="zh">固定食材商+清楚PO，好过乱亚马逊。</span></div>
+  <table>
+    <tr><th><span class="en">Type</span><span class="zh">类型</span></th><th><span class="en">How</span><span class="zh">怎么</span></th></tr>
+    <tr><td><span class="en">Catalog supply</span><span class="zh">清单物资</span></td><td>P1 + catalog price</td></tr>
+    <tr><td><span class="en">Needs formal PO</span><span class="zh">要正式PO</span></td><td>CASH-F-002</td></tr>
+    <tr><td><span class="en">Food distributor</span><span class="zh">食材商</span></td><td><span class="en">invoice path · Finance close</span><span class="zh">账单路径·财务结</span></td></tr>
+    <tr><td><span class="en">New big vendor</span><span class="zh">新大供应商</span></td><td>Louis yes</td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>send PO form</code> · <code>vendor list</code></div>
+</div>
+
+<div class="page" id="s8">
+  <div class="page-h">8. <span class="en">Close</span><span class="zh">结单</span></div>
+  <div class="page-sub">done / partial / blocked</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Requester must hear the end state.</span><span class="zh">申请人必须听到最终状态。</span></div>
+  <table>
+    <tr><th><span class="en">Status</span><span class="zh">状态</span></th><th><span class="en">Do</span><span class="zh">做</span></th></tr>
+    <tr><td>✅ done</td><td>P2 + delivered + $ saved</td></tr>
+    <tr><td>⏳ partial</td><td>P2 list remaining</td></tr>
+    <tr><td>❌ blocked / cancel</td><td>P2 reason · don’t ghost</td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">Brain:</span><span class="zh">Brain：</span></strong> form_data.purchases[] + amount when available</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>closed purchases week</code></div>
+</div>
+
+<div class="page" id="rules">
+  <div class="page-h">📋 Rules</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="box box-rule"><strong>1.</strong> All buys → #04-finance new post.</div>
+  <div class="box box-rule"><strong>2.</strong> Must have store · who · item×qty · when · $ if known.</div>
+  <div class="box box-rule"><strong>3.</strong> Bot never pays.</div>
+  <div class="box box-rule"><strong>4.</strong> ≥$500 / CapEx → Louis first.</div>
+  <div class="box box-rule"><strong>5.</strong> Always notify requester (P2) on any progress.</div>
+  <div class="box box-rule"><strong>6.</strong> Pay first, then kitchen manager delivers.</div>
+  <div class="box box-rule"><strong>7.</strong> One Shopping List Sheet only — no second catalog.</div>
+  <div class="box box-rule"><strong>8.</strong> Supply buy ≠ repair (repair → #03-ops).</div>
+  <div class="box box-rule"><strong>9.</strong> Title + • bullets only for Louis how-to.</div>
+  <div class="box box-rule"><strong>10.</strong> Don’t route supply to Area Manager.</div>
+  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
+  <table>
+    <tr><th><span class="en">Item</span><span class="zh">事项</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td><span class="en">Ask to buy</span><span class="zh">提出要买</span></td><td>GM</td></tr>
+    <tr><td><span class="en">Buy &lt;$500</span><span class="zh">买&lt;$500</span></td><td>Yumi</td></tr>
+    <tr><td>≥$500 / CapEx</td><td>Louis</td></tr>
+    <tr><td><span class="en">Catalog price change</span><span class="zh">清单改价</span></td><td>Yumi</td></tr>
+    <tr><td><span class="en">Deliver on floor</span><span class="zh">店内交付</span></td><td>Kitchen Manager</td></tr>
+    <tr><td><span class="en">Bank pay method</span><span class="zh">银行付款方式</span></td><td>Louis + Luna if wire</td></tr>
+  </table>
+  <div class="sec-title">Automated / support</div>
+  <div class="box box-auto">⚡ Store ask → forward P1 to #04-finance</div>
+  <div class="box box-auto">⚡ P2 notify on ordered/done/blocked</div>
+  <div class="box box-auto">📊 Catalog Sheet + Procurement KPI Sheet</div>
+  <div class="box box-auto">📄 CASH-F-002 PO form when vendor needs it</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>open purchases</code> · <code>what's our policy on purchase</code> · <code>shopping catalog</code></div>
+</div>
+
+</div>
+<div class="footer">Wiserise Hospitality Group · Procurement Roadmap · Handbook · EN/中文 · Verified 2026-07-21 · Hermes Artifact</div>
+<script>
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function goTab(i){document.querySelectorAll('.tab')[i].click()}
+function setLang(lang,btn){document.body.className='lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+document.addEventListener('keydown',e=>{const tabs=[...document.querySelectorAll('.tab')];const i=tabs.indexOf(document.querySelector('.tab.active'));if(e.key==='ArrowRight'&&i<tabs.length-1)tabs[i+1].click();if(e.key==='ArrowLeft'&&i>0)tabs[i-1].click()});
+</script>
+</body>
+</html>
+

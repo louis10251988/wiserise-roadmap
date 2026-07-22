@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT · 信息技术部 · Wiserise</title>
+<style>
+:root {
+  --bg:#fafbfc; --card:#fff; --ink:#111827; --muted:#6b7280; --muted-light:#9ca3af;
+  --brand:#0f172a; --accent:#3b82f6;
+  --green:#059669; --green-bg:#ecfdf5;
+  --yellow:#d97706; --yellow-bg:#fffbeb;
+  --red:#dc2626; --red-bg:#fef2f2;
+  --blue:#2563eb; --blue-bg:#eff6ff;
+  --border:#e5e7eb; --border-light:#f3f4f6;
+  --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.04); --shadow-lg:0 4px 16px rgba(0,0,0,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.topbar{background:var(--brand);color:#fff;padding:16px 28px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto}
+.topbar h1{font-size:17px;font-weight:700}
+.topbar .sub{font-size:11.5px;opacity:.65;margin-top:2px}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden}
+.lang-btn{padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer}
+.lang-btn.active{background:rgba(255,255,255,.15);color:#fff}
+.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto}
+.tab{padding:11px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--brand);border-bottom-color:var(--brand)}
+.content{max-width:1040px;margin:0 auto;padding:24px 20px 80px}
+.page{display:none;animation:fadeIn .2s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.pareto{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:16px 18px;margin-bottom:18px;font-size:13.5px}
+.pareto strong{color:var(--brand)}
+.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+th{background:var(--brand);color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:11.5px}
+td{border-bottom:1px solid var(--border-light);padding:9px 10px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f9fafb}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.box{border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:12.5px;line-height:1.5;border:1px solid}
+.box-rule{background:var(--yellow-bg);border-color:#fde68a}
+.box-auto{background:var(--blue-bg);border-color:#bfdbfe}
+.box-gate{background:var(--green-bg);border-color:#a7f3d0}
+.box-red{background:var(--red-bg);border-color:#fecaca}
+.badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:600}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-yellow{background:var(--yellow-bg);color:var(--yellow)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-gray{background:#f3f4f6;color:#6b7280}
+.badge-gate{background:#fff;border:1.5px solid var(--green);color:var(--green)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px;font-size:12px}
+.flow-step{background:var(--brand);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+.flow-arrow{color:var(--muted-light);font-size:18px}
+.stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stage-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .15s}
+.stage-card:hover{box-shadow:var(--shadow-lg)}
+.stage-num{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.stage-name{font-size:16px;font-weight:700;color:var(--brand);margin-bottom:8px}
+.stage-work{font-size:12.5px;line-height:1.5;margin-bottom:10px}
+.stage-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted)}
+.stage-meta .owner{font-weight:600;color:var(--ink)}
+.gate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.gate-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
+.gate-card .g-badge{margin-bottom:8px}
+.gate-card .g-who{font-size:13px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.gate-card .g-what{font-size:12px;color:var(--muted);line-height:1.4}
+.kpi-link{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
+.kpi-link:hover{box-shadow:var(--shadow-lg)}
+.kpi-link .kl-icon{font-size:32px}
+.kpi-link .kl-text{flex:1}
+.kpi-link .kl-title{font-size:14px;font-weight:700;color:var(--brand)}
+.kpi-link .kl-sub{font-size:12px;color:var(--muted)}
+.kpi-link .kl-arrow{font-size:20px;color:var(--accent)}
+.page-h{font-size:20px;font-weight:800;color:var(--brand);margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.verified{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);background:#f3f4f6;border-radius:999px;padding:3px 10px;margin:0 0 14px}
+.ask-brain{background:var(--card);border:1px dashed #93c5fd;border-radius:var(--radius);padding:12px 14px;margin-top:16px;font-size:12.5px}
+.ask-brain strong{color:var(--blue)}
+.ask-brain code{background:#eff6ff;padding:1px 6px;border-radius:4px;font-size:12px}
+.footer{text-align:center;font-size:10px;color:var(--muted-light);padding:20px 0}
+.zh{display:none}
+body.lang-zh .zh{display:inline}
+body.lang-zh .en{display:none}
+body.lang-both .zh{display:inline}
+body.lang-both .en{display:inline}
+.en{display:inline}
+@media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab{display:none}.lang-toggle{display:none}}
+@media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}.gate-row{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.stage-grid{grid-template-columns:1fr}.gate-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="lang-both">
+<div class="topbar">
+  <div class="topbar-row">
+    <div>
+      <h1>🖥️ IT · <span class="zh">信息技术部</span></h1>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · Permissions + secrets + integrations = 80% of system issues</div>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn" onclick="setLang('zh',this)">中文</button>
+      <button class="lang-btn active" onclick="setLang('both',this)">EN+中文</button>
+    </div>
+  </div>
+</div>
+<div class="tabs">
+  <button class="tab active" onclick="showPage('ops',this)">💬 Slack OPS</button>
+  <button class="tab" onclick="showPage('start',this)">🎓 IT Start <span class="zh">入职</span></button>
+  <button class="tab" onclick="showPage('kpi',this)">📈 KPI</button>
+  <button class="tab" onclick="showPage('ov',this)">📊 Overview <span class="zh">总表</span></button>
+  <button class="tab" onclick="showPage('s1',this)">1 Access <span class="zh">权限</span></button>
+  <button class="tab" onclick="showPage('s2',this)">2 Secrets <span class="zh">密钥</span></button>
+  <button class="tab" onclick="showPage('s3',this)">3 Integrations <span class="zh">集成</span></button>
+  <button class="tab" onclick="showPage('s4',this)">4 POS/POS <span class="zh">收银</span></button>
+  <button class="tab" onclick="showPage('s5',this)">5 Slack Setup <span class="zh">Slack配置</span></button>
+  <button class="tab" onclick="showPage('s6',this)">6 Brain <span class="zh">数据库</span></button>
+  <button class="tab" onclick="showPage('s7',this)">7 Security <span class="zh">安全</span></button>
+  <button class="tab" onclick="showPage('rules',this)">📋 Rules <span class="zh">规矩</span></button>
+</div>
+<div class="content">
+
+<div class="page active" id="ops">
+  <div class="page-h">💬 <span class="en">How to Work in Slack</span><span class="zh">在Slack怎么干活</span></div>
+  <div class="page-sub"><span class="en">IT simple only</span><span class="zh">IT只讲简单的</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong><span class="en">1 line:</span><span class="zh">1句：</span></strong> <span class="en">Wrong permission + expired key = 80% of outages. Lock access, rotate keys, test integrations.</span><span class="zh">权限给错+密钥过期=80%的故障。锁好权限，轮换密钥，测集成。</span></div>
+  <div class="sec-title"><span class="en">3 pieces</span><span class="zh">3个东西</span></div>
+  <div class="stage-grid">
+    <div class="stage-card"><div class="stage-name">💬 Slack</div><div class="stage-work"><span class="en">IT tickets in #02-exec or Louis DM</span><span class="zh">IT工单在#02-exec或Louis私信</span></div></div>
+    <div class="stage-card"><div class="stage-name">⚡ WISE OPS</div><div class="stage-work"><span class="en">Runs health checks, token watch</span><span class="zh">跑健康检查、token监控</span></div></div>
+    <div class="stage-card"><div class="stage-name">🧠 Brain</div><div class="stage-work"><span class="en">Manager IDs · keys flags · schema</span><span class="zh">经理ID·密钥标记·表结构</span></div></div>
+  </div>
+  <div class="sec-title"><span class="en">Where to type</span><span class="zh">在哪打字</span></div>
+  <table>
+    <tr><th><span class="en">Place</span><span class="zh">地方</span></th><th><span class="en">Say</span><span class="zh">说</span></th></tr>
+    <tr><td><strong>Louis DM</strong></td><td><span class="en">Config change · key rotation · secret</span><span class="zh">改配置·换密钥·机密</span></td></tr>
+    <tr><td><strong>#02-exec</strong></td><td><span class="en">System status · token alert</span><span class="zh">系统状态·token警报</span></td></tr>
+    <tr><td><strong><span class="en">Store channel</span><span class="zh">店频道</span></strong></td><td><span class="en">POS down / WiFi (GM reports)</span><span class="zh">POS断/WiFi（GM报）</span></td></tr>
+  </table>
+  <div class="sec-title"><span class="en">Copy lines</span><span class="zh">复制这些话</span></div>
+  <table>
+    <tr><th><span class="en">Want</span><span class="zh">想做</span></th><th><span class="en">Type</span><span class="zh">打</span></th></tr>
+    <tr><td><span class="en">System status</span><span class="zh">系统状态</span></td><td><code>hermes status</code></td></tr>
+    <tr><td><span class="en">Token spend</span><span class="zh">AI花费</span></td><td><code>token spend</code></td></tr>
+    <tr><td><span class="en">Key check</span><span class="zh">查密钥</span></td><td><code>check keys</code></td></tr>
+    <tr><td><span class="en">Manager IDs</span><span class="zh">经理ID</span></td><td><code>manager slack IDs</code></td></tr>
+    <tr><td><span class="en">Add manager to Slack</span><span class="zh">加经理进Slack</span></td><td><code>invite manager [name] [store]</code></td></tr>
+  </table>
+  <div class="sec-title"><span class="en">One example (new manager)</span><span class="zh">一个例子（新经理）</span></div>
+  <div class="card"><div class="stage-work" style="margin:0;line-height:1.8">
+    <strong>1.</strong> <span class="en">Louis says add manager to Slack</span><span class="zh">Louis说加经理进Slack</span><br>
+    <strong>2.</strong> <span class="en">WISE OPS sends admin invite to email</span><span class="zh">WISE OPS发管理员邀请到邮箱</span><br>
+    <strong>3.</strong> <span class="en">Manager joins workspace (not creates own)</span><span class="zh">经理加入工作区（不自己建）</span><br>
+    <strong>4.</strong> <span class="en">WISE OPS adds to store channel</span><span class="zh">WISE OPS加进店频道</span><br>
+    <strong>5.</strong> <span class="en">Brain updated: manager ID + store</span><span class="zh">更新Brain：经理ID+店</span>
+  </div></div>
+  <div class="sec-title"><span class="en">3 rules</span><span class="zh">3条</span></div>
+  <div class="box box-gate"><strong>1.</strong> <span class="en">No secret in HTML / Slack / artifacts.</span><span class="zh">密钥不进HTML/Slack/artifact。</span></div>
+  <div class="box box-gate"><strong>2.</strong> <span class="en">New keys → 1Password first, then .env.</span><span class="zh">新密钥→先1Password，后.env。</span></div>
+  <div class="box box-red"><strong>3.</strong> <span class="en">Config / code / permission change = Louis yes.</span><span class="zh">改配置/代码/权限=Louis yes。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>hermes status</code> · <code>manager slack IDs</code> · <code>check keys</code></div>
+</div>
+
+<div class="page" id="start">
+  <div class="page-h">🎓 <span class="en">New IT Path</span><span class="zh">新IT入职路径</span></div>
+  <div class="page-sub"><span class="en">For IT admin / Louis managing systems</span><span class="zh">给IT管理员/Louis管系统</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">30 days: know every system, every key location, every manager access. No phantom accounts.</span><span class="zh">30天：知道每个系统、每个密钥在哪、每个经理有什么权限。没有幽灵账号。</span></div>
+  <div class="sec-title">Day 1</div>
+  <table>
+    <tr><th>#</th><th><span class="en">Do</span><span class="zh">做</span></th><th>Where</th></tr>
+    <tr><td>1</td><td><span class="en">Read Slack OPS + Overview</span><span class="zh">看Slack OPS+总表</span></td><td>💬 📊</td></tr>
+    <tr><td>2</td><td><span class="en">Run hermes status</span><span class="zh">跑hermes status</span></td><td>Terminal</td></tr>
+    <tr><td>3</td><td><span class="en">Check 1Password vault</span><span class="zh">查1Password保险库</span></td><td>1P</td></tr>
+  </table>
+  <div class="sec-title">Week 1</div>
+  <table>
+    <tr><th><span class="en">Learn</span><span class="zh">学</span></th><th>Tab</th><th>Ask</th></tr>
+    <tr><td><span class="en">Access model</span><span class="zh">权限模型</span></td><td>1 Access</td><td><code>manager slack IDs</code></td></tr>
+    <tr><td><span class="en">Secret vault</span><span class="zh">密钥库</span></td><td>2 Secrets</td><td><code>check keys</code></td></tr>
+    <tr><td><span class="en">Integrations</span><span class="zh">集成</span></td><td>3 Integrations</td><td><code>7shifts status</code></td></tr>
+  </table>
+  <div class="sec-title">Month 1</div>
+  <table>
+    <tr><th><span class="en">Finish</span><span class="zh">完成</span></th><th><span class="en">Pass</span><span class="zh">过关</span></th></tr>
+    <tr><td><span class="en">All manager IDs in Brain</span><span class="zh">所有经理ID在Brain</span></td><td>14+ mapped</td></tr>
+    <tr><td><span class="en">All keys in 1P + .env synced</span><span class="zh">所有密钥在1P+.env同步</span></td><td>0 keys in .env only</td></tr>
+    <tr><td><span class="en">1 Slack invite done right</span><span class="zh">1次Slack邀请做对</span></td><td><span class="en">No new workspace</span><span class="zh">没建新工作区</span></td></tr>
+    <tr><td><span class="en">Owner door verified (4 places)</span><span class="zh">老板门验证（4处）</span></td><td>Louis + Luna both</td></tr>
+  </table>
+  <div class="box box-red"><strong>Never:</strong> <span class="en">put keys in artifacts · give admin to non-owner · skip gateway restart after config</span><span class="zh">密钥放artifact·给非老板admin·改完配置不重启gateway</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>manager slack IDs</code> · <code>check keys</code> · <code>hermes status</code></div>
+</div>
+
+<div class="page" id="kpi">
+  <div class="page-h">📈 KPI</div>
+  <div class="verified">✅ Sheet · 2026-07-21</div>
+  <a class="kpi-link" href="https://docs.google.com/spreadsheets/d/1vmOy1WNKFSiY6x1AEpP_jerTQ2-tNovUC20UgQHsPRg/edit" target="_blank">
+    <div class="kl-icon">📊</div>
+    <div class="kl-text">
+      <div class="kl-title"><span class="en">IT KPI (Google Sheet)</span><span class="zh">IT KPI（Google Sheet）</span></div>
+      <div class="kl-sub"><span class="en">Access · secrets · integrations · system</span><span class="zh">权限·密钥·集成·系统</span></div>
+    </div>
+    <div class="kl-arrow">→</div>
+  </a>
+  <table>
+    <tr><th><span class="en">Metric</span><span class="zh">指标</span></th><th><span class="en">Status</span><span class="zh">状态</span></th></tr>
+    <tr><td><span class="en">Manager IDs known</span><span class="zh">已知经理ID</span></td><td>~14</td></tr>
+    <tr><td><span class="en">Owner door IDs</span><span class="zh">老板门ID</span></td><td>Louis + Luna (4 places)</td></tr>
+    <tr><td><span class="en">7shifts linked</span><span class="zh">7shifts连接</span></td><td>4 stores</td></tr>
+    <tr><td><span class="en">Chowbus linked</span><span class="zh">Chowbus连接</span></td><td>4 stores</td></tr>
+    <tr><td><span class="en">Gusto</span><span class="zh">Gusto</span></td><td>Active (payroll)</td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>hermes status</code> · <code>check keys</code> · <code>manager IDs</code></div>
+</div>
+
+<div class="page" id="ov">
+  <div class="verified">✅ Roadmap verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Wrong permission + expired key = 80% of system issues. Lock those two first.</span><span class="zh">权限给错+密钥过期=80%的系统问题。先锁这两个。</span></div>
+  <div class="sec-title"><span class="en">IT Flow</span><span class="zh">IT全流程</span></div>
+  <div class="flow">
+    <span class="flow-step">1 Access</span><span class="flow-arrow">→</span>
+    <span class="flow-step">2 Secrets</span><span class="flow-arrow">→</span>
+    <span class="flow-step">3 Integrations</span><span class="flow-arrow">→</span>
+    <span class="flow-step">4 POS</span><span class="flow-arrow">→</span>
+    <span class="flow-step">5 Slack</span><span class="flow-arrow">→</span>
+    <span class="flow-step">6 Brain</span><span class="flow-arrow">→</span>
+    <span class="flow-step">7 Security</span>
+  </div>
+  <div class="sec-title"><span class="en">7 Stages</span><span class="zh">7阶段</span></div>
+  <div class="stage-grid">
+    <div class="stage-card" onclick="goTab(4)"><div class="stage-num">1</div><div class="stage-name">Access</div><div class="stage-work"><span class="en">Who can see what</span><span class="zh">谁能看什么</span></div><div class="stage-meta"><span class="owner">Louis</span> <span class="badge badge-gate">⭐</span></div></div>
+    <div class="stage-card" onclick="goTab(5)"><div class="stage-num">2</div><div class="stage-name">Secrets</div><div class="stage-work"><span class="en">Keys · 1P · .env</span><span class="zh">密钥·1P·.env</span></div><div class="stage-meta"><span class="owner">Louis · IT</span> <span class="badge badge-gate">⭐</span></div></div>
+    <div class="stage-card" onclick="goTab(6)"><div class="stage-num">3</div><div class="stage-name">Integrations</div><div class="stage-work"><span class="en">7shifts · Chowbus · Gusto</span><span class="zh">7shifts·Chowbus·Gusto</span></div><div class="stage-meta"><span class="owner">IT · Yumi</span></div></div>
+    <div class="stage-card" onclick="goTab(7)"><div class="stage-num">4</div><div class="stage-name">POS / Network</div><div class="stage-work"><span class="en">Chowbus POS · WiFi · internet</span><span class="zh">Chowbus POS·WiFi·网络</span></div><div class="stage-meta"><span class="owner">Ops · IT</span></div></div>
+    <div class="stage-card" onclick="goTab(8)"><div class="stage-num">5</div><div class="stage-name">Slack Setup</div><div class="stage-work"><span class="en">Invite · channels · manifest</span><span class="zh">邀请·频道·manifest</span></div><div class="stage-meta"><span class="owner">IT · Louis</span></div></div>
+    <div class="stage-card" onclick="goTab(9)"><div class="stage-num">6</div><div class="stage-name">Brain (DB)</div><div class="stage-work"><span class="en">Supabase · schema · RLS</span><span class="zh">Supabase·表结构·RLS</span></div><div class="stage-meta"><span class="owner">Louis · Hermes</span></div></div>
+    <div class="stage-card" onclick="goTab(10)"><div class="stage-num">7</div><div class="stage-name">Security</div><div class="stage-work"><span class="en">Owner guard · audit · token watch</span><span class="zh">老板门·审计·token监控</span></div><div class="stage-meta"><span class="owner">Louis</span> <span class="badge badge-gate">⭐</span></div></div>
+  </div>
+  <div class="sec-title"><span class="en">Gates</span><span class="zh">门</span></div>
+  <div class="gate-row">
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ T1</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Config/code change</span><span class="zh">改配置/代码</span></div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ T2</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Permission grant</span><span class="zh">给权限</span></div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ T3</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Key rotation</span><span class="zh">换密钥</span></div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ T4</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Owner door change</span><span class="zh">改老板门</span></div></div>
+  </div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>hermes status</code> · <code>it roadmap</code></div>
+</div>
+
+<div class="page" id="s1">
+  <div class="page-h">1. <span class="en">Access Control</span><span class="zh">权限管理</span></div>
+  <div class="page-sub"><span class="en">Who can see/do what</span><span class="zh">谁能看/做什么</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">2 tiers exist: GM (own store) + Exec (all). Don't build 6 empty tiers.</span><span class="zh">现在2层：GM(自己店)+高管(全部)。别建6个空层。</span></div>
+  <table>
+    <tr><th><span class="en">Role</span><span class="zh">角色</span></th><th><span class="en">Can see</span><span class="zh">能看</span></th><th><span class="en">Can do</span><span class="zh">能做</span></th></tr>
+    <tr><td><strong>GM</strong></td><td><span class="en">Own store only</span><span class="zh">只自己店</span></td><td><span class="en">Schedule · floor staff · roster</span><span class="zh">排班·floor员工·花名册</span></td></tr>
+    <tr><td><strong>Exec (Louis/Luna)</strong></td><td><span class="en">All stores</span><span class="zh">所有店</span></td><td><span class="en">Everything</span><span class="zh">全部</span></td></tr>
+    <tr><td><strong>HR (Coach/Yumi)</strong></td><td><span class="en">People data</span><span class="zh">人事数据</span></td><td><span class="en">Hire/fire prep · payroll</span><span class="zh">招/开除准备·工资</span></td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">4 places to change owner:</span><span class="zh">改老板要改4处：</span></strong> owner-gate · openbudget_guard · config.yaml allow_from · .env SLACK_ALLOWED_USERS → <strong>gateway restart outside Slack</strong></div>
+  <div class="box box-red"><strong><span class="en">Hard:</span><span class="zh">硬：</span></strong> <span class="en">Managers never in #02-executive. Own store channel only.</span><span class="zh">经理不进#02-executive。只自己店频道。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>manager slack IDs</code> · <code>who has access</code></div>
+</div>
+
+<div class="page" id="s2">
+  <div class="page-h">2. <span class="en">Secrets Management</span><span class="zh">密钥管理</span></div>
+  <div class="page-sub">1Password master · .env mirror</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Key only in .env = lost on crash. 1Password first, .env second.</span><span class="zh">密钥只在.env=崩了就丢。先1P，后.env。</span></div>
+  <table>
+    <tr><th><span class="en">Key type</span><span class="zh">类型</span></th><th><span class="en">Where</span><span class="zh">在哪</span></th><th><span class="en">Rule</span><span class="zh">规矩</span></th></tr>
+    <tr><td>Supabase</td><td>1P + .env</td><td><span class="en">Never in HTML</span><span class="zh">永不进HTML</span></td></tr>
+    <tr><td>Slack bot token</td><td>1P + .env</td><td>xoxb</td></tr>
+    <tr><td>Chowbus API</td><td>1P + .env</td><td><span class="en">Rotate if leaked</span><span class="zh">泄露就换</span></td></tr>
+    <tr><td>Google OAuth</td><td>~/.hermes/*.json</td><td>token auto-refresh</td></tr>
+    <tr><td>GBP tokens</td><td>~/.hermes/google_business_tokens.json</td><td>per email</td></tr>
+  </table>
+  <div class="box box-gate"><strong><span class="en">New key pattern:</span><span class="zh">新密钥流程：</span></strong> 1) op-save-secret 2) .env 3) gateway restart 4) test</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>check keys</code> · <code>1password status</code></div>
+</div>
+
+<div class="page" id="s3">
+  <div class="page-h">3. <span class="en">Integrations</span><span class="zh">集成</span></div>
+  <div class="page-sub">7shifts · Chowbus · Gusto · Google</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Broken sync between systems = stale data everywhere. Test links monthly.</span><span class="zh">系统间同步断了=到处旧数据。每月测连接。</span></div>
+  <table>
+    <tr><th><span class="en">System</span><span class="zh">系统</span></th><th><span class="en">Status</span><span class="zh">状态</span></th><th><span class="en">Sync</span><span class="zh">同步</span></th></tr>
+    <tr><td>7shifts</td><td>4 stores linked</td><td>Employee + labor sync ON</td></tr>
+    <tr><td>Chowbus</td><td>4 stores linked</td><td>Sales nightly → Brain</td></tr>
+    <tr><td>Gusto</td><td>Active</td><td>Payroll</td></tr>
+    <tr><td>Google Workspace</td><td>OAuth</td><td>Sheets · Gmail · Drive</td></tr>
+    <tr><td>GBP</td><td>Blocked (QPM 0)</td><td><span class="en">Need Basic Access</span><span class="zh">要申请</span></td></tr>
+    <tr><td>OpenBudget (bank)</td><td>Owner only</td><td>Read-only MCP</td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">Join key:</span><span class="zh">关联键：</span></strong> store_number TEXT ("00003") = stores.number · NOT stores.id UUID</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>7shifts status</code> · <code>chowbus status</code> · <code>integration check</code></div>
+</div>
+
+<div class="page" id="s4">
+  <div class="page-h">4. <span class="en">POS / Network</span><span class="zh">收银/网络</span></div>
+  <div class="page-sub">Chowbus POS · WiFi · internet</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">POS down = no sales. Internet is lifeline. Redundant WiFi if possible.</span><span class="zh">POS断=没销售。网络是命脉。尽量有备用。</span></div>
+  <table>
+    <tr><th><span class="en">Item</span><span class="zh">项目</span></th><th><span class="en">Who handles</span><span class="zh">谁管</span></th></tr>
+    <tr><td><span class="en">POS hardware / printer</span><span class="zh">POS硬件/打印机</span></td><td>Ops → Chowbus support</td></tr>
+    <tr><td><span class="en">Internet / WiFi</span><span class="zh">网络/WiFi</span></td><td>Ops · IT</td></tr>
+    <tr><td><span class="en">POS down (urgent)</span><span class="zh">POS断（紧急）</span></td><td>Ops → #03-ops → Chowbus</td></tr>
+    <tr><td><span class="en">PIN reset</span><span class="zh">重置PIN</span></td><td>GM (floor staff) · Louis (manager)</td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>pos status</code> · <code>reset pin</code></div>
+</div>
+
+<div class="page" id="s5">
+  <div class="page-h">5. <span class="en">Slack Setup</span><span class="zh">Slack配置</span></div>
+  <div class="page-sub">Invite · channels · manifest · slash commands</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Use admin invite, not regular link, or managers create own workspace.</span><span class="zh">用管理员邀请，不是普通链接，否则经理自己建工作区。</span></div>
+  <table>
+    <tr><th><span class="en">Task</span><span class="zh">任务</span></th><th><span class="en">How</span><span class="zh">怎么做</span></th></tr>
+    <tr><td><span class="en">Add manager</span><span class="zh">加经理</span></td><td>admin.users.invite (xoxp token) → store channel</td></tr>
+    <tr><td><span class="en">Create store channel</span><span class="zh">建店频道</span></td><td>store-NNNNN-brand-city format</td></tr>
+    <tr><td><span class="en">Slash commands broken</span><span class="zh">斜杠命令坏了</span></td><td>hermes slack manifest --write → paste → reinstall</td></tr>
+    <tr><td><span class="en">Gateway restart</span><span class="zh">重启gateway</span></td><td><span class="en">Outside Slack terminal only</span><span class="zh">只能在外面Terminal</span></td></tr>
+  </table>
+  <div class="box box-red"><strong><span class="en">Bot token (xoxb) ≠ admin token (xoxp):</span><span class="zh">Bot token不能做admin操作：</span></strong> <span class="en">Need xoxp for admin.users.invite</span><span class="zh">admin操作需要xoxp</span></div>
+  <div class="box box-rule"><strong><span class="en">Workspace:</span><span class="zh">工作区：</span></strong> wiserisehospi-evh5540.slack.com · team_id T08TW3FDBDG</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>invite manager</code> · <code>slack manifest</code> · <code>store channels</code></div>
+</div>
+
+<div class="page" id="s6">
+  <div class="page-h">6. <span class="en">Brain (Supabase)</span><span class="zh">数据库</span></div>
+  <div class="page-sub">Project kwadpofhzjpmmahlrefj · East US Ohio</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Never assume schema. Always SELECT * LIMIT 1 before writing queries.</span><span class="zh">永不猜表结构。写查询前先SELECT * LIMIT 1。</span></div>
+  <table>
+    <tr><th><span class="en">Table</span><span class="zh">表</span></th><th><span class="en">Use</span><span class="zh">用途</span></th></tr>
+    <tr><td>stores</td><td><span class="en">Store metadata</span><span class="zh">店信息</span></td></tr>
+    <tr><td>workforce_employees</td><td><span class="en">Staff</span><span class="zh">员工</span></td></tr>
+    <tr><td>applicants</td><td><span class="en">Candidates</span><span class="zh">候选人</span></td></tr>
+    <tr><td>chowbus_raw</td><td><span class="en">Daily sales</span><span class="zh">日销售</span></td></tr>
+    <tr><td>fraud_history</td><td><span class="en">Nightly fraud</span><span class="zh">每晚作弊</span></td></tr>
+    <tr><td>form_submissions</td><td><span class="en">Forms data</span><span class="zh">表格数据</span></td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">RLS:</span><span class="zh">行级安全：</span></strong> workforce_employees + stores behind RLS → use SERVICE_ROLE_KEY for direct queries</div>
+  <div class="box box-red"><strong><span class="en">DDL:</span><span class="zh">改表：</span></strong> <span class="en">PostgREST can't DDL. Use supabase db query --linked</span><span class="zh">PostgREST不能改表。用CLI</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>supabase tables</code> · <code>schema check</code></div>
+</div>
+
+<div class="page" id="s7">
+  <div class="page-h">7. <span class="en">Security</span><span class="zh">安全</span></div>
+  <div class="page-sub">Owner guard · audit · token watch</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Non-owner tries bank = silent block + Louis DM alert. Code check, not prompt.</span><span class="zh">非老板查银行=静默拦+Louis私信。代码检查，不是提示词。</span></div>
+  <table>
+    <tr><th><span class="en">Layer</span><span class="zh">层</span></th><th><span class="en">What</span><span class="zh">做什么</span></th></tr>
+    <tr><td><span class="en">Owner gate</span><span class="zh">老板门</span></td><td>Louis + Luna only · others silenced</td></tr>
+    <tr><td><span class="en">OpenBudget guard</span><span class="zh">银行门</span></td><td>Bank tools blocked for non-owners</td></tr>
+    <tr><td><span class="en">Token spend watch</span><span class="zh">AI花费监控</span></td><td>Silent unless store over $50/mo</td></tr>
+    <tr><td><span class="en">Audit trail</span><span class="zh">审计</span><span class="zh"></span></td><td>Hermes state.db · sessions</td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">Alert DM:</span><span class="zh">警报私信：</span></strong> D0BGEEPQ141 (Louis home)</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>token spend</code> · <code>security check</code> · <code>owner door</code></div>
+</div>
+
+<div class="page" id="rules">
+  <div class="page-h">📋 Rules</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="box box-rule"><strong>1.</strong> <span class="en">No secrets in HTML / Slack / artifacts.</span><span class="zh">密钥不进HTML/Slack/artifact。</span></div>
+  <div class="box box-rule"><strong>2.</strong> <span class="en">New key → 1Password first, then .env.</span><span class="zh">新密钥→先1P，后.env。</span></div>
+  <div class="box box-rule"><strong>3.</strong> <span class="en">Config / code / permission = Louis yes.</span><span class="zh">改配置/代码/权限=Louis yes。</span></div>
+  <div class="box box-rule"><strong>4.</strong> <span class="en">Managers own store channel only. Not #02-exec.</span><span class="zh">经理只自己店频道。</span></div>
+  <div class="box box-rule"><strong>5.</strong> <span class="en">Owner change = 4 places + gateway restart.</span><span class="zh">改老板=4处+重启。</span></div>
+  <div class="box box-rule"><strong>6.</strong> <span class="en">Use admin invite (xoxp), not regular link.</span><span class="zh">用管理员邀请(xoxp)。</span></div>
+  <div class="box box-rule"><strong>7.</strong> <span class="en">Never assume Supabase schema. SELECT first.</span><span class="zh">永不猜表结构。先SELECT。</span></div>
+  <div class="box box-rule"><strong>8.</strong> <span class="en">store_number TEXT join, not UUID.</span><span class="zh">用TEXT店号关联，不用UUID。</span></div>
+  <div class="box box-rule"><strong>9.</strong> <span class="en">Gateway restart from outside Slack terminal.</span><span class="zh">重启gateway在外面Terminal。</span></div>
+  <div class="box box-rule"><strong>10.</strong> <span class="en">Token spend watch silent unless over cap.</span><span class="zh">AI花费监控超了才报。</span></div>
+  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
+  <table>
+    <tr><th><span class="en">Item</span><span class="zh">事项</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td><span class="en">Config change</span><span class="zh">改配置</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Permission grant</span><span class="zh">给权限</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Key rotation</span><span class="zh">换密钥</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">New integration</span><span class="zh">新集成</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Owner door change</span><span class="zh">改老板门</span></td><td>Louis (4 places + restart)</td></tr>
+  </table>
+  <div class="sec-title">Automated / support</div>
+  <div class="box box-auto">⚡ Token spend watch — silent unless over cap</div>
+  <div class="box box-auto">⚡ Night sales → Brain (Chowbus)</div>
+  <div class="box box-auto">⚡ Fraud watch 12:15 AM</div>
+  <div class="box box-auto">📊 IT KPI Sheet</div>
+  <div class="box box-auto">🔐 1Password master vault</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>hermes status</code> · <code>check keys</code> · <code>manager slack IDs</code> · <code>token spend</code></div>
+</div>
+
+</div>
+<div class="footer">Wiserise Hospitality Group · IT Department Roadmap · Handbook · EN/中文 · Verified 2026-07-21 · Hermes Artifact</div>
+<script>
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function goTab(i){document.querySelectorAll('.tab')[i].click()}
+function setLang(lang,btn){document.body.className='lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+document.addEventListener('keydown',e=>{const tabs=[...document.querySelectorAll('.tab')];const i=tabs.indexOf(document.querySelector('.tab.active'));if(e.key==='ArrowRight'&&i<tabs.length-1)tabs[i+1].click();if(e.key==='ArrowLeft'&&i>0)tabs[i-1].click()});
+</script>
+</body>
+</html>

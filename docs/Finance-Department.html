@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance Department · 财务部 · Wiserise</title>
+<style>
+:root {
+  --bg:#fafbfc; --card:#fff; --ink:#111827; --muted:#6b7280; --muted-light:#9ca3af;
+  --brand:#0f172a; --accent:#3b82f6;
+  --green:#059669; --green-bg:#ecfdf5;
+  --yellow:#d97706; --yellow-bg:#fffbeb;
+  --red:#dc2626; --red-bg:#fef2f2;
+  --blue:#2563eb; --blue-bg:#eff6ff;
+  --border:#e5e7eb; --border-light:#f3f4f6;
+  --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.04); --shadow-lg:0 4px 16px rgba(0,0,0,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.topbar{background:var(--brand);color:#fff;padding:16px 28px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto}
+.topbar h1{font-size:17px;font-weight:700}
+.topbar .sub{font-size:11.5px;opacity:.65;margin-top:2px}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden}
+.lang-btn{padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer}
+.lang-btn.active{background:rgba(255,255,255,.15);color:#fff}
+.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto}
+.tab{padding:11px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--brand);border-bottom-color:var(--brand)}
+.content{max-width:1040px;margin:0 auto;padding:24px 20px 80px}
+.page{display:none;animation:fadeIn .2s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.pareto{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:16px 18px;margin-bottom:18px;font-size:13.5px}
+.pareto strong{color:var(--brand)}
+.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+th{background:var(--brand);color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:11.5px}
+td{border-bottom:1px solid var(--border-light);padding:9px 10px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f9fafb}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card-title{font-size:15px;font-weight:700;color:var(--brand);margin-bottom:6px}
+.box{border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:12.5px;line-height:1.5;border:1px solid}
+.box-rule{background:var(--yellow-bg);border-color:#fde68a}
+.box-auto{background:var(--blue-bg);border-color:#bfdbfe}
+.box-gate{background:var(--green-bg);border-color:#a7f3d0}
+.box-red{background:var(--red-bg);border-color:#fecaca}
+.badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:600}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-yellow{background:var(--yellow-bg);color:var(--yellow)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-gray{background:#f3f4f6;color:#6b7280}
+.badge-gate{background:#fff;border:1.5px solid var(--green);color:var(--green)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px;font-size:12px}
+.flow-step{background:var(--brand);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+.flow-arrow{color:var(--muted-light);font-size:18px}
+.flow-gate{background:var(--green);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+.stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stage-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .15s}
+.stage-card:hover{box-shadow:var(--shadow-lg)}
+.stage-num{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.stage-name{font-size:16px;font-weight:700;color:var(--brand);margin-bottom:8px}
+.stage-work{font-size:12.5px;color:var(--ink);line-height:1.5;margin-bottom:10px}
+.stage-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted)}
+.stage-meta .owner{font-weight:600;color:var(--ink)}
+.gate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.gate-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
+.gate-card .g-badge{margin-bottom:8px}
+.gate-card .g-who{font-size:13px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.gate-card .g-what{font-size:12px;color:var(--muted);line-height:1.4}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.quick-list{list-style:none;margin:0;padding:0}
+.quick-list li{padding:8px 0;border-bottom:1px solid var(--border-light);font-size:12.5px;display:flex;justify-content:space-between;gap:12px}
+.quick-list li:last-child{border-bottom:none}
+.quick-list .q-label{color:var(--muted);flex-shrink:0}
+.quick-list .q-val{font-weight:600;color:var(--ink);text-align:right}
+.kpi-link{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
+.kpi-link:hover{box-shadow:var(--shadow-lg)}
+.kpi-link .kl-icon{font-size:32px}
+.kpi-link .kl-text{flex:1}
+.kpi-link .kl-title{font-size:14px;font-weight:700;color:var(--brand)}
+.kpi-link .kl-sub{font-size:12px;color:var(--muted)}
+.kpi-link .kl-arrow{font-size:20px;color:var(--accent)}
+.page-h{font-size:20px;font-weight:800;color:var(--brand);margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.verified{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);background:#f3f4f6;border-radius:999px;padding:3px 10px;margin:0 0 14px}
+.ask-brain{background:var(--card);border:1px dashed #93c5fd;border-radius:var(--radius);padding:12px 14px;margin-top:16px;font-size:12.5px}
+.ask-brain strong{color:var(--blue)}
+.ask-brain code{background:#eff6ff;padding:1px 6px;border-radius:4px;font-size:12px}
+.footer{text-align:center;font-size:10px;color:var(--muted-light);padding:20px 0}
+.zh{display:none}
+body.lang-zh .zh{display:inline}
+body.lang-zh .en{display:none}
+body.lang-both .zh{display:inline}
+body.lang-both .en{display:inline}
+.en{display:inline}
+@media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab{display:none}.lang-toggle{display:none}}
+@media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}.gate-row{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr}}
+@media(max-width:500px){.stage-grid{grid-template-columns:1fr}.gate-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="lang-both">
+
+<div class="topbar">
+  <div class="topbar-row">
+    <div>
+      <h1>💵 Finance Department · <span class="zh">财务部</span></h1>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · 80/20 Rule</div>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn" onclick="setLang('zh',this)">中文</button>
+      <button class="lang-btn active" onclick="setLang('both',this)">EN+中文</button>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showPage('ops',this)">💬 Slack OPS</button>
+  <button class="tab" onclick="showPage('start',this)">🎓 Finance Start <span class="zh">入职</span></button>
+  <button class="tab" onclick="showPage('kpi',this)">📈 KPI</button>
+  <button class="tab" onclick="showPage('ov',this)">📊 Overview <span class="zh">总表</span></button>
+  <button class="tab" onclick="showPage('s1',this)">1 Sales <span class="zh">销售</span></button>
+  <button class="tab" onclick="showPage('s2',this)">2 Cash <span class="zh">现金</span></button>
+  <button class="tab" onclick="showPage('s3',this)">3 Purchase <span class="zh">采购</span></button>
+  <button class="tab" onclick="showPage('s4',this)">4 Payroll <span class="zh">工资</span></button>
+  <button class="tab" onclick="showPage('s5',this)">5 Pay Bills <span class="zh">付款</span></button>
+  <button class="tab" onclick="showPage('s6',this)">6 Bank <span class="zh">银行</span></button>
+  <button class="tab" onclick="showPage('s7',this)">7 Tax <span class="zh">税务</span></button>
+  <button class="tab" onclick="showPage('s8',this)">8 Close <span class="zh">关账</span></button>
+  <button class="tab" onclick="showPage('rules',this)">📋 Rules <span class="zh">规矩</span></button>
+</div>
+
+<div class="content">
+
+<!-- Slack OPS -->
+<div class="page active" id="ops">
+  <div class="page-h">💬 <span class="en">How to Work in Slack</span><span class="zh">在Slack怎么干活</span></div>
+  <div class="page-sub"><span class="en">Finance simple only</span><span class="zh">财务只讲简单的</span></div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · new Finance first read</div>
+  <div class="pareto"><strong><span class="en">Remember 1 line:</span><span class="zh">只记1句：</span></strong> <span class="en">You talk in Slack → bot preps → you only say yes/no on money out, wire/ACH, and ≥$500 buys.</span><span class="zh">你在Slack说 → 机器人准备 → 你只对出钱、转账、≥$500采购说 yes/no。</span></div>
+
+  <div class="sec-title"><span class="en">3 pieces</span><span class="zh">3个东西</span></div>
+  <div class="stage-grid">
+    <div class="stage-card"><div class="stage-name">💬 Slack</div><div class="stage-work"><span class="en">Your office. Finance work lives in #04-finance.</span><span class="zh">你的办公室。财务工作在#04-finance。</span></div></div>
+    <div class="stage-card"><div class="stage-name">⚡ WISE OPS</div><div class="stage-work"><span class="en">The worker. Posts buys, nudges, summaries.</span><span class="zh">工人。发采购、催办、摘要。</span></div></div>
+    <div class="stage-card"><div class="stage-name">🧠 Brain</div><div class="stage-work"><span class="en">The book. Sales, forms, store facts.</span><span class="zh">账本。销售、表格、店事实。</span></div></div>
+  </div>
+
+  <div class="sec-title"><span class="en">2 doors</span><span class="zh">2扇门</span></div>
+  <table>
+    <tr><th><span class="en">Door</span><span class="zh">门</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">Use for</span><span class="zh">干什么</span></th></tr>
+    <tr><td><strong>WISE OPS</strong></td><td>Yumi · GMs (buy ask)</td><td><span class="en">Purchase posts, daily ops</span><span class="zh">采购帖、日常</span></td></tr>
+    <tr><td><strong>WISE BRAIN</strong></td><td>Louis + Luna</td><td><span class="en">Bank balances, wire, secrets</span><span class="zh">银行余额、转账、机密</span></td></tr>
+  </table>
+  <div class="box box-red"><strong><span class="en">Hard:</span><span class="zh">硬：</span></strong> <span class="en">Bank data = owner door only. Bot never pays.</span><span class="zh">银行数据=老板门。机器人永不付款。</span></div>
+
+  <div class="sec-title"><span class="en">Where to type</span><span class="zh">在哪打字</span></div>
+  <table>
+    <tr><th><span class="en">Place</span><span class="zh">地方</span></th><th><span class="en">Say what</span><span class="zh">说什么</span></th></tr>
+    <tr><td><strong>#04-finance</strong></td><td><span class="en">buy / PO / invoice / pay status</span><span class="zh">采购/PO/账单/付款进度</span></td></tr>
+    <tr><td><strong><span class="en">Store channel</span><span class="zh">店里频道</span></strong></td><td><span class="en">ask to buy → bot forwards finance</span><span class="zh">要买东西 → 机器人转财务</span></td></tr>
+    <tr><td><strong>#03-ops</strong></td><td><span class="en">cash bag-swap photos (NOT finance approval)</span><span class="zh">换零钱拍照（不走财务批）</span></td></tr>
+    <tr><td><strong><span class="en">Louis DM</span><span class="zh">Louis私信</span></strong></td><td><span class="en">bank / wire / ≥$500 yes</span><span class="zh">银行/转账/≥$500 yes</span></td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">Copy these lines</span><span class="zh">直接复制这些话</span></div>
+  <table>
+    <tr><th><span class="en">Want</span><span class="zh">想做</span></th><th><span class="en">Type</span><span class="zh">打这个</span></th></tr>
+    <tr><td><span class="en">Store buy</span><span class="zh">店要买</span></td><td><code>🛒 采购 · 00003 · headset 10 · this week</code></td></tr>
+    <tr><td><span class="en">Buy progress</span><span class="zh">采购进度</span></td><td><code>ordered / partial / done / blocked</code></td></tr>
+    <tr><td><span class="en">Need Louis</span><span class="zh">要老板批</span></td><td><code>≥$500 buy · need Louis yes</code></td></tr>
+    <tr><td><span class="en">Sales check</span><span class="zh">查销售</span></td><td><code>sales 00003 last 7 days</code></td></tr>
+    <tr><td><span class="en">Cash float</span><span class="zh">钱箱</span></td><td><code>drawer count $300</code></td></tr>
+    <tr><td><span class="en">Bank (owner)</span><span class="zh">银行(老板)</span></td><td><code>bank balance</code> <span class="en">in Louis DM</span><span class="zh">Louis私信</span></td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">One example (buy)</span><span class="zh">一个例子（采购）</span></div>
+  <div class="card">
+    <div class="stage-work" style="margin:0;line-height:1.8">
+      <strong>1.</strong> <span class="en">Store posts new in #04-finance:</span><span class="zh">店在#04-finance新发：</span> <code>🛒 采购 · 00003 · …</code><br>
+      <strong>2.</strong> <span class="en">Yumi checks catalog price</span><span class="zh">Yumi查清单单价</span><br>
+      <strong>3.</strong> <span class="en">If ≥$500 → Louis yes first</span><span class="zh">≥$500 → 先Louis yes</span><br>
+      <strong>4.</strong> <span class="en">Yumi pays, then kitchen manager delivers</span><span class="zh">Yumi先付钱，后厨经理再交付</span><br>
+      <strong>5.</strong> <span class="en">Notify requester in same thread + DM</span><span class="zh">同thread+DM通知申请人</span>
+    </div>
+  </div>
+
+  <div class="sec-title"><span class="en">3 rules only</span><span class="zh">只记3条</span></div>
+  <div class="box box-gate"><strong>1.</strong> <span class="en">New buy = new #04-finance post.</span><span class="zh">新采购=新#04-finance帖。</span></div>
+  <div class="box box-gate"><strong>2.</strong> <span class="en">Always tell the requester the status.</span><span class="zh">进度一定通知申请人。</span></div>
+  <div class="box box-red"><strong>3.</strong> <span class="en">Money out = human yes. Bot never pays.</span><span class="zh">出钱=人yes。机器人永不付款。</span></div>
+
+  <div class="sec-title"><span class="en">Your day (5 min)</span><span class="zh">你的一天（5分钟）</span></div>
+  <table>
+    <tr><th><span class="en">When</span><span class="zh">时间</span></th><th><span class="en">Look</span><span class="zh">看什么</span></th><th><span class="en">Do</span><span class="zh">做什么</span></th></tr>
+    <tr><td>AM</td><td>#04-finance buys</td><td><span class="en">Buy / block / ask Louis</span><span class="zh">买/卡住/问Louis</span></td></tr>
+    <tr><td>Day</td><td><span class="en">Invoices / payroll flags</span><span class="zh">账单/工资红旗</span></td><td>yes / no</td></tr>
+    <tr><td>9PM</td><td><span class="en">Email wire/ACH returned</span><span class="zh">邮件转账退回</span></td><td><span class="en">Red first</span><span class="zh">先看红的</span></td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>sales 00003</code> · <code>open purchases</code> · <code>bank balance</code> <span class="en">(owner)</span><span class="zh">（老板）</span></div>
+</div>
+
+<!-- Finance Start -->
+<div class="page" id="start">
+  <div class="page-h">🎓 <span class="en">New Finance Path</span><span class="zh">新财务入职路径</span></div>
+  <div class="page-sub"><span class="en">For Yumi / new finance lead. Read first. Practice in #04-finance.</span><span class="zh">给Yumi/新财务负责人。先看。再去#04-finance练。</span></div>
+  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
+  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">In 30 days you run purchase + cash records + payroll prep without asking Louis every time — and you still never move bank money alone.</span><span class="zh">30天内你会独立跑采购+现金记录+工资准备 — 但银行出钱仍不能自己做。</span></div>
+
+  <div class="sec-title"><span class="en">Day 1 — Read only</span><span class="zh">第1天 — 只看</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">Do</span><span class="zh">做什么</span></th><th><span class="en">Where</span><span class="zh">在哪</span></th></tr>
+    <tr><td>1</td><td><span class="en">Read Slack OPS</span><span class="zh">看Slack OPS</span></td><td>💬</td></tr>
+    <tr><td>2</td><td><span class="en">Read Overview + 4 gates</span><span class="zh">看总表+4个门</span></td><td>📊</td></tr>
+    <tr><td>3</td><td><span class="en">Open Finance KPI Sheet</span><span class="zh">打开财务KPI表</span></td><td>📈</td></tr>
+    <tr><td>4</td><td><span class="en">Join #04-finance</span><span class="zh">进#04-finance</span></td><td>Slack</td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">Week 1 — Watch + ask</span><span class="zh">第1周 — 看+问</span></div>
+  <table>
+    <tr><th><span class="en">Learn</span><span class="zh">学什么</span></th><th><span class="en">Tab</span><span class="zh">页</span></th><th>Ask Brain</th></tr>
+    <tr><td><span class="en">Sales truth</span><span class="zh">销售真相</span></td><td>1 Sales</td><td><code>sales 00003 last 7 days</code></td></tr>
+    <tr><td><span class="en">Cash float / bag swap</span><span class="zh">钱箱/换零钱</span></td><td>2 Cash</td><td><code>what's the SOP for cash bag swap</code></td></tr>
+    <tr><td><span class="en">Purchase P1/P2</span><span class="zh">采购P1/P2</span></td><td>3 Purchase</td><td><code>open purchases</code></td></tr>
+    <tr><td><span class="en">Payroll prep</span><span class="zh">工资准备</span></td><td>4 Payroll</td><td><code>pay band server</code></td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">Month 1 — Do with Louis/Yumi</span><span class="zh">第1月 — 跟Louis/Yumi做</span></div>
+  <table>
+    <tr><th><span class="en">Finish</span><span class="zh">完成</span></th><th><span class="en">With</span><span class="zh">跟谁</span></th><th><span class="en">Pass</span><span class="zh">过关</span></th></tr>
+    <tr><td><span class="en">10 store buys end-to-end</span><span class="zh">完整处理10次店采购</span></td><td>Yumi</td><td><span class="en">Requester notified every time</span><span class="zh">每次都通知申请人</span></td></tr>
+    <tr><td><span class="en">1 ≥$500 buy with Louis yes</span><span class="zh">1次≥$500并拿到Louis yes</span></td><td>Louis</td><td><span class="en">Yes before pay</span><span class="zh">付钱前有yes</span></td></tr>
+    <tr><td><span class="en">1 payroll cycle prep</span><span class="zh">准备1个工资周期</span></td><td>Yumi / Louis</td><td><span class="en">Hours from 7shifts only</span><span class="zh">工时只认7shifts</span></td></tr>
+    <tr><td><span class="en">1 week cash logs check</span><span class="zh">查1周现金表</span></td><td>Ops</td><td><span class="en">Photos in #03-ops, not finance approve</span><span class="zh">照片在#03-ops，不财务批</span></td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">Who owns what</span><span class="zh">谁管什么</span></div>
+  <table>
+    <tr><th><span class="en">Item</span><span class="zh">事项</span></th><th>Finance / Yumi</th><th><span class="en">Not alone</span><span class="zh">不能自己</span></th></tr>
+    <tr><td><span class="en">Buy under $500</span><span class="zh">买&lt;$500</span></td><td>✅</td><td>—</td></tr>
+    <tr><td><span class="en">Buy ≥$500 / CapEx</span><span class="zh">买≥$500/大件</span></td><td><span class="en">Prepare</span><span class="zh">准备</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Payroll run</span><span class="zh">发工资</span></td><td><span class="en">Prep in Gusto</span><span class="zh">Gusto准备</span></td><td>Louis if odd</td></tr>
+    <tr><td><span class="en">Bank / wire / ACH</span><span class="zh">银行/转账</span></td><td>❌</td><td>Louis + Luna</td></tr>
+  </table>
+  <div class="box box-red"><strong><span class="en">Never:</span><span class="zh">永不：</span></strong> <span class="en">auto-pay · pay from pocket · skip ≥$500 gate · hide returned ACH</span><span class="zh">自动付 · 私下垫付 · 跳过≥$500门 · 隐瞒退回ACH</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>open purchases</code> · <code>sales all stores 30d</code> · <code>what's our policy on purchase</code></div>
+</div>
+
+<!-- KPI -->
+<div class="page" id="kpi">
+  <div class="page-h">📈 KPI</div>
+  <div class="verified">✅ <span class="en">Live via Sheet</span><span class="zh">活数据在Sheet</span> · 2026-07-21</div>
+  <div class="pareto"><strong><span class="en">Live finance numbers live in Google Sheet + Brain/bank — not frozen in this HTML.</span><span class="zh">财务实时数字在Google Sheet + Brain/银行 — 不冻在这个HTML里。</span></strong></div>
+  <a class="kpi-link" href="https://docs.google.com/spreadsheets/d/1JVs3hGJIww1B3nONTMmjFe_W8ZTv2tWZ1KnIUUaDWHU/edit" target="_blank">
+    <div class="kl-icon">📊</div>
+    <div class="kl-text">
+      <div class="kl-title"><span class="en">Finance KPI Dashboard (Google Sheet)</span><span class="zh">财务KPI看板（Google Sheet）</span></div>
+      <div class="kl-sub"><span class="en">Cash · Sales · Gaps · Approvals</span><span class="zh">现金 · 销售 · 缺口 · 审批</span></div>
+    </div>
+    <div class="kl-arrow">→</div>
+  </a>
+  <div class="sec-title"><span class="en">What's in the Sheet</span><span class="zh">Sheet里有什么</span></div>
+  <table>
+    <tr><th><span class="en">Section</span><span class="zh">区</span></th><th><span class="en">Shows</span><span class="zh">显示</span></th><th><span class="en">Source</span><span class="zh">来源</span></th></tr>
+    <tr><td>Cash</td><td><span class="en">Operating cash + cards</span><span class="zh">运营现金+卡</span></td><td>bank_balance_truth / OpenBudget</td></tr>
+    <tr><td>Sales</td><td><span class="en">30D net by store</span><span class="zh">每店30天净销售</span></td><td>chowbus_raw</td></tr>
+    <tr><td>Gaps</td><td><span class="en">Payroll / COGS / rent missing</span><span class="zh">工资/食材/房租缺数据</span></td><td>Brain gaps</td></tr>
+    <tr><td>Approvals</td><td><span class="en">≥$500 pending</span><span class="zh">≥$500待批</span></td><td>Slack #04-fin</td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">Also:</span><span class="zh">还有：</span></strong> <span class="en">Older finance dashboard HTML may exist for charts — treat Sheet + this handbook as teaching truth.</span><span class="zh">旧财务dashboard HTML可看图 — 教学真相以Sheet+本手册为准。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>sales 00003 last 30 days</code> · <code>bank balance</code> · <code>finance gaps</code></div>
+</div>
+
+<!-- Overview -->
+<div class="page" id="ov">
+  <div class="verified">✅ <span class="en">Roadmap verified</span><span class="zh">路线图已验证</span> · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Most money risk is pay without approval. Kill unpaid free-buys and wire/ACH mistakes first.</span><span class="zh">钱的最大风险是没批就付。先管死乱买和不对的转账。</span></div>
+  <div class="sec-title"><span class="en">Finance Flow</span><span class="zh">财务全流程</span></div>
+  <div class="flow">
+    <span class="flow-step">1 Sales</span><span class="flow-arrow">→</span>
+    <span class="flow-step">2 Cash</span><span class="flow-arrow">→</span>
+    <span class="flow-step">3 Purchase</span><span class="flow-arrow">→</span>
+    <span class="flow-step">4 Payroll</span><span class="flow-arrow">→</span>
+    <span class="flow-step">5 Pay Bills</span><span class="flow-arrow">→</span>
+    <span class="flow-step">6 Bank</span><span class="flow-arrow">→</span>
+    <span class="flow-step">7 Tax</span><span class="flow-arrow">→</span>
+    <span class="flow-step">8 Close</span>
+  </div>
+  <div style="font-size:11px;color:var(--muted);margin-bottom:16px">
+    <span class="badge badge-gate">⭐ Gate</span> = <span class="en">Human yes</span><span class="zh">人批</span> ·
+    <span class="badge badge-blue">⚡ Auto</span> = WISE OPS
+  </div>
+  <div class="sec-title"><span class="en">8 Stages — click</span><span class="zh">8个阶段 — 点开</span></div>
+  <div class="stage-grid">
+    <div class="stage-card" onclick="goTab(4)"><div class="stage-num">Stage 1</div><div class="stage-name"><span class="en">Sales</span><span class="zh">销售入账</span></div><div class="stage-work"><span class="en">Chowbus → Brain → check voids/tips</span><span class="zh">Chowbus→Brain→查void/小费</span></div><div class="stage-meta"><span class="owner">Auto · Finance</span></div></div>
+    <div class="stage-card" onclick="goTab(5)"><div class="stage-num">Stage 2</div><div class="stage-name"><span class="en">Cash Drawer</span><span class="zh">现金钱箱</span></div><div class="stage-work"><span class="en">$300 float · bag swap log · Ops photo</span><span class="zh">$300底金·换零钱表·运营拍照</span></div><div class="stage-meta"><span class="owner">GM · Ops</span></div></div>
+    <div class="stage-card" onclick="goTab(6)"><div class="stage-num">Stage 3</div><div class="stage-name"><span class="en">Purchase</span><span class="zh">采购</span></div><div class="stage-work"><span class="en">#04-fin P1 → Yumi buy → notify</span><span class="zh">#04-fin P1→Yumi买→通知</span></div><div class="stage-meta"><span class="owner">Yumi</span> <span class="badge badge-gate">⭐ ≥$500</span></div></div>
+    <div class="stage-card" onclick="goTab(7)"><div class="stage-num">Stage 4</div><div class="stage-name"><span class="en">Payroll</span><span class="zh">工资</span></div><div class="stage-work"><span class="en">7shifts hours → tip-out → Gusto</span><span class="zh">7shifts工时→小费→Gusto</span></div><div class="stage-meta"><span class="owner">Yumi · Louis</span></div></div>
+    <div class="stage-card" onclick="goTab(8)"><div class="stage-num">Stage 5</div><div class="stage-name"><span class="en">Pay Bills</span><span class="zh">付账单</span></div><div class="stage-work"><span class="en">Invoice → approve → pay proof</span><span class="zh">账单→批→付款证明</span></div><div class="stage-meta"><span class="owner">Yumi</span> <span class="badge badge-gate">⭐ Louis</span></div></div>
+    <div class="stage-card" onclick="goTab(9)"><div class="stage-num">Stage 6</div><div class="stage-name"><span class="en">Bank</span><span class="zh">银行</span></div><div class="stage-work"><span class="en">Balances · wire/ACH · returned = red</span><span class="zh">余额·转账·退回=红</span></div><div class="stage-meta"><span class="owner">Louis + Luna</span> <span class="badge badge-gate">⭐ Owner</span></div></div>
+    <div class="stage-card" onclick="goTab(10)"><div class="stage-num">Stage 7</div><div class="stage-name"><span class="en">Tax</span><span class="zh">税务</span></div><div class="stage-work"><span class="en">Calendar · file · pay on time</span><span class="zh">日历·申报·按时付</span></div><div class="stage-meta"><span class="owner">Yumi · Louis</span></div></div>
+    <div class="stage-card" onclick="goTab(11)"><div class="stage-num">Stage 8</div><div class="stage-name"><span class="en">Close / Report</span><span class="zh">关账/报告</span></div><div class="stage-work"><span class="en">Month close · P&amp;L gaps honest</span><span class="zh">月结·P&amp;L缺口老实说</span></div><div class="stage-meta"><span class="owner">Finance · Louis</span></div></div>
+  </div>
+
+  <div class="sec-title"><span class="en">4 Human Gates</span><span class="zh">4个人拍板</span></div>
+  <div class="gate-row">
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ F1</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Buy ≥$500 / CapEx</span><span class="zh">买≥$500/大件</span></div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ F2</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Odd payroll / raise</span><span class="zh">异常工资/涨薪</span></div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ F3</span></div><div class="g-who">Louis + Luna</div><div class="g-what"><span class="en">Wire / ACH / bank</span><span class="zh">转账/银行</span></div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ F4</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Tax pay / big vendor</span><span class="zh">税/大供应商</span></div></div>
+  </div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>finance roadmap</code> · <code>open purchases</code> · <code>sales all stores</code></div>
+</div>
+
+<!-- S1 Sales -->
+<div class="page" id="s1">
+  <div class="page-h">1. <span class="en">Sales In</span><span class="zh">销售入账</span></div>
+  <div class="page-sub"><span class="en">POS money truth</span><span class="zh">POS钱的真相</span> · Auto · Finance</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Wrong sales numbers break every later decision. Trust Chowbus → Brain first.</span><span class="zh">销售数字错了，后面全错。先信Chowbus→Brain。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">How</span><span class="zh">怎么做</span></th></tr>
+    <tr><td>1</td><td><span class="en">Night pull sales</span><span class="zh">夜里拉销售</span></td><td><span class="badge badge-blue">⚡ Auto</span></td><td>chowbus_raw</td></tr>
+    <tr><td>2</td><td><span class="en">Check voids / discounts / tips</span><span class="zh">查void/折扣/小费</span></td><td>Finance · Ops fraud</td><td><span class="en">Flags go store + exec</span><span class="zh">红旗发店+高管</span></td></tr>
+    <tr><td>3</td><td><span class="en">Use net sales for reports</span><span class="zh">报告用净销售</span></td><td>Finance</td><td><span class="en">By store_number TEXT</span><span class="zh">按店号TEXT</span></td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">Join key:</span><span class="zh">关联键：</span></strong> store_number = "00003" not UUID.</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>sales 00003 last 7 days</code> · <code>voids 00003 yesterday</code></div>
+</div>
+
+<!-- S2 Cash -->
+<div class="page" id="s2">
+  <div class="page-h">2. <span class="en">Cash Drawer</span><span class="zh">现金钱箱</span></div>
+  <div class="page-sub">$300 float · bag swap · GM · Ops</div>
+  <div class="verified">✅ Verified · 2026-07-21 · CASH-007 / CASH-F-004</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Drawer always ends $300. Log the swap same day.</span><span class="zh">钱箱结尾永远$300。当天记换零钱。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">How</span><span class="zh">怎么做</span></th></tr>
+    <tr><td>1</td><td><span class="en">Start / end count</span><span class="zh">开收工点钞</span></td><td>GM</td><td>CASH-F-001 · $300</td></tr>
+    <tr><td>2</td><td><span class="en">Need coins/small bills</span><span class="zh">缺零钱</span></td><td>GM</td><td><span class="en">Swap bag/bank</span><span class="zh">换袋/银行</span></td></tr>
+    <tr><td>3</td><td><span class="en">Write CASH-F-004 line</span><span class="zh">写CASH-F-004一行</span></td><td>GM</td><td><span class="en">Same day</span><span class="zh">当天</span></td></tr>
+    <tr><td>4</td><td><span class="en">Photo → #03-ops</span><span class="zh">拍照→#03-ops</span></td><td>GM</td><td><span class="en">NOT #04-finance approval</span><span class="zh">不走财务批</span></td></tr>
+  </table>
+  <div class="box box-red"><strong><span class="en">Wrong:</span><span class="zh">错：</span></strong> <span class="en">Sending bag-swap photos to Finance for approval.</span><span class="zh">把换零钱照片发财务审批。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>what's the SOP for cash bag swap</code> · <code>send me CASH-F-004</code></div>
+</div>
+
+<!-- S3 Purchase -->
+<div class="page" id="s3">
+  <div class="page-h">3. <span class="en">Purchase / 采购</span></div>
+  <div class="page-sub">#04-finance · Yumi · <span class="badge badge-gate">⭐ ≥$500 Louis</span></div>
+  <div class="verified">✅ Verified · 2026-07-21 · wiserise-purchase</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Unclear buy = waste. Force store · who · item · when · $.</span><span class="zh">说不清就买=浪费。必须有店·谁·物·何时·钱。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th>Gate</th><th><span class="en">How</span><span class="zh">怎么做</span></th></tr>
+    <tr><td>1</td><td><span class="en">New P1 post</span><span class="zh">新P1帖</span></td><td>GM / Auto</td><td>—</td><td>#04-finance · store · who · items · when · $</td></tr>
+    <tr><td>2</td><td><span class="en">Check catalog price</span><span class="zh">查清单价</span></td><td>Yumi</td><td>—</td><td><span class="en">Shopping List Sheet</span><span class="zh">采购清单Sheet</span></td></tr>
+    <tr><td>3</td><td><strong>⭐ ≥$500 / CapEx</strong></td><td>Louis</td><td><span class="badge badge-gate">⭐ F1</span></td><td>yes first</td></tr>
+    <tr><td>4</td><td><span class="en">Pay then deliver</span><span class="zh">先付钱后交付</span></td><td>Yumi · KM</td><td>—</td><td><span class="en">Kitchen manager delivers after pay</span><span class="zh">付钱后后厨经理交付</span></td></tr>
+    <tr><td>5</td><td><span class="en">Notify requester</span><span class="zh">通知申请人</span></td><td>Yumi / Auto</td><td>—</td><td>thread + DM · ordered/done/blocked</td></tr>
+  </table>
+  <div class="box box-gate"><strong>P1 title:</strong> <code>🛒 采购 · {store} · {items} · {when}</code></div>
+  <div class="box box-rule"><strong><span class="en">Catalog seed:</span><span class="zh">清单种子：</span></strong> Headset $10 · Uniform $10 · Apron $5</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>open purchases</code> · <code>shopping catalog</code> · <code>purchase status 00003</code></div>
+</div>
+
+<!-- S4 Payroll -->
+<div class="page" id="s4">
+  <div class="page-h">4. <span class="en">Payroll</span><span class="zh">工资</span></div>
+  <div class="page-sub">7shifts · tip-out · Gusto · Yumi · Louis</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Most pay fights = wrong hours. 7shifts is truth.</span><span class="zh">工资纠纷多半是工时错。7shifts是真相。</span></div>
+  <table>
+    <tr><th><span class="en">Step</span><span class="zh">步骤</span></th><th><span class="en">Status</span><span class="zh">状态</span></th><th><span class="en">How</span><span class="zh">怎么做</span></th></tr>
+    <tr><td><span class="en">Hours</span><span class="zh">工时</span></td><td><span class="badge badge-green">✅</span></td><td>7shifts</td></tr>
+    <tr><td><span class="en">Tip-out forms</span><span class="zh">小费表</span></td><td><span class="badge badge-green">✅</span></td><td>PAY-F-002 / PAY-F-004 photo</td></tr>
+    <tr><td><span class="en">Pay bands</span><span class="zh">工资标准</span></td><td><span class="badge badge-green">✅</span></td><td>REF-002 · training $7.25 / mgr $15</td></tr>
+    <tr><td><span class="en">Gusto pay</span><span class="zh">Gusto发</span></td><td><span class="badge badge-green">✅</span></td><td>Yumi prep</td></tr>
+    <tr><td><span class="en">Auto payroll robot</span><span class="zh">自动发工资</span></td><td><span class="badge badge-gray">❌</span></td><td><span class="en">Not built — never promise</span><span class="zh">没建 — 别承诺</span></td></tr>
+  </table>
+  <div class="box box-gate"><strong>⭐ F2:</strong> <span class="en">Odd payroll / manager raise = Louis.</span><span class="zh">异常工资/经理涨薪=Louis。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>pay band server</code> · <code>payroll due</code> · <code>tip out form</code></div>
+</div>
+
+<!-- S5 Pay bills -->
+<div class="page" id="s5">
+  <div class="page-h">5. <span class="en">Pay Bills</span><span class="zh">付账单</span></div>
+  <div class="page-sub"><span class="en">Invoice → approve → pay proof</span><span class="zh">账单→批→付款证明</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">No invoice / no owner = no pay.</span><span class="zh">没账单/没负责人=不付。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th>Gate</th></tr>
+    <tr><td>1</td><td><span class="en">Collect invoice + store/vendor</span><span class="zh">收账单+店/供应商</span></td><td>Yumi</td><td>—</td></tr>
+    <tr><td>2</td><td><span class="en">Match PO / reason</span><span class="zh">对PO/原因</span></td><td>Yumi</td><td>—</td></tr>
+    <tr><td>3</td><td><span class="en">Big / unclear / new vendor</span><span class="zh">大额/不清/新供应商</span></td><td>Louis</td><td><span class="badge badge-gate">⭐</span></td></tr>
+    <tr><td>4</td><td><span class="en">Pay + keep proof</span><span class="zh">付+留证明</span></td><td>Yumi / Louis bank</td><td>—</td></tr>
+  </table>
+  <div class="box box-red"><strong><span class="en">Never:</span><span class="zh">永不：</span></strong> <span class="en">Pay from personal pocket and “settle later” without record.</span><span class="zh">私人垫付事后再算且不记账。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>unpaid invoices</code> · <code>vendor [name]</code></div>
+</div>
+
+<!-- S6 Bank -->
+<div class="page" id="s6">
+  <div class="page-h">6. <span class="en">Bank</span><span class="zh">银行</span></div>
+  <div class="page-sub">Truist · OpenBudget · Louis + Luna only</div>
+  <div class="verified">✅ Verified · 2026-07-21 · owner door</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Returned wire/ACH = red today. Balances need as-of date.</span><span class="zh">退回转账=今天红。余额要写截止日期。</span></div>
+  <table>
+    <tr><th><span class="en">Item</span><span class="zh">项目</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">Rule</span><span class="zh">规矩</span></th></tr>
+    <tr><td><span class="en">See balances</span><span class="zh">看余额</span></td><td>Louis + Luna</td><td><span class="en">Owner door / OpenBudget guard</span><span class="zh">老板门</span></td></tr>
+    <tr><td><span class="en">Wire / ACH out</span><span class="zh">转账出</span></td><td>Louis + Luna</td><td><span class="en">Human only · bot never</span><span class="zh">只要人·机器人永不</span></td></tr>
+    <tr><td><span class="en">Returned payment</span><span class="zh">退回</span></td><td>Louis</td><td><span class="en">Night email 🔴</span><span class="zh">夜邮🔴</span></td></tr>
+    <tr><td><span class="en">Snapshot file</span><span class="zh">快照文件</span></td><td>Finance assist</td><td>bank_balance_truth.json + as_of</td></tr>
+  </table>
+  <div class="box box-red"><strong><span class="en">Hard:</span><span class="zh">硬：</span></strong> <span class="en">Non-owners get silence on bank tools. Alert goes to Louis DM.</span><span class="zh">非老板查银行=静默。警报去Louis私信。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>bank balance</code> <span class="en">(owner DM)</span><span class="zh">（老板私信）</span> · <code>returned ACH</code></div>
+</div>
+
+<!-- S7 Tax -->
+<div class="page" id="s7">
+  <div class="page-h">7. <span class="en">Tax</span><span class="zh">税务</span></div>
+  <div class="page-sub"><span class="en">Calendar · file · pay</span><span class="zh">日历·申报·付</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Late tax is expensive. Calendar first.</span><span class="zh">税晚交最贵。先管日历。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>1</td><td><span class="en">Track due dates from email/CPA</span><span class="zh">从邮件/会计盯到期</span></td><td>Yumi · Louis</td></tr>
+    <tr><td>2</td><td><span class="en">Prepare numbers</span><span class="zh">准备数字</span></td><td>Yumi</td></tr>
+    <tr><td>3</td><td><span class="en">Pay / file with Louis yes if money out</span><span class="zh">出钱要Louis yes</span></td><td>Louis <span class="badge badge-gate">⭐ F4</span></td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>tax due</code> · <code>email tax</code></div>
+</div>
+
+<!-- S8 Close -->
+<div class="page" id="s8">
+  <div class="page-h">8. <span class="en">Close / Report</span><span class="zh">关账 / 报告</span></div>
+  <div class="page-sub"><span class="en">Month close · honest gaps</span><span class="zh">月结·老实说缺口</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">A clean wrong P&amp;L is worse than an ugly true one. Show data gaps.</span><span class="zh">漂亮的假P&amp;L比难看的真账更糟。要写数据缺口。</span></div>
+  <table>
+    <tr><th><span class="en">Have now</span><span class="zh">现在有</span></th><th><span class="en">Still gap</span><span class="zh">还缺</span></th></tr>
+    <tr><td>Sales (Chowbus)</td><td>Full payroll cost table in Brain</td></tr>
+    <tr><td>Cash snapshot</td><td>Rent / utilities structured</td></tr>
+    <tr><td>Purchase thread truth</td><td>COGS % auto</td></tr>
+    <tr><td>Bank owner view</td><td>Full multi-entity P&amp;L</td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">Close checklist:</span><span class="zh">关账检查：</span></strong> sales pulled · big buys closed · payroll paid · bank recon note · gaps listed</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>month sales July</code> · <code>finance gaps</code></div>
+</div>
+
+<!-- Rules -->
+<div class="page" id="rules">
+  <div class="page-h">📋 <span class="en">Rules</span><span class="zh">规矩</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="box box-rule"><strong>1.</strong> <span class="en">Bot never pays. Human yes for money out.</span><span class="zh">机器人永不付款。出钱要人yes。</span></div>
+  <div class="box box-rule"><strong>2.</strong> <span class="en">All store buys → #04-finance new post.</span><span class="zh">店要买→#04-finance新帖。</span></div>
+  <div class="box box-rule"><strong>3.</strong> <span class="en">≥$500 / CapEx → Louis first.</span><span class="zh">≥$500/大件→先Louis。</span></div>
+  <div class="box box-rule"><strong>4.</strong> <span class="en">Always notify purchase requester on progress.</span><span class="zh">采购进度一定通知申请人。</span></div>
+  <div class="box box-rule"><strong>5.</strong> <span class="en">Pay first, then kitchen manager delivers.</span><span class="zh">先付钱，后厨经理再交付。</span></div>
+  <div class="box box-rule"><strong>6.</strong> <span class="en">Cash bag-swap photos → #03-ops, not finance approval.</span><span class="zh">换零钱照片→#03-ops，不财务批。</span></div>
+  <div class="box box-rule"><strong>7.</strong> <span class="en">Bank / wire / ACH = Louis + Luna only.</span><span class="zh">银行/转账=只有Louis+Luna。</span></div>
+  <div class="box box-rule"><strong>8.</strong> <span class="en">Returned wire/ACH = red same day.</span><span class="zh">转账退回=当天红。</span></div>
+  <div class="box box-rule"><strong>9.</strong> <span class="en">7shifts hours are payroll truth.</span><span class="zh">工资工时认7shifts。</span></div>
+  <div class="box box-rule"><strong>10.</strong> <span class="en">Show data gaps. Don’t fake full P&amp;L.</span><span class="zh">要写数据缺口。不编完整P&amp;L。</span></div>
+
+  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
+  <table>
+    <tr><th><span class="en">Item</span><span class="zh">事项</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td><span class="en">Buy &lt;$500</span><span class="zh">买&lt;$500</span></td><td>Yumi</td></tr>
+    <tr><td><span class="en">Buy ≥$500</span><span class="zh">买≥$500</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Normal payroll</span><span class="zh">正常工资</span></td><td>Yumi prep · process</td></tr>
+    <tr><td><span class="en">Odd payroll / raise</span><span class="zh">异常工资/涨薪</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Bank move</span><span class="zh">银行动钱</span></td><td>Louis + Luna</td></tr>
+    <tr><td><span class="en">Tax pay</span><span class="zh">付税</span></td><td>Louis</td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">Automated / support</span><span class="zh">自动/支持</span></div>
+  <div class="box box-auto">⚡ Night — Chowbus sales → Brain</div>
+  <div class="box box-auto">⚡ Fraud flags — voids/discounts watch</div>
+  <div class="box box-auto">⚡ 9PM — email digest (wire/ACH returned = 🔴)</div>
+  <div class="box box-auto">⚡ Token spend watch — silent unless over cap</div>
+  <div class="box box-auto">📊 Finance KPI Sheet — fill/refresh as data matures</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>what's our policy on purchase</code> · <code>can I buy headset</code> · <code>bank balance</code></div>
+</div>
+
+</div>
+<div class="footer">Wiserise Hospitality Group · Finance Department Roadmap · New finance handbook · EN/中文 · Verified 2026-07-21 · Hermes Artifact</div>
+<script>
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function goTab(i){document.querySelectorAll('.tab')[i].click()}
+function setLang(lang,btn){document.body.className='lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+document.addEventListener('keydown',e=>{const tabs=[...document.querySelectorAll('.tab')];const i=tabs.indexOf(document.querySelector('.tab.active'));if(e.key==='ArrowRight'&&i<tabs.length-1)tabs[i+1].click();if(e.key==='ArrowLeft'&&i>0)tabs[i-1].click()});
+</script>
+</body>
+</html>
+

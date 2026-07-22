@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · 行政部 · Wiserise</title>
+<style>
+:root {
+  --bg:#fafbfc; --card:#fff; --ink:#111827; --muted:#6b7280; --muted-light:#9ca3af;
+  --brand:#0f172a; --accent:#3b82f6;
+  --green:#059669; --green-bg:#ecfdf5;
+  --yellow:#d97706; --yellow-bg:#fffbeb;
+  --red:#dc2626; --red-bg:#fef2f2;
+  --blue:#2563eb; --blue-bg:#eff6ff;
+  --border:#e5e7eb; --border-light:#f3f4f6;
+  --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.04); --shadow-lg:0 4px 16px rgba(0,0,0,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.topbar{background:var(--brand);color:#fff;padding:16px 28px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto}
+.topbar h1{font-size:17px;font-weight:700}
+.topbar .sub{font-size:11.5px;opacity:.65;margin-top:2px}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden}
+.lang-btn{padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer}
+.lang-btn.active{background:rgba(255,255,255,.15);color:#fff}
+.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto}
+.tab{padding:11px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--brand);border-bottom-color:var(--brand)}
+.content{max-width:1040px;margin:0 auto;padding:24px 20px 80px}
+.page{display:none;animation:fadeIn .2s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.pareto{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:16px 18px;margin-bottom:18px;font-size:13.5px}
+.pareto strong{color:var(--brand)}
+.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+th{background:var(--brand);color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:11.5px}
+td{border-bottom:1px solid var(--border-light);padding:9px 10px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f9fafb}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.box{border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:12.5px;line-height:1.5;border:1px solid}
+.box-rule{background:var(--yellow-bg);border-color:#fde68a}
+.box-auto{background:var(--blue-bg);border-color:#bfdbfe}
+.box-gate{background:var(--green-bg);border-color:#a7f3d0}
+.box-red{background:var(--red-bg);border-color:#fecaca}
+.badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:600}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-yellow{background:var(--yellow-bg);color:var(--yellow)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-gray{background:#f3f4f6;color:#6b7280}
+.badge-gate{background:#fff;border:1.5px solid var(--green);color:var(--green)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px;font-size:12px}
+.flow-step{background:var(--brand);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+.flow-arrow{color:var(--muted-light);font-size:18px}
+.stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stage-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .15s}
+.stage-card:hover{box-shadow:var(--shadow-lg)}
+.stage-num{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.stage-name{font-size:16px;font-weight:700;color:var(--brand);margin-bottom:8px}
+.stage-work{font-size:12.5px;line-height:1.5;margin-bottom:10px}
+.stage-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted)}
+.stage-meta .owner{font-weight:600;color:var(--ink)}
+.gate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.gate-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
+.gate-card .g-badge{margin-bottom:8px}
+.gate-card .g-who{font-size:13px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.gate-card .g-what{font-size:12px;color:var(--muted);line-height:1.4}
+.kpi-link{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
+.kpi-link:hover{box-shadow:var(--shadow-lg)}
+.kpi-link .kl-icon{font-size:32px}
+.kpi-link .kl-text{flex:1}
+.kpi-link .kl-title{font-size:14px;font-weight:700;color:var(--brand)}
+.kpi-link .kl-sub{font-size:12px;color:var(--muted)}
+.kpi-link .kl-arrow{font-size:20px;color:var(--accent)}
+.page-h{font-size:20px;font-weight:800;color:var(--brand);margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.verified{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);background:#f3f4f6;border-radius:999px;padding:3px 10px;margin:0 0 14px}
+.ask-brain{background:var(--card);border:1px dashed #93c5fd;border-radius:var(--radius);padding:12px 14px;margin-top:16px;font-size:12.5px}
+.ask-brain strong{color:var(--blue)}
+.ask-brain code{background:#eff6ff;padding:1px 6px;border-radius:4px;font-size:12px}
+.footer{text-align:center;font-size:10px;color:var(--muted-light);padding:20px 0}
+.zh{display:none}
+body.lang-zh .zh{display:inline}
+body.lang-zh .en{display:none}
+body.lang-both .zh{display:inline}
+body.lang-both .en{display:inline}
+.en{display:inline}
+@media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab{display:none}.lang-toggle{display:none}}
+@media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}.gate-row{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.stage-grid{grid-template-columns:1fr}.gate-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="lang-both">
+<div class="topbar">
+  <div class="topbar-row">
+    <div>
+      <h1>📋 Admin · <span class="zh">行政部</span></h1>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · Owner time = people + decisions + direction</div>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn" onclick="setLang('zh',this)">中文</button>
+      <button class="lang-btn active" onclick="setLang('both',this)">EN+中文</button>
+    </div>
+  </div>
+</div>
+<div class="tabs">
+  <button class="tab active" onclick="showPage('ops',this)">💬 Slack OPS</button>
+  <button class="tab" onclick="showPage('start',this)">🎓 Admin Start <span class="zh">入职</span></button>
+  <button class="tab" onclick="showPage('kpi',this)">📈 KPI</button>
+  <button class="tab" onclick="showPage('ov',this)">📊 Overview <span class="zh">总表</span></button>
+  <button class="tab" onclick="showPage('s1',this)">1 Inbox <span class="zh">收件箱</span></button>
+  <button class="tab" onclick="showPage('s2',this)">2 Calendar <span class="zh">日历</span></button>
+  <button class="tab" onclick="showPage('s3',this)">3 Docs <span class="zh">文档</span></button>
+  <button class="tab" onclick="showPage('s4',this)">4 Rhythm <span class="zh">节奏</span></button>
+  <button class="tab" onclick="showPage('s5',this)">5 HQ Channels <span class="zh">总部频道</span></button>
+  <button class="tab" onclick="showPage('s6',this)">6 Landlord <span class="zh">房东</span></button>
+  <button class="tab" onclick="showPage('s7',this)">7 Owner Time <span class="zh">老板时间</span></button>
+  <button class="tab" onclick="showPage('rules',this)">📋 Rules <span class="zh">规矩</span></button>
+</div>
+<div class="content">
+
+<div class="page active" id="ops">
+  <div class="page-h">💬 <span class="en">How to Work in Slack</span><span class="zh">在Slack怎么干活</span></div>
+  <div class="page-sub"><span class="en">Admin simple only</span><span class="zh">行政只讲简单的</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong><span class="en">1 line:</span><span class="zh">1句：</span></strong> <span class="en">Owner time should 80% go to people + yes/no + direction. Admin keeps inbox and rhythm clean so Louis only sees red.</span><span class="zh">老板时间80%应用在人+拍板+方向。行政把收件箱和节奏清干净，Louis只看红的。</span></div>
+  <div class="sec-title"><span class="en">3 pieces</span><span class="zh">3个东西</span></div>
+  <div class="stage-grid">
+    <div class="stage-card"><div class="stage-name">💬 Slack</div><div class="stage-work"><span class="en">Louis DM + #02-exec = HQ office</span><span class="zh">Louis私信+#02-exec=总部办公室</span></div></div>
+    <div class="stage-card"><div class="stage-name">⚡ WISE OPS</div><div class="stage-work"><span class="en">Night digest · sticky email · duty check</span><span class="zh">夜邮摘要·粘性邮件·职责检查</span></div></div>
+    <div class="stage-card"><div class="stage-name">🧠 Brain</div><div class="stage-work"><span class="en">Tickets · SOPs · chat store</span><span class="zh">工单·SOP·聊天存档</span></div></div>
+  </div>
+  <div class="sec-title"><span class="en">Where to type</span><span class="zh">在哪打字</span></div>
+  <table>
+    <tr><th><span class="en">Place</span><span class="zh">地方</span></th><th><span class="en">Say</span><span class="zh">说</span></th></tr>
+    <tr><td><strong>Louis DM</strong></td><td><span class="en">9PM email · duty check · private owner</span><span class="zh">9PM邮件·职责·老板私事</span></td></tr>
+    <tr><td><strong>#02-exec</strong></td><td><span class="en">HQ summary · P0 flags · managers NEVER</span><span class="zh">总部摘要·P0·经理绝不进</span></td></tr>
+    <tr><td><strong>Dept channels</strong></td><td>#03-ops · #04-finance · #06-people</td></tr>
+  </table>
+  <div class="sec-title"><span class="en">Copy lines</span><span class="zh">复制这些话</span></div>
+  <table>
+    <tr><th><span class="en">Want</span><span class="zh">想做</span></th><th><span class="en">Type</span><span class="zh">打</span></th></tr>
+    <tr><td><span class="en">Email sticky</span><span class="zh">邮件粘性</span></td><td><code>email sticky</code> · <code>exec inbox</code></td></tr>
+    <tr><td><span class="en">Landlord</span><span class="zh">房东</span></td><td><code>landlord 21d</code></td></tr>
+    <tr><td><span class="en">SOP</span><span class="zh">SOP</span></td><td><code>what's the SOP for open</code></td></tr>
+    <tr><td><span class="en">Form</span><span class="zh">表格</span></td><td><code>send me CASH-F-004</code></td></tr>
+    <tr><td><span class="en">Duty</span><span class="zh">职责</span></td><td><code>what is my job</code></td></tr>
+  </table>
+  <div class="sec-title"><span class="en">One example (night)</span><span class="zh">一个例子（晚上）</span></div>
+  <div class="card"><div class="stage-work" style="margin:0;line-height:1.8">
+    <strong>1.</strong> 9PM · <span class="en">email digest to Louis DM (max 10 sticky)</span><span class="zh">邮件摘要到Louis私信（最多10条）</span><br>
+    <strong>2.</strong> <span class="en">Wire/ACH returned = 🔴 first</span><span class="zh">转账退回=先看🔴</span><br>
+    <strong>3.</strong> <span class="en">Louis replies only what matters</span><span class="zh">Louis只回重要的</span><br>
+    <strong>4.</strong> 10:30PM · <span class="en">store chat → Brain</span><span class="zh">店聊天→Brain</span><br>
+    <strong>5.</strong> 11PM · <span class="en">dirty data if any</span><span class="zh">有脏数据才报</span>
+  </div></div>
+  <div class="sec-title"><span class="en">3 rules</span><span class="zh">3条</span></div>
+  <div class="box box-gate"><strong>1.</strong> <span class="en">Green = silent. Only red/yellow talk.</span><span class="zh">绿=静默。只有红/黄说话。</span></div>
+  <div class="box box-gate"><strong>2.</strong> <span class="en">Managers never in #02-executive.</span><span class="zh">经理绝不进#02-executive。</span></div>
+  <div class="box box-red"><strong>3.</strong> <span class="en">Money · fire · break rules = Louis yes only.</span><span class="zh">钱·开除·破规=只有Louis yes。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>email sticky</code> · <code>exec inbox</code> · <code>landlord 21d</code></div>
+</div>
+
+<div class="page" id="start">
+  <div class="page-h">🎓 <span class="en">New Admin / EA Path</span><span class="zh">新行政/助理入职路径</span></div>
+  <div class="page-sub"><span class="en">For EA / HQ admin supporting Louis</span><span class="zh">给支持Louis的行政/助理</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">30 days: inbox clean, docs findable, rhythm runs without Louis chasing.</span><span class="zh">30天：收件箱干净、文档找得到、节奏不用Louis追着跑。</span></div>
+  <div class="sec-title">Day 1</div>
+  <table>
+    <tr><th>#</th><th><span class="en">Do</span><span class="zh">做</span></th><th>Where</th></tr>
+    <tr><td>1</td><td><span class="en">Read Slack OPS + Overview</span><span class="zh">看Slack OPS+总表</span></td><td>💬 📊</td></tr>
+    <tr><td>2</td><td><span class="en">Join #02-exec · #03 · #04 · #06</span><span class="zh">进总部频道</span></td><td>Slack</td></tr>
+    <tr><td>3</td><td><span class="en">Open Admin KPI Sheet</span><span class="zh">打开行政KPI</span></td><td>📈</td></tr>
+  </table>
+  <div class="sec-title">Week 1</div>
+  <table>
+    <tr><th><span class="en">Learn</span><span class="zh">学</span></th><th>Tab</th><th>Ask</th></tr>
+    <tr><td><span class="en">Email sticky</span><span class="zh">粘性邮件</span></td><td>1 Inbox</td><td><code>email sticky</code></td></tr>
+    <tr><td><span class="en">Daily rhythm</span><span class="zh">每日节奏</span></td><td>4 Rhythm</td><td><code>nightly digest</code></td></tr>
+    <tr><td><span class="en">SOP lookup</span><span class="zh">查SOP</span></td><td>3 Docs</td><td><code>what's the SOP for open</code></td></tr>
+  </table>
+  <div class="sec-title">Month 1</div>
+  <table>
+    <tr><th><span class="en">Finish</span><span class="zh">完成</span></th><th><span class="en">Pass</span><span class="zh">过关</span></th></tr>
+    <tr><td><span class="en">7 nights of clean sticky digest</span><span class="zh">7晚干净粘性摘要</span></td><td>≤10 items · red first</td></tr>
+    <tr><td><span class="en">1 landlord follow-up on time</span><span class="zh">1次房东按时跟进</span></td><td>21d rule</td></tr>
+    <tr><td><span class="en">Find any SOP in &lt;30s</span><span class="zh">30秒内找到任意SOP</span></td><td>Brain lookup works</td></tr>
+  </table>
+  <div class="box box-red"><strong>Never:</strong> <span class="en">put managers in #02-exec · dump walls · hide returned ACH</span><span class="zh">经理进#02-exec·长文墙·隐瞒退回ACH</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>email sticky</code> · <code>what is my job</code></div>
+</div>
+
+<div class="page" id="kpi">
+  <div class="page-h">📈 KPI</div>
+  <div class="verified">✅ Sheet · 2026-07-21</div>
+  <a class="kpi-link" href="https://docs.google.com/spreadsheets/d/1m76BA6Tq4MsDZ9Bt-UC7fPFv8uR9biseEX7j9kFHP5k/edit" target="_blank">
+    <div class="kl-icon">📊</div>
+    <div class="kl-text">
+      <div class="kl-title"><span class="en">Admin KPI (Google Sheet)</span><span class="zh">行政KPI（Google Sheet）</span></div>
+      <div class="kl-sub"><span class="en">Inbox · landlord · docs · rhythm</span><span class="zh">收件箱·房东·文档·节奏</span></div>
+    </div>
+    <div class="kl-arrow">→</div>
+  </a>
+  <table>
+    <tr><th><span class="en">Metric</span><span class="zh">指标</span></th><th><span class="en">Rule</span><span class="zh">规矩</span></th></tr>
+    <tr><td><span class="en">Sticky email digest</span><span class="zh">粘性邮件摘要</span></td><td>max 10 · red first · 9PM Louis DM</td></tr>
+    <tr><td><span class="en">Wire/ACH returned</span><span class="zh">转账退回</span></td><td>🔴 same day</td></tr>
+    <tr><td><span class="en">Landlord watch</span><span class="zh">房东盯</span></td><td>21 days</td></tr>
+    <tr><td><span class="en">Night quality</span><span class="zh">夜质量</span></td><td><span class="en">Low score only</span><span class="zh">分低才看</span></td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>email sticky</code> · <code>landlord 21d</code> · <code>exec inbox</code></div>
+</div>
+
+<div class="page" id="ov">
+  <div class="verified">✅ Roadmap verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Owner time should 80% go to people + decisions + direction. Admin removes noise.</span><span class="zh">老板时间80%应用在人+拍板+方向。行政去掉噪音。</span></div>
+  <div class="sec-title"><span class="en">Admin Flow</span><span class="zh">行政全流程</span></div>
+  <div class="flow">
+    <span class="flow-step">1 Inbox</span><span class="flow-arrow">→</span>
+    <span class="flow-step">2 Calendar</span><span class="flow-arrow">→</span>
+    <span class="flow-step">3 Docs</span><span class="flow-arrow">→</span>
+    <span class="flow-step">4 Rhythm</span><span class="flow-arrow">→</span>
+    <span class="flow-step">5 HQ Ch</span><span class="flow-arrow">→</span>
+    <span class="flow-step">6 Landlord</span><span class="flow-arrow">→</span>
+    <span class="flow-step">7 Owner Time</span>
+  </div>
+  <div class="sec-title"><span class="en">7 Stages</span><span class="zh">7阶段</span></div>
+  <div class="stage-grid">
+    <div class="stage-card" onclick="goTab(4)"><div class="stage-num">1</div><div class="stage-name">Inbox</div><div class="stage-work"><span class="en">Sticky email · red first</span><span class="zh">粘性邮件·先红</span></div><div class="stage-meta"><span class="owner">Auto · Louis</span></div></div>
+    <div class="stage-card" onclick="goTab(5)"><div class="stage-num">2</div><div class="stage-name">Calendar</div><div class="stage-work"><span class="en">Deadlines · landlord · tax</span><span class="zh">截止日期·房东·税</span></div><div class="stage-meta"><span class="owner">Admin · Louis</span></div></div>
+    <div class="stage-card" onclick="goTab(6)"><div class="stage-num">3</div><div class="stage-name">Docs</div><div class="stage-work"><span class="en">SOP · form · Drive original</span><span class="zh">SOP·表格·Drive原件</span></div><div class="stage-meta"><span class="owner">Hermes · Louis</span></div></div>
+    <div class="stage-card" onclick="goTab(7)"><div class="stage-num">4</div><div class="stage-name">Rhythm</div><div class="stage-work"><span class="en">7AM · day · 9PM · night</span><span class="zh">7AM·白天·9PM·夜里</span></div><div class="stage-meta"><span class="owner">Auto</span></div></div>
+    <div class="stage-card" onclick="goTab(8)"><div class="stage-num">5</div><div class="stage-name">HQ Channels</div><div class="stage-work"><span class="en">#02 #03 #04 #06 map</span><span class="zh">总部频道地图</span></div><div class="stage-meta"><span class="owner">Louis</span></div></div>
+    <div class="stage-card" onclick="goTab(9)"><div class="stage-num">6</div><div class="stage-name">Landlord</div><div class="stage-work"><span class="en">21-day follow · lease legal</span><span class="zh">21天跟进·租约法律</span></div><div class="stage-meta"><span class="owner">Louis · Legal</span></div></div>
+    <div class="stage-card" onclick="goTab(10)"><div class="stage-num">7</div><div class="stage-name">Owner Time</div><div class="stage-work"><span class="en">People · yes/no · direction</span><span class="zh">人·拍板·方向</span></div><div class="stage-meta"><span class="owner">Louis + Luna</span> <span class="badge badge-gate">⭐</span></div></div>
+  </div>
+  <div class="sec-title"><span class="en">Gates</span><span class="zh">门</span></div>
+  <div class="gate-row">
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ A1</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Money out</span><span class="zh">出钱</span></div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ A2</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Fire / people</span><span class="zh">开除/人事</span></div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ A3</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Break rule / architecture</span><span class="zh">破规/改架构</span></div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ A4</span></div><div class="g-who">Louis+Luna</div><div class="g-what"><span class="en">Bank / owner door</span><span class="zh">银行/老板门</span></div></div>
+  </div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>admin roadmap</code> · <code>email sticky</code></div>
+</div>
+
+<div class="page" id="s1">
+  <div class="page-h">1. <span class="en">Inbox</span><span class="zh">收件箱</span></div>
+  <div class="page-sub">exec-inbox · 9PM digest · sticky only</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Max 10 sticky. Red first. No URL dump. Simple Chinese OK.</span><span class="zh">最多10条粘性。先红。不堆链接。简单中文可以。</span></div>
+  <table>
+    <tr><th><span class="en">Priority</span><span class="zh">优先</span></th><th><span class="en">Example</span><span class="zh">例子</span></th></tr>
+    <tr><td>🔴</td><td><span class="en">Wire/ACH returned · payee + money</span><span class="zh">转账退回·收款人+钱</span></td></tr>
+    <tr><td>🟠</td><td><span class="en">Landlord / legal deadline</span><span class="zh">房东/法律截止</span></td></tr>
+    <tr><td>🟡</td><td><span class="en">Vendor / payroll notice</span><span class="zh">供应商/工资通知</span></td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">Known stickies:</span><span class="zh">已知粘性：</span></strong> Anderson/Lista · Brixmor · Masa Spinoso AR · Cobb #553</div>
+  <div class="box box-gate"><strong><span class="en">Louis only</span><span class="zh">只给Louis</span></strong> — night email digest</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>email sticky</code> · <code>exec inbox</code> · <code>returned ACH</code></div>
+</div>
+
+<div class="page" id="s2">
+  <div class="page-h">2. <span class="en">Calendar</span><span class="zh">日历</span></div>
+  <div class="page-sub">Deadlines · landlord · tax · meetings</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Missed deadline costs more than busy day. Watch 21d landlord + tax.</span><span class="zh">错过截止日期比忙一天更贵。盯21天房东+税。</span></div>
+  <table>
+    <tr><th><span class="en">Item</span><span class="zh">项目</span></th><th><span class="en">Cadence</span><span class="zh">节奏</span></th></tr>
+    <tr><td><span class="en">Landlord follow</span><span class="zh">房东跟进</span></td><td>21 days</td></tr>
+    <tr><td><span class="en">Tax / ACH</span><span class="zh">税/转账</span></td><td><span class="en">calendar + email</span><span class="zh">日历+邮件</span></td></tr>
+    <tr><td><span class="en">GM 1:1</span><span class="zh">GM一对一</span></td><td>biweekly / weekly shaky / monthly stable</td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>landlord 21d</code> · <code>tax due</code></div>
+</div>
+
+<div class="page" id="s3">
+  <div class="page-h">3. <span class="en">Docs</span><span class="zh">文档</span></div>
+  <div class="page-sub">SOP · form · Drive original · Obsidian wiki</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">One truth. Lookup before create. Numbered SOPs.</span><span class="zh">一个真相。先查再建。编号SOP。</span></div>
+  <table>
+    <tr><th><span class="en">Where</span><span class="zh">在哪</span></th><th><span class="en">What</span><span class="zh">什么</span></th></tr>
+    <tr><td>Brain sops</td><td><span class="en">Live SOP content</span><span class="zh">活SOP内容</span></td></tr>
+    <tr><td>Drive</td><td><span class="en">Original PDF</span><span class="zh">原件PDF</span></td></tr>
+    <tr><td>Obsidian</td><td><span class="en">Wiki copy</span><span class="zh">wiki副本</span></td></tr>
+    <tr><td>~/.hermes/artifacts</td><td><span class="en">Department handbooks</span><span class="zh">部门手册</span></td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">Lookup first:</span><span class="zh">先查：</span></strong> <code>what's the SOP for X</code> · <code>send me the X form</code></div>
+  <div class="box box-gate"><strong><span class="en">Create only with Louis yes</span><span class="zh">新建要Louis yes</span></strong> (wiserise-sop / wiserise-form)</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>what's the SOP for onboarding</code> · <code>send me CASH-F-004</code></div>
+</div>
+
+<div class="page" id="s4">
+  <div class="page-h">4. <span class="en">Daily Rhythm</span><span class="zh">每日节奏</span></div>
+  <div class="page-sub">What arrives · what Louis does</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <table>
+    <tr><th><span class="en">When</span><span class="zh">时间</span></th><th><span class="en">What</span><span class="zh">什么</span></th><th><span class="en">Where</span><span class="zh">哪</span></th><th><span class="en">Louis</span><span class="zh">Louis做</span></th></tr>
+    <tr><td>7AM</td><td><span class="en">Staffing gap</span><span class="zh">人手缺口</span></td><td><span class="en">Store ch</span><span class="zh">店频道</span></td><td><span class="en">Short → hire</span><span class="zh">缺→招</span></td></tr>
+    <tr><td>8AM</td><td><span class="en">AI spend if over</span><span class="zh">AI花费超了</span></td><td>#02-exec</td><td><span class="en">Only if over</span><span class="zh">超了才看</span></td></tr>
+    <tr><td>Day</td><td><span class="en">Red flags only</span><span class="zh">只有红旗</span></td><td>channels</td><td>yes / no</td></tr>
+    <tr><td>9PM</td><td><span class="en">Email + duty</span><span class="zh">邮件+职责</span></td><td>Louis DM</td><td><span class="en">Reply important</span><span class="zh">回重要的</span></td></tr>
+    <tr><td>10:30PM</td><td><span class="en">Store chat → Brain</span><span class="zh">店聊天→Brain</span></td><td>system</td><td><span class="en">Tomorrow if needed</span><span class="zh">需要明天看</span></td></tr>
+    <tr><td>11PM</td><td><span class="en">Dirty data</span><span class="zh">脏数据</span></td><td>#02-exec</td><td><span class="en">Fix tomorrow</span><span class="zh">明天修</span></td></tr>
+    <tr><td>1AM</td><td><span class="en">Quality score</span><span class="zh">质量分</span></td><td>#02-exec</td><td><span class="en">Low only</span><span class="zh">低才看</span></td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>staffing all</code> · <code>email sticky</code></div>
+</div>
+
+<div class="page" id="s5">
+  <div class="page-h">5. <span class="en">HQ Channels</span><span class="zh">总部频道</span></div>
+  <div class="page-sub">Where work goes</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <table>
+    <tr><th>Channel</th><th><span class="en">Use</span><span class="zh">用途</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>#02-executive</td><td><span class="en">Owner/HQ only · night summaries</span><span class="zh">老板/HQ only·夜报</span></td><td>Louis · Luna · HQ named</td></tr>
+    <tr><td>#03-operations</td><td><span class="en">Repair E1 中文 · bag-swap photo</span><span class="zh">维修E1·换零钱拍照</span></td><td>Ops · Yumi · Louis</td></tr>
+    <tr><td>#04-finance</td><td><span class="en">Buy · invoice · pay</span><span class="zh">采购·账单·付款</span></td><td>Yumi · Louis ≥$500</td></tr>
+    <tr><td>#06-people</td><td><span class="en">HR tickets · onboarding</span><span class="zh">HR工单·入职</span></td><td>HR · Coach · Louis</td></tr>
+    <tr><td><span class="en">Store channel</span><span class="zh">店频道</span></td><td><span class="en">Daily store ops</span><span class="zh">店日常</span></td><td>GM · managers</td></tr>
+  </table>
+  <div class="box box-red"><strong><span class="en">Hard:</span><span class="zh">硬：</span></strong> <span class="en">Store managers never in #02-executive.</span><span class="zh">店经理绝不进#02-executive。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>channel map</code> · <code>where does repair go</code></div>
+</div>
+
+<div class="page" id="s6">
+  <div class="page-h">6. <span class="en">Landlord / Legal Admin</span><span class="zh">房东/法律行政</span></div>
+  <div class="page-sub">21d follow · lease in Drive · LEGAL tickets</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Missed landlord reply = rent/lease pain. 21-day watch.</span><span class="zh">漏回房东=租约痛。21天盯。</span></div>
+  <table>
+    <tr><th><span class="en">Item</span><span class="zh">项目</span></th><th><span class="en">Rule</span><span class="zh">规矩</span></th></tr>
+    <tr><td><span class="en">Landlord email</span><span class="zh">房东邮件</span></td><td>21d follow · sticky</td></tr>
+    <tr><td><span class="en">Lease original</span><span class="zh">租约原件</span></td><td>Drive · Brain key</td></tr>
+    <tr><td><span class="en">00003 lease tickets</span><span class="zh">00003租约工单</span></td><td>LEGAL-LEASE-* only</td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>landlord 21d</code> · <code>lease 00003</code></div>
+</div>
+
+<div class="page" id="s7">
+  <div class="page-h">7. <span class="en">Owner Time</span><span class="zh">老板时间</span></div>
+  <div class="page-sub">Louis + Luna · 80/20 self-check</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">People + yes/no + direction. Not email gymnastics.</span><span class="zh">人+拍板+方向。不是邮件体操。</span></div>
+  <table>
+    <tr><th><span class="en">Do</span><span class="zh">做</span></th><th><span class="en">Don't</span><span class="zh">不做</span></th></tr>
+    <tr><td><span class="en">Hire/fire managers</span><span class="zh">招/开除经理</span></td><td><span class="en">Every floor detail</span><span class="zh">每个楼面细节</span></td></tr>
+    <tr><td><span class="en">Money out yes/no</span><span class="zh">出钱yes/no</span></td><td><span class="en">Buy headsets under $500</span><span class="zh">买耳机&lt;$500</span></td></tr>
+    <tr><td><span class="en">New store / lease</span><span class="zh">新店/租约</span></td><td><span class="en">Every repair quote under threshold</span><span class="zh">阈值下每个维修报价</span></td></tr>
+    <tr><td><span class="en">Break rule / architecture</span><span class="zh">破规/改架构</span></td><td><span class="en">Green store noise</span><span class="zh">绿店噪音</span></td></tr>
+  </table>
+  <div class="box box-gate"><strong><span class="en">Luna:</span><span class="zh">Luna：</span></strong> <span class="en">Full owner rights except settings/code changes</span><span class="zh">完整老板权，除了设置/改代码</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>what needs my yes</code> · <code>owner gates</code></div>
+</div>
+
+<div class="page" id="rules">
+  <div class="page-h">📋 Rules</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="box box-rule"><strong>1.</strong> <span class="en">Green silent. Red talks.</span><span class="zh">绿静默。红说话。</span></div>
+  <div class="box box-rule"><strong>2.</strong> <span class="en">Managers never #02-executive.</span><span class="zh">经理不进#02-executive。</span></div>
+  <div class="box box-rule"><strong>3.</strong> <span class="en">Night email max 10 sticky · red first · Louis only.</span><span class="zh">夜邮最多10条·先红·只Louis。</span></div>
+  <div class="box box-rule"><strong>4.</strong> <span class="en">Wire/ACH returned = 🔴 same day.</span><span class="zh">转账退回=当天🔴。</span></div>
+  <div class="box box-rule"><strong>5.</strong> <span class="en">Landlord 21-day follow.</span><span class="zh">房东21天跟进。</span></div>
+  <div class="box box-rule"><strong>6.</strong> <span class="en">Lookup SOP before create.</span><span class="zh">先查SOP再建。</span></div>
+  <div class="box box-rule"><strong>7.</strong> <span class="en">Money · fire · break rules = human yes.</span><span class="zh">钱·开除·破规=人yes。</span></div>
+  <div class="box box-rule"><strong>8.</strong> <span class="en">Owner time = people + decisions + direction.</span><span class="zh">老板时间=人+拍板+方向。</span></div>
+  <div class="box box-rule"><strong>9.</strong> <span class="en">One message per channel cycle · clean never in parent long wall.</span><span class="zh">每频道每周期1条·父消息不堆长墙。</span></div>
+  <div class="box box-rule"><strong>10.</strong> <span class="en">Luna = owner (no settings/code).</span><span class="zh">Luna=老板（不改设置/代码）。</span></div>
+  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
+  <table>
+    <tr><th><span class="en">Item</span><span class="zh">事项</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td><span class="en">Sticky reply</span><span class="zh">粘性回信</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">New SOP/form publish</span><span class="zh">新SOP/表格发布</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Money / fire / architecture</span><span class="zh">钱/开除/架构</span></td><td>Louis (+Luna bank)</td></tr>
+    <tr><td><span class="en">HQ channel membership</span><span class="zh">总部频道成员</span></td><td>Louis</td></tr>
+  </table>
+  <div class="sec-title">Automated</div>
+  <div class="box box-auto">⚡ 7AM staffing brief</div>
+  <div class="box box-auto">⚡ 9PM email sticky digest → Louis DM</div>
+  <div class="box box-auto">⚡ 10:30PM store chat → Brain</div>
+  <div class="box box-auto">⚡ 11PM dirty data · 1AM quality if low</div>
+  <div class="box box-auto">📊 Admin KPI Sheet</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>email sticky</code> · <code>landlord 21d</code> · <code>what needs my yes</code> · <code>channel map</code></div>
+</div>
+
+</div>
+<div class="footer">Wiserise Hospitality Group · Admin Department Roadmap · Handbook · EN/中文 · Verified 2026-07-21 · Hermes Artifact · 8/8 depts complete</div>
+<script>
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function goTab(i){document.querySelectorAll('.tab')[i].click()}
+function setLang(lang,btn){document.body.className='lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+document.addEventListener('keydown',e=>{const tabs=[...document.querySelectorAll('.tab')];const i=tabs.indexOf(document.querySelector('.tab.active'));if(e.key==='ArrowRight'&&i<tabs.length-1)tabs[i+1].click();if(e.key==='ArrowLeft'&&i>0)tabs[i-1].click()});
+</script>
+</body>
+</html>

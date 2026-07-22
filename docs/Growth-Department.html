@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth · 新店扩张部 · Wiserise</title>
+<style>
+:root {
+  --bg:#fafbfc; --card:#fff; --ink:#111827; --muted:#6b7280; --muted-light:#9ca3af;
+  --brand:#0f172a; --accent:#3b82f6;
+  --green:#059669; --green-bg:#ecfdf5;
+  --yellow:#d97706; --yellow-bg:#fffbeb;
+  --red:#dc2626; --red-bg:#fef2f2;
+  --blue:#2563eb; --blue-bg:#eff6ff;
+  --border:#e5e7eb; --border-light:#f3f4f6;
+  --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.04); --shadow-lg:0 4px 16px rgba(0,0,0,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.topbar{background:var(--brand);color:#fff;padding:16px 28px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto}
+.topbar h1{font-size:17px;font-weight:700}
+.topbar .sub{font-size:11.5px;opacity:.65;margin-top:2px}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden}
+.lang-btn{padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer}
+.lang-btn.active{background:rgba(255,255,255,.15);color:#fff}
+.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto}
+.tab{padding:11px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--brand);border-bottom-color:var(--brand)}
+.content{max-width:1040px;margin:0 auto;padding:24px 20px 80px}
+.page{display:none;animation:fadeIn .2s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.pareto{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:16px 18px;margin-bottom:18px;font-size:13.5px}
+.pareto strong{color:var(--brand)}
+.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+th{background:var(--brand);color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:11.5px}
+td{border-bottom:1px solid var(--border-light);padding:9px 10px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f9fafb}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card-title{font-size:15px;font-weight:700;color:var(--brand);margin-bottom:6px}
+.box{border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:12.5px;line-height:1.5;border:1px solid}
+.box-rule{background:var(--yellow-bg);border-color:#fde68a}
+.box-auto{background:var(--blue-bg);border-color:#bfdbfe}
+.box-gate{background:var(--green-bg);border-color:#a7f3d0}
+.box-red{background:var(--red-bg);border-color:#fecaca}
+.badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:600}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-yellow{background:var(--yellow-bg);color:var(--yellow)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-gray{background:#f3f4f6;color:#6b7280}
+.badge-gate{background:#fff;border:1.5px solid var(--green);color:var(--green)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px;font-size:12px}
+.flow-step{background:var(--brand);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+.flow-arrow{color:var(--muted-light);font-size:18px}
+.flow-gate{background:var(--green);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+.stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stage-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .15s}
+.stage-card:hover{box-shadow:var(--shadow-lg)}
+.stage-num{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.stage-name{font-size:16px;font-weight:700;color:var(--brand);margin-bottom:8px}
+.stage-work{font-size:12.5px;color:var(--ink);line-height:1.5;margin-bottom:10px}
+.stage-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted)}
+.stage-meta .owner{font-weight:600;color:var(--ink)}
+.gate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.gate-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
+.gate-card .g-badge{margin-bottom:8px}
+.gate-card .g-who{font-size:13px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.gate-card .g-what{font-size:12px;color:var(--muted);line-height:1.4}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.quick-list{list-style:none;margin:0;padding:0}
+.quick-list li{padding:8px 0;border-bottom:1px solid var(--border-light);font-size:12.5px;display:flex;justify-content:space-between;gap:12px}
+.quick-list li:last-child{border-bottom:none}
+.quick-list .q-label{color:var(--muted);flex-shrink:0}
+.quick-list .q-val{font-weight:600;color:var(--ink);text-align:right}
+.kpi-link{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
+.kpi-link:hover{box-shadow:var(--shadow-lg)}
+.kpi-link .kl-icon{font-size:32px}
+.kpi-link .kl-text{flex:1}
+.kpi-link .kl-title{font-size:14px;font-weight:700;color:var(--brand)}
+.kpi-link .kl-sub{font-size:12px;color:var(--muted)}
+.kpi-link .kl-arrow{font-size:20px;color:var(--accent)}
+.page-h{font-size:20px;font-weight:800;color:var(--brand);margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.verified{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);background:#f3f4f6;border-radius:999px;padding:3px 10px;margin:0 0 14px}
+.ask-brain{background:var(--card);border:1px dashed #93c5fd;border-radius:var(--radius);padding:12px 14px;margin-top:16px;font-size:12.5px}
+.ask-brain strong{color:var(--blue)}
+.ask-brain code{background:#eff6ff;padding:1px 6px;border-radius:4px;font-size:12px}
+.footer{text-align:center;font-size:10px;color:var(--muted-light);padding:20px 0}
+.zh{display:none}
+body.lang-zh .zh{display:inline}
+body.lang-zh .en{display:none}
+body.lang-both .zh{display:inline}
+body.lang-both .en{display:inline}
+.en{display:inline}
+@media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab{display:none}.lang-toggle{display:none}}
+@media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}.gate-row{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr}}
+@media(max-width:500px){.stage-grid{grid-template-columns:1fr}.gate-row{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body class="lang-both">
+<div class="topbar">
+  <div class="topbar-row">
+    <div>
+      <h1>↗️ Growth · <span class="zh">新店扩张部</span></h1>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · Location is everything · Every step Louis</div>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn" onclick="setLang('zh',this)">中文</button>
+      <button class="lang-btn active" onclick="setLang('both',this)">EN+中文</button>
+    </div>
+  </div>
+</div>
+<div class="tabs">
+  <button class="tab active" onclick="showPage('ops',this)">💬 Slack OPS</button>
+  <button class="tab" onclick="showPage('start',this)">🎓 Growth Start <span class="zh">入职</span></button>
+  <button class="tab" onclick="showPage('kpi',this)">📈 KPI</button>
+  <button class="tab" onclick="showPage('ov',this)">📊 Overview <span class="zh">总表</span></button>
+  <button class="tab" onclick="showPage('s1',this)">1 Scout <span class="zh">选址</span></button>
+  <button class="tab" onclick="showPage('s2',this)">2 LOI <span class="zh">意向书</span></button>
+  <button class="tab" onclick="showPage('s3',this)">3 Lease <span class="zh">租约</span></button>
+  <button class="tab" onclick="showPage('s4',this)">4 Buildout <span class="zh">装修</span></button>
+  <button class="tab" onclick="showPage('s5',this)">5 Brand <span class="zh">品牌</span></button>
+  <button class="tab" onclick="showPage('s6',this)">6 Permit <span class="zh">执照</span></button>
+  <button class="tab" onclick="showPage('s7',this)">7 Staff Up <span class="zh">招人</span></button>
+  <button class="tab" onclick="showPage('s8',this)">8 Open <span class="zh">开业</span></button>
+  <button class="tab" onclick="showPage('rules',this)">📋 Rules <span class="zh">规矩</span></button>
+</div>
+<div class="content">
+
+<div class="page active" id="ops">
+  <div class="page-h">💬 <span class="en">How to Work in Slack</span><span class="zh">在Slack怎么干活</span></div>
+  <div class="page-sub"><span class="en">Growth simple only</span><span class="zh">扩张只讲简单的</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong><span class="en">1 line:</span><span class="zh">1句：</span></strong> <span class="en">Drop a flyer → LOI Agent builds deal card → Louis approves → every next step Louis yes.</span><span class="zh">发传单→LOI Agent建卡→Louis批→后面每步Louis yes。</span></div>
+  <div class="sec-title"><span class="en">3 pieces</span><span class="zh">3个东西</span></div>
+  <div class="stage-grid">
+    <div class="stage-card"><div class="stage-name">💬 Slack</div><div class="stage-work"><span class="en">Louis DM + #02-exec for deals</span><span class="zh">Louis私信+#02-exec谈生意</span></div></div>
+    <div class="stage-card"><div class="stage-name">⚡ WISE OPS</div><div class="stage-work"><span class="en">LOI Agent reads flyer, builds Word + email</span><span class="zh">LOI Agent读传单、建Word+邮件</span></div></div>
+    <div class="stage-card"><div class="stage-name">🧠 Brain</div><div class="stage-work"><span class="en">LOI pipeline + lease + entity</span><span class="zh">LOI管道+租约+公司</span></div></div>
+  </div>
+  <div class="sec-title"><span class="en">Where to type</span><span class="zh">在哪打字</span></div>
+  <table>
+    <tr><th><span class="en">Place</span><span class="zh">地方</span></th><th><span class="en">Say</span><span class="zh">说</span></th></tr>
+    <tr><td><strong>Louis DM</strong></td><td><span class="en">Drop flyer PDF / URL</span><span class="zh">发传单PDF/链接</span></td></tr>
+    <tr><td><strong>#02-exec</strong></td><td><span class="en">Deal card · approve · revise</span><span class="zh">交易卡·批·改</span></td></tr>
+    <tr><td><strong><span class="en">Store channel</span><span class="zh">店频道</span></strong></td><td><span class="en">Only when store exists</span><span class="zh">店开起来才有</span></td></tr>
+  </table>
+  <div class="sec-title"><span class="en">Copy lines</span><span class="zh">复制这些话</span></div>
+  <table>
+    <tr><th><span class="en">Want</span><span class="zh">想做</span></th><th><span class="en">Type</span><span class="zh">打</span></th></tr>
+    <tr><td><span class="en">New deal</span><span class="zh">新交易</span></td><td><span class="en">Drop PDF + "LOI"</span><span class="zh">发PDF + "LOI"</span></td></tr>
+    <tr><td><span class="en">Approve</span><span class="zh">批准</span></td><td><code>approve</code></td></tr>
+    <tr><td><span class="en">Change terms</span><span class="zh">改条件</span></td><td><code>revise rent $X / term 5yr</code></td></tr>
+    <tr><td><span class="en">Pipeline</span><span class="zh">管道</span></td><td><code>LOI pipeline</code></td></tr>
+    <tr><td><span class="en">Send email</span><span class="zh">发邮件</span></td><td><code>send now</code></td></tr>
+  </table>
+  <div class="sec-title"><span class="en">One example</span><span class="zh">一个例子</span></div>
+  <div class="card"><div class="stage-work" style="margin:0;line-height:1.8">
+    <strong>1.</strong> <span class="en">Louis drops flyer PDF in DM</span><span class="zh">Louis在DM发传单PDF</span><br>
+    <strong>2.</strong> <span class="en">LOI Agent reads, auto-picks brand + standard offer</span><span class="zh">Agent读、自动选品牌+标准条件</span><br>
+    <strong>3.</strong> <span class="en">Deal card shown → Louis approve / revise</span><span class="zh">显示交易卡→Louis批/改</span><br>
+    <strong>4.</strong> <span class="en">Word doc + Gmail draft built</span><span class="zh">建Word+Gmail草稿</span><br>
+    <strong>5.</strong> <span class="en">Louis opens Gmail → sends manually</span><span class="zh">Louis打开Gmail→手动发</span>
+  </div></div>
+  <div class="sec-title"><span class="en">3 rules</span><span class="zh">3条</span></div>
+  <div class="box box-gate"><strong>1.</strong> <span class="en">Every step = Louis yes.</span><span class="zh">每步=Louis yes。</span></div>
+  <div class="box box-gate"><strong>2.</strong> <span class="en">Agent builds draft, never sends.</span><span class="zh">Agent建草稿，永不自动发。</span></div>
+  <div class="box box-red"><strong>3.</strong> <span class="en">No lease sign / no money without Louis.</span><span class="zh">没Louis不签租约/不出钱。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>LOI pipeline</code> · <code>brands list</code> · <code>standard offer terms</code></div>
+</div>
+
+<div class="page" id="start">
+  <div class="page-h">🎓 <span class="en">New Growth Path</span><span class="zh">新扩张入职路径</span></div>
+  <div class="page-sub"><span class="en">For Louis / growth lead / broker liaison</span><span class="zh">给Louis/扩张负责人/中介联络</span></div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">Turn flyers into signed leases → built stores → opened doors. Every step Louis approves.</span><span class="zh">把传单变成签租约→装修好→开业。每步Louis批。</span></div>
+  <div class="sec-title">Day 1</div>
+  <table>
+    <tr><th>#</th><th><span class="en">Do</span><span class="zh">做</span></th><th>Where</th></tr>
+    <tr><td>1</td><td><span class="en">Read Slack OPS + Overview</span><span class="zh">看Slack OPS+总表</span></td><td>💬 📊</td></tr>
+    <tr><td>2</td><td><span class="en">Know 6 brands</span><span class="zh">知道6个品牌</span></td><td>5 Brand</td></tr>
+    <tr><td>3</td><td><span class="en">Know standard offer</span><span class="zh">知道标准条件</span></td><td>2 LOI</td></tr>
+  </table>
+  <div class="sec-title">Week 1</div>
+  <table>
+    <tr><th><span class="en">Learn</span><span class="zh">学</span></th><th>Tab</th><th>Ask</th></tr>
+    <tr><td><span class="en">LOI Agent flow</span><span class="zh">LOI流程</span></td><td>2 LOI</td><td><code>LOI pipeline</code></td></tr>
+    <tr><td><span class="en">Standard terms</span><span class="zh">标准条件</span></td><td>2 LOI</td><td><code>standard offer terms</code></td></tr>
+    <tr><td><span class="en">Entity naming</span><span class="zh">公司命名</span></td><td>3 Lease</td><td><code>entity naming</code></td></tr>
+  </table>
+  <div class="sec-title">Month 1</div>
+  <table>
+    <tr><th><span class="en">Finish</span><span class="zh">完成</span></th><th><span class="en">Pass</span><span class="zh">过关</span></th></tr>
+    <tr><td><span class="en">3 deal cards from flyers</span><span class="zh">从传单建3张卡</span></td><td><span class="en">Brand + terms auto-picked right</span><span class="zh">品牌+条件自动选对</span></td></tr>
+    <tr><td><span class="en">1 LOI sent (Louis sends email)</span><span class="zh">发出1份LOI</span></td><td><span class="en">Louis sends from Gmail</span><span class="zh">Louis在Gmail发</span></td></tr>
+    <tr><td><span class="en">Pipeline Sheet updated</span><span class="zh">管道Sheet更新</span></td><td>stage tracked</td></tr>
+  </table>
+  <div class="box box-red"><strong>Never:</strong> <span class="en">auto-send LOI · auto-sign lease · promise a brand without Louis</span><span class="zh">自动发LOI·自动签租约·没Louis就承诺品牌</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>LOI pipeline</code> · <code>brands</code> · <code>standard terms</code></div>
+</div>
+
+<div class="page" id="kpi">
+  <div class="page-h">📈 KPI</div>
+  <div class="verified">✅ Sheet · 2026-07-21</div>
+  <a class="kpi-link" href="https://docs.google.com/spreadsheets/d/1P0F9L-gS4V2q9k9jOcBxfsXSq6-VIi3A7nw7Fz1B6xs/edit" target="_blank">
+    <div class="kl-icon">📊</div>
+    <div class="kl-text">
+      <div class="kl-title"><span class="en">Growth KPI (Google Sheet)</span><span class="zh">扩张KPI（Google Sheet）</span></div>
+      <div class="kl-sub"><span class="en">LOI pipeline · leases · stores · brands</span><span class="zh">LOI管道·租约·店·品牌</span></div>
+    </div>
+    <div class="kl-arrow">→</div>
+  </a>
+  <div class="sec-title"><span class="en">Status snapshot</span><span class="zh">现状</span></div>
+  <table>
+    <tr><th><span class="en">Metric</span><span class="zh">指标</span></th><th><span class="en">Value</span><span class="zh">值</span></th></tr>
+    <tr><td><span class="en">Stores open</span><span class="zh">在营店</span></td><td>5 (Jul 2026)</td></tr>
+    <tr><td><span class="en">In buildout</span><span class="zh">装修中</span></td><td>00004</td></tr>
+    <tr><td><span class="en">Brands</span><span class="zh">品牌</span></td><td>6</td></tr>
+    <tr><td><span class="en">Market focus</span><span class="zh">市场</span></td><td><span class="en">Southeast US</span><span class="zh">美国东南</span></td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>LOI pipeline</code> · <code>how many stores</code> · <code>brands list</code></div>
+</div>
+
+<div class="page" id="ov">
+  <div class="verified">✅ Roadmap verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Location = 80% of new-store success or failure. Pick slow, sign right.</span><span class="zh">选址=新店80%成败。慢慢选，签对。</span></div>
+  <div class="sec-title"><span class="en">Growth Flow</span><span class="zh">扩张全流程</span></div>
+  <div class="flow">
+    <span class="flow-step">1 Scout</span><span class="flow-arrow">→</span>
+    <span class="flow-step">2 LOI</span><span class="flow-arrow">→</span>
+    <span class="flow-step">3 Lease</span><span class="flow-arrow">→</span>
+    <span class="flow-step">4 Buildout</span><span class="flow-arrow">→</span>
+    <span class="flow-step">5 Brand</span><span class="flow-arrow">→</span>
+    <span class="flow-step">6 Permit</span><span class="flow-arrow">→</span>
+    <span class="flow-step">7 Staff</span><span class="flow-arrow">→</span>
+    <span class="flow-step">8 Open</span>
+  </div>
+  <div class="sec-title"><span class="en">8 Stages</span><span class="zh">8阶段</span></div>
+  <div class="stage-grid">
+    <div class="stage-card" onclick="goTab(4)"><div class="stage-num">1</div><div class="stage-name">Scout</div><div class="stage-work"><span class="en">Flyer · broker · market</span><span class="zh">传单·中介·市场</span></div><div class="stage-meta"><span class="owner">Louis</span></div></div>
+    <div class="stage-card" onclick="goTab(5)"><div class="stage-num">2</div><div class="stage-name">LOI</div><div class="stage-work"><span class="en">Agent builds deal card</span><span class="zh">Agent建交易卡</span></div><div class="stage-meta"><span class="owner">Auto · Louis</span> <span class="badge badge-gate">⭐</span></div></div>
+    <div class="stage-card" onclick="goTab(6)"><div class="stage-num">3</div><div class="stage-name">Lease</div><div class="stage-work"><span class="en">Negotiate → sign → entity</span><span class="zh">谈判→签→建公司</span></div><div class="stage-meta"><span class="owner">Louis</span> <span class="badge badge-gate">⭐</span></div></div>
+    <div class="stage-card" onclick="goTab(7)"><div class="stage-num">4</div><div class="stage-name">Buildout</div><div class="stage-work"><span class="en">Design · GC · timeline</span><span class="zh">设计·总包·时间线</span></div><div class="stage-meta"><span class="owner">Louis · Ops</span> <span class="badge badge-gate">⭐</span></div></div>
+    <div class="stage-card" onclick="goTab(8)"><div class="stage-num">5</div><div class="stage-name">Brand</div><div class="stage-work"><span class="en">6 brands · pick fit</span><span class="zh">6品牌·选合适的</span></div><div class="stage-meta"><span class="owner">Louis</span></div></div>
+    <div class="stage-card" onclick="goTab(9)"><div class="stage-num">6</div><div class="stage-name">Permit</div><div class="stage-work"><span class="en">Health · liquor · sign</span><span class="zh">卫生·酒牌·招牌</span></div><div class="stage-meta"><span class="owner">Ops · Louis</span></div></div>
+    <div class="stage-card" onclick="goTab(10)"><div class="stage-num">7</div><div class="stage-name">Staff Up</div><div class="stage-work"><span class="en">GM first → full team</span><span class="zh">先GM→全套人</span></div><div class="stage-meta"><span class="owner">People</span></div></div>
+    <div class="stage-card" onclick="goTab(11)"><div class="stage-num">8</div><div class="stage-name">Open</div><div class="stage-work"><span class="en">Soft → grand open</span><span class="zh">软开→正式开业</span></div><div class="stage-meta"><span class="owner">Louis · GM</span> <span class="badge badge-gate">⭐</span></div></div>
+  </div>
+  <div class="sec-title"><span class="en">Gates</span><span class="zh">门</span></div>
+  <div class="gate-row">
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ G1</span></div><div class="g-who">Louis</div><div class="g-what">LOI approve</div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ G2</span></div><div class="g-who">Louis</div><div class="g-what">Lease sign</div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ G3</span></div><div class="g-who">Louis</div><div class="g-what">Buildout $</div></div>
+    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ G4</span></div><div class="g-who">Louis</div><div class="g-what">Open date</div></div>
+  </div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>LOI pipeline</code> · <code>growth roadmap</code></div>
+</div>
+
+<div class="page" id="s1">
+  <div class="page-h">1. <span class="en">Scout</span><span class="zh">选址</span></div>
+  <div class="page-sub">Flyer · broker · market research</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Right location beats cheap rent in wrong spot.</span><span class="zh">位置对比错的地方便宜租更重要。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>1</td><td><span class="en">Collect flyers / broker listings</span><span class="zh">收集传单/中介房源</span></td><td>Louis · brokers</td></tr>
+    <tr><td>2</td><td><span class="en">Market research (NotebookLM)</span><span class="zh">市场研究</span></td><td>Louis · Hermes</td></tr>
+    <tr><td>3</td><td><span class="en">Drop PDF to LOI Agent</span><span class="zh">发PDF给LOI Agent</span></td><td>Louis</td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>market research Greenville</code> · <code>LOI pipeline</code></div>
+</div>
+
+<div class="page" id="s2">
+  <div class="page-h">2. <span class="en">LOI</span><span class="zh">意向书</span></div>
+  <div class="page-sub">LOI Agent · auto-pick brand + standard terms</div>
+  <div class="verified">✅ Verified · 2026-07-21 · loi-agent</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Standard terms already locked. Agent fills them. Louis just approves.</span><span class="zh">标准条件已锁。Agent填。Louis只批。</span></div>
+  <div class="sec-title"><span class="en">Standard Offer</span><span class="zh">标准条件</span></div>
+  <table>
+    <tr><th><span class="en">Term</span><span class="zh">条件</span></th><th><span class="en">Standard</span><span class="zh">标准</span></th></tr>
+    <tr><td>Lease</td><td>5 yr + two 5-yr options</td></tr>
+    <tr><td>Escalation</td><td>3% annual</td></tr>
+    <tr><td>NNN</td><td>Yes</td></tr>
+    <tr><td>Free rent</td><td>Request 3 months</td></tr>
+    <tr><td>TI</td><td>Request $30/SF</td></tr>
+    <tr><td>Kick-out</td><td>50% sales after 18 mo</td></tr>
+    <tr><td>Exclusive</td><td>Brand category</td></tr>
+    <tr><td>GO clause</td><td>12 mo notice</td></tr>
+  </table>
+  <div class="box box-gate"><strong>⭐ G1:</strong> <span class="en">Louis approve / revise → Word + Gmail draft</span><span class="zh">Louis批/改→Word+Gmail草稿</span></div>
+  <div class="box box-red"><strong><span class="en">Agent never auto-sends.</span><span class="zh">Agent永不自动发。</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>standard offer terms</code> · <code>LOI pipeline</code></div>
+</div>
+
+<div class="page" id="s3">
+  <div class="page-h">3. <span class="en">Lease</span><span class="zh">租约</span></div>
+  <div class="page-sub">Negotiate · sign · entity · Drive</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Signed lease = original in Drive + key facts in Brain. Not just email.</span><span class="zh">签了租约=原件存Drive+关键在Brain。不只是邮件。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>1</td><td><span class="en">Negotiate terms</span><span class="zh">谈判条件</span></td><td>Louis</td></tr>
+    <tr><td>2</td><td><span class="en">Sign</span><span class="zh">签</span></td><td>Louis ⭐ G2</td></tr>
+    <tr><td>3</td><td><span class="en">Create entity: BRAND STATE ZIP LLC</span><span class="zh">建公司</span></td><td>Louis · Agent auto-names</td></tr>
+    <tr><td>4</td><td><span class="en">Original → Drive · key → Brain</span><span class="zh">原件→Drive·关键→Brain</span></td><td>Hermes</td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">Entity example:</span><span class="zh">公司例子：</span></strong> GANGNAM SC 29406 LLC</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>lease 00003</code> · <code>entity naming</code></div>
+</div>
+
+<div class="page" id="s4">
+  <div class="page-h">4. <span class="en">Buildout</span><span class="zh">装修</span></div>
+  <div class="page-sub">Design · GC · timeline · money</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Timeline slip = rent burning with no sales. Lock GC schedule first.</span><span class="zh">装修拖=白烧租没销售。先锁总包时间。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>1</td><td><span class="en">Design / layout</span><span class="zh">设计/布局</span></td><td>Louis · architect</td></tr>
+    <tr><td>2</td><td><span class="en">Pick GC · quote</span><span class="zh">选总包·报价</span></td><td>Louis</td></tr>
+    <tr><td>3</td><td><span class="en">Timeline + milestones</span><span class="zh">时间线+里程碑</span></td><td>Louis · Ops</td></tr>
+    <tr><td>4</td><td><span class="en">Big $ → Louis yes</span><span class="zh">大钱→Louis yes</span></td><td>Louis ⭐ G3</td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>buildout 00004</code> · <code>GC timeline</code></div>
+</div>
+
+<div class="page" id="s5">
+  <div class="page-h">5. <span class="en">Brand</span><span class="zh">品牌</span></div>
+  <div class="page-sub">6 brands · pick market fit</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <table>
+    <tr><th>#</th><th><span class="en">Brand</span><span class="zh">品牌</span></th><th><span class="en">Type</span><span class="zh">类型</span></th></tr>
+    <tr><td>1</td><td>Gangnam Korean BBQ</td><td><span class="en">Full-service K-BBQ</span><span class="zh">正餐韩烤</span></td></tr>
+    <tr><td>2</td><td>Masa Sushi</td><td><span class="en">Sushi & hibachi</span><span class="zh">寿司铁板烧</span></td></tr>
+    <tr><td>3</td><td>Low Country Boils</td><td><span class="en">Seafood boil</span><span class="zh">海鲜煮</span></td></tr>
+    <tr><td>4</td><td>Gangnam Street</td><td><span class="en">Quick Korean</span><span class="zh">快餐韩式</span></td></tr>
+    <tr><td>5</td><td>Masa Ramen</td><td><span class="en">Ramen</span><span class="zh">拉面</span></td></tr>
+    <tr><td>6</td><td>Gangnam Wings</td><td><span class="en">Fried chicken</span><span class="zh">炸鸡</span></td></tr>
+  </table>
+  <div class="box box-rule"><strong><span class="en">Auto-pick logic:</span><span class="zh">自动选逻辑：</span></strong> <span class="en">Market fit + existing proximity + demographics</span><span class="zh">市场匹配+附近现有店+人口</span></div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>brands list</code> · <code>which brand for Wilmington</code></div>
+</div>
+
+<div class="page" id="s6">
+  <div class="page-h">6. <span class="en">Permit</span><span class="zh">执照</span></div>
+  <div class="page-sub">Health · liquor · sign · business</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Health + liquor permit delay = open date slip. Start day 1 of buildout.</span><span class="zh">卫生+酒牌晚=开业拖。装修第一天就开始申请。</span></div>
+  <table>
+    <tr><th><span class="en">Permit</span><span class="zh">执照</span></th><th><span class="en">Who drives</span><span class="zh">谁推</span></th></tr>
+    <tr><td><span class="en">Health dept</span><span class="zh">卫生局</span></td><td>Ops · GM</td></tr>
+    <tr><td><span class="en">Liquor license</span><span class="zh">酒牌</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Sign permit</span><span class="zh">招牌许可</span></td><td>Ops</td></tr>
+    <tr><td><span class="en">Business license</span><span class="zh">营业执照</span></td><td>Louis · Finance</td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>permits 00004</code> · <code>liquor license status</code></div>
+</div>
+
+<div class="page" id="s7">
+  <div class="page-h">7. <span class="en">Staff Up</span><span class="zh">招人开业</span></div>
+  <div class="page-sub">GM first → full team (see People Stage 1)</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">No GM = no open. Hire GM 4–6 weeks before doors.</span><span class="zh">没GM=开不了。提前4-6周招GM。</span></div>
+  <table>
+    <tr><th><span class="en">Order</span><span class="zh">顺序</span></th><th><span class="en">Role</span><span class="zh">职位</span></th><th><span class="en">Min open</span><span class="zh">最少</span></th></tr>
+    <tr><td>1</td><td>GM</td><td>1</td></tr>
+    <tr><td>2</td><td>AGM / Floor Mgr</td><td>1</td></tr>
+    <tr><td>3</td><td>Line Cook + Prep</td><td>3</td></tr>
+    <tr><td>4</td><td>Sushi Chef</td><td>1–2</td></tr>
+    <tr><td>5</td><td>Server</td><td>4</td></tr>
+    <tr><td>6</td><td>Host + Busser</td><td>2</td></tr>
+    <tr><td>7</td><td>Dishwasher</td><td>1–2</td></tr>
+  </table>
+  <div class="box box-gate"><strong><span class="en">Open gate:</span><span class="zh">开业门：</span></strong> GM + I-9 + 7shifts + 1 training week done</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>new store staffing 00004</code> · <code>need 1 GM</code></div>
+</div>
+
+<div class="page" id="s8">
+  <div class="page-h">8. <span class="en">Open</span><span class="zh">开业</span></div>
+  <div class="page-sub">Soft open → grand open</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="pareto"><strong>80/20:</strong> <span class="en">Soft open finds the kinks. Grand open when 5 training days + cash + POS proven.</span><span class="zh">软开找问题。5天培训+现金+POS都过才正式开。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">What</span><span class="zh">做</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>1</td><td><span class="en">Soft open (friends/family)</span><span class="zh">软开（亲友）</span></td><td>GM · Louis</td></tr>
+    <tr><td>2</td><td><span class="en">Fix menu/speed issues</span><span class="zh">修菜单/速度问题</span></td><td>GM</td></tr>
+    <tr><td>3</td><td><span class="en">Grand open</span><span class="zh">正式开业</span></td><td>Louis ⭐ G4</td></tr>
+    <tr><td>4</td><td><span class="en">Store channel created → Slack live</span><span class="zh">建店频道→Slack上线</span></td><td>Ops</td></tr>
+  </table>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>open date 00004</code> · <code>store status</code></div>
+</div>
+
+<div class="page" id="rules">
+  <div class="page-h">📋 Rules</div>
+  <div class="verified">✅ Verified · 2026-07-21</div>
+  <div class="box box-rule"><strong>1.</strong> <span class="en">Every growth step = Louis yes.</span><span class="zh">扩张每步=Louis yes。</span></div>
+  <div class="box box-rule"><strong>2.</strong> <span class="en">LOI Agent builds draft, never auto-sends.</span><span class="zh">LOI Agent建草稿，永不自动发。</span></div>
+  <div class="box box-rule"><strong>3.</strong> <span class="en">No lease sign without Louis.</span><span class="zh">没Louis不签租约。</span></div>
+  <div class="box box-rule"><strong>4.</strong> <span class="en">Lease original → Drive · key facts → Brain.</span><span class="zh">租约原件→Drive·关键→Brain。</span></div>
+  <div class="box box-rule"><strong>5.</strong> <span class="en">Entity = BRAND STATE ZIP LLC.</span><span class="zh">公司=品牌+州+邮编+LLC。</span></div>
+  <div class="box box-rule"><strong>6.</strong> <span class="en">Buildout big $ = Louis.</span><span class="zh">装修大钱=Louis。</span></div>
+  <div class="box box-rule"><strong>7.</strong> <span class="en">Permit starts day 1 of buildout.</span><span class="zh">执照装修第一天就申请。</span></div>
+  <div class="box box-rule"><strong>8.</strong> <span class="en">No GM = no open.</span><span class="zh">没GM不开业。</span></div>
+  <div class="box box-rule"><strong>9.</strong> <span class="en">One LOI Pipeline Sheet only.</span><span class="zh">只有一个LOI管道Sheet。</span></div>
+  <div class="box box-rule"><strong>10.</strong> <span class="en">6 brands. Pick fit, not favorite.</span><span class="zh">6个品牌。选合适的，不选最喜欢的。</span></div>
+  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
+  <table>
+    <tr><th><span class="en">Item</span><span class="zh">事项</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td><span class="en">Scout / pick location</span><span class="zh">选位置</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">LOI approve</span><span class="zh">批LOI</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Lease sign</span><span class="zh">签租约</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Buildout $</span><span class="zh">装修钱</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Brand pick</span><span class="zh">选品牌</span></td><td>Louis</td></tr>
+    <tr><td><span class="en">Open date</span><span class="zh">开业日</span></td><td>Louis</td></tr>
+  </table>
+  <div class="sec-title">Automated / support</div>
+  <div class="box box-auto">⚡ LOI Agent reads flyer → deal card</div>
+  <div class="box box-auto">⚡ Word doc + Gmail draft auto-built</div>
+  <div class="box box-auto">⚡ Entity name auto-suggested</div>
+  <div class="box box-auto">📊 LOI Pipeline Sheet + Growth KPI Sheet</div>
+  <div class="box box-auto">🔬 NotebookLM for market research</div>
+  <div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>LOI pipeline</code> · <code>brands</code> · <code>standard offer terms</code> · <code>entity naming</code></div>
+</div>
+
+</div>
+<div class="footer">Wiserise Hospitality Group · Growth Department Roadmap · Handbook · EN/中文 · Verified 2026-07-21 · Hermes Artifact</div>
+<script>
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function goTab(i){document.querySelectorAll('.tab')[i].click()}
+function setLang(lang,btn){document.body.className='lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+document.addEventListener('keydown',e=>{const tabs=[...document.querySelectorAll('.tab')];const i=tabs.indexOf(document.querySelector('.tab.active'));if(e.key==='ArrowRight'&&i<tabs.length-1)tabs[i+1].click();if(e.key==='ArrowLeft'&&i>0)tabs[i-1].click()});
+</script>
+</body>
+</html>
+
