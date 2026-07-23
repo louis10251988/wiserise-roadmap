@@ -220,7 +220,7 @@ textarea{min-height:110px;resize:vertical}
   <!-- EMAIL -->
   <div class="page" id="page-email">
     <div class="h">
-      <div><h2>Email</h2><p>Edit freely. Draft to Gmail includes LOI PDF printed from letter HTML.</p></div>
+      <div><h2>Email</h2><p>Short personal email to the broker. Edit anytime before send.</p></div>
       <div class="btn-row">
         <button class="btn btn-white" type="button" data-go="letter">← Letter</button>
         <button class="btn btn-white" type="button" id="btnResetEmail">Reset template</button>
@@ -328,25 +328,28 @@ textarea{min-height:110px;resize:vertical}
     };
   }
 
-  function defaultEmail(d){
+    function defaultEmail(d){
     var first=(d.broker_name||"there").split(/\s+/)[0];
+    if(!first || first.toLowerCase()==="test") first="there";
+    var place=d.property_name||"the space";
+    var where=d.city_state_zip||([d.city,d.state].filter(Boolean).join(", "));
     return {
       to:d.broker_email||"",
-      cc:"benjy.cooke@oswaldcooke.com",
-      subject:"Letter of Intent - "+d.concept+" at "+d.property_name+" ("+d.city+", "+d.state+")",
+      cc:d.email_cc||"",
+      subject:"Letter of Intent – "+(d.concept||"Restaurant")+" at "+place+(where?" ("+where+")":""),
       body:[
         "Hi "+first+",","",
-        "This is Louis from Wiserise Hospitality Group. We operate Gangnam Korean BBQ + Hotpot, Masa Sushi and Grill, and Low Country Boils across the Southeast.",
+        "This is Louis from Wiserise Hospitality Group. We run Gangnam Korean BBQ + Hotpot, Masa Sushi, and Low Country Boils across the Southeast.",
         "",
-        d.property_name+" in "+d.city_state_zip+" caught our attention as a strong fit for "+d.concept+".",
+        place+(where?" in "+where:"")+" caught our attention, and I think it could be a strong fit for "+(d.concept||"one of our brands")+".",
         "",
-        "Please find attached our Letter of Intent. We are a serious operator ready to move quickly.",
+        "I attached our Letter of Intent with proposed terms. Happy to jump on a quick call if useful — we can move fast.",
         "",
-        "Happy to connect at your convenience.",
-        "",
-        "Best regards,",
-        "Louis Liu | Owner, Wiserise Hospitality Group",
-        "252-258-2432 | www.wiserisegroup.com"
+        "Thanks,",
+        "Louis Liu",
+        "Owner, Wiserise Hospitality Group",
+        "252-258-2432",
+        "www.wiserisegroup.com"
       ].join("\n")
     };
   }
