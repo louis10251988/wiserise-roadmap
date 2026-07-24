@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offer Letter — General Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unna:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#152035; --navy-deep:#1E3152; --gold:#C4A55A;
+    --tint:#F4F6FB; --line:#E3E8F2; --ink:#0F0F0F; --mute:#6B7C9A;
+  }
+  * { box-sizing:border-box; margin:0; padding:0 }
+  body {
+    font-family:'Inter',sans-serif; color:var(--ink); background:#EAEDF4;
+    line-height:1.4; padding:24px 16px; -webkit-font-smoothing:antialiased;
+  }
+  .sheet {
+    max-width:860px; margin:0 auto; background:#fff; border-radius:14px;
+    overflow:hidden; box-shadow:0 18px 50px rgba(21,32,53,.18);
+  }
+  .band {
+    background:var(--navy); color:#fff; padding:10px 28px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .wordmark {
+    font-family:'Unna',serif; font-weight:700; font-size:24px;
+    letter-spacing:1px; line-height:1;
+  }
+  .wordmark small {
+    display:block; font-family:'Inter'; font-weight:700; font-size:9px;
+    letter-spacing:2.5px; margin-top:2px; opacity:.85;
+  }
+  .band .tag {
+    font-size:9px; font-weight:700; letter-spacing:2px;
+    text-align:right; opacity:.9;
+  }
+  .band .tag .label {
+    display:block; color:var(--gold); font-size:11px; letter-spacing:1px; opacity:1;
+  }
+  .title-wrap { padding:6px 28px 0 }
+  h1 {
+    font-family:'Unna',serif; font-weight:700; color:var(--navy);
+    font-size:20px; letter-spacing:1px; line-height:1.1;
+  }
+  .sub { color:var(--mute); font-weight:600; font-size:10px; margin-top:1px }
+  .rule { height:3px; width:80px; background:var(--gold); border-radius:3px; margin-top:3px }
+  .letter-meta { padding:5px 28px 0; font-size:11px; line-height:1.5 }
+  .letter-meta .row { display:flex; gap:8px; align-items:baseline }
+  .letter-meta .k { font-weight:700; color:var(--mute); min-width:48px; letter-spacing:1px; font-size:10px }
+  .letter-meta .v { color:var(--navy); font-weight:600 }
+  .section { padding:5px 28px 0 }
+  .section h2 {
+    font-size:10px; font-weight:700; letter-spacing:1.5px; color:var(--navy);
+    margin-bottom:3px;
+  }
+  .section h2 .pill {
+    background:var(--navy-deep); color:#fff; padding:4px 10px; border-radius:16px;
+  }
+  .content { padding:0 28px; font-size:10.5px; line-height:1.4; color:var(--navy) }
+  .content ul { list-style:none; padding:0 }
+  .content ul li {
+    position:relative; padding-left:14px; margin-bottom:1px; color:var(--navy);
+  }
+  .content ul li::before {
+    content:''; position:absolute; left:0; top:6px;
+    width:5px; height:5px; background:var(--gold); border-radius:50%;
+  }
+  .two-col-content {
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:0 16px; padding:0 28px;
+  }
+  .two-col-content .section { padding:5px 0 0 }
+  .two-col-content .content { padding:0 }
+  table { width:100%; border-collapse:collapse; margin-top:2px }
+  th {
+    background:var(--navy-deep); color:#fff; font-size:8.5px; font-weight:700;
+    letter-spacing:1px; text-align:left; padding:5px 6px;
+  }
+  th:first-child { border-top-left-radius:6px }
+  th:last-child { border-top-right-radius:6px }
+  td {
+    border:1px solid var(--line); padding:2px 6px; font-size:9.5px;
+    color:var(--navy); vertical-align:top;
+  }
+  td.num { background:var(--tint); font-weight:700; width:6%; text-align:center }
+  td.day { background:var(--tint); font-weight:700; width:12% }
+  .note { font-size:9px; color:var(--mute); margin-top:2px; font-weight:500 }
+  .kpi-note {
+    margin-top:3px; font-size:9.5px; color:var(--navy); font-weight:600;
+    background:var(--tint); border-left:3px solid var(--gold); padding:4px 8px; border-radius:4px;
+  }
+  .scope-wrap { break-inside:avoid }
+  .two-col {
+    display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:2px 28px 0;
+  }
+  .col-block {
+    border:1px solid var(--line); border-radius:8px; padding:5px 8px;
+  }
+  .col-block.do { background:#EAF6EF; border-color:#CDE8D8 }
+  .col-block.dont { background:#FBF3E8; border-color:#EFDCC0 }
+  .col-block .ch {
+    font-size:9px; font-weight:700; letter-spacing:1px;
+    color:var(--navy); margin-bottom:2px;
+  }
+  .col-block ol { padding-left:14px; margin:0 }
+  .col-block ol li { font-size:9.5px; margin-bottom:1px; color:var(--navy) }
+  .accept {
+    margin:4px 28px 0; background:var(--tint); border-left:3px solid var(--gold);
+    border-radius:8px; padding:5px 10px;
+  }
+  .accept b { letter-spacing:1px; font-size:9px; display:block; margin-bottom:1px; color:var(--navy-deep) }
+  .accept ul { list-style:none; padding:0 }
+  .accept ul li {
+    position:relative; padding-left:14px; margin-bottom:0; font-size:10px; color:var(--navy);
+  }
+  .accept ul li::before {
+    content:''; position:absolute; left:0; top:6px;
+    width:4px; height:4px; background:var(--gold); border-radius:50%;
+  }
+  .sign {
+    display:grid; grid-template-columns:1fr 1fr 0.7fr; gap:16px;
+    margin:5px 28px 0;
+  }
+  .sign .slot .line { border-bottom:1.5px solid var(--navy-deep); height:20px }
+  .sign .slot .cap {
+    font-size:8px; font-weight:700; letter-spacing:1.2px;
+    color:var(--mute); margin-top:2px;
+  }
+  footer {
+    margin-top:4px; padding:4px 28px 8px; text-align:center;
+    font-size:8px; letter-spacing:1.2px; color:var(--mute); font-weight:600;
+  }
+  @media print {
+    @page { size:Letter; margin:4mm }
+    body { background:#fff; padding:0 }
+    .sheet { box-shadow:none; border-radius:0; max-width:none; overflow:visible }
+    .section, .sign, table, tr, .col-block, .scope-wrap { break-inside:avoid }
+    .band { padding:7px 28px }
+    h1 { font-size:18px } .title-wrap { padding-top:4px }
+    .letter-meta { padding-top:4px }
+    .section { padding-top:4px }
+    .content { font-size:9.5px }
+    .content td { padding:1px 5px; font-size:9px }
+    .col-block ol li { font-size:9px }
+    .sign .slot .line { height:16px }
+    footer { margin-top:2px; padding-top:2px; padding-bottom:0 }
+    * { -webkit-print-color-adjust:exact; print-color-adjust:exact }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="band">
+    <div class="wordmark">
+      WISERISE
+      <small>HOSPITALITY GROUP</small>
+    </div>
+    <div class="tag">
+      OFFER LETTER
+      <span class="label">General Manager</span>
+    </div>
+  </div>
+
+  <div class="title-wrap">
+    <h1>Offer Letter</h1>
+    <div class="sub">Own one store’s daily run · Full-time W-2</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="letter-meta">
+    <div class="row"><span class="k">DATE</span><span class="v">[Month DD, YYYY]</span></div>
+    <div class="row"><span class="k">TO</span><span class="v">[Candidate Full Name]</span></div>
+    <div class="row"><span class="k">FROM</span><span class="v">Louis Liu, Owner</span></div>
+  </div>
+
+  <div class="two-col-content">
+    <div class="col-left">
+      <div class="section">
+        <h2><span class="pill">THE ROLE</span></h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li><strong>General Manager</strong> · Store <strong>[0000X]</strong> · reports to Owner</li>
+          <li><strong>Own one store’s daily run</strong></li>
+          <li>Staff · sales · guest · food · clean books</li>
+          <li>Full-time · 5 days · 55 hrs / wk</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-right">
+      <div class="section">
+        <h2><span class="pill">PAY &amp; TERMS</span></h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li><strong>Salary:</strong> $5,750 / mo · $69,000 / yr · W-2</li>
+          <li><strong>KPI:</strong> up to +$1,500 / mo · $18,000 / yr (5 × $300)</li>
+          <li><strong>Max:</strong> $7,250 / mo · $87,000 / yr</li>
+          <li><strong>Hours:</strong> 5 days × 11 hrs = <strong>55 hrs / wk</strong></li>
+          <li><strong>Time off:</strong> company holidays + [X] PTO days / yr</li>
+          <li><strong>Start date:</strong> [Month DD, YYYY]</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="pill">KPI PAY (5 METRICS)</span></h2>
+  </div>
+  <div class="content">
+    <div class="kpi-note"><strong>Rules:</strong> You show proof → Owner scores yes/no each month → hit pays with next check · miss = $0. Proof only: P&amp;L / Brain, Google, roster, audit card.</div>
+    <table>
+      <tr>
+        <th style="width:5%">#</th>
+        <th style="width:22%">KPI</th>
+        <th style="width:40%">Goal</th>
+        <th style="width:16%">Proof</th>
+        <th style="width:17%">Pay mo/yr</th>
+      </tr>
+      <tr>
+        <td class="num">1</td>
+        <td><strong>Growth rate</strong></td>
+        <td>≥ <strong>0.4%</strong> same-store sales vs <strong>prior month</strong></td>
+        <td>P&amp;L / Chowbus</td>
+        <td><strong>$300 / $3,600</strong></td>
+      </tr>
+      <tr>
+        <td class="num">2</td>
+        <td><strong>Net profit</strong></td>
+        <td><strong>18% – 25%</strong> P&amp;L net after all store costs</td>
+        <td>P&amp;L / Finance</td>
+        <td><strong>$300 / $3,600</strong></td>
+      </tr>
+      <tr>
+        <td class="num">3</td>
+        <td><strong>Google review</strong></td>
+        <td><strong>≥ 4.5 stars</strong> live average</td>
+        <td>Google</td>
+        <td><strong>$300 / $3,600</strong></td>
+      </tr>
+      <tr>
+        <td class="num">4</td>
+        <td><strong>Staff retention</strong></td>
+        <td><strong>&gt; 80%</strong> stay · <strong>12-month rolling</strong></td>
+        <td>Brain / roster</td>
+        <td><strong>$300 / $3,600</strong></td>
+      </tr>
+      <tr>
+        <td class="num">5</td>
+        <td><strong>Store audit</strong></td>
+        <td><strong>&gt; 80%</strong> company audit score</td>
+        <td>Audit card</td>
+        <td><strong>$300 / $3,600</strong></td>
+      </tr>
+    </table>
+    <div class="note">Equal split. Owner scores yes/no on each goal monthly. Miss that slice = $0. Same definitions for GM + Finance.</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="pill">WEEKLY SCHEDULE</span></h2>
+  </div>
+  <div class="content">
+    <table>
+      <tr><th style="width:10%">DAY</th><th style="width:26%">HOURS</th><th style="width:8%">HRS</th><th>PLAN</th></tr>
+      <tr><td class="day">Mon</td><td>10:00 AM – 9:00 PM</td><td>11</td><td>Admin day · schedule · labor plan · payroll check · hire pipeline</td></tr>
+      <tr><td class="day">Tue</td><td>10:00 AM – 9:00 PM</td><td>11</td><td>Floor lead · train FOH · guest recovery · 1:1 with 1–2 managers</td></tr>
+      <tr><td class="day">Wed</td><td>OFF</td><td>0</td><td>OFF</td></tr>
+      <tr><td class="day">Thu</td><td>10:00 AM – 9:00 PM</td><td>11</td><td>Floor lead · onboarding / training check · Google review reply</td></tr>
+      <tr><td class="day">Fri</td><td>11:00 AM – 10:00 PM</td><td>11</td><td>Busy night lead · closeout · cash + fraud clean · KPI proof</td></tr>
+      <tr><td class="day">Sat</td><td>11:00 AM – 10:00 PM</td><td>11</td><td>Peak day · full FOH ownership · guest + speed + staffing</td></tr>
+      <tr><td class="day">Sun</td><td>OFF</td><td>0</td><td>OFF</td></tr>
+    </table>
+    <div class="note"><strong>Total = 55 hrs / wk</strong> (5 × 11). Work Mon·Tue·Thu·Fri·Sat. <strong>Wed OFF · Sun OFF</strong>. GM owns FOH + people + money — not BOH line work. Kitchen Mgr owns BOH.</div>
+  </div>
+
+  <div class="scope-wrap">
+    <div class="section">
+      <h2><span class="pill">SCOPE</span></h2>
+    </div>
+    <div class="two-col">
+      <div class="col-block do">
+        <div class="ch">✅ WHAT YOU DO</div>
+        <ol>
+          <li>Lead FOH + people (hire · train · schedule · 1:1)</li>
+          <li>Run guest quality + busy nights</li>
+          <li>Hit the 5 KPIs with proof every month</li>
+        </ol>
+      </div>
+      <div class="col-block dont">
+        <div class="ch">⛔ WHAT YOU DON'T</div>
+        <ol>
+          <li>Work the BOH line (Kitchen Mgr owns kitchen)</li>
+          <li>Fire alone or skip the discipline ladder</li>
+          <li>Touch company bank or run other stores</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="accept-wrap">
+    <div class="section">
+      <h2><span class="pill">ACCEPTANCE</span></h2>
+    </div>
+    <div class="accept">
+      <b>SIGN AND RETURN</b>
+      <ul>
+        <li>Sign and return by <strong>[Sign-by date]</strong></li>
+        <li>Start date: <strong>[Start date]</strong> · after I-9 / work papers check</li>
+        <li>This is at-will work in North Carolina (either side can end it)</li>
+      </ul>
+    </div>
+    <div class="sign">
+      <div class="slot">
+        <div class="line"></div>
+        <div class="cap">SIGNATURE</div>
+      </div>
+      <div class="slot">
+        <div class="line"></div>
+        <div class="cap">PRINT NAME</div>
+      </div>
+      <div class="slot">
+        <div class="line"></div>
+        <div class="cap">DATE</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    WISERISE HOSPITALITY GROUP · CONFIDENTIAL · FOR INTERNAL USE ONLY
+  </footer>
+</div>
+</body>
+</html>

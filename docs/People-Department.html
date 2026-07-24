@@ -109,7 +109,7 @@ body.lang-both .en{display:inline}
   <div class="topbar-row">
     <div>
       <h1>👥 People Department · <span class="zh">人事部</span></h1>
-      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · 80/20 Rule</div>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · Offer Letter packs approved</div>
     </div>
     <div class="lang-toggle">
       <button class="lang-btn" onclick="setLang('en',this)">EN</button>
@@ -125,6 +125,7 @@ body.lang-both .en{display:inline}
   <button class="tab" onclick="showPage('p0',this)">📈 KPI</button>
   <button class="tab" onclick="showPage('p1',this)">📊 Overview <span class="zh">总表</span></button>
   <button class="tab" onclick="showPage('s1',this)">1 Hire <span class="zh">招人</span></button>
+  <button class="tab" onclick="showPage('offer',this)">📝 Offer Letter <span class="zh">录用信</span></button>
   <button class="tab" onclick="showPage('s2',this)">2 Onboard <span class="zh">入职</span></button>
   <button class="tab" onclick="showPage('s3',this)">3 Schedule <span class="zh">排班</span></button>
   <button class="tab" onclick="showPage('s4',this)">4 1:1 <span class="zh">一对一</span></button>
@@ -318,6 +319,211 @@ body.lang-both .en{display:inline}
     <tr><td>"walk-in Name, email, phone"</td><td><span class="en">Face-to-face hire</span><span class="zh">现场录用</span></td></tr>
   </table>
   <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>hiring status</code> · <code>need 1 server</code> · <code>new store staffing 00004</code></div>
+</div>
+
+<!-- Offer Letter catalog -->
+<div class="page" id="offer">
+  <div class="page-h">📝 <span class="en">Offer Letter</span><span class="zh">录用信</span></div>
+  <div class="page-sub"><span class="en">One letter per person. Same navy+gold brand. All roles over time — now: HR Manager + GM.</span><span class="zh">一人一封。同一套品牌模板。以后覆盖全部职位 — 现在先做：HR经理 + GM。</span></div>
+  <div class="verified">✅ <span class="en">Louis approved + deployed</span><span class="zh">Louis已批并上线</span> · 2026-07-23 · HR Manager + GM packs live · wiserise-letter</div>
+
+  <div class="pareto"><strong><span class="en">What it is:</span><span class="zh">是什么：</span></strong> <span class="en">A letter TO the candidate (job · pay · start · rules · sign). Not a form. Not an SOP. Louis approves before send.</span><span class="zh">写给候选人的信（职位·工资·开工·规矩·签字）。不是表格。不是SOP。Louis批了才能发。</span></div>
+
+  <div class="sec-title"><span class="en">6 parts only</span><span class="zh">只要6块</span></div>
+  <div class="flow">
+    <span class="flow-step">1 Brand</span><span class="flow-arrow">→</span>
+    <span class="flow-step">2 Who + job</span><span class="flow-arrow">→</span>
+    <span class="flow-step">3 Pay</span><span class="flow-arrow">→</span>
+    <span class="flow-step">4 Start</span><span class="flow-arrow">→</span>
+    <span class="flow-step">5 Rules</span><span class="flow-arrow">→</span>
+    <span class="flow-gate">6 Sign</span>
+  </div>
+
+  <div class="sec-title"><span class="en">How to make one</span><span class="zh">怎么做一封</span></div>
+  <table>
+    <tr><th style="width:8%">#</th><th style="width:42%"><span class="en">Step</span><span class="zh">步骤</span></th><th style="width:50%"><span class="en">Detail</span><span class="zh">细节</span></th></tr>
+    <tr><td>1</td><td><span class="en">Pick role pack below</span><span class="zh">先选下面职位包</span></td><td><span class="en">HR Manager or GM (more roles later)</span><span class="zh">HR经理或GM（其它职位后补）</span></td></tr>
+    <tr><td>2</td><td><span class="en">Tell Hermes in Slack</span><span class="zh">在Slack告诉Hermes</span></td><td><code>make offer letter — [Name] — [Role] — store [#####] — start [date]</code></td></tr>
+    <tr><td>3</td><td><span class="en">Pay truth</span><span class="zh">工资真相</span></td><td><span class="en">Hourly = REF-002. Salary / HQ = Louis number. Always show mo + yr.</span><span class="zh">时薪看REF-002。年薪/总部=Louis定。一律写月+年。</span></td></tr>
+    <tr><td>4</td><td><span class="en">1-page PDF</span><span class="zh">1页PDF</span></td><td><span class="en">Navy + gold · max 3 do / 3 don't · candidate sign only</span><span class="zh">海军蓝+金 · 做/不做各最多3条 · 只候选人签字</span></td></tr>
+    <tr><td>5</td><td><span class="en">Louis says yes</span><span class="zh">Louis说yes</span></td><td><span class="en">Then send / save under People Letters</span><span class="zh">再发人 / 存到人事Letters</span></td></tr>
+  </table>
+
+  <div class="sec-title"><span class="en">Role packs (live now)</span><span class="zh">职位包（现已上线）</span></div>
+  <div class="flow" style="margin-bottom:14px">
+    <button type="button" class="flow-gate" id="offer-btn-hr" onclick="showOfferRole('hr',this)" style="border:none;cursor:pointer">HR Manager</button>
+    <button type="button" class="flow-step" id="offer-btn-gm" onclick="showOfferRole('gm',this)" style="border:none;cursor:pointer;opacity:.85">GM</button>
+    <span class="badge badge-gray" style="align-self:center"><span class="en">More roles coming</span><span class="zh">其它职位后续加</span></span>
+  </div>
+
+  <!-- HR Manager pack = locked from Sally Coach offer letter v1.1 -->
+  <div class="card offer-role" id="offer-hr">
+    <div class="card-title">🛡️ HR Manager · Regional People Coach · <span class="zh">人事经理</span></div>
+    <div class="page-sub" style="margin-bottom:10px"><span class="en">Canonical pack locked from attached offer letter (Sally · v1.1). Letter title on PDF = Regional People Coach.</span><span class="zh">标准包已按附件录用信锁定（Sally · v1.1）。信上职位名 = Regional People Coach。</span></div>
+    <div class="verified">✅ <span class="en">Louis approved pack</span><span class="zh">Louis已批标准包</span> · Wiserise_Offer_Letter_HR_Manager_Regional_People_Coach.pdf · 1 page</div>
+
+    <div class="sec-title" style="margin-top:0"><span class="en">Main job (1 line)</span><span class="zh">主责（1句）</span></div>
+    <div class="box box-gate"><strong><span class="en">Coach managers across 5 stores</span><span class="zh">带5店经理</span></strong> · Full-time W-2 · Hire → train → schedule audit → exit</div>
+
+    <div class="quick-grid">
+      <div>
+        <div class="sec-title" style="margin-top:0"><span class="en">PAY & TERMS (locked)</span><span class="zh">工资与条件（已锁）</span></div>
+        <table>
+          <tr><th><span class="en">Item</span><span class="zh">项</span></th><th><span class="en">Value</span><span class="zh">值</span></th></tr>
+          <tr><td>Salary</td><td><strong>$5,167 / mo · $62,000 / yr</strong> · W-2</td></tr>
+          <tr><td>KPI</td><td>up to <strong>+$1,550 / mo · $18,600 / yr</strong> (6 × $258)</td></tr>
+          <tr><td>Max</td><td><strong>$6,717 / mo · $80,600 / yr</strong></td></tr>
+          <tr><td>Hours</td><td>9:00 AM – 7:00 PM · ~50 hrs / wk</td></tr>
+          <tr><td>Travel</td><td><span class="en">Company pays car rental + gas + hotel</span><span class="zh">公司付租车+油+酒店</span></td></tr>
+          <tr><td>Receipts</td><td><span class="en">Turn in within 7 days</span><span class="zh">7天内交发票</span></td></tr>
+          <tr><td>Time off</td><td><span class="en">Company holidays + [X] PTO days / yr</span><span class="zh">公司假 + [X]天年假</span></td></tr>
+          <tr><td>Base</td><td>Wilmington · multi-store travel</td></tr>
+          <tr><td>Reports</td><td>Owner (Louis)</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="sec-title" style="margin-top:0"><span class="en">Weekly schedule (locked)</span><span class="zh">周行程（已锁）</span></div>
+        <table>
+          <tr><th>Day</th><th>Hours</th><th>Plan</th></tr>
+          <tr><td>Mon</td><td>9–7</td><td><span class="en">Home — plan + payroll check</span><span class="zh">家 — 计划+查工资</span></td></tr>
+          <tr><td>Tue</td><td>9–7</td><td><span class="en">Wilmington — coach + papers</span><span class="zh">Wilmington — 教练+纸质</span></td></tr>
+          <tr><td>Wed</td><td>9–7</td><td><span class="en">Greenville — hotel night</span><span class="zh">Greenville — 住酒店</span></td></tr>
+          <tr><td>Thu</td><td>9–7</td><td><span class="en">Fayetteville — drive home</span><span class="zh">Fayetteville — 开回家</span></td></tr>
+          <tr><td>Fri</td><td>9–7</td><td><span class="en">Home — summary + owner 1:1</span><span class="zh">家 — 总结+老板1:1</span></td></tr>
+        </table>
+        <div class="box box-rule" style="margin-top:8px"><span class="en">Drive time counts. Wilmington & Greenville swap weeks. Fayetteville every week.</span><span class="zh">开车算工时。Wilmington/Greenville隔周换。Fayetteville每周。</span></div>
+      </div>
+    </div>
+
+    <div class="sec-title"><span class="en">KPI pay — 6 metrics (equal split)</span><span class="zh">KPI工资 — 6项均分</span></div>
+    <div class="box box-auto"><span class="en">Rules: show proof → Owner scores yes/no each month → hit pays next check · miss = $0. Proof only: Slack, Brain, 7shifts, audit card.</span><span class="zh">规矩：交证明 → 老板每月打是/否 → 过了下期工资付 · 不过=0。证明只认Slack/Brain/7shifts/audit卡。</span></div>
+    <table>
+      <tr><th>#</th><th>KPI</th><th>Goal</th><th>Proof</th><th>Pay mo/yr</th></tr>
+      <tr><td>1</td><td>Manager 1:1 done</td><td>100% on cadence · 5 stores</td><td>Slack</td><td>$258 / $3,100</td></tr>
+      <tr><td>2</td><td>Staffing gaps closed</td><td>Key must-fill job ≤14 days</td><td>Staffing</td><td>$258 / $3,100</td></tr>
+      <tr><td>3</td><td>Onboarding → Active</td><td>Checklist + train ≥90% ≤10 days</td><td>Brain</td><td>$258 / $3,100</td></tr>
+      <tr><td>4</td><td>Schedule on time</td><td>5/5 stores / week</td><td>7shifts</td><td>$258 / $3,100</td></tr>
+      <tr><td>5</td><td>New hire 60-day stay</td><td>≥75% still active</td><td>Brain</td><td>$258 / $3,100</td></tr>
+      <tr><td>6</td><td>Monthly people audit</td><td>5/5 stores / month</td><td>Audit card</td><td>$258 / $3,100</td></tr>
+    </table>
+
+    <div class="quick-grid">
+      <div>
+        <div class="sec-title"><span class="en">What you do (max 3)</span><span class="zh">你做什么（最多3）</span></div>
+        <div class="box box-gate">1. <span class="en">Coach managers across 5 stores</span><span class="zh">带5店经理</span></div>
+        <div class="box box-gate">2. <span class="en">Hire / onboard / exit store team</span><span class="zh">招/入职/离店员</span></div>
+        <div class="box box-gate">3. <span class="en">Hit the 6 KPIs with proof</span><span class="zh">用证明打满6项KPI</span></div>
+      </div>
+      <div>
+        <div class="sec-title"><span class="en">What you don't (max 3)</span><span class="zh">你不做什么（最多3）</span></div>
+        <div class="box box-red">1. <span class="en">Hire or fire managers (owner yes)</span><span class="zh">招/开除经理（要老板yes）</span></div>
+        <div class="box box-red">2. <span class="en">Approve payroll or touch the bank</span><span class="zh">批工资或碰银行</span></div>
+        <div class="box box-red">3. <span class="en">Keep side spreadsheets</span><span class="zh">另开表格账</span></div>
+      </div>
+    </div>
+
+    <div class="sec-title"><span class="en">Acceptance (on letter)</span><span class="zh">接受条款（信上）</span></div>
+    <div class="box box-rule"><span class="en">Sign and return by [sign-by]. Start after I-9 / work papers. NC at-will (either side can end it). Candidate signature only.</span><span class="zh">在截止日期前签字交回。I-9通过后开工。北卡任意解雇。只候选人签字。</span></div>
+
+    <div class="sec-title"><span class="en">Still fill before send</span><span class="zh">发出前还要填</span></div>
+    <table>
+      <tr><th>#</th><th><span class="en">Blank</span><span class="zh">空位</span></th></tr>
+      <tr><td>1</td><td>DATE</td></tr>
+      <tr><td>2</td><td>Sally last name (or new candidate full name)</td></tr>
+      <tr><td>3</td><td>PTO days [X]</td></tr>
+      <tr><td>4</td><td>Sign-by date</td></tr>
+      <tr><td>5</td><td>Start date</td></tr>
+    </table>
+
+    <div class="sec-title"><span class="en">Files</span><span class="zh">文件</span></div>
+    <div class="box box-auto"><span class="en">Canonical PDF:</span><span class="zh">标准PDF：</span> <code>Desktop/Wiserise_Offer_Letter_HR_Manager_Regional_People_Coach.pdf</code><br>
+    <span class="en">HTML source:</span><span class="zh">HTML源：</span> <code>Desktop/Wiserise_Offer_Sally_Coach_v1.1.html</code></div>
+
+    <div class="sec-title"><span class="en">Slack line (reuse pack)</span><span class="zh">Slack句（套用此包）</span></div>
+    <div class="box box-auto"><code>make offer letter — [Full Name] — HR Manager / Regional People Coach — $62k + 30% KPI — start [date] — PTO [N] — use locked HR pack</code></div>
+  </div>
+
+  <!-- GM pack locked Louis 2026-07-23: $5750 mo + $1500 KPI -->
+  <div class="card offer-role" id="offer-gm" style="display:none">
+    <div class="card-title">🏪 GM · General Manager · <span class="zh">店长</span></div>
+    <div class="page-sub" style="margin-bottom:10px"><span class="en">Canonical pack locked · $5,750/mo salary + $1,500/mo KPI.</span><span class="zh">标准包已锁 · 月薪$5,750 + KPI$1,500。</span></div>
+    <div class="verified">✅ <span class="en">Louis approved + deployed</span><span class="zh">Louis已批并上线</span> · Wiserise_Offer_Letter_GM.pdf · FOH cadence · 55 hrs · 5 KPIs · 2026-07-23</div>
+
+    <div class="sec-title" style="margin-top:0"><span class="en">Main job (1 line)</span><span class="zh">主责（1句）</span></div>
+    <div class="box box-gate"><strong><span class="en">Own one store’s daily run</span><span class="zh">对一家店日常负责</span></strong> · staff · sales · guest · food · clean books</div>
+
+    <div class="quick-grid">
+      <div>
+        <div class="sec-title" style="margin-top:0"><span class="en">PAY & TERMS (locked)</span><span class="zh">工资与条件（已锁）</span></div>
+        <table>
+          <tr><th><span class="en">Item</span><span class="zh">项</span></th><th><span class="en">Value</span><span class="zh">值</span></th></tr>
+          <tr><td>Salary</td><td><strong>$5,750 / mo · $69,000 / yr</strong> · W-2</td></tr>
+          <tr><td>KPI</td><td>up to <strong>+$1,500 / mo · $18,000 / yr</strong> (5 × $300)</td></tr>
+          <tr><td>Max</td><td><strong>$7,250 / mo · $87,000 / yr</strong></td></tr>
+          <tr><td>Hours</td><td><strong>5 days × 11 hrs = 55 hrs / wk</strong></td></tr>
+          <tr><td>Time off</td><td>company holidays + [X] PTO</td></tr>
+        </table>
+        <div class="sec-title"><span class="en">KPI goals (5 locked)</span><span class="zh">KPI目标（5项已锁）</span></div>
+        <table>
+          <tr><th>#</th><th>KPI</th><th>Goal</th><th>Pay mo/yr</th></tr>
+          <tr><td>1</td><td>Growth rate</td><td>≥0.4% same-store sales vs prior month</td><td>$300 / $3,600</td></tr>
+          <tr><td>2</td><td>Net profit</td><td>18%–25% P&amp;L net after all store costs</td><td>$300 / $3,600</td></tr>
+          <tr><td>3</td><td>Google review</td><td>≥4.5 stars live average</td><td>$300 / $3,600</td></tr>
+          <tr><td>4</td><td>Staff retention</td><td>&gt;80% · 12-month rolling</td><td>$300 / $3,600</td></tr>
+          <tr><td>5</td><td>Store audit</td><td>&gt;80% company audit score</td><td>$300 / $3,600</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="sec-title" style="margin-top:0"><span class="en">Weekly schedule (locked · 55 hrs)</span><span class="zh">周行程（已锁 · 55小时）</span></div>
+        <table>
+          <tr><th>Day</th><th>Hours</th><th>Hrs</th><th>Plan</th></tr>
+          <tr><td>Mon</td><td>10–9</td><td>11</td><td><span class="en">Admin · schedule · labor · payroll · hire pipeline</span><span class="zh">行政·排班·人工·工资查·招人</span></td></tr>
+          <tr><td>Tue</td><td>10–9</td><td>11</td><td><span class="en">FOH floor · train · guest · manager 1:1</span><span class="zh">前厅带班·培训·客人·经理1:1</span></td></tr>
+          <tr><td>Wed</td><td>OFF</td><td>0</td><td><span class="en">OFF</span><span class="zh">休</span></td></tr>
+          <tr><td>Thu</td><td>10–9</td><td>11</td><td><span class="en">FOH floor · onboard/train check · Google reply</span><span class="zh">前厅·入职培训检查·回Google评论</span></td></tr>
+          <tr><td>Fri</td><td>11–10</td><td>11</td><td><span class="en">Busy night · closeout · cash/fraud · KPI proof</span><span class="zh">忙夜·打烊·现金/作弊·KPI证明</span></td></tr>
+          <tr><td>Sat</td><td>11–10</td><td>11</td><td><span class="en">Peak day · full FOH · guest + staffing</span><span class="zh">高峰日·全前厅·客人+人手</span></td></tr>
+          <tr><td>Sun</td><td>OFF</td><td>0</td><td><span class="en">OFF</span><span class="zh">休</span></td></tr>
+        </table>
+        <div class="box box-rule" style="margin-top:8px"><strong>Total = 55 hrs</strong> (5 × 11). <span class="en">Work Mon·Tue·Thu·Fri·Sat. Wed OFF · Sun OFF. GM = FOH + people + money. Not BOH line — Kitchen Mgr owns kitchen.</span><span class="zh">上班：一·二·四·五·六。休：三+日。GM=前厅+人+钱。不做后厨线 — 厨房经理管BOH。</span></div>
+      </div>
+    </div>
+
+    <div class="quick-grid">
+      <div>
+        <div class="sec-title"><span class="en">What you do (max 3)</span><span class="zh">你做什么（最多3）</span></div>
+        <div class="box box-gate">1. <span class="en">Lead FOH + people (hire · train · schedule · 1:1)</span><span class="zh">管前厅+人（招·训·排班·1:1）</span></div>
+        <div class="box box-gate">2. <span class="en">Run guest quality + busy nights</span><span class="zh">客人品质+忙夜</span></div>
+        <div class="box box-gate">3. <span class="en">Hit the 5 KPIs with proof every month</span><span class="zh">每月用证明打满5项KPI</span></div>
+      </div>
+      <div>
+        <div class="sec-title"><span class="en">What you don't (max 3)</span><span class="zh">你不做什么（最多3）</span></div>
+        <div class="box box-red">1. <span class="en">Work the BOH line (Kitchen Mgr owns kitchen)</span><span class="zh">做后厨线（厨房经理管）</span></div>
+        <div class="box box-red">2. <span class="en">Fire alone or skip the discipline ladder</span><span class="zh">自己开除或跳纪律阶梯</span></div>
+        <div class="box box-red">3. <span class="en">Touch company bank or run other stores</span><span class="zh">碰公司银行或管别店</span></div>
+      </div>
+    </div>
+
+    <div class="sec-title"><span class="en">Files</span><span class="zh">文件</span></div>
+    <div class="box box-auto">PDF: <code>Desktop/Wiserise_Offer_Letter_GM.pdf</code><br>HTML: <code>Desktop/Wiserise_Offer_Letter_GM.html</code></div>
+
+    <div class="sec-title"><span class="en">Slack line (reuse pack)</span><span class="zh">生成用Slack句</span></div>
+    <div class="box box-auto"><code>make offer letter — [Full Name] — GM — store [0000X] — $5,750/mo + $1,500 KPI — start [date] — use locked GM pack</code></div>
+  </div>
+
+  <div class="sec-title"><span class="en">All roles (roadmap)</span><span class="zh">全部职位（路线图）</span></div>
+  <div class="pareto" style="margin-bottom:10px"><strong><span class="en">Now live in this tab:</span><span class="zh">本页已上线：</span></strong> HR Manager · GM &nbsp;|&nbsp; <strong><span class="en">Next packs:</span><span class="zh">下一批：</span></strong> AGM · Floor Manager · Kitchen Manager · Server · Host · Cook · Prep · Dish · Busser · Bartender · Sushi Chef · Server Lead · Kitchen Lead · Manager in Training · Restaurant Trainer / Coach</div>
+  <table>
+    <tr><th><span class="en">Group</span><span class="zh">组</span></th><th><span class="en">Roles</span><span class="zh">职位</span></th><th><span class="en">Pay source</span><span class="zh">工资来源</span></th><th><span class="en">Status</span><span class="zh">状态</span></th></tr>
+    <tr><td>HQ / People</td><td>HR Manager · Regional People Coach · Trainer</td><td><span class="en">Owner / salary + KPI</span><span class="zh">老板/年薪+KPI</span></td><td><span class="badge badge-green">HR Manager approved</span></td></tr>
+    <tr><td>Store leadership</td><td>GM · AGM · Floor · Kitchen Mgr</td><td>REF-002 + owner KPI</td><td><span class="badge badge-green">GM approved $5750+$1500 · 5 KPI</span></td></tr>
+    <tr><td>FOH</td><td>Server · Host · Busser · Bartender · Server Lead</td><td>REF-002 hourly</td><td><span class="badge badge-gray">queued</span></td></tr>
+    <tr><td>BOH</td><td>Cook · Prep · Dish · Sushi · Kitchen Lead</td><td>REF-002 hourly</td><td><span class="badge badge-gray">queued</span></td></tr>
+  </table>
+
+  <div class="box box-rule"><strong><span class="en">Rules:</span><span class="zh">规矩：</span></strong> <span class="en">High-school English · 1 page · fill DATE/TO/start · only signature blank · Louis gate before send · no fake pay.</span><span class="zh">高中英语 · 1页 · 填日期/收件人/开工 · 只留签字空 · 发出前Louis门 · 不编工资。</span></div>
+
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>make offer letter — Name — GM — store 00003</code> · <code>pay band GM</code> · <code>pay band server</code></div>
 </div>
 
 <!-- Stage 2 Onboard -->
@@ -659,7 +865,7 @@ body.lang-both .en{display:inline}
 </div>
 
 </div>
-<div class="footer">Wiserise Hospitality Group · People Department Roadmap · New HR handbook · EN/中文 · Verified 2026-07-21 · Hermes Artifact</div>
+<div class="footer">Wiserise Hospitality Group · People Department Roadmap · Offer Letter tab · HR Manager + GM Louis-approved + deployed · EN/中文 · 2026-07-23 · Hermes Artifact</div>
 
 <script>
 function showPage(id,btn){
@@ -668,6 +874,22 @@ function showPage(id,btn){
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+}
+function showOfferRole(role,btn){
+  document.querySelectorAll('.offer-role').forEach(el=>el.style.display='none');
+  const map={hr:'offer-hr',gm:'offer-gm'};
+  const el=document.getElementById(map[role]||'offer-hr');
+  if(el) el.style.display='block';
+  document.querySelectorAll('#offer-btn-hr,#offer-btn-gm').forEach(b=>{
+    b.classList.remove('flow-gate');
+    b.classList.add('flow-step');
+    b.style.opacity='.85';
+  });
+  if(btn){
+    btn.classList.remove('flow-step');
+    btn.classList.add('flow-gate');
+    btn.style.opacity='1';
+  }
 }
 function goTab(i){document.querySelectorAll('.tab')[i].click()}
 function setLang(lang,btn){
