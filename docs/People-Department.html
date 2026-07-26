@@ -96,26 +96,7 @@ tr:hover td{background:#f9fafb}
 body.lang-zh .zh{display:inline}
 body.lang-zh .en{display:none}
 
-/* EN+中文 simultaneous */
-body.lang-both .en{display:inline}
-body.lang-both .zh{display:inline}
-body.lang-both td span.en::after,
-body.lang-both th span.en::after,
-body.lang-both .stage-name span.en::after,
-body.lang-both .card-title span.en::after,
-body.lang-both li span.en::after,
-body.lang-both .page-h span.en::after,
-body.lang-both .page-sub span.en::after,
-body.lang-both .sec-title span.en::after,
-body.lang-both .pareto span.en::after,
-body.lang-both .box span.en::after,
-body.lang-both .ask-brain span.en::after,
-body.lang-both p span.en::after,
-body.lang-both .g-what span.en::after,
-body.lang-both .stage-work span.en::after,
-body.lang-both .q-label span.en::after,
-body.lang-both ol span.en::after{content:" / ";color:#9ca3af}
-body.lang-both .zh{color:#374151}
+
 
 .en{display:inline}
 @media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab{display:none}.lang-toggle{display:none}}
@@ -123,18 +104,17 @@ body.lang-both .zh{color:#374151}
 @media(max-width:500px){.stage-grid{grid-template-columns:1fr}.gate-row{grid-template-columns:1fr}}
 </style>
 </head>
-<body class="lang-both">
+<body class="lang-en">
 
 <div class="topbar">
   <div class="topbar-row">
     <div>
       <h1>👥 People Department · <span class="zh">人事部</span></h1>
-      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · Complete EN + 中文 · 2026-07-26</div>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · EN / 中文 · 2026-07-26</div>
     </div>
-    <div class="lang-toggle">
-      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+        <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
       <button class="lang-btn" onclick="setLang('zh',this)">中文</button>
-      <button class="lang-btn active" onclick="setLang('both',this)">EN+中文</button>
     </div>
   </div>
 </div>
@@ -1081,26 +1061,24 @@ function goPage(id){
   }
 }
 function setLang(lang,btn){
+  if(lang!=='en' && lang!=='zh') lang='en';
   document.body.className='lang-'+lang;
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
+  else {
+    document.querySelectorAll('.lang-btn').forEach(b=>{
+      const t=(b.textContent||'').trim();
+      b.classList.toggle('active', (lang==='en' && t==='EN') || (lang==='zh' && t==='中文'));
+    });
+  }
   try{ localStorage.setItem('people-lang', lang); }catch(e){}
 }
 try{
   const saved=localStorage.getItem('people-lang');
-  if(saved==='en'||saved==='zh'||saved==='both'){
-    document.body.className='lang-'+saved;
-    document.querySelectorAll('.lang-btn').forEach(b=>{
-      b.classList.toggle('active', (b.textContent||'').includes(saved==='en'?'EN':saved==='zh'?'中文':'EN+'));
-    });
+  if(saved==='zh' || saved==='en'){
+    setLang(saved, null);
   }
 }catch(e){}
-document.addEventListener('keydown',e=>{
-  const tabs=[...document.querySelectorAll('.tab')];
-  const i=tabs.indexOf(document.querySelector('.tab.active'));
-  if(e.key==='ArrowRight'&&i<tabs.length-1) tabs[i+1].click();
-  if(e.key==='ArrowLeft'&&i>0) tabs[i-1].click();
-});
 </script>
 </body>
 </html>
