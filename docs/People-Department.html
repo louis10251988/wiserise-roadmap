@@ -95,15 +95,13 @@ tr:hover td{background:#f9fafb}
 .zh{display:none}
 body.lang-zh .zh{display:inline}
 body.lang-zh .en{display:none}
-body.lang-both .zh{display:inline}
-body.lang-both .en{display:inline}
 .en{display:inline}
 @media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab{display:none}.lang-toggle{display:none}}
 @media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}.gate-row{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr}}
 @media(max-width:500px){.stage-grid{grid-template-columns:1fr}.gate-row{grid-template-columns:1fr}}
 </style>
 </head>
-<body class="lang-both">
+<body class="lang-en">
 
 <div class="topbar">
   <div class="topbar-row">
@@ -112,9 +110,8 @@ body.lang-both .en{display:inline}
       <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · Offer packs · first-principles pass 2026-07-26</div>
     </div>
     <div class="lang-toggle">
-      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
       <button class="lang-btn" onclick="setLang('zh',this)">中文</button>
-      <button class="lang-btn active" onclick="setLang('both',this)">EN+中文</button>
     </div>
   </div>
 </div>
