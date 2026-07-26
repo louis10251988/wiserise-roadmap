@@ -95,23 +95,46 @@ tr:hover td{background:#f9fafb}
 .zh{display:none}
 body.lang-zh .zh{display:inline}
 body.lang-zh .en{display:none}
+
+/* EN+中文 simultaneous */
+body.lang-both .en{display:inline}
+body.lang-both .zh{display:inline}
+body.lang-both td span.en::after,
+body.lang-both th span.en::after,
+body.lang-both .stage-name span.en::after,
+body.lang-both .card-title span.en::after,
+body.lang-both li span.en::after,
+body.lang-both .page-h span.en::after,
+body.lang-both .page-sub span.en::after,
+body.lang-both .sec-title span.en::after,
+body.lang-both .pareto span.en::after,
+body.lang-both .box span.en::after,
+body.lang-both .ask-brain span.en::after,
+body.lang-both p span.en::after,
+body.lang-both .g-what span.en::after,
+body.lang-both .stage-work span.en::after,
+body.lang-both .q-label span.en::after,
+body.lang-both ol span.en::after{content:" / ";color:#9ca3af}
+body.lang-both .zh{color:#374151}
+
 .en{display:inline}
 @media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab{display:none}.lang-toggle{display:none}}
 @media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}.gate-row{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr}}
 @media(max-width:500px){.stage-grid{grid-template-columns:1fr}.gate-row{grid-template-columns:1fr}}
 </style>
 </head>
-<body class="lang-en">
+<body class="lang-both">
 
 <div class="topbar">
   <div class="topbar-row">
     <div>
       <h1>👥 People Department · <span class="zh">人事部</span></h1>
-      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · Sally Day-1 · My KPIs + Stuck path 2026-07-26</div>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · Complete EN + 中文 · 2026-07-26</div>
     </div>
     <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
       <button class="lang-btn" onclick="setLang('zh',this)">中文</button>
+      <button class="lang-btn active" onclick="setLang('both',this)">EN+中文</button>
     </div>
   </div>
 </div>
@@ -143,7 +166,7 @@ body.lang-zh .en{display:none}
   <div class="page-sub"><span class="en">This artifact is your department roadmap. Read first. Then practice in Slack.</span><span class="zh">这份文档是部门路线图。先看。再去Slack练。</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
 
-  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">In 30 days you can run hire / onboard / discipline / exit without asking Louis every time — and you still never auto-fire or move money alone.</span><span class="zh">30天内你会独立跑招人/入职/纪律/离职 — 但钱和开除仍要人批。</span></div>
+  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">In 30 days you can run hire / onboard / discipline / exit without asking Louis every time — and you still never auto-fire or move money alone.</span><span class="zh">30天内你会独立跑招人 / 入职 / 纪律 / 离职 — 不用每次都问 Louis；但钱和开除仍要人批，不能自己自动做。</span></div>
 
   <div class="sec-title"><span class="en">Day 1 — Read only</span><span class="zh">第1天 — 只看</span></div>
   <table>
@@ -797,7 +820,7 @@ body.lang-zh .en{display:none}
     <tr><td>24</td><td><strong>⭐ <span class="en">HR/Louis approve</span><span class="zh">HR/Louis批</span></strong></td><td>HR + Louis</td><td>Slack ✅</td></tr>
     <tr><td>25</td><td><span class="en">Terminated + accounts removed</span><span class="zh">离职+删账号</span></td><td><span class="badge badge-blue">⚡ Auto</span></td><td><span class="en">Only after D3</span><span class="zh">只有D3之后</span></td></tr>
   </table>
-  <div class="box box-rule"><strong><span class="en">Final pay:</span><span class="zh">最后工资：</span></strong> <span class="en">HR + Gusto. No pocket cash. Weekend → Monday unless Louis/HR says off-cycle.</span><span class="zh">走HR+Gusto。不私下给现金。</span></div>
+  <div class="box box-rule"><strong><span class="en">Final pay:</span><span class="zh">最后工资：</span></strong> <span class="en">HR + Gusto. No pocket cash. Weekend → Monday unless Louis/HR says off-cycle.</span><span class="zh">走 HR + Gusto。不私下给现金。周末离职 → 周一发，除非 Louis/HR 批准加急。</span></div>
   <div class="box box-rule"><strong><span class="en">Floor staff fire:</span><span class="zh">开除服务员：</span></strong> Coach Sally · <strong><span class="en">Manager fire:</span><span class="zh">开除经理：</span></strong> Louis + Yumi</div>
   <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>can fire [name] 00003</code></div>
 </div>
@@ -1061,7 +1084,17 @@ function setLang(lang,btn){
   document.body.className='lang-'+lang;
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
+  try{ localStorage.setItem('people-lang', lang); }catch(e){}
 }
+try{
+  const saved=localStorage.getItem('people-lang');
+  if(saved==='en'||saved==='zh'||saved==='both'){
+    document.body.className='lang-'+saved;
+    document.querySelectorAll('.lang-btn').forEach(b=>{
+      b.classList.toggle('active', (b.textContent||'').includes(saved==='en'?'EN':saved==='zh'?'中文':'EN+'));
+    });
+  }
+}catch(e){}
 document.addEventListener('keydown',e=>{
   const tabs=[...document.querySelectorAll('.tab')];
   const i=tabs.indexOf(document.querySelector('.tab.active'));
