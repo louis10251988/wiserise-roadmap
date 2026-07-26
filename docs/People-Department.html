@@ -109,7 +109,7 @@ body.lang-both .en{display:inline}
   <div class="topbar-row">
     <div>
       <h1>👥 People Department · <span class="zh">人事部</span></h1>
-      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · Offer Letter packs approved</div>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · Offer packs · first-principles pass 2026-07-26</div>
     </div>
     <div class="lang-toggle">
       <button class="lang-btn" onclick="setLang('en',this)">EN</button>
@@ -242,8 +242,8 @@ body.lang-both .en{display:inline}
     <div class="stage-card" onclick="goTab(7)"><div class="stage-num">Stage 4</div><div class="stage-name"><span class="en">1:1 Training</span><span class="zh">一对一培训</span></div><div class="stage-work"><span class="en">Private 1:1 → paper → Slack photo</span><span class="zh">私下1:1 → 纸质表 → 拍照</span></div><div class="stage-meta"><span class="owner">GM</span></div></div>
     <div class="stage-card" onclick="goTab(8)"><div class="stage-num">Stage 5</div><div class="stage-name"><span class="en">Discipline</span><span class="zh">纪律</span></div><div class="stage-work"><span class="en">Coach → Warning → Probation → Fire</span><span class="zh">教 → 警告 → 察看 → 开除</span></div><div class="stage-meta"><span class="owner">GM → HR → Louis</span> <span class="badge badge-gate">⭐ D3</span></div></div>
     <div class="stage-card" onclick="goTab(9)"><div class="stage-num">Stage 6</div><div class="stage-name"><span class="en">Exit</span><span class="zh">离职</span></div><div class="stage-work"><span class="en">can-fire → HR yes → remove accounts</span><span class="zh">能开除吗 → HR批 → 删账号</span></div><div class="stage-meta"><span class="owner">HR + Louis</span> <span class="badge badge-gate">⭐ D3</span></div></div>
-    <div class="stage-card" onclick="goTab(10)"><div class="stage-num">Stage 7</div><div class="stage-name"><span class="en">Payroll</span><span class="zh">工资</span></div><div class="stage-work"><span class="en">7shifts hours → tip-out → Gusto</span><span class="zh">工时 → 小费 → Gusto发</span></div><div class="stage-meta"><span class="owner">Yumi · Louis</span> <span class="badge badge-gray">D4 pending</span></div></div>
-    <div class="stage-card" onclick="goTab(11)"><div class="stage-num">Stage 8</div><div class="stage-name"><span class="en">Compliance</span><span class="zh">合规</span></div><div class="stage-work"><span class="en">I-9 · OT · min wage · breaks</span><span class="zh">I-9 · OT · 最低工资 · 休息</span></div><div class="stage-meta"><span class="owner">Auto · HR</span></div></div>
+    <div class="stage-card" onclick="goTab(10)"><div class="stage-num">Stage 7</div><div class="stage-name"><span class="en">Payroll</span><span class="zh">工资</span></div><div class="stage-work"><span class="en">7shifts hours → tip-out → Gusto</span><span class="zh">工时 → 小费 → Gusto发</span></div><div class="stage-meta"><span class="owner">Yumi · Louis</span> <span class="badge badge-green">Gusto live</span></div></div>
+    <div class="stage-card" onclick="goTab(11)"><div class="stage-num">Stage 8</div><div class="stage-name"><span class="en">Compliance</span><span class="zh">合规</span></div><div class="stage-work"><span class="en">I-9 hard gate · meals/breaks SOP</span><span class="zh">I-9硬门 · 用餐/休息SOP</span></div><div class="stage-meta"><span class="owner">Auto · HR</span></div></div>
     <div class="stage-card" onclick="goTab(12)"><div class="stage-num">Stage 9</div><div class="stage-name"><span class="en">Incidents</span><span class="zh">事故</span></div><div class="stage-work"><span class="en">Slack report → Hermes routes → HR</span><span class="zh">Slack报 → Hermes转 → HR</span></div><div class="stage-meta"><span class="owner">GM → HR</span></div></div>
   </div>
   <div class="sec-title"><span class="en">4 Human Gates</span><span class="zh">4个人拍板</span></div>
@@ -376,7 +376,7 @@ body.lang-both .en{display:inline}
           <tr><td>Hours</td><td>9:00 AM – 7:00 PM · ~50 hrs / wk</td></tr>
           <tr><td>Travel</td><td><span class="en">Company pays car rental + gas + hotel</span><span class="zh">公司付租车+油+酒店</span></td></tr>
           <tr><td>Receipts</td><td><span class="en">Turn in within 7 days</span><span class="zh">7天内交发票</span></td></tr>
-          <tr><td>Time off</td><td><span class="en">Company holidays + [X] PTO days / yr</span><span class="zh">公司假 + [X]天年假</span></td></tr>
+          <tr><td>Time off</td><td><span class="en">Company holidays + <strong>10 PTO days / yr</strong></span><span class="zh">公司假 + <strong>10天年假/年</strong></span></td></tr>
           <tr><td>Base</td><td>Wilmington · multi-store travel</td></tr>
           <tr><td>Reports</td><td>Owner (Louis)</td></tr>
         </table>
@@ -428,19 +428,17 @@ body.lang-both .en{display:inline}
     <div class="sec-title"><span class="en">Still fill before send</span><span class="zh">发出前还要填</span></div>
     <table>
       <tr><th>#</th><th><span class="en">Blank</span><span class="zh">空位</span></th></tr>
-      <tr><td>1</td><td>DATE</td></tr>
-      <tr><td>2</td><td>Sally last name (or new candidate full name)</td></tr>
-      <tr><td>3</td><td>PTO days [X]</td></tr>
-      <tr><td>4</td><td>Sign-by date</td></tr>
-      <tr><td>5</td><td>Start date</td></tr>
+      <tr><td>1</td><td><span class="en">Candidate full name (last name if only first known)</span><span class="zh">候选人全名</span></td></tr>
+      <tr><td>2</td><td><span class="en">Sign-by date</span><span class="zh">签字截止日期</span></td></tr>
     </table>
+    <div class="box box-auto"><span class="en">DATE + start date auto-fill at build. PTO locked at 10 days/yr (company holidays extra).</span><span class="zh">日期+开工日构建时自动填。年假锁10天/年（公司假另算）。</span></div>
 
     <div class="sec-title"><span class="en">Files</span><span class="zh">文件</span></div>
     <div class="box box-auto"><span class="en">Canonical PDF:</span><span class="zh">标准PDF：</span> <code>Desktop/Wiserise_Offer_Letter_HR_Manager_Regional_People_Coach.pdf</code><br>
     <span class="en">HTML source:</span><span class="zh">HTML源：</span> <code>Desktop/Wiserise_Offer_Sally_Coach_v1.1.html</code></div>
 
     <div class="sec-title"><span class="en">Slack line (reuse pack)</span><span class="zh">Slack句（套用此包）</span></div>
-    <div class="box box-auto"><code>make offer letter — [Full Name] — HR Manager / Regional People Coach — $62k + 30% KPI — start [date] — PTO [N] — use locked HR pack</code></div>
+    <div class="box box-auto"><code>make offer letter — [Full Name] — HR Manager / Regional People Coach — $62k + 30% KPI — start [date] — use locked HR pack</code></div>
   </div>
 
   <!-- GM pack locked Louis 2026-07-23: $5750 mo + $1500 KPI -->
@@ -462,7 +460,7 @@ body.lang-both .en{display:inline}
           <tr><td>KPI</td><td>up to <strong>+$1,500 / mo · $18,000 / yr</strong> (5 × $300)</td></tr>
           <tr><td>Max</td><td><strong>$7,250 / mo · $87,000 / yr</strong></td></tr>
           <tr><td>Hours</td><td><strong>5 days × 11 hrs = 55 hrs / wk</strong></td></tr>
-          <tr><td>Time off</td><td>company holidays + [X] PTO</td></tr>
+          <tr><td>Time off</td><td>company holidays + <strong>10 PTO days / yr</strong></td></tr>
         </table>
         <div class="sec-title"><span class="en">KPI goals (5 locked)</span><span class="zh">KPI目标（5项已锁）</span></div>
         <table>
@@ -522,7 +520,7 @@ body.lang-both .en{display:inline}
     <tr><td>BOH</td><td>Cook · Prep · Dish · Sushi · Kitchen Lead</td><td>REF-002 hourly</td><td><span class="badge badge-gray">queued</span></td></tr>
   </table>
 
-  <div class="box box-rule"><strong><span class="en">Rules:</span><span class="zh">规矩：</span></strong> <span class="en">High-school English · 1 page · fill DATE/TO/start · only signature blank · Louis gate before send · no fake pay.</span><span class="zh">高中英语 · 1页 · 填日期/收件人/开工 · 只留签字空 · 发出前Louis门 · 不编工资。</span></div>
+  <div class="box box-rule"><strong><span class="en">Rules:</span><span class="zh">规矩：</span></strong> <span class="en">High-school English · 1 page · fill name + sign-by · DATE/start auto · only signature blank · Louis gate before send · no fake pay.</span><span class="zh">高中英语 · 1页 · 填姓名+签字截止 · 日期/开工自动 · 只留签字空 · 发出前Louis门 · 不编工资。</span></div>
 
   <div class="sec-title"><span class="en">GM offer send log</span><span class="zh">GM录用信发送记录</span></div>
   <table>
@@ -530,7 +528,7 @@ body.lang-both .en{display:inline}
     <tr><td>00001 Fayetteville</td><td>Steven Goode</td><td>Slack DM</td><td>✅ sent 2026-07-23</td><td>Jul 30, 2026</td></tr>
     <tr><td>00002 Masa Greenville</td><td>Taxx Galopo</td><td>Slack DM</td><td>✅ sent 2026-07-23</td><td>Jul 30, 2026</td></tr>
     <tr><td>00003 Wilmington</td><td>Levi Fioravanti</td><td>Slack DM</td><td>✅ sent 2026-07-23</td><td>Jul 30, 2026</td></tr>
-    <tr><td>00004 / 00005</td><td>—</td><td>—</td><td>⬜ no gm_slack_id</td><td>—</td></tr>
+    <tr><td>00004 / 00005</td><td>—</td><td>—</td><td>⬜ pending — no GM hired yet</td><td>—</td></tr>
   </table>
   <div class="box box-rule"><span class="en">Name sources: stores.gm_slack_id → Slack users.info · full name from workforce_employees when Slack missing last name (Levi Fioravanti).</span><span class="zh">姓名来源：stores.gm_slack_id→Slack · 全名优先workforce_employees（Levi Fioravanti）。</span></div>
 
@@ -690,7 +688,7 @@ body.lang-both .en{display:inline}
 <!-- Stage 7 Payroll -->
 <div class="page" id="s7">
   <div class="page-h">7. <span class="en">Payroll</span><span class="zh">工资</span></div>
-  <div class="page-sub"><span class="en">Hours → tip-out → pay</span><span class="zh">工时 → 小费 → 发钱</span> · Yumi · Louis · <span class="badge badge-gray">D4 not built</span></div>
+  <div class="page-sub"><span class="en">Hours → tip-out → pay</span><span class="zh">工时 → 小费 → 发钱</span> · Yumi · Louis · <span class="badge badge-green">Gusto pays</span> · <span class="badge badge-gray">auto-pay robot ❌</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · REF-002 pay bands</div>
   <div class="pareto"><strong>80/20:</strong> <span class="en">Wrong hours cause most pay fights. 7shifts is truth.</span><span class="zh">工资纠纷多半是工时错。7shifts是真相。</span></div>
   <div class="sec-title"><span class="en">Today’s path</span><span class="zh">现在怎么做</span></div>
@@ -700,7 +698,7 @@ body.lang-both .en{display:inline}
     <tr><td><span class="en">Tip-out forms</span><span class="zh">小费表</span></td><td><span class="badge badge-green">✅</span></td><td>PAY-F-002 / PAY-F-004 · photo Slack</td></tr>
     <tr><td><span class="en">Pay bands</span><span class="zh">工资标准</span></td><td><span class="badge badge-green">✅</span></td><td>REF-002</td></tr>
     <tr><td><span class="en">Pay</span><span class="zh">发工资</span></td><td><span class="badge badge-green">✅</span></td><td>Gusto · Yumi/Finance</td></tr>
-    <tr><td><span class="en">Auto payroll robot</span><span class="zh">自动发工资</span></td><td><span class="badge badge-gray">❌</span></td><td><span class="en">Not built — never promise auto-pay</span><span class="zh">没建 — 别承诺自动发</span></td></tr>
+    <tr><td><span class="en">Auto payroll robot</span><span class="zh">自动发工资</span></td><td><span class="badge badge-gray">❌ Not built</span></td><td><span class="en">Gusto pays today (Yumi/Finance). Never promise auto-pay robot.</span><span class="zh">今天Gusto发（Yumi/财务）。别承诺自动发工资机器人。</span></td></tr>
   </table>
   <div class="box box-rule"><strong><span class="en">Training rate:</span><span class="zh">培训期：</span></strong> Staff $7.25/hr · Managers $15/hr · <span class="en">until training pass</span><span class="zh">直到培训过</span></div>
   <div class="sec-title"><span class="en">Pay bands (REF-002)</span><span class="zh">工资标准</span></div>
@@ -739,10 +737,10 @@ body.lang-both .en{display:inline}
   <table>
     <tr><th><span class="en">Item</span><span class="zh">项目</span></th><th><span class="en">Status</span><span class="zh">状态</span></th><th><span class="en">Rule</span><span class="zh">规矩</span></th></tr>
     <tr><td>I-9 / E-Verify</td><td><span class="badge badge-green">✅ Live</span></td><td><span class="en">No I-9 = no Active</span><span class="zh">没I-9不能上岗</span></td></tr>
-    <tr><td>OT / min wage / breaks</td><td><span class="badge badge-gray">❌ Not built</span></td><td><span class="en">Future labor guard</span><span class="zh">以后劳工监控</span></td></tr>
     <tr><td>PAY-001 meals/breaks</td><td><span class="badge badge-green">✅ SOP</span></td><td><span class="en">Follow policy</span><span class="zh">按政策</span></td></tr>
   </table>
   <div class="box box-red"><strong>⛔ Legal:</strong> <span class="en">Hermes never overrides I-9. Gusto owns it.</span><span class="zh">Hermes不能越过I-9。Gusto管。</span></div>
+  <div class="box box-auto"><strong><span class="en">Coming later (not a workflow yet):</span><span class="zh">以后再做（还不是流程）：</span></strong> <span class="en">OT / min wage / breaks labor guard — idea only, do not run as if built.</span><span class="zh">加班/最低工资/休息监控 — 只是想法，别当已建。</span></div>
   <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>what's the SOP for I-9</code> · <code>stuck onboarding</code></div>
 </div>
 
@@ -760,6 +758,27 @@ body.lang-both .en{display:inline}
     <tr><td>35</td><td><span class="en">HR resolves</span><span class="zh">HR处理</span></td><td>HR</td><td><span class="en">Private, with facts</span><span class="zh">私下，用事实</span></td></tr>
   </table>
   <div class="box box-rule"><strong><span class="en">First reply shape:</span><span class="zh">第一次回复：</span></strong> <span class="en">1) write who/store/facts 2) private talk 3) if still bad → written warning</span><span class="zh">1)写谁/店/事实 2)私下谈 3)还不行→书面警告</span></div>
+
+  <div class="sec-title"><span class="en">Examples (what counts)</span><span class="zh">例子（算什么事故）</span></div>
+  <table>
+    <tr><th><span class="en">Example</span><span class="zh">例子</span></th><th><span class="en">What to write</span><span class="zh">写什么</span></th><th><span class="en">Who handles</span><span class="zh">谁处理</span></th></tr>
+    <tr>
+      <td><strong><span class="en">Injury / cut / fall</span><span class="zh">受伤/割伤/摔倒</span></strong></td>
+      <td><span class="en">Who · store · what happened · when · first aid done?</span><span class="zh">谁·店·发生了什么·时间·急救做了吗</span></td>
+      <td>GM → HR · <span class="en">Louis if hospital</span><span class="zh">送医院→Louis</span></td>
+    </tr>
+    <tr>
+      <td><strong><span class="en">Theft / missing cash</span><span class="zh">偷窃/少钱</span></strong></td>
+      <td><span class="en">Who · store · $ amount · when found · cameras?</span><span class="zh">谁·店·金额·何时发现·有监控吗</span></td>
+      <td>GM → HR + Louis · <span class="en">can skip ladder</span><span class="zh">可跳阶梯</span></td>
+    </tr>
+    <tr>
+      <td><strong><span class="en">Guest fight / staff fight</span><span class="zh">客人打架/员工打架</span></strong></td>
+      <td><span class="en">Who · store · what said/done · police called?</span><span class="zh">谁·店·说了/做了什么·报警察了吗</span></td>
+      <td>GM → HR · <span class="en">Louis if police / injury</span><span class="zh">警察/伤人→Louis</span></td>
+    </tr>
+  </table>
+  <div class="box box-auto"><span class="en">Not an incident:</span><span class="zh">不算事故：</span> <span class="en">normal guest complaint → GM handles on floor. Late once → 1:1 / ladder, not Incidents tab.</span><span class="zh">普通客诉→GM现场处理。迟到一次→1:1/纪律阶梯，不进事故页。</span></div>
   <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <span class="en">report who + store + facts in Slack</span><span class="zh">在Slack写清 谁+店+事实</span></div>
 </div>
 
