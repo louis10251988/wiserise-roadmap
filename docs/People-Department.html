@@ -121,7 +121,7 @@ body.lang-zh .en{display:none}
   <div class="topbar-row">
     <div>
       <h1>👥 People Department · <span class="zh">人事部</span></h1>
-      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · EN / 中文 · 2026-07-27</div>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · EN / 中文 · Elon cut 2026-07-27d</div>
     </div>
         <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
@@ -131,230 +131,22 @@ body.lang-zh .en{display:none}
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="showPage('ops',this)">💬 Slack OPS</button>
-  <button class="tab" onclick="showPage('sallyos',this)">🧭 Sally Daily <span class="zh">每天OS</span></button>
-  <button class="tab" onclick="showPage('hrstart',this)">🎓 HR Start <span class="zh">入职</span></button>
-  <button class="tab" onclick="showPage('mykpi',this)">🎯 My KPIs <span class="zh">我的KPI</span></button>
-  <button class="tab" onclick="showPage('p0',this)">📈 Store KPI <span class="zh">店KPI</span></button>
-  <button class="tab" onclick="showPage('p1',this)">📊 Overview <span class="zh">总表</span></button>
+  <button class="tab active" onclick="showPage('sallyos',this)">🧭 Sally Daily <span class="zh">每天</span></button>
+  <button class="tab" onclick="showPage('ops',this)">💬 Slack OPS</button>
+  <button class="tab" onclick="showPage('p1',this)">📊 Map <span class="zh">总图</span></button>
   <button class="tab" onclick="showPage('s1',this)">1 Hire <span class="zh">招人</span></button>
   <button class="tab" onclick="showPage('s2',this)">2 Onboard <span class="zh">入职</span></button>
   <button class="tab" onclick="showPage('s3',this)">3 Schedule <span class="zh">排班</span></button>
-  <button class="tab" onclick="showPage('coachfire',this)">4 Coach→Fire <span class="zh">教导→开除</span></button>
-  <button class="tab" onclick="showPage('s7',this)">5 Payroll <span class="zh">工资</span></button>
-  <button class="tab" onclick="showPage('s9',this)">6 Incidents <span class="zh">事故</span></button>
-  <button class="tab" onclick="showPage('offer',this)">📝 Offer Letter <span class="zh">录用信</span></button>
+  <button class="tab" onclick="showPage('coachfire',this)">4 Coach→Fire <span class="zh">教→开</span></button>
+  <button class="tab" onclick="showPage('s7',this)">5 Pay <span class="zh">工资</span></button>
+  <button class="tab" onclick="showPage('offer',this)">📝 Offer</button>
   <button class="tab" onclick="showPage('rules',this)">📋 Rules <span class="zh">规矩</span></button>
 </div>
 
 <div class="content">
 
-<!-- HR Start path for new HR manager -->
-<div class="page" id="hrstart">
-  <div class="page-h">🎓 <span class="en">New HR Manager Path</span><span class="zh">新HR经理入职路径</span></div>
-  <div class="page-sub"><span class="en">This artifact is your department roadmap. Read first. Then practice in Slack.</span><span class="zh">这份文档是部门路线图。先看。再去Slack练。</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · Louis</div>
-
-  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">In 30 days you can run hire / onboard / discipline / exit without asking Louis every time — and you still never auto-fire or move money alone.</span><span class="zh">30天内你会独立跑招人 / 入职 / 纪律 / 离职 — 不用每次都问 Louis；但钱和开除仍要人批，不能自己自动做。</span></div>
-
-  <div class="sec-title"><span class="en">Day 1 — 3 steps only</span><span class="zh">第1天 — 只做3步</span></div>
-  <table>
-    <tr><th style="width:8%">#</th><th style="width:52%"><span class="en">Do</span><span class="zh">做什么</span></th><th style="width:40%"><span class="en">Where</span><span class="zh">在哪</span></th></tr>
-    <tr><td>1</td><td><span class="en">Open Sally Daily OS — today loop + 6 KPIs + never list</span><span class="zh">打开 Sally Daily OS — 今天回路+6 KPI+禁止清单</span></td><td>🧭 Sally Daily OS</td></tr>
-    <tr><td>2</td><td><span class="en">Open Slack OPS — learn where to type + copy-paste lines</span><span class="zh">打开Slack OPS — 学在哪打字+复制话术</span></td><td>💬 Slack OPS</td></tr>
-    <tr><td>3</td><td><span class="en">Join #06-people → type <code>people KPI</code> → see live data</span><span class="zh">进#06-people → 打 <code>people KPI</code> → 看实时数据</span></td><td>Slack</td></tr>
-  </table>
-  <div class="box box-gate"><strong><span class="en">No Slack invite yet?</span><span class="zh">还没收到Slack邀请？</span></strong> <span class="en">Text Louis — he sends the Slack invite. You need Slack before anything else.</span><span class="zh">发短信给Louis — 他发Slack邀请。没有Slack什么都做不了。</span></div>
-  <div class="box box-auto"><strong><span class="en">Read Week 1 + Month 1 below — that's your roadmap. Overview tab = your map of the whole HR lifecycle (read Week 1).</span><span class="zh">下面看第1周+第1月 — 那是你的路线图。总表页=整个HR流程地图（第1周看）。</span></strong></div>
-
-  <div class="sec-title"><span class="en">Stuck? — your ladder</span><span class="zh">卡住了？— 你的阶梯</span></div>
-  <div class="pareto"><strong><span class="en">1 line:</span><span class="zh">1句：</span></strong> <span class="en">Do not guess. Ask in order. Stop when you get a clear next step.</span><span class="zh">别猜。按顺序问。拿到明确下一步就停。</span></div>
-  <div class="flow">
-    <span class="flow-step">1 🧠 Ask Brain</span><span class="flow-arrow">→</span>
-    <span class="flow-step">2 💬 #06-people / Sally</span><span class="flow-arrow">→</span>
-    <span class="flow-gate">3 ⭐ Louis</span>
-  </div>
-  <table>
-    <tr><th style="width:12%">#</th><th style="width:28%"><span class="en">Step</span><span class="zh">步骤</span></th><th style="width:30%"><span class="en">Where</span><span class="zh">在哪</span></th><th style="width:30%"><span class="en">Say</span><span class="zh">怎么说</span></th></tr>
-    <tr><td>1</td><td><span class="en">Ask Brain first</span><span class="zh">先问Brain</span></td><td>Slack</td><td><code>what is my job</code> · <code>hiring status</code></td></tr>
-    <tr><td>2</td><td><span class="en">Still stuck → People channel</span><span class="zh">还卡 → 人事频道</span></td><td>#06-people · Sally</td><td><span class="en">facts only: who / store / what / what you tried</span><span class="zh">只写事实：谁/店/什么/你试过什么</span></td></tr>
-    <tr><td>3</td><td><span class="en">Money · fire · big rule</span><span class="zh">钱·开除·大规矩</span></td><td>Louis DM / #02-executive</td><td><span class="en">Need decision + 3 facts</span><span class="zh">要决定 + 3个事实</span></td></tr>
-  </table>
-  <div class="box box-red"><strong><span class="en">Never when stuck:</span><span class="zh">卡住时永不：</span></strong> <span class="en">guess a yes · invent approval · pay cash · fire alone · open side spreadsheet</span><span class="zh">猜 yes · 编批准 · 私下给现金 · 自己开除 · 另开表格</span></div>
-
-  <div class="sec-title"><span class="en">Week 1 — Watch + ask</span><span class="zh">第1周 — 看+问</span></div>
-  <table>
-    <tr><th style="width:25%"><span class="en">Learn</span><span class="zh">学什么</span></th><th style="width:40%"><span class="en">Read tab</span><span class="zh">看哪个页</span></th><th style="width:35%"><span class="en">Ask Brain</span><span class="zh">问Brain</span></th></tr>
-    <tr><td><span class="en">Hire flow</span><span class="zh">招人流程</span></td><td>1 Hire</td><td><code>hiring status</code></td></tr>
-    <tr><td><span class="en">Onboard + 5-day plan</span><span class="zh">入职+5天培训</span></td><td>2 Onboard</td><td><code>stuck onboarding</code></td></tr>
-    <tr><td><span class="en">Roster / leave</span><span class="zh">人数/请假</span></td><td>3 Schedule</td><td><code>roster 00003</code></td></tr>
-    <tr><td><span class="en">1:1 + discipline ladder</span><span class="zh">1:1+纪律阶梯</span></td><td>4 1:1 · 5 Discipline</td><td><code>ladder history [name]</code></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Month 1 — Do with coach</span><span class="zh">第1月 — 跟教练做</span></div>
-  <table>
-    <tr><th style="width:40%"><span class="en">You should finish</span><span class="zh">你要完成</span></th><th style="width:30%"><span class="en">With</span><span class="zh">跟谁</span></th><th style="width:30%"><span class="en">Pass means</span><span class="zh">过关标准</span></th></tr>
-    <tr><td><span class="en">1 full hire from request → hired</span><span class="zh">完整招1次：需求→录用</span></td><td>GM · Sally if stuck</td><td><span class="en">Thread clean + Brain updated</span><span class="zh">thread干净+Brain已更新</span></td></tr>
-    <tr><td><span class="en">1 onboarding to Active</span><span class="zh">带1人入职到上岗</span></td><td>GM</td><td>5 checks ✅</td></tr>
-    <tr><td><span class="en">1 discipline paper file</span><span class="zh">处理1次纪律纸质表</span></td><td>GM</td><td><span class="en">Photo in Slack → ladder</span><span class="zh">拍照进Slack→进ladder</span></td></tr>
-    <tr><td><span class="en">1 can-fire check (no fire alone)</span><span class="zh">查1次能开除吗（不自己开除）</span></td><td>Louis / Yumi</td><td><span class="en">Use can-fire before any yes</span><span class="zh">任何yes前先can-fire</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Who owns what</span><span class="zh">谁管什么</span></div>
-  <table>
-    <tr><th><span class="en">Item</span><span class="zh">事项</span></th><th><span class="en">HR Manager</span><span class="zh">HR经理</span></th><th><span class="en">Not alone</span><span class="zh">不能自己做</span></th></tr>
-    <tr><td><span class="en">Floor hire / coach / warning</span><span class="zh">服务员招/教/警告</span></td><td>✅ <span class="en">with GM/Coach</span><span class="zh">跟GM/Coach</span></td><td>—</td></tr>
-    <tr><td><span class="en">Manager hire / fire / pay change</span><span class="zh">经理招/开除/改工资</span></td><td><span class="en">Prepare only</span><span class="zh">只准备</span></td><td>Louis / Yumi</td></tr>
-    <tr><td><span class="en">Bank / Gusto money out</span><span class="zh">银行/Gusto出钱</span></td><td>❌</td><td>Louis / Yumi</td></tr>
-  </table>
-
-  <div class="box box-red"><strong><span class="en">Never:</span><span class="zh">永不：</span></strong> <span class="en">auto-fire · pay cash out of pocket · skip ladder · invent approval</span><span class="zh">自动开除 · 私下给现金 · 跳纪律阶梯 · 编造批准</span></div>
-
-  <div class="ask-brain">
-    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
-    <code>what is my job</code> ·
-    <code>people KPI</code> ·
-    <code>hiring status</code> ·
-    <code>stuck onboarding</code>
-  </div>
-</div>
 
 
-<!-- My KPIs — Sally scorecard (first-principles front door) -->
-<div class="page" id="mykpi">
-  <div class="page-h">🎯 <span class="en">My KPIs · Weekly Plan</span><span class="zh">我的KPI · 周计划</span></div>
-  <div class="page-sub"><span class="en">Sally · Regional People Coach · Your scorecard is here — not inside Offer Letter.</span><span class="zh">Sally · 区域人事教练 · 你的计分卡在这里 — 不在录用信里。</span></div>
-  <div class="verified">✅ <span class="en">First-principles fix</span><span class="zh">第一性原理修复</span> · 2026-07-26 · Louis</div>
-
-  <div class="pareto"><strong><span class="en">1 line:</span><span class="zh">1句：</span></strong> <span class="en">Your job = coach 5 stores + hit 6 KPIs with proof. Money / fire / manager hire = Louis yes.</span><span class="zh">你的工作=带5店+用证明打满6项KPI。钱/开除/招经理=Louis yes。</span></div>
-
-  <div class="sec-title"><span class="en">Main job (1 line)</span><span class="zh">主责（1句）</span></div>
-  <div class="box box-gate"><strong><span class="en">Coach managers across 5 stores</span><span class="zh">带5店经理</span></strong> · Full-time W-2 · Hire → train → schedule audit → exit</div>
-
-  <div class="sec-title"><span class="en">Pay (locked)</span><span class="zh">工资（已锁）</span></div>
-  <table>
-    <tr><th><span class="en">Item</span><span class="zh">项</span></th><th><span class="en">Value</span><span class="zh">值</span></th></tr>
-    <tr><td>Salary</td><td><strong>$5,167 / mo · $62,000 / yr</strong> · W-2</td></tr>
-    <tr><td>KPI</td><td>up to <strong>+$1,550 / mo · $18,600 / yr</strong> (6 × $258)</td></tr>
-    <tr><td>Max</td><td><strong>$6,717 / mo · $80,600 / yr</strong></td></tr>
-    <tr><td>Hours</td><td>9:00 AM – 7:00 PM · ~50 hrs / wk</td></tr>
-    <tr><td>Travel</td><td><span class="en">Company pays car rental + gas + hotel · receipts in 7 days</span><span class="zh">公司付租车+油+酒店 · 7天内交发票</span></td></tr>
-    <tr><td>PTO</td><td><span class="en">Company holidays + <strong>10 PTO days / yr</strong></span><span class="zh">公司假 + <strong>10天年假/年</strong></span></td></tr>
-    <tr><td>Base</td><td>Wilmington · multi-store travel</td></tr>
-    <tr><td>Reports</td><td>Owner (Louis)</td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Weekly schedule (locked)</span><span class="zh">周行程（已锁）</span></div>
-  <div class="flow">
-    <span class="flow-step">Mon Home</span><span class="flow-arrow">→</span>
-    <span class="flow-step">Tue Wilmington</span><span class="flow-arrow">→</span>
-    <span class="flow-step">Wed Greenville</span><span class="flow-arrow">→</span>
-    <span class="flow-step">Thu Fayetteville</span><span class="flow-arrow">→</span>
-    <span class="flow-gate">Fri Home + Louis</span>
-  </div>
-  <table>
-    <tr><th>Day</th><th>Hours</th><th><span class="en">Plan</span><span class="zh">计划</span></th><th><span class="en">Do this</span><span class="zh">做什么</span></th></tr>
-    <tr><td><strong>Mon</strong></td><td>9–7</td><td><span class="en">Home — plan + payroll check</span><span class="zh">家 — 计划+查工资</span></td><td><code>people KPI</code> · <code>stuck onboarding</code> · <code>hiring status</code></td></tr>
-    <tr><td><strong>Tue</strong></td><td>9–7</td><td><span class="en">Wilmington — coach + papers</span><span class="zh">Wilmington — 教练+纸质</span></td><td><span class="en">1:1 managers · ladder photos · roster check</span><span class="zh">经理1:1 · 纪律拍照 · 查花名册</span></td></tr>
-    <tr><td><strong>Wed</strong></td><td>9–7</td><td><span class="en">Greenville — hotel night</span><span class="zh">Greenville — 住酒店</span></td><td><span class="en">Coach GM/AGM · onboard stuck · schedule audit</span><span class="zh">带GM/AGM · 催入职 · 查排班</span></td></tr>
-    <tr><td><strong>Thu</strong></td><td>9–7</td><td><span class="en">Fayetteville — drive home</span><span class="zh">Fayetteville — 开回家</span></td><td><span class="en">Same store visit loop · close gaps</span><span class="zh">同样店访循环 · 关缺口</span></td></tr>
-    <tr><td><strong>Fri</strong></td><td>9–7</td><td><span class="en">Home — summary + owner 1:1</span><span class="zh">家 — 总结+老板1:1</span></td><td><span class="en">KPI proof pack → Louis</span><span class="zh">KPI证明包 → Louis</span></td></tr>
-  </table>
-  <div class="box box-rule"><span class="en">Drive time counts. Wilmington &amp; Greenville swap weeks. Fayetteville every week.</span><span class="zh">开车算工时。Wilmington/Greenville隔周换。Fayetteville每周。</span></div>
-
-  <div class="sec-title"><span class="en">Store map (name → number)</span><span class="zh">店名对照表（名字→编号）</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">Store name</span><span class="zh">店名</span></th><th><span class="en">Brand</span><span class="zh">品牌</span></th><th><span class="en">Slack channel</span><span class="zh">Slack频道</span></th><th><span class="en">Type in Slack</span><span class="zh">Slack怎么打</span></th></tr>
-    <tr><td>00001</td><td>Fayetteville</td><td>Gangnam</td><td>s001-gangnam-fay</td><td><code>roster 00001</code></td></tr>
-    <tr><td>00002</td><td>Greenville</td><td>Masa</td><td>s002-masa-greenville</td><td><code>roster 00002</code></td></tr>
-    <tr><td>00003</td><td>Wilmington</td><td>Gangnam</td><td><span class="en">no channel — use #02-executive</span><span class="zh">无频道 — 用#02-executive</span></td><td><code>roster 00003</code></td></tr>
-    <tr><td>00004</td><td>TBD</td><td>—</td><td>—</td><td><code>roster 00004</code></td></tr>
-    <tr><td>00005</td><td>TBD</td><td>—</td><td>—</td><td><code>roster 00005</code></td></tr>
-  </table>
-  <div class="box box-rule"><strong><span class="en">Both number and city work.</span><span class="zh">编号和城市名都能用。</span></strong> <span class="en"><code>staffing 00003</code> ✅ · <code>staffing Wilmington</code> ✅ · <code>staffing Gangnam Wilmington</code> ✅ — use whichever is easier.</span><span class="zh">哪个顺手用哪个。</span></div>
-
-  <div class="sec-title"><span class="en">Your 6 KPIs (equal split · $258 each)</span><span class="zh">你的6项KPI（均分 · 各$258）</span></div>
-  <div class="box box-auto"><span class="en">Rules: show proof → Owner scores yes/no each month → hit pays next check · miss = $0. Proof only: Slack, Brain, 7shifts, audit card.</span><span class="zh">规矩：交证明 → 老板每月打是/否 → 过了下期工资付 · 不过=0。证明只认Slack/Brain/7shifts/audit卡。</span></div>
-  <table>
-    <tr><th>#</th><th>KPI</th><th><span class="en">Goal</span><span class="zh">目标</span></th><th>Proof</th><th>Pay mo/yr</th><th><span class="en">Ask</span><span class="zh">问</span></th></tr>
-    <tr><td>1</td><td>Manager 1:1 done</td><td>100% on cadence · 5 stores</td><td>Slack</td><td>$258 / $3,100</td><td><code>ladder history [name]</code></td></tr>
-    <tr><td>2</td><td>Staffing gaps closed</td><td>Key must-fill job ≤14 days</td><td>Staffing</td><td>$258 / $3,100</td><td><code>staffing 00003</code></td></tr>
-    <tr><td>3</td><td>Onboarding → Active</td><td>Checklist + train ≥90% ≤10 days</td><td>Brain</td><td>$258 / $3,100</td><td><code>stuck onboarding</code></td></tr>
-    <tr><td>4</td><td>Schedule on time</td><td>5/5 stores / week</td><td>7shifts</td><td>$258 / $3,100</td><td><code>roster 00003</code></td></tr>
-    <tr><td>5</td><td>New hire 60-day stay</td><td>≥75% still active</td><td>Brain</td><td>$258 / $3,100</td><td><code>people KPI</code></td></tr>
-    <tr><td>6</td><td>Monthly people audit</td><td>5/5 stores / month</td><td>Audit card</td><td>$258 / $3,100</td><td><span class="en">photo card → #06-people</span><span class="zh">拍照卡→#06-people</span></td></tr>
-  </table>
-
-  <div class="quick-grid">
-    <div>
-      <div class="sec-title"><span class="en">What you do (max 3)</span><span class="zh">你做什么（最多3）</span></div>
-      <div class="box box-gate">1. <span class="en">Coach managers across 5 stores</span><span class="zh">带5店经理</span></div>
-      <div class="box box-gate">2. <span class="en">Hire / onboard / exit store team</span><span class="zh">招/入职/离店员</span></div>
-      <div class="box box-gate">3. <span class="en">Hit the 6 KPIs with proof</span><span class="zh">用证明打满6项KPI</span></div>
-    </div>
-    <div>
-      <div class="sec-title"><span class="en">What you don't (max 3)</span><span class="zh">你不做什么（最多3）</span></div>
-      <div class="box box-red">1. <span class="en">Hire or fire managers (owner yes)</span><span class="zh">招/开除经理（要老板yes）</span></div>
-      <div class="box box-red">2. <span class="en">Approve payroll or touch the bank</span><span class="zh">批工资或碰银行</span></div>
-      <div class="box box-red">3. <span class="en">Keep side spreadsheets</span><span class="zh">另开表格账</span></div>
-    </div>
-  </div>
-
-  <div class="sec-title"><span class="en">Friday proof pack (copy)</span><span class="zh">周五证明包（复制）</span></div>
-  <div class="card">
-    <div class="stage-work" style="margin:0;line-height:1.8">
-      <strong><span class="en">Send Louis:</span><span class="zh">发给Louis：</span></strong><br>
-      1) <span class="en">1:1 done this week</span><span class="zh">本周做完的1:1</span> — store + name<br>
-      2) <span class="en">Open staffing gaps &gt;14 days</span><span class="zh">超过14天的人手缺口</span> — or none<br>
-      3) <span class="en">Stuck onboarding list</span><span class="zh">卡住入职名单</span><br>
-      4) <span class="en">Schedule late stores</span><span class="zh">排班晚的店</span> — or 5/5 on time<br>
-      5) <span class="en">New hires under 60 days + still active?</span><span class="zh">60天内新人+还在岗吗</span><br>
-      6) <span class="en">Audit card photos this month</span><span class="zh">本月audit卡照片</span>
-    </div>
-  </div>
-
-  <div class="sec-title"><span class="en">Stuck? (same ladder)</span><span class="zh">卡住了？（同一阶梯）</span></div>
-  <div class="flow">
-    <span class="flow-step">1 🧠 Brain</span><span class="flow-arrow">→</span>
-    <span class="flow-step">2 #06-people / Sally</span><span class="flow-arrow">→</span>
-    <span class="flow-gate">3 ⭐ Louis</span>
-  </div>
-  <div class="box box-red"><strong><span class="en">Never:</span><span class="zh">永不：</span></strong> <span class="en">auto-fire · pay cash · skip ladder · invent approval · side spreadsheet</span><span class="zh">自动开除 · 私下现金 · 跳阶梯 · 编批准 · 另开表格</span></div>
-
-  <div class="ask-brain">
-    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
-    <code>what is my job</code> ·
-    <code>people KPI</code> ·
-    <code>hiring status</code> ·
-    <code>stuck onboarding</code> ·
-    <code>staffing 00003</code>
-  </div>
-</div>
-
-<!-- KPI -->
-<div class="page" id="p0">
-  <div class="verified">✅ <span class="en">Live data daily</span><span class="zh">数据每天刷新</span> · 7AM cron · Sheet</div>
-  <div class="page-h">📈 <span class="en">Store KPI Dashboard</span><span class="zh">店KPI看板</span></div>
-  <div class="page-sub"><span class="en">Company headcount by store — not your personal scorecard. Your scorecard = 🎯 My KPIs.</span><span class="zh">公司按店人数 — 不是你个人计分卡。你的计分卡=🎯 My KPIs。</span></div>
-  <div class="pareto"><strong><span class="en">Live store KPI is in Google Sheet — refreshed daily from Brain.</span><span class="zh">实时店KPI在Google Sheet — 每天从Brain刷新。</span></strong></div>
-  <a class="kpi-link" href="https://docs.google.com/spreadsheets/d/1o_IaNDbwvUbXLTTJusjMzqYBzvA1PaI0AUC0pauE0zc/edit" target="_blank">
-    <div class="kl-icon">📊</div>
-    <div class="kl-text">
-      <div class="kl-title"><span class="en">People KPI Dashboard (Google Sheet)</span><span class="zh">人事KPI看板（Google Sheet）</span></div>
-      <div class="kl-sub"><span class="en">Click to open · Daily 7AM refresh · Active / Recruiting / Hired / Coaching per store</span><span class="zh">点击打开 · 每天7AM刷新 · 每店在职/招人/录用/教导</span></div>
-    </div>
-    <div class="kl-arrow">→</div>
-  </a>
-  <div class="sec-title"><span class="en">Or check in Slack</span><span class="zh">或在Slack查</span></div>
-  <table>
-    <tr><th style="width:40%"><span class="en">Want</span><span class="zh">想知道</span></th><th style="width:60%"><span class="en">Say</span><span class="zh">怎么说</span></th></tr>
-    <tr><td><span class="en">Full KPI</span><span class="zh">全部KPI</span></td><td>"people KPI"</td></tr>
-    <tr><td><span class="en">One store</span><span class="zh">某店</span></td><td>"roster 00003"</td></tr>
-    <tr><td><span class="en">Stuck people</span><span class="zh">谁卡了</span></td><td>"stuck onboarding"</td></tr>
-    <tr><td><span class="en">Hiring status</span><span class="zh">招人进度</span></td><td>"hiring status"</td></tr>
-  </table>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>people KPI</code> · <code>roster 00003</code> · <code>stuck onboarding</code></div>
-</div>
 
 <!-- Overview -->
 <div class="page" id="p1">
@@ -395,7 +187,14 @@ body.lang-zh .en{display:none}
   </div>
 
 
+
+  <div class="box box-auto"><strong><span class="en">Live store headcount:</span><span class="zh">实时店人数：</span></strong>
+    <a href="https://docs.google.com/spreadsheets/d/1o_IaNDbwvUbXLTTJusjMzqYBzvA1PaI0AUC0pauE0zc/edit" target="_blank" rel="noopener">Sheet</a>
+    · Slack <code>people KPI</code> · 7AM auto
+  </div>
+
 </div>
+
 
 <!-- Stage 1 Hire -->
 <div class="page" id="s1">
@@ -473,6 +272,8 @@ body.lang-zh .en{display:none}
 
   <!-- HR Manager pack = locked from Sally Coach offer letter v1.1 -->
   <div class="card offer-role" id="offer-hr">
+  <div class="box box-gate"><span class="en"><strong>Coach daily OS + 6 KPIs live in</strong> 🧭 Sally Daily → Score. This Offer tab = letter template + send path only.</span><span class="zh"><strong>教练每天OS+6 KPI在</strong> 🧭 Sally Daily → 得分。本 Offer 页=信模板+发送路径。</span></div>
+
     <div class="card-title">🛡️ HR Manager · Regional People Coach · <span class="zh">人事经理</span></div>
     <div class="page-sub" style="margin-bottom:10px"><span class="en">Canonical pack locked from attached offer letter (Sally · v1.1). Letter title on PDF = Regional People Coach.</span><span class="zh">标准包已按附件录用信锁定（Sally · v1.1）。信上职位名 = Regional People Coach。</span></div>
     <div class="verified">✅ <span class="en">Louis approved pack</span><span class="zh">Louis已批标准包</span> · Wiserise_Offer_Letter_HR_Manager_Regional_People_Coach.pdf · 1 page</div>
@@ -782,6 +583,17 @@ body.lang-zh .en{display:none}
     <tr><td>"can fire [name] 00003"</td><td><span class="en">Ready to fire?</span><span class="zh">能开除吗</span></td></tr>
   </table>
   <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>ladder history [name] 00003</code> · <code>can fire [name] 00003</code></div>
+
+  <div class="sec-title"><span class="en">Incidents (short)</span><span class="zh">事故（短）</span></div>
+  <div class="pareto"><span class="en"><strong>80/20:</strong> Write facts first. No public fight.</span><span class="zh"><strong>80/20：</strong>先写事实。别公开吵。</span></div>
+  <table>
+    <tr><th>#</th><th><span class="en">Do</span><span class="zh">做</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
+    <tr><td>1</td><td><span class="en">Slack: who + store + what + when</span><span class="zh">Slack：谁+店+什么+何时</span></td><td>GM</td></tr>
+    <tr><td>2</td><td><span class="en">Route</span><span class="zh">转发</span></td><td>Bot → HR / Louis if P0</td></tr>
+    <tr><td>3</td><td><span class="en">Private fix with facts</span><span class="zh">私下用事实处理</span></td><td>Sally / Louis</td></tr>
+  </table>
+  <div class="box box-rule"><span class="en"><strong>Always report:</strong> injury / theft / fight / hospital / police. <strong>Not incident:</strong> normal guest complain → GM; late once → 1:1.</span><span class="zh"><strong>必报：</strong>受伤/偷/打架/医院/警察。<strong>不算：</strong>普通客诉→GM；迟到一次→1:1。</span></div>
+
 </div>
 
 
@@ -827,46 +639,10 @@ body.lang-zh .en{display:none}
   <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>pay band [role]</code> · <code>review [name] 00003</code></div>
 </div>
 
-<!-- Stage 8 Compliance -->
-<div class="page" id="s8">
-  <div class="page-h"><span class="en">Compliance (merged into Onboard)</span><span class="zh">合规（已合并到入职页）</span></div>
-  <div class="page-sub"><span class="en">Legal + labor rules</span><span class="zh">法律+劳工规矩</span> · Auto · HR</div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · I-9 hard gate</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">I-9 is the hard gate. Everything else follows.</span><span class="zh">I-9是硬门。其他跟着走。</span></div>
-  <div class="sec-title"><span class="en">What matters now</span><span class="zh">现在重要的</span></div>
-  <table>
-    <tr><th><span class="en">Item</span><span class="zh">项目</span></th><th><span class="en">Status</span><span class="zh">状态</span></th><th><span class="en">Rule</span><span class="zh">规矩</span></th></tr>
-    <tr><td>I-9 / E-Verify</td><td><span class="badge badge-green">✅ Live</span></td><td><span class="en">No I-9 = no Active</span><span class="zh">没I-9不能上岗</span></td></tr>
-    <tr><td>PAY-001 meals/breaks</td><td><span class="badge badge-green">✅ SOP</span></td><td><span class="en">Follow policy</span><span class="zh">按政策</span></td></tr>
-  </table>
-  <div class="box box-red"><strong>⛔ Legal:</strong> <span class="en">Hermes never overrides I-9. Gusto owns it.</span><span class="zh">Hermes不能越过I-9。Gusto管。</span></div>
-  <div class="box box-auto"><strong><span class="en">Coming later (not a workflow yet):</span><span class="zh">以后再做（还不是流程）：</span></strong> <span class="en">OT / min wage / breaks labor guard — idea only, do not run as if built.</span><span class="zh">加班/最低工资/休息监控 — 只是想法，别当已建。</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>what's the SOP for I-9</code> · <code>stuck onboarding</code></div>
-</div>
 
-<!-- Stage 9 Incidents -->
-<div class="page" id="s9">
-  <div class="page-h">6. <span class="en">Incidents</span><span class="zh">事故</span></div>
-  <div class="page-sub"><span class="en">Report → route → resolve</span><span class="zh">报告 → 转发 → 处理</span> · GM → HR</div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Write facts first. Don’t argue in public channel.</span><span class="zh">先写事实。别在公开频道吵。</span></div>
-  <div class="sec-title"><span class="en">Steps</span><span class="zh">步骤</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">How</span><span class="zh">怎么做</span></th></tr>
-    <tr><td>33</td><td><span class="en">Report in Slack</span><span class="zh">Slack报告</span></td><td>GM</td><td><span class="en">Who + store + what happened</span><span class="zh">谁+店+发生了什么</span></td></tr>
-    <tr><td>34</td><td><span class="en">Hermes routes</span><span class="zh">Hermes转发</span></td><td><span class="badge badge-blue">⚡ Auto</span></td><td>HR / Louis if P0</td></tr>
-    <tr><td>35</td><td><span class="en">HR resolves</span><span class="zh">HR处理</span></td><td>HR</td><td><span class="en">Private, with facts</span><span class="zh">私下，用事实</span></td></tr>
-  </table>
-  <div class="box box-rule"><strong><span class="en">First reply shape:</span><span class="zh">第一次回复：</span></strong> <span class="en">1) write who/store/facts 2) private talk 3) if still bad → written warning</span><span class="zh">1)写谁/店/事实 2)私下谈 3)还不行→书面警告</span></div>
-
-  <div class="sec-title"><span class="en">What counts as an incident</span><span class="zh">什么算事故</span></div>
-  <div class="box box-red"><strong><span class="en">Injury / theft / fight:</span><span class="zh">受伤/偷窃/打架：</span></strong> <span class="en">Always report. Write who + store + what + when. GM → HR. Louis if hospital / police / theft.</span><span class="zh">一定要报。写谁+店+什么+时间。GM→HR。送医院/警察/偷窃→Louis。</span></div>
-  <div class="box box-auto"><span class="en">Not an incident:</span><span class="zh">不算事故：</span> <span class="en">normal guest complaint → GM handles. Late once → 1:1 / ladder.</span><span class="zh">普通客诉→GM处理。迟到一次→1:1/纪律阶梯。</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <span class="en">report who + store + facts in Slack</span><span class="zh">在Slack写清 谁+店+事实</span></div>
-</div>
 
 <!-- Slack OPS / World Brain — simple -->
-<div class="page active" id="ops">
+<div class="page" id="ops">
   <div class="page-h">💬 <span class="en">How to Work in Slack</span><span class="zh">在Slack怎么干活</span></div>
   <div class="page-sub"><span class="en">Simple only</span><span class="zh">只讲简单的</span></div>
   <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-21 · new HR first read</div>
@@ -884,7 +660,7 @@ body.lang-zh .en{display:none}
     <span class="flow-gate">3 ⭐ Louis</span>
   </div>
   <div class="box box-rule"><span class="en">Facts only: who + store + what happened + what you already tried. Money/fire/big rule skips to Louis.</span><span class="zh">只写事实：谁+店+发生了什么+你试过什么。钱/开除/大规矩直接找Louis。</span></div>
-  <div class="box box-gate"><strong><span class="en">Your scorecard:</span><span class="zh">你的计分卡：</span></strong> <span class="en">open</span><span class="zh">打开</span> 🎯 My KPIs</div>
+  <div class="box box-gate"><strong><span class="en">Your scorecard:</span><span class="zh">你的计分卡：</span></strong> <span class="en">open</span><span class="zh">打开</span> 🧭 Sally Daily</div>
 
   <div class="sec-title"><span class="en">3 pieces</span><span class="zh">3个东西</span></div>
   <div class="stage-grid" style="grid-template-columns:repeat(3,1fr)">
@@ -961,7 +737,7 @@ body.lang-zh .en{display:none}
 <!-- Rules -->
 
 <!-- Sally Daily OS — full migrate (no iframe) -->
-<div class="page" id="sallyos">
+<div class="page active" id="sallyos">
   <div class="page-h">🧭 <span class="en">Sally Daily OS</span><span class="zh">Sally 每天操作系统</span></div>
   <div class="page-sub"><span class="en">Regional People Coach · full daily system inside this roadmap · Elon v3</span><span class="zh">区域人事教练 · 完整每天系统在本路线图里 · Elon v3</span></div>
   <div class="verified">✅ <span class="en">Migrated in-page</span><span class="zh">已迁入本页</span> · 2026-07-27 · Louis</div>
@@ -974,7 +750,8 @@ body.lang-zh .en{display:none}
   <div class="subtabs" role="tablist">
     <button type="button" class="subtab on" onclick="showSallySub('sally-today',this)"><span class="en">1 · Today</span><span class="zh">1 · 今天</span></button>
     <button type="button" class="subtab" onclick="showSallySub('sally-score',this)"><span class="en">2 · Score</span><span class="zh">2 · 得分</span></button>
-    <button type="button" class="subtab" onclick="showSallySub('sally-rules',this)"><span class="en">3 · Rules</span><span class="zh">3 · 规矩</span></button>
+    <button type="button" class="subtab" onclick="showSallySub('sally-path',this)"><span class="en">3 · Path 30d</span><span class="zh">3 · 30天</span></button>
+    <button type="button" class="subtab" onclick="showSallySub('sally-rules',this)"><span class="en">4 · Rules</span><span class="zh">4 · 规矩</span></button>
   </div>
 
   <!-- SUB: TODAY -->
@@ -1081,7 +858,54 @@ Stay % · Audits N/5
       </tr>
     </table>
 
-    <div class="box box-auto"><span class="en">Same scorecard also lives in tab <strong>🎯 My KPIs</strong> — numbers/detail there; daily loop here.</span><span class="zh">计分卡也在 <strong>🎯 My KPIs</strong> 页 — 那边看细项；每天回路在本页。</span></div>
+    
+    <div class="sec-title"><span class="en">Store map</span><span class="zh">店名对照</span></div>
+    <table>
+      <tr><th>#</th><th><span class="en">Name</span><span class="zh">店名</span></th><th><span class="en">Brand</span><span class="zh">品牌</span></th><th><span class="en">Slack say</span><span class="zh">Slack打</span></th></tr>
+      <tr><td>00001</td><td>Fayetteville</td><td>Gangnam</td><td><code>roster 00001</code></td></tr>
+      <tr><td>00002</td><td>Greenville</td><td>Masa</td><td><code>roster 00002</code></td></tr>
+      <tr><td>00003</td><td>Wilmington</td><td>Gangnam</td><td><code>roster 00003</code></td></tr>
+      <tr><td>00004</td><td><span class="en">soon</span><span class="zh">待定</span></td><td>—</td><td><code>roster 00004</code></td></tr>
+      <tr><td>00005</td><td><span class="en">soon</span><span class="zh">待定</span></td><td>—</td><td><code>roster 00005</code></td></tr>
+    </table>
+    <div class="box box-auto"><strong><span class="en">Company headcount sheet (not your personal KPI):</span><span class="zh">公司人数表（不是你个人KPI）：</span></strong>
+      <a href="https://docs.google.com/spreadsheets/d/1o_IaNDbwvUbXLTTJusjMzqYBzvA1PaI0AUC0pauE0zc/edit" target="_blank" rel="noopener">People KPI Dashboard</a>
+      · <span class="en">7AM refresh · or Slack</span><span class="zh">每天7AM刷新 · 或Slack</span>
+      <code>people KPI</code>
+    </div>
+    <div class="box box-rule"><span class="en">PTO: company holidays + 10 days/yr · Travel: rental + gas + hotel, receipts in 7 days</span><span class="zh">年假：公司假+10天/年 · 差旅：租车+油+酒店，7天内交发票</span></div>
+
+    <div class="box box-gate"><span class="en"><strong>This Score sub-tab = your only personal scorecard.</strong> Offer PDF is pay contract, not the daily OS.</span><span class="zh"><strong>本「得分」子页=你唯一个人计分卡。</strong>录用信PDF是合同，不是每天OS。</span></div>
+  </div>
+
+
+  <!-- SUB: PATH 30d -->
+  <div class="subpane" id="sally-path">
+    <div class="sec-title"><span class="en">🚀 First 30 days</span><span class="zh">🚀 前30天</span></div>
+    <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong>
+      <span class="en">Run hire / onboard / discipline / exit without asking Louis every time — still never fire or move money alone.</span>
+      <span class="zh">能独立跑招人/入职/纪律/离职 — 仍不自己开除或动钱。</span>
+    </div>
+
+    <div class="sec-title"><span class="en">Week 1 — watch + ask</span><span class="zh">第1周 — 看+问</span></div>
+    <table>
+      <tr><th><span class="en">Learn</span><span class="zh">学</span></th><th><span class="en">Open tab</span><span class="zh">开页</span></th><th><span class="en">Say</span><span class="zh">打</span></th></tr>
+      <tr><td><span class="en">Hire flow</span><span class="zh">招人</span></td><td>1 Hire</td><td><code>hiring status</code></td></tr>
+      <tr><td><span class="en">Onboard</span><span class="zh">入职</span></td><td>2 Onboard</td><td><code>stuck onboarding</code></td></tr>
+      <tr><td><span class="en">Roster</span><span class="zh">人数</span></td><td>3 Schedule</td><td><code>roster 00003</code></td></tr>
+      <tr><td><span class="en">1:1 + ladder</span><span class="zh">1:1+纪律</span></td><td>4 Coach→Fire</td><td><code>ladder history [name]</code></td></tr>
+    </table>
+
+    <div class="sec-title"><span class="en">Month 1 — do with coach</span><span class="zh">第1月 — 跟教练做</span></div>
+    <table>
+      <tr><th><span class="en">Finish</span><span class="zh">完成</span></th><th><span class="en">With</span><span class="zh">跟谁</span></th><th><span class="en">Pass</span><span class="zh">过关</span></th></tr>
+      <tr><td><span class="en">1 full hire request→hired</span><span class="zh">完整招1次</span></td><td>GM</td><td><span class="en">Thread clean + Brain</span><span class="zh">thread干净+Brain</span></td></tr>
+      <tr><td><span class="en">1 person onboard→Active</span><span class="zh">1人入职到上岗</span></td><td>GM</td><td>5 checks ✅</td></tr>
+      <tr><td><span class="en">1 discipline paper</span><span class="zh">1次纪律表</span></td><td>GM</td><td><span class="en">Photo → Slack ladder</span><span class="zh">拍照进Slack</span></td></tr>
+      <tr><td><span class="en">1 can-fire check (no fire)</span><span class="zh">1次能开吗（不开）</span></td><td>Louis</td><td><span class="en">can-fire before any yes</span><span class="zh">yes前先can-fire</span></td></tr>
+    </table>
+
+    <div class="box box-rule"><span class="en">No Slack invite? Text Louis. No Slack = no work.</span><span class="zh">没Slack邀请？短信Louis。没Slack干不了活。</span></div>
   </div>
 
   <!-- SUB: RULES -->
@@ -1190,7 +1014,7 @@ Stay % · Audits N/5
 </div>
 
 </div>
-<div class="footer">Wiserise Hospitality Group · People Department Roadmap · Sally Daily full in-page + subtabs · 2026-07-27c · Hermes Artifact</div>
+<div class="footer">Wiserise Hospitality Group · People Department Roadmap · Elon 5-step · 14→10 tabs · Sally Daily default · 2026-07-27d · Hermes Artifact</div>
 
 <script>
 function showPage(id,btn){
@@ -1236,7 +1060,7 @@ function openHash(){
   if(main && document.getElementById(main) && document.getElementById(main).classList.contains('page')){
     showPage(main, null);
     if(main === 'sallyos'){
-      const map = {today:'sally-today', score:'sally-score', rules:'sally-rules', week:'sally-score', kpi:'sally-score'};
+      const map = {today:'sally-today', score:'sally-score', path:'sally-path', '30d':'sally-path', rules:'sally-rules', week:'sally-score', kpi:'sally-score'};
       const sid = map[(sub||'today').toLowerCase()] || 'sally-today';
       showSallySub(sid, null);
     }
