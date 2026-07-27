@@ -422,10 +422,10 @@ body.lang-zh .en{display:none}
 <!-- Offer Letter catalog -->
 <div class="page" id="offer">
   <div class="page-h">📝 <span class="en">Offer Letter</span><span class="zh">录用信</span></div>
-  <div class="page-sub"><span class="en">One letter per person. Same navy+gold brand. All roles over time — now: HR Manager + GM.</span><span class="zh">一人一封。同一套品牌模板。以后覆盖全部职位 — 现在先做：HR经理 + GM。</span></div>
+  <div class="page-sub"><span class="en">One letter per person. Same navy+gold brand. Send path = wiserise-letter E2E (draft → Louis yes → DocuSign). Packs live: Coach/HR + GM.</span><span class="zh">一人一封。同一品牌。发送路径 = wiserise-letter E2E（草稿→Louis批→DocuSign）。现有包：教练/HR + GM。</span></div>
   <div class="verified">✅ <span class="en">Louis approved + deployed + GM letters sent</span><span class="zh">Louis已批上线 · GM信已私发</span> · 2026-07-23 · HR pack live · GM DMs sent to 00001–00003</div>
 
-  <div class="pareto"><strong><span class="en">What it is:</span><span class="zh">是什么：</span></strong> <span class="en">A letter TO the candidate (job · pay · start · rules · sign). Not a form. Not an SOP. Louis approves before send.</span><span class="zh">写给候选人的信（职位·工资·开工·规矩·签字）。不是表格。不是SOP。Louis批了才能发。</span></div>
+  <div class="pareto"><strong><span class="en">What it is:</span><span class="zh">是什么：</span></strong> <span class="en">A letter TO the candidate (job · pay · start · rules · sign). Not a form. Not an SOP. <b>Gate:</b> DRAFT → SHOW Louis → WAIT → SEND (DocuSign). Never send before he sees the PDF.</span><span class="zh">写给候选人的信（职位·工资·开工·规矩·签字）。不是表格。不是SOP。<b>关卡：</b>草稿→给Louis看→等yes→再发DocuSign。没看过PDF不能发。</span></div>
 
   <div class="sec-title"><span class="en">6 parts only</span><span class="zh">只要6块</span></div>
   <div class="flow">
@@ -437,15 +437,20 @@ body.lang-zh .en{display:none}
     <span class="flow-gate">6 Sign</span>
   </div>
 
-  <div class="sec-title"><span class="en">How to make one</span><span class="zh">怎么做一封</span></div>
+  <div class="sec-title"><span class="en">How to make + send (E2E)</span><span class="zh">怎么做+发出（端到端）</span></div>
+  <div class="box box-auto" style="margin-bottom:12px"><span class="en"><b>Runbook:</b> wiserise-letter → <code>references/offer-letter-e2e-workflow.md</code>. Do not invent a second process.</span><span class="zh"><b>操作手册：</b>wiserise-letter → <code>references/offer-letter-e2e-workflow.md</code>。不要另造一套流程。</span></div>
   <table>
     <tr><th style="width:8%">#</th><th style="width:42%"><span class="en">Step</span><span class="zh">步骤</span></th><th style="width:50%"><span class="en">Detail</span><span class="zh">细节</span></th></tr>
-    <tr><td>1</td><td><span class="en">Pick role pack below</span><span class="zh">先选下面职位包</span></td><td><span class="en">HR Manager or GM (more roles later)</span><span class="zh">HR经理或GM（其它职位后补）</span></td></tr>
-    <tr><td>2</td><td><span class="en">Tell Hermes in Slack</span><span class="zh">在Slack告诉Hermes</span></td><td><code>make offer letter — [Name] — [Role] — store [#####] — start [date]</code></td></tr>
-    <tr><td>3</td><td><span class="en">Pay truth</span><span class="zh">工资真相</span></td><td><span class="en">Hourly = REF-002. Salary / HQ = Louis number. Always show mo + yr.</span><span class="zh">时薪看REF-002。年薪/总部=Louis定。一律写月+年。</span></td></tr>
-    <tr><td>4</td><td><span class="en">1-page PDF</span><span class="zh">1页PDF</span></td><td><span class="en">Navy + gold · max 3 do / 3 don't · candidate sign only</span><span class="zh">海军蓝+金 · 做/不做各最多3条 · 只候选人签字</span></td></tr>
-    <tr><td>5</td><td><span class="en">Louis says yes</span><span class="zh">Louis说yes</span></td><td><span class="en">Then send / save under People Letters</span><span class="zh">再发人 / 存到人事Letters</span></td></tr>
+    <tr><td>0</td><td><span class="en">Pick pack</span><span class="zh">选职位包</span></td><td><span class="en">Coach/HR · GM · hourly (REF-002)</span><span class="zh">教练/HR · GM · 时薪(REF-002)</span></td></tr>
+    <tr><td>1</td><td><span class="en">Slack Hermes (draft only)</span><span class="zh">Slack让Hermes出草稿</span></td><td><code>offer letter for [Name] [Role]</code> · start date if known</td></tr>
+    <tr><td>2</td><td><span class="en">⭐ Louis reviews PDF</span><span class="zh">⭐ Louis看PDF</span></td><td><span class="en">MEDIA draft · STOP — no DocuSign yet</span><span class="zh">先发草稿卡片 · 停 — 先不DocuSign</span></td></tr>
+    <tr><td>3</td><td><span class="en">Louis says send</span><span class="zh">Louis说send</span></td><td><code>send</code> / <code>approved</code> · or <code>fix …</code> · or <code>email only</code></td></tr>
+    <tr><td>4</td><td><span class="en">DocuSign (or hr@)</span><span class="zh">DocuSign（或hr@邮件）</span></td><td><span class="en">Hermes CDP send · envelope id · Brain offer_sent</span><span class="zh">Hermes发出 · 信封号 · Brain记录offer_sent</span></td></tr>
+    <tr><td>5</td><td><span class="en">When signed</span><span class="zh">签完后</span></td><td><code>offer signed [Name]</code> → Drive Letters · Brain offer_signed · hire Step 7 if needed</td></tr>
   </table>
+  <div class="box" style="margin-top:10px"><span class="en"><b>Copy-paste:</b></span><span class="zh"><b>可复制：</b></span><br>
+  <code>offer letter for Sally Park Regional People Coach</code><br>
+  <code>send</code> · <code>fix start to August 1</code> · <code>email only</code> · <code>offer signed Sally Park</code></div>
 
   <div class="sec-title"><span class="en">Role packs (live now)</span><span class="zh">职位包（现已上线）</span></div>
   <div class="flow" style="margin-bottom:14px">
@@ -536,7 +541,7 @@ body.lang-zh .en{display:none}
     <span class="en">HTML source:</span><span class="zh">HTML源：</span> <code>Desktop/Wiserise_Offer_Sally_Coach_v1.1.html</code></div>
 
     <div class="sec-title"><span class="en">Slack line (reuse pack)</span><span class="zh">Slack句（套用此包）</span></div>
-    <div class="box box-auto"><code>make offer letter — [Full Name] — HR Manager / Regional People Coach — $62k + 30% KPI — start [date] — use locked HR pack</code></div>
+    <div class="box box-auto"><code>offer letter for [Full Name] Regional People Coach</code><br><span class="en">Then after PDF:</span><span class="zh">看完PDF后：</span> <code>send</code> · <code>offer signed [Full Name]</code></div>
   </div>
 
   <!-- GM pack locked Louis 2026-07-23: $5750 mo + $1500 KPI -->
@@ -605,7 +610,7 @@ body.lang-zh .en{display:none}
     <div class="box box-auto">PDF: <code>Desktop/Wiserise_Offer_Letter_GM.pdf</code><br>HTML: <code>Desktop/Wiserise_Offer_Letter_GM.html</code></div>
 
     <div class="sec-title"><span class="en">Slack line (reuse pack)</span><span class="zh">生成用Slack句</span></div>
-    <div class="box box-auto"><code>make offer letter — [Full Name] — GM — store [0000X] — $5,750/mo + $1,500 KPI — start [date] — use locked GM pack</code></div>
+    <div class="box box-auto"><code>offer letter for [Full Name] GM store [0000X]  →  then: send  ·  offer signed [Full Name]</code></div>
   </div>
 
   <div class="sec-title"><span class="en">All roles (roadmap)</span><span class="zh">全部职位（路线图）</span></div>
@@ -630,7 +635,7 @@ body.lang-zh .en{display:none}
   </table>
   <div class="box box-rule"><span class="en">Name sources: stores.gm_slack_id → Slack users.info · full name from workforce_employees when Slack missing last name (Levi Fioravanti).</span><span class="zh">姓名来源：stores.gm_slack_id→Slack · 全名优先workforce_employees（Levi Fioravanti）。</span></div>
 
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>make offer letter — Name — GM — store 00003</code> · <code>pay band GM</code> · <code>pay band server</code></div>
+  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>offer letter for Name GM store 00003</code> · <code>pay band GM</code> · <code>pay band server</code></div>
 </div>
 
 <!-- Stage 2 Onboard -->
