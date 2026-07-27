@@ -113,6 +113,17 @@ body.lang-zh .en{display:none}
 .sally-ask{border:1.5px dashed #93c5fd;background:#f8fbff;border-radius:8px;padding:10px 12px;margin:8px 0 12px;font-size:12.5px;line-height:1.55}
 .sally-ask code{white-space:pre-wrap}
 
+/* Live Schedule System (GM embed) */
+.sched-store-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:0 0 10px}
+.sched-store-meta .links{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px}
+.sched-store-meta a{color:var(--blue);font-weight:700;text-decoration:none}
+.sched-store-meta a:hover{text-decoration:underline}
+.sched-frame-wrap{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+.sched-frame{width:100%;height:min(78vh,1100px);border:0;display:block;background:#f7f8fa}
+.sched-hint{font-size:12px;color:var(--muted);margin:0 0 10px;line-height:1.5}
+.sched-chiprow{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.sched-chiprow .badge{font-size:11px}
+
 
 /* ===== Mobile-friendly (Louis 2026-07-27) ===== */
 html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
@@ -221,7 +232,7 @@ code{ word-break:break-word; white-space:pre-wrap; font-size:11.5px; }
   <div class="topbar-row">
     <div>
       <h1>👥 People Department · <span class="zh">人事部</span></h1>
-      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · EN / 中文 · Elon cut 2026-07-27d</div>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · EN / 中文 · Elon cut 2026-07-27e</div>
     </div>
         <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
@@ -237,6 +248,7 @@ code{ word-break:break-word; white-space:pre-wrap; font-size:11.5px; }
   <button class="tab" onclick="showPage('s1',this)">1 Hire <span class="zh">招人</span></button>
   <button class="tab" onclick="showPage('s2',this)">2 Onboard <span class="zh">入职</span></button>
   <button class="tab" onclick="showPage('s3',this)">3 Schedule <span class="zh">排班</span></button>
+  <button class="tab" onclick="showPage('schedsys',this)">🗓️ Sched System <span class="zh">排班系统</span></button>
   <button class="tab" onclick="showPage('coachfire',this)">4 Coach→Fire <span class="zh">教→开</span></button>
   <button class="tab" onclick="showPage('s7',this)">5 Pay <span class="zh">工资</span></button>
   <button class="tab" onclick="showPage('offer',this)">📝 Offer</button>
@@ -632,9 +644,107 @@ code{ word-break:break-word; white-space:pre-wrap; font-size:11.5px; }
   <div class="box box-rule"><strong><span class="en">Slack:</span><span class="zh">Slack：</span></strong> <code>time off [name] [dates] [reason]</code> · <span class="en">GM replies approved / denied in same thread</span><span class="zh">GM同thread回 approved / denied</span></div>
   <div class="box box-gate"><strong><span class="en">GM duty:</span><span class="zh">GM职责：</span></strong> <span class="en">Approve leave only after cover is set in 7shifts. Empty shift = deny.</span><span class="zh">7shifts有人顶才批。空班 = 不批。</span></div>
   <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>staffing 00003</code> · <code>roster 00003</code> · <code>time off [name] [dates] [reason]</code></div>
+  <div class="box box-auto" style="margin-top:14px">
+    <strong>🗓️ <span class="en">Live multi-store board:</span><span class="zh">多店实时排班板：</span></strong>
+    <span class="en">Open top tab </span><span class="zh">打开顶栏 </span>
+    <a href="#schedsys" onclick="showPage('schedsys',null);return false" style="font-weight:700">🗓️ Sched System</a>
+    <span class="en"> — 00001 / 00002 / 00003 · How · Staff · Gap · Schedule · History (live from GM roadmaps).</span>
+    <span class="zh"> — 00001 / 00002 / 00003 · 原理·人员·缺口·排班·历史（嵌 GM 路线图实时页）。</span>
+  </div>
 </div>
 
+<!-- Live Schedule System — Sally multi-store (iframe GM #foh) -->
+<div class="page" id="schedsys">
+  <div class="page-h">🗓️ <span class="en">Schedule System</span><span class="zh">排班系统</span></div>
+  <div class="page-sub">
+    <span class="en">Sally audit · all live stores · same board GMs use</span>
+    <span class="zh">Sally 稽核 · 全部在营店 · 与 GM 同一套板</span>
+  </div>
+  <div class="verified">✅ <span class="en">Live embed</span><span class="zh">实时嵌入</span> · 2026-07-27 · Louis · GM roadmaps morning refresh</div>
+  <div class="pareto">
+    <strong><span class="en">1 line:</span><span class="zh">一句话：</span></strong>
+    <span class="en">Pick a store → open How / Staff / Gap / Schedule / History inside the live GM board. Push GAP hire or late publish. Do not edit HTML — publish only in 7shifts.</span>
+    <span class="zh">先选店 → 在实时 GM 板里看 原理/人员/缺口/排班/历史。缺口去招人或催发布。不要改这个 HTML — 只在 7shifts 发布。</span>
+  </div>
+  <div class="sched-chiprow">
+    <span class="badge badge-blue">📘 How</span>
+    <span class="badge badge-blue">👥 Staff</span>
+    <span class="badge badge-blue">📉 Gap</span>
+    <span class="badge badge-blue">📅 Schedule</span>
+    <span class="badge badge-blue">📁 History</span>
+    <span class="badge badge-green"><span class="en">Live · not a snapshot</span><span class="zh">实时 · 非截图</span></span>
+  </div>
+  <div class="box box-rule">
+    <strong><span class="en">Sally job here:</span><span class="zh">Sally 在这里做什么：</span></strong>
+    <span class="en">Score KPI “schedule on time” · see GAP by role · coach GM before Friday 5pm publish · loop hire when GAP &gt; 0.</span>
+    <span class="zh">查 KPI「排班准时」· 看各职位 GAP · 周五5点前催 GM 发布 · GAP&gt;0 回招人。</span>
+  </div>
 
+  <div class="subtabs" id="schedsys-store-tabs" role="tablist">
+    <button type="button" class="subtab on" onclick="showSchedStore('00001',this)">00001 Fayetteville</button>
+    <button type="button" class="subtab" onclick="showSchedStore('00002',this)">00002 Greenville</button>
+    <button type="button" class="subtab" onclick="showSchedStore('00003',this)">00003 Wilmington</button>
+  </div>
+
+  <!-- 00001 -->
+  <div class="subpane on" id="sched-store-00001" data-store="00001" data-src="https://wiserise-gm-roadmaps.vercel.app/00001#foh">
+    <div class="sched-store-meta">
+      <div>
+        <strong>🏪 00001 · Gangnam Fayetteville</strong>
+        <div class="sched-hint"><span class="en">Live GM Schedule System · 5 sub-tabs inside the frame</span><span class="zh">实时 GM 排班系统 · 框内 5 个子页</span></div>
+      </div>
+      <div class="links">
+        <a href="https://wiserise-gm-roadmaps.vercel.app/00001#foh" target="_blank" rel="noopener">↗ <span class="en">Open full</span><span class="zh">新窗口全开</span></a>
+        <a href="#" onclick="reloadSchedFrame('00001');return false">↻ <span class="en">Reload</span><span class="zh">刷新</span></a>
+      </div>
+    </div>
+    <div class="sched-hint"><span class="en">If the frame opens on “How to use”, click </span><span class="zh">若框内停在「怎么用」，点 </span><strong>🗓️ Schedule System</strong><span class="en"> in the frame top tabs.</span><span class="zh">（框内顶栏）。</span></div>
+    <div class="sched-frame-wrap">
+      <iframe class="sched-frame" id="sched-frame-00001" title="00001 Schedule System" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+
+  <!-- 00002 -->
+  <div class="subpane" id="sched-store-00002" data-store="00002" data-src="https://wiserise-gm-roadmaps.vercel.app/00002#foh">
+    <div class="sched-store-meta">
+      <div>
+        <strong>🏪 00002 · Masa Greenville</strong>
+        <div class="sched-hint"><span class="en">Live GM Schedule System · 5 sub-tabs inside the frame</span><span class="zh">实时 GM 排班系统 · 框内 5 个子页</span></div>
+      </div>
+      <div class="links">
+        <a href="https://wiserise-gm-roadmaps.vercel.app/00002#foh" target="_blank" rel="noopener">↗ <span class="en">Open full</span><span class="zh">新窗口全开</span></a>
+        <a href="#" onclick="reloadSchedFrame('00002');return false">↻ <span class="en">Reload</span><span class="zh">刷新</span></a>
+      </div>
+    </div>
+    <div class="sched-hint"><span class="en">If the frame opens on “How to use”, click </span><span class="zh">若框内停在「怎么用」，点 </span><strong>🗓️ Schedule System</strong><span class="en"> in the frame top tabs.</span><span class="zh">（框内顶栏）。</span></div>
+    <div class="sched-frame-wrap">
+      <iframe class="sched-frame" id="sched-frame-00002" title="00002 Schedule System" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+
+  <!-- 00003 -->
+  <div class="subpane" id="sched-store-00003" data-store="00003" data-src="https://wiserise-gm-roadmaps.vercel.app/00003#foh">
+    <div class="sched-store-meta">
+      <div>
+        <strong>🏪 00003 · Gangnam Wilmington</strong>
+        <div class="sched-hint"><span class="en">Live GM Schedule System · 5 sub-tabs inside the frame</span><span class="zh">实时 GM 排班系统 · 框内 5 个子页</span></div>
+      </div>
+      <div class="links">
+        <a href="https://wiserise-gm-roadmaps.vercel.app/00003#foh" target="_blank" rel="noopener">↗ <span class="en">Open full</span><span class="zh">新窗口全开</span></a>
+        <a href="#" onclick="reloadSchedFrame('00003');return false">↻ <span class="en">Reload</span><span class="zh">刷新</span></a>
+      </div>
+    </div>
+    <div class="sched-hint"><span class="en">If the frame opens on “How to use”, click </span><span class="zh">若框内停在「怎么用」，点 </span><strong>🗓️ Schedule System</strong><span class="en"> in the frame top tabs.</span><span class="zh">（框内顶栏）。</span></div>
+    <div class="sched-frame-wrap">
+      <iframe class="sched-frame" id="sched-frame-00003" title="00003 Schedule System" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+
+  <div class="ask-brain" style="margin-top:14px">
+    <strong>🧠 <span class="en">Slack</span><span class="zh">Slack</span>:</strong>
+    <code>staffing 00001</code> · <code>roster 00002</code> · <code>schedule late 00003 due TODAY 5pm</code>
+  </div>
+</div>
 
 <!-- Coach → Fire (merged 1:1 + Discipline + Exit) -->
 <div class="page" id="coachfire">
@@ -1113,7 +1223,7 @@ Stay % · Audits N/5
 </div>
 
 </div>
-<div class="footer">Wiserise Hospitality Group · People Department Roadmap · Elon 5-step · 14→10 tabs · Sally Daily default · 2026-07-27d · Hermes Artifact</div>
+<div class="footer">Wiserise Hospitality Group · People Department Roadmap · Elon 5-step · Sched System multi-store live · Sally Daily default · 2026-07-27e · Hermes Artifact</div>
 
 <script>
 function showPage(id,btn){
@@ -1126,8 +1236,62 @@ function showPage(id,btn){
     const b=[...document.querySelectorAll('.tab')].find(x=>(x.getAttribute('onclick')||'').includes("'"+id+"'"));
     if(b) b.classList.add('active');
   }
-  try{ history.replaceState(null,'','#'+id); }catch(e){}
+  try{
+    if(id==='schedsys'){
+      const on0 = document.querySelector('#schedsys .subpane.on');
+      const st0 = (on0 && on0.getAttribute('data-store')) || '00001';
+      history.replaceState(null,'','#schedsys/'+st0);
+    } else {
+      history.replaceState(null,'','#'+id);
+    }
+  }catch(e){}
   window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='schedsys'){
+    const on = document.querySelector('#schedsys .subpane.on');
+    const st = on && on.getAttribute('data-store');
+    ensureSchedFrame(st || '00001');
+  }
+}
+
+function ensureSchedFrame(store){
+  const pane = document.getElementById('sched-store-'+store);
+  const frame = document.getElementById('sched-frame-'+store);
+  if(!pane || !frame) return;
+  const src = pane.getAttribute('data-src');
+  if(!src) return;
+  if(!frame.getAttribute('src')){
+    frame.setAttribute('src', src);
+  }
+}
+
+function reloadSchedFrame(store){
+  const pane = document.getElementById('sched-store-'+store);
+  const frame = document.getElementById('sched-frame-'+store);
+  if(!pane || !frame) return;
+  const src = pane.getAttribute('data-src');
+  if(!src) return;
+  // cache-bust so morning GM refresh is visible without full browser hard reload
+  const bust = src.split('#')[0] + '?t=' + Date.now() + '#' + (src.split('#')[1]||'foh');
+  frame.setAttribute('src', bust);
+}
+
+function showSchedStore(store, btn){
+  const root = document.getElementById('schedsys');
+  if(!root) return;
+  root.querySelectorAll('.subpane').forEach(p=>p.classList.remove('on'));
+  const tabs = document.getElementById('schedsys-store-tabs');
+  if(tabs) tabs.querySelectorAll('.subtab').forEach(b=>b.classList.remove('on'));
+  const pane = document.getElementById('sched-store-'+store);
+  if(pane) pane.classList.add('on');
+  if(btn) btn.classList.add('on');
+  else if(tabs){
+    const b = [...tabs.querySelectorAll('.subtab')].find(x => (x.getAttribute('onclick')||'').includes("'"+store+"'"));
+    if(b) b.classList.add('on');
+  }
+  ensureSchedFrame(store);
+  try{
+    history.replaceState(null,'', '#schedsys/'+store);
+  }catch(e){}
 }
 
 function showSallySub(id, btn){
@@ -1162,6 +1326,11 @@ function openHash(){
       const map = {today:'sally-today', score:'sally-score', path:'sally-path', '30d':'sally-path', rules:'sally-rules', week:'sally-score', kpi:'sally-score'};
       const sid = map[(sub||'today').toLowerCase()] || 'sally-today';
       showSallySub(sid, null);
+    }
+    if(main === 'schedsys'){
+      const st = (sub||'00001').replace(/\D/g,'').padStart(5,'0');
+      const ok = ['00001','00002','00003'].includes(st) ? st : '00001';
+      showSchedStore(ok, null);
     }
     return;
   }
