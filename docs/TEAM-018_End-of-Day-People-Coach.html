@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>End of Day — People Coach · TEAM-018</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unna:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#152035; --navy-deep:#1E3152; --gold:#C4A55A;
+    --tint:#F4F6FB; --line:#E3E8F2; --ink:#0F0F0F; --mute:#6B7C9A;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{font-family:'Inter',sans-serif; color:var(--ink); background:#EAEDF4;
+    line-height:1.5; padding:24px 16px; -webkit-font-smoothing:antialiased}
+  .sheet{max-width:860px; margin:0 auto; background:#fff; border-radius:14px;
+    overflow:hidden; box-shadow:0 18px 50px rgba(21,32,53,.18)}
+  .band{background:var(--navy); color:#fff; padding:22px 34px; display:flex;
+    align-items:center; justify-content:space-between; gap:16px}
+  .wordmark{font-family:'Unna',serif; font-weight:700; font-size:30px; letter-spacing:1px; line-height:1}
+  .wordmark small{display:block; font-family:'Inter'; font-weight:700; font-size:10px;
+    letter-spacing:3px; margin-top:4px; opacity:.85}
+  .band .tag{font-size:10px; font-weight:700; letter-spacing:2px; text-align:right; opacity:.9}
+  .title-wrap{padding:30px 34px 0}
+  h1{font-family:'Unna',serif; font-weight:700; color:var(--navy); font-size:40px; letter-spacing:1px; line-height:1.05}
+  .rule{height:4px; width:96px; background:var(--gold); border-radius:3px; margin-top:12px}
+  .meta{display:flex; flex-wrap:wrap; gap:10px; padding:20px 34px 4px}
+  .chip{flex:1 1 180px; border:1px solid var(--line); border-radius:10px; overflow:hidden}
+  .chip .k{background:var(--navy-deep); color:#fff; font-size:10px; font-weight:700; letter-spacing:2px; padding:7px 12px}
+  .chip .v{padding:10px 12px; font-weight:600; color:var(--navy)}
+  .flow{display:flex; align-items:stretch; padding:22px 34px 6px}
+  .step3d{flex:1; background:var(--navy); color:#fff; border-radius:12px; padding:16px 14px;
+    text-align:center; transition:transform .15s ease, box-shadow .15s ease}
+  .step3d:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(21,32,53,.25)}
+  .step3d .num{width:34px; height:34px; border-radius:50%; background:var(--gold); color:var(--navy);
+    font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; margin:0 auto 8px}
+  .step3d .lbl{font-weight:700; letter-spacing:1px; font-size:13px}
+  .step3d .sub{font-size:11px; opacity:.8; margin-top:3px}
+  .arrow{display:flex; align-items:center; color:var(--gold); font-size:22px; font-weight:700; padding:0 8px}
+  .rows{padding:18px 34px 6px; display:flex; flex-direction:column; gap:8px}
+  .row{display:grid; grid-template-columns:160px 1fr; gap:8px; align-items:stretch}
+  .row .lab{background:var(--navy-deep); color:#fff; border-radius:9px; font-size:11px; font-weight:700;
+    letter-spacing:1.5px; display:flex; align-items:center; justify-content:flex-end; text-align:right; padding:12px 14px}
+  .row .val{background:var(--tint); border-radius:9px; padding:12px 16px; font-weight:500}
+  .section{padding:14px 34px 0}
+  .section h2{font-size:12px; font-weight:700; letter-spacing:2px; color:var(--navy);
+    display:flex; align-items:center; gap:10px; margin-bottom:10px}
+  .section h2 .pill{background:var(--navy-deep); color:#fff; padding:6px 12px; border-radius:20px; font-size:11px; letter-spacing:1.5px}
+  .section h2 .hint{margin-left:auto; font-weight:500; letter-spacing:0; font-size:11px; color:var(--mute)}
+  .ex-head .pill{background:var(--gold); color:var(--navy); padding:9px 22px; border-radius:22px;
+    font-size:12px; letter-spacing:2px}
+  .example{background:#FAF8F1; border:1px solid #EEE9DA; border-left:8px solid var(--gold);
+    border-radius:22px; padding:6px 34px}
+  .exrow{display:grid; grid-template-columns:210px 1fr; gap:28px; align-items:baseline;
+    padding:20px 4px; border-bottom:1px solid #ECE7DA}
+  .exrow:last-child{border-bottom:none}
+  .exk{color:var(--gold); font-size:13px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase}
+  .exv{color:var(--navy); font-weight:500; font-size:18px; line-height:1.35}
+  .exbul{color:var(--navy); font-weight:500; font-size:15px; line-height:1.5; padding:2px 0}
+  .exbul:first-child{padding-top:0} .exbul:last-child{padding-bottom:0}
+  .ex-foot{padding:14px 34px 0; font-size:12px; color:var(--mute)}
+  .cards{display:flex; flex-direction:column; gap:8px}
+  .card{display:flex; align-items:flex-start; gap:14px; background:#fff; border:1px solid var(--line);
+    border-left:4px solid var(--gold); border-radius:10px; padding:13px 16px; cursor:pointer;
+    transition:background .12s ease, transform .12s ease}
+  .card:hover{background:var(--tint); transform:translateX(2px)}
+  .card .n{flex:none; min-width:28px; height:28px; padding:0 7px; box-sizing:border-box; border-radius:14px;
+    background:var(--gold); color:var(--navy);
+    font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center}
+  .card .txt{padding-top:3px; font-weight:500}
+  .card.done{opacity:.55}
+  .card.done .txt{text-decoration:line-through}
+  .card.done .n{background:#2E7D52}
+  .card.done .n::after{content:'✓'; font-size:15px}
+  .card.done .n span{display:none}
+  .done-block{padding:18px 34px 4px}
+  .done-head{font-size:12px; font-weight:700; letter-spacing:2px; color:var(--navy); margin-bottom:10px}
+  .check{display:flex; align-items:center; gap:13px; padding:12px 16px; border:1px solid var(--line);
+    border-radius:10px; margin-bottom:8px; cursor:pointer; background:var(--tint); transition:background .12s ease}
+  .check:hover{background:#EAEEF8}
+  .check .box{flex:none; width:22px; height:22px; border-radius:6px; border:2px solid var(--navy-deep);
+    background:#fff; display:flex; align-items:center; justify-content:center; font-size:14px; color:#fff}
+  .check.on .box{background:var(--navy-deep); border-color:var(--navy-deep)}
+  .check.on .box::after{content:'✓'}
+  .check.on .label{text-decoration:line-through; color:var(--mute)}
+  .check .label{font-weight:500}
+  .progress{padding:6px 34px 0; display:flex; align-items:center; gap:12px}
+  .bar{flex:1; height:8px; background:var(--line); border-radius:6px; overflow:hidden}
+  .bar i{display:block; height:100%; width:0; background:var(--gold); transition:width .25s ease}
+  .pct{font-size:12px; font-weight:700; color:var(--navy); min-width:38px; text-align:right}
+  footer{margin-top:22px; padding:16px 34px 26px; text-align:center; font-size:10px;
+    letter-spacing:1.5px; color:var(--mute); font-weight:600}
+  .reset{display:block; margin:14px auto 0; background:none; border:1px solid var(--line); color:var(--mute);
+    font-size:11px; font-weight:600; padding:7px 16px; border-radius:8px; cursor:pointer}
+  .reset:hover{border-color:var(--navy-deep); color:var(--navy)}
+  @media(max-width:560px){
+    .flow{flex-direction:column; gap:8px}
+    .arrow{transform:rotate(90deg); padding:2px 0}
+    .row{grid-template-columns:110px 1fr}
+    .exrow{grid-template-columns:1fr; gap:4px; padding:12px 0}
+    .example{padding:4px 18px}
+    h1{font-size:30px} .band{padding:18px 20px}
+    .title-wrap,.meta,.rows,.section,.done-block,.progress{padding-left:18px; padding-right:18px}
+  }
+  @media print{
+    @page{size:Letter; margin:9mm}
+    body{background:#fff; padding:0}
+    /* overflow:visible is REQUIRED — the base sheet uses overflow:hidden for rounded
+       corners, but with @page that clips all content past page 1 */
+    .sheet{box-shadow:none; border-radius:0; max-width:none; overflow:visible}
+    .reset,.hint{display:none}
+    .card:hover,.step3d:hover{transform:none}
+    /* compact spacing in print — reclaim vertical room so nothing spills to a near-empty page */
+    .title-wrap{padding-top:16px}
+    .meta{padding-top:12px; padding-bottom:0}
+    .flow{padding-top:12px; padding-bottom:0}
+    .rows{padding-top:10px; padding-bottom:0; gap:6px}
+    .section{padding-top:10px}
+    .section h2{margin-bottom:7px}
+    .cards{gap:6px}
+    .card{padding:9px 14px}
+    .row .lab,.row .val{padding:9px 12px}
+    .done-block{padding-top:12px}
+    .check{padding:9px 14px; margin-bottom:6px}
+    .progress{padding-top:4px}
+    /* footer must not spill onto a fresh page */
+    footer{margin-top:8px; padding:8px 34px 0; break-inside:avoid}
+    /* never split a single item across pages */
+    .card,.check,.step3d,.chip,.row,.exrow,.example{break-inside:avoid}
+  }
+
+@page { size: letter; margin: 0.38in; }
+html { zoom: 0.78; }
+body { padding: 0 !important; background: #fff !important; }
+.sheet { box-shadow: none !important; border-radius: 0 !important; max-width: none !important; }
+.band { padding: 12px 20px !important; }
+.title-wrap { padding: 12px 20px 0 !important; }
+h1 { font-size: 26px !important; }
+.rows { gap: 6px !important; padding-top: 8px !important; }
+.section { padding-top: 8px !important; }
+.cards { gap: 5px !important; }
+.card { padding: 7px 12px !important; }
+.row .lab, .row .val { padding: 7px 10px !important; }
+.check { padding: 7px 12px !important; margin-bottom: 4px !important; }
+footer { margin-top: 6px !important; padding: 6px 20px 0 !important; }
+.card,.check,.row,.exrow,.example { break-inside: avoid; }
+
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="band">
+    <div class="wordmark">WISERISE<small>HOSPITALITY GROUP</small></div>
+    <div class="tag">STANDARD<br>OPERATING<br>PROCEDURE</div>
+  </div>
+  <div class="title-wrap"><h1>END OF DAY — PEOPLE COACH</h1><div class="rule"></div></div>
+  <div class="meta">
+    <div class="chip"><div class="k">SOP NO</div><div class="v">TEAM-018</div></div>
+    <div class="chip"><div class="k">WRITTEN BY</div><div class="v">Hermes · Louis approve</div></div>
+    <div class="chip"><div class="k">DATE</div><div class="v"></div></div>
+  </div>
+  <div class="flow"><div class="step3d"><div class="num">1</div><div class="lbl">PULL</div><div class="sub">Truth</div></div><div class="arrow">&rarr;</div><div class="step3d"><div class="num">2</div><div class="lbl">WRITE</div><div class="sub">Done/open</div></div><div class="arrow">&rarr;</div><div class="step3d"><div class="num">3</div><div class="lbl">PEOPLE</div><div class="sub">1:1/push</div></div><div class="arrow">&rarr;</div><div class="step3d"><div class="num">4</div><div class="lbl">POST</div><div class="sub">Slack</div></div></div>
+  <div class="rows"><div class="row"><div class="lab">PURPOSE</div><div class="val">Write the day so tomorrow is not blind.</div></div><div class="row"><div class="lab">WHO</div><div class="val">Regional People Coach (Sally).</div></div><div class="row"><div class="lab">WHEN</div><div class="val">Every work day. Before you stop. ~5 minutes.</div></div><div class="row"><div class="lab">WHAT YOU NEED</div><div class="val">TEAM-F-012 form or phone. #06-people. Facts.</div></div><div class="row"><div class="lab">WHAT IF</div><div class="val">Late on the road? Still post. Off day? Write off + why.</div></div></div>
+  <div class="done-block"><div class="done-head">PROCEDURE</div><div class="check"><div class="box"></div><div class="label"><strong>PULL</strong> — Slack: people KPI · stuck onboarding.</div></div><div class="check"><div class="box"></div><div class="label"><strong>DONE</strong> — write top 3 finished. Facts only.</div></div><div class="check"><div class="box"></div><div class="label"><strong>OPEN</strong> — top 3 open. Who owns. Due day.</div></div><div class="check"><div class="box"></div><div class="label"><strong>PEOPLE</strong> — 1:1 / hard talk: who · store · outcome.</div></div><div class="check"><div class="box"></div><div class="label"><strong>PUSH</strong> — GM miss? No / pushed / need Louis + 3 facts.</div></div><div class="check"><div class="box"></div><div class="label"><strong>BOSS</strong> — Louis yes tonight? No or Yes + one-line ask.</div></div><div class="check"><div class="box"></div><div class="label"><strong>TOMORROW</strong> — store # and top 1 job.</div></div><div class="check"><div class="box"></div><div class="label"><strong>POST</strong> — TEAM-F-012 or Slack card → #06-people now.</div></div></div><div class="section"><h2 class="ex-head"><span class="pill">FILLED EXAMPLE</span> <span class="hint">Copy the style, not the words.</span></h2><div class="example"><div class="exrow"><div class="exk">DATE</div><div class="exv">Mon Jul 27 · 9–7 · store 00003</div></div><div class="exrow"><div class="exk">DONE</div><div class="exv">roster pull · Chris 1:1 set · stuck list clean</div></div><div class="exrow"><div class="exk">OPEN</div><div class="exv">server gap → GM due Fri · I-9 photo → Sally due Tue</div></div><div class="exrow"><div class="exk">1:1 / LOUIS</div><div class="exv">Chris 00003 schedule Sun 5pm · Louis: No</div></div><div class="exrow"><div class="exk">TOMORROW</div><div class="exv">00003 · finish host onboard · posted #06-people 6:40pm</div></div></div><div class="ex-foot">Leave only after Slack post is up.</div></div>
+  <div class="progress"><div class="bar"><i id="barFill"></i></div><div class="pct" id="pctTxt">0%</div></div><button class="reset" id="resetBtn">Reset checklist</button>
+  <footer>WISERISE HOSPITALITY GROUP &nbsp;·&nbsp; CONFIDENTIAL &nbsp;·&nbsp; FOR INTERNAL USE ONLY
+  </footer>
+</div>
+<script>
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const checks = Array.from(document.querySelectorAll('.check'));
+  const barFill = document.getElementById('barFill');
+  const pctTxt = document.getElementById('pctTxt');
+  function updateProgress(){
+    const all = cards.length + checks.length || 1;
+    const done = cards.filter(c=>c.classList.contains('done')).length
+               + checks.filter(c=>c.classList.contains('on')).length;
+    const pct = Math.round((done/all)*100);
+    barFill.style.width = pct + '%'; pctTxt.textContent = pct + '%';
+  }
+  cards.forEach(c => c.addEventListener('click', () => { c.classList.toggle('done'); updateProgress(); }));
+  checks.forEach(c => c.addEventListener('click', () => { c.classList.toggle('on'); updateProgress(); }));
+  const rb = document.getElementById('resetBtn');
+  if (rb) rb.addEventListener('click', () => {
+    cards.forEach(c=>c.classList.remove('done'));
+    checks.forEach(c=>c.classList.remove('on')); updateProgress();
+  });
+  updateProgress();
+</script>
+</body>
+</html>
