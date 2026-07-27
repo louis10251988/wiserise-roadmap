@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
 <title>Sally Daily OS · Wiserise</title>
 <style>
 :root{--bg:#fafbfc;--card:#fff;--ink:#111827;--muted:#6b7280;--brand:#0f172a;--blue:#2563eb;--blue-bg:#eff6ff;--green-bg:#ecfdf5;--yellow-bg:#fffbeb;--red-bg:#fef2f2;--border:#e5e7eb;--bl:#f3f4f6;--r:12px}
@@ -44,6 +44,32 @@ body.lang-en .en{display:inline}
 body.lang-en .zh{display:none}
 .en{display:inline}
 .n{font-weight:800}
+
+/* Mobile-friendly */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:hidden}
+.topbar{padding:12px 14px}
+.topbar h1{font-size:15px;line-height:1.25}
+.topbar .sub{font-size:10.5px}
+.lang-btn{padding:8px 12px;min-height:36px}
+.tabs{top:52px;padding:0 6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
+.tabs::-webkit-scrollbar{display:none}
+a.tab{padding:12px 11px;font-size:12px;min-height:44px}
+.content{padding:14px 12px 88px}
+h2{font-size:16px}
+table{display:block;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:12px}
+th,td{padding:8px 9px;word-break:break-word}
+.ask,.box,.law{font-size:13px}
+code{white-space:pre-wrap;word-break:break-word}
+.grid2{grid-template-columns:1fr!important}
+@media(max-width:420px){
+  .topbar .sub{display:none}
+  .content{padding:12px 10px 96px}
+}
+@supports(padding:max(0px)){
+  .content{padding-bottom:max(88px,calc(64px + env(safe-area-inset-bottom)))}
+}
+
 </style>
 </head>
 <body class="lang-en">
