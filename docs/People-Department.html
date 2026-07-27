@@ -102,6 +102,17 @@ body.lang-zh .en{display:none}
 @media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab{display:none}.lang-toggle{display:none}}
 @media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}.gate-row{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr}}
 @media(max-width:500px){.stage-grid{grid-template-columns:1fr}.gate-row{grid-template-columns:1fr}}
+
+/* Sally Daily OS sub-tabs */
+.subtabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px;padding:0}
+.subtab{border:1px solid var(--border);background:#fff;color:var(--muted);font-size:12px;font-weight:700;padding:8px 12px;border-radius:999px;cursor:pointer;font-family:inherit}
+.subtab:hover{color:var(--ink);border-color:#cbd5e1}
+.subtab.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.subpane{display:none}
+.subpane.on{display:block}
+.sally-ask{border:1.5px dashed #93c5fd;background:#f8fbff;border-radius:8px;padding:10px 12px;margin:8px 0 12px;font-size:12.5px;line-height:1.55}
+.sally-ask code{white-space:pre-wrap}
+
 </style>
 </head>
 <body class="lang-en">
@@ -949,42 +960,193 @@ body.lang-zh .en{display:none}
 
 <!-- Rules -->
 
-<!-- Sally Daily OS (live card) -->
+<!-- Sally Daily OS — full migrate (no iframe) -->
 <div class="page" id="sallyos">
   <div class="page-h">🧭 <span class="en">Sally Daily OS</span><span class="zh">Sally 每天操作系统</span></div>
-  <div class="page-sub"><span class="en">Regional People Coach · every day card · Elon 5-step v3</span><span class="zh">区域人事教练 · 每天卡片 · Elon 5步 v3</span></div>
-  <div class="verified">✅ <span class="en">Live</span><span class="zh">在线</span> · 2026-07-27 · Louis · <span class="en">Tab #2 after Slack OPS</span><span class="zh">第2个标签（Slack OPS后面）</span></div>
+  <div class="page-sub"><span class="en">Regional People Coach · full daily system inside this roadmap · Elon v3</span><span class="zh">区域人事教练 · 完整每天系统在本路线图里 · Elon v3</span></div>
+  <div class="verified">✅ <span class="en">Migrated in-page</span><span class="zh">已迁入本页</span> · 2026-07-27 · Louis</div>
 
-  <div class="pareto"><strong><span class="en">Use:</span><span class="zh">用法：</span></strong>
-    <span class="en">Open this tab every morning. Deep hire/onboard steps stay in other tabs. Full standalone file if you want it alone on your phone.</span>
-    <span class="zh">每天早上看这个页。招人/入职细步骤还在其他页。要单独手机打开用下方完整链接。</span>
+  <div class="pareto"><strong><span class="en">1 line:</span><span class="zh">1句：</span></strong>
+    <span class="en">Coach GMs · close people gaps · prove 6 KPIs. Bot drafts. You talk. Louis = money / fire / managers.</span>
+    <span class="zh">带GM · 关人事缺口 · 用证明打6项KPI。机器人草稿。你谈话。Louis=钱/开除/经理。</span>
   </div>
 
-  <div class="sec-title"><span class="en">Open full card</span><span class="zh">打开完整卡片</span></div>
-  <div class="box box-ok">
-    <span class="en"><strong>Permanent link:</strong></span><span class="zh"><strong>永久链接：</strong></span>
-    <a href="https://louis10251988.github.io/wiserise-roadmap/Sally-Daily-OS.html" target="_blank" rel="noopener">Sally-Daily-OS.html</a>
-    · <a href="Sally-Daily-OS.html" target="_blank" rel="noopener"><span class="en">same folder</span><span class="zh">同文件夹</span></a>
+  <div class="subtabs" role="tablist">
+    <button type="button" class="subtab on" onclick="showSallySub('sally-today',this)"><span class="en">1 · Today</span><span class="zh">1 · 今天</span></button>
+    <button type="button" class="subtab" onclick="showSallySub('sally-score',this)"><span class="en">2 · Score</span><span class="zh">2 · 得分</span></button>
+    <button type="button" class="subtab" onclick="showSallySub('sally-rules',this)"><span class="en">3 · Rules</span><span class="zh">3 · 规矩</span></button>
   </div>
 
-  <div class="sec-title"><span class="en">Today in 10 seconds</span><span class="zh">今天 10 秒版</span></div>
-  <table>
-    <tr><th style="width:20%"><span class="en">When</span><span class="zh">何时</span></th><th><span class="en">Do</span><span class="zh">做</span></th></tr>
-    <tr><td><span class="en">Morning</span><span class="zh">早上</span></td><td><code>people KPI</code> · <code>stuck onboarding</code> · <code>roster 00003</code></td></tr>
-    <tr><td><span class="en">Day</span><span class="zh">白天</span></td><td><span class="en">1 GM 1:1 · 1 hire/onboard move · 1 schedule check</span><span class="zh">1次GM 1:1 · 推进1个招人/入职 · 查1次排班</span></td></tr>
-    <tr><td><span class="en">Night</span><span class="zh">晚上</span></td><td><span class="en">EOD card in #06-people</span><span class="zh">在 #06-people 发下班卡</span></td></tr>
-  </table>
+  <!-- SUB: TODAY -->
+  <div class="subpane on" id="sally-today">
+    <div class="sec-title"><span class="en">📅 Today · 9:00–19:00 · first store 00003</span><span class="zh">📅 今天 · 9:00–19:00 · 第一店 00003</span></div>
 
-  <div class="sec-title"><span class="en">Live card (below)</span><span class="zh">下面是实时卡片</span></div>
-  <div class="box box-info">
-    <span class="en">If the box is blank, use the permanent link above.</span>
-    <span class="zh">如果下面是空的，点上面的永久链接。</span>
+    <div class="box box-rule"><strong><span class="en">First day only:</span><span class="zh">仅第1天：</span></strong>
+      <span class="en">Open Slack · Gusto · 7shifts · Drive. Join <code>#06-people</code> + 00003 store channel. Then do the 3 pulls.</span>
+      <span class="zh">打开 Slack · Gusto · 7shifts · Drive。进 <code>#06-people</code> + 00003 店群。然后做下面3个拉取。</span>
+    </div>
+
+    <div class="sec-title"><span class="en">Morning — 3 pulls</span><span class="zh">早上 — 3个拉取</span></div>
+    <div class="sally-ask"><code>people KPI</code><br><code>stuck onboarding</code><br><code>roster 00003</code></div>
+
+    <div class="sec-title"><span class="en">Day — 3 actions (pick from pulls)</span><span class="zh">白天 — 3个行动（从拉取里选）</span></div>
+    <table>
+      <tr><th style="width:8%">#</th><th><span class="en">Do</span><span class="zh">做</span></th><th><span class="en">Done when</span><span class="zh">算完</span></th></tr>
+      <tr><td><strong>1</strong></td><td><span class="en">One GM 1:1</span><span class="zh">一次GM 1:1</span></td><td><span class="en">Note + next date + form photo in Slack</span><span class="zh">记录+下次日期+表照片进Slack</span></td></tr>
+      <tr><td><strong>2</strong></td><td><span class="en">Move one hire or one stuck onboard</span><span class="zh">推进一个招人或一个卡住入职</span></td><td><span class="en">Status changed</span><span class="zh">状态变了</span></td></tr>
+      <tr><td><strong>3</strong></td><td><span class="en">One schedule check</span><span class="zh">查一次排班</span></td><td><span class="en">On time, or push GM with due time</span><span class="zh">准时，或已推GM并写截止</span></td></tr>
+    </table>
+
+    <div class="sec-title"><span class="en">Night — end card (#06-people)</span><span class="zh">晚上 — 下班卡（#06-people）</span></div>
+    <div class="sally-ask"><code>📋 EOD · DATE
+Done: …
+Open: …
+1:1: who/store
+Louis?: yes/no + 3 facts
+Tomorrow store:</code></div>
+
+    <div class="sec-title"><span class="en">Something broke? 5 lines only</span><span class="zh">出事？只写5行</span></div>
+    <div class="sally-ask"><code>What / Store / Facts
+Bad?: P0–P4
+Owner (1 person) / Do next (max 3)
+Missing / Need Louis yes?</code></div>
+
+    <div class="sec-title"><span class="en">Copy lines</span><span class="zh">复制句</span></div>
+    <div class="sally-ask">
+      <strong><span class="en">Push GM</span><span class="zh">推GM</span></strong><br>
+      <code>📋 00003 · schedule late · due TODAY 5pm
+👉 @GM fix today · miss → @Louis</code>
+    </div>
+    <div class="sally-ask">
+      <strong><span class="en">Ask Louis</span><span class="zh">问 Louis</span></strong><br>
+      <code>🚨 Need Louis · STORE · TOPIC
+1) … 2) … 3) … · Tried: … · Ask: …</code>
+    </div>
   </div>
-  <iframe src="Sally-Daily-OS.html" title="Sally Daily OS" style="width:100%;height:920px;border:1px solid var(--border);border-radius:12px;background:#fff" loading="lazy"></iframe>
 
-  <div class="ask-line" style="margin-top:14px">
-    <span class="en">Slack:</span><span class="zh">Slack：</span>
-    <code>people KPI</code> · <code>stuck onboarding</code> · <code>roster 00003</code>
+  <!-- SUB: SCORE -->
+  <div class="subpane" id="sally-score">
+    <div class="sec-title"><span class="en">🎯 Score — week + 6 KPIs</span><span class="zh">🎯 得分 — 周计划 + 6 KPI</span></div>
+    <div class="pareto"><strong><span class="en">Pay:</span><span class="zh">工资：</span></strong>
+      <span class="en">$62k base · up to +$18.6k KPI (6 × $258) · proof or $0 that piece</span>
+      <span class="zh">底薪$62k · KPI最高+$18.6k（6×$258）· 没证明该片$0</span>
+    </div>
+    <div class="box box-auto"><strong><span class="en">Proof only:</span><span class="zh">证明只认：</span></strong>
+      <span class="en">Slack · Brain · 7shifts · audit card photo. No side spreadsheet.</span>
+      <span class="zh">Slack · Brain · 7shifts · 审计卡照片。不要另开表。</span>
+    </div>
+
+    <div class="sec-title"><span class="en">Week plan (from offer)</span><span class="zh">周计划（录用信）</span></div>
+    <table>
+      <tr><th><span class="en">Day</span><span class="zh">天</span></th><th><span class="en">Where</span><span class="zh">在哪</span></th></tr>
+      <tr><td><strong>Mon</strong></td><td><span class="en">Home — plan week</span><span class="zh">在家 — 排周</span></td></tr>
+      <tr><td><strong>Tue</strong></td><td><span class="en">Wilmington (start 00003) — coach + papers</span><span class="zh">Wilmington（先00003）— 带教+材料</span></td></tr>
+      <tr><td><strong>Wed</strong></td><td><span class="en">Greenville + hotel</span><span class="zh">Greenville + 酒店</span></td></tr>
+      <tr><td><strong>Thu</strong></td><td><span class="en">Fayetteville → drive home</span><span class="zh">Fayetteville → 开车回家</span></td></tr>
+      <tr><td><strong>Fri</strong></td><td><span class="en">Home — week pack + Louis 1:1</span><span class="zh">在家 — 周证明包 + Louis 1:1</span></td></tr>
+    </table>
+    <div class="box box-rule"><span class="en">Wilmington ↔ Greenville swap weeks. Fayetteville every week. Drive time counts.</span><span class="zh">Wilmington↔Greenville 隔周换。Fayetteville 每周。开车算工时。</span></div>
+
+    <div class="sec-title"><span class="en">6 KPIs · $258 each / month</span><span class="zh">6项KPI · 每月各$258</span></div>
+    <table>
+      <tr><th>#</th><th>KPI</th><th><span class="en">Goal</span><span class="zh">目标</span></th><th><span class="en">Good proof</span><span class="zh">好证明</span></th></tr>
+      <tr><td>1</td><td><span class="en">GM 1:1 done</span><span class="zh">GM 1:1做完</span></td><td><span class="en">All GMs on time · 5 stores</span><span class="zh">全部GM按时 · 5店</span></td><td><span class="en">Slack: name/store/date + form photo</span><span class="zh">Slack：名/店/日+表照片</span></td></tr>
+      <tr><td>2</td><td><span class="en">Staff gaps closed</span><span class="zh">缺口关掉</span></td><td>≤14 days</td><td><span class="en">Open date → hired date</span><span class="zh">开放日→录用日</span></td></tr>
+      <tr><td>3</td><td><span class="en">Onboard → Active</span><span class="zh">入职→上岗</span></td><td>≥90% in ≤10 days</td><td><code>stuck onboarding</code> <span class="en">clear</span><span class="zh">清空</span></td></tr>
+      <tr><td>4</td><td><span class="en">Schedule on time</span><span class="zh">排班准时</span></td><td>5/5 stores / week</td><td><span class="en">7shifts published before due</span><span class="zh">7shifts截止前已发布</span></td></tr>
+      <tr><td>5</td><td><span class="en">New hire 60-day stay</span><span class="zh">新人60天留下</span></td><td>≥75% still active</td><td><code>people KPI</code></td></tr>
+      <tr><td>6</td><td><span class="en">Monthly people audit</span><span class="zh">每月人事检查</span></td><td>5/5 stores / month</td><td><span class="en">Audit card photo per store</span><span class="zh">每店审计卡照片</span></td></tr>
+    </table>
+
+    <div class="box box-gate"><strong><span class="en">1:1 rule:</span><span class="zh">1:1规则：</span></strong>
+      <span class="en">You → each GM every week (KPI #1). GM → their staff. You teach the GM. You do not replace the GM.</span>
+      <span class="zh">你 → 每个GM每周（KPI#1）。GM → 店员。你教GM。你不替GM做。</span>
+    </div>
+
+    <div class="sec-title"><span class="en">Fri pack → Louis</span><span class="zh">周五包 → Louis</span></div>
+    <div class="sally-ask"><code>📦 Week · DATE
+1:1s + photos
+Gaps closed/open
+Onboard→Active
+Schedules 5/5 Y/N
+Stay % · Audits N/5
+👉 @Louis</code></div>
+
+    <div class="sec-title"><span class="en">You do / you don’t</span><span class="zh">你做 / 你不做</span></div>
+    <table>
+      <tr><th><span class="en">You do</span><span class="zh">你做</span></th><th><span class="en">You don’t</span><span class="zh">你不做</span></th></tr>
+      <tr>
+        <td><span class="en">Coach managers · 5 stores<br>Hire / onboard / exit store team<br>Hit 6 KPIs with proof</span><span class="zh">带5店经理<br>店团队招/入/离<br>用证明打满6 KPI</span></td>
+        <td><span class="en">Hire/fire managers alone<br>Approve pay / touch bank<br>Side spreadsheets</span><span class="zh">自己招/开经理<br>批工资/碰银行<br>另开表格</span></td>
+      </tr>
+    </table>
+
+    <div class="box box-auto"><span class="en">Same scorecard also lives in tab <strong>🎯 My KPIs</strong> — numbers/detail there; daily loop here.</span><span class="zh">计分卡也在 <strong>🎯 My KPIs</strong> 页 — 那边看细项；每天回路在本页。</span></div>
+  </div>
+
+  <!-- SUB: RULES -->
+  <div class="subpane" id="sally-rules">
+    <div class="sec-title"><span class="en">⛔ Rules · who owns · never · where</span><span class="zh">⛔ 规矩 · 谁扛 · 禁止 · 去哪</span></div>
+
+    <div class="sec-title"><span class="en">Who owns the result (one person)</span><span class="zh">谁扛结果（只能1人）</span></div>
+    <table>
+      <tr><th><span class="en">Result</span><span class="zh">结果</span></th><th><span class="en">Owner</span><span class="zh">负责人</span></th><th><span class="en">Sally does</span><span class="zh">Sally做什么</span></th></tr>
+      <tr><td><span class="en">Store staff hire in plan</span><span class="zh">预算内招店员</span></td><td>GM</td><td><span class="en">Help + coach</span><span class="zh">帮+教</span></td></tr>
+      <tr><td><span class="en">Onboard KPI on time</span><span class="zh">入职KPI按时</span></td><td><strong>Sally</strong></td><td><span class="en">Chase + fix</span><span class="zh">追+修</span></td></tr>
+      <tr><td><span class="en">Schedule out on time</span><span class="zh">排班按时出</span></td><td>GM</td><td><span class="en">Check + push</span><span class="zh">查+推</span></td></tr>
+      <tr><td><span class="en">GM 1:1s done</span><span class="zh">GM 1:1做完</span></td><td><strong>Sally</strong></td><td><span class="en">Do them</span><span class="zh">你做</span></td></tr>
+      <tr><td><span class="en">Fire / manager hire / pay / bank</span><span class="zh">开除/招经理/工资/银行</span></td><td><strong>Louis</strong></td><td><span class="en">Prep facts only</span><span class="zh">只准备事实</span></td></tr>
+      <tr><td><span class="en">Bias / payback claim</span><span class="zh">歧视/报复投诉</span></td><td><strong>Louis</strong></td><td><span class="en">Facts pack · not the accused</span><span class="zh">事实包 · 不是被告</span></td></tr>
+    </table>
+
+    <div class="box box-rule"><strong><span class="en">Push:</span><span class="zh">推：</span></strong>
+      <span class="en">GM misses → facts + due time in Slack. Still miss → Louis + 3 facts. Coach with teeth. No second-boss fight.</span>
+      <span class="zh">GM掉了 → Slack写事实+截止。还掉 → Louis+3事实。带牙齿的教练。不打二老板仗。</span>
+    </div>
+
+    <div class="sec-title"><span class="en">Never</span><span class="zh">禁止</span></div>
+    <div class="box box-red">
+      <ul style="margin:0 0 0 16px">
+        <li><span class="en">Side spreadsheet / shadow HR file</span><span class="zh">另开表 / 影子人事档案</span></li>
+        <li><span class="en">Fire or change pay alone</span><span class="zh">自己开除或改工资</span></li>
+        <li><span class="en">Guess a yes · pocket cash</span><span class="zh">猜 yes · 私下塞现金</span></li>
+        <li><span class="en">Public write-up drama</span><span class="zh">大群表演处分</span></li>
+        <li><span class="en">Turn POS off alone</span><span class="zh">自己关POS</span></li>
+      </ul>
+    </div>
+
+    <div class="sec-title"><span class="en">Where to post</span><span class="zh">发哪里</span></div>
+    <table>
+      <tr><th><span class="en">Thing</span><span class="zh">事</span></th><th><span class="en">Channel</span><span class="zh">频道</span></th></tr>
+      <tr><td><span class="en">Hire / onboard / warning / fire ask</span><span class="zh">招/入职/警告/开除请示</span></td><td>#06-people</td></tr>
+      <tr><td><span class="en">Store daily people</span><span class="zh">店日常人事</span></td><td><span class="en">Store channel → @GM</span><span class="zh">店群 → @GM</span></td></tr>
+      <tr><td><span class="en">Money / fire / big yes</span><span class="zh">钱/开除/大决定</span></td><td>Louis</td></tr>
+    </table>
+
+    <div class="sec-title"><span class="en">Stuck ladder</span><span class="zh">卡住梯子</span></div>
+    <table>
+      <tr><th>#</th><th><span class="en">Go</span><span class="zh">找</span></th><th><span class="en">Say</span><span class="zh">说</span></th></tr>
+      <tr><td>1</td><td>Bot</td><td><code>what is my job</code> · <code>hiring status</code></td></tr>
+      <tr><td>2</td><td>#06-people</td><td><span class="en">who / store / what / tried</span><span class="zh">谁/店/什么/试过</span></td></tr>
+      <tr><td>3</td><td>Louis</td><td><span class="en">need decision + 3 facts</span><span class="zh">要决定 + 3事实</span></td></tr>
+    </table>
+
+    <div class="sec-title"><span class="en">Deep detail (other main tabs)</span><span class="zh">细步骤（其它主标签）</span></div>
+    <table>
+      <tr><th><span class="en">Need</span><span class="zh">需要</span></th><th><span class="en">Open tab</span><span class="zh">开哪个标签</span></th></tr>
+      <tr><td><span class="en">Hire flow</span><span class="zh">招人流程</span></td><td>1 Hire</td></tr>
+      <tr><td><span class="en">Onboard checklist</span><span class="zh">入职清单</span></td><td>2 Onboard</td></tr>
+      <tr><td><span class="en">Schedule</span><span class="zh">排班</span></td><td>3 Schedule</td></tr>
+      <tr><td><span class="en">1:1 → fire ladder</span><span class="zh">1:1→开除阶梯</span></td><td>4 Coach→Fire</td></tr>
+      <tr><td><span class="en">Pay path</span><span class="zh">发薪路径</span></td><td>5 Payroll</td></tr>
+      <tr><td><span class="en">Offer letter pack</span><span class="zh">录用信包</span></td><td>📝 Offer Letter</td></tr>
+      <tr><td><span class="en">Slack how-to</span><span class="zh">Slack怎么打</span></td><td>💬 Slack OPS</td></tr>
+    </table>
+
+    <div class="box box-gate"><strong><span class="en">Auto later (bot, not you):</span><span class="zh">以后自动（机器人，不是你）：</span></strong>
+      <span class="en">Morning 3 pulls + Fri pack reminder. You still do 1:1s and human talks.</span>
+      <span class="zh">早上3拉 + 周五包提醒。1:1和谈话还是你做。</span>
+    </div>
   </div>
 </div>
 
@@ -1028,7 +1190,7 @@ body.lang-zh .en{display:none}
 </div>
 
 </div>
-<div class="footer">Wiserise Hospitality Group · People Department Roadmap · Elon 5-step · +Sally Daily OS tab · EN/中文 · 2026-07-27b · Hermes Artifact</div>
+<div class="footer">Wiserise Hospitality Group · People Department Roadmap · Sally Daily full in-page + subtabs · 2026-07-27c · Hermes Artifact</div>
 
 <script>
 function showPage(id,btn){
@@ -1044,12 +1206,44 @@ function showPage(id,btn){
   try{ history.replaceState(null,'','#'+id); }catch(e){}
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+function showSallySub(id, btn){
+  const root = document.getElementById('sallyos');
+  if(!root) return;
+  root.querySelectorAll('.subpane').forEach(p=>p.classList.remove('on'));
+  root.querySelectorAll('.subtab').forEach(b=>b.classList.remove('on'));
+  const pane = document.getElementById(id);
+  if(pane) pane.classList.add('on');
+  if(btn) btn.classList.add('on');
+  else {
+    const b = [...root.querySelectorAll('.subtab')].find(x => (x.getAttribute('onclick')||'').includes("'"+id+"'"));
+    if(b) b.classList.add('on');
+  }
+  try{
+    const base = (location.hash||'#sallyos').split('/')[0];
+    const short = id.replace(/^sally-/,'');
+    history.replaceState(null,'', base + '/' + short);
+  }catch(e){}
+}
+// extend openHash for #sallyos/today etc
+const _openHashOrig = typeof openHash === 'function' ? openHash : null;
 function openHash(){
-  const id=(location.hash||'').replace(/^#/,'').trim();
-  if(id && document.getElementById(id) && document.getElementById(id).classList.contains('page')){
-    showPage(id,null);
+  const raw = (location.hash||'').replace(/^#/,'').trim();
+  if(!raw){ if(_openHashOrig) return; }
+  const parts = raw.split('/');
+  const main = parts[0];
+  const sub = parts[1];
+  if(main && document.getElementById(main) && document.getElementById(main).classList.contains('page')){
+    showPage(main, null);
+    if(main === 'sallyos'){
+      const map = {today:'sally-today', score:'sally-score', rules:'sally-rules', week:'sally-score', kpi:'sally-score'};
+      const sid = map[(sub||'today').toLowerCase()] || 'sally-today';
+      showSallySub(sid, null);
+    }
+    return;
   }
 }
+
 document.addEventListener('DOMContentLoaded', openHash);
 window.addEventListener('hashchange', openHash);
 function showOfferRole(role,btn){
