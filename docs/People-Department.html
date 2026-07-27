@@ -232,7 +232,7 @@ code{ word-break:break-word; white-space:pre-wrap; font-size:11.5px; }
   <div class="topbar-row">
     <div>
       <h1>👥 People Department · <span class="zh">人事部</span></h1>
-      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · EN / 中文 · Elon cut 2026-07-27e</div>
+      <div class="sub">Wiserise Hospitality Group · July 2026 · 5 Stores · EN / 中文 · Elon cut 2026-07-27f</div>
     </div>
         <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
@@ -248,11 +248,11 @@ code{ word-break:break-word; white-space:pre-wrap; font-size:11.5px; }
   <button class="tab" onclick="showPage('s1',this)">1 Hire <span class="zh">招人</span></button>
   <button class="tab" onclick="showPage('s2',this)">2 Onboard <span class="zh">入职</span></button>
   <button class="tab" onclick="showPage('s3',this)">3 Schedule <span class="zh">排班</span></button>
-  <button class="tab" onclick="showPage('schedsys',this)">🗓️ Sched System <span class="zh">排班系统</span></button>
   <button class="tab" onclick="showPage('coachfire',this)">4 Coach→Fire <span class="zh">教→开</span></button>
   <button class="tab" onclick="showPage('s7',this)">5 Pay <span class="zh">工资</span></button>
   <button class="tab" onclick="showPage('offer',this)">📝 Offer</button>
   <button class="tab" onclick="showPage('rules',this)">📋 Rules <span class="zh">规矩</span></button>
+  <button class="tab" onclick="showPage('schedsys',this)">🗺️ GM Roadmap <span class="zh">GM路线图</span></button>
 </div>
 
 <div class="content">
@@ -645,9 +645,9 @@ code{ word-break:break-word; white-space:pre-wrap; font-size:11.5px; }
   <div class="box box-gate"><strong><span class="en">GM duty:</span><span class="zh">GM职责：</span></strong> <span class="en">Approve leave only after cover is set in 7shifts. Empty shift = deny.</span><span class="zh">7shifts有人顶才批。空班 = 不批。</span></div>
   <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>staffing 00003</code> · <code>roster 00003</code> · <code>time off [name] [dates] [reason]</code></div>
   <div class="box box-auto" style="margin-top:14px">
-    <strong>🗓️ <span class="en">Live multi-store board:</span><span class="zh">多店实时排班板：</span></strong>
+    <strong>🗺️ <span class="en">Live multi-store GM board:</span><span class="zh">多店实时 GM 板：</span></strong>
     <span class="en">Open top tab </span><span class="zh">打开顶栏 </span>
-    <a href="#schedsys" onclick="showPage('schedsys',null);return false" style="font-weight:700">🗓️ Sched System</a>
+    <a href="#schedsys" onclick="showPage('schedsys',null);return false" style="font-weight:700">🗺️ GM Roadmap</a>
     <span class="en"> — 00001 / 00002 / 00003 · How · Staff · Gap · Schedule · History (live from GM roadmaps).</span>
     <span class="zh"> — 00001 / 00002 / 00003 · 原理·人员·缺口·排班·历史（嵌 GM 路线图实时页）。</span>
   </div>
@@ -655,10 +655,10 @@ code{ word-break:break-word; white-space:pre-wrap; font-size:11.5px; }
 
 <!-- Live Schedule System — Sally multi-store (iframe GM #foh) -->
 <div class="page" id="schedsys">
-  <div class="page-h">🗓️ <span class="en">Schedule System</span><span class="zh">排班系统</span></div>
+  <div class="page-h">🗺️ <span class="en">GM Roadmap</span><span class="zh">GM路线图</span></div>
   <div class="page-sub">
-    <span class="en">Sally audit · all live stores · same board GMs use</span>
-    <span class="zh">Sally 稽核 · 全部在营店 · 与 GM 同一套板</span>
+    <span class="en">Sally audit · all live stores · same board GMs use · Schedule System inside</span>
+    <span class="zh">Sally 稽核 · 全部在营店 · 与 GM 同一套板 · 内含排班系统</span>
   </div>
   <div class="verified">✅ <span class="en">Live embed</span><span class="zh">实时嵌入</span> · 2026-07-27 · Louis · GM roadmaps morning refresh</div>
   <div class="pareto">
@@ -1223,7 +1223,7 @@ Stay % · Audits N/5
 </div>
 
 </div>
-<div class="footer">Wiserise Hospitality Group · People Department Roadmap · Elon 5-step · Sched System multi-store live · Sally Daily default · 2026-07-27e · Hermes Artifact</div>
+<div class="footer">Wiserise Hospitality Group · People Department Roadmap · Elon 5-step · GM Roadmap multi-store live · Sally Daily default · 2026-07-27f · Hermes Artifact</div>
 
 <script>
 function showPage(id,btn){
