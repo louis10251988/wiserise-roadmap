@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reserve at MASA — Reservation | MASA Sushi Sake & Grill + Bar</title>
+<meta name="description" content="Reserve a table at MASA Sushi Sake & Grill + Bar in Greenville, NC. Pick a date, time, and party size. We'll confirm your table within 1 hour.">
+<link rel="canonical" href="https://eatatmasa.com/reservation">
+<meta property="og:type" content="restaurant">
+<meta property="og:title" content="Reserve at MASA — Book Your Table">
+<meta property="og:description" content="Reserve a table at MASA Sushi in Greenville, NC. Pick date, time, party size. Confirmation within 1 hour.">
+<meta property="og:image" content="https://d2xsxph8kpxj0f.cloudfront.net/310519663178967618/Qh5EMW3MgtBjudZGyC6jsL/masa-hero-ayce_66822ce5.jpg">
+<meta name="theme-color" content="#7c2d12">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{--cream:#f8f5ef;--warm:#f0ebe1;--charcoal:#3a3530;--red:#c2410c;--red-rgb:194,65,12;--gold:#b8860b;--gold-rgb:184,134,11;--dark-wood:#4a3728;--text:#2a2520;--text-secondary:#6b6358;--card:rgba(0,0,0,.03);--border:rgba(0,0,0,.08);--font-display:'Playfair Display',Georgia,serif;--font-body:'Source Sans 3',system-ui,sans-serif;--font-mono:'JetBrains Mono',monospace;--radius:14px}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--red);color:#fff}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--cream);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.2}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:var(--warm)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:5px}
+.skip-link{position:absolute;top:-40px;left:0;background:var(--red);color:#fff;padding:8px 16px;z-index:10001;border-radius:0 0 8px 0}.skip-link:focus{top:0}
+#scrollProgress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--red),var(--gold));z-index:10000;transition:width .1s linear}
+
+/* Navbar */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.nav-inner{max-width:100%;margin:0 auto;padding:16px 32px;display:flex;justify-content:space-between;align-items:center;transition:all .4s}
+#navbar.nav-scrolled .nav-inner{max-width:900px;background:rgba(248,245,239,.95);border-bottom:1px solid var(--border);box-shadow:0 2px 20px rgba(0,0,0,.06);padding:12px 24px}
+#navbar:not(.nav-scrolled) .nav-logo,#navbar:not(.nav-scrolled) .nav-links a{color:#fff}
+.nav-logo{display:flex;align-items:center;gap:.6rem;font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:var(--charcoal)}
+.nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--red)}
+.nav-links{display:flex;gap:1.8rem;align-items:center}
+.nav-links a{color:var(--charcoal);font-size:.82rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;transition:color .3s}
+.nav-links a:hover{color:var(--red)}
+.nav-cta{background:var(--red);color:#fff!important;padding:9px 20px;border-radius:100px;font-weight:700;text-transform:none;letter-spacing:0;transition:all .3s}
+.nav-cta:hover{background:#993300;transform:translateY(-1px)}
+.hamburger{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--charcoal);width:44px;height:44px;align-items:center;justify-content:center}
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--cream);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--font-display);font-size:1.5rem;color:var(--charcoal)}
+.mobile-close{position:absolute;top:20px;right:20px;font-size:2rem;background:none;border:none;cursor:pointer;color:var(--charcoal);width:44px;height:44px}
+
+/* Hero */
+.reservation-hero{position:relative;min-height:40vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.reservation-hero .hero-bg{position:absolute;inset:0;z-index:0}
+.reservation-hero .hero-bg img{width:100%;height:100%;object-fit:cover}
+.reservation-hero .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.65));z-index:1}
+.reservation-hero .hero-content{position:relative;z-index:2;color:#fff;padding:100px 32px 40px}
+.reservation-hero h1{font-size:clamp(1.8rem,5vw,3rem);margin-bottom:8px;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.5)}
+.reservation-hero p{font-size:1rem;color:rgba(255,255,255,.8)}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;margin-bottom:1.5rem;border-radius:980px;border:1px solid rgba(184,134,11,.4);background:rgba(184,134,11,.1);color:var(--gold);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;backdrop-filter:blur(10px)}
+
+/* Reservation section */
+.reservation-section{max-width:700px;margin:0 auto;padding:60px 32px 80px}
+.step-title{font-size:1.4rem;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--gold)}
+
+/* Location cards */
+.reservation-locations{display:grid;gap:16px}
+.res-location-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;cursor:pointer;transition:all .3s}
+.res-location-card:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.res-location-card h3{font-size:1.15rem;margin-bottom:6px}
+.res-location-card p{font-size:.88rem;color:var(--text-secondary);margin-bottom:4px}
+
+/* Selected location banner */
+.selected-location{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.selected-location .loc-info{font-size:.9rem}
+.selected-location .loc-info strong{font-family:var(--font-display)}
+.selected-location .change-link{font-size:.82rem;color:var(--red);font-weight:600;cursor:pointer;background:none;border:none;min-height:40px;white-space:nowrap}
+
+/* Form */
+.reservation-form{display:flex;flex-direction:column;gap:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:.85rem;font-weight:600;color:var(--text)}
+.required{color:var(--red)}
+.form-group input,.form-group select,.form-group textarea{padding:12px 16px;border:1px solid var(--border);border-radius:12px;background:#fff;color:var(--text);font-size:.9rem;font-family:var(--font-body);min-height:44px}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:2px solid var(--red);outline-offset:-1px;border-color:var(--red)}
+.form-group textarea{resize:vertical}
+.form-note{font-size:.82rem;color:var(--text-secondary);font-style:italic}
+.form-msg{font-size:.88rem;margin-top:8px}
+.form-msg.error{color:var(--red)}
+.form-msg.success{color:#16a34a}
+.btn-primary{background:var(--red);color:#fff;padding:14px 32px;border-radius:var(--radius);font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:all .3s;min-height:44px;display:inline-flex;align-items:center;gap:.5rem;justify-content:center}
+.btn-primary:hover{background:#993300;transform:translateY(-2px);box-shadow:0 8px 24px rgba(var(--red-rgb),.3)}
+
+/* Success */
+.success-card{text-align:center;padding:40px;background:#fff;border:1px solid var(--border);border-radius:20px}
+.success-icon{width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,.12);color:#16a34a;font-size:2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.success-card h2{margin-bottom:12px}
+.success-card p{color:var(--text-secondary);margin-bottom:8px}
+.success-note{font-size:.88rem!important}
+.success-number{font-size:.9rem;margin:16px 0 24px}
+.success-number strong{font-family:var(--font-mono);color:var(--red)}
+
+/* Footer */
+footer{background:var(--dark-wood);color:#fff;padding:60px 32px 24px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1100px;margin:0 auto 40px}
+.footer-col h4{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;color:var(--gold)}
+.footer-col ul{list-style:none}.footer-col li{margin-bottom:8px}
+.footer-col a{color:rgba(255,255,255,.6);font-size:.85rem;transition:color .3s}.footer-col a:hover{color:var(--gold)}
+.footer-desc{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.6;margin-top:12px}
+.footer-copy{text-align:center;font-size:.8rem;color:rgba(255,255,255,.4)}
+.app-store-btn{display:flex;flex-direction:column;align-items:center;background:#000;color:#fff;border:1px solid #333;border-radius:10px;padding:8px 16px;text-decoration:none;min-height:44px;justify-content:center;margin-bottom:8px}
+.app-store-btn span{font-size:.6rem}.app-store-btn strong{font-size:.9rem}
+
+@media(max-width:640px){.form-row{grid-template-columns:1fr}}
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:flex}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="scrollProgress"></div>
+
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="masa-sushi-redesign.html" class="nav-logo"><span class="dot"></span> MASA</a>
+    <div class="nav-links">
+      <a href="masa-sushi-redesign.html#pricing">Pricing</a>
+      <a href="masa-sushi-redesign.html#menu">Menu</a>
+      <a href="masa-sushi-redesign.html#bar">Bar</a>
+      <a href="masa-sushi-redesign.html#catering">Catering</a>
+      <a href="masa-sushi-redesign.html#about">About</a>
+      <a href="masa-sushi-redesign.html#faq">FAQ</a>
+      <a href="locations.html">Locations</a>
+      <a href="https://pos.chowbus.com/online-ordering/store/masa-sushi/22124" class="nav-cta">Order Online</a>
+    </div>
+    <button class="hamburger" aria-label="Open menu" onclick="document.querySelector('.mobile-menu').classList.add('open')">☰</button>
+  </div>
+</nav>
+<div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile menu">
+  <button class="mobile-close" aria-label="Close menu" onclick="document.querySelector('.mobile-menu').classList.remove('open')">×</button>
+  <a href="masa-sushi-redesign.html#pricing" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Pricing</a>
+  <a href="masa-sushi-redesign.html#menu" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Menu</a>
+  <a href="masa-sushi-redesign.html#bar" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Bar</a>
+  <a href="masa-sushi-redesign.html#catering" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Catering</a>
+  <a href="masa-sushi-redesign.html#about" onclick="document.querySelector('.mobile-menu').classList.remove('open')">About</a>
+  <a href="masa-sushi-redesign.html#faq" onclick="document.querySelector('.mobile-menu').classList.remove('open')">FAQ</a>
+  <a href="locations.html" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Locations</a>
+  <a href="https://pos.chowbus.com/online-ordering/store/masa-sushi/22124" class="nav-cta">Order Online</a>
+</div>
+
+<main id="main">
+  <section class="reservation-hero">
+    <div class="hero-bg">
+      <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663178967618/Qh5EMW3MgtBjudZGyC6jsL/masa-hero-ayce_66822ce5.jpg" alt="Reserve at MASA Sushi Sake & Grill + Bar">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Schedule a Table</div>
+      <h1>Reserve at MASA</h1>
+      <p>Pick a location, date, time and party size. We'll confirm your table.</p>
+    </div>
+  </section>
+
+  <section class="reservation-section">
+    <!-- Step 1: Choose Location -->
+    <div class="reservation-step" id="stepLocation">
+      <h2 class="step-title">Step 1 — Choose Your Location</h2>
+      <div class="reservation-locations" id="reservationLocations"></div>
+    </div>
+
+    <!-- Step 2: Reservation Form -->
+    <div class="reservation-step" id="stepForm" style="display:none;">
+      <h2 class="step-title">Step 2 — Reservation Details</h2>
+      <div class="selected-location" id="selectedLocation"></div>
+
+      <form class="reservation-form" id="reservationForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="resName">Full Name <span class="required">*</span></label>
+            <input type="text" id="resName" name="name" required aria-required="true">
+          </div>
+          <div class="form-group">
+            <label for="resPhone">Phone <span class="required">*</span></label>
+            <input type="tel" id="resPhone" name="phone" required aria-required="true" placeholder="(252) 555-0000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="resEmail">Email <span class="required">*</span></label>
+            <input type="email" id="resEmail" name="email" required aria-required="true" placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label for="resPartySize">Party Size <span class="required">*</span></label>
+            <select id="resPartySize" name="partySize" required aria-required="true">
+              <option value="">Select party size</option>
+              <option value="1">1 Guest</option>
+              <option value="2">2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="5">5 Guests</option>
+              <option value="6">6 Guests</option>
+              <option value="7">7 Guests</option>
+              <option value="8">8 Guests</option>
+              <option value="9">9 Guests</option>
+              <option value="10">10 Guests</option>
+              <option value="10+">10+ (Large Party)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="resDate">Date <span class="required">*</span></label>
+            <input type="date" id="resDate" name="date" required aria-required="true" min="">
+          </div>
+          <div class="form-group">
+            <label for="resTime">Time <span class="required">*</span></label>
+            <select id="resTime" name="time" required aria-required="true" disabled>
+              <option value="">Pick date first</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="resRequests">Special Requests (optional)</label>
+          <textarea id="resRequests" name="requests" rows="3" placeholder="High chair, wheelchair access, birthday celebration, etc."></textarea>
+        </div>
+        <p class="form-note">We'll confirm via phone or email within 1 hour during business hours.</p>
+        <button type="submit" class="btn-primary" id="resSubmit">Request Reservation</button>
+        <p class="form-msg" id="resMsg" role="status"></p>
+      </form>
+    </div>
+
+    <!-- Step 3: Success -->
+    <div class="reservation-step" id="stepSuccess" style="display:none;">
+      <div class="success-card">
+        <div class="success-icon">✓</div>
+        <h2>Reservation Requested!</h2>
+        <p id="successDetails"></p>
+        <p class="success-note">We'll confirm via phone or email within 1 hour during business hours.</p>
+        <p class="success-number">Confirmation #: <strong id="confirmNumber"></strong></p>
+        <a href="masa-sushi-redesign.html" class="btn-primary">Back to Home</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="nav-logo" style="color:#fff;"><span class="dot"></span> MASA Sushi Sake & Grill + Bar</div>
+      <p class="footer-desc">Greenville's modern Japanese AYCE restaurant. Best all-you-can-eat sushi, hibachi, and signature rolls in Greenville, NC. Near ECU. Open daily.</p>
+    </div>
+    <div class="footer-col"><h4>Quick Links</h4><ul>
+      <li><a href="masa-sushi-redesign.html#pricing">Pricing</a></li>
+      <li><a href="masa-sushi-redesign.html#menu">Menu</a></li>
+      <li><a href="masa-sushi-redesign.html#catering">Catering</a></li>
+      <li><a href="masa-sushi-redesign.html#about">About</a></li>
+      <li><a href="masa-sushi-redesign.html#faq">FAQ</a></li>
+      <li><a href="locations.html">Locations</a></li>
+      <li><a href="reservation.html">Reserve a Table</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Location</h4><ul>
+      <li><a href="https://www.google.com/maps/dir/?api=1&destination=35.5846,-77.3664">704 SE Greenville Blvd<br>Greenville, NC 27858</a></li>
+      <li><a href="tel:2522274679">(252) 227-4679</a></li>
+      <li>Mon-Sat: 11AM-10PM</li><li>Sun: 12PM-10PM</li>
+    </ul></div>
+    <div class="footer-col"><h4>Get the App</h4>
+      <p style="font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:12px;">Order ahead, earn rewards.</p>
+      <a href="https://apps.apple.com/us/app/masa-sushi-sake-grill-bar/id6756615346" class="app-store-btn"><span>Download on the</span><strong>App Store</strong></a>
+      <a href="https://play.google.com/store/apps/details?id=com.chowbus.branded.masasushisakegrillbar" class="app-store-btn"><span>Get it on</span><strong>Google Play</strong></a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 MASA Sushi Sake & Grill + Bar. All rights reserved. · A Wiserise Hospitality Group restaurant.</div>
+</footer>
+
+<script>
+const LOCATIONS=[{id:"greenville-nc",name:"MASA Sushi Sake & Grill + Bar",shortName:"Greenville, NC",address:"704 SE Greenville Blvd",city:"Greenville",state:"NC",zip:"27858",phone:"(252) 227-4679",phoneRaw:"2522274679",lat:35.5846,lng:-77.3664,orderOnlineUrl:"https://pos.chowbus.com/online-ordering/store/masa-sushi/22124",reservationUrl:"reservation.html?location=greenville-nc",googleRating:4.6,googleReviews:751,priceRange:"$$",features:["Dine-In","Takeout","Delivery","Catering","Bar"],hours:[{day:0,open:"12:00",close:"22:00",display:"12:00 PM – 10:00 PM"},{day:1,open:"11:00",close:"22:00",display:"11:00 AM – 10:00 PM"},{day:2,open:"11:00",close:"22:00",display:"11:00 AM – 10:00 PM"},{day:3,open:"11:00",close:"22:00",display:"11:00 AM – 10:00 PM"},{day:4,open:"11:00",close:"22:00",display:"11:00 AM – 10:00 PM"},{day:5,open:"11:00",close:"22:00",display:"11:00 AM – 10:00 PM"},{day:6,open:"11:00",close:"22:00",display:"11:00 AM – 10:00 PM"}]}];
+
+let selectedLocation=null;
+const urlParams=new URLSearchParams(window.location.search);
+const preselectedId=urlParams.get('location');
+
+function timeToMinutes(s){const[h,m]=s.split(':').map(Number);return h*60+m}
+
+function renderReservationLocations(){
+  const container=document.getElementById('reservationLocations');
+  container.innerHTML=LOCATIONS.map(loc=>`
+    <div class="res-location-card" onclick="selectLocation('${loc.id}')">
+      <h3>${loc.name}</h3>
+      <p>📍 ${loc.address}, ${loc.city}, ${loc.state} ${loc.zip}</p>
+      <p>📞 ${loc.phone}</p>
+      <p>🕐 ${loc.hours.find(h=>h.day===new Date().getDay())?.display||'Hours vary'}</p>
+    </div>`).join('');
+}
+
+function selectLocation(id){
+  selectedLocation=LOCATIONS.find(l=>l.id===id);
+  if(!selectedLocation)return;
+  document.getElementById('stepLocation').style.display='none';
+  document.getElementById('stepForm').style.display='block';
+  document.getElementById('selectedLocation').innerHTML=`
+    <div class="loc-info">
+      <strong>${selectedLocation.name}</strong><br>
+      📍 ${selectedLocation.address}, ${selectedLocation.city}, ${selectedLocation.state}
+    </div>
+    <button class="change-link" onclick="changeLocation()">Change Location</button>`;
+  const today=new Date().toISOString().split('T')[0];
+  document.getElementById('resDate').min=today;
+  document.getElementById('resDate').value=today;
+  generateTimeSlots(today);
+}
+
+function changeLocation(){
+  document.getElementById('stepLocation').style.display='block';
+  document.getElementById('stepForm').style.display='none';
+  document.getElementById('stepSuccess').style.display='none';
+  selectedLocation=null;
+}
+
+function generateTimeSlots(dateStr){
+  const timeSelect=document.getElementById('resTime');
+  timeSelect.innerHTML='<option value="">Select a time</option>';
+  if(!selectedLocation||!dateStr){timeSelect.disabled=true;return}
+  const date=new Date(dateStr+'T00:00:00');
+  const dayOfWeek=date.getDay();
+  const dayHours=selectedLocation.hours.find(h=>h.day===dayOfWeek);
+  if(!dayHours){timeSelect.innerHTML='<option value="">Closed on this day</option>';timeSelect.disabled=true;return}
+  timeSelect.disabled=false;
+  const openMin=timeToMinutes(dayHours.open);
+  const closeMin=timeToMinutes(dayHours.close);
+  const lastBookingMin=closeMin-30;
+  const now=new Date();
+  const isToday=dateStr===now.toISOString().split('T')[0];
+  const currentMin=now.getHours()*60+now.getMinutes();
+  for(let m=openMin;m<=lastBookingMin;m+=30){
+    if(isToday&&m<=currentMin)continue;
+    const h=Math.floor(m/60);const min=m%60;
+    const period=h>=12?'PM':'AM';
+    const displayH=h>12?h-12:(h===0?12:h);
+    const display=`${displayH}:${String(min).padStart(2,'0')} ${period}`;
+    const value=`${String(h).padStart(2,'0')}:${String(min).padStart(2,'0')}`;
+    timeSelect.innerHTML+=`<option value="${value}">${display}</option>`;
+  }
+  if(timeSelect.children.length<=1){timeSelect.innerHTML='<option value="">No available times today</option>';timeSelect.disabled=true}
+}
+
+document.getElementById('resDate').addEventListener('change',(e)=>generateTimeSlots(e.target.value));
+
+document.getElementById('reservationForm').addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const msg=document.getElementById('resMsg');
+  const form=e.target;
+  const name=form.name.value.trim(),phone=form.phone.value.trim(),email=form.email.value.trim();
+  const partySize=form.partySize.value,date=form.date.value,time=form.time.value;
+  if(!name||!phone||!email||!partySize||!date||!time){msg.textContent='Please fill in all required fields.';msg.className='form-msg error';return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='Please enter a valid email address.';msg.className='form-msg error';return}
+  if(!/^[\d\s\-\(\)\+]+$/.test(phone)||phone.replace(/\D/g,'').length<10){msg.textContent='Please enter a valid phone number.';msg.className='form-msg error';return}
+
+  const confirmNum=generateConfirmationNumber();
+  document.getElementById('confirmNumber').textContent=confirmNum;
+  const[h,min]=time.split(':').map(Number);
+  const period=h>=12?'PM':'AM';
+  const displayH=h>12?h-12:(h===0?12:h);
+  const timeDisplay=`${displayH}:${String(min).padStart(2,'0')} ${period}`;
+  const dateObj=new Date(date+'T00:00:00');
+  const dateDisplay=dateObj.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('successDetails').innerHTML=`<strong>${name}</strong> · Party of ${partySize}<br>${selectedLocation.name}<br>${dateDisplay} at ${timeDisplay}`;
+  document.getElementById('stepForm').style.display='none';
+  document.getElementById('stepSuccess').style.display='block';
+  document.getElementById('resMsg').textContent='';
+});
+
+function generateConfirmationNumber(){
+  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let random='';for(let i=0;i<4;i++)random+=chars[Math.floor(Math.random()*chars.length)];
+  const date=new Date();
+  const dateStr=date.getFullYear()+String(date.getMonth()+1).padStart(2,'0')+String(date.getDate()).padStart(2,'0');
+  return'MASA-'+dateStr+'-'+random;
+}
+
+renderReservationLocations();
+if(preselectedId)selectLocation(preselectedId);
+
+window.addEventListener('scroll',()=>{
+  const pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+  document.getElementById('scrollProgress').style.width=pct+'%';
+  document.getElementById('navbar').classList.toggle('nav-scrolled',window.scrollY>60);
+},{passive:true});
+</script>
+</body>
+</html>
