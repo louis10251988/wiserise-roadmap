@@ -1,470 +1,384 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>30-Day Scaling Roadmap · 30天扩张路线图 · Wiserise</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
+<script>document.documentElement.classList.add("js")</script>
+<title>30-Day Scale Learning Roadmap · Wiserise</title>
 <style>
-:root {
-  --bg:#fafbfc; --card:#fff; --ink:#111827; --muted:#6b7280; --muted-light:#9ca3af;
-  --brand:#0f172a; --accent:#3b82f6;
-  --green:#059669; --green-bg:#ecfdf5;
-  --yellow:#d97706; --yellow-bg:#fffbeb;
-  --red:#dc2626; --red-bg:#fef2f2;
-  --blue:#2563eb; --blue-bg:#eff6ff;
-  --orange:#e75e2e; --orange-bg:#fff5f1;
-  --purple:#7c3aed; --purple-bg:#f3f0ff;
-  --border:#e5e7eb; --border-light:#f3f4f6;
-  --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.04); --shadow-lg:0 4px 16px rgba(0,0,0,.08);
-}
+:root{--bg:#fafbfc;--card:#fff;--ink:#111827;--muted:#6b7280;--muted-light:#9ca3af;--brand:#0f172a;--accent:#3b82f6;--green:#059669;--green-bg:#ecfdf5;--yellow:#d97706;--yellow-bg:#fffbeb;--red:#dc2626;--red-bg:#fef2f2;--blue:#2563eb;--blue-bg:#eff6ff;--border:#e5e7eb;--border-light:#f3f4f6;--radius:12px;--shadow:0 1px 2px rgba(0,0,0,.04);--shadow-lg:0 4px 16px rgba(0,0,0,.08)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:14px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 .topbar{background:var(--brand);color:#fff;padding:16px 28px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
-.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto;gap:12px}
 .topbar h1{font-size:17px;font-weight:700}
 .topbar .sub{font-size:11.5px;opacity:.65;margin-top:2px}
-.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden}
-.lang-btn{padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer}
-.lang-btn.active{background:rgba(255,255,255,.15);color:#fff}
-.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto}
-.tab{padding:11px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden;flex-shrink:0}
+.lang-btn{padding:8px 14px;min-height:44px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.lang-btn.on{background:rgba(255,255,255,.15);color:#fff}
+.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:12px 14px;min-height:44px;font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;display:inline-flex;align-items:center}
 .tab:hover{color:var(--ink)}
-.tab.active{color:var(--brand);border-bottom-color:var(--brand)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
 .content{max-width:1040px;margin:0 auto;padding:24px 20px 80px}
-.page{display:none;animation:fadeIn .2s ease}
-.page.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.pareto{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:16px 18px;margin-bottom:18px;font-size:13.5px}
+.page{display:none}
+.page.on{display:block}
+.page:target{display:block}
+.content:has(>.page:target)>.page{display:none}
+.content:has(>.page:target)>.page:target{display:block}
+.pareto{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;font-size:13.5px}
 .pareto strong{color:var(--brand)}
-.pareto-orange{background:var(--orange-bg);border-color:#fed7aa}
-.pareto-orange strong{color:var(--orange)}
-.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.why{font-size:13px;color:var(--muted);margin-bottom:14px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--card);border-radius:0 8px 8px 0}
+.outcome{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;font-size:14px;font-weight:600}
+.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin:18px 0 10px;display:flex;align-items:center;gap:8px}
 .sec-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
-table{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-th{background:var(--brand);color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:11.5px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+thead,tbody,tr{display:table;width:100%;table-layout:fixed}
+th{background:var(--brand);color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:12px}
 td{border-bottom:1px solid var(--border-light);padding:9px 10px;vertical-align:top}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:#f9fafb}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
-.card-title{font-size:15px;font-weight:700;color:var(--brand);margin-bottom:6px}
-.card-title-en{font-size:12px;color:var(--muted);margin-bottom:10px}
-.box{border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:12.5px;line-height:1.5;border:1px solid}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.box{border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:13px;line-height:1.5;border:1px solid}
 .box-rule{background:var(--yellow-bg);border-color:#fde68a}
 .box-auto{background:var(--blue-bg);border-color:#bfdbfe}
 .box-gate{background:var(--green-bg);border-color:#a7f3d0}
-.box-red{background:var(--red-bg);border-color:#fecaca}
-.box-orange{background:var(--orange-bg);border-color:#fed7aa}
-.badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:600}
-.badge-green{background:var(--green-bg);color:var(--green)}
-.badge-yellow{background:var(--yellow-bg);color:var(--yellow)}
-.badge-red{background:var(--red-bg);color:var(--red)}
+.badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600}
 .badge-blue{background:var(--blue-bg);color:var(--blue)}
-.badge-orange{background:var(--orange-bg);color:var(--orange)}
-.badge-gray{background:#f3f4f6;color:#6b7280}
-.badge-purple{background:var(--purple-bg);color:var(--purple)}
-.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px;font-size:12px}
-.flow-step{background:var(--brand);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+.badge-gate{background:#fff;border:1.5px solid var(--green);color:var(--green)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px;font-size:12px}
+.flow-step{background:var(--brand);color:#fff;padding:8px 12px;border-radius:8px;font-weight:600}
 .flow-arrow{color:var(--muted-light);font-size:18px}
-.stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.stage-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .15s}
+.stage-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:520px){.stage-grid{grid-template-columns:1fr}}
+.stage-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);text-decoration:none;color:inherit;display:block;cursor:pointer}
 .stage-card:hover{box-shadow:var(--shadow-lg)}
-.stage-num{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
-.stage-name{font-size:15px;font-weight:700;color:var(--brand);margin-bottom:6px}
-.stage-work{font-size:12px;color:var(--ink);line-height:1.5;margin-bottom:8px}
-.stage-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted)}
-.day-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
-.day-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)}
-.day-card.w1{border-left:4px solid var(--blue)}
-.day-card.w2{border-left:4px solid var(--green)}
-.day-card.w3{border-left:4px solid var(--orange)}
-.day-card.w4{border-left:4px solid var(--purple)}
-.day-num{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:2px}
-.day-title{font-size:14px;font-weight:700;color:var(--brand);margin-bottom:6px}
-.day-body{font-size:12px;color:var(--ink);line-height:1.5;margin-bottom:8px}
-.day-output{font-size:11.5px;background:#f9fafb;border-radius:6px;padding:6px 10px;color:var(--muted)}
-.day-output strong{color:var(--accent)}
-.rhythm-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
-.rhythm-row{display:flex;align-items:center;gap:16px;padding:12px 0;border-bottom:1px solid var(--border-light)}
-.rhythm-row:last-child{border-bottom:none}
-.rhythm-time{font-size:13px;font-weight:700;color:var(--accent);min-width:90px}
-.rhythm-what{font-size:13px;font-weight:600;color:var(--ink)}
-.rhythm-desc{font-size:12px;color:var(--muted)}
-.skill-row{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-light)}
-.skill-row:last-child{border-bottom:none}
-.skill-rank{font-size:18px;font-weight:800;color:var(--accent);min-width:32px}
-.skill-name{font-size:14px;font-weight:700;color:var(--brand);margin-bottom:2px}
-.skill-desc{font-size:12px;color:var(--ink);line-height:1.5}
-.skill-test{font-size:11.5px;color:var(--muted);font-style:italic;margin-top:4px}
-.deliver-list{list-style:none;margin:0;padding:0}
-.deliver-list li{padding:10px 14px;background:var(--green-bg);border:1px solid #a7f3d0;border-radius:8px;margin-bottom:8px;font-size:13px;display:flex;align-items:center;gap:8px}
-.stage-table-row td{font-size:12px}
-.kpi-link{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
-.page-h{font-size:20px;font-weight:800;color:var(--brand);margin-bottom:4px}
-.page-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
-.verified{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);background:#f3f4f6;border-radius:999px;padding:3px 10px;margin:0 0 14px}
-.ask-brain{background:var(--card);border:1px dashed #93c5fd;border-radius:var(--radius);padding:12px 14px;margin-top:16px;font-size:12.5px}
-.ask-brain strong{color:var(--blue)}
-.ask-brain code{background:#eff6ff;padding:1px 6px;border-radius:4px;font-size:12px}
-.footer{text-align:center;font-size:10px;color:var(--muted-light);padding:20px 0}
-code{background:#f3f4f6;padding:1px 6px;border-radius:4px;font-size:12px}
-.zh{display:none}
-body.lang-zh .zh{display:inline}
+.stage-num{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.stage-name{font-size:16px;font-weight:700;color:var(--brand);margin-bottom:8px}
+.stage-work{font-size:13px;margin-bottom:10px}
+.gate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:800px){.gate-row{grid-template-columns:1fr 1fr}}
+.gate-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center;box-shadow:var(--shadow)}
+.gate-card .g-who{font-size:13px;font-weight:700;color:var(--brand);margin:6px 0 4px}
+.gate-card .g-what{font-size:12px;color:var(--muted)}
+.verified{font-size:12px;color:var(--green);margin-bottom:12px;font-weight:600}
+.ask-brain{background:var(--card);border:1px dashed var(--border);border-radius:var(--radius);padding:12px 14px;margin-top:12px;font-size:13px}
+.ask-brain code,.box code,td code{background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:12.5px;white-space:pre-wrap;word-break:break-word}
+.page-h{font-size:20px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:12px}
+body.lang-en .zh{display:none}
 body.lang-zh .en{display:none}
-body.lang-both .zh{display:inline}
-body.lang-both .en{display:inline}
-.en{display:inline}
-@media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab{display:none}.lang-toggle{display:none}}
-@media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}.day-grid{grid-template-columns:1fr}}
-@media(max-width:500px){.stage-grid{grid-template-columns:1fr}}
+.footer{text-align:center;font-size:10px;color:var(--muted);padding:8px 0 24px}
+a{color:var(--blue)}
+.pulls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:700px){.pulls{grid-template-columns:1fr}}
+.pull{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:13px}
+.pull strong{display:block;margin-bottom:6px;color:var(--brand)}
+.rhythm{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+@media(max-width:800px){.rhythm{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.rhythm{grid-template-columns:1fr}}
+.r-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px}
+.r-card .t{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px}
+.r-card .n{font-size:13px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.r-card .d{font-size:12px;color:var(--muted)}
+.out-list{list-style:none;margin:0 0 14px;padding:0}
+.out-list li{background:var(--green-bg);border:1px solid #a7f3d0;border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:13px}
+@supports(padding:max(0px)){
+  .topbar{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right))}
+  .content{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));padding-bottom:max(80px,calc(64px + env(safe-area-inset-bottom)))}
+  .tabs{padding-left:max(6px,env(safe-area-inset-left))}
+}
+@media(max-width:420px){.topbar .sub{display:none}}
 </style>
 </head>
-<body class="lang-both">
-
-<div class="topbar">
-  <div class="topbar-row">
-    <div>
-      <h1>🚀 30-Day Scaling Roadmap · <span class="zh">30天扩张路线图</span></h1>
-      <div class="sub">Wiserise Hospitality Group · Aug 2026 · Owner self-training · <span class="zh">老板自学</span></div>
-    </div>
-    <div class="lang-toggle">
-      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
-      <button class="lang-btn" onclick="setLang('zh',this)">中文</button>
-      <button class="lang-btn active" onclick="setLang('both',this)">EN+中文</button>
-    </div>
-  </div>
+<body class="lang-en">
+<div class="topbar"><div class="topbar-row">
+<div>
+<h1>30-Day Scale Learning · <span class="zh">30天扩张学习</span></h1>
+<div class="sub">Wiserise · Owner path · Cycle ends 2026-09-02 · roadmap-skill</div>
 </div>
-
-<div class="tabs">
-  <button class="tab active" onclick="showPage('ov',this)">📊 Overview <span class="zh">总览</span></button>
-  <button class="tab" onclick="showPage('skills',this)">🧠 10 Skills <span class="zh">10技能</span></button>
-  <button class="tab" onclick="showPage('rhythm',this)">⏰ Daily Rule <span class="zh">每日</span></button>
-  <button class="tab" onclick="showPage('w1',this)">W1 <span class="zh">第一周</span></button>
-  <button class="tab" onclick="showPage('w2',this)">W2 <span class="zh">第二周</span></button>
-  <button class="tab" onclick="showPage('w3',this)">W3 <span class="zh">第三周</span></button>
-  <button class="tab" onclick="showPage('w4',this)">W4 <span class="zh">第四周</span></button>
-  <button class="tab" onclick="showPage('deliver',this)">📦 Deliverables <span class="zh">成果</span></button>
-  <button class="tab" onclick="showPage('rules',this)">📋 Rules <span class="zh">规矩</span></button>
+<div class="lang-toggle">
+<a class="lang-btn on" href="#" onclick="setLang('en',this);return false">EN</a>
+<a class="lang-btn" href="#" onclick="setLang('zh',this);return false">中文</a>
 </div>
+</div></div>
+
+<nav class="tabs" id="tabs">
+<a class="tab on" href="#ops" onclick="go('ops',this);return false">Slack OPS</a>
+<a class="tab" href="#map" onclick="go('map',this);return false">Map <span class="zh">总图</span></a>
+<a class="tab" href="#money" onclick="go('money',this);return false">1 Money <span class="zh">钱</span></a>
+<a class="tab" href="#leaders" onclick="go('leaders',this);return false">2 Leaders <span class="zh">人</span></a>
+<a class="tab" href="#systems" onclick="go('systems',this);return false">3 Systems <span class="zh">系统</span></a>
+<a class="tab" href="#multiply" onclick="go('multiply',this);return false">4 Multiply <span class="zh">复制</span></a>
+<a class="tab" href="#rules" onclick="go('rules',this);return false">Rules <span class="zh">规矩</span></a>
+</nav>
 
 <div class="content">
 
-<!-- OVERVIEW -->
-<div class="page active" id="ov">
-  <div class="page-h">📊 <span class="en">30 Days to Scale Wiserise</span><span class="zh">30天扩张Wiserise</span></div>
-  <div class="page-sub"><span class="en">One page. One goal. One plan.</span><span class="zh">一页纸。一个目标。一个计划。</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-03 · Louis</div>
+<!-- OPS -->
+<div class="page on" id="ops">
+<div class="verified">OK Elon 5-step · 2026-08-03 · <span class="en">Verified</span><span class="zh">已验证</span></div>
+<div class="page-h">Slack OPS</div>
+<div class="page-sub"><span class="en">Open here every day. Path in Map. Numbers from Brain. Write one real output.</span><span class="zh">每天先开这页。路径在总图。数字问Brain。每天写一个真成果。</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">You scale when the company works without you. This path trains that muscle in 30 days.</span><span class="zh">公司不靠你也能转，才叫扩张。这条路径30天练这个肌肉。</span></div>
+<div class="pareto"><strong>80/20:</strong> <span class="en">Leaders + store economics + simple systems. Marketing and leases wait until those three are true.</span><span class="zh">领导 + 单店赚钱 + 简单系统。营销和租约等这三样真了再说。</span></div>
 
-  <div class="pareto pareto-orange"><strong><span class="en">First Principle:</span><span class="zh">第一性原理：</span></strong> <span class="en">A business scales when it can <strong>repeatedly</strong> attract customers, serve them well, make money, and teach others to repeat the process — without Louis doing it all.</span><span class="zh">一个生意能扩张，当它能<strong>重复</strong>吸引客人、服务好、赚钱、教别人重复这个过程——而且不需要Louis亲自做。</span></div>
-
-  <div class="sec-title"><span class="en">4 Weeks · 4 Goals</span><span class="zh">4周 · 4个目标</span></div>
-  <div class="stage-grid">
-    <div class="stage-card" onclick="goTab(3)">
-      <div class="stage-num">WEEK 1</div>
-      <div class="stage-name">Understand the Business</div>
-      <div class="stage-work"><span class="en">Money in, money out. Find the biggest problem.</span><span class="zh">钱进，钱出。找到最大问题。</span></div>
-      <div class="stage-meta"><span class="badge badge-blue">Days 1-7</span> <span class="badge badge-gray">7 outputs</span></div>
-    </div>
-    <div class="stage-card" onclick="goTab(4)">
-      <div class="stage-num">WEEK 2</div>
-      <div class="stage-name">Build People & Leaders</div>
-      <div class="stage-work"><span class="en">Can your leaders run the store without you?</span><span class="zh">你的领导能不靠你管店吗？</span></div>
-      <div class="stage-meta"><span class="badge badge-green">Days 8-14</span> <span class="badge badge-gray">7 outputs</span></div>
-    </div>
-    <div class="stage-card" onclick="goTab(5)">
-      <div class="stage-num">WEEK 3</div>
-      <div class="stage-name">Operations & Demand</div>
-      <div class="stage-work"><span class="en">Simple SOPs. Clear brand. Customer engine.</span><span class="zh">简单SOP。清晰品牌。客人引擎。</span></div>
-      <div class="stage-meta"><span class="badge badge-orange">Days 15-21</span> <span class="badge badge-gray">7 outputs</span></div>
-    </div>
-  </div>
-  <div class="stage-grid">
-    <div class="stage-card" onclick="goTab(6)">
-      <div class="stage-num">WEEK 4</div>
-      <div class="stage-name">Growth & Multiply</div>
-      <div class="stage-work"><span class="en">Sites, deals, data, capital, your real job.</span><span class="zh">选址、谈判、数据、资本、你真正的工作。</span></div>
-      <div class="stage-meta"><span class="badge badge-purple">Days 22-30</span> <span class="badge badge-gray">9 outputs</span></div>
-    </div>
-    <div class="stage-card" onclick="goTab(7)">
-      <div class="stage-num">AFTER 30 DAYS</div>
-      <div class="stage-name">10 Deliverables</div>
-      <div class="stage-work"><span class="en">What you hold in your hand on Day 31.</span><span class="zh">第31天你手里有的东西。</span></div>
-      <div class="stage-meta"><span class="badge badge-green">Output</span></div>
-    </div>
-    <div class="stage-card" onclick="goTab(1)">
-      <div class="stage-num">FOUNDATION</div>
-      <div class="stage-name">10 Core Skills</div>
-      <div class="stage-work"><span class="en">The skills behind every day's work.</span><span class="zh">每天工作背后的核心技能。</span></div>
-      <div class="stage-meta"><span class="badge badge-blue">Priority 1-10</span></div>
-    </div>
-  </div>
-
-  <div class="sec-title"><span class="en">The Real Priority</span><span class="zh">真正的优先级</span></div>
-  <div class="card">
-    <div class="card-title"><span class="en">If you only do 5 things first:</span><span class="zh">如果你先只做5件事：</span></div>
-    <table>
-      <tr><th style="width:8%">#</th><th style="width:46%"><span class="en">Skill</span><span class="zh">技能</span></th><th style="width:46%"><span class="en">Why</span><span class="zh">为什么</span></th></tr>
-      <tr><td><strong>1</strong></td><td>Build leaders</td><td><span class="en">One Louis = few stores. Ten leaders = many.</span><span class="zh">一个Louis=几家店。十个领导=很多家。</span></td></tr>
-      <tr><td><strong>2</strong></td><td>Store economics</td><td><span class="en">Growth creates wealth only if each store makes money.</span><span class="zh">只有每家店赚钱，扩张才创造财富。</span></td></tr>
-      <tr><td><strong>3</strong></td><td>Repeatable systems</td><td><span class="en">Transfer your judgment into systems others follow.</span><span class="zh">把你的判断变成别人能跟的系统。</span></td></tr>
-      <tr><td><strong>4</strong></td><td>Hire & train reliably</td><td><span class="en">Find good people faster than you lose them.</span><span class="zh">找好人比你丢人快。</span></td></tr>
-      <tr><td><strong>5</strong></td><td>Create customer demand</td><td><span class="en">Operations without demand = empty restaurant.</span><span class="zh">运营没有需求=空餐厅。</span></td></tr>
-    </table>
-  </div>
-
-  <div class="ask-brain">
-    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
-    <code>show store sales last 30 days</code> · <code>show labor % by store</code> · <code>who are my GMs</code>
-  </div>
+<div class="sec-title"><span class="en">Daily rhythm (60–90 min)</span><span class="zh">每日节奏（60–90分钟）</span></div>
+<div class="rhythm">
+<div class="r-card"><div class="t">20 min</div><div class="n"><span class="en">Learn</span><span class="zh">学</span></div><div class="d"><span class="en">One topic only</span><span class="zh">只一个主题</span></div></div>
+<div class="r-card"><div class="t">20 min</div><div class="n"><span class="en">Look</span><span class="zh">看</span></div><div class="d"><span class="en">Real store / real number</span><span class="zh">真店 / 真数</span></div></div>
+<div class="r-card"><div class="t">30 min</div><div class="n"><span class="en">Do</span><span class="zh">做</span></div><div class="d"><span class="en">One real change</span><span class="zh">一个真改动</span></div></div>
+<div class="r-card"><div class="t">10 min</div><div class="n"><span class="en">Write</span><span class="zh">写</span></div><div class="d"><span class="en">Output page</span><span class="zh">成果一页</span></div></div>
 </div>
 
-<!-- 10 SKILLS -->
-<div class="page" id="skills">
-  <div class="page-h">🧠 <span class="en">10 Core Skills by Priority</span><span class="zh">10个核心技能（按优先级）</span></div>
-  <div class="page-sub"><span class="en">First principles. Simple enough for a 10-year-old.</span><span class="zh">第一性原理。10岁也能懂。</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-03 · Louis</div>
-
-  <div class="pareto"><strong><span class="en">Core scaling skill:</span><span class="zh">核心扩张技能：</span></strong> <span class="en">Don't ask "How can I do this better?" Ask "How can the company do this correctly without needing me?"</span><span class="zh">不要问"我怎么能做得更好？"要问"公司怎么能不需要我就做对？"</span></div>
-
-  <div class="card">
-    <div class="skill-row"><div class="skill-rank">1</div><div><div class="skill-name">Build Leaders <span class="zh">建领导</span></div><div class="skill-desc"><span class="en">Stop being the strongest worker. Build people who lead other people.</span><span class="zh">不要当最强的工人。要培养能带人的人。</span></div><div class="skill-test">🧪 <span class="en">If you disappear 30 days, does each store get better or worse?</span><span class="zh">如果你消失30天，每家店变好还是变坏？</span></div></div></div>
-    <div class="skill-row"><div class="skill-rank">2</div><div><div class="skill-name">Unit Economics & Capital <span class="zh">单店经济与资本</span></div><div class="skill-desc"><span class="en">Know exactly where every dollar comes from and where it goes.</span><span class="zh">清楚每一块钱从哪来、到哪去。</span></div><div class="skill-test">🧪 <span class="en">Can you explain in 5 min why one store makes money and another doesn't?</span><span class="zh">你能5分钟说清为什么一家赚钱一家不赚？</span></div></div></div>
-    <div class="skill-row"><div class="skill-rank">3</div><div><div class="skill-name">Operating System <span class="zh">操作系统</span></div><div class="skill-desc"><span class="en">Make the right way the easy way. SOPs, checklists, scorecards.</span><span class="zh">让对的做法变成容易的做法。SOP、清单、记分卡。</span></div><div class="skill-test">🧪 <span class="en">Can a new GM know what "good" looks like without 50 questions?</span><span class="zh">新GM能不问50个问题就知道什么是"好"？</span></div></div></div>
-    <div class="skill-row"><div class="skill-rank">4</div><div><div class="skill-name">Customer Demand & Brand <span class="zh">客户需求与品牌</span></div><div class="skill-desc"><span class="en">Know why customers choose you instead of the restaurant next door.</span><span class="zh">知道客人为什么选你不选隔壁。</span></div><div class="skill-test">🧪 <span class="en">Can a customer say in one sentence why you're special?</span><span class="zh">客人能一句话说出你特别在哪？</span></div></div></div>
-    <div class="skill-row"><div class="skill-rank">5</div><div><div class="skill-name">Hiring & Training <span class="zh">招人与培训</span></div><div class="skill-desc"><span class="en">Find good people faster than you lose them. People are the product.</span><span class="zh">找好人比你丢人快。人就是产品。</span></div><div class="skill-test">🧪 <span class="en">Can every store hire, train, and certify using the same process?</span><span class="zh">每家店能用同一套流程招、训、认证？</span></div></div></div>
-    <div class="skill-row"><div class="skill-rank">6</div><div><div class="skill-name">Site Selection & Real Estate <span class="zh">选址与地产</span></div><div class="skill-desc"><span class="en">A bad location defeats a great restaurant.</span><span class="zh">差的选址能打败好的餐厅。</span></div><div class="skill-test">🧪 <span class="en">Before signing a lease, can you estimate sales, costs, and downside?</span><span class="zh">签约前能估算销售、成本、风险？</span></div></div></div>
-    <div class="skill-row"><div class="skill-rank">7</div><div><div class="skill-name">Sales & Marketing <span class="zh">销售与营销</span></div><div class="skill-desc"><span class="en">Don't wait for customers to discover you.</span><span class="zh">不要等客人自己发现你。</span></div><div class="skill-test">🧪 <span class="en">Can a GM create a plan to bring in more profitable customers?</span><span class="zh">GM能做出带更多赚钱客人的计划？</span></div></div></div>
-    <div class="skill-row"><div class="skill-rank">8</div><div><div class="skill-name">Disciplined Decisions <span class="zh">纪律性决策</span></div><div class="skill-desc"><span class="en">Fewer emotional decisions, more tested decisions.</span><span class="zh">少感情用事，多测试验证。</span></div><div class="skill-test">🧪 <span class="en">Can you separate facts, assumptions, opinions, and hopes?</span><span class="zh">你能分清事实、假设、意见、希望？</span></div></div></div>
-    <div class="skill-row"><div class="skill-rank">9</div><div><div class="skill-name">Data & Technology <span class="zh">数据与技术</span></div><div class="skill-desc"><span class="en">Use computers to watch the business so humans can improve it.</span><span class="zh">用电脑看生意，人去改生意。</span></div><div class="skill-test">🧪 <span class="en">Does every important number lead to a clear action?</span><span class="zh">每个重要数字都能导向一个明确行动？</span></div></div></div>
-    <div class="skill-row"><div class="skill-rank">10</div><div><div class="skill-name">Negotiation & Relationships <span class="zh">谈判与关系</span></div><div class="skill-desc"><span class="en">Better deals compound for years.</span><span class="zh">更好的交易复利多年。</span></div><div class="skill-test">🧪 <span class="en">Do you enter negotiations knowing your alternatives and limits?</span><span class="zh">谈判前你知道自己的替代方案和底线？</span></div></div></div>
-  </div>
-
-  <div class="sec-title"><span class="en">10-Year Job Evolution</span><span class="zh">10年工作演变</span></div>
-  <div class="card">
-    <table>
-      <tr><th><span class="en">Stage</span><span class="zh">阶段</span></th><th><span class="en">Your Main Job</span><span class="zh">你的主要工作</span></th></tr>
-      <tr><td><span class="en">Small company</span><span class="zh">小公司</span></td><td><span class="en">Solve problems personally</span><span class="zh">亲自解决问题</span></td></tr>
-      <tr><td><span class="en">Growing company</span><span class="zh">成长中</span></td><td><span class="en">Build repeatable systems</span><span class="zh">建可重复系统</span></td></tr>
-      <tr><td><span class="en">Multi-store</span><span class="zh">多店</span></td><td><span class="en">Build leaders and capital discipline</span><span class="zh">培养领导、资本纪律</span></td></tr>
-      <tr><td><span class="en">Large company</span><span class="zh">大公司</span></td><td><span class="en">Allocate resources and protect culture</span><span class="zh">分配资源、保护文化</span></td></tr>
-      <tr><td><span class="en">Scaled company</span><span class="zh">规模化</span></td><td><span class="en">Design the machine that designs the next machine</span><span class="zh">设计能设计下一台机器的机器</span></td></tr>
-    </table>
-  </div>
-
-  <div class="ask-brain">
-    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
-    <code>show manager scorecard</code> · <code>show store profit ranking</code>
-  </div>
+<div class="sec-title"><span class="en">3 pulls</span><span class="zh">3句先发</span></div>
+<div class="pulls">
+<div class="pull"><strong>1. Money</strong><code>store sales last 30 days</code><br><code>labor % by store</code></div>
+<div class="pull"><strong>2. People</strong><code>who are my GMs</code><br><code>roster</code> / <code>gap</code></div>
+<div class="pull"><strong>3. Health</strong><code>store health</code><br><code>reviews</code></div>
 </div>
 
-<!-- DAILY RHYTHM -->
-<div class="page" id="rhythm">
-  <div class="page-h">⏰ <span class="en">The Daily Rule</span><span class="zh">每日规则</span></div>
-  <div class="page-sub"><span class="en">60–90 minutes. Every day. No exceptions.</span><span class="zh">每天60–90分钟。没有例外。</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-03 · Louis</div>
+<div class="box box-gate"><strong><span class="en">First gate:</span><span class="zh">第一关：</span></strong> Louis · G1 · <span class="en">name the biggest money problem in writing</span><span class="zh">书面写出最大赚钱问题</span></div>
 
-  <div class="pareto pareto-orange"><strong><span class="en">Rule:</span><span class="zh">规则：</span></strong> <span class="en">Do not only watch videos. Every day must produce something useful for Wiserise.</span><span class="zh">不要只看视频。每天必须产出对Wiserise有用的东西。</span></div>
-
-  <div class="rhythm-box">
-    <div class="rhythm-row">
-      <div class="rhythm-time">20 min</div>
-      <div><div class="rhythm-what"><span class="en">📖 Learn</span><span class="zh">📖 学习</span></div><div class="rhythm-desc"><span class="en">Read, study, or watch one focused topic.</span><span class="zh">读、学、看一个聚焦的主题。</span></div></div>
-    </div>
-    <div class="rhythm-row">
-      <div class="rhythm-time">20 min</div>
-      <div><div class="rhythm-what"><span class="en">👁️ Look at your real business</span><span class="zh">👁️ 看你的真生意</span></div><div class="rhythm-desc"><span class="en">Pull real numbers. Observe one store. Talk to one person.</span><span class="zh">拉真实数字。看一家店。跟一个人说话。</span></div></div>
-    </div>
-    <div class="rhythm-row">
-      <div class="rhythm-time">30 min</div>
-      <div><div class="rhythm-what"><span class="en">🔧 Do one improvement</span><span class="zh">🔧 做一个改进</span></div><div class="rhythm-desc"><span class="en">Not a plan. A real change. Today.</span><span class="zh">不是计划。是真实的改变。今天。</span></div></div>
-    </div>
-    <div class="rhythm-row">
-      <div class="rhythm-time">10 min</div>
-      <div><div class="rhythm-what"><span class="en">✍️ Write what you learned</span><span class="zh">✍️ 写下你学到的</span></div><div class="rhythm-desc"><span class="en">One page. What did I learn? What will I do?</span><span class="zh">一页纸。我学到了什么？我要做什么？</span></div></div>
-    </div>
-  </div>
-
-  <div class="box box-gate"><strong><span class="en">Weekly review (every Day 7):</span><span class="zh">每周回顾（每第7天）：</span></strong> <span class="en">What did I learn? What was surprising? What should we stop? What should we repeat?</span><span class="zh">我学到了什么？什么让我惊讶？该停止什么？该重复什么？</span></div>
-
-  <div class="ask-brain">
-    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
-    <code>show today's store scorecard</code> · <code>what changed since yesterday</code>
-  </div>
+<div class="card">
+<div class="sec-title" style="margin-top:0"><span class="en">Rule</span><span class="zh">规矩</span></div>
+<p><span class="en">No video-only days. Every day ends with a real Wiserise artifact you can show someone.</span><span class="zh">禁止只看视频。每天结束必须有能给人看的真成果。</span></p>
 </div>
 
-<!-- WEEK 1 -->
-<div class="page" id="w1">
-  <div class="page-h">📅 <span class="en">Week 1: Understand the Business</span><span class="zh">第一周：理解生意</span></div>
-  <div class="page-sub"><span class="en">Money in, money out. Find the biggest problem.</span><span class="zh">钱进，钱出。找到最大问题。</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-03 · Louis</div>
+<div class="sec-title"><span class="en">Where</span><span class="zh">去哪</span></div>
+<table>
+<tr><th><span class="en">Work</span><span class="zh">事</span></th><th><span class="en">Where</span><span class="zh">哪</span></th></tr>
+<tr><td><span class="en">Learn path / owner decisions</span><span class="zh">学习路径/老板决策</span></td><td>#02-executive · Louis</td></tr>
+<tr><td><span class="en">Store truth / numbers</span><span class="zh">店真相/数字</span></td><td>Brain · <strong>WISE OPS</strong> store ch</td></tr>
+<tr><td><span class="en">Hire / roster / train</span><span class="zh">招/人/训</span></td><td>#06-people · store ch</td></tr>
+</table>
 
-  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">Know exactly where every dollar comes from and where it goes.</span><span class="zh">清楚每一块钱从哪来、到哪去。</span></div>
-
-  <div class="day-grid">
-    <div class="day-card w1"><div class="day-num">DAY 1</div><div class="day-title">Learn the Business Formula</div><div class="day-body"><span class="en">Customers − Costs = Profit. Write: how customers find you, what they buy, what it costs to serve them, what profit remains.</span><span class="zh">客人−成本=利润。写下：客人怎么找到你、买什么、服务成本多少、剩多少利润。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One-page Wiserise business map</span><span class="zh">一页Wiserise生意地图</span></div></div>
-    <div class="day-card w1"><div class="day-num">DAY 2</div><div class="day-title">Learn Store Economics</div><div class="day-body"><span class="en">Study: sales, labor, food cost, rent, other expenses, profit.</span><span class="zh">学习：销售、人工、食材成本、租金、其他费用、利润。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Simple profit sheet for one store</span><span class="zh">一家店的简单利润表</span></div></div>
-    <div class="day-card w1"><div class="day-num">DAY 3</div><div class="day-title">Find the Biggest Money Problem</div><div class="day-body"><span class="en">Compare stores. Which makes the most? Which loses the most? Why?</span><span class="zh">对比各店。哪家赚最多？哪家亏最多？为什么？</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Top 3 financial problems</span><span class="zh">前3个财务问题</span></div></div>
-    <div class="day-card w1"><div class="day-num">DAY 4</div><div class="day-title">Learn Cash Control</div><div class="day-body"><span class="en">Review: sales reporting, cash drawers, voids, discounts, payroll, vendor payments.</span><span class="zh">检查：销售报告、钱箱、 void、折扣、工资、供应商付款。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Cash-risk checklist</span><span class="zh">现金风险清单</span></div></div>
-    <div class="day-card w1"><div class="day-num">DAY 5</div><div class="day-title">Learn Decision-Making</div><div class="day-body"><span class="en">For one problem, write: What do we know? What are we guessing? What would prove us wrong? What is the cheapest test?</span><span class="zh">针对一个问题写：我们知道什么？在猜什么？什么能证明我们错？最便宜的测试是什么？</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One decision memo</span><span class="zh">一份决策备忘录</span></div></div>
-    <div class="day-card w1"><div class="day-num">DAY 6</div><div class="day-title">Review a Real Store</div><div class="day-body"><span class="en">Observe one store without fixing everything. Watch: guests, employees, food, speed, cleanliness, manager behavior.</span><span class="zh">看一家店，不要马上修所有东西。观察：客人、员工、食物、速度、清洁、经理行为。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">5 observations + 3 actions</span><span class="zh">5个观察+3个行动</span></div></div>
-    <div class="day-card w1"><div class="day-num">DAY 7</div><div class="day-title">Weekly Review</div><div class="day-body"><span class="en">What did I learn? What was surprising? What should we stop? What should we repeat?</span><span class="zh">我学到了什么？什么让我惊讶？该停止什么？该重复什么？</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One-page Week 1 review</span><span class="zh">一页第一周回顾</span></div></div>
-  </div>
-
-  <div class="ask-brain">
-    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
-    <code>show store sales last 30 days</code> · <code>show labor % by store</code> · <code>show food cost by store</code>
-  </div>
+<div class="ask-brain"><strong>Ask Brain:</strong>
+<code>store sales last 30 days</code> · <code>labor % by store</code> · <code>who are my GMs</code> · <code>store health</code> · <code>gap</code> · <code>reviews</code>
+</div>
 </div>
 
-<!-- WEEK 2 -->
-<div class="page" id="w2">
-  <div class="page-h">👥 <span class="en">Week 2: Build People & Leaders</span><span class="zh">第二周：建人与领导</span></div>
-  <div class="page-sub"><span class="en">Can your leaders run the store without you?</span><span class="zh">你的领导能不靠你管店吗？</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-03 · Louis</div>
+<!-- MAP -->
+<div class="page" id="map">
+<div class="verified">OK 2026-08-03 · Cycle ends <strong>2026-09-02</strong></div>
+<div class="page-h">Map <span class="zh">总图</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">One order so you don’t bounce between shiny work. Money → people → systems → multiply.</span><span class="zh">一张顺序：钱 → 人 → 系统 → 复制。别追新鲜事。</span></div>
 
-  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">Build people who can lead other people. One Louis = few stores. Ten leaders = many.</span><span class="zh">培养能带人的人。一个Louis=几家店。十个领导=很多家。</span></div>
+<div class="outcome"><span class="en">By 2026-09-02:</span><span class="zh">2026-09-02前：</span>
+<span class="en">You can name the biggest bottleneck, the owner of the fix, a simple system, and a measure — without Louis doing floor work. Company path runs without you answering “what next?”</span>
+<span class="zh">你能说出最大瓶颈、谁修、简单系统、怎么量 — Louis不做楼面活。公司路径不用你答“下一步做什么”。</span></div>
 
-  <div class="day-grid">
-    <div class="day-card w2"><div class="day-num">DAY 8</div><div class="day-title">Learn What a Great GM Does</div><div class="day-body"><span class="en">Write the 5 most important GM responsibilities.</span><span class="zh">写出GM最重要的5个职责。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One-page GM job card</span><span class="zh">一页GM工作卡</span></div></div>
-    <div class="day-card w2"><div class="day-num">DAY 9</div><div class="day-title">Learn How to Choose Leaders</div><div class="day-body"><span class="en">Define what a great leader must be: reliable, honest, calm, clear, accountable, able to teach others.</span><span class="zh">定义好领导的标准：靠谱、诚实、冷静、清晰、有担当、能教人。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Leadership scorecard</span><span class="zh">领导力评分卡</span></div></div>
-    <div class="day-card w2"><div class="day-num">DAY 10</div><div class="day-title">Evaluate Current Leaders</div><div class="day-body"><span class="en">Score each manager 1–5 on: results, people leadership, communication, follow-through, problem-solving.</span><span class="zh">给每个经理1-5分打分：结果、带人、沟通、执行力、解决问题。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Manager development list</span><span class="zh">经理发展清单</span></div></div>
-    <div class="day-card w2"><div class="day-num">DAY 11</div><div class="day-title">Learn Coaching</div><div class="day-body"><span class="en">Practice: What happened? Why? What should happen next time? What will you do now? When will we check again?</span><span class="zh">练习：发生了什么？为什么？下次该怎样？你现在要做什么？我们什么时候检查？</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One real coaching conversation</span><span class="zh">一次真实辅导对话</span></div></div>
-    <div class="day-card w2"><div class="day-num">DAY 12</div><div class="day-title">Learn Hiring</div><div class="day-body"><span class="en">Improve: job ad, interview questions, candidate scorecard, reference checks.</span><span class="zh">改进：招聘广告、面试问题、候选人评分卡、背景调查。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Complete hiring scorecard for one role</span><span class="zh">一个岗位的完整招聘评分卡</span></div></div>
-    <div class="day-card w2"><div class="day-num">DAY 13</div><div class="day-title">Learn Training</div><div class="day-body"><span class="en">For one role, define: what they must know, what they must do, how they are tested, who certifies them.</span><span class="zh">为一个岗位定义：必须知道什么、必须做什么、怎么测试、谁认证。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One role training checklist</span><span class="zh">一个岗位培训清单</span></div></div>
-    <div class="day-card w2"><div class="day-num">DAY 14</div><div class="day-title">Weekly Review</div><div class="day-body"><span class="en">If I disappeared for 30 days, which leader would succeed and which would struggle?</span><span class="zh">如果我消失30天，哪个领导能行？哪个会挣扎？</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Leadership bench plan</span><span class="zh">领导梯队计划</span></div></div>
-  </div>
+<div class="pareto"><strong>80/20:</strong> <span class="en">Build leaders. Know store profit. Make the right way easy. Hire/train reliably. Create demand only after those work.</span><span class="zh">建领导。懂单店利润。让对的做法容易。招训可靠。这四样好了再猛推需求。</span></div>
 
-  <div class="ask-brain">
-    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
-    <code>show all managers and roles</code> · <code>show hiring pipeline</code> · <code>show training status</code>
-  </div>
+<div class="box box-gate"><strong>THIS CYCLE → 2026-09-02:</strong>
+<span class="en">1 profit sheet · manager scorecard · 1 SOP · 1 scorecard · 1 marketing test · 90-day priority · owner job list</span>
+<span class="zh">1利润表 · 经理评分卡 · 1 SOP · 1记分卡 · 1营销测试 · 90天优先 · 老板工作清单</span></div>
+<div class="box box-rule"><strong>LATER:</strong>
+<span class="en">new store open · full brand overhaul · deep automation library · multi-market leases</span>
+<span class="zh">新店开业 · 全品牌重做 · 深自动化库 · 多市场租约</span></div>
+
+<div class="sec-title"><span class="en">Path</span><span class="zh">路径</span></div>
+<div class="flow">
+<span class="flow-step">1 Money</span><span class="flow-arrow">→</span>
+<span class="flow-step">2 Leaders</span><span class="flow-arrow">→</span>
+<span class="flow-step">3 Systems</span><span class="flow-arrow">→</span>
+<span class="flow-step">4 Multiply</span>
+</div>
+<div style="font-size:12px;color:var(--muted);margin-bottom:12px">
+<span class="badge badge-gate">Gate</span> Louis ·
+<span class="badge badge-blue">Auto</span> WISE OPS / Brain
 </div>
 
-<!-- WEEK 3 -->
-<div class="page" id="w3">
-  <div class="page-h">⚙️ <span class="en">Week 3: Operations & Customer Demand</span><span class="zh">第三周：运营与客户需求</span></div>
-  <div class="page-sub"><span class="en">Simple SOPs. Clear brand. Customer engine.</span><span class="zh">简单SOP。清晰品牌。客人引擎。</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-03 · Louis</div>
-
-  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">Make the right way the easy way. Transfer your judgment into systems others follow.</span><span class="zh">让对的做法变成容易的做法。把你的判断变成别人能跟的系统。</span></div>
-
-  <div class="day-grid">
-    <div class="day-card w3"><div class="day-num">DAY 15</div><div class="day-title">Find the Best Current Process</div><div class="day-body"><span class="en">Choose one: opening, closing, cash handling, guest greeting, food prep, cleaning. Write the current process step by step.</span><span class="zh">选一个：开店、关店、现金、迎客、备餐、清洁。写出当前流程每一步。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Current process written out</span><span class="zh">写出的当前流程</span></div></div>
-    <div class="day-card w3"><div class="day-num">DAY 16</div><div class="day-title">Make the Process Simpler</div><div class="day-body"><span class="en">Remove: unnecessary steps, confusing language, duplicate work, steps nobody follows.</span><span class="zh">去掉：不必要的步骤、让人困惑的语言、重复工作、没人跟的步骤。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One simple SOP</span><span class="zh">一个简单SOP</span></div></div>
-    <div class="day-card w3"><div class="day-num">DAY 17</div><div class="day-title">Build a Daily Scorecard</div><div class="day-body"><span class="en">Track only important numbers: sales, labor, food cost, complaints, reviews, staffing, cash issues.</span><span class="zh">只跟重要数字：销售、人工、食材成本、投诉、评价、人手、现金问题。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One daily store scorecard</span><span class="zh">一个每日店记分卡</span></div></div>
-    <div class="day-card w3"><div class="day-num">DAY 18</div><div class="day-title">Learn the Customer</div><div class="day-body"><span class="en">Ask: Why do guests come? Why return? Why complain? What do they tell friends?</span><span class="zh">问：客人为什么来？为什么回来？为什么投诉？他们跟朋友说什么？</span></div><div class="day-output"><strong>Output:</strong> <span class="en">10 customer insights</span><span class="zh">10条客人洞察</span></div></div>
-    <div class="day-card w3"><div class="day-num">DAY 19</div><div class="day-title">Improve the Brand</div><div class="day-body"><span class="en">Write: "We are the restaurant for ___ who want ___."</span><span class="zh">写："我们是给___的餐厅，他们想要___。"</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One clear brand sentence</span><span class="zh">一句清晰品牌定位</span></div></div>
-    <div class="day-card w3"><div class="day-num">DAY 20</div><div class="day-title">Build a Local Marketing Test</div><div class="day-body"><span class="en">Choose one: review campaign, community partnership, social media, customer reactivation, local event. Set: goal, cost, start date, success measure.</span><span class="zh">选一个：评价活动、社区合作、社交媒体、客户唤醒、本地活动。设定：目标、成本、开始日期、成功标准。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One 30-day marketing experiment</span><span class="zh">一个30天营销实验</span></div></div>
-    <div class="day-card w3"><div class="day-num">DAY 21</div><div class="day-title">Weekly Review</div><div class="day-body"><span class="en">Which process improved? Did guests notice? Which marketing idea produced measurable results?</span><span class="zh">哪个流程改进了？客人注意到了吗？哪个营销想法有可量化的结果？</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Keep / change / stop list</span><span class="zh">保留/改/停清单</span></div></div>
-  </div>
-
-  <div class="ask-brain">
-    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
-    <code>show recent reviews</code> · <code>show guest complaints last 7 days</code> · <code>show marketing campaign results</code>
-  </div>
+<div class="sec-title"><span class="en">Open a stage</span><span class="zh">点阶段</span></div>
+<div class="stage-grid">
+<a class="stage-card" href="#money" onclick="return goPage('money')"><div class="stage-num">Days 1–7</div><div class="stage-name">1 Money</div><div class="stage-work"><span class="en">Where dollars come and go</span><span class="zh">钱从哪来到哪去</span></div><span class="badge badge-gate">G1</span></a>
+<a class="stage-card" href="#leaders" onclick="return goPage('leaders')"><div class="stage-num">Days 8–14</div><div class="stage-name">2 Leaders</div><div class="stage-work"><span class="en">Who runs stores without you</span><span class="zh">谁不靠你管店</span></div><span class="badge badge-gate">G2</span></a>
+<a class="stage-card" href="#systems" onclick="return goPage('systems')"><div class="stage-num">Days 15–21</div><div class="stage-name">3 Systems</div><div class="stage-work"><span class="en">SOP + brand + demand test</span><span class="zh">SOP+品牌+需求测试</span></div><span class="badge badge-gate">G3</span></a>
+<a class="stage-card" href="#multiply" onclick="return goPage('multiply')"><div class="stage-num">Days 22–30</div><div class="stage-name">4 Multiply</div><div class="stage-work"><span class="en">Site · capital · owner job · 90d</span><span class="zh">选址·资本·老板岗·90天</span></div><span class="badge badge-gate">G4</span></a>
 </div>
 
-<!-- WEEK 4 -->
-<div class="page" id="w4">
-  <div class="page-h">🚀 <span class="en">Week 4: Growth & Multiply</span><span class="zh">第四周：增长与复制</span></div>
-  <div class="page-sub"><span class="en">Sites, deals, data, capital, your real job.</span><span class="zh">选址、谈判、数据、资本、你真正的工作。</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-03 · Louis</div>
-
-  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">Design the machine that designs the next machine. Your job shifts from doing to building.</span><span class="zh">设计能设计下一台机器的机器。你的工作从"做"变成"建"。</span></div>
-
-  <div class="day-grid">
-    <div class="day-card w4"><div class="day-num">DAY 22</div><div class="day-title">Learn Site Selection</div><div class="day-body"><span class="en">Study one possible location. Check: traffic, parking, visibility, rent, competition, nearby customers, expected sales.</span><span class="zh">研究一个可能的位置。检查：人流、停车、可见度、租金、竞争、附近客人、预期销售。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One-page location review</span><span class="zh">一页选址评估</span></div></div>
-    <div class="day-card w4"><div class="day-num">DAY 23</div><div class="day-title">Learn Negotiation</div><div class="day-body"><span class="en">Before a negotiation, write: What do we want? What can we offer? What is our limit? What is our backup? What if we walk away?</span><span class="zh">谈判前写：我们要什么？能给什么？底线是什么？备选是什么？走开会怎样？</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One negotiation plan</span><span class="zh">一份谈判计划</span></div></div>
-    <div class="day-card w4"><div class="day-num">DAY 24</div><div class="day-title">Learn Technology & Data</div><div class="day-body"><span class="en">Find one repeated manual task that can be automated or simplified.</span><span class="zh">找一个能自动化或简化的重复手工任务。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One automation opportunity</span><span class="zh">一个自动化机会</span></div></div>
-    <div class="day-card w4"><div class="day-num">DAY 25</div><div class="day-title">Build an Early-Warning System</div><div class="day-body"><span class="en">Create alerts for: sales dropping, labor too high, food cost too high, cash shortage, bad reviews, manager absence, turnover.</span><span class="zh">建警报：销售下降、人工过高、食材成本过高、现金短缺、差评、经理缺席、离职。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Store health alert list</span><span class="zh">门店健康警报清单</span></div></div>
-    <div class="day-card w4"><div class="day-num">DAY 26</div><div class="day-title">Learn Capital Allocation</div><div class="day-body"><span class="en">For every major investment, ask: How much cost? How much return? How long to recover? What could go wrong? Is this better than improving an existing store?</span><span class="zh">每笔大投资问：多少成本？多少回报？多久回收？会出什么问题？比改现有店更好吗？</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One investment decision sheet</span><span class="zh">一份投资决策表</span></div></div>
-    <div class="day-card w4"><div class="day-num">DAY 27</div><div class="day-title">Design Your Owner Job</div><div class="day-body"><span class="en">List: work only Louis should do, work leaders should do, work systems should do, work that should stop.</span><span class="zh">列出：只有Louis该做的、领导该做的、系统该做的、该停的。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Louis's owner-role description</span><span class="zh">Louis的老板角色描述</span></div></div>
-    <div class="day-card w4"><div class="day-num">DAY 28</div><div class="day-title">Build the Scale Plan</div><div class="day-body"><span class="en">Choose the next growth priority: improve current stores, build leaders, open a store, improve brand, reduce costs, fix cash controls.</span><span class="zh">选下一个增长优先：改现有店、培养领导、开新店、改品牌、降成本、修现金管控。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One 90-day company priority</span><span class="zh">一个90天公司优先级</span></div></div>
-    <div class="day-card w4"><div class="day-num">DAY 29</div><div class="day-title">Teach Everything Back</div><div class="day-body"><span class="en">Explain the 10 skills to a manager in simple language. If you can't explain it simply, you don't understand it yet.</span><span class="zh">用简单话把10个技能讲给一个经理听。讲不清楚=你还没懂。</span></div><div class="day-output"><strong>Output:</strong> <span class="en">One-page "How Wiserise Scales" guide</span><span class="zh">一页"Wiserise怎么扩张"指南</span></div></div>
-    <div class="day-card w4"><div class="day-num">DAY 30</div><div class="day-title">Final Review & Commitment</div><div class="day-body"><span class="en">Answer: What is Wiserise's biggest bottleneck? What is the highest-value improvement? Who owns it? What happens by when? How will we measure success?</span><span class="zh">回答：Wiserise最大瓶颈是什么？最高价值改进是什么？谁负责？什么时候做到？怎么衡量成功？</span></div><div class="day-output"><strong>Output:</strong> <span class="en">Your 30-day action plan</span><span class="zh">你的30天行动计划</span></div></div>
-  </div>
-
-  <div class="ask-brain">
-    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
-    <code>show open LOIs</code> · <code>show store health alerts</code> · <code>show automation opportunities</code>
-  </div>
+<div class="sec-title"><span class="en">Gates</span><span class="zh">关卡</span></div>
+<div class="gate-row">
+<div class="gate-card"><span class="badge badge-gate">G1</span><div class="g-who">Louis</div><div class="g-what"><span class="en">Biggest money problem named</span><span class="zh">最大钱问题写清</span></div></div>
+<div class="gate-card"><span class="badge badge-gate">G2</span><div class="g-who">Louis</div><div class="g-what"><span class="en">Keep / coach / replace each GM</span><span class="zh">每个GM留/训/换</span></div></div>
+<div class="gate-card"><span class="badge badge-gate">G3</span><div class="g-who">Louis</div><div class="g-what"><span class="en">1 SOP live + brand sentence</span><span class="zh">1 SOP上线+品牌句</span></div></div>
+<div class="gate-card"><span class="badge badge-gate">G4</span><div class="g-who">Louis</div><div class="g-what"><span class="en">90-day company priority locked</span><span class="zh">锁死90天公司优先</span></div></div>
 </div>
 
-<!-- DELIVERABLES -->
-<div class="page" id="deliver">
-  <div class="page-h">📦 <span class="en">What You Hold on Day 31</span><span class="zh">第31天你手里有的</span></div>
-  <div class="page-sub"><span class="en">10 real artifacts. Not notes. Not plans. Real things.</span><span class="zh">10个真实成果。不是笔记。不是计划。是真实的东西。</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-03 · Louis</div>
+<div class="sec-title"><span class="en">Day-31 deliverables</span><span class="zh">第31天成果</span></div>
+<ul class="out-list">
+<li>✅ <span class="en">Business map + 1 store profit sheet</span><span class="zh">生意地图 + 1店利润表</span></li>
+<li>✅ <span class="en">Manager scorecard + hiring scorecard + 1 role train checklist</span><span class="zh">经理评分卡 + 招聘评分卡 + 1岗培训清单</span></li>
+<li>✅ <span class="en">1 SOP + daily store scorecard + 1 marketing experiment</span><span class="zh">1 SOP + 每日记分卡 + 1营销实验</span></li>
+<li>✅ <span class="en">Location review + owner job list + 90-day plan</span><span class="zh">选址评估 + 老板工作清单 + 90天计划</span></li>
+</ul>
 
-  <div class="pareto pareto-orange"><strong><span class="en">The goal is not to become an expert in 30 days.</span><span class="zh">目标不是30天变专家。</span></strong> <span class="en">The goal is to become better at finding the biggest problem, choosing the right person, building a simple system, and measuring whether it worked.</span><span class="zh">目标是更擅长找到最大问题、选对人、建简单系统、衡量是否有效。</span></div>
+<div class="box box-auto"><strong>Live:</strong> Brain · Chowbus · 7shifts · <code>store health</code> · <code>people KPI</code> · <span class="en">no counts frozen here</span><span class="zh">本页不写死人数</span></div>
+</div>
 
-  <div class="card">
-    <ul class="deliver-list">
-      <li>✅ <span class="en">One business map</span><span class="zh">一份生意地图</span></li>
-      <li>✅ <span class="en">One store profit sheet</span><span class="zh">一份门店利润表</span></li>
-      <li>✅ <span class="en">One manager scorecard</span><span class="zh">一份经理评分卡</span></li>
-      <li>✅ <span class="en">One hiring scorecard</span><span class="zh">一份招聘评分卡</span></li>
-      <li>✅ <span class="en">One role training checklist</span><span class="zh">一份岗位培训清单</span></li>
-      <li>✅ <span class="en">One SOP</span><span class="zh">一份SOP</span></li>
-      <li>✅ <span class="en">One store dashboard</span><span class="zh">一份门店仪表盘</span></li>
-      <li>✅ <span class="en">One marketing experiment</span><span class="zh">一个营销实验</span></li>
-      <li>✅ <span class="en">One location review</span><span class="zh">一份选址评估</span></li>
-      <li>✅ <span class="en">One 90-day growth plan</span><span class="zh">一份90天增长计划</span></li>
-    </ul>
-  </div>
+<!-- STAGE 1 MONEY -->
+<div class="page" id="money">
+<div class="page-h">1. Money <span class="zh">钱</span></div>
+<div class="page-sub">Days 1–7 · Louis · <span class="badge badge-gate">G1</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Growth without unit profit is a bigger hole.</span><span class="zh">单店不赚钱的扩张=更大的坑。</span></div>
+<div class="flow">
+<span class="flow-step">map</span><span class="flow-arrow">→</span>
+<span class="flow-step">P&amp;L</span><span class="flow-arrow">→</span>
+<span class="flow-step">compare</span><span class="flow-arrow">→</span>
+<span class="flow-step">cash risk</span><span class="flow-arrow">→</span>
+<span class="flow-step">decide</span><span class="flow-arrow">→</span>
+<span class="flow-step">visit</span>
+</div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">One-page profit for 1 store + top 3 money problems written + cash-risk checklist exists.</span><span class="zh">1店一页利润表 + 前3钱问题写清 + 现金风险清单存在。</span></div>
+<table>
+<tr><th>#</th><th>What</th><th>Who</th><th>Gate</th><th>How</th><th>Done-when</th></tr>
+<tr><td>1</td><td><span class="en">Business formula</span><span class="zh">生意公式</span></td><td>Louis</td><td>—</td><td><span class="en">Customers − Costs = Profit map</span><span class="zh">客人−成本=利润地图</span></td><td><span class="en">1-page map</span><span class="zh">一页地图</span></td></tr>
+<tr><td>2</td><td><span class="en">Store P&amp;L</span><span class="zh">单店盈亏</span></td><td>Louis</td><td>—</td><td><code>store sales</code> · labor · food · rent</td><td><span class="en">1 store sheet</span><span class="zh">1店表</span></td></tr>
+<tr><td>3</td><td><span class="en">Compare stores</span><span class="zh">比店</span></td><td>Louis</td><td>—</td><td><span class="en">best vs worst + why</span><span class="zh">最好vs最差+为什么</span></td><td><span class="en">top 3 problems</span><span class="zh">前3问题</span></td></tr>
+<tr><td>4</td><td><span class="en">Cash control</span><span class="zh">现金管控</span></td><td>Louis</td><td>—</td><td>drawer · voids · discounts · pay</td><td><span class="en">risk checklist</span><span class="zh">风险清单</span></td></tr>
+<tr><td>5</td><td><span class="en">Decision memo</span><span class="zh">决策备忘</span></td><td>Louis</td><td>—</td><td>know / guess / prove wrong / cheap test</td><td><span class="en">1 memo</span><span class="zh">1备忘</span></td></tr>
+<tr><td>6</td><td><span class="en">Store visit</span><span class="zh">看店</span></td><td>Louis</td><td>—</td><td><span class="en">observe only first</span><span class="zh">先只观察</span></td><td>5 obs + 3 acts</td></tr>
+<tr><td>7</td><td><strong>G1 lock</strong></td><td>Louis</td><td><span class="badge badge-gate">G1</span></td><td><span class="en">name #1 money problem</span><span class="zh">写出#1钱问题</span></td><td><span class="en">written + owned</span><span class="zh">写清+有主</span></td></tr>
+</table>
+<div class="ask-brain"><strong>Ask Brain:</strong> <code>store sales last 30 days</code> · <code>labor % by store</code> · <code>food cost by store</code></div>
+</div>
 
-  <div class="sec-title"><span class="en">The Core Scaling Skill</span><span class="zh">核心扩张技能</span></div>
-  <div class="card">
-    <div class="pareto pareto-orange" style="font-size:15px;text-align:center;padding:24px">
-      <span class="en">Don't ask: <em>"How can I do this better?"</em><br>Ask: <strong>"How can the company do this correctly without needing me?"</strong></span>
-      <span class="zh">不要问：<em>"我怎么能做得更好？"</em><br>要问：<strong>"公司怎么能不需要我就做对？"</strong></span>
-    </div>
-  </div>
+<!-- STAGE 2 LEADERS -->
+<div class="page" id="leaders">
+<div class="page-h">2. Leaders <span class="zh">人</span></div>
+<div class="page-sub">Days 8–14 · Louis · <span class="badge badge-gate">G2</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">One Louis = few stores. Ten leaders = many.</span><span class="zh">一个Louis=几家店。十个领导=很多家。</span></div>
+<div class="flow">
+<span class="flow-step">GM card</span><span class="flow-arrow">→</span>
+<span class="flow-step">scorecard</span><span class="flow-arrow">→</span>
+<span class="flow-step">rate</span><span class="flow-arrow">→</span>
+<span class="flow-step">coach</span><span class="flow-arrow">→</span>
+<span class="flow-step">hire</span><span class="flow-arrow">→</span>
+<span class="flow-step">train</span>
+</div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">Every GM scored 1–5 · keep/coach/replace written · 1 role hiring scorecard + train checklist exists.</span><span class="zh">每个GM打分 · 留/训/换写清 · 1岗招聘评分卡+培训清单存在。</span></div>
+<table>
+<tr><th>#</th><th>What</th><th>Who</th><th>Gate</th><th>How</th><th>Done-when</th></tr>
+<tr><td>1</td><td><span class="en">GM job card</span><span class="zh">GM工作卡</span></td><td>Louis</td><td>—</td><td><span class="en">5 must-do only</span><span class="zh">只写5件必须</span></td><td><span class="en">1 page</span><span class="zh">1页</span></td></tr>
+<tr><td>2</td><td><span class="en">Leader bar</span><span class="zh">领导标准</span></td><td>Louis</td><td>—</td><td>reliable · honest · calm · clear · teach</td><td><span class="en">scorecard</span><span class="zh">评分卡</span></td></tr>
+<tr><td>3</td><td><span class="en">Rate managers</span><span class="zh">评经理</span></td><td>Louis</td><td>—</td><td>1–5 results · people · follow-through</td><td><span class="en">list complete</span><span class="zh">名单齐</span></td></tr>
+<tr><td>4</td><td><span class="en">Coach once</span><span class="zh">真辅导1次</span></td><td>Louis</td><td>—</td><td>what / why / next / when check</td><td><span class="en">1 real talk</span><span class="zh">1次真谈</span></td></tr>
+<tr><td>5</td><td><span class="en">Hiring kit</span><span class="zh">招聘包</span></td><td>Louis</td><td>—</td><td>ad · questions · score · refs</td><td><span class="en">1 role kit</span><span class="zh">1岗齐</span></td></tr>
+<tr><td>6</td><td><span class="en">Train kit</span><span class="zh">培训包</span></td><td>Louis</td><td>—</td><td>know · do · test · certify</td><td><span class="en">1 role checklist</span><span class="zh">1岗清单</span></td></tr>
+<tr><td>7</td><td><strong>G2 lock</strong></td><td>Louis</td><td><span class="badge badge-gate">G2</span></td><td><span class="en">keep / coach / replace each GM</span><span class="zh">每个GM留/训/换</span></td><td><span class="en">bench plan written</span><span class="zh">梯队写清</span></td></tr>
+</table>
+<div class="box box-rule"><strong><span class="en">30-day disappear test:</span><span class="zh">消失30天测试：</span></strong> <span class="en">If you leave, which store gets better / worse / same?</span><span class="zh">你离开后哪店变好/变坏/不变？</span></div>
+<div class="ask-brain"><strong>Ask Brain:</strong> <code>who are my GMs</code> · <code>roster</code> · <code>hiring status</code> · <code>gap</code></div>
+</div>
 
-  <div class="ask-brain">
-    <strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong>
-    <code>create action plan from roadmap</code> · <code>assign owners to deliverables</code>
-  </div>
+<!-- STAGE 3 SYSTEMS -->
+<div class="page" id="systems">
+<div class="page-h">3. Systems + Demand <span class="zh">系统+需求</span></div>
+<div class="page-sub">Days 15–21 · Louis · <span class="badge badge-gate">G3</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Transfer judgment into systems. Empty efficient restaurant still fails.</span><span class="zh">把判断变成系统。高效空店也失败。</span></div>
+<div class="flow">
+<span class="flow-step">write</span><span class="flow-arrow">→</span>
+<span class="flow-step">simplify</span><span class="flow-arrow">→</span>
+<span class="flow-step">scorecard</span><span class="flow-arrow">→</span>
+<span class="flow-step">customer</span><span class="flow-arrow">→</span>
+<span class="flow-step">brand</span><span class="flow-arrow">→</span>
+<span class="flow-step">test</span>
+</div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">1 simple SOP live · daily scorecard fields locked · brand one-liner · 30d marketing test with goal+cost+measure.</span><span class="zh">1简单SOP上线 · 每日记分卡字段锁死 · 品牌一句 · 30天营销测试有目标+成本+标准。</span></div>
+<table>
+<tr><th>#</th><th>What</th><th>Who</th><th>Gate</th><th>How</th><th>Done-when</th></tr>
+<tr><td>1</td><td><span class="en">Pick process</span><span class="zh">选流程</span></td><td>Louis</td><td>—</td><td>open / close / cash / greet / prep</td><td><span class="en">steps written</span><span class="zh">步骤写出</span></td></tr>
+<tr><td>2</td><td><span class="en">Simplify</span><span class="zh">简化</span></td><td>Louis</td><td>—</td><td><span class="en">cut unused steps</span><span class="zh">砍没人跟的</span></td><td><span class="en">1 simple SOP</span><span class="zh">1简单SOP</span></td></tr>
+<tr><td>3</td><td><span class="en">Daily scorecard</span><span class="zh">每日记分卡</span></td><td>Louis</td><td>—</td><td>sales · labor · food · complaints · cash</td><td><span class="en">fields locked</span><span class="zh">字段锁死</span></td></tr>
+<tr><td>4</td><td><span class="en">Customer truth</span><span class="zh">客人真相</span></td><td>Louis</td><td>—</td><td>why come / return / complain</td><td>10 insights</td></tr>
+<tr><td>5</td><td><span class="en">Brand line</span><span class="zh">品牌句</span></td><td>Louis</td><td>—</td><td>for ___ who want ___</td><td><span class="en">1 sentence</span><span class="zh">1句</span></td></tr>
+<tr><td>6</td><td><span class="en">Marketing test</span><span class="zh">营销测试</span></td><td>Louis</td><td>—</td><td>goal · cost · start · success</td><td><span class="en">test live</span><span class="zh">测试上线</span></td></tr>
+<tr><td>7</td><td><strong>G3 lock</strong></td><td>Louis</td><td><span class="badge badge-gate">G3</span></td><td><span class="en">keep / change / stop list</span><span class="zh">留/改/停清单</span></td><td><span class="en">SOP + brand + test yes</span><span class="zh">SOP+品牌+测试都有</span></td></tr>
+</table>
+<div class="ask-brain"><strong>Ask Brain:</strong> <code>reviews</code> · <code>guest complaints last 7 days</code> · <code>store health</code></div>
+</div>
+
+<!-- STAGE 4 MULTIPLY -->
+<div class="page" id="multiply">
+<div class="page-h">4. Multiply <span class="zh">复制</span></div>
+<div class="page-sub">Days 22–30 · Louis · <span class="badge badge-gate">G4</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Your job shifts from doing to building the machine.</span><span class="zh">工作从“做”变成“建机器”。</span></div>
+<div class="flow">
+<span class="flow-step">site</span><span class="flow-arrow">→</span>
+<span class="flow-step">negotiate</span><span class="flow-arrow">→</span>
+<span class="flow-step">auto</span><span class="flow-arrow">→</span>
+<span class="flow-step">alerts</span><span class="flow-arrow">→</span>
+<span class="flow-step">capital</span><span class="flow-arrow">→</span>
+<span class="flow-step">owner job</span><span class="flow-arrow">→</span>
+<span class="flow-step">90d</span>
+</div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">Owner job list split · 90-day company priority locked · one investment sheet · alert list exists · you can teach the 10 skills simply.</span><span class="zh">老板工作拆开 · 90天公司优先锁死 · 1投资表 · 警报清单有 · 能简单讲10技能。</span></div>
+<table>
+<tr><th>#</th><th>What</th><th>Who</th><th>Gate</th><th>How</th><th>Done-when</th></tr>
+<tr><td>1</td><td><span class="en">Site review</span><span class="zh">选址</span></td><td>Louis</td><td>—</td><td>traffic · rent · sales guess · downside</td><td><span class="en">1-page review</span><span class="zh">1页评估</span></td></tr>
+<tr><td>2</td><td><span class="en">Negotiation plan</span><span class="zh">谈判计划</span></td><td>Louis</td><td>—</td><td>want · offer · limit · backup · walk</td><td><span class="en">1 plan</span><span class="zh">1计划</span></td></tr>
+<tr><td>3</td><td><span class="en">Automation pick</span><span class="zh">自动化点</span></td><td>Louis</td><td>—</td><td><span class="en">one repeated manual task</span><span class="zh">一个重复手工活</span></td><td><span class="en">1 opportunity</span><span class="zh">1机会</span></td></tr>
+<tr><td>4</td><td><span class="en">Early warnings</span><span class="zh">早期警报</span></td><td>Louis</td><td>—</td><td>sales · labor · food · cash · reviews · turnover</td><td><span class="en">alert list</span><span class="zh">警报清单</span></td></tr>
+<tr><td>5</td><td><span class="en">Capital sheet</span><span class="zh">资本表</span></td><td>Louis</td><td>—</td><td>cost · return · payback · risk · vs improve store</td><td><span class="en">1 decision sheet</span><span class="zh">1决策表</span></td></tr>
+<tr><td>6</td><td><span class="en">Owner job</span><span class="zh">老板岗</span></td><td>Louis</td><td>—</td><td>only me / leaders / systems / stop</td><td><span class="en">role page</span><span class="zh">角色页</span></td></tr>
+<tr><td>7</td><td><span class="en">Teach back</span><span class="zh">教回去</span></td><td>Louis</td><td>—</td><td><span class="en">10 skills to one manager simple</span><span class="zh">10技能简单讲给1经理</span></td><td><span class="en">1-page guide</span><span class="zh">1页指南</span></td></tr>
+<tr><td>8</td><td><strong>G4 lock</strong></td><td>Louis</td><td><span class="badge badge-gate">G4</span></td><td>bottleneck · fix · owner · when · measure</td><td><span class="en">90d priority locked</span><span class="zh">90天优先锁死</span></td></tr>
+</table>
+<div class="box box-rule"><strong><span class="en">Core question:</span><span class="zh">核心问题：</span></strong>
+<span class="en">Not “How can I do this better?” → “How can the company do this correctly without me?”</span>
+<span class="zh">不是“我怎么做得更好？”→“公司怎么不需要我就做对？”</span></div>
+<div class="ask-brain"><strong>Ask Brain:</strong> <code>open LOIs</code> · <code>store health</code> · <code>which store is worst</code></div>
 </div>
 
 <!-- RULES -->
 <div class="page" id="rules">
-  <div class="page-h">📋 <span class="en">Rules</span><span class="zh">规矩</span></div>
-  <div class="page-sub"><span class="en">What keeps this roadmap honest.</span><span class="zh">让这份路线图不跑偏的规矩。</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-03 · Louis</div>
-
-  <div class="box box-rule"><strong>1. <span class="en">Every day produces something real.</span><span class="zh">每天产出真实的东西。</span></strong> <span class="en">Not a note. Not a plan. A real artifact you can show someone.</span><span class="zh">不是笔记。不是计划。是能给别人看的真实成果。</span></div>
-  <div class="box box-rule"><strong>2. <span class="en">Use real Wiserise data.</span><span class="zh">用真实的Wiserise数据。</span></strong> <span class="en">Every number comes from Brain, Chowbus, or 7shifts — not guesses.</span><span class="zh">每个数字来自Brain、Chowbus或7shifts——不是猜的。</span></div>
-  <div class="box box-rule"><strong>3. <span class="en">One problem at a time.</span><span class="zh">一次一个问题。</span></strong> <span class="en">Don't try to fix everything. Find the biggest one. Fix it. Move on.</span><span class="zh">不要什么都修。找到最大的。修好。继续。</span></div>
-  <div class="box box-rule"><strong>4. <span class="en">Write it down or it didn't happen.</span><span class="zh">写下来才算数。</span></strong> <span class="en">If you can't explain it simply, you don't understand it yet.</span><span class="zh">讲不清楚=你还没懂。</span></div>
-  <div class="box box-rule"><strong>5. <span class="en">Your job changes.</span><span class="zh">你的工作会变。</span></strong> <span class="en">Week 1 = understand. Week 2 = people. Week 3 = systems. Week 4 = multiply. Don't skip ahead.</span><span class="zh">第一周=理解。第二周=人。第三周=系统。第四周=复制。不要跳。</span></div>
-  <div class="box box-gate"><strong>6. <span class="en">The test that matters:</span><span class="zh">最重要的测试：</span></strong> <span class="en">If you disappear for 30 days, does each store get better, worse, or stay the same?</span><span class="zh">如果你消失30天，每家店变好、变坏、还是不变？</span></div>
-
-  <div class="footer">Wiserise Hospitality Group · 30-Day Scaling Roadmap · Built 2026-08-03 · <span class="en">Owner self-training artifact</span><span class="zh">老板自学工具</span></div>
+<div class="page-h">Rules <span class="zh">规矩</span></div>
+<div class="page-sub"><span class="en">Only rules that change behavior.</span><span class="zh">只放会改变行为的规矩。</span></div>
+<div class="box box-rule"><strong>1.</strong> <span class="en">Every day produces a real artifact — not a note, not a plan.</span><span class="zh">每天产出真成果 — 不是笔记，不是计划。</span></div>
+<div class="box box-rule"><strong>2.</strong> <span class="en">Numbers from Brain / Chowbus / 7shifts only. No guesses in decisions.</span><span class="zh">数字只来Brain/Chowbus/7shifts。决策不许猜。</span></div>
+<div class="box box-rule"><strong>3.</strong> <span class="en">One problem at a time. Biggest first.</span><span class="zh">一次一个问题。最大的先。</span></div>
+<div class="box box-rule"><strong>4.</strong> <span class="en">Order is law: Money → Leaders → Systems → Multiply. Don’t skip.</span><span class="zh">顺序是法律：钱→人→系统→复制。不许跳。</span></div>
+<div class="box box-rule"><strong>5.</strong> <span class="en">Write it down or it didn’t happen. Simple words only.</span><span class="zh">写下来才算。只用简单话。</span></div>
+<div class="box box-gate"><strong>6. Test:</strong> <span class="en">If Louis disappears 30 days, does each store get better, worse, or same?</span><span class="zh">Louis消失30天，每店变好、变坏、还是不变？</span></div>
+<div class="box box-auto"><strong>Auto:</strong> <span class="en">Brain pulls, digests, scorecards — Louis only hits G1–G4.</span><span class="zh">Brain拉数、摘要、记分卡 — Louis只打G1–G4。</span></div>
+<div class="box box-rule"><strong>Never auto:</strong> <span class="en">fire · bank/wire · invent approval · open store without unit economics</span><span class="zh">开除 · 转账 · 编造批准 · 单店经济没搞清就开店</span></div>
 </div>
 
 </div>
+
+<div class="footer">roadmap-skill · 30-Day Scale Learning · structure is law · Wiserise · 2026-08-03</div>
 
 <script>
-function showPage(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+function setLang(lang, el){
+  document.body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){ b.classList.remove('on'); });
+  if (el) el.classList.add('on');
 }
-function goTab(i){document.querySelectorAll('.tab')[i].click()}
-function setLang(lang,btn){
-  document.body.className='lang-'+lang;
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+function go(id, el){
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
+  var page = document.getElementById(id);
+  if (page) page.classList.add('on');
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('on'); });
+  if (el) el.classList.add('on');
+  else {
+    var tab = document.querySelector('.tab[href="#' + id + '"]');
+    if (tab) tab.classList.add('on');
+  }
+  if (history.replaceState) history.replaceState(null, '', '#' + id);
+  window.scrollTo(0, 0);
+  return false;
 }
-document.addEventListener('keydown',e=>{
-  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
-  const tabs=document.querySelectorAll('.tab');
-  let cur=[...tabs].findIndex(t=>t.classList.contains('active'));
-  if(cur===-1)return;
-  if(e.key==='ArrowRight'&&cur<tabs.length-1)tabs[cur+1].click();
-  if(e.key==='ArrowLeft'&&cur>0)tabs[cur-1].click();
+function goPage(id){ go(id, document.querySelector('.tab[href="#' + id + '"]')); return false; }
+(function(){
+  var h = (location.hash || '#ops').slice(1);
+  var page = document.getElementById(h);
+  var tab = document.querySelector('.tab[href="#' + h + '"]');
+  if (page) go(h, tab);
+})();
+window.addEventListener('hashchange', function(){
+  var h = (location.hash || '#ops').slice(1);
+  if (document.getElementById(h)) go(h, document.querySelector('.tab[href="#' + h + '"]'));
 });
 </script>
 </body>
