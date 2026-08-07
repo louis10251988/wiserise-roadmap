@@ -1,75 +1,495 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
-<title>WISE OPS · Operations Command Center</title>
+<script>document.documentElement.classList.add("js")</script>
+<title>Ops Department Roadmap · Wiserise</title>
 <style>
-:root{--bg:#07111f;--panel:#0d1b2d;--panel2:#12253b;--ink:#edf5ff;--muted:#91a5bb;--line:#20364e;--cyan:#45d5e8;--cyan2:#0d7286;--green:#45d39b;--amber:#f4b85f;--red:#ff6f78;--purple:#a995ff;--max:1180px;--r:16px}
-*{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;background:radial-gradient(circle at 80% -10%,#16334c 0,#07111f 42%);color:var(--ink);font:14px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}button,a{font:inherit}button{cursor:pointer}a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
-.shell{max-width:var(--max);margin:auto;padding:0 22px 70px}.top{padding:27px 0 22px;display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:800}.brand{font-size:clamp(25px,4vw,42px);line-height:1.05;font-weight:850;letter-spacing:-.04em;margin:7px 0}.subtitle{color:var(--muted);max-width:680px}.lang{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#0a1727}.lang button{border:0;background:transparent;color:var(--muted);padding:9px 13px;font-weight:750}.lang button.on{background:var(--cyan);color:#06131e}
-.nav{position:sticky;top:0;z-index:5;margin:0 -22px;padding:9px 22px;background:rgba(7,17,31,.9);backdrop-filter:blur(14px);border-top:1px solid rgba(69,213,232,.12);border-bottom:1px solid var(--line);display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav button{flex:0 0 auto;min-height:42px;border:1px solid transparent;border-radius:9px;padding:8px 12px;background:transparent;color:var(--muted);font-weight:750;white-space:nowrap}.nav button:hover,.nav button.on{color:var(--ink);background:var(--panel2);border-color:var(--line)}.nav button.on{box-shadow:inset 0 -2px var(--cyan)}
-.page{display:none;padding-top:30px}.page.on{display:block;animation:in .2s ease}@keyframes in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}.pagehead{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:18px}.page h2{font-size:clamp(24px,4vw,34px);letter-spacing:-.035em;margin:0}.pagelead{color:var(--muted);max-width:700px;margin:5px 0 0}.stamp{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:5px 10px;white-space:nowrap}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.span12{grid-column:span 12}.span8{grid-column:span 8}.span6{grid-column:span 6}.span4{grid-column:span 4}.card{background:linear-gradient(145deg,rgba(18,37,59,.96),rgba(10,24,40,.96));border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:0 12px 30px rgba(0,0,0,.13)}.card h3{font-size:16px;margin:0 0 7px}.card p{margin:0;color:var(--muted)}.label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:850;margin-bottom:8px}.big{font-size:30px;font-weight:850;letter-spacing:-.05em}.status{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:4px 9px;font-size:11px;font-weight:800}.green{background:rgba(69,211,155,.13);color:var(--green)}.amber{background:rgba(244,184,95,.14);color:var(--amber)}.red{background:rgba(255,111,120,.14);color:var(--red)}.blue{background:rgba(69,213,232,.13);color:var(--cyan)}.purple{background:rgba(169,149,255,.14);color:var(--purple)}
-.hero{border-radius:20px;padding:25px;background:linear-gradient(120deg,#103a4c 0%,#10283f 52%,#171b3d 100%);border:1px solid #2d6174;margin-bottom:16px}.hero h3{font-size:24px;max-width:760px;margin:0 0 8px;letter-spacing:-.03em}.hero p{color:#c1d8e5;max-width:760px;margin:0}.rule{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.rule div{border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:9px 12px;color:#d9f4f7;background:rgba(0,0,0,.12)}
-.action{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.action:last-child{border-bottom:0}.icon{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:rgba(69,213,232,.13);color:var(--cyan);font-weight:900;flex:none}.action strong{display:block}.action small{display:block;color:var(--muted);margin-top:2px}.arrow{margin-left:auto;color:var(--muted);font-size:20px}.store{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)}.store:last-child{border:0}.store-left{display:flex;gap:10px;align-items:center}.dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 12px currentColor}.dot.wait{background:var(--amber)}.metric{color:var(--muted);font-size:12px}
-.tabs{display:flex;gap:7px;overflow:auto;margin:0 0 15px;padding-bottom:3px}.pill{flex:none;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:99px;padding:8px 12px;font-weight:750}.pill.on{background:var(--cyan);border-color:var(--cyan);color:#06131e}.sub{display:none}.sub.on{display:block}.table{width:100%;border-collapse:collapse;font-size:13px}.table th{color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase;text-align:left;border-bottom:1px solid var(--line);padding:9px}.table td{padding:11px 9px;border-bottom:1px solid rgba(32,54,78,.8);vertical-align:top}.table tr:last-child td{border:0}.callout{border-left:3px solid var(--amber);background:rgba(244,184,95,.08);padding:12px 14px;margin:13px 0;color:#e8d5b5}.callout strong{color:var(--amber)}.footer{border-top:1px solid var(--line);margin-top:45px;padding-top:18px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.en{display:inline}.zh{display:none}body.zh .en{display:none}body.zh .zh{display:inline}
-@media(max-width:760px){.shell{padding:0 13px 55px}.top{padding-top:19px}.topbar{display:block}.top{display:block}.lang{margin-top:14px;width:max-content}.nav{margin:0 -13px;padding:8px 13px;top:0}.page{padding-top:22px}.pagehead{display:block}.stamp{display:inline-block;margin-top:12px}.grid{grid-template-columns:1fr}.span12,.span8,.span6,.span4{grid-column:auto}.hero{padding:19px}.card{padding:15px}.table{display:block;overflow-x:auto;white-space:normal}.table th,.table td{min-width:125px}.rule div{flex:1 1 140px}.big{font-size:26px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important}}
+:root{--bg:#fafbfc;--card:#fff;--ink:#111827;--muted:#6b7280;--muted-light:#9ca3af;--brand:#0f172a;--accent:#3b82f6;--green:#059669;--green-bg:#ecfdf5;--yellow:#d97706;--yellow-bg:#fffbeb;--red:#dc2626;--red-bg:#fef2f2;--blue:#2563eb;--blue-bg:#eff6ff;--border:#e5e7eb;--border-light:#f3f4f6;--radius:12px;--shadow:0 1px 2px rgba(0,0,0,.04);--shadow-lg:0 4px 16px rgba(0,0,0,.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:14px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.topbar{background:var(--brand);color:#fff;padding:16px 28px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto;gap:12px}
+.topbar h1{font-size:17px;font-weight:700}
+.topbar .sub{font-size:11.5px;opacity:.65;margin-top:2px}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden;flex-shrink:0}
+.lang-btn{padding:8px 14px;min-height:44px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.lang-btn.on{background:rgba(255,255,255,.15);color:#fff}
+.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:12px 14px;min-height:44px;font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;display:inline-flex;align-items:center}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
+.content{max-width:1040px;margin:0 auto;padding:24px 20px 80px}
+.page{display:none}
+.page.on{display:block}
+.pareto{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;font-size:13.5px}
+.pareto strong{color:var(--brand)}
+.why{font-size:13px;color:var(--muted);margin-bottom:14px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--card);border-radius:0 8px 8px 0}
+.outcome{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;font-size:14px;font-weight:600}
+.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin:18px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+th{background:var(--brand);color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:12px}
+td{border-bottom:1px solid var(--border-light);padding:9px 10px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.box{border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:13px;line-height:1.5;border:1px solid}
+.box-rule{background:var(--yellow-bg);border-color:#fde68a}
+.box-auto{background:var(--blue-bg);border-color:#bfdbfe}
+.box-gate{background:var(--green-bg);border-color:#a7f3d0}
+.box-red{background:var(--red-bg);border-color:#fca5a5}
+.badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-gate{background:#fff;border:1.5px solid var(--green);color:var(--green)}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px;font-size:12px}
+.flow-step{background:var(--brand);color:#fff;padding:8px 12px;border-radius:8px;font-weight:600}
+.flow-arrow{color:var(--muted-light);font-size:18px}
+.flow-gate{background:var(--green);color:#fff;padding:8px 12px;border-radius:8px;font-weight:600}
+.stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.stage-grid{grid-template-columns:1fr}}
+.stage-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);text-decoration:none;color:inherit;display:block;cursor:pointer}
+.stage-card:hover{box-shadow:var(--shadow-lg)}
+.stage-num{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.stage-name{font-size:16px;font-weight:700;color:var(--brand);margin-bottom:8px}
+.stage-work{font-size:13px;margin-bottom:10px}
+.stage-meta{font-size:12px;color:var(--muted)}
+.gate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:800px){.gate-row{grid-template-columns:1fr 1fr}}
+.gate-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center;box-shadow:var(--shadow)}
+.gate-card .g-who{font-size:13px;font-weight:700;color:var(--brand);margin:6px 0 4px}
+.gate-card .g-what{font-size:12px;color:var(--muted)}
+.verified{font-size:12px;color:var(--green);margin-bottom:12px;font-weight:600}
+.ask-brain{background:var(--card);border:1px dashed var(--border);border-radius:var(--radius);padding:12px 14px;margin-top:12px;font-size:13px}
+.ask-brain code,.box code,td code{background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:12.5px;white-space:pre-wrap;word-break:break-word}
+.page-h{font-size:20px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:12px}
+body.lang-en .zh{display:none}
+body.lang-zh .en{display:none}
+.footer{text-align:center;font-size:10px;color:var(--muted);padding:8px 0 24px}
+a{color:var(--blue)}
+.cadence-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:700px){.cadence-grid{grid-template-columns:1fr}}
+.cadence-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.cadence-card .c-tier{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.cadence-card .c-name{font-size:15px;font-weight:700;color:var(--brand);margin-bottom:8px}
+.cadence-card .c-body{font-size:12.5px;line-height:1.6;color:var(--muted)}
+.cadence-card .c-body strong{color:var(--ink)}
+.week-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:700px){.week-grid{grid-template-columns:1fr}}
+.week-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.week-card .w-num{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;margin-bottom:4px}
+.week-card .w-title{font-size:15px;font-weight:700;color:var(--brand);margin-bottom:8px}
+.week-card ul{list-style:none;padding:0}
+.week-card li{font-size:12.5px;padding:4px 0;border-bottom:1px solid var(--border-light)}
+.week-card li:last-child{border-bottom:none}
+.week-card li::before{content:"→ ";color:var(--accent);font-weight:700}
+.pulls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:700px){.pulls{grid-template-columns:1fr}}
+.pull{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:13px}
+.pull strong{display:block;margin-bottom:6px;color:var(--brand)}
+.store-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)}
+.store-row:last-child{border-bottom:none}
+.store-row .s-name{font-weight:600}
+.store-row .s-meta{font-size:12px;color:var(--muted)}
+@supports(padding:max(0px)){
+.topbar{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right))}
+.content{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));padding-bottom:max(80px,calc(64px + env(safe-area-inset-bottom)))}
+.tabs{padding-left:max(6px,env(safe-area-inset-left))}
+}
+@media(max-width:420px){.topbar .sub{display:none}}
 </style>
 </head>
-<body>
-<div class="shell">
-<header class="top">
-  <div><div class="eyebrow">WISERISE HOSPITALITY GROUP · OPERATIONS</div><div class="brand">WISE OPS <span class="zh">· 运营指挥台</span></div><div class="subtitle en">The operating system for five stores: detect exceptions, make the right human decision, close the loop.</div><div class="subtitle zh">五家店的运营系统：发现例外、让正确的人拍板、把闭环做完。</div></div>
-  <div class="lang"><button class="on" onclick="setLang('en',this)">EN</button><button onclick="setLang('zh',this)">中文</button></div>
-</header>
-<nav class="nav" aria-label="Main navigation">
- <button class="on" onclick="showPage('daily',this)">◉ <span class="en">Ops Daily</span><span class="zh">今日运营</span></button>
- <button onclick="showPage('command',this)">⌁ <span class="en">Command</span><span class="zh">总指挥</span></button>
- <button onclick="showPage('repair',this)">⚒ <span class="en">Repair</span><span class="zh">维修</span></button>
- <button onclick="showPage('fraud',this)">◎ <span class="en">Fraud</span><span class="zh">防作弊</span></button>
- <button onclick="showPage('people',this)">♙ <span class="en">People</span><span class="zh">人手</span></button>
- <button onclick="showPage('store',this)">▦ <span class="en">Store Loop</span><span class="zh">门店循环</span></button>
- <button onclick="showPage('learn',this)">▤ <span class="en">Learn</span><span class="zh">入职</span></button>
- <button onclick="showPage('rules',this)">⌘ <span class="en">Rules</span><span class="zh">规矩</span></button>
+<body class="lang-en">
+<div class="topbar"><div class="topbar-row">
+<div>
+<h1>🔧 Ops Department Roadmap · <span class="zh">运营部路线图</span></h1>
+<div class="sub">Wiserise · Department Roadmap v1.1 · Cycle ends 2026-09-06 · wiserise-department-roadmap</div>
+</div>
+<div class="lang-toggle">
+<a class="lang-btn on" href="#" onclick="setLang('en',this);return false">EN</a>
+<a class="lang-btn" href="#" onclick="setLang('zh',this);return false">中文</a>
+</div>
+</div></div>
+
+<nav class="tabs" id="tabs">
+<a class="tab on" href="#map" onclick="go('map',this);return false">📊 Map <span class="zh">总图</span></a>
+<a class="tab" href="#cadence" onclick="go('cadence',this);return false">🧭 Cadence <span class="zh">节奏</span></a>
+<a class="tab" href="#repair" onclick="go('repair',this);return false">1 Repair <span class="zh">维修</span></a>
+<a class="tab" href="#fraud" onclick="go('fraud',this);return false">2 Fraud <span class="zh">防作弊</span></a>
+<a class="tab" href="#staffing" onclick="go('staffing',this);return false">3 Staff <span class="zh">人手</span></a>
+<a class="tab" href="#loop" onclick="go('loop',this);return false">4 Store Loop <span class="zh">门店循环</span></a>
+<a class="tab" href="#30days" onclick="go('30days',this);return false">🚀 30 Days <span class="zh">30天</span></a>
+<a class="tab" href="#rules" onclick="go('rules',this);return false">📋 Rules <span class="zh">规矩</span></a>
+<a class="tab" href="#kpi" onclick="go('kpi',this);return false">📈 KPI</a>
 </nav>
 
-<main>
-<section class="page on" id="daily">
- <div class="hero"><div class="label">OPERATING PRINCIPLE 01</div><h3 class="en">Do not manage a dashboard. Manage exceptions.</h3><h3 class="zh">不要管理看板。要管理例外。</h3><p class="en">A green store stays quiet. A red flag becomes one clear action: owner, decision, due time, proof of close.</p><p class="zh">绿色门店保持安静。有红旗就变成一个清楚动作：负责人、决定、截止时间、完成证据。</p><div class="rule"><div>1 · Detect</div><div>2 · Decide</div><div>3 · Execute</div><div>4 · Verify</div></div></div>
- <div class="pagehead"><div><h2 class="en">Ops Daily</h2><h2 class="zh">今日运营</h2><p class="pagelead en">The first screen for the person running the floor today.</p><p class="pagelead zh">今天在店里负责运营的人，先看这一页。</p></div><span class="stamp">Hybrid · live sources + verified rules</span></div>
- <div class="grid">
-  <div class="card span4"><div class="label">TODAY'S ROUTE</div><h3 class="en">Start with what can hurt the store.</h3><h3 class="zh">先看会伤害门店的事情。</h3><div class="action"><div class="icon">!</div><div><strong>Exceptions first</strong><small>Open repairs · fraud flags · staffing gaps</small></div><div class="arrow">›</div></div><div class="action"><div class="icon">✓</div><div><strong>Green means quiet</strong><small>No invented numbers. No noise.</small></div><div class="arrow">›</div></div><div class="action"><div class="icon">↗</div><div><strong>Close the loop</strong><small>Every real job ends with outcome proof.</small></div><div class="arrow">›</div></div></div>
-  <div class="card span4"><div class="label">LIVE SOURCE MAP</div><h3>Where truth lives</h3><div class="action"><div class="icon">S</div><div><strong>Slack</strong><small>Human input, approvals, store thread</small></div></div><div class="action"><div class="icon">B</div><div><strong>WISE BRAIN</strong><small>Tickets, roster, sales, fraud facts</small></div></div><div class="action"><div class="icon">↗</div><div><strong><a href="https://docs.google.com/spreadsheets/d/1zsJnqDllQOcFhGIAIlBJnBNlBCHVSdwUJKRTPNBdgn4/edit" target="_blank" rel="noopener">Ops KPI Sheet</a></strong><small>View only · not a second database</small></div></div></div>
-  <div class="card span4"><div class="label">HUMAN GATES</div><h3>Only four decisions stop the flow</h3><div class="action"><span class="status amber">O1</span><div><strong>Big repair spend</strong><small>Louis approves before payment</small></div></div><div class="action"><span class="status red">O2</span><div><strong>Real fraud / theft</strong><small>Louis decides the verdict</small></div></div><div class="action"><span class="status blue">O3</span><div><strong>Hire / training pick</strong><small>GM decides the normal case</small></div></div><div class="action"><span class="status purple">O4</span><div><strong>Fire path</strong><small>HR + Louis policy gate</small></div></div></div>
-  <div class="card span8"><div class="label">THE DAILY CONTROL LOOP</div><h3 class="en">Use this sequence for any store problem.</h3><h3 class="zh">任何门店问题都用这个顺序。</h3><table class="table"><tr><th>#</th><th>Question</th><th>Output</th><th>Route</th></tr><tr><td>01</td><td><strong>What changed?</strong><br><span class="metric">Fact, not story</span></td><td>One-line exception</td><td>Store thread</td></tr><tr><td>02</td><td><strong>Who owns the next move?</strong><br><span class="metric">One owner only</span></td><td>Owner + due time</td><td>Ticket</td></tr><tr><td>03</td><td><strong>Who must decide?</strong><br><span class="metric">Only if a gate is hit</span></td><td>Yes / no / verdict</td><td>Human gate</td></tr><tr><td>04</td><td><strong>What proves it closed?</strong><br><span class="metric">Photo, vendor, Brain outcome</span></td><td>Close evidence</td><td>Brain outcome</td></tr></table></div>
-  <div class="card span4"><div class="label">NO-GUESS ZONE</div><h3>Unknown is a valid status.</h3><p class="en">Labor %, food cost, missing vendor facts, and fraud verdicts stay UNKNOWN until the source proves them.</p><p class="zh">Labor%、食材成本、缺失的供应商事实、作弊结论，在来源证明前都保持 UNKNOWN。</p><div class="callout"><strong>Never:</strong> make a clean-looking number to fill an empty cell.</div></div>
- </div>
-</section>
+<div class="content">
 
-<section class="page" id="command"><div class="pagehead"><div><h2>Command Center</h2><p class="pagelead en">One view for Anson and Louis: what changed across stores, without pretending this page is the database.</p><p class="pagelead zh">给 Anson 和 Louis 的总览：看门店发生了什么，但不把这页冒充数据库。</p></div><span class="stamp">00001–00003 live boards · 00004–00005 pending</span></div><div class="grid"><div class="card span8"><div class="label">MULTI-STORE STATUS</div><div class="store"><div class="store-left"><span class="dot"></span><div><strong>00001 · Fayetteville</strong><div class="metric">Live GM roadmap available</div></div></div><a href="https://wiserise-gm-roadmaps.vercel.app/00001#foh" target="_blank" rel="noopener">Open ›</a></div><div class="store"><div class="store-left"><span class="dot"></span><div><strong>00002 · Greenville</strong><div class="metric">Live GM roadmap available</div></div></div><a href="https://wiserise-gm-roadmaps.vercel.app/00002#foh" target="_blank" rel="noopener">Open ›</a></div><div class="store"><div class="store-left"><span class="dot"></span><div><strong>00003 · Wilmington</strong><div class="metric">Live GM roadmap available</div></div></div><a href="https://wiserise-gm-roadmaps.vercel.app/00003#foh" target="_blank" rel="noopener">Open ›</a></div><div class="store"><div class="store-left"><span class="dot wait"></span><div><strong>00004–00005</strong><div class="metric">No live GM board connected yet</div></div></div><span class="status amber">PENDING</span></div></div><div class="card span4"><div class="label">OWNER ROUTE</div><h3>Route by decision, not by panic.</h3><div class="action"><span class="status blue">OPS</span><div><strong>Anson</strong><small>Ops workflow + department execution</small></div></div><div class="action"><span class="status purple">OWNER</span><div><strong>Louis</strong><small>Money, real fraud, final gates</small></div></div><div class="action"><span class="status green">HR</span><div><strong>Sally</strong><small>People process and HR cases</small></div></div></div></div></section>
+<!-- ==================== MAP ==================== -->
+<div class="page on" id="map">
+<div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-07 · Department Roadmap v1.1</div>
+<div class="page-h">📊 Map <span class="zh">总图</span></div>
+<div class="page-sub"><span class="en">One order + gates so nobody invents a second process.</span><span class="zh">一张总图+关卡，没人另造流程。</span></div>
 
-<section class="page" id="repair"><div class="pagehead"><div><h2>Repair Command</h2><p class="pagelead en">Repair is a production problem first, a finance question second.</p><p class="pagelead zh">维修首先是营业问题，其次才是财务问题。</p></div><span class="stamp">OPS-EQ → #03-operations</span></div><div class="grid"><div class="card span4"><div class="label">DECISION TREE</div><div class="action"><div class="icon">01</div><div><strong>Is there an immediate safety / closure risk?</strong><small>Yes → urgent title and store action now</small></div></div><div class="action"><div class="icon">02</div><div><strong>Can staff work around it safely?</strong><small>Document workaround and due time</small></div></div><div class="action"><div class="icon">03</div><div><strong>Does it need money approval?</strong><small>Quote / replacement → Louis gate</small></div></div><div class="action"><div class="icon">04</div><div><strong>What proves close?</strong><small>Vendor result, photo, or verified test</small></div></div></div><div class="card span8"><div class="label">REPAIR PACK</div><table class="table"><tr><th>Step</th><th>Do</th><th>Where</th></tr><tr><td><span class="status red">E1</span></td><td>Open a ticket with urgency, store, asset, symptom, impact</td><td>#03-operations</td></tr><tr><td><span class="status amber">QUOTE</span></td><td>Collect vendor diagnosis and quote; do not promise payment</td><td>Ticket thread</td></tr><tr><td><span class="status purple">GATE</span></td><td>High quote or replacement unit waits for Louis yes</td><td>Human approval</td></tr><tr><td><span class="status green">E2</span></td><td>Reply to store with short English action and status</td><td>Store thread</td></tr><tr><td><span class="status blue">DONE</span></td><td>Write one-line Brain outcome with proof</td><td>Ticket outcome</td></tr></table><div class="callout"><strong>Route:</strong> fridge, HVAC, roof, sewer, drain, plumbing, electrical, door, POS hardware, Wi-Fi, and every other repair use the same OPS-EQ path.</div></div></div></section>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">A store runs itself when exceptions get detected, routed, and closed — not when someone manages a dashboard.</span><span class="zh">门店能自己跑的前提是例外被及时发现、路由、关闭 — 不是靠人盯看板。</span></div>
 
-<section class="page" id="fraud"><div class="pagehead"><div><h2>Fraud Watch</h2><p class="pagelead en">Silence is the default. Escalation requires a pattern plus facts — never a vibe.</p><p class="pagelead zh">默认是安静。升级需要模式和事实，不能凭感觉。</p></div><span class="stamp">Clean = silent · Flag = investigate</span></div><div class="grid"><div class="card span6"><div class="label">CLASSIFY BEFORE ACCUSING</div><table class="table"><tr><th>Signal</th><th>First question</th><th>Normal route</th></tr><tr><td>Void / refund spike</td><td>Named promo or unexplained?</td><td>Check ticket + reason</td></tr><tr><td>Discount pattern</td><td>Approved program or mystery?</td><td>Match promo rules</td></tr><tr><td>Cash share</td><td>Real operating context?</td><td>Compare facts</td></tr><tr><td>Free gift card / theft-shaped</td><td>Is there evidence of loss?</td><td>Louis gate</td></tr></table></div><div class="card span6"><div class="label">VERDICT LOOP</div><div class="action"><div class="icon">1</div><div><strong>Pull the exact ticket</strong><small>Order, amount, user, timestamp, receipt</small></div></div><div class="action"><div class="icon">2</div><div><strong>Ask for reason / approver</strong><small>Do not call a person a thief in the first pass</small></div></div><div class="action"><div class="icon">3</div><div><strong>Louis decides theft-shaped cases</strong><small>Dismissed or confirmed becomes a Brain verdict</small></div></div><div class="action"><div class="icon">4</div><div><strong>Green night stays silent</strong><small>One digest only when a flag exists</small></div></div></div></div></section>
+<div class="outcome"><span class="en">By 2026-09-06:</span><span class="zh">2026-09-06前：</span>
+<span class="en">Open repairs ticketed and closing · fraud green or verdicted · staffing gaps known and hiring · $300 drawer clean · no invented numbers — without Louis answering process.</span>
+<span class="zh">维修有单且在关闭 · 作弊绿或有结论 · 人手缺口清楚且在招 · $300钱箱干净 · 不编数字 — Louis不用答流程。</span></div>
 
-<section class="page" id="people"><div class="pagehead"><div><h2>People & Staffing</h2><p class="pagelead en">Staffing is a capacity problem. Hiring is the response to a proven gap, not a reflex.</p><p class="pagelead zh">人手是容量问题。招聘是对已证明缺口的回应，不是条件反射。</p></div><span class="stamp">7shifts + Brain roster</span></div><div class="grid"><div class="card span4"><div class="label">GAP FORMULA</div><div class="big">GAP = max(0, SAFE − CURRENT)</div><p style="margin-top:8px">MIN = weekly shifts ÷ 4<br>SAFE = MIN × 1.25<br>CURRENT = live roster</p></div><div class="card span8"><div class="label">NORMAL STAFFING LOOP</div><table class="table"><tr><th>#</th><th>Move</th><th>Owner</th><th>Gate</th></tr><tr><td>1</td><td>Publish the schedule and identify the actual gap</td><td>GM</td><td>—</td></tr><tr><td>2</td><td>Try coverage / internal move before opening a role</td><td>GM</td><td>—</td></tr><tr><td>3</td><td>Request hire with role and count</td><td>GM</td><td>Brain ticket</td></tr><tr><td>4</td><td>Score candidates and show shortlist</td><td>OPS / People</td><td>GM picks</td></tr><tr><td>5</td><td>Onboard, train, verify, then activate</td><td>GM + HR</td><td>Training pass</td></tr></table></div></div></section>
+<div class="pareto"><strong>80/20:</strong> <span class="en">POS cheating + broken equipment = most pain. Watch those two first.</span><span class="zh">POS作弊+设备坏=最大痛。先盯这两样。</span></div>
 
-<section class="page" id="store"><div class="pagehead"><div><h2>Store Operating Loop</h2><p class="pagelead en">The store day is a loop, not eight disconnected checklists.</p><p class="pagelead zh">门店的一天是一个循环，不是八张互相断开的清单。</p></div><span class="stamp">Open → Close → Verify</span></div><div class="grid"><div class="card span12"><div class="label">ONE STORE DAY</div><div class="rule"><div>① Open · keys / stations / $300</div><div>② Service · speed / quality / guest</div><div>③ Staff · coverage / gap</div><div>④ Watch · fraud exceptions</div><div>⑤ Repair · safe continuity</div><div>⑥ Cash · count / swap proof</div><div>⑦ Close · lock / food / log</div><div>⑧ Health · top 3 issues only</div></div></div><div class="card span6"><div class="label">START / END NON-NEGOTIABLES</div><div class="action"><span class="status blue">OPEN</span><div><strong>Keys, lights, music, AC, POS, stations, team brief</strong><small>Drawer start = $300</small></div></div><div class="action"><span class="status purple">CLOSE</span><div><strong>Count, clean, food safe, lock, alarm, log</strong><small>Drawer end = $300</small></div></div></div><div class="card span6"><div class="label">HEALTH OUTPUT</div><h3>Healthy · Watch · Risk · Partial</h3><p>Show no more than three issues, each with evidence and one next action. Missing data is UNKNOWN, not a guessed score.</p></div></div></section>
+<div class="box box-gate"><strong><span class="en">THIS CYCLE → 2026-09-06:</span><span class="zh">本周期 → 2026-09-06：</span></strong> <span class="en">repair tickets closing fast · fraud silent or verdicted · staffing gaps with owners · cash drawer clean</span><span class="zh">维修单快速关闭 · 作弊静默或有结论 · 人手缺口有负责人 · 钱箱干净</span></div>
+<div class="box box-rule"><strong><span class="en">LATER:</span><span class="zh">以后：</span></strong> <span class="en">labor% engine · food cost live · full compliance checklist · multi-store live board</span><span class="zh">labor%引擎 · 实时食材成本 · 合规清单 · 多店实时看板</span></div>
 
-<section class="page" id="learn"><div class="pagehead"><div><h2>Ops Start</h2><p class="pagelead en">A 30-day path from “I saw the page” to “I can run the loop.”</p><p class="pagelead zh">30天从“我看过页面”到“我能跑完整循环”。</p></div><span class="stamp">Training path</span></div><div class="grid"><div class="card span4"><div class="label">DAY 1</div><h3>Understand the system</h3><p>Read Ops Daily. Know Slack, WISE OPS, WISE BRAIN, sources, and human gates.</p></div><div class="card span4"><div class="label">WEEK 1</div><h3>Run normal work</h3><p>Open/close, staffing gap, repair intake, receipt facts, and green-night silence.</p></div><div class="card span4"><div class="label">MONTH 1</div><h3>Prove the loop</h3><p>Seven clean open/close days, one real hire request, one repair ticket, one handled flag.</p></div><div class="card span12"><div class="label">PASS TEST</div><table class="table"><tr><th>Can you…</th><th>Evidence</th></tr><tr><td>Find the right source?</td><td>Names Brain, Slack, Sheet, Drive correctly</td></tr><tr><td>Route a repair?</td><td>OPS-EQ ticket with urgency, impact, owner</td></tr><tr><td>Handle a fraud flag?</td><td>Facts first; no automatic accusation</td></tr><tr><td>Know when to stop?</td><td>Recognizes Louis / HR gate before money or fire</td></tr></table></div></div></section>
-
-<section class="page" id="rules"><div class="pagehead"><div><h2>Rules of the System</h2><p class="pagelead en">Rules exist to protect speed, truth, and human accountability.</p><p class="pagelead zh">规矩是为了保护速度、事实和人的责任。</p></div><span class="stamp">Reference · verified source</span></div><div class="grid"><div class="card span6"><div class="label">ALWAYS</div><div class="action"><span class="status green">01</span><div><strong>Use the source that owns the truth</strong><small>Brain for live facts; skill / Playbook for procedure; Drive for originals</small></div></div><div class="action"><span class="status green">02</span><div><strong>One real job = one ticket</strong><small>Save the store-changing work and its outcome</small></div></div><div class="action"><span class="status green">03</span><div><strong>One owner and one next action</strong><small>No vague “someone should handle it”</small></div></div><div class="action"><span class="status green">04</span><div><strong>Reply in the store thread</strong><small>Short WHAT / WHO / WHEN; details in thread</small></div></div></div><div class="card span6"><div class="label">STOP / ESCALATE</div><div class="action"><span class="status red">STOP</span><div><strong>Money out, final fire decision, secrets</strong><small>Human gate; freshness check; never guess</small></div></div><div class="action"><span class="status amber">STOP</span><div><strong>Missing or stale source</strong><small>Say UNKNOWN and identify the missing proof</small></div></div><div class="action"><span class="status purple">STOP</span><div><strong>New company SOP / form request</strong><small>Only Louis, Luna, Sally, or Anson by scope</small></div></div></div></div></section>
-</main>
-<footer class="footer"><span>WISE OPS · Operations Command Center · First-principles redesign</span><span>Framework v2 · synced 2026-08-07b · live source links are views, not databases</span></footer>
+<div class="sec-title"><span class="en">Path</span><span class="zh">路径</span></div>
+<div class="flow">
+<span class="flow-step"><span class="en">Detect</span><span class="zh">发现</span></span><span class="flow-arrow">→</span>
+<span class="flow-step"><span class="en">Route</span><span class="zh">路由</span></span><span class="flow-arrow">→</span>
+<span class="flow-gate">⭐ <span class="en">Decide</span><span class="zh">拍板</span></span><span class="flow-arrow">→</span>
+<span class="flow-step"><span class="en">Execute</span><span class="zh">执行</span></span><span class="flow-arrow">→</span>
+<span class="flow-step"><span class="en">Verify</span><span class="zh">验证</span></span>
 </div>
+<div style="font-size:12px;color:var(--muted);margin-bottom:12px">
+<span class="badge badge-gate">⭐ Gate</span> <span class="en">human</span><span class="zh">人拍板</span> ·
+<span class="badge badge-blue">⚡ Auto</span> WISE OPS / Brain
+</div>
+
+<div class="sec-title"><span class="en">Open a stage</span><span class="zh">点阶段</span></div>
+<div class="stage-grid">
+<a class="stage-card" href="#repair" onclick="return goPage('repair')"><div class="stage-num"><span class="en">Stage 1</span><span class="zh">阶段1</span></div><div class="stage-name"><span class="en">Repair</span><span class="zh">维修</span></div><div class="stage-work"><span class="en">E1 → quote → gate → E2 → close</span><span class="zh">E1→报价→门→E2→关</span></div><div class="stage-meta"><span class="en">Ops · Louis</span><span class="zh">运营·Louis</span> <span class="badge badge-gate">⭐ O1</span></div></a>
+<a class="stage-card" href="#fraud" onclick="return goPage('fraud')"><div class="stage-num"><span class="en">Stage 2</span><span class="zh">阶段2</span></div><div class="stage-name"><span class="en">Fraud Watch</span><span class="zh">防作弊</span></div><div class="stage-work"><span class="en">Silent if green · flag → investigate</span><span class="zh">绿静默·有旗→查</span></div><div class="stage-meta"><span class="en">Auto · Louis</span><span class="zh">自动·Louis</span> <span class="badge badge-gate">⭐ O2</span></div></a>
+<a class="stage-card" href="#staffing" onclick="return goPage('staffing')"><div class="stage-num"><span class="en">Stage 3</span><span class="zh">阶段3</span></div><div class="stage-name"><span class="en">Staffing</span><span class="zh">人手</span></div><div class="stage-work"><span class="en">MIN · SAFE · GAP → hire loop</span><span class="zh">MIN·SAFE·GAP→招人</span></div><div class="stage-meta"><span class="en">GM · Auto</span><span class="zh">GM·自动</span></div></a>
+<a class="stage-card" href="#loop" onclick="return goPage('loop')"><div class="stage-num"><span class="en">Stage 4</span><span class="zh">阶段4</span></div><div class="stage-name"><span class="en">Store Loop</span><span class="zh">门店循环</span></div><div class="stage-work"><span class="en">Open → serve → cash → close</span><span class="zh">开→营业→现金→打烊</span></div><div class="stage-meta"><span class="en">GM</span><span class="zh">GM</span></div></a>
+</div>
+
+<div class="sec-title"><span class="en">Human Gates</span><span class="zh">人拍板</span></div>
+<div class="gate-row">
+<div class="gate-card"><span class="badge badge-gate">⭐ O1</span><div class="g-who">Louis</div><div class="g-what"><span class="en">Big repair $</span><span class="zh">大维修钱</span></div></div>
+<div class="gate-card"><span class="badge badge-gate">⭐ O2</span><div class="g-who">Louis</div><div class="g-what"><span class="en">Fraud / theft</span><span class="zh">作弊/偷</span></div></div>
+<div class="gate-card"><span class="badge badge-gate">⭐ O3</span><div class="g-who">GM</div><div class="g-what"><span class="en">Hire / train pass</span><span class="zh">选人/培训</span></div></div>
+<div class="gate-card"><span class="badge badge-gate">⭐ O4</span><div class="g-who">HR+Louis</div><div class="g-what"><span class="en">Fire path</span><span class="zh">开除</span></div></div>
+</div>
+
+<div class="box box-auto"><strong><span class="en">Live data:</span><span class="zh">实时数据：</span></strong> <a href="https://docs.google.com/spreadsheets/d/1zsJnqDllQOcFhGIAIlBJnBNlBCHVSdwUJKRTPNBdgn4/edit" target="_blank" rel="noopener">Ops KPI Sheet</a> · <code>store health</code> · <code>fraud</code> · <span class="en">no counts frozen here</span><span class="zh">本页不写死数字</span></div>
+</div>
+
+<!-- ==================== CADENCE ==================== -->
+<div class="page" id="cadence">
+<div class="page-h">🧭 Cadence <span class="zh">节奏</span></div>
+<div class="page-sub"><span class="en">Daily = Act · Weekly = Focus · Monthly = Decide. Open here every day.</span><span class="zh">每日=行动 · 每周=聚焦 · 每月=决策。每天先开这页。</span></div>
+
+<div class="pareto"><strong>80/20:</strong> <span class="en">POS cheating + broken equipment. Fix repair routing + fraud silence first.</span><span class="zh">POS作弊+设备坏。先修维修路由+作弊静默。</span></div>
+
+<div class="sec-title"><span class="en">3 Tiers</span><span class="zh">三层节奏</span></div>
+<div class="cadence-grid">
+<div class="cadence-card">
+<div class="c-tier"><span class="en">Daily = Act</span><span class="zh">每日=行动</span></div>
+<div class="c-name"><span class="en">Daily Digest</span><span class="zh">每日简报</span></div>
+<div class="c-body">
+<strong>7 AM</strong> <span class="en">Staffing gap brief</span><span class="zh">人手缺口简报</span><br>
+<strong>Day</strong> <span class="en">Repairs · guest · floor issues</span><span class="zh">维修·客人·楼面</span><br>
+<strong>Night</strong> <span class="en">Fraud watch (silent if green)</span><span class="zh">作弊检查（绿则静默）</span><br><br>
+<span class="en">Source: Brain tickets + fraud_history</span><span class="zh">来源：Brain工单+作弊记录</span><br>
+<span class="en">Where: #03-operations</span><span class="zh">在哪：#03-operations</span>
+</div>
+</div>
+<div class="cadence-card">
+<div class="c-tier"><span class="en">Weekly = Focus</span><span class="zh">每周=聚焦</span></div>
+<div class="c-name"><span class="en">One Thing Framework</span><span class="zh">一件事框架</span></div>
+<div class="c-body">
+<strong><span class="en">Fri</span><span class="zh">周五</span></strong> <span class="en">memo: biggest result next week</span><span class="zh">备忘：下周最大成果</span><br>
+<strong><span class="en">Mon</span><span class="zh">周一</span></strong> <span class="en">3 focus items + owners</span><span class="zh">3个聚焦+负责人</span><br>
+<strong><span class="en">Wed</span><span class="zh">周三</span></strong> <span class="en">blocker check</span><span class="zh">查障碍</span><br>
+<strong><span class="en">Fri</span><span class="zh">周五</span></strong> <span class="en">result + proof</span><span class="zh">结果+证据</span><br><br>
+<span class="en">FOCUS: Find biggest result · One owner · Clear finish · Unblock early · Show proof</span><span class="zh">聚焦：找最大成果·一个负责人·明确完成·早除障碍·出证据</span>
+</div>
+</div>
+<div class="cadence-card">
+<div class="c-tier"><span class="en">Monthly = Decide</span><span class="zh">每月=决策</span></div>
+<div class="c-name"><span class="en">KPI Report</span><span class="zh">KPI报告</span></div>
+<div class="c-body">
+<strong><span class="en">Last business day</span><span class="zh">月末最后工作日</span></strong> <span class="en">submit results</span><span class="zh">交结果</span><br>
+<strong><span class="en">First week</span><span class="zh">下月第一周</span></strong> <span class="en">Louis reviews</span><span class="zh">Louis审</span><br><br>
+<strong><span class="en">4 questions:</span><span class="zh">4个问题：</span></strong><br>
+1. <span class="en">What improved?</span><span class="zh">什么变好了？</span><br>
+2. <span class="en">What did not?</span><span class="zh">什么没好？</span><br>
+3. <span class="en">What keeps repeating?</span><span class="zh">什么老重复？</span><br>
+4. <span class="en">What decision needed?</span><span class="zh">需要什么决策？</span>
+</div>
+</div>
+</div>
+
+<div class="sec-title"><span class="en">3 Pulls (copy-paste)</span><span class="zh">3句先发（复制粘贴）</span></div>
+<div class="pulls">
+<div class="pull"><strong>1. Health</strong><code>store health 00003</code></div>
+<div class="pull"><strong>2. Fraud</strong><code>fraud 00003</code><br><code>any fraud?</code></div>
+<div class="pull"><strong>3. Staff</strong><code>staffing 00003</code><br><code>roster 00003</code></div>
+</div>
+
+<div class="card">
+<div class="sec-title" style="margin-top:0"><span class="en">Rule</span><span class="zh">规矩</span></div>
+<p><span class="en">Talk in store Slack → <strong>WISE OPS</strong> works → you yes/no only on big repair money, real fraud, and fire.</span><span class="zh">Slack说 → <strong>WISE OPS</strong>干 → 大维修钱/真作弊/开除你拍板。</span></p>
+</div>
+
+<div class="sec-title"><span class="en">Where to post</span><span class="zh">去哪发</span></div>
+<table>
+<tr><th><span class="en">Work</span><span class="zh">事</span></th><th><span class="en">Where</span><span class="zh">哪</span></th></tr>
+<tr><td><span class="en">Store floor / staffing / cash</span><span class="zh">楼面/人手/现金</span></td><td><span class="en">Store channel + WISE OPS</span><span class="zh">店频道+WISE OPS</span></td></tr>
+<tr><td><span class="en">Repair E1 / bag-swap photos</span><span class="zh">维修E1/换零钱拍照</span></td><td>#03-operations</td></tr>
+<tr><td><span class="en">Buy things (not repair)</span><span class="zh">买东西（非维修）</span></td><td>#04-finance</td></tr>
+<tr><td><span class="en">Weekly Focus + Monthly Report</span><span class="zh">周聚焦+月报告</span></td><td>#012-weekly-onething</td></tr>
+</table>
+
+<div class="box box-gate"><strong><span class="en">First gate:</span><span class="zh">第一关：</span></strong> Louis · O1 · <span class="en">big repair money before payment</span><span class="zh">大维修钱付钱前</span></div>
+
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong>
+<code>store health 00003</code> · <code>fraud 00003</code> · <code>any fraud?</code> · <code>staffing 00003</code> · <code>roster 00003</code> · <code>repair fridge 00002</code> · <code>open repairs</code>
+</div>
+
+<div class="box box-auto" style="margin-top:12px"><strong><span class="en">Brain = record · Canvas = team view · Slack = act.</span><span class="zh">Brain=记录 · Canvas=团队视图 · Slack=行动。</span></strong> <span class="en">Silence means no open work.</span><span class="zh">安静=没有待办。</span></div>
+</div>
+
+<!-- ==================== STAGE 1: REPAIR ==================== -->
+<div class="page" id="repair">
+<div class="page-h">1. Repair <span class="zh">维修</span></div>
+<div class="page-sub"><span class="en">Ops · Louis</span><span class="zh">运营·Louis</span> · <span class="badge badge-gate">⭐ O1</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Repair is a production problem first, a finance question second.</span><span class="zh">维修首先是营业问题，其次才是财务问题。</span></div>
+<div class="flow"><span class="flow-step"><span class="en">E1 ticket</span><span class="zh">E1开单</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">quote</span><span class="zh">报价</span></span><span class="flow-arrow">→</span><span class="flow-gate">⭐ <span class="en">big $</span><span class="zh">大钱</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">E2 store</span><span class="zh">E2店</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">close</span><span class="zh">关</span></span></div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">every repair has an OPS-EQ ticket with urgency, owner, status, and proof of close.</span><span class="zh">每个维修有OPS-EQ单，带紧急、负责人、状态、关闭证据。</span></div>
+<table>
+<tr><th>#</th><th><span class="en">What</span><span class="zh">事</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th>Gate</th><th><span class="en">How</span><span class="zh">怎么</span></th><th><span class="en">Done-when</span><span class="zh">完成</span></th></tr>
+<tr><td>1</td><td><span class="en">E1 ticket</span><span class="zh">E1开单</span></td><td><span class="en">GM/⚡</span><span class="zh">GM/自动</span></td><td>—</td><td><span class="en">urgency + symptom + impact</span><span class="zh">紧急+症状+影响</span></td><td><span class="en">#03-ops</span><span class="zh">#03-ops</span></td></tr>
+<tr><td>2</td><td><span class="en">Quote</span><span class="zh">报价</span></td><td><span class="en">Ops</span><span class="zh">运营</span></td><td>—</td><td><span class="en">vendor diagnosis</span><span class="zh">供应商诊断</span></td><td><span class="en">quote in thread</span><span class="zh">线程有报价</span></td></tr>
+<tr><td>3</td><td><strong><span class="en">Gate</span><span class="zh">门</span></strong></td><td>Louis</td><td><span class="badge badge-gate">⭐ O1</span></td><td><span class="en">high quote / replace</span><span class="zh">高报价/换机</span></td><td><span class="en">yes / no</span><span class="zh">同意/拒绝</span></td></tr>
+<tr><td>4</td><td><span class="en">E2 store</span><span class="zh">E2回店</span></td><td>⚡</td><td>—</td><td><span class="en">short English action</span><span class="zh">短英文行动</span></td><td><span class="en">in store thread</span><span class="zh">店线程</span></td></tr>
+<tr><td>5</td><td><span class="en">Close</span><span class="zh">关单</span></td><td>⚡</td><td>—</td><td><span class="en">Brain outcome</span><span class="zh">Brain结果</span></td><td><span class="en">proof on ticket</span><span class="zh">单有证据</span></td></tr>
+</table>
+<div class="box box-rule"><strong><span class="en">Urgency titles:</span><span class="zh">紧急标题：</span></strong> 🔴 <span class="en">today</span><span class="zh">今天</span> · 🟡 <span class="en">1–2 days</span><span class="zh">1–2天</span> · 🟢 <span class="en">this week</span><span class="zh">本周</span></div>
+<div class="box box-rule"><strong><span class="en">Always tag:</span><span class="zh">一定@：</span></strong> Louis · Yumi · Luna</div>
+<div class="box box-red"><strong><span class="en">Not finance first:</span><span class="zh">不先财务：</span></strong> <span class="en">Repair pack goes #03-ops, not #04-finance.</span><span class="zh">维修包去#03-ops，不是#04-finance。</span></div>
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>repair fridge 00002</code> · <code>open repairs</code> · <code>open OPS-EQ</code></div>
+</div>
+
+<!-- ==================== STAGE 2: FRAUD ==================== -->
+<div class="page" id="fraud">
+<div class="page-h">2. Fraud Watch <span class="zh">防作弊</span></div>
+<div class="page-sub"><span class="en">Auto · Louis</span><span class="zh">自动·Louis</span> · <span class="badge badge-gate">⭐ O2</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Silence is the default. Escalation needs pattern + facts, never a vibe.</span><span class="zh">默认安静。升级需要模式+事实，不能凭感觉。</span></div>
+<div class="flow"><span class="flow-step"><span class="en">night scan</span><span class="zh">夜扫</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">flag?</span><span class="zh">有旗?</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">classify</span><span class="zh">分类</span></span><span class="flow-arrow">→</span><span class="flow-gate">⭐ <span class="en">verdict</span><span class="zh">结论</span></span></div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">green night = silent. Flag → investigated. Theft-shaped → Louis verdict written.</span><span class="zh">绿夜=静默。有旗→查。偷窃型→Louis写结论。</span></div>
+<table>
+<tr><th><span class="en">Check</span><span class="zh">查</span></th><th>RED</th><th>YELLOW</th><th><span class="en">Normal?</span><span class="zh">正常?</span></th></tr>
+<tr><td>Voids</td><td>&gt;2% / 3+ one server</td><td>&gt;1% / 2+</td><td><span class="en">Named promo</span><span class="zh">记名优惠</span></td></tr>
+<tr><td>Refunds</td><td>&gt;1%</td><td>&gt;0.5%</td><td><span class="en">Approved program</span><span class="zh">已批方案</span></td></tr>
+<tr><td><span class="en">Mystery discount</span><span class="zh">神秘折扣</span></td><td>&gt;5% unexplained</td><td>&gt;3%</td><td><span class="en">Birthday/Military/DoorDash</span><span class="zh">生日/军人/DoorDash</span></td></tr>
+<tr><td><span class="en">Cash share</span><span class="zh">现金比</span></td><td>&gt;40%</td><td>&gt;30%</td><td><span class="en">Operating context</span><span class="zh">营业实际</span></td></tr>
+<tr><td><span class="en">Gift card free</span><span class="zh">免费礼品卡</span></td><td><span class="en">any</span><span class="zh">任何</span></td><td>—</td><td>—</td></tr>
+</table>
+<div class="box box-rule"><strong><span class="en">Not auto-theft:</span><span class="zh">不自动当偷：</span></strong> <span class="en">named promos · birthday free needs 4+ guests</span><span class="zh">记名优惠·生日免单要4人+</span></div>
+<div class="box box-gate"><strong>⭐ O2:</strong> <span class="en">Louis says dismissed / confirmed → write Brain verdict</span><span class="zh">Louis说dismissed/confirmed→写Brain</span></div>
+<div class="box box-red"><strong><span class="en">Never:</span><span class="zh">永不：</span></strong> <span class="en">accuse without ticket evidence · call someone a thief first pass</span><span class="zh">无单据证据指控·第一次就说人偷</span></div>
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>any fraud?</code> · <code>fraud 00003</code> · <code>30 day anomalies 00002</code></div>
+</div>
+
+<!-- ==================== STAGE 3: STAFFING ==================== -->
+<div class="page" id="staffing">
+<div class="page-h">3. Staffing <span class="zh">人手</span></div>
+<div class="page-sub"><span class="en">GM · Auto</span><span class="zh">GM·自动</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Staffing is a capacity problem. Hiring responds to a proven gap, not a reflex.</span><span class="zh">人手是容量问题。招聘回应已证明缺口，不是条件反射。</span></div>
+<div class="flow"><span class="flow-step"><span class="en">MIN</span><span class="zh">最少</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">SAFE</span><span class="zh">安全</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">CURRENT</span><span class="zh">现有</span></span><span class="flow-arrow">→</span><span class="flow-gate">⭐ <span class="en">gap</span><span class="zh">缺口</span></span></div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">every store knows its GAP. Open gaps have hire tickets with owners.</span><span class="zh">每个店知道GAP。开放缺口有招聘单和负责人。</span></div>
+<div class="box box-auto"><strong><span class="en">Formula:</span><span class="zh">公式：</span></strong> MIN = weekly shifts ÷ 4 · SAFE = MIN × 1.25 · CURRENT = 7shifts live · GAP = max(0, SAFE − CURRENT)</div>
+<table>
+<tr><th>#</th><th><span class="en">What</span><span class="zh">事</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th>Gate</th><th><span class="en">How</span><span class="zh">怎么</span></th><th><span class="en">Done-when</span><span class="zh">完成</span></th></tr>
+<tr><td>1</td><td><span class="en">Schedule</span><span class="zh">排班</span></td><td>GM</td><td>—</td><td>7shifts</td><td><span class="en">published</span><span class="zh">已发</span></td></tr>
+<tr><td>2</td><td><span class="en">Gap brief</span><span class="zh">缺口</span></td><td><span class="badge badge-blue">⚡</span></td><td>—</td><td>7 AM</td><td><span class="en">gap posted</span><span class="zh">缺口已贴</span></td></tr>
+<tr><td>3</td><td><span class="en">Hire</span><span class="zh">招</span></td><td>GM</td><td><span class="badge badge-gate">⭐ O3</span></td><td><code>need 1 server</code></td><td><span class="en">ticket open</span><span class="zh">单开了</span></td></tr>
+<tr><td>4</td><td><span class="en">Cover</span><span class="zh">补</span></td><td>GM</td><td>—</td><td><span class="en">internal move / overtime</span><span class="zh">内部调/加班</span></td><td><span class="en">or hire loop</span><span class="zh">或招人</span></td></tr>
+</table>
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>staffing 00003</code> · <code>roster 00003</code> · <code>need 1 cook</code></div>
+</div>
+
+<!-- ==================== STAGE 4: STORE LOOP ==================== -->
+<div class="page" id="loop">
+<div class="page-h">4. Store Loop <span class="zh">门店循环</span></div>
+<div class="page-sub">GM</div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">The store day is one loop, not eight disconnected checklists.</span><span class="zh">门店一天是一个循环，不是八张断开的清单。</span></div>
+<div class="flow"><span class="flow-step"><span class="en">Open</span><span class="zh">开店</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">Service</span><span class="zh">营业</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">Cash</span><span class="zh">现金</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">Close</span><span class="zh">打烊</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">Health</span><span class="zh">健康</span></span></div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">clean open · clean close · $300 drawer · top 3 health issues with proof.</span><span class="zh">干净开店·干净打烊·$300钱箱·最多3个有证据健康问题。</span></div>
+
+<div class="sec-title">A. <span class="en">Open</span><span class="zh">开店</span></div>
+<table>
+<tr><th>#</th><th><span class="en">What</span><span class="zh">事</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">Done-when</span><span class="zh">完成</span></th></tr>
+<tr><td>1</td><td><span class="en">Keys · lights · music · AC</span><span class="zh">钥匙·灯·音乐·空调</span></td><td>GM</td><td><span class="en">on</span><span class="zh">开</span></td></tr>
+<tr><td>2</td><td><span class="en">Drawer start $300</span><span class="zh">钱箱起$300</span></td><td>GM</td><td><span class="en">counted</span><span class="zh">数了</span></td></tr>
+<tr><td>3</td><td><span class="en">Stations · POS on</span><span class="zh">工位·POS开</span></td><td><span class="en">GM · leads</span><span class="zh">GM·组长</span></td><td><span class="en">ready</span><span class="zh">就绪</span></td></tr>
+<tr><td>4</td><td><span class="en">Team brief 2 min</span><span class="zh">班前会2分钟</span></td><td>GM</td><td><span class="en">done</span><span class="zh">完成</span></td></tr>
+</table>
+
+<div class="sec-title">B. <span class="en">Service</span><span class="zh">营业</span></div>
+<table>
+<tr><th>#</th><th><span class="en">What</span><span class="zh">事</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">Done-when</span><span class="zh">完成</span></th></tr>
+<tr><td>1</td><td><span class="en">Run floor / expo</span><span class="zh">跑楼面/出餐口</span></td><td>GM</td><td><span class="en">smooth</span><span class="zh">顺</span></td></tr>
+<tr><td>2</td><td><span class="en">Guest issue private + fast</span><span class="zh">客人问题私下快</span></td><td>GM</td><td><span class="en">resolved</span><span class="zh">解决</span></td></tr>
+<tr><td>3</td><td><span class="en">Big incident in Slack with facts</span><span class="zh">大事Slack写事实</span></td><td>GM</td><td><span class="en">noted</span><span class="zh">记了</span></td></tr>
+</table>
+
+<div class="sec-title">C. <span class="en">Cash</span><span class="zh">现金</span></div>
+<table>
+<tr><th>#</th><th><span class="en">What</span><span class="zh">事</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">Done-when</span><span class="zh">完成</span></th></tr>
+<tr><td>1</td><td><span class="en">Start / end $300</span><span class="zh">开/收$300</span></td><td>GM</td><td><span class="en">counted</span><span class="zh">数了</span></td></tr>
+<tr><td>2</td><td><span class="en">Swap → photo</span><span class="zh">换零钱→拍照</span></td><td>GM</td><td><span class="en">#03-ops</span></td></tr>
+<tr><td>3</td><td><span class="en">CASH-F-004 one line</span><span class="zh">CASH-F-004一行</span></td><td>GM</td><td><span class="en">logged</span><span class="zh">记了</span></td></tr>
+</table>
+<div class="box box-rule"><strong><span class="en">Photo → #03-ops. Not finance approve.</span><span class="zh">拍照→#03-ops。不财务批。</span></strong></div>
+
+<div class="sec-title">D. <span class="en">Close</span><span class="zh">打烊</span></div>
+<table>
+<tr><th>#</th><th><span class="en">What</span><span class="zh">事</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">Done-when</span><span class="zh">完成</span></th></tr>
+<tr><td>1</td><td><span class="en">Drawer end $300</span><span class="zh">钱箱收$300</span></td><td>GM</td><td><span class="en">counted</span><span class="zh">数了</span></td></tr>
+<tr><td>2</td><td><span class="en">Clean / food safe / temps</span><span class="zh">清洁/食品安全/温度</span></td><td><span class="en">team · GM check</span><span class="zh">团队·GM查</span></td><td><span class="en">done</span><span class="zh">完成</span></td></tr>
+<tr><td>3</td><td><span class="en">Lock · alarm</span><span class="zh">锁门·报警</span></td><td>GM</td><td><span class="en">on</span><span class="zh">开</span></td></tr>
+<tr><td>4</td><td><span class="en">Logbook → Brain</span><span class="zh">日志→Brain</span></td><td><span class="badge badge-blue">⚡</span></td><td><span class="en">pulled</span><span class="zh">拉了</span></td></tr>
+</table>
+
+<div class="sec-title">E. <span class="en">Health</span><span class="zh">健康</span></div>
+<div class="box box-rule"><strong><span class="en">Output:</span><span class="zh">输出：</span></strong> <span class="en">Healthy / Watch / Risk / Partial + top 3 issues with evidence. Labor% = UNKNOWN until proven.</span><span class="zh">健康/观察/风险/部分 + 最多3个有证据问题。Labor%=UNKNOWN直到证明。</span></div>
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>store health 00003</code> · <code>close checklist</code> · <code>sales yesterday 00003</code></div>
+</div>
+
+<!-- ==================== FIRST 30 DAYS ==================== -->
+<div class="page" id="30days">
+<div class="page-h">🚀 First 30 Days <span class="zh">前30天</span></div>
+<div class="page-sub"><span class="en">Week-by-week ramp for a new Ops / GM.</span><span class="zh">新运营/GM按周上手。</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">If the GM still asks "what do I do next?" after 30 days, the roadmap failed.</span><span class="zh">如果30天后GM还在问"下一步做什么"，路线图就失败了。</span></div>
+
+<div class="week-grid">
+<div class="week-card">
+<div class="w-num"><span class="en">Week 1</span><span class="zh">第1周</span></div>
+<div class="w-title"><span class="en">Read + Connect</span><span class="zh">读+连接</span></div>
+<ul>
+<li><span class="en">Read this roadmap: Map → Cadence</span><span class="zh">读本路线图：总图→节奏</span></li>
+<li><span class="en">Join store channel + #03-operations</span><span class="zh">进店频道+#03-operations</span></li>
+<li><span class="en">First pull: <code>store health 00003</code></span><span class="zh">第一次拉：store health 00003</span></li>
+<li><span class="en">Learn the 3 pulls + daily cadence</span><span class="zh">学3句先发+每日节奏</span></li>
+<li><span class="en">Open / close shadow with GM</span><span class="zh">跟GM开店/打烊</span></li>
+</ul>
+</div>
+<div class="week-card">
+<div class="w-num"><span class="en">Week 2</span><span class="zh">第2周</span></div>
+<div class="w-title"><span class="en">Repair + Cash</span><span class="zh">维修+现金</span></div>
+<ul>
+<li><span class="en">First repair E1: open + tag correctly</span><span class="zh">第一次维修E1：开单+正确@</span></li>
+<li><span class="en">Drawer start/end $300 — 7 clean days</span><span class="zh">钱箱开收$300 — 7天干净</span></li>
+<li><span class="en">Bag-swap photo → #03-ops</span><span class="zh">换零钱拍照→#03-ops</span></li>
+<li><span class="en">Review open repairs: <code>open repairs</code></span><span class="zh">查开放维修：open repairs</span></li>
+<li><span class="en">Learn fraud silence rule</span><span class="zh">学作弊静默规矩</span></li>
+</ul>
+</div>
+<div class="week-card">
+<div class="w-num"><span class="en">Week 3</span><span class="zh">第3周</span></div>
+<div class="w-title"><span class="en">Staffing + Fraud</span><span class="zh">人手+作弊</span></div>
+<ul>
+<li><span class="en">First staffing gap check: <code>staffing 00003</code></span><span class="zh">第一次人手检查：staffing 00003</span></li>
+<li><span class="en">Understand MIN · SAFE · GAP</span><span class="zh">搞懂MIN·SAFE·GAP</span></li>
+<li><span class="en">First hire request if gap exists</span><span class="zh">如有缺口第一次招人</span></li>
+<li><span class="en">First weekly FOCUS: pick 3 items</span><span class="zh">第一次周聚焦：选3件事</span></li>
+<li><span class="en">Review fraud flags (if any)</span><span class="zh">查作弊旗（如有）</span></li>
+</ul>
+</div>
+<div class="week-card">
+<div class="w-num"><span class="en">Week 4</span><span class="zh">第4周</span></div>
+<div class="w-title"><span class="en">Store Health + Monthly</span><span class="zh">健康+月报</span></div>
+<ul>
+<li><span class="en">First store health review: <code>store health 00003</code></span><span class="zh">第一次店健康检查</span></li>
+<li><span class="en">Write first monthly KPI report (4 questions)</span><span class="zh">写第一份月KPI报告（4问）</span></li>
+<li><span class="en">Submit to #012-weekly-onething</span><span class="zh">交到#012-weekly-onething</span></li>
+<li><span class="en">Prove one repair ticket closed with proof</span><span class="zh">证明一张维修单有证据关闭</span></li>
+<li><span class="en">Self-check: run a day without asking Louis?</span><span class="zh">自检：不问Louis跑一天？</span></li>
+</ul>
+</div>
+</div>
+
+<div class="box box-gate"><strong><span class="en">30-day test:</span><span class="zh">30天测试：</span></strong> <span class="en">GM opens Map → Cadence → hits ⭐ gates only. If still asking "what next?" → roadmap failed, re-derive.</span><span class="zh">GM开总图→节奏→只拍板⭐门。如果还在问"下一步"→路线图失败，重新推导。</span></div>
+</div>
+
+<!-- ==================== RULES ==================== -->
+<div class="page" id="rules">
+<div class="page-h">📋 Rules <span class="zh">规矩</span></div>
+<div class="page-sub"><span class="en">Only rules that change behavior.</span><span class="zh">只放会改变行为的规矩。</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Few rules that change behavior. Not a policy novel.</span><span class="zh">少而硬。不是政策小说。</span></div>
+
+<div class="box box-rule"><strong>1.</strong> <span class="en">GM stays in own store channel. Never #02-executive.</span><span class="zh">GM只在自己店频道。不进#02-executive。</span></div>
+<div class="box box-rule"><strong>2.</strong> <span class="en">Drawer ends $300 every open / close.</span><span class="zh">开打烊钱箱结尾$300。</span></div>
+<div class="box box-rule"><strong>3.</strong> <span class="en">Bag-swap photo → #03-ops. Not finance approve.</span><span class="zh">换零钱拍照→#03-ops。不财务批。</span></div>
+<div class="box box-rule"><strong>4.</strong> <span class="en">Repair → #03-ops E1 Chinese + tag Louis / Yumi / Luna.</span><span class="zh">维修→#03-ops E1中文+@三人。</span></div>
+<div class="box box-rule"><strong>5.</strong> <span class="en">Big repair money → Louis yes before pay.</span><span class="zh">大维修钱→付钱前Louis yes。</span></div>
+<div class="box box-rule"><strong>6.</strong> <span class="en">Fraud green night = silent. Named promos ≠ theft. Birthday free needs 4+ guests.</span><span class="zh">作弊绿夜=静默。记名优惠≠偷窃。生日免单要4人+。</span></div>
+<div class="box box-rule"><strong>7.</strong> <span class="en">Human fraud decision must write Brain verdict.</span><span class="zh">人对作弊的决定要写Brain。</span></div>
+<div class="box box-rule"><strong>8.</strong> <span class="en">Never invent labor% or food cost.</span><span class="zh">永不编labor%或食材成本。</span></div>
+<div class="box box-rule"><strong>9.</strong> <span class="en">Health review: max 3 issues with evidence.</span><span class="zh">健康检查：最多3个有证据问题。</span></div>
+<div class="box box-rule"><strong>10.</strong> <span class="en">Store numbers yes (00001–00005). No invented numbers to fill empty cells.</span><span class="zh">写店号不编数字填空。</span></div>
+<div class="box box-auto"><strong><span class="en">No secrets here.</span><span class="zh">无密钥。</span></strong> <span class="en">Live numbers = Sheet / Brain only.</span><span class="zh">数字只看表/Brain。</span></div>
+<div class="box box-gate"><strong><span class="en">Success:</span><span class="zh">成功：</span></strong> <span class="en">ping for gate decisions, not "what is the process?"</span><span class="zh">找你拍板，不是问流程。</span></div>
+</div>
+
+<!-- ==================== KPI ==================== -->
+<div class="page" id="kpi">
+<div class="page-h">📈 KPI <span class="zh">指标</span></div>
+<div class="page-sub"><span class="en">Live numbers live outside this file. Link to truth, don't freeze.</span><span class="zh">实时数字不在本页写死。链接到真相源。</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Sales, fraud, staffing, repairs change daily. Hardcoding = guaranteed drift.</span><span class="zh">销售、作弊、人手、维修每天变。写死=必然过期。</span></div>
+
+<div class="sec-title"><span class="en">Live Sources</span><span class="zh">实时源</span></div>
+<table>
+<tr><th><span class="en">KPI</span><span class="zh">指标</span></th><th><span class="en">Source</span><span class="zh">来源</span></th><th><span class="en">Proof</span><span class="zh">证据</span></th></tr>
+<tr><td><span class="en">Sales</span><span class="zh">销售</span></td><td><span class="en">chowbus_raw</span><span class="zh">chowbus_raw</span></td><td><code>sales 00003 yesterday</code></td></tr>
+<tr><td><span class="en">Fraud flags</span><span class="zh">作弊旗</span></td><td><span class="en">fraud_history</span><span class="zh">作弊记录</span></td><td><code>fraud 00003</code> · <code>any fraud?</code></td></tr>
+<tr><td><span class="en">Staffing gap</span><span class="zh">人手缺口</span></td><td><a href="https://docs.google.com/spreadsheets/d/1zsJnqDllQOcFhGIAIlBJnBNlBCHVSdwUJKRTPNBdgn4/edit" target="_blank" rel="noopener">Ops KPI Sheet</a></td><td><code>staffing 00003</code></td></tr>
+<tr><td><span class="en">Open repairs</span><span class="zh">开放维修</span></td><td><span class="en">#03-ops tickets</span><span class="zh">#03-ops工单</span></td><td><code>open repairs</code></td></tr>
+<tr><td><span class="en">Store health</span><span class="zh">店健康</span></td><td><span class="en">store-health-review</span><span class="zh">健康检查</span></td><td><code>store health 00003</code></td></tr>
+</table>
+
+<div class="sec-title"><span class="en">Proof Rules</span><span class="zh">证据规则</span></div>
+<div class="box box-auto"><strong>1.</strong> <span class="en">Proof only from Slack / Brain / Sheet / vendor — never invented.</span><span class="zh">证据只来自Slack/Brain/表/供应商 — 不编造。</span></div>
+<div class="box box-auto"><strong>2.</strong> <span class="en">If a number changes daily, it lives outside this file.</span><span class="zh">每天变的数字不在本文件里。</span></div>
+<div class="box box-auto"><strong>3.</strong> <span class="en">Monthly KPI report: 4 questions (improved / not / repeating / decision needed).</span><span class="zh">月KPI报告：4个问题（变好/没好/重复/需决策）。</span></div>
+<div class="box box-rule"><strong><span class="en">UNKNOWN ok:</span><span class="zh">不知道可以说：</span></strong> <span class="en">labor% · food cost — never invent</span><span class="zh">永不编</span></div>
+
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>store health 00003</code> · <code>sales 00003 yesterday</code> · <code>any fraud?</code> · <code>staffing 00003</code> · <code>open repairs</code></div>
+</div>
+
+</div>
+<div class="footer">Wiserise · Ops Department Roadmap · v1.1 · Map→Cadence→Stages→30Days→Rules→KPI · Cycle ends 2026-09-06 · wiserise-department-roadmap</div>
 <script>
-function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));const p=document.getElementById(id);if(p)p.classList.add('on');if(btn)btn.classList.add('on');else{const b=[...document.querySelectorAll('.nav button')].find(x=>(x.getAttribute('onclick')||'').includes("'"+id+"'"));if(b)b.classList.add('on')}try{history.replaceState(null,'','#'+id)}catch(e){}window.scrollTo({top:0,behavior:'smooth'})}
-function openHash(){const id=(location.hash||'').replace(/^#/,'').split('/')[0];if(id&&document.getElementById(id)?.classList.contains('page'))showPage(id,null)}
-function setLang(lang,btn){if(lang!=='en'&&lang!=='zh')lang='en';document.body.className=lang==='zh'?'zh':'';document.querySelectorAll('.lang button').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');else document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',(lang==='en'&&b.textContent.trim()==='EN')||(lang==='zh'&&b.textContent.trim()==='中文')));try{localStorage.setItem('ops-lang',lang)}catch(e){}}
-document.addEventListener('DOMContentLoaded',()=>{try{const s=localStorage.getItem('ops-lang');if(s==='en'||s==='zh')setLang(s,null)}catch(e){}openHash()});window.addEventListener('hashchange',openHash);document.addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;const b=[...document.querySelectorAll('.nav button')],i=b.indexOf(document.querySelector('.nav button.on')),n=e.key==='ArrowRight'?i+1:i-1;if(b[n])b[n].click()});
+function setLang(lang,el){document.body.className='lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('on')});if(el)el.classList.add('on')}
+function go(id,el){
+  var page=document.getElementById(id);
+  if(!page){console.warn('missing page',id);return false;}
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on');});
+  page.classList.add('on');
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on');});
+  var tab=el&&el.classList&&el.classList.contains('tab')?el:document.querySelector('.tab[href="#'+id+'"]');
+  if(tab) tab.classList.add('on');
+  try{if(history.replaceState)history.replaceState(null,'','#'+id);}catch(e){}
+  window.scrollTo(0,0);
+  return false;
+}
+function goPage(id){return go(id,document.querySelector('.tab[href="#'+id+'"]'));}
+(function(){
+  function sync(){
+    var h=(location.hash||'#map').replace(/^#/,'').split('/')[0]||'map';
+    if(!document.getElementById(h)) h='map';
+    go(h,document.querySelector('.tab[href="#'+h+'"]'));
+  }
+  window.addEventListener('hashchange',sync);
+  sync();
+})();
 </script>
 </body>
 </html>
