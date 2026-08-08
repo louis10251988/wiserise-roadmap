@@ -1,780 +1,475 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marketing · 市场部 · Wiserise V1.2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
+<script>document.documentElement.classList.add("js")</script>
+<title>Marketing Department Roadmap · Wiserise</title>
 <style>
-:root {
-  --bg:#fafbfc; --card:#fff; --ink:#111827; --muted:#6b7280; --muted-light:#9ca3af;
-  --brand:#0f172a; --accent:#3b82f6;
-  --green:#059669; --green-bg:#ecfdf5;
-  --yellow:#d97706; --yellow-bg:#fffbeb;
-  --red:#dc2626; --red-bg:#fef2f2;
-  --blue:#2563eb; --blue-bg:#eff6ff;
-  --border:#e5e7eb; --border-light:#f3f4f6;
-  --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.04); --shadow-lg:0 4px 16px rgba(0,0,0,.08);
-}
+
+:root{--bg:#fafbfc;--card:#fff;--ink:#111827;--muted:#6b7280;--muted-light:#9ca3af;--brand:#0f172a;--accent:#3b82f6;--green:#059669;--green-bg:#ecfdf5;--yellow:#d97706;--yellow-bg:#fffbeb;--red:#dc2626;--red-bg:#fef2f2;--blue:#2563eb;--blue-bg:#eff6ff;--border:#e5e7eb;--border-light:#f3f4f6;--radius:12px;--shadow:0 1px 2px rgba(0,0,0,.04);--shadow-lg:0 4px 16px rgba(0,0,0,.08)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:14px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 .topbar{background:var(--brand);color:#fff;padding:16px 28px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
-.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;max-width:1040px;margin:0 auto;gap:12px}
 .topbar h1{font-size:17px;font-weight:700}
 .topbar .sub{font-size:11.5px;opacity:.65;margin-top:2px}
-.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden}
-.lang-btn{padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer}
-.lang-btn.active{background:rgba(255,255,255,.15);color:#fff}
-.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto}
-.tab{padding:11px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden;flex-shrink:0}
+.lang-btn{padding:8px 14px;min-height:44px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);background:none;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.lang-btn.on{background:rgba(255,255,255,.15);color:#fff}
+.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;position:sticky;top:61px;z-index:99;max-width:1040px;margin:0 auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:12px 14px;min-height:44px;font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;display:inline-flex;align-items:center}
 .tab:hover{color:var(--ink)}
-.tab.active{color:var(--brand);border-bottom-color:var(--brand)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
 .content{max-width:1040px;margin:0 auto;padding:24px 20px 80px}
-.page{display:none;animation:fadeIn .2s ease}
-.page.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.pareto{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:16px 18px;margin-bottom:18px;font-size:13.5px}
+.page{display:none}
+.page.on{display:block}
+.pareto{background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;font-size:13.5px}
 .pareto strong{color:var(--brand)}
-.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.why{font-size:13px;color:var(--muted);margin-bottom:14px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--card);border-radius:0 8px 8px 0}
+.outcome{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;font-size:14px;font-weight:600}
+.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin:18px 0 10px;display:flex;align-items:center;gap:8px}
 .sec-title::before{content:"";width:3px;height:14px;background:var(--accent);border-radius:2px}
-table{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-th{background:var(--brand);color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:11.5px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+th{background:var(--brand);color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:12px}
 td{border-bottom:1px solid var(--border-light);padding:9px 10px;vertical-align:top}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:#f9fafb}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
-.card-title{font-size:15px;font-weight:700;color:var(--brand);margin-bottom:6px}
-.box{border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:12.5px;line-height:1.5;border:1px solid}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.box{border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:13px;line-height:1.5;border:1px solid}
 .box-rule{background:var(--yellow-bg);border-color:#fde68a}
 .box-auto{background:var(--blue-bg);border-color:#bfdbfe}
 .box-gate{background:var(--green-bg);border-color:#a7f3d0}
-.box-red{background:var(--red-bg);border-color:#fecaca}
-.badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:600}
-.badge-green{background:var(--green-bg);color:var(--green)}
-.badge-yellow{background:var(--yellow-bg);color:var(--yellow)}
-.badge-red{background:var(--red-bg);color:var(--red)}
+.box-red{background:var(--red-bg);border-color:#fca5a5}
+.badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600}
 .badge-blue{background:var(--blue-bg);color:var(--blue)}
-.badge-gray{background:#f3f4f6;color:#6b7280}
 .badge-gate{background:#fff;border:1.5px solid var(--green);color:var(--green)}
-.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px;font-size:12px}
-.flow-step{background:var(--brand);color:#fff;padding:7px 12px;border-radius:8px;font-weight:600;white-space:nowrap}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px;font-size:12px}
+.flow-step{background:var(--brand);color:#fff;padding:8px 12px;border-radius:8px;font-weight:600}
 .flow-arrow{color:var(--muted-light);font-size:18px}
-.stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.stage-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .15s}
+.flow-gate{background:var(--green);color:#fff;padding:8px 12px;border-radius:8px;font-weight:600}
+.stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.stage-grid{grid-template-columns:1fr}}
+.stage-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);text-decoration:none;color:inherit;display:block;cursor:pointer}
 .stage-card:hover{box-shadow:var(--shadow-lg)}
 .stage-num{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
 .stage-name{font-size:16px;font-weight:700;color:var(--brand);margin-bottom:8px}
-.stage-work{font-size:12.5px;line-height:1.5;margin-bottom:10px}
-.stage-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted)}
-.stage-meta .owner{font-weight:600;color:var(--ink)}
-.gate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.gate-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
-.gate-card .g-badge{margin-bottom:8px}
-.gate-card .g-who{font-size:13px;font-weight:700;color:var(--brand);margin-bottom:4px}
-.gate-card .g-what{font-size:12px;color:var(--muted);line-height:1.4}
-.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.kpi-link{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
-.kpi-link:hover{box-shadow:var(--shadow-lg)}
-.kpi-link .kl-icon{font-size:32px}
-.kpi-link .kl-text{flex:1}
-.kpi-link .kl-title{font-size:14px;font-weight:700;color:var(--brand)}
-.kpi-link .kl-sub{font-size:12px;color:var(--muted)}
-.kpi-link .kl-arrow{font-size:20px;color:var(--accent)}
-.page-h{font-size:20px;font-weight:800;color:var(--brand);margin-bottom:4px}
-.page-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
-.verified{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);background:#f3f4f6;border-radius:999px;padding:3px 10px;margin:0 0 14px}
-.ask-brain{background:var(--card);border:1px dashed #93c5fd;border-radius:var(--radius);padding:12px 14px;margin-top:16px;font-size:12.5px}
-.ask-brain strong{color:var(--blue)}
-.ask-brain code{background:#eff6ff;padding:1px 6px;border-radius:4px;font-size:12px}
-.script{background:#0f172a;color:#e5e7eb;border-radius:10px;padding:12px 14px;font-size:12.5px;line-height:1.55;margin:8px 0 12px}
-.footer{text-align:center;font-size:10px;color:var(--muted-light);padding:20px 0}
-.zh{display:none}
-body.lang-zh .zh{display:inline}
+.stage-work{font-size:13px;margin-bottom:10px}
+.stage-meta{font-size:12px;color:var(--muted)}
+.gate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:800px){.gate-row{grid-template-columns:1fr 1fr}}
+.gate-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center;box-shadow:var(--shadow)}
+.gate-card .g-who{font-size:13px;font-weight:700;color:var(--brand);margin:6px 0 4px}
+.gate-card .g-what{font-size:12px;color:var(--muted)}
+.verified{font-size:12px;color:var(--green);margin-bottom:12px;font-weight:600}
+.ask-brain{background:var(--card);border:1px dashed var(--border);border-radius:var(--radius);padding:12px 14px;margin-top:12px;font-size:13px}
+.ask-brain code,.box code,td code{background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:12.5px;white-space:pre-wrap;word-break:break-word}
+.page-h{font-size:20px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:12px}
+body.lang-en .zh{display:none}
 body.lang-zh .en{display:none}
-body.lang-both .zh{display:inline}
-body.lang-both .en{display:inline}
-.en{display:inline}
-@media print{.topbar,.tabs{position:static}.page{display:block!important;page-break-after:always}.tab{display:none}.lang-toggle{display:none}}
-@media(max-width:800px){.stage-grid{grid-template-columns:1fr 1fr}.gate-row{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr}}
-@media(max-width:500px){.stage-grid{grid-template-columns:1fr}.gate-row{grid-template-columns:1fr}}
+.footer{text-align:center;font-size:10px;color:var(--muted);padding:8px 0 24px}
+a{color:var(--blue)}
+.cadence-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:700px){.cadence-grid{grid-template-columns:1fr}}
+.cadence-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.cadence-card .c-tier{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.cadence-card .c-name{font-size:15px;font-weight:700;color:var(--brand);margin-bottom:8px}
+.cadence-card .c-body{font-size:12.5px;line-height:1.6;color:var(--muted)}
+.cadence-card .c-body strong{color:var(--ink)}
+.week-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:700px){.week-grid{grid-template-columns:1fr}}
+.week-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.week-card .w-num{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;margin-bottom:4px}
+.week-card .w-title{font-size:15px;font-weight:700;color:var(--brand);margin-bottom:8px}
+.week-card ul{list-style:none;padding:0}
+.week-card li{font-size:12.5px;padding:4px 0;border-bottom:1px solid var(--border-light)}
+.week-card li:last-child{border-bottom:none}
+.week-card li::before{content:"→ ";color:var(--accent);font-weight:700}
+.pulls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:700px){.pulls{grid-template-columns:1fr}}
+.pull{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:13px}
+.pull strong{display:block;margin-bottom:6px;color:var(--brand)}
+.store-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)}
+.store-row:last-child{border-bottom:none}
+.store-row .s-name{font-weight:600}
+.store-row .s-meta{font-size:12px;color:var(--muted)}
+@supports(padding:max(0px)){
+.topbar{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right))}
+.content{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));padding-bottom:max(80px,calc(64px + env(safe-area-inset-bottom)))}
+.tabs{padding-left:max(6px,env(safe-area-inset-left))}
+}
+@media(max-width:420px){.topbar .sub{display:none}}
+
 </style>
 </head>
-<body class="lang-both">
-<div class="topbar">
-  <div class="topbar-row">
-    <div>
-      <h1>📣 Marketing · <span class="zh">市场部</span> · V1.2</h1>
-      <div class="sub">Wiserise · First principles · 90-day roadmap + Foundation + Rule of 3 · Gangnam first · 2026-08-07</div>
-    </div>
-    <div class="lang-toggle">
-      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
-      <button class="lang-btn" onclick="setLang('zh',this)">中文</button>
-      <button class="lang-btn active" onclick="setLang('both',this)">EN+中文</button>
-    </div>
-  </div>
+<body class="lang-en">
+<div class="topbar"><div class="topbar-row">
+<div>
+<h1>📣 Marketing Department Roadmap · <span class="zh">市场部路线图</span></h1>
+<div class="sub">Wiserise · Department Roadmap v1.1 · Cycle ends 2026-09-07 · sibling shell locked · wiserise-department-roadmap</div>
 </div>
-<div class="tabs">
-  <button class="tab active" onclick="showPage('ops',this)">💬 Slack OPS</button>
-  <button class="tab" onclick="showPage('roadmap',this)">🗺️ Roadmap <span class="zh">路线图</span></button>
-  <button class="tab" onclick="showPage('start',this)">🎓 Mkt Start <span class="zh">入职</span></button>
-  <button class="tab" onclick="showPage('kpi',this)">📈 KPI</button>
-  <button class="tab" onclick="showPage('ov',this)">📊 Overview <span class="zh">总表</span></button>
-  <button class="tab" onclick="showPage('s1',this)">1 Trust <span class="zh">信任</span></button>
-  <button class="tab" onclick="showPage('s2',this)">2 Listings <span class="zh">商家</span></button>
-  <button class="tab" onclick="showPage('s3',this)">3 Reply <span class="zh">回复</span></button>
-  <button class="tab" onclick="showPage('s4',this)">4 Rule of 3 <span class="zh">三次</span></button>
-  <button class="tab" onclick="showPage('s5',this)">5 Floor <span class="zh">前厅</span></button>
-  <button class="tab" onclick="showPage('s6',this)">6 Social <span class="zh">社媒</span></button>
-  <button class="tab" onclick="showPage('s7',this)">7 Promo <span class="zh">促销</span></button>
-  <button class="tab" onclick="showPage('s8',this)">8 Brand <span class="zh">品牌</span></button>
-  <button class="tab" onclick="showPage('s9',this)">9 Ads <span class="zh">广告</span></button>
-  <button class="tab" onclick="showPage('s10',this)">10 Check <span class="zh">检查</span></button>
-  <button class="tab" onclick="showPage('rules',this)">📋 Rules <span class="zh">规矩</span></button>
+<div class="lang-toggle">
+<a class="lang-btn on" href="#" onclick="setLang('en',this);return false">EN</a>
+<a class="lang-btn" href="#" onclick="setLang('zh',this);return false">中文</a>
 </div>
+</div></div>
+
+<nav class="tabs" id="tabs">
+<a class="tab on" href="#map" onclick="go('map',this);return false">📊 Map <span class="zh">总图</span></a>
+<a class="tab" href="#cadence" onclick="go('cadence',this);return false">🧭 Cadence <span class="zh">节奏</span></a>
+<a class="tab" href="#reviews" onclick="go('reviews',this);return false">1 Reviews <span class="zh">评价</span></a>
+<a class="tab" href="#content" onclick="go('content',this);return false">2 Content <span class="zh">内容</span></a>
+<a class="tab" href="#social" onclick="go('social',this);return false">3 Social <span class="zh">社媒</span></a>
+<a class="tab" href="#campaign" onclick="go('campaign',this);return false">4 Campaign <span class="zh">活动</span></a>
+<a class="tab" href="#30days" onclick="go('30days',this);return false">🚀 30 Days <span class="zh">30天</span></a>
+<a class="tab" href="#rules" onclick="go('rules',this);return false">📋 Rules <span class="zh">规矩</span></a>
+<a class="tab" href="#kpi" onclick="go('kpi',this);return false">📈 KPI</a>
+</nav>
+
 <div class="content">
 
-<!-- SLACK OPS -->
-<div class="page active" id="ops">
-  <div class="page-h">💬 <span class="en">How to Work in Slack</span><span class="zh">在Slack怎么干活</span></div>
-  <div class="page-sub"><span class="en">Marketing simple only · Anson + GM</span><span class="zh">市场只讲简单的 · Anson + GM</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-22 · V1.1 FP</div>
-  <div class="pareto"><strong><span class="en">1 line:</span><span class="zh">1句：</span></strong> <span class="en">Fix Google trust first. Then move guests Visit 1→2→3. Ads last.</span><span class="zh">先修Google信任。再把客人推到第2次、第3次。广告最后。</span></div>
+<!-- ==================== MAP ==================== -->
+<div class="page on" id="map">
+<div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-08 · Department Roadmap v1.1</div>
+<div class="page-h">📊 Map <span class="zh">总图</span></div>
+<div class="page-sub"><span class="en">One order + gates so nobody invents a second process.</span><span class="zh">一张总图+关卡，没人另造流程。</span></div>
 
-  <div class="sec-title"><span class="en">3 pieces</span><span class="zh">3个东西</span></div>
-  <div class="stage-grid">
-    <div class="stage-card"><div class="stage-name">💬 Slack</div><div class="stage-work"><span class="en">#05-marketing · store ch · Anson DM</span><span class="zh">#05-marketing · 店频道 · Anson私信</span></div></div>
-    <div class="stage-card"><div class="stage-name">⚡ WISE OPS</div><div class="stage-work"><span class="en">Daily walk · Mon plan · Fri check · review flags</span><span class="zh">每天提醒 · 周一计划 · 周五检查 · 低星提醒</span></div></div>
-    <div class="stage-card"><div class="stage-name">🧠 Brain</div><div class="stage-work"><span class="en">Store facts · promo names · later visits</span><span class="zh">店事实 · 记名促销 · 以后的到店数据</span></div></div>
-  </div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Marketing works only if the owner can turn guest proof into traffic without asking Louis every day.</span><span class="zh">市场部只有能把客人证据变成客流、且不用每天问Louis，才算成功。</span></div>
 
-  <div class="sec-title"><span class="en">Where to type</span><span class="zh">在哪打字</span></div>
-  <table>
-    <tr><th><span class="en">Place</span><span class="zh">地方</span></th><th><span class="en">Say</span><span class="zh">说</span></th></tr>
-    <tr><td><strong>#05-marketing</strong></td><td><span class="en">Plan · social draft · left off · setup</span><span class="zh">计划 · 社媒草稿 · 做到哪 · 设置</span></td></tr>
-    <tr><td><strong><span class="en">Store channel</span><span class="zh">店频道</span></strong></td><td><span class="en">New low-star alert · GM reply path · promo post</span><span class="zh">新低星 · GM回复 · 促销帖</span></td></tr>
-    <tr><td><strong>Anson DM</strong></td><td><span class="en">Mon track · daily walk · Fri week check</span><span class="zh">周一轨道 · 每天提醒 · 周五检查</span></td></tr>
-    <tr><td><strong>Louis DM</strong></td><td><span class="en">Ad spend · brand · loyalty / 50% go-live · big $</span><span class="zh">广告费 · 品牌 · 会员/5折上线 · 大钱</span></td></tr>
-  </table>
+<div class="outcome"><span class="en">By 2026-09-07:</span><span class="zh">2026-09-07前：</span>
+<span class="en">Google reviews answered on time · content runs 3-design pick loop · offers need Louis yes · campaigns recorded in Brain — without Louis answering process.</span>
+<span class="zh">Google评价按时回复 · 内容走3稿选一 · 优惠要Louis批 · 活动记在Brain — Louis不用答流程。</span></div>
 
-  <div class="sec-title"><span class="en">Copy lines</span><span class="zh">复制这些话</span></div>
-  <table>
-    <tr><th><span class="en">Want</span><span class="zh">想做</span></th><th><span class="en">Type</span><span class="zh">打</span></th></tr>
-    <tr><td><span class="en">Reviews</span><span class="zh">评价</span></td><td><code>reviews 00003</code></td></tr>
-    <tr><td><span class="en">Low stars</span><span class="zh">低星</span></td><td><code>low stars 00003</code></td></tr>
-    <tr><td><span class="en">All stores</span><span class="zh">全店</span></td><td><code>reviews all stores</code></td></tr>
-    <tr><td><span class="en">Rating</span><span class="zh">评分</span></td><td><code>rating 00003</code></td></tr>
-    <tr><td><span class="en">Promo list</span><span class="zh">促销清单</span></td><td><code>promo list</code></td></tr>
-    <tr><td><span class="en">Update plan</span><span class="zh">改计划</span></td><td><code>update plan: …</code></td></tr>
-    <tr><td><span class="en">Handoff</span><span class="zh">交接</span></td><td><code>left off: …</code></td></tr>
-    <tr><td><span class="en">Publish post</span><span class="zh">发帖</span></td><td><code>post it</code></td></tr>
-    <tr><td><span class="en">Fri done</span><span class="zh">周五做完</span></td><td><code>week done</code> / <code>week partial: …</code></td></tr>
-  </table>
+<div class="pareto"><strong>80/20:</strong> <span class="en">Google reviews drive most guest decisions. Fix review reply + proof-based content first.</span><span class="zh">Google评价决定大部分客人选择。先修好评价回复+有证据的内容。</span></div>
 
-  <div class="sec-title"><span class="en">One example (bad review)</span><span class="zh">一个例子（差评）</span></div>
-  <div class="card"><div class="stage-work" style="margin:0;line-height:1.8">
-    <strong>1.</strong> <span class="en">WISE OPS / GBP finds new ≤3★</span><span class="zh">WISE OPS/GBP发现新≤3星</span><br>
-    <strong>2.</strong> <span class="en">Post store channel (+ exec if serious)</span><span class="zh">发店频道（严重再发高管）</span><br>
-    <strong>3.</strong> <span class="en">GM drafts honest reply · issue private</span><span class="zh">GM写真实回复 · 问题私下处理</span><br>
-    <strong>4.</strong> <span class="en">Reply on Google ≤48h</span><span class="zh">48小时内在Google回</span><br>
-    <strong>5.</strong> <span class="en">Pattern → coach FOH/BOH</span><span class="zh">有规律→教前厅/后厨</span>
-  </div></div>
+<div class="box box-gate"><strong><span class="en">THIS CYCLE → 2026-09-07:</span><span class="zh">本周期 → 2026-09-07：</span></strong> <span class="en">review loop live · content 3-pick workflow · Louis offer gate · campaigns in Brain · weekly FOCUS in #05-marketing</span><span class="zh">评价闭环 · 内容3选1 · Louis优惠门 · 活动进Brain · 周聚焦在#05-marketing</span></div>
+<div class="box box-rule"><strong><span class="en">LATER:</span><span class="zh">以后：</span></strong> <span class="en">full video cadence · paid ads engine · multi-brand content library · competitor teardown automation</span><span class="zh">完整视频节奏 · 付费广告引擎 · 多品牌内容库 · 竞品拆解自动化</span></div>
 
-  <div class="sec-title"><span class="en">3 rules</span><span class="zh">3条</span></div>
-  <div class="box box-gate"><strong>1.</strong> <span class="en">Reply every review ≤48h.</span><span class="zh">48小时内回每条评价。</span></div>
-  <div class="box box-gate"><strong>2.</strong> <span class="en">Foundation before growth engine. No ads under 4.0.</span><span class="zh">先打地基再开增长引擎。评分不到4.0不投广告。</span></div>
-  <div class="box box-red"><strong>3.</strong> <span class="en">Ad spend · brand · loyalty/50% economics · big promo $ = Louis yes.</span><span class="zh">广告费·改品牌·会员/5折经济·大促销钱 = Louis yes。</span></div>
-
-  <div class="sec-title"><span class="en">Your week (Anson)</span><span class="zh">你的一周（Anson）</span></div>
-  <table>
-    <tr><th><span class="en">When</span><span class="zh">时</span></th><th><span class="en">Look</span><span class="zh">看</span></th><th><span class="en">Do</span><span class="zh">做</span></th></tr>
-    <tr><td>Mon 9am</td><td>DM track</td><td><span class="en">Plan board + 1 setup</span><span class="zh">计划板+1个设置</span></td></tr>
-    <tr><td><span class="en">Daily 9am</span><span class="zh">每天9点</span></td><td>Walk DM</td><td><span class="en">Comments/DMs · bad reviews · one primary task</span><span class="zh">评论/私信·差评·一个主任务</span></td></tr>
-    <tr><td>Tue–Fri</td><td><span class="en">Posts</span><span class="zh">发帖</span></td><td><span class="en">3–5 company posts · wait for post it</span><span class="zh">全公司3–5帖·等post it</span></td></tr>
-    <tr><td>Fri 4pm</td><td><span class="en">Week check</span><span class="zh">周检查</span></td><td><code>week done</code> / <code>week partial</code></td></tr>
-  </table>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>reviews 00003</code> · <code>rating all stores</code> · <code>promo list</code> · <code>left off: …</code></div>
+<div class="sec-title"><span class="en">Path</span><span class="zh">路径</span></div>
+<div class="flow">
+<span class="flow-step"><span class="en">Listen</span><span class="zh">听</span></span><span class="flow-arrow">→</span>
+<span class="flow-step"><span class="en">Create</span><span class="zh">做</span></span><span class="flow-arrow">→</span>
+<span class="flow-gate">⭐ <span class="en">Approve</span><span class="zh">批</span></span><span class="flow-arrow">→</span>
+<span class="flow-step"><span class="en">Publish</span><span class="zh">发</span></span><span class="flow-arrow">→</span>
+<span class="flow-step"><span class="en">Measure</span><span class="zh">量</span></span>
+</div>
+<div style="font-size:12px;color:var(--muted);margin-bottom:12px">
+<span class="badge badge-gate">⭐ Gate</span> <span class="en">human</span><span class="zh">人拍板</span> ·
+<span class="badge badge-blue">⚡ Auto</span> WISE MARKETING / Brain
 </div>
 
-<!-- 90-DAY ROADMAP -->
-<div class="page" id="roadmap">
-  <div class="page-h">🗺️ <span class="en">90-Day Marketing Roadmap</span><span class="zh">90天市场路线图</span></div>
-  <div class="page-sub"><span class="en">First principles · Gangnam first · Anson + Hermes + GMs · 2026-08-07</span><span class="zh">第一性原理·Gangnam优先·Anson+Hermes+GM·2026-08-07</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-08-07 · V1.2 FP</div>
-
-  <div class="pareto"><strong><span class="en">North Star:</span><span class="zh">北极星：</span></strong> <span class="en">Grow revenue by fixing trust → driving repeat visits → scaling what works. No ads on a leaking funnel.</span><span class="zh">先修信任→再推复购→最后放大。漏斗在漏水不投广告。</span></div>
-
-  <div class="sec-title"><span class="en">The math (why this order)</span><span class="zh">公式（为什么这个顺序）</span></div>
-  <div class="card">
-    <div class="stage-work" style="margin:0;font-size:14px;line-height:1.8">
-      <strong>Revenue = (New guests × Convert %) + (Existing guests × Frequency)</strong><br>
-      <span class="en">→ Trust drives Convert %. Repeat drives Frequency. Ads multiply both — but only if the funnel holds.</span><br>
-      <span class="zh">→ 信任决定转化。复购决定频率。广告放大两者—但前提是漏斗不漏。</span>
-    </div>
-  </div>
-
-  <div class="sec-title"><span class="en">3 phases · 90 days</span><span class="zh">3阶段·90天</span></div>
-  <div class="flow">
-    <span class="flow-step">Phase 1 · Foundation</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-step">Phase 2 · Repeat Engine</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-step">Phase 3 · Scale</span>
-  </div>
-
-  <div class="stage-grid">
-    <div class="stage-card">
-      <div class="stage-num">Days 1–30</div>
-      <div class="stage-name">1 Foundation</div>
-      <div class="stage-work"><span class="en">Fix Google trust. Clean listings. Reply ≤48h. Social cadence live.</span><span class="zh">修Google信任。清商家信息。48h回复。社媒上节奏。</span></div>
-      <div class="stage-meta"><span class="owner">Anson + GMs</span> · <span class="badge badge-yellow">No ads</span></div>
-    </div>
-    <div class="stage-card">
-      <div class="stage-num">Days 31–60</div>
-      <div class="stage-name">2 Repeat Engine</div>
-      <div class="stage-work"><span class="en">Rule of 3: V1→V2→V3. FOH plays. SMS data capture. Win-back loop.</span><span class="zh">三次逻辑：V1→V2→V3。前厅话术。短信采集。召回闭环。</span></div>
-      <div class="stage-meta"><span class="owner">Anson + Hermes + GMs</span> · <span class="badge badge-blue">Data</span></div>
-    </div>
-    <div class="stage-card">
-      <div class="stage-num">Days 61–90</div>
-      <div class="stage-name">3 Scale</div>
-      <div class="stage-work"><span class="en">Video/content engine. Paid ad tests if ≥4.0★. Replicate to Masa + LCB.</span><span class="zh">视频/内容引擎。≥4.0星测广告。复制到Masa+LCB。</span></div>
-      <div class="stage-meta"><span class="owner">Anson + Hermes</span> · <span class="badge badge-gate">Louis gate</span></div>
-    </div>
-  </div>
-
-  <div class="sec-title"><span class="en">Phase 1 · Foundation (Days 1–30)</span><span class="zh">阶段1·地基（1–30天）</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">Gate</span><span class="zh">门</span></th><th><span class="en">Done-when</span><span class="zh">完成标准</span></th></tr>
-    <tr><td>1</td><td><span class="en">Pull all Google reviews · know every store rating</span><span class="zh">拉全部Google评价·知道每店评分</span></td><td>Hermes</td><td>—</td><td><span class="en">All stores scored in Brain</span><span class="zh">全部入Brain</span></td></tr>
-    <tr><td>2</td><td><span class="en">Reply every review ≤48h</span><span class="zh">48h内回每条</span></td><td>GM · Hermes drafts</td><td>1-2★ Louis</td><td><span class="en">Unreplied >48h = 0</span><span class="zh">超48h未回=0</span></td></tr>
-    <tr><td>3</td><td><span class="en">Clean every GBP listing: hours · photos · menu · category</span><span class="zh">清每店商家信息</span></td><td>Anson</td><td>—</td><td><span class="en">5 stores 100% complete</span><span class="zh">5店100%完整</span></td></tr>
-    <tr><td>4</td><td><span class="en">Social cadence: 3–5 posts/week per brand</span><span class="zh">社媒节奏：每品牌周3-5帖</span></td><td>Hermes + Anson</td><td>GM pick</td><td><span class="en">4 weeks no gap</span><span class="zh">4周不断</span></td></tr>
-    <tr><td>5</td><td><span class="en">Brand identity locked: logo · colors · one-liner per brand</span><span class="zh">品牌锁定：logo·色·一句</span></td><td>Anson</td><td>Louis</td><td><span class="en">3 brands documented</span><span class="zh">3品牌归档</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Phase 2 · Repeat Engine (Days 31–60)</span><span class="zh">阶段2·复购引擎（31–60天）</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">Gate</span><span class="zh">门</span></th><th><span class="en">Done-when</span><span class="zh">完成标准</span></th></tr>
-    <tr><td>1</td><td><span class="en">Rule of 3 live: V1 first-visit offer → V2 bridge → V3 loyalty</span><span class="zh">三次逻辑上线</span></td><td>Anson + GM</td><td>Louis</td><td><span class="en">V1→V2 ≥50%</span><span class="zh">V1→V2≥50%</span></td></tr>
-    <tr><td>2</td><td><span class="en">FOH 4 plays trained: greet · review ask · check drop · win-back</span><span class="zh">前厅4话术训完</span></td><td>GM</td><td>—</td><td><span class="en">Hear 3 greets/day</span><span class="zh">每天听3次</span></td></tr>
-    <tr><td>3</td><td><span class="en">SMS data capture: phone per first visit</span><span class="zh">短信采集：首次留电话</span></td><td>Hermes + GM</td><td>Louis</td><td><span class="en">≥70% capture</span><span class="zh">≥70%采集</span></td></tr>
-    <tr><td>4</td><td><span class="en">Win-back loop: BOGO → Slack approve → SMS send</span><span class="zh">召回闭环</span></td><td>Hermes + GM</td><td>GM ≤24h</td><td><span class="en">No win-back >48h</span><span class="zh">无超48h</span></td></tr>
-    <tr><td>5</td><td><span class="en">Review growth: push happy guests to Google</span><span class="zh">推好评</span></td><td>GM + Hermes</td><td>—</td><td><span class="en">+10 reviews/store</span><span class="zh">每店+10条</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Phase 3 · Scale (Days 61–90)</span><span class="zh">阶段3·放大（61–90天）</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">What</span><span class="zh">做什么</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th><span class="en">Gate</span><span class="zh">门</span></th><th><span class="en">Done-when</span><span class="zh">完成标准</span></th></tr>
-    <tr><td>1</td><td><span class="en">Video marketing engine: store photos → viral prompts → TikTok/Reels</span><span class="zh">视频引擎</span></td><td>Hermes</td><td>Human post</td><td><span class="en">2 videos/brand</span><span class="zh">每品牌2条</span></td></tr>
-    <tr><td>2</td><td><span class="en">Paid ad test — ONLY if Gangnam ≥4.0★ + listings complete</span><span class="zh">测广告—仅≥4.0且信息全</span></td><td>Anson</td><td><strong>Louis $</strong></td><td><span class="en">1 test · goal+cost+measure</span><span class="zh">1次·有目标成本标准</span></td></tr>
-    <tr><td>3</td><td><span class="en">Replicate foundation to Masa + Low Country</span><span class="zh">复制到Masa+LCB</span></td><td>Anson + GMs</td><td>—</td><td><span class="en">3 brands Phase 1 done</span><span class="zh">3品牌阶段1完</span></td></tr>
-    <tr><td>4</td><td><span class="en">Monthly competitor teardown</span><span class="zh">月度竞品分析</span></td><td>Hermes</td><td>—</td><td><span class="en">1 report/brand</span><span class="zh">每品牌1份</span></td></tr>
-    <tr><td>5</td><td><span class="en">90-day review: what worked → double down</span><span class="zh">90天复盘</span></td><td>Anson + Louis</td><td>Louis</td><td><span class="en">Next 90 locked</span><span class="zh">锁定下个90天</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Success metrics</span><span class="zh">成功指标</span></div>
-  <div class="gate-row">
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-green">Trust</span></div><div class="g-who">≥4.0★ all stores</div><div class="g-what"><span class="en">Reply ≤48h · listing 100%</span><span class="zh">48h回复·信息100%</span></div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-blue">Social</span></div><div class="g-who">3–5 posts/week</div><div class="g-what"><span class="en">Reach + engagement up</span><span class="zh">触达+互动涨</span></div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-yellow">Repeat</span></div><div class="g-who">V1→V2 ≥50%</div><div class="g-what"><span class="en">V2→V3 ≥40%</span><span class="zh">V2→V3≥40%</span></div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-red">Revenue</span></div><div class="g-who">Covers growth</div><div class="g-what"><span class="en">CAC &lt; CLV</span><span class="zh">获客成本&lt;客户价值</span></div></div>
-  </div>
-
-  <div class="sec-title"><span class="en">Brand rollout order</span><span class="zh">品牌顺序</span></div>
-  <div class="flow">
-    <span class="flow-step">Gangnam (pilot)</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-step">Masa</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-step">Low Country</span>
-  </div>
-  <div class="box box-rule"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Prove the system on one brand. Fix mistakes cheap. Then replicate the proven playbook — not start over each time.</span><span class="zh">在一个品牌跑通。便宜的犯错。然后复制—not每店重来。</span></div>
-
-  <div class="sec-title"><span class="en">Approval gates</span><span class="zh">审批门</span></div>
-  <div class="gate-row">
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">Louis</span></div><div class="g-who">Ad spend · brand · big $</div><div class="g-what"><span class="en">Any paid promo or discount</span><span class="zh">任何付费促销</span></div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">GM/Mkt</span></div><div class="g-who">Design pick · 4-5★ reply</div><div class="g-what"><span class="en">Social post approval</span><span class="zh">社媒帖审批</span></div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">Louis</span></div><div class="g-who">1-2★ · critical reviews</div><div class="g-what"><span class="en">P0 immediate</span><span class="zh">P0立刻</span></div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">Human</span></div><div class="g-who">Video publish</div><div class="g-what"><span class="en">Hermes generates · human posts</span><span class="zh">Hermes生成·人发</span></div></div>
-  </div>
-
-  <div class="box box-red"><strong><span class="en">Never:</span><span class="zh">禁止：</span></strong> <span class="en">Auto-publish · invent prices/dates · ads under 4.0★ · skip approval gates.</span><span class="zh">自动发布·编价格日期·4.0下投广告·跳审批门。</span></div>
-
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>reviews all</code> · <code>rating 00003</code> · <code>promo list</code> · <code>left off: …</code> · <code>week done</code></div>
+<div class="sec-title"><span class="en">Open a stage</span><span class="zh">点阶段</span></div>
+<div class="stage-grid">
+<a class="stage-card" href="#reviews" onclick="return goPage('reviews')"><div class="stage-num"><span class="en">Stage 1</span><span class="zh">阶段1</span></div><div class="stage-name"><span class="en">Reviews</span><span class="zh">评价</span></div><div class="stage-work"><span class="en">pull → draft → approve → publish</span><span class="zh">拉→草稿→批→发</span></div><div class="stage-meta"><span class="en">Auto · GM · Louis</span><span class="zh">自动·GM·Louis</span> <span class="badge badge-gate">⭐ M3</span></div></a>
+<a class="stage-card" href="#content" onclick="return goPage('content')"><div class="stage-num"><span class="en">Stage 2</span><span class="zh">阶段2</span></div><div class="stage-name"><span class="en">Content</span><span class="zh">内容</span></div><div class="stage-work"><span class="en">brief → 3 designs → pick → save</span><span class="zh">需求→3稿→选→存</span></div><div class="stage-meta"><span class="en">Mkt · GM · Louis</span><span class="zh">市场·GM·Louis</span> <span class="badge badge-gate">⭐ M1 M2</span></div></a>
+<a class="stage-card" href="#social" onclick="return goPage('social')"><div class="stage-num"><span class="en">Stage 3</span><span class="zh">阶段3</span></div><div class="stage-name"><span class="en">Social</span><span class="zh">社媒</span></div><div class="stage-work"><span class="en">approved offer → platform copy → human post</span><span class="zh">已批优惠→平台文案→人发</span></div><div class="stage-meta"><span class="en">Mkt · GM</span><span class="zh">市场·GM</span></div></a>
+<a class="stage-card" href="#campaign" onclick="return goPage('campaign')"><div class="stage-num"><span class="en">Stage 4</span><span class="zh">阶段4</span></div><div class="stage-name"><span class="en">Campaign</span><span class="zh">活动</span></div><div class="stage-work"><span class="en">record → measure → decide next</span><span class="zh">记录→测量→决定下一步</span></div><div class="stage-meta"><span class="en">Mkt · Louis</span><span class="zh">市场·Louis</span> <span class="badge badge-gate">⭐ M4</span></div></a>
 </div>
 
-<!-- START -->
-<div class="page" id="start">
-  <div class="page-h">🎓 <span class="en">New Marketing Path</span><span class="zh">新市场入职路径</span></div>
-  <div class="page-sub"><span class="en">For Anson / marketing lead / GM handling reviews</span><span class="zh">给Anson/市场负责人/管评价的GM</span></div>
-  <div class="verified">✅ <span class="en">Verified</span><span class="zh">已验证</span> · 2026-07-22</div>
-  <div class="pareto"><strong><span class="en">Goal:</span><span class="zh">目标：</span></strong> <span class="en">30 days: ratings known, bad reviews replied ≤48h, listings clean, social cadence live, FOH scripts practiced. Phase 2 automation waits Louis yes on 50%/loyalty.</span><span class="zh">30天：评分清楚、差评48h内回、商家信息干净、社媒有节奏、前厅话术练过。Phase 2自动化等Louis批5折/会员。</span></div>
-
-  <div class="sec-title">Day 1</div>
-  <table>
-    <tr><th>#</th><th><span class="en">Do</span><span class="zh">做</span></th><th>Where</th></tr>
-    <tr><td>1</td><td><span class="en">Read Slack OPS + Overview</span><span class="zh">看Slack OPS+总表</span></td><td>💬 📊</td></tr>
-    <tr><td>2</td><td><span class="en">Open Marketing KPI Sheet</span><span class="zh">打开市场KPI</span></td><td>📈</td></tr>
-    <tr><td>3</td><td><span class="en">Know GBP owners (not louis@)</span><span class="zh">知道商家账号归谁</span></td><td>2 Listings</td></tr>
-    <tr><td>4</td><td><span class="en">Join #05-marketing</span><span class="zh">进#05-marketing</span></td><td>Slack</td></tr>
-  </table>
-
-  <div class="sec-title">Week 1</div>
-  <table>
-    <tr><th><span class="en">Learn</span><span class="zh">学</span></th><th>Tab</th><th>Ask</th></tr>
-    <tr><td><span class="en">Trust / ratings</span><span class="zh">信任/评分</span></td><td>1 Trust</td><td><code>reviews 00003</code></td></tr>
-    <tr><td><span class="en">Reply style</span><span class="zh">回复风格</span></td><td>3 Reply</td><td><code>low stars 00003</code></td></tr>
-    <tr><td><span class="en">Rule of 3 story</span><span class="zh">三次逻辑</span></td><td>4 Rule of 3</td><td><code>promo list</code></td></tr>
-    <tr><td><span class="en">FOH 4 plays</span><span class="zh">前厅4话术</span></td><td>5 Floor</td><td><span class="en">observe 3 greets</span><span class="zh">听3次招呼</span></td></tr>
-  </table>
-
-  <div class="sec-title">Month 1</div>
-  <table>
-    <tr><th><span class="en">Finish</span><span class="zh">完成</span></th><th><span class="en">Pass</span><span class="zh">过关</span></th></tr>
-    <tr><td><span class="en">All priority store ratings known</span><span class="zh">优先店评分都知道</span></td><td>≥4.0 or action plan</td></tr>
-    <tr><td><span class="en">Every bad review replied ≤48h</span><span class="zh">每条差评48h内回</span></td><td>0 unreplied &gt;2 days</td></tr>
-    <tr><td><span class="en">3–5 social posts / week cadence</span><span class="zh">每周3–5帖节奏</span></td><td>logged in #05-marketing</td></tr>
-    <tr><td><span class="en">1 promo pushed + tracked</span><span class="zh">推了1次促销并追踪</span></td><td>named in POS</td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Who owns what</span><span class="zh">谁管什么</span></div>
-  <table>
-    <tr><th><span class="en">Item</span><span class="zh">事项</span></th><th>Anson / Mkt</th><th><span class="en">Not alone</span><span class="zh">不能自己做</span></th></tr>
-    <tr><td><span class="en">Social draft · comments · listing refresh</span><span class="zh">社媒草稿·评论·商家刷新</span></td><td>✅</td><td>—</td></tr>
-    <tr><td><span class="en">Review reply</span><span class="zh">评价回复</span></td><td>GM primary</td><td>—</td></tr>
-    <tr><td><span class="en">50% / loyalty / ads / brand / big $</span><span class="zh">5折/会员/广告/品牌/大钱</span></td><td><span class="en">Prepare only</span><span class="zh">只准备</span></td><td>Louis</td></tr>
-  </table>
-  <div class="box box-red"><strong><span class="en">Never:</span><span class="zh">永不：</span></strong> <span class="en">argue in public reviews · mystery Custom promo · ads under 4.0 · invent Louis approval · publish without post it</span><span class="zh">公开吵差评 · 神秘Custom促销 · 不到4.0投广告 · 编Louis批准 · 没说post it就发</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>reviews all stores</code> · <code>promo list</code> · <code>gbp status</code></div>
+<div class="sec-title"><span class="en">Human Gates</span><span class="zh">人拍板</span></div>
+<div class="gate-row">
+<div class="gate-card"><span class="badge badge-gate">⭐ M1</span><div class="g-who">Louis</div><div class="g-what"><span class="en">Offer / promo / public promise</span><span class="zh">优惠/活动/公开承诺</span></div></div>
+<div class="gate-card"><span class="badge badge-gate">⭐ M2</span><div class="g-who">GM / Mkt</div><div class="g-what"><span class="en">Pick design (1 of 3)</span><span class="zh">3稿选1</span></div></div>
+<div class="gate-card"><span class="badge badge-gate">⭐ M3</span><div class="g-who">Louis</div><div class="g-what"><span class="en">1–2★ / critical review reply</span><span class="zh">1–2星/严重评价回复</span></div></div>
+<div class="gate-card"><span class="badge badge-gate">⭐ M4</span><div class="g-who">Louis</div><div class="g-what"><span class="en">Ad spend / paid launch</span><span class="zh">广告花费/付费上线</span></div></div>
 </div>
 
-<!-- KPI -->
-<div class="page" id="kpi">
-  <div class="page-h">📈 KPI</div>
-  <div class="verified">✅ Sheet · 2026-07-22 · <span class="en">no stale live counts in HTML</span><span class="zh">HTML不写死数字</span></div>
-  <a class="kpi-link" href="https://docs.google.com/spreadsheets/d/1WbJ__7bUoytML2JL3KgIBGDeYEucJz6IIF2Sr7HClZY/edit" target="_blank">
-    <div class="kl-icon">📊</div>
-    <div class="kl-text">
-      <div class="kl-title"><span class="en">Marketing KPI (Google Sheet)</span><span class="zh">市场KPI（Google Sheet）</span></div>
-      <div class="kl-sub"><span class="en">Ratings · unreplied · social · ads readiness</span><span class="zh">评分·未回复·社媒·广告就绪</span></div>
-    </div>
-    <div class="kl-arrow">→</div>
-  </a>
-
-  <div class="sec-title"><span class="en">Targets (process, not live fill)</span><span class="zh">目标（流程目标，不填死数）</span></div>
-  <table>
-    <tr><th><span class="en">Metric</span><span class="zh">指标</span></th><th><span class="en">Target</span><span class="zh">目标</span></th><th><span class="en">Source</span><span class="zh">来源</span></th></tr>
-    <tr><td><span class="en">Store rating</span><span class="zh">店评分</span></td><td>≥4.0 before ads</td><td>GBP</td></tr>
-    <tr><td><span class="en">Unreplied &gt;48h</span><span class="zh">超48h未回</span></td><td>0</td><td>GBP / OPS</td></tr>
-    <tr><td><span class="en">New Google reviews / week</span><span class="zh">每周新评</span></td><td>10+ <span class="en">when SMS live</span><span class="zh">短信上线后</span></td><td>GBP</td></tr>
-    <tr><td>Visit 1 → 2</td><td>40%+</td><td><span class="en">Phase 2</span><span class="zh">第二阶段</span></td></tr>
-    <tr><td>Visit 2 → 3</td><td>55%+</td><td><span class="en">Phase 2</span><span class="zh">第二阶段</span></td></tr>
-    <tr><td><span class="en">Social posts / week</span><span class="zh">每周社媒</span></td><td>3–5</td><td>Slack / apps</td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Known system state</span><span class="zh">系统现状</span></div>
-  <table>
-    <tr><th><span class="en">System</span><span class="zh">系统</span></th><th><span class="en">Status</span><span class="zh">状态</span></th></tr>
-    <tr><td>GBP API</td><td><span class="badge badge-red">QPM 0</span> <span class="en">need Basic Access as marketing@ · project 901042318150</span><span class="zh">要用marketing@申请Basic Access</span></td></tr>
-    <tr><td>GBP owners</td><td>marketing@ + s00003@ · <span class="en">not louis@</span><span class="zh">不是louis@</span></td></tr>
-    <tr><td>WISE OPS crons</td><td>Marketing-#1..#4 + Ops-Reviews-#1</td></tr>
-    <tr><td>QR / Twilio / visit counter</td><td><span class="badge badge-yellow">Phase 2</span></td></tr>
-    <tr><td>Ads Google/Meta</td><td><span class="badge badge-gray">Off</span> until ≥4.0 + Louis $</td></tr>
-  </table>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>reviews 00003</code> · <code>rating all</code> · <code>gbp status</code> · <code>promo list</code></div>
+<div class="box box-auto"><strong><span class="en">Live data:</span><span class="zh">实时数据：</span></strong> Brain <code>reviews_raw</code> · <code>content_campaigns</code> · #05-marketing digests · <span class="en">no counts frozen here</span><span class="zh">本页不写死数字</span></div>
 </div>
 
-<!-- OVERVIEW -->
-<div class="page" id="ov">
-  <div class="verified">✅ <span class="en">Roadmap verified</span><span class="zh">路线图已验证</span> · 2026-07-22 · V1.1</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Google reviews ≈ 80% of the walk-in decision. Trust first. Then engineer Visit 1→2→3 (~23% alone → ~70% with system). Paid ads last.</span><span class="zh">Google评价≈80%进店决定。先信任。再把第1次推到第2、3次（自己回来约23%→系统约70%）。付费广告最后。</span></div>
+<!-- ==================== CADENCE ==================== -->
+<div class="page" id="cadence">
+<div class="page-h">🧭 Cadence <span class="zh">节奏</span></div>
+<div class="page-sub"><span class="en">Daily = Act · Weekly = Focus · Monthly = Decide. Open here every day.</span><span class="zh">每日=行动 · 每周=聚焦 · 每月=决策。每天先开这页。</span></div>
 
-  <div class="sec-title"><span class="en">Two laws</span><span class="zh">两条定律</span></div>
-  <div class="quick-grid">
-    <div class="card"><div class="card-title"><span class="en">Law 1 · Foundation (Louis)</span><span class="zh">定律1 · 地基（Louis）</span></div><div class="stage-work" style="margin:0"><span class="en">Rating · listing · reply ≤48h · real photos. Ads on a weak listing = buying traffic into a leak.</span><span class="zh">评分·商家信息·48h回复·真照片。评分差还投广告=往漏斗里倒水。</span></div></div>
-    <div class="card"><div class="card-title"><span class="en">Law 2 · Rule of 3 (Anson)</span><span class="zh">定律2 · 三次（Anson）</span></div><div class="stage-work" style="margin:0"><span class="en">Win is not one full table tonight. Win is phone → review → Visit 2 → loyalty → Visit 3 regular.</span><span class="zh">赢不是今晚满桌一次。赢是电话→评价→第2次→会员→第3次变常客。</span></div></div>
-  </div>
+<div class="pareto"><strong>80/20:</strong> <span class="en">Google reviews + proof-based content. Fix reply speed and offer truth first.</span><span class="zh">Google评价+有证据内容。先修回复速度和优惠真实性。</span></div>
 
-  <div class="sec-title"><span class="en">Marketing flow</span><span class="zh">市场全流程</span></div>
-  <div class="flow">
-    <span class="flow-step">1 Trust</span><span class="flow-arrow">→</span>
-    <span class="flow-step">2 Listings</span><span class="flow-arrow">→</span>
-    <span class="flow-step">3 Reply</span><span class="flow-arrow">→</span>
-    <span class="flow-step">4 Rule of 3</span><span class="flow-arrow">→</span>
-    <span class="flow-step">5 Floor</span><span class="flow-arrow">→</span>
-    <span class="flow-step">6 Social</span><span class="flow-arrow">→</span>
-    <span class="flow-step">7 Promo</span><span class="flow-arrow">→</span>
-    <span class="flow-step">8 Brand</span><span class="flow-arrow">→</span>
-    <span class="flow-step">9 Ads</span>
-  </div>
-
-  <div class="sec-title"><span class="en">Phases</span><span class="zh">阶段</span></div>
-  <table>
-    <tr><th>Phase</th><th><span class="en">Do</span><span class="zh">做</span></th><th><span class="en">Status</span><span class="zh">状态</span></th></tr>
-    <tr><td><strong>1 Now</strong></td><td><span class="en">Ratings · replies · listings · FOH scripts practice · named promos · manual social</span><span class="zh">评分·回复·商家·前厅话术练·记名促销·手动社媒</span></td><td><span class="badge badge-green">Run</span></td></tr>
-    <tr><td><strong>2</strong></td><td><span class="en">QR + Twilio Rule of 3 + loyalty lock-in</span><span class="zh">二维码+短信三次+会员锁定</span></td><td><span class="badge badge-yellow">Louis yes $</span></td></tr>
-    <tr><td><strong>3</strong></td><td><span class="en">Paid ads after ≥4.0 + complete listing</span><span class="zh">评分≥4.0且信息完整后再投广告</span></td><td><span class="badge badge-gray">Later</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">10 stages (click)</span><span class="zh">10阶段（点）</span></div>
-  <div class="stage-grid">
-    <div class="stage-card" onclick="goTab(4)"><div class="stage-num">1</div><div class="stage-name">Trust</div><div class="stage-work"><span class="en">Pull · flag ≤3★ · rating trend</span><span class="zh">拉·标≤3星·评分趋势</span></div><div class="stage-meta"><span class="owner">Auto · Marketing</span></div></div>
-    <div class="stage-card" onclick="goTab(5)"><div class="stage-num">2</div><div class="stage-name">Listings</div><div class="stage-work"><span class="en">Hours · photos · menu · phone</span><span class="zh">时间·照片·菜单·电话</span></div><div class="stage-meta"><span class="owner">Marketing · GM</span></div></div>
-    <div class="stage-card" onclick="goTab(6)"><div class="stage-num">3</div><div class="stage-name">Reply</div><div class="stage-work"><span class="en">Every review ≤48h</span><span class="zh">每条≤48h</span></div><div class="stage-meta"><span class="owner">GM</span> <span class="badge badge-gate">⭐ M3</span></div></div>
-    <div class="stage-card" onclick="goTab(7)"><div class="stage-num">4</div><div class="stage-name">Rule of 3</div><div class="stage-work"><span class="en">50% → review SMS → 25% → 10% member</span><span class="zh">5折→评价短信→25%→会员10%</span></div><div class="stage-meta"><span class="owner">Anson · Louis $</span> <span class="badge badge-gate">⭐ M4</span></div></div>
-    <div class="stage-card" onclick="goTab(8)"><div class="stage-num">5</div><div class="stage-name">Floor</div><div class="stage-work"><span class="en">4 exact FOH plays</span><span class="zh">4条前厅固定话术</span></div><div class="stage-meta"><span class="owner">GM · FOH</span></div></div>
-    <div class="stage-card" onclick="goTab(9)"><div class="stage-num">6</div><div class="stage-name">Social</div><div class="stage-work"><span class="en">3–5 posts/week · draft → post it</span><span class="zh">每周3–5帖·草稿→post it</span></div><div class="stage-meta"><span class="owner">Anson · OPS</span></div></div>
-    <div class="stage-card" onclick="goTab(10)"><div class="stage-num">7</div><div class="stage-name">Promo</div><div class="stage-work"><span class="en">Named POS only</span><span class="zh">POS只记名</span></div><div class="stage-meta"><span class="owner">Mkt · Ops</span></div></div>
-    <div class="stage-card" onclick="goTab(11)"><div class="stage-num">8</div><div class="stage-name">Brand</div><div class="stage-work"><span class="en">6 brands · consistent identity</span><span class="zh">6品牌·身份一致</span></div><div class="stage-meta"><span class="owner">Louis</span> <span class="badge badge-gate">⭐ M2</span></div></div>
-    <div class="stage-card" onclick="goTab(12)"><div class="stage-num">9</div><div class="stage-name">Ads</div><div class="stage-work"><span class="en">Google · Meta after gate</span><span class="zh">过门后再Google·Meta</span></div><div class="stage-meta"><span class="owner">Louis</span> <span class="badge badge-gate">⭐ M1</span></div></div>
-    <div class="stage-card" onclick="goTab(13)"><div class="stage-num">10</div><div class="stage-name">Check</div><div class="stage-work"><span class="en">Daily / weekly / monthly</span><span class="zh">日/周/月检查</span></div><div class="stage-meta"><span class="owner">MOD · GM · Louis</span></div></div>
-  </div>
-
-  <div class="sec-title"><span class="en">Gates</span><span class="zh">门</span></div>
-  <div class="gate-row">
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ M1</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Ad budget</span><span class="zh">广告预算</span></div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ M2</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">Brand change</span><span class="zh">改品牌</span></div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ M3</span></div><div class="g-who">GM</div><div class="g-what"><span class="en">Review reply</span><span class="zh">评价回复</span></div></div>
-    <div class="gate-card"><div class="g-badge"><span class="badge badge-gate">⭐ M4</span></div><div class="g-who">Louis</div><div class="g-what"><span class="en">50% / loyalty / big promo $</span><span class="zh">5折/会员/大促销钱</span></div></div>
-  </div>
-  <div class="box box-rule"><strong><span class="en">Brand focus now:</span><span class="zh">现在品牌焦点：</span></strong> Gangnam Korean BBQ &amp; Hot Pot (00003 → 00002 → 00001/00004). Same foundation later for Masa · Boils · Street · Ramen · Wings. <span class="en">00005 HOLD until page confirmed.</span><span class="zh">00005确认页面前HOLD。</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>reviews all</code> · <code>marketing roadmap</code> · <code>promo list</code></div>
+<div class="sec-title"><span class="en">3 Tiers</span><span class="zh">三层节奏</span></div>
+<div class="cadence-grid">
+<div class="cadence-card">
+<div class="c-tier"><span class="en">Daily = Act</span><span class="zh">每日=行动</span></div>
+<div class="c-name"><span class="en">Daily Digest</span><span class="zh">每日简报</span></div>
+<div class="c-body">
+<strong>8 AM</strong> <span class="en">Start — open marketing tickets</span><span class="zh">开工 — 看市场工单</span><br>
+<strong>1 PM</strong> <span class="en">Reset — afternoon content / replies</span><span class="zh">重置 — 下午内容/回复</span><br>
+<strong>5 PM</strong> <span class="en">Close — park unfinished work</span><span class="zh">收工 — 未完留给明天</span><br><br>
+<span class="en">Source: Brain tickets + reviews_raw + content_campaigns</span><span class="zh">来源：Brain工单+评价+活动表</span><br>
+<span class="en">Where: #05-marketing</span><span class="zh">在哪：#05-marketing</span>
+</div>
+</div>
+<div class="cadence-card">
+<div class="c-tier"><span class="en">Weekly = Focus</span><span class="zh">每周=聚焦</span></div>
+<div class="c-name"><span class="en">One Thing Framework</span><span class="zh">一件事框架</span></div>
+<div class="c-body">
+<strong><span class="en">Fri</span><span class="zh">周五</span></strong> <span class="en">memo: biggest marketing result next week</span><span class="zh">备忘：下周最大市场成果</span><br>
+<strong><span class="en">Mon</span><span class="zh">周一</span></strong> <span class="en">3 focus items + owners</span><span class="zh">3个聚焦+负责人</span><br>
+<strong><span class="en">Wed</span><span class="zh">周三</span></strong> <span class="en">blocker check</span><span class="zh">查障碍</span><br>
+<strong><span class="en">Fri</span><span class="zh">周五</span></strong> <span class="en">result + proof</span><span class="zh">结果+证据</span><br><br>
+<span class="en">FOCUS: Find biggest result · One owner · Clear finish · Unblock early · Show proof</span><span class="zh">聚焦：找最大成果·一个负责人·明确完成·早除障碍·出证据</span>
+</div>
+</div>
+<div class="cadence-card">
+<div class="c-tier"><span class="en">Monthly = Decide</span><span class="zh">每月=决策</span></div>
+<div class="c-name"><span class="en">KPI Report</span><span class="zh">KPI报告</span></div>
+<div class="c-body">
+<strong><span class="en">Last business day</span><span class="zh">月末最后工作日</span></strong> <span class="en">submit results</span><span class="zh">交结果</span><br>
+<strong><span class="en">First week</span><span class="zh">下月第一周</span></strong> <span class="en">Louis reviews</span><span class="zh">Louis审</span><br><br>
+<strong><span class="en">4 questions:</span><span class="zh">4个问题：</span></strong><br>
+1. <span class="en">What improved?</span><span class="zh">什么变好了？</span><br>
+2. <span class="en">What did not?</span><span class="zh">什么没好？</span><br>
+3. <span class="en">What keeps repeating?</span><span class="zh">什么老重复？</span><br>
+4. <span class="en">What decision needed?</span><span class="zh">需要什么决策？</span>
+</div>
+</div>
 </div>
 
-<!-- S1 TRUST -->
-<div class="page" id="s1">
-  <div class="page-h">1. <span class="en">Trust (Reviews)</span><span class="zh">信任（评价）</span></div>
-  <div class="page-sub">GBP · marketing@ + s00003@</div>
-  <div class="verified">✅ 2026-07-22 · GBP API blocked (QPM 0)</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Under 4.0 loses customers every day. Fix top complaints before any paid push.</span><span class="zh">低于4.0每天丢客人。先修最多的投诉，再谈花钱推。</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">What</span><span class="zh">做</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
-    <tr><td>1</td><td><span class="en">Pull reviews from GBP</span><span class="zh">从GBP拉评价</span></td><td><span class="badge badge-blue">⚡ Auto</span> <span class="en">when QPM 300</span><span class="zh">配额300后</span> · <span class="en">manual until then</span><span class="zh">之前手动</span></td></tr>
-    <tr><td>2</td><td><span class="en">Flag ≤3★ (and morning 4★- for 00003)</span><span class="zh">标≤3星（00003早班也盯4星及以下）</span></td><td><span class="badge badge-blue">⚡ Auto</span></td></tr>
-    <tr><td>3</td><td><span class="en">Alert store (+ exec if serious)</span><span class="zh">提醒店（严重提醒高管）</span></td><td><span class="badge badge-blue">⚡ Auto</span></td></tr>
-    <tr><td>4</td><td><span class="en">Track rating vs 4.0 ads gate</span><span class="zh">跟踪评分vs广告门4.0</span></td><td>Marketing</td></tr>
-  </table>
-  <div class="box box-red"><strong><span class="en">Blocked:</span><span class="zh">卡住：</span></strong> <span class="en">GCP project wiserise-newstore 901042318150 quota = 0. Apply Basic Access as marketing@ (not louis@). Enable API alone is not enough.</span><span class="zh">项目配额=0。用marketing@申请Basic Access（不要louis@）。只开API不够。</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>reviews 00003</code> · <code>rating 00003</code> · <code>gbp status</code></div>
+<div class="sec-title"><span class="en">3 Pulls (copy-paste)</span><span class="zh">3句先发（复制粘贴）</span></div>
+<div class="pulls">
+<div class="pull"><strong>1. Reviews</strong><code>reviews 00003</code><br><code>any bad reviews?</code></div>
+<div class="pull"><strong>2. Content</strong><code>flyer 00003 birthday</code><br><code>campaign status</code></div>
+<div class="pull"><strong>3. Focus</strong><code>marketing digest</code><br><code>open marketing tickets</code></div>
 </div>
 
-<!-- S2 LISTINGS -->
-<div class="page" id="s2">
-  <div class="page-h">2. <span class="en">Listings (GBP)</span><span class="zh">商家信息</span></div>
-  <div class="page-sub">Hours · photos · menu · address</div>
-  <div class="verified">✅ 2026-07-22</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Wrong hours / old photos = free traffic wasted.</span><span class="zh">营业时间错/旧照片=白送流量浪费。</span></div>
-  <table>
-    <tr><th><span class="en">Field</span><span class="zh">项</span></th><th><span class="en">Owner</span><span class="zh">谁</span></th><th><span class="en">Cadence</span><span class="zh">节奏</span></th></tr>
-    <tr><td>Hours / holiday</td><td>Marketing · GM</td><td><span class="en">Weekly check</span><span class="zh">每周查</span></td></tr>
-    <tr><td>Photos (food + interior)</td><td>Marketing</td><td><span class="en">Fresh when possible</span><span class="zh">有就更新</span></td></tr>
-    <tr><td>Menu link</td><td>Marketing</td><td><span class="en">Must work</span><span class="zh">必须能开</span></td></tr>
-    <tr><td>Address / phone</td><td>Marketing</td><td><span class="en">On change only</span><span class="zh">有变才改</span></td></tr>
-  </table>
-  <div class="box box-rule"><strong><span class="en">GBP owners:</span><span class="zh">归谁：</span></strong> marketing@wiserisehospitalitygroup.com · s00003@wiserisehospitalitygroup.com · <span class="en">NOT louis@ for listing ownership</span><span class="zh">商家归属不是louis@</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>gbp owners</code> · <code>listing 00003</code></div>
+<div class="card">
+<div class="sec-title" style="margin-top:0"><span class="en">Rule</span><span class="zh">规矩</span></div>
+<p><span class="en">Talk in Slack → <strong>WISE MARKETING</strong> works → you yes/no only on offers, low-star replies, ad spend, and brand risk.</span><span class="zh">Slack说 → <strong>WISE MARKETING</strong>干 → 优惠/差评回复/广告花费/品牌风险你拍板。</span></p>
 </div>
 
-<!-- S3 REPLY -->
-<div class="page" id="s3">
-  <div class="page-h">3. <span class="en">Reply</span><span class="zh">回复</span></div>
-  <div class="page-sub">Good + bad · ≤48h · <span class="badge badge-gate">⭐ M3 GM</span></div>
-  <div class="verified">✅ 2026-07-22</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Fast honest reply to a bad review saves the next reader.</span><span class="zh">快而真的差评回复，能救下一个看到的人。</span></div>
-  <table>
-    <tr><th><span class="en">Star</span><span class="zh">星</span></th><th><span class="en">Action</span><span class="zh">做</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
-    <tr><td>5 ⭐</td><td><span class="en">Thank + invite more reviews</span><span class="zh">感谢+推更多评价</span></td><td>GM</td></tr>
-    <tr><td>4 ⭐</td><td><span class="en">Thank + fix the “almost”</span><span class="zh">感谢+修差一点</span></td><td>GM</td></tr>
-    <tr><td>≤3 ⭐</td><td><span class="en">Apologize + invite back + coach staff</span><span class="zh">道歉+邀请再来+教员工</span></td><td>GM · Louis if serious</td></tr>
-  </table>
-  <div class="box box-rule"><strong><span class="en">Reply rule:</span><span class="zh">回复规矩：</span></strong> <span class="en">Never argue publicly. Take private. Show you care.</span><span class="zh">不在公开吵。转私下。让对方看到你关心。</span></div>
-  <div class="sec-title"><span class="en">Steps</span><span class="zh">步骤</span></div>
-  <div class="card"><div class="stage-work" style="margin:0;line-height:1.8">
-    1. Alert → 2. GM drafts → 3. Post on Google ≤48h → 4. Pattern → coach
-  </div></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>unreplied reviews</code> · <code>low stars 00003</code></div>
+<div class="sec-title"><span class="en">Where to post</span><span class="zh">去哪发</span></div>
+<table>
+<tr><th><span class="en">Work</span><span class="zh">事</span></th><th><span class="en">Where</span><span class="zh">哪</span></th></tr>
+<tr><td><span class="en">Daily marketing work / approvals</span><span class="zh">日常市场工作/审批</span></td><td>#05-marketing</td></tr>
+<tr><td><span class="en">Review draft replies</span><span class="zh">评价回复草稿</span></td><td>marketing-reviews</td></tr>
+<tr><td><span class="en">Brand content (Gangnam / Masa / LCB)</span><span class="zh">品牌内容</span></td><td>gangnam-marketing · masa-marketing · lcb-marketing</td></tr>
+<tr><td><span class="en">Store-specific guest / offer ask</span><span class="zh">单店客人/优惠请求</span></td><td><span class="en">Store channel + Marketing</span><span class="zh">店频道+市场</span></td></tr>
+<tr><td><span class="en">Weekly Focus + Monthly Report</span><span class="zh">周聚焦+月报告</span></td><td>#012-weekly-onething</td></tr>
+</table>
+
+<div class="box box-gate"><strong><span class="en">First gate:</span><span class="zh">第一关：</span></strong> Louis · M1 · <span class="en">offer / promo / public promise before publish</span><span class="zh">优惠/活动/公开承诺发布前</span></div>
+
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong>
+<code>reviews 00003</code> · <code>any bad reviews?</code> · <code>flyer 00003</code> · <code>campaign status</code> · <code>marketing digest</code> · <code>social copy birthday 00003</code>
 </div>
 
-<!-- S4 RULE OF 3 -->
-<div class="page" id="s4">
-  <div class="page-h">4. <span class="en">Rule of 3 Engine</span><span class="zh">三次引擎</span></div>
-  <div class="page-sub">Visit 1 → 2 → 3 · <span class="badge badge-yellow">Phase 2</span> · <span class="badge badge-gate">⭐ M4</span></div>
-  <div class="verified">✅ 2026-07-22 · Anson Doc1 + Louis gates</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Alone ~23% return. Engineer Visit 2+3 → ~70% chance of lifelong regular.</span><span class="zh">放着不管约23%会回来。系统推第2、3次→约70%变常客。</span></div>
-
-  <div class="sec-title"><span class="en">Full loop</span><span class="zh">全流程</span></div>
-  <div class="flow">
-    <span class="flow-step">QR + phone</span><span class="flow-arrow">→</span>
-    <span class="flow-step">50% Visit 1</span><span class="flow-arrow">→</span>
-    <span class="flow-step">90m SMS review</span><span class="flow-arrow">→</span>
-    <span class="flow-step">YES → 25%</span><span class="flow-arrow">→</span>
-    <span class="flow-step">Visit 2 + 10%</span><span class="flow-arrow">→</span>
-    <span class="flow-step">Visit 3 regular</span>
-  </div>
-
-  <div class="sec-title"><span class="en">Acquisition — 50% first visit</span><span class="zh">获客 — 首次5折</span></div>
-  <table>
-    <tr><th><span class="en">Rule</span><span class="zh">规矩</span></th><th><span class="en">Detail</span><span class="zh">细节</span></th></tr>
-    <tr><td>Deal</td><td>50% off · up to 2 people</td></tr>
-    <tr><td>Cap</td><td><strong>$40 max</strong></td></tr>
-    <tr><td>Need</td><td>Scan QR + phone</td></tr>
-    <tr><td>Abuse</td><td>One phone = one redeem</td></tr>
-    <tr><td>Expiry</td><td>30 days from sign-up</td></tr>
-    <tr><td>POS</td><td>Named promo — never Custom</td></tr>
-    <tr><td>Gate</td><td>Louis yes before company-scale live</td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Retention bridge</span><span class="zh">留存桥</span></div>
-  <table>
-    <tr><th><span class="en">Step</span><span class="zh">步</span></th><th><span class="en">What</span><span class="zh">做什么</span></th></tr>
-    <tr><td>90 min</td><td><span class="en">SMS review link → reply YES → 25% code (min $40 · one-time · phone-locked)</span><span class="zh">短信评价链接→回YES→25%码</span></td></tr>
-    <tr><td>Visit 2</td><td><span class="en">Apply 25% → pitch Member 10% forever</span><span class="zh">用25%→推永久会员10%</span></td></tr>
-    <tr><td>7 days</td><td><span class="en">Bridge SMS if no Visit 3</span><span class="zh">没来第3次就桥接短信</span></td></tr>
-    <tr><td>30 / 45 / 90</td><td><span class="en">Expiry nudge · member reminder · BOGO needs 👍 approve</span><span class="zh">到期提醒·会员提醒·BOGO要👍批</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Local offers (adapt by city)</span><span class="zh">本地优惠（按城市改）</span></div>
-  <table>
-    <tr><th>Group</th><th>Offer</th></tr>
-    <tr><td>UNCW / students</td><td>10% Student ID</td></tr>
-    <tr><td>Military</td><td>15% Military ID</td></tr>
-    <tr><td>Tourists</td><td><span class="en">Google review discount (not loyalty push)</span><span class="zh">评价折扣（不推会员）</span></td></tr>
-  </table>
-  <div class="box box-gate"><strong>⭐ M4:</strong> <span class="en">Louis must approve 50% economics + permanent 10% loyalty before Phase 2 go-live.</span><span class="zh">Phase 2上线前Louis必须批5折经济和永久10%会员。</span></div>
-  <div class="box box-rule"><strong><span class="en">Hard:</span><span class="zh">硬：</span></strong> <span class="en">Earned 25% always honored if rules met — never withhold. No data = no discount when offer requires phone.</span><span class="zh">该得的25%必须给。要电话的优惠没数据就不给。</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>promo list</code> · <code>approved discounts</code></div>
+<div class="box box-auto" style="margin-top:12px"><strong><span class="en">Brain = record · Canvas = team view · Slack = act.</span><span class="zh">Brain=记录 · Canvas=团队视图 · Slack=行动。</span></strong> <span class="en">Silence means no open work.</span><span class="zh">安静=没有待办。</span></div>
 </div>
 
-<!-- S5 FLOOR -->
-<div class="page" id="s5">
-  <div class="page-h">5. <span class="en">Floor — 4 FOH Plays</span><span class="zh">前厅 — 4条话术</span></div>
-  <div class="page-sub"><span class="en">Exact scripts. No improvising.</span><span class="zh">固定话术。不要即兴乱说。</span></div>
-  <div class="verified">✅ 2026-07-22 · Anson Doc2</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Staff never needs Slack. Management runs marketing. Floor only says the 4 plays.</span><span class="zh">员工不需要Slack。管理层跑市场。前厅只说这4句。</span></div>
-
-  <div class="sec-title">Play 1 · <span class="en">Greeting &amp; QR</span><span class="zh">招呼+二维码</span></div>
-  <div class="box box-auto"><span class="en">When:</span><span class="zh">何时：</span> <span class="en">Right after seating. Job: scan + phone before order.</span><span class="zh">入座后。目标：点菜前扫码+电话。</span></div>
-  <div class="script">“Welcome to Gangnam! If this is your first time with us, scan this QR code right now to get 50% off your meal today. It only takes 10 seconds.”</div>
-  <div class="box box-rule"><span class="en">Already used → Play 3. Refuses → OK full price. No data, no follow-up.</span><span class="zh">用过→Play 3。拒绝→原价。没数据就没跟进。</span></div>
-
-  <div class="sec-title">Play 2 · <span class="en">Check drop &amp; review seed</span><span class="zh">放账单+种评价</span></div>
-  <div class="box box-auto"><span class="en">When:</span><span class="zh">何时：</span> <span class="en">Dropping the check. Job: make them open the SMS.</span><span class="zh">放账单时。目标：让他们打开短信。</span></div>
-  <div class="script">“Thank you so much for dining with us! Check your phone in a few minutes — we are sending you a quick link. If you leave us a 5-star review, you get 25% off your next visit.”</div>
-  <div class="box box-rule"><span class="en">SMS fires 90 min from QR scan, not from this line. Line = open-rate booster.</span><span class="zh">短信从扫码起90分钟发，不是从这句话起。这句话是提高打开率。</span></div>
-
-  <div class="sec-title">Play 3 · <span class="en">Loyalty (Visit 2)</span><span class="zh">会员（第2次）</span></div>
-  <div class="script">“I have applied your 25% off! Since you came back, let me make you a Gangnam Member right now. It takes 5 seconds, and you get 10% off every single visit forever. What is your phone number?”</div>
-  <div class="box box-rule"><span class="en">Already member → apply 10%. Declines loyalty → still give earned 25%. Never withhold.</span><span class="zh">已是会员→打10%。不入会→25%仍给。永不扣回。</span></div>
-
-  <div class="sec-title">Play 4 · <span class="en">Regular checkout</span><span class="zh">常客结账</span></div>
-  <div class="script">“Are you a Gangnam Member? Let me get your phone number to apply your 10% discount.”</div>
-  <div class="box box-red"><span class="en">Missing phone log can trigger false “we miss you” texts later.</span><span class="zh">漏记电话后面会误发“想你了”短信。</span></div>
-
-  <div class="sec-title"><span class="en">Exceptions</span><span class="zh">例外</span></div>
-  <table>
-    <tr><th><span class="en">Situation</span><span class="zh">情况</span></th><th><span class="en">Response</span><span class="zh">处理</span></th></tr>
-    <tr><td><span class="en">Already used 50%</span><span class="zh">5折用过了</span></td><td><span class="en">Member 10% path</span><span class="zh">走会员10%</span></td></tr>
-    <tr><td><span class="en">Won’t give number</span><span class="zh">不给电话</span></td><td><span class="en">OK — no discount without data</span><span class="zh">可以 — 没数据没折扣</span></td></tr>
-    <tr><td><span class="en">Large group on 50%</span><span class="zh">大桌5折</span></td><td>Cap $40 · Chowbus enforce</td></tr>
-    <tr><td><span class="en">Says review posted, no YES</span><span class="zh">说评了但没回YES</span></td><td><span class="en">Tell them reply YES to the text</span><span class="zh">让他短信回YES</span></td></tr>
-    <tr><td>Tourist</td><td><span class="en">Review discount first, not loyalty</span><span class="zh">先评价折扣，不推会员</span></td></tr>
-  </table>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>foh scripts</code> · <code>promo list</code></div>
+<!-- ==================== STAGE 1: REVIEWS ==================== -->
+<div class="page" id="reviews">
+<div class="page-h">1. Reviews <span class="zh">评价</span></div>
+<div class="page-sub"><span class="en">Auto · GM · Louis</span><span class="zh">自动·GM·Louis</span> · <span class="badge badge-gate">⭐ M3</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Reviews are the #1 guest trust signal. Silence on bad reviews costs more than one flyer.</span><span class="zh">评价是客人信任第一信号。差评沉默比一张传单更贵。</span></div>
+<div class="flow"><span class="flow-step"><span class="en">pull</span><span class="zh">拉</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">tag + draft</span><span class="zh">标+草稿</span></span><span class="flow-arrow">→</span><span class="flow-gate">⭐ <span class="en">approve</span><span class="zh">批</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">publish</span><span class="zh">发</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">trend</span><span class="zh">趋势</span></span></div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">actionable reviews have draft + owner + status. Critical replies need Louis yes. Positive can stay quiet.</span><span class="zh">需行动评价有草稿+负责人+状态。严重回复要Louis批。好评可安静。</span></div>
+<table>
+<tr><th>#</th><th><span class="en">What</span><span class="zh">事</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th>Gate</th><th><span class="en">How</span><span class="zh">怎么</span></th><th><span class="en">Done-when</span><span class="zh">完成</span></th></tr>
+<tr><td>1</td><td><span class="en">Pull</span><span class="zh">拉评价</span></td><td><span class="badge badge-blue">⚡</span></td><td>—</td><td><span class="en">Google Business Profile → Brain reviews_raw</span><span class="zh">GBP→Brain reviews_raw</span></td><td><span class="en">fresh pull or blocked status known</span><span class="zh">已拉或阻塞状态清楚</span></td></tr>
+<tr><td>2</td><td><span class="en">Tag + draft</span><span class="zh">标+草稿</span></td><td><span class="badge badge-blue">⚡</span></td><td>—</td><td><span class="en">critical keywords + style draft</span><span class="zh">危险词+风格草稿</span></td><td><span class="en">draft in marketing-reviews</span><span class="zh">草稿在marketing-reviews</span></td></tr>
+<tr><td>3</td><td><span class="en">Route</span><span class="zh">路由</span></td><td><span class="badge badge-blue">⚡</span></td><td>—</td><td><span class="en">4–5★ Mkt/GM · 3★ GM/Mkt · 1–2★ Louis · critical P0 Louis</span><span class="zh">4–5星市场/GM · 3星GM/市场 · 1–2星Louis · 严重P0 Louis</span></td><td><span class="en">owner tagged</span><span class="zh">负责人@了</span></td></tr>
+<tr><td>4</td><td><strong><span class="en">Approve</span><span class="zh">批</span></strong></td><td><span class="en">Human</span><span class="zh">人</span></td><td><span class="badge badge-gate">⭐ M3</span></td><td><code>approve</code> / <code>edit: …</code> / <code>skip</code></td><td><span class="en">decision written</span><span class="zh">决定已写</span></td></tr>
+<tr><td>5</td><td><span class="en">Publish</span><span class="zh">发布</span></td><td><span class="badge badge-blue">⚡</span></td><td>—</td><td><span class="en">GBP reply after human yes</span><span class="zh">人批后再发GBP</span></td><td><span class="en">replied=true in Brain</span><span class="zh">Brain replied=true</span></td></tr>
+<tr><td>6</td><td><span class="en">Weekly theme</span><span class="zh">周主题</span></td><td>Mkt</td><td>—</td><td><span class="en">group complaint themes</span><span class="zh">归类投诉主题</span></td><td><span class="en">theme note posted</span><span class="zh">主题已贴</span></td></tr>
+</table>
+<div class="box box-rule"><strong><span class="en">Positive reviews:</span><span class="zh">好评：</span></strong> <span class="en">do not clutter channel parent. Silent or thread only.</span><span class="zh">不占频道主帖。安静或只进线程。</span></div>
+<div class="box box-red"><strong><span class="en">Never auto-publish.</span><span class="zh">永不自动发布。</span></strong> <span class="en">Food poisoning / injury / legal = Louis only, immediate.</span><span class="zh">食物中毒/受伤/法律=只Louis，立刻。</span></div>
+<div class="box box-rule"><strong><span class="en">GBP quota:</span><span class="zh">GBP额度：</span></strong> <span class="en">if pull blocked, say blocked — never invent review text.</span><span class="zh">拉不动就说阻塞 — 永不编评价原文。</span></div>
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>reviews 00003</code> · <code>any bad reviews?</code> · <code>review reply 00001</code> · <code>GBP quota</code></div>
 </div>
 
-<!-- S6 SOCIAL -->
-<div class="page" id="s6">
-  <div class="page-h">6. <span class="en">Social</span><span class="zh">社媒</span></div>
-  <div class="page-sub">IG · FB · TikTok · GBP · Anson living plan</div>
-  <div class="verified">✅ 2026-07-22 · living plan + V1.1</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Consistent real food photos beat polished ad campaigns.</span><span class="zh">坚持发真菜照片，比精致广告更有效。</span></div>
-  <table>
-    <tr><th><span class="en">Channel</span><span class="zh">渠道</span></th><th><span class="en">Status</span><span class="zh">状态</span></th></tr>
-    <tr><td>Facebook</td><td><span class="en">Primary now · draft → post it</span><span class="zh">现在主渠道 · 草稿→post it</span></td></tr>
-    <tr><td>Instagram</td><td><span class="en">Connect / setup backlog</span><span class="zh">连接/设置待办</span></td></tr>
-    <tr><td>TikTok / X</td><td><span class="en">As plan allows</span><span class="zh">按计划</span></td></tr>
-    <tr><td>GBP posts</td><td><span class="en">When connected</span><span class="zh">连上后</span></td></tr>
-  </table>
-  <div class="sec-title"><span class="en">Weekly calendar (default)</span><span class="zh">默认周历</span></div>
-  <table>
-    <tr><th>Day</th><th><span class="en">Work</span><span class="zh">工作</span></th></tr>
-    <tr><td>Mon</td><td><span class="en">Plan board · usually no post</span><span class="zh">计划板·通常不发</span></td></tr>
-    <tr><td>Tue</td><td><span class="en">Food / dish post</span><span class="zh">菜品帖</span></td></tr>
-    <tr><td>Wed</td><td><span class="en">Hiring or community</span><span class="zh">招聘或社区</span></td></tr>
-    <tr><td>Thu</td><td><span class="en">Deal (if true) or review thank-you</span><span class="zh">真实优惠或感谢评价</span></td></tr>
-    <tr><td>Fri</td><td><span class="en">Weekend rush post</span><span class="zh">周末冲锋帖</span></td></tr>
-  </table>
-  <div class="box box-rule"><strong><span class="en">Flow:</span><span class="zh">流程：</span></strong> <span class="en">Drop media in #05-marketing → OPS drafts caption → Anson says</span><span class="zh">素材丢#05-marketing → OPS写文案 → Anson说</span> <code>post it</code> · Target 3–5/week company-wide · priority 00003→00002→00001/00004 · <strong>00005 HOLD</strong></div>
-  <div class="box box-red"><strong><span class="en">Never:</span><span class="zh">永不：</span></strong> <span class="en">Invent prices/hours · buy fake engagement · boost ads without Louis · promo 00005 while HOLD</span><span class="zh">编价格/时间 · 买假互动 · 没Louis就投放 · HOLD时推00005</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>update plan: …</code> · <code>left off: …</code> · <code>post it</code></div>
+<!-- ==================== STAGE 2: CONTENT ==================== -->
+<div class="page" id="content">
+<div class="page-h">2. Content <span class="zh">内容</span></div>
+<div class="page-sub"><span class="en">Mkt · GM · Louis</span><span class="zh">市场·GM·Louis</span> · <span class="badge badge-gate">⭐ M1</span> <span class="badge badge-gate">⭐ M2</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Content without truth is brand debt. 3 real options beat one polished guess.</span><span class="zh">没真相的内容是品牌债。3个真选项胜过一个漂亮猜测。</span></div>
+<div class="flow"><span class="flow-step"><span class="en">brief</span><span class="zh">需求</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">3 designs</span><span class="zh">3稿</span></span><span class="flow-arrow">→</span><span class="flow-gate">⭐ <span class="en">pick</span><span class="zh">选</span></span><span class="flow-arrow">→</span><span class="flow-gate">⭐ <span class="en">offer?</span><span class="zh">优惠?</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">Drive + Brain</span><span class="zh">盘+Brain</span></span></div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">one design picked · offer Louis-approved if needed · file in Drive · campaign row in Brain.</span><span class="zh">选中1稿 · 优惠如需已Louis批 · Drive有文件 · Brain有活动行。</span></div>
+<table>
+<tr><th>#</th><th><span class="en">What</span><span class="zh">事</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th>Gate</th><th><span class="en">How</span><span class="zh">怎么</span></th><th><span class="en">Done-when</span><span class="zh">完成</span></th></tr>
+<tr><td>1</td><td><span class="en">Brief</span><span class="zh">需求</span></td><td>GM/Mkt</td><td>—</td><td><span class="en">store · goal · offer · dates · CTA · format</span><span class="zh">店·目标·优惠·日期·行动·格式</span></td><td><span class="en">clear ask in Slack</span><span class="zh">Slack需求清楚</span></td></tr>
+<tr><td>2</td><td><span class="en">Create 3</span><span class="zh">做3稿</span></td><td><span class="badge badge-blue">⚡</span>/Mkt</td><td>—</td><td><span class="en">3 different designs + caption + CTA</span><span class="zh">3个不同设计+文案+行动</span></td><td><span class="en">3 MEDIA files posted</span><span class="zh">3个MEDIA已贴</span></td></tr>
+<tr><td>3</td><td><span class="en">Fact check</span><span class="zh">查事实</span></td><td><span class="badge badge-blue">⚡</span>/Mkt</td><td>—</td><td><span class="en">name · logo · address · phone · hours · no invented claims</span><span class="zh">店名·logo·地址·电话·时间·不编</span></td><td><span class="en">check passed</span><span class="zh">检查过</span></td></tr>
+<tr><td>4</td><td><strong><span class="en">Pick design</span><span class="zh">选设计</span></strong></td><td>GM/Mkt</td><td><span class="badge badge-gate">⭐ M2</span></td><td><span class="en">pick A/B/C · max 2 revisions</span><span class="zh">选A/B/C · 最多改2次</span></td><td><span class="en">choice in thread</span><span class="zh">线程有选择</span></td></tr>
+<tr><td>5</td><td><strong><span class="en">Offer gate</span><span class="zh">优惠门</span></strong></td><td>Louis</td><td><span class="badge badge-gate">⭐ M1</span></td><td><span class="en">if discount / promo / public promise</span><span class="zh">有折扣/活动/公开承诺</span></td><td><span class="en">Louis yes</span><span class="zh">Louis同意</span></td></tr>
+<tr><td>6</td><td><span class="en">Save + record</span><span class="zh">存+记</span></td><td><span class="badge badge-blue">⚡</span></td><td>—</td><td><span class="en">Drive + content_campaigns</span><span class="zh">Drive+content_campaigns</span></td><td><span class="en">Drive ID + status=approved</span><span class="zh">Drive ID+已批</span></td></tr>
+</table>
+<div class="box box-rule"><strong><span class="en">Formats:</span><span class="zh">格式：</span></strong> <span class="en">flyer · post · ad · offer card. Start from approved offer path, not a caption idea.</span><span class="zh">传单·帖子·广告·优惠卡。从已批优惠路径开始，不是先想文案。</span></div>
+<div class="box box-red"><strong><span class="en">Never invent:</span><span class="zh">永不编：</span></strong> <span class="en">prices · dates · scarcity · awards · testimonials without proof.</span><span class="zh">价格·日期·稀缺·奖项·无证据好评。</span></div>
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>flyer 00003 birthday</code> · <code>make post 00001 lunch</code> · <code>campaign status</code></div>
 </div>
 
-<!-- S7 PROMO -->
-<div class="page" id="s7">
-  <div class="page-h">7. <span class="en">Promotions</span><span class="zh">促销</span></div>
-  <div class="page-sub"><span class="en">Named in POS only</span><span class="zh">POS只记名</span></div>
-  <div class="verified">✅ 2026-07-22</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Simple promo staff can explain beats complex one they can’t.</span><span class="zh">员工能说清的简单促销，比说不清的复杂促销有用。</span></div>
-  <table>
-    <tr><th><span class="en">Promo</span><span class="zh">促销</span></th><th><span class="en">Who approves</span><span class="zh">谁批</span></th></tr>
-    <tr><td><span class="en">Happy hour / lunch special</span><span class="zh">欢乐时光/午餐特惠</span></td><td>GM · Marketing</td></tr>
-    <tr><td><span class="en">First-visit 50% / Review 25% / Member 10%</span><span class="zh">首次5折/评价25%/会员10%</span></td><td>Louis ⭐ M4</td></tr>
-    <tr><td><span class="en">Loyalty program live</span><span class="zh">会员上线</span></td><td>Louis</td></tr>
-    <tr><td><span class="en">Event / pop-up / big $</span><span class="zh">活动/快闪/大钱</span></td><td>Louis ⭐ M4</td></tr>
-    <tr><td><span class="en">90-day BOGO win-back</span><span class="zh">90天BOGO召回</span></td><td><span class="en">Manager 👍 in Slack ≤24h</span><span class="zh">经理Slack👍≤24h</span></td></tr>
-  </table>
-  <div class="box box-rule"><strong><span class="en">Named only (not mystery Custom):</span><span class="zh">只记名（不要神秘Custom）：</span></strong> Birthday · Military · ECU/Student · DoorDash · Healthcare · Manager meal · Google review · First-visit 50% · Review 25% · Member 10%</div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>promo list</code> · <code>approved discounts</code></div>
+<!-- ==================== STAGE 3: SOCIAL ==================== -->
+<div class="page" id="social">
+<div class="page-h">3. Social <span class="zh">社媒</span></div>
+<div class="page-sub"><span class="en">Mkt · GM</span><span class="zh">市场·GM</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">One generic caption for every platform wastes the approved offer.</span><span class="zh">每个平台同一句通用文案会浪费已批优惠。</span></div>
+<div class="flow"><span class="flow-step"><span class="en">approved asset</span><span class="zh">已批素材</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">platform copy</span><span class="zh">平台文案</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">human post</span><span class="zh">人发</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">optional video</span><span class="zh">可选视频</span></span></div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">each platform has native copy from an approved offer, and a human posts it. Hermes never auto-posts.</span><span class="zh">每个平台有基于已批优惠的原生文案，且由人发布。Hermes永不自动发。</span></div>
+<table>
+<tr><th>#</th><th><span class="en">What</span><span class="zh">事</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th>Gate</th><th><span class="en">How</span><span class="zh">怎么</span></th><th><span class="en">Done-when</span><span class="zh">完成</span></th></tr>
+<tr><td>1</td><td><span class="en">Start from approved</span><span class="zh">从已批开始</span></td><td>Mkt</td><td>—</td><td><span class="en">use approved design/offer only</span><span class="zh">只用已批设计/优惠</span></td><td><span class="en">source linked</span><span class="zh">来源已链</span></td></tr>
+<tr><td>2</td><td><span class="en">Write copy</span><span class="zh">写文案</span></td><td><span class="badge badge-blue">⚡</span>/Mkt</td><td>—</td><td><span class="en">IG / TikTok / Facebook / Google native versions</span><span class="zh">IG/TikTok/FB/Google原生版</span></td><td><span class="en">copy in thread</span><span class="zh">线程有文案</span></td></tr>
+<tr><td>3</td><td><span class="en">Video (optional)</span><span class="zh">视频（可选）</span></td><td>Mkt</td><td>—</td><td><span class="en">3 real photos → 10s · 9:16 prompt → generate</span><span class="zh">3张真照片→10秒·9:16提示→生成</span></td><td><span class="en">clip ready for human post</span><span class="zh">片子给人发</span></td></tr>
+<tr><td>4</td><td><span class="en">Post</span><span class="zh">发布</span></td><td><span class="en">Human</span><span class="zh">人</span></td><td>—</td><td><span class="en">human posts to platforms</span><span class="zh">人发到平台</span></td><td><span class="en">link or screenshot proof</span><span class="zh">链接或截图证据</span></td></tr>
+<tr><td>5</td><td><span class="en">Record</span><span class="zh">记录</span></td><td><span class="badge badge-blue">⚡</span>/Mkt</td><td>—</td><td><span class="en">update content_campaigns</span><span class="zh">更新content_campaigns</span></td><td><span class="en">status + proof</span><span class="zh">状态+证据</span></td></tr>
+</table>
+<div class="box box-rule"><strong><span class="en">Video lock:</span><span class="zh">视频锁定：</span></strong> <span class="en">real store photos required · 9:16 · ~10s · human posts.</span><span class="zh">必须真店照片 · 9:16 · 约10秒 · 人发。</span></div>
+<div class="box box-red"><strong><span class="en">Never:</span><span class="zh">永不：</span></strong> <span class="en">auto-publish · invent urgency · one bland caption for all platforms.</span><span class="zh">自动发布 · 编紧迫感 · 全平台同一句干文案。</span></div>
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>social copy 00003 lunch special</code> · <code>video 00001</code> · <code>campaign status</code></div>
 </div>
 
-<!-- S8 BRAND -->
-<div class="page" id="s8">
-  <div class="page-h">8. <span class="en">Brand</span><span class="zh">品牌</span></div>
-  <div class="page-sub">6 brands · Louis owns changes · <span class="badge badge-gate">⭐ M2</span></div>
-  <div class="verified">✅ 2026-07-22</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Same name + photo + hours everywhere beats scattered identity.</span><span class="zh">名字+照片+时间到处一致，好过身份散乱。</span></div>
-  <table>
-    <tr><th>Brand</th><th><span class="en">Identity</span><span class="zh">身份</span></th></tr>
-    <tr><td>Gangnam Korean BBQ</td><td><span class="en">Full-service K-BBQ / Hot Pot (V1.1 focus)</span><span class="zh">正餐韩烤/火锅（V1.1焦点）</span></td></tr>
-    <tr><td>Masa Sushi</td><td><span class="en">Sushi &amp; hibachi</span><span class="zh">寿司铁板</span></td></tr>
-    <tr><td>Low Country Boils</td><td><span class="en">Seafood boil</span><span class="zh">海鲜煮</span></td></tr>
-    <tr><td>Gangnam Street</td><td><span class="en">Quick Korean</span><span class="zh">快餐韩式</span></td></tr>
-    <tr><td>Masa Ramen</td><td>Ramen / <span class="zh">拉面</span></td></tr>
-    <tr><td>Gangnam Wings</td><td><span class="en">Fried chicken</span><span class="zh">炸鸡</span></td></tr>
-  </table>
-  <div class="box box-gate"><strong>⭐ M2:</strong> <span class="en">Brand change = Louis only</span><span class="zh">改品牌=只有Louis</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>brands list</code> · <code>brand identity</code></div>
+<!-- ==================== STAGE 4: CAMPAIGN ==================== -->
+<div class="page" id="campaign">
+<div class="page-h">4. Campaign <span class="zh">活动</span></div>
+<div class="page-sub"><span class="en">Mkt · Louis</span><span class="zh">市场·Louis</span> · <span class="badge badge-gate">⭐ M4</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">If it is not recorded and measured, it was just activity, not marketing.</span><span class="zh">不记录不测量，只是忙，不是市场。</span></div>
+<div class="flow"><span class="flow-step"><span class="en">define</span><span class="zh">定义</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">run</span><span class="zh">跑</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">measure</span><span class="zh">量</span></span><span class="flow-arrow">→</span><span class="flow-gate">⭐ <span class="en">spend?</span><span class="zh">花钱?</span></span><span class="flow-arrow">→</span><span class="flow-step"><span class="en">next</span><span class="zh">下一步</span></span></div>
+<div class="box box-gate"><strong><span class="en">Done-when:</span><span class="zh">完成：</span></strong> <span class="en">every campaign has owner, store, status, Drive proof, and a next decision.</span><span class="zh">每个活动有负责人、店、状态、Drive证据、下一步决定。</span></div>
+<table>
+<tr><th>#</th><th><span class="en">What</span><span class="zh">事</span></th><th><span class="en">Who</span><span class="zh">谁</span></th><th>Gate</th><th><span class="en">How</span><span class="zh">怎么</span></th><th><span class="en">Done-when</span><span class="zh">完成</span></th></tr>
+<tr><td>1</td><td><span class="en">Open campaign</span><span class="zh">开活动</span></td><td>Mkt</td><td>—</td><td><span class="en">name · store · objective · dates</span><span class="zh">名·店·目标·日期</span></td><td><span class="en">row in content_campaigns</span><span class="zh">content_campaigns有行</span></td></tr>
+<tr><td>2</td><td><span class="en">Run assets</span><span class="zh">跑素材</span></td><td>Mkt</td><td>M1/M2</td><td><span class="en">content + social stages</span><span class="zh">内容+社媒阶段</span></td><td><span class="en">approved assets live</span><span class="zh">已批素材在用</span></td></tr>
+<tr><td>3</td><td><span class="en">Measure</span><span class="zh">测量</span></td><td>Mkt</td><td>—</td><td><span class="en">views / saves / replies / sales proxy if known</span><span class="zh">观看/收藏/回复/可知销售代理</span></td><td><span class="en">result note</span><span class="zh">结果备注</span></td></tr>
+<tr><td>4</td><td><strong><span class="en">Paid spend</span><span class="zh">付费</span></strong></td><td>Louis</td><td><span class="badge badge-gate">⭐ M4</span></td><td><span class="en">before any ad money leaves</span><span class="zh">任何广告钱出去前</span></td><td><span class="en">Louis yes + budget</span><span class="zh">Louis同意+预算</span></td></tr>
+<tr><td>5</td><td><span class="en">Close / iterate</span><span class="zh">关/迭代</span></td><td>Mkt</td><td>—</td><td><span class="en">keep / kill / change</span><span class="zh">留/杀/改</span></td><td><span class="en">status updated</span><span class="zh">状态已更新</span></td></tr>
+</table>
+<div class="box box-rule"><strong><span class="en">Sales proof:</span><span class="zh">销售证据：</span></strong> <span class="en">use chowbus_raw / store health when available. If unknown, say UNKNOWN.</span><span class="zh">有就用chowbus_raw/店健康。不知道就说UNKNOWN。</span></div>
+<div class="box box-red"><strong><span class="en">No vanity win:</span><span class="zh">不要虚荣胜利：</span></strong> <span class="en">likes alone do not pass. Need guest action or honest fail.</span><span class="zh">只有点赞不算过。要客人行动或诚实失败。</span></div>
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>campaign status</code> · <code>how did the video do</code> · <code>sales 00003 last 7 days</code></div>
 </div>
 
-<!-- S9 ADS -->
-<div class="page" id="s9">
-  <div class="page-h">9. <span class="en">Ads</span><span class="zh">广告</span></div>
-  <div class="page-sub">Google · Meta · Louis budget · <span class="badge badge-gate">⭐ M1</span></div>
-  <div class="verified">✅ 2026-07-22 · gap / Phase 3</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">Reviews + listing beat paid ads until ≥4.0. Fix free first.</span><span class="zh">评分+商家信息比花钱广告重要。先修免费的。</span></div>
-  <table>
-    <tr><th><span class="en">Channel</span><span class="zh">渠道</span></th><th><span class="en">Status</span><span class="zh">状态</span></th><th>Gate</th></tr>
-    <tr><td>Google Ads</td><td><span class="en">Not active</span><span class="zh">没开</span></td><td>Louis ⭐ M1</td></tr>
-    <tr><td>Meta (FB/IG)</td><td><span class="en">Not active</span><span class="zh">没开</span></td><td>Louis ⭐ M1</td></tr>
-    <tr><td>DoorDash / UberEats</td><td><span class="en">Active platform</span><span class="zh">平台在线</span></td><td>Ops</td></tr>
-  </table>
-  <div class="box box-red"><strong><span class="en">Rule:</span><span class="zh">规矩：</span></strong> <span class="en">No paid ads until rating ≥4.0 AND listing complete AND Louis budget yes.</span><span class="zh">评分≥4.0且信息完整且Louis批预算，才投付费广告。</span></div>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>ad budget</code> · <code>ads status</code> · <code>rating all</code></div>
+<!-- ==================== FIRST 30 DAYS ==================== -->
+<div class="page" id="30days">
+<div class="page-h">🚀 First 30 Days <span class="zh">前30天</span></div>
+<div class="page-sub"><span class="en">Week-by-week ramp for a new Marketing owner.</span><span class="zh">新市场负责人按周上手。</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">If the owner still asks "what do I do next?" after 30 days, the roadmap failed.</span><span class="zh">如果30天后负责人还在问"下一步做什么"，路线图就失败了。</span></div>
+
+<div class="week-grid">
+<div class="week-card">
+<div class="w-num"><span class="en">Week 1</span><span class="zh">第1周</span></div>
+<div class="w-title"><span class="en">Read + Connect</span><span class="zh">读+连接</span></div>
+<ul>
+<li><span class="en">Read this roadmap: Map → Cadence</span><span class="zh">读本路线图：总图→节奏</span></li>
+<li><span class="en">Join #05-marketing + brand channels</span><span class="zh">进#05-marketing+品牌频道</span></li>
+<li><span class="en">First pull: <code>marketing digest</code> + <code>any bad reviews?</code></span><span class="zh">第一次拉：marketing digest + any bad reviews?</span></li>
+<li><span class="en">Learn gates M1–M4</span><span class="zh">学门 M1–M4</span></li>
+<li><span class="en">List live stores 00001–00005 brands</span><span class="zh">列清00001–00005品牌</span></li>
+</ul>
+</div>
+<div class="week-card">
+<div class="w-num"><span class="en">Week 2</span><span class="zh">第2周</span></div>
+<div class="w-title"><span class="en">Reviews + One Flyer</span><span class="zh">评价+一张传单</span></div>
+<ul>
+<li><span class="en">Shadow one review draft → approve → publish path</span><span class="zh">跟一次评价草稿→批→发</span></li>
+<li><span class="en">First content brief from one store</span><span class="zh">从一个店收第一个内容需求</span></li>
+<li><span class="en">Run 3-design pick loop once</span><span class="zh">跑一次3稿选1</span></li>
+<li><span class="en">If offer exists, route Louis M1</span><span class="zh">有优惠就走Louis M1</span></li>
+<li><span class="en">Save approved file to Drive + Brain</span><span class="zh">已批文件存Drive+Brain</span></li>
+</ul>
+</div>
+<div class="week-card">
+<div class="w-num"><span class="en">Week 3</span><span class="zh">第3周</span></div>
+<div class="w-title"><span class="en">Social + Focus</span><span class="zh">社媒+聚焦</span></div>
+<ul>
+<li><span class="en">Write platform-native copy from one approved asset</span><span class="zh">用一个已批素材写平台原生文案</span></li>
+<li><span class="en">Human posts; collect proof link/screenshot</span><span class="zh">人发；收链接/截图证据</span></li>
+<li><span class="en">Optional: one 10s video from real photos</span><span class="zh">可选：真照片做一条10秒视频</span></li>
+<li><span class="en">First weekly FOCUS: 3 marketing items</span><span class="zh">第一次周聚焦：3个市场事项</span></li>
+<li><span class="en">Review open marketing tickets</span><span class="zh">查开放市场工单</span></li>
+</ul>
+</div>
+<div class="week-card">
+<div class="w-num"><span class="en">Week 4</span><span class="zh">第4周</span></div>
+<div class="w-title"><span class="en">Campaign + Monthly</span><span class="zh">活动+月报</span></div>
+<ul>
+<li><span class="en">Close or iterate one campaign with measure note</span><span class="zh">关闭或迭代一个有测量备注的活动</span></li>
+<li><span class="en">Write first monthly KPI report (4 questions)</span><span class="zh">写第一份月KPI报告（4问）</span></li>
+<li><span class="en">Submit to #012-weekly-onething</span><span class="zh">交到#012-weekly-onething</span></li>
+<li><span class="en">Confirm no auto-publish happened</span><span class="zh">确认没有自动发布</span></li>
+<li><span class="en">Self-check: run a day without asking Louis process?</span><span class="zh">自检：不问Louis流程能跑一天？</span></li>
+</ul>
+</div>
 </div>
 
-<!-- S10 CHECK -->
-<div class="page" id="s10">
-  <div class="page-h">10. <span class="en">Checklist</span><span class="zh">检查表</span></div>
-  <div class="page-sub">Daily MOD · Weekly GM/Mkt · Monthly strategy</div>
-  <div class="verified">✅ 2026-07-22 · Anson Doc3 + Louis foundation</div>
-  <div class="pareto"><strong>80/20:</strong> <span class="en">A system is only as good as its enforcement.</span><span class="zh">系统好不好，看有没有人天天查。</span></div>
-
-  <div class="sec-title"><span class="en">Daily — MOD</span><span class="zh">每天 — 当班经理</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">Task</span><span class="zh">任务</span></th><th>Verify</th></tr>
-    <tr><td>1</td><td><span class="en">Every table: clean scannable 50% QR tent</span><span class="zh">每桌干净可扫5折台卡</span></td><td>Walk</td></tr>
-    <tr><td>2</td><td><span class="en">QR landing page live — one test scan</span><span class="zh">落地页活着—测扫一次</span></td><td>Phone</td></tr>
-    <tr><td>3</td><td><span class="en">Hear ≥3 greets use Play 1 exact</span><span class="zh">听≥3次招呼用Play1原句</span></td><td>Floor</td></tr>
-    <tr><td>4</td><td><span class="en">Hear ≥3 check drops use Play 2</span><span class="zh">听≥3次放账单用Play2</span></td><td>Floor</td></tr>
-    <tr><td>5</td><td><span class="en">Clear win-back 👍/❌ in Slack</span><span class="zh">清掉召回审批</span></td><td>Slack</td></tr>
-    <tr><td>6</td><td><span class="en">Daily summary: sign-ups · 50% · SMS</span><span class="zh">日总结：注册·5折·短信</span></td><td>Agent/log</td></tr>
-    <tr><td>7</td><td><span class="en">Any new ≤3★? Reply path started ≤48h</span><span class="zh">有新≤3星？48h内启动回复</span></td><td>GBP/OPS</td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Weekly — GM / Marketing</span><span class="zh">每周 — GM/市场</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">Task</span><span class="zh">任务</span></th></tr>
-    <tr><td>1</td><td>Twilio health · delivery ≥90% · bounce &lt;10%</td></tr>
-    <tr><td>2</td><td><span class="en">No unanswered win-backs</span><span class="zh">没有未批召回</span></td></tr>
-    <tr><td>3</td><td><span class="en">Count new 5★ · reply every review</span><span class="zh">数新5星·回完所有评价</span></td></tr>
-    <tr><td>4</td><td>≥3–5 social posts published</td></tr>
-    <tr><td>5</td><td>Chowbus → visit data sync (until API)</td></tr>
-    <tr><td>6</td><td><span class="en">Listing: hours · photos · menu OK</span><span class="zh">商家：时间·照片·菜单OK</span></td></tr>
-    <tr><td>7</td><td>Unreplied &gt;48h = 0</td></tr>
-    <tr><td>8</td><td><span class="en">Note rating vs 4.0 ads gate</span><span class="zh">记评分vs广告门4.0</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Monthly — Strategy</span><span class="zh">每月 — 策略</span></div>
-  <table>
-    <tr><th>#</th><th><span class="en">Task</span><span class="zh">任务</span></th></tr>
-    <tr><td>1</td><td><span class="en">Full monthly report</span><span class="zh">月报</span></td></tr>
-    <tr><td>2</td><td>CAC = $ of 50% ÷ new phones</td></tr>
-    <tr><td>3</td><td>Rule of 3: % V1→2 and →V3</td></tr>
-    <tr><td>4</td><td><span class="en">If V2→3 &lt;40%, upgrade 7-day bridge</span><span class="zh">V2→3&lt;40%就加强7天桥</span></td></tr>
-    <tr><td>5</td><td><span class="en">Review growth from 90-min SMS</span><span class="zh">90分钟短信带来的评价增长</span></td></tr>
-    <tr><td>6</td><td>Win-back % after BOGO</td></tr>
-    <tr><td>7</td><td><span class="en">Ads-ready? All Gangnam ≥4.0 + listings complete?</span><span class="zh">广告就绪？Gangnam都≥4.0且信息完整？</span></td></tr>
-    <tr><td>8</td><td><span class="en">Named promo audit (no mystery Custom)</span><span class="zh">记名促销审计</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Red flags — escalate now</span><span class="zh">红旗 — 立刻升级</span></div>
-  <table>
-    <tr><th>Flag</th><th><span class="en">Means</span><span class="zh">意味</span></th><th><span class="en">Action</span><span class="zh">动作</span></th></tr>
-    <tr><td>QR sign-ups = 0 for 2+ days</td><td>Tents/page down</td><td><span class="en">Replace + test</span><span class="zh">换卡+测页</span></td></tr>
-    <tr><td>Twilio delivery &lt;80%</td><td>SMS failing</td><td>Health check</td></tr>
-    <tr><td>No new Google reviews 7+ days</td><td>Play 2 not used</td><td><span class="en">Mandatory FOH retrain</span><span class="zh">强制前厅重训</span></td></tr>
-    <tr><td>Win-back open 48h+</td><td>Mgr not in Slack</td><td><span class="en">Owner respond now</span><span class="zh">老板立刻回</span></td></tr>
-    <tr><td>Rating &lt;4.0 + unpaid low stars</td><td><span class="en">Losing demand</span><span class="zh">丢需求</span></td><td><span class="en">Reply + fix before ads</span><span class="zh">先回+修，再广告</span></td></tr>
-  </table>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>week done</code> · <code>rating 00003</code> · <code>unreplied reviews</code></div>
+<div class="box box-gate"><strong><span class="en">30-day test:</span><span class="zh">30天测试：</span></strong> <span class="en">Owner opens Map → Cadence → hits ⭐ gates only. If still asking "what next?" → roadmap failed, re-derive.</span><span class="zh">负责人开总图→节奏→只拍板⭐门。如果还在问"下一步"→路线图失败，重新推导。</span></div>
 </div>
 
-<!-- RULES -->
+<!-- ==================== RULES ==================== -->
 <div class="page" id="rules">
-  <div class="page-h">📋 Rules</div>
-  <div class="verified">✅ 2026-07-22 · V1.1 merged</div>
-  <div class="box box-rule"><strong>1.</strong> <span class="en">Reply every review ≤48h.</span><span class="zh">48小时内回每条评价。</span></div>
-  <div class="box box-rule"><strong>2.</strong> <span class="en">Push happy guests to Google review.</span><span class="zh">推满意客人去Google评。</span></div>
-  <div class="box box-rule"><strong>3.</strong> <span class="en">GBP owned by marketing@ + store emails — not louis@.</span><span class="zh">商家归marketing@+店邮箱，不是louis@。</span></div>
-  <div class="box box-rule"><strong>4.</strong> <span class="en">Never argue in public review reply.</span><span class="zh">不在公开评论吵。</span></div>
-  <div class="box box-rule"><strong>5.</strong> <span class="en">Named promos only in POS. No mystery Custom.</span><span class="zh">POS只记名优惠。不要Custom。</span></div>
-  <div class="box box-rule"><strong>6.</strong> <span class="en">No paid ads until reviews ≥4.0 and listing complete.</span><span class="zh">评分≥4.0且信息完整才投广告。</span></div>
-  <div class="box box-rule"><strong>7.</strong> <span class="en">Brand change = Louis only.</span><span class="zh">改品牌=只有Louis。</span></div>
-  <div class="box box-rule"><strong>8.</strong> <span class="en">Keep listing fresh: photos + hours + menu.</span><span class="zh">保持信息新：照片+时间+菜单。</span></div>
-  <div class="box box-rule"><strong>9.</strong> <span class="en">50% first visit capped at $40; one phone = one redeem.</span><span class="zh">首次5折封顶$40；一电话一兑。</span></div>
-  <div class="box box-rule"><strong>10.</strong> <span class="en">Earned 25% always honored if rules met — never withhold.</span><span class="zh">该得的25%必须给。</span></div>
-  <div class="box box-rule"><strong>11.</strong> <span class="en">Win-back approvals ≤24h; escalate at 48h.</span><span class="zh">召回审批≤24h；48h升级。</span></div>
-  <div class="box box-rule"><strong>12.</strong> <span class="en">No discount without phone when offer requires data.</span><span class="zh">要数据的优惠没电话就不给。</span></div>
+<div class="page-h">📋 Rules <span class="zh">规矩</span></div>
+<div class="page-sub"><span class="en">Only rules that change behavior.</span><span class="zh">只放会改变行为的规矩。</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Few rules that change behavior. Not a brand novel.</span><span class="zh">少而硬。不是品牌小说。</span></div>
 
-  <div class="sec-title"><span class="en">Who decides</span><span class="zh">谁拍板</span></div>
-  <table>
-    <tr><th><span class="en">Item</span><span class="zh">事项</span></th><th><span class="en">Who</span><span class="zh">谁</span></th></tr>
-    <tr><td><span class="en">Review reply</span><span class="zh">评价回复</span></td><td>GM</td></tr>
-    <tr><td><span class="en">Listing update</span><span class="zh">改商家信息</span></td><td>Marketing</td></tr>
-    <tr><td><span class="en">Happy hour / lunch</span><span class="zh">欢乐时光/午餐</span></td><td>GM · Marketing</td></tr>
-    <tr><td><span class="en">Loyalty / 50% live / big promo $</span><span class="zh">会员/5折上线/大促销钱</span></td><td>Louis</td></tr>
-    <tr><td><span class="en">Ad spend</span><span class="zh">广告费</span></td><td>Louis</td></tr>
-    <tr><td><span class="en">Brand change</span><span class="zh">改品牌</span></td><td>Louis</td></tr>
-    <tr><td>90-day BOGO</td><td><span class="en">Manager 👍 Slack</span><span class="zh">经理Slack👍</span></td></tr>
-  </table>
-
-  <div class="sec-title"><span class="en">Automated / support</span><span class="zh">自动/支持</span></div>
-  <div class="box box-auto">⚡ Ops-Reviews-#1 · 8AM low-star flag 00003 (silent if API blocked)</div>
-  <div class="box box-auto">⚡ Marketing-#1 Mon 9am Anson weekly track DM</div>
-  <div class="box box-auto">⚡ Marketing-#4 Daily 9am Anson walk DM</div>
-  <div class="box box-auto">⚡ Marketing-#2 Fri 4pm Anson week check · #3 Louis progress brief</div>
-  <div class="box box-auto">📊 Marketing KPI Sheet · living plan in wise_ops state</div>
-  <div class="box box-red"><strong>Phase 2 wait:</strong> QR page · Twilio · visit counter · Chowbus named 50/25/10 · Louis economics yes · GBP QPM 300</div>
-
-  <div class="sec-title"><span class="en">Sources</span><span class="zh">来源</span></div>
-  <table>
-    <tr><th>Source</th><th><span class="en">Took</span><span class="zh">取了什么</span></th></tr>
-    <tr><td>Louis handbook HTML</td><td><span class="en">Foundation · gates · KPI · multi-brand · ads gate</span><span class="zh">地基·门·KPI·多品牌·广告门</span></td></tr>
-    <tr><td>Anson Doc1 Plan</td><td>Rule of 3 · 50% · SMS · loyalty · win-back · metrics</td></tr>
-    <tr><td>Anson Doc2 SOP</td><td>4 FOH plays · exceptions · Slack procs</td></tr>
-    <tr><td>Anson Doc3 Checklist</td><td>Daily/weekly/monthly · red flags</td></tr>
-    <tr><td>Merged Plan V1.1</td><td><span class="en">One plan two layers</span><span class="zh">一个计划两层</span></td></tr>
-    <tr><td>WISE OPS living plan</td><td><span class="en">Daily/weekly social ops · Anson crons</span><span class="zh">日/周社媒运营·Anson定时</span></td></tr>
-  </table>
-  <div class="ask-brain"><strong>🧠 <span class="en">Ask Brain</span><span class="zh">问Brain</span>:</strong> <code>reviews all</code> · <code>rating 00003</code> · <code>promo list</code> · <code>gbp status</code> · <code>week done</code></div>
+<div class="box box-rule"><strong>1.</strong> <span class="en">Hermes never auto-publishes. Human posts after approval.</span><span class="zh">Hermes永不自动发布。人批后人发。</span></div>
+<div class="box box-rule"><strong>2.</strong> <span class="en">Offer / promo / public promise → Louis M1 before publish.</span><span class="zh">优惠/活动/公开承诺 → 发布前Louis M1。</span></div>
+<div class="box box-rule"><strong>3.</strong> <span class="en">Content = 3 designs. GM/Mkt picks 1. Max 2 revisions.</span><span class="zh">内容=3稿。GM/市场选1。最多改2次。</span></div>
+<div class="box box-rule"><strong>4.</strong> <span class="en">1–2★ and critical review replies → Louis. Food/injury/legal = immediate P0.</span><span class="zh">1–2星和严重评价 → Louis。食物/受伤/法律=立刻P0。</span></div>
+<div class="box box-rule"><strong>5.</strong> <span class="en">Never invent prices, dates, scarcity, awards, or testimonials.</span><span class="zh">永不编价格、日期、稀缺、奖项、好评。</span></div>
+<div class="box box-rule"><strong>6.</strong> <span class="en">Start from approved offer path, not a random caption idea.</span><span class="zh">从已批优惠路径开始，不从随机文案开始。</span></div>
+<div class="box box-rule"><strong>7.</strong> <span class="en">Platform-native copy. No one bland caption for all channels.</span><span class="zh">平台原生文案。不要全渠道同一句干文案。</span></div>
+<div class="box box-rule"><strong>8.</strong> <span class="en">Ad spend / paid launch → Louis M4 before money leaves.</span><span class="zh">广告花费/付费上线 → 钱出去前Louis M4。</span></div>
+<div class="box box-rule"><strong>9.</strong> <span class="en">Brain = record. Drive = original file. Slack = act. No duplicate task lists.</span><span class="zh">Brain=记录。Drive=原件。Slack=行动。不重复任务表。</span></div>
+<div class="box box-rule"><strong>10.</strong> <span class="en">Store numbers yes (00001–00005). No frozen live counts in this file.</span><span class="zh">写店号。本文件不写死实时数字。</span></div>
+<div class="box box-auto"><strong><span class="en">No secrets here.</span><span class="zh">无密钥。</span></strong> <span class="en">Live numbers = Brain / Slack / platform only.</span><span class="zh">数字只看Brain/Slack/平台。</span></div>
+<div class="box box-gate"><strong><span class="en">Success:</span><span class="zh">成功：</span></strong> <span class="en">ping for gate decisions, not "what is the process?"</span><span class="zh">找你拍板，不是问流程。</span></div>
 </div>
 
+<!-- ==================== KPI ==================== -->
+<div class="page" id="kpi">
+<div class="page-h">📈 KPI <span class="zh">指标</span></div>
+<div class="page-sub"><span class="en">Live numbers live outside this file. Link to truth, don't freeze.</span><span class="zh">实时数字不在本页写死。链接到真相源。</span></div>
+<div class="why"><strong><span class="en">Why:</span><span class="zh">为什么：</span></strong> <span class="en">Reviews, campaigns, and sales change daily. Hardcoding = guaranteed drift.</span><span class="zh">评价、活动、销售每天变。写死=必然过期。</span></div>
+
+<div class="sec-title"><span class="en">Live Sources</span><span class="zh">实时源</span></div>
+<table>
+<tr><th><span class="en">KPI</span><span class="zh">指标</span></th><th><span class="en">Source</span><span class="zh">来源</span></th><th><span class="en">Proof</span><span class="zh">证据</span></th></tr>
+<tr><td><span class="en">Open review replies</span><span class="zh">待回评价</span></td><td>Brain <code>reviews_raw</code></td><td><code>reviews 00003</code> · <code>any bad reviews?</code></td></tr>
+<tr><td><span class="en">Campaign status</span><span class="zh">活动状态</span></td><td>Brain <code>content_campaigns</code></td><td><code>campaign status</code></td></tr>
+<tr><td><span class="en">Marketing tickets</span><span class="zh">市场工单</span></td><td>Brain <code>tickets</code> · #05-marketing digest</td><td><code>marketing digest</code> · <code>open marketing tickets</code></td></tr>
+<tr><td><span class="en">Sales proxy</span><span class="zh">销售代理</span></td><td><code>chowbus_raw</code></td><td><code>sales 00003 last 7 days</code></td></tr>
+<tr><td><span class="en">Video / post proof</span><span class="zh">视频/帖子证据</span></td><td>Drive + platform link/screenshot</td><td><span class="en">thread proof</span><span class="zh">线程证据</span></td></tr>
+<tr><td><span class="en">GBP quota</span><span class="zh">GBP额度</span></td><td>google-business-profile-reviews</td><td><code>GBP quota</code></td></tr>
+</table>
+
+<div class="sec-title"><span class="en">Proof Rules</span><span class="zh">证据规则</span></div>
+<div class="box box-auto"><strong>1.</strong> <span class="en">Proof only from Slack / Brain / Drive / platform — never invented.</span><span class="zh">证据只来自Slack/Brain/Drive/平台 — 不编造。</span></div>
+<div class="box box-auto"><strong>2.</strong> <span class="en">If a number changes daily, it lives outside this file.</span><span class="zh">每天变的数字不在本文件里。</span></div>
+<div class="box box-auto"><strong>3.</strong> <span class="en">Monthly KPI report: 4 questions (improved / not / repeating / decision needed).</span><span class="zh">月KPI报告：4个问题（变好/没好/重复/需决策）。</span></div>
+<div class="box box-rule"><strong><span class="en">UNKNOWN ok:</span><span class="zh">不知道可以说：</span></strong> <span class="en">exact ROI · review pull if GBP blocked — never invent</span><span class="zh">精确ROI · GBP阻塞时评价拉取 — 永不编</span></div>
+
+<div class="ask-brain"><strong>🧠 Ask Brain:</strong> <code>reviews 00003</code> · <code>campaign status</code> · <code>marketing digest</code> · <code>sales 00003 last 7 days</code> · <code>GBP quota</code></div>
 </div>
-<div class="footer">Wiserise Hospitality Group · Marketing Department Handbook V1.2 FP · 90-Day Roadmap + Foundation + Rule of 3 + Floor + Checklist · EN/中文 · Verified 2026-08-07 · Hermes Artifact</div>
+
+
+</div>
+<div class="footer">Wiserise · Marketing Department Roadmap · v1.1 · 2026-08-08 · Map→Cadence→Stages→30Days→Rules→KPI · Reference sibling: People LATEST / Ops v1.1 · Change type: content update · Cycle ends 2026-09-07 · wiserise-department-roadmap</div>
 <script>
-function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
-function goTab(i){document.querySelectorAll('.tab')[i].click()}
-function setLang(lang,btn){document.body.className='lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-document.addEventListener('keydown',e=>{const tabs=[...document.querySelectorAll('.tab')];const i=tabs.indexOf(document.querySelector('.tab.active'));if(e.key==='ArrowRight'&&i<tabs.length-1)tabs[i+1].click();if(e.key==='ArrowLeft'&&i>0)tabs[i-1].click()});
+function setLang(lang,el){document.body.className='lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('on')});if(el)el.classList.add('on')}
+function go(id,el){
+  var page=document.getElementById(id);
+  if(!page){console.warn('missing page',id);return false;}
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on');});
+  page.classList.add('on');
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on');});
+  var tab=el&&el.classList&&el.classList.contains('tab')?el:document.querySelector('.tab[href="#'+id+'"]');
+  if(tab) tab.classList.add('on');
+  try{if(history.replaceState)history.replaceState(null,'','#'+id);}catch(e){}
+  window.scrollTo(0,0);
+  return false;
+}
+function goPage(id){return go(id,document.querySelector('.tab[href="#'+id+'"]'));}
+(function(){
+  function sync(){
+    var h=(location.hash||'#map').replace(/^#/,'').split('/')[0]||'map';
+    if(!document.getElementById(h)) h='map';
+    go(h,document.querySelector('.tab[href="#'+h+'"]'));
+  }
+  window.addEventListener('hashchange',sync);
+  sync();
+})();
 </script>
 </body>
 </html>
