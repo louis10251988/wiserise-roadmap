@@ -79,7 +79,7 @@ padding:18px 18px 14px;z-index:99;pointer-events:none;font-family:'DM Sans',sans
     <div class="eyebrow">Anson · Live Build · 2026-08-24</div>
     <h1>Skill Tree</h1>
     <div class="sub">Hover any skill for its full card · yellow = you built it</div>
-    <div class="playerbar"><span>Classes: <b>2</b></span><span>&#9733; Your skills: <b>14</b></span><span>Highest level: <b>Lv 4</b></span><span>Auto-refresh: <b>daily 3:30 AM</b></span></div>
+    <div class="playerbar"><span>Classes: <b>2</b></span><span>&#9733; Your skills: <b>21</b></span><span>Highest level: <b>Lv 4</b></span><span>Auto-refresh: <b>daily 3:30 AM</b></span></div>
     <div class="legend"><span class="l0">NEW</span><span class="l1">Lv1 IDEA</span><span class="l2">Lv2 WORKING</span><span class="l3">Lv3 PROVEN</span><span class="l4">Lv4 AUTOMATED</span><span class="l5">Lv5 SELF-SUSTAINING</span></div>
   </div>
   <section class="class">
@@ -87,21 +87,21 @@ padding:18px 18px 14px;z-index:99;pointer-events:none;font-family:'DM Sans',sans
     <div class="eyebrow">CLASS 01 · SKILL TREE</div>
     <h2>Marketing</h2>
     <div class="cmission">Get noticed → get visited → keep them coming back.</div>
-    <div class="cstats"><span>31 skills</span><span class="dotsep">·</span><span><b>9</b> authored by you</span><span class="dotsep">·</span><span>3 branches</span></div>
+    <div class="cstats"><span>31 skills</span><span class="dotsep">·</span><span><b>16</b> authored by you</span><span class="dotsep">·</span><span>3 branches</span></div>
   </div>
   <div class="trunk"></div>
   <div class="rail"></div>
   <div class="bcols"><div class="branch">
   <div class="bnode"><div class="bdot"><span>RE</span></div>
-  <div class="btxt"><div class="bname">Retention</div><div class="bmission">Keep current guests coming back — reviews, replies, service recovery.</div><div class="bcount">7 skills · 2 yours</div></div></div>
-  <ul class="chain"><li class="skill" data-name="Retentionworkflow" data-type="ACTIVE" data-lv="3" data-desc="Reviews -&gt; psychology reply draft -&gt; Slack approval -&gt; Google -&gt; tracking." data-trigger="new review alert" data-req="marketing@ token" data-gate="human approves reply in Slack" data-proof="reply posted, 48h SLA" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0">
+  <div class="btxt"><div class="bname">Retention</div><div class="bmission">Keep current guests coming back — reviews, replies, service recovery.</div><div class="bcount">7 skills · 5 yours</div></div></div>
+  <ul class="chain"><li class="skill mine" data-name="Retentionworkflow" data-type="ACTIVE" data-lv="3" data-desc="Reviews -&gt; psychology reply draft -&gt; Slack approval -&gt; Google -&gt; tracking." data-trigger="new review alert" data-req="marketing@ token" data-gate="human approves reply in Slack" data-proof="reply posted, 48h SLA" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="1">
   <div class="dot"><span>CO</span></div>
-  <div class="sinfo"><div class="sname">Core Engine</div>
+  <div class="sinfo"><div class="sname">Core Engine<span class="star">&#9733;</span></div>
   <div class="smeta">ACTIVE · LV 3 · OPS</div></div>
   <div class="slv lv3">LV 3</div>
-</li><li class="skill" data-name="Google Reviews" data-type="ACTIVE" data-lv="3" data-desc="Store-facing morning low-star (&lt;=4) review watch for GMs." data-trigger="daily 8 AM per store" data-req="GBP quota / state files" data-gate="none - flags only" data-proof="morning watch post" data-owner="Anson" data-verified="2026-08-22" data-bot="OPS" data-mine="0">
+</li><li class="skill mine" data-name="Google Reviews" data-type="ACTIVE" data-lv="3" data-desc="Store-facing morning low-star (&lt;=4) review watch for GMs." data-trigger="daily 8 AM per store" data-req="GBP quota / state files" data-gate="none - flags only" data-proof="morning watch post" data-owner="Anson" data-verified="2026-08-22" data-bot="OPS" data-mine="1">
   <div class="dot"><span>LO</span></div>
-  <div class="sinfo"><div class="sname">Low-Star Watch</div>
+  <div class="sinfo"><div class="sname">Low-Star Watch<span class="star">&#9733;</span></div>
   <div class="smeta">ACTIVE · LV 3 · OPS</div></div>
   <div class="slv lv3">LV 3</div>
 </li><li class="skill mine" data-name="Reply Engine" data-type="ACTIVE" data-lv="3" data-desc="Drafts one specific, fact-checked reply per review or comment on any platform and routes it to the right approver." data-trigger="new review/comment alert, reply ask, APPROVE/EDIT/SKIP command" data-req="platform access (Google via wiserise-gbp-access; FB/IG via Composio; Yelp capture), Brain reviews data" data-gate="Anson approves normal 3–5★; Louis approves 1–2★ and serious; never auto-publish" data-proof="reply posted + Brain row (status, approver, timestamps, API result)" data-owner="Anson" data-verified="2026-08-24" data-bot="MKTG" data-mine="1">
@@ -109,9 +109,9 @@ padding:18px 18px 14px;z-index:99;pointer-events:none;font-family:'DM Sans',sans
   <div class="sinfo"><div class="sname">Reply Engine<span class="star">&#9733;</span></div>
   <div class="smeta">ACTIVE · LV 3 · MKTG</div></div>
   <div class="slv lv3">LV 3</div>
-</li><li class="skill" data-name="Gbp Access" data-type="PASSIVE" data-lv="2" data-desc="Owns how Wiserise authenticates to Google Business Profile and how review pulls happen (or stay blocked) per quota." data-trigger="GBP/token/quota ask, scheduled 8AM/8PM pulls" data-req="GCP project wiserise-newstore, business.manage scope, owner-mailbox consent" data-gate="Louis signs each owner-mailbox OAuth; no listing changes without owner" data-proof="successful pull logged to data dir + Brain" data-owner="Anson" data-verified="2026-08-24" data-bot="MKTG" data-mine="0">
+</li><li class="skill mine" data-name="Gbp Access" data-type="PASSIVE" data-lv="2" data-desc="Owns how Wiserise authenticates to Google Business Profile and how review pulls happen (or stay blocked) per quota." data-trigger="GBP/token/quota ask, scheduled 8AM/8PM pulls" data-req="GCP project wiserise-newstore, business.manage scope, owner-mailbox consent" data-gate="Louis signs each owner-mailbox OAuth; no listing changes without owner" data-proof="successful pull logged to data dir + Brain" data-owner="Anson" data-verified="2026-08-24" data-bot="MKTG" data-mine="1">
   <div class="dot"><span>GB</span></div>
-  <div class="sinfo"><div class="sname">GBP Access</div>
+  <div class="sinfo"><div class="sname">GBP Access<span class="star">&#9733;</span></div>
   <div class="smeta">PASSIVE · LV 2 · MKTG</div></div>
   <div class="slv lv2">LV 2</div>
 </li><li class="skill mine" data-name="Guest Feedback" data-type="ACTIVE" data-lv="2" data-desc="Triage guest feedback across channels and, when sales drop, run the survey-landing-page diagnosis to find why." data-trigger="feedback triage ask, &quot;why did sales drop&quot;, survey page ask" data-req="Brain data + live landing-page deployment (Vercel)" data-gate="coupon terms + email/PII handling = Louis; public replies via Reply Engine gates" data-proof="survey responses captured + analysis + one recovery test result in Brain" data-owner="Anson" data-verified="2026-08-24" data-bot="MKTG" data-mine="1">
@@ -132,15 +132,15 @@ padding:18px 18px 14px;z-index:99;pointer-events:none;font-family:'DM Sans',sans
 </li></ul>
 </div><div class="branch">
   <div class="bnode"><div class="bdot"><span>AC</span></div>
-  <div class="btxt"><div class="bname">Acquisition</div><div class="bmission">Get more new customers — Google Ads, PMax, paid channels.</div><div class="bcount">3 skills · 0 yours</div></div></div>
-  <ul class="chain"><li class="skill" data-name="Acquisitionsworkflow" data-type="ACTIVE" data-lv="3" data-desc="Google Ads + paid channels. Niche-discovery doctrine: broad -&gt; cuisine -&gt; niche tiers." data-trigger="ads build/audit ask" data-req="Composio googleads connection" data-gate="Louis approves any spend change" data-proof="campaign IDs + verified metrics" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0">
+  <div class="btxt"><div class="bname">Acquisition</div><div class="bmission">Get more new customers — Google Ads, PMax, paid channels.</div><div class="bcount">3 skills · 2 yours</div></div></div>
+  <ul class="chain"><li class="skill mine" data-name="Acquisitionsworkflow" data-type="ACTIVE" data-lv="3" data-desc="Google Ads + paid channels. Niche-discovery doctrine: broad -&gt; cuisine -&gt; niche tiers." data-trigger="ads build/audit ask" data-req="Composio googleads connection" data-gate="Louis approves any spend change" data-proof="campaign IDs + verified metrics" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="1">
   <div class="dot"><span>CO</span></div>
-  <div class="sinfo"><div class="sname">Core Engine</div>
+  <div class="sinfo"><div class="sname">Core Engine<span class="star">&#9733;</span></div>
   <div class="smeta">ACTIVE · LV 3 · OPS</div></div>
   <div class="slv lv3">LV 3</div>
-</li><li class="skill" data-name="Pmax Campaign Ops" data-type="ACTIVE" data-lv="2" data-desc="Audit and fix PMax campaigns built by humans in the Ads UI." data-trigger="PMax audit ask" data-req="Ads UI access" data-gate="spend changes = Louis" data-proof="audit findings" data-owner="Anson" data-verified="2026-08-21" data-bot="OPS" data-mine="0">
+</li><li class="skill mine" data-name="Pmax Campaign Ops" data-type="ACTIVE" data-lv="2" data-desc="Audit and fix PMax campaigns built by humans in the Ads UI." data-trigger="PMax audit ask" data-req="Ads UI access" data-gate="spend changes = Louis" data-proof="audit findings" data-owner="Anson" data-verified="2026-08-21" data-bot="OPS" data-mine="1">
   <div class="dot"><span>PM</span></div>
-  <div class="sinfo"><div class="sname">PMax Ops</div>
+  <div class="sinfo"><div class="sname">PMax Ops<span class="star">&#9733;</span></div>
   <div class="smeta">ACTIVE · LV 2 · OPS</div></div>
   <div class="slv lv2">LV 2</div>
 </li><li class="skill" data-name="Acquisition Workflow" data-type="ACTIVE" data-lv="0" data-desc="Use for customer acquisition marketing: Google Ads, Meta/Facebook Ads, Instagram Ads, and other paid or direct channels that bring new guests in at a steady rate." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
@@ -151,15 +151,15 @@ padding:18px 18px 14px;z-index:99;pointer-events:none;font-family:'DM Sans',sans
 </li></ul>
 </div><div class="branch">
   <div class="bnode"><div class="bdot"><span>AW</span></div>
-  <div class="btxt"><div class="bname">Awareness</div><div class="bmission">Brand awareness and outreach — social content, video, discovery.</div><div class="bcount">21 skills · 7 yours</div></div></div>
-  <ul class="chain"><li class="skill" data-name="Marketing" data-type="ACTIVE" data-lv="4" data-desc="Marketing class hub - handbooks, plans, promos, gates, branch routing." data-trigger="any marketing ask" data-req="-" data-gate="money/brand = Louis" data-proof="work product in #05" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0">
+  <div class="btxt"><div class="bname">Awareness</div><div class="bmission">Brand awareness and outreach — social content, video, discovery.</div><div class="bcount">21 skills · 9 yours</div></div></div>
+  <ul class="chain"><li class="skill mine" data-name="Marketing" data-type="ACTIVE" data-lv="4" data-desc="Marketing class hub - handbooks, plans, promos, gates, branch routing." data-trigger="any marketing ask" data-req="-" data-gate="money/brand = Louis" data-proof="work product in #05" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="1">
   <div class="dot"><span>HU</span></div>
-  <div class="sinfo"><div class="sname">Hub</div>
+  <div class="sinfo"><div class="sname">Hub<span class="star">&#9733;</span></div>
   <div class="smeta">ACTIVE · LV 4 · OPS</div></div>
   <div class="slv lv4">LV 4</div>
-</li><li class="skill" data-name="Awarenessworkflow" data-type="ACTIVE" data-lv="2" data-desc="Organic FB/social creatives from the Gangnam brand kit, composite builds, vision QA gate." data-trigger="make post / creative ask" data-req="brand kit + real store photo" data-gate="vision QA must pass before ship" data-proof="delivered PNG + caption" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0">
+</li><li class="skill mine" data-name="Awarenessworkflow" data-type="ACTIVE" data-lv="2" data-desc="Organic FB/social creatives from the Gangnam brand kit, composite builds, vision QA gate." data-trigger="make post / creative ask" data-req="brand kit + real store photo" data-gate="vision QA must pass before ship" data-proof="delivered PNG + caption" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="1">
   <div class="dot"><span>CO</span></div>
-  <div class="sinfo"><div class="sname">Core Engine</div>
+  <div class="sinfo"><div class="sname">Core Engine<span class="star">&#9733;</span></div>
   <div class="smeta">ACTIVE · LV 2 · OPS</div></div>
   <div class="slv lv2">LV 2</div>
 </li><li class="skill mine" data-name="Daily Digest" data-type="ACTIVE" data-lv="4" data-desc="One-glance morning report of all marketing work in #05-marketing." data-trigger="daily 8:00 AM cron" data-req="Brain + Gmail data" data-gate="none - advisory" data-proof="digest post" data-owner="Anson" data-verified="2026-08-14" data-bot="OPS" data-mine="1">
