@@ -1,75 +1,334 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anson &middot; Skill Tree</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+<title>Anson · Skill Tree</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0d0d0d;color:#f8f8f7;font-family:'DM Sans','Segoe UI',system-ui,sans-serif;padding:34px 20px 26px;display:flex;flex-direction:column;align-items:center}
-.hdr{text-align:center;margin-bottom:6px}
-.hdr h1{font-size:36px;letter-spacing:3px;text-transform:uppercase;background:linear-gradient(90deg,#f84331,#ff8769);-webkit-background-clip:text;background-clip:text;color:transparent;font-family:Anton,sans-serif}
-.hdr .sub{color:#858481;font-size:14px;margin-top:6px}
-.playerbar{display:flex;justify-content:center;gap:30px;margin:20px 0 12px;font-size:13px;flex-wrap:wrap}
-.playerbar b{color:#ff8769}
-.legend{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:24px}
-.legend span{font-size:11px;padding:4px 12px;border-radius:20px;border:1px solid #333;color:#858481}
-.legend .l1{border-color:#666;color:#aaa}.legend .l2{border-color:#4a7a2a;color:#8fce5a}.legend .l3{border-color:#2a6fa8;color:#5ab0e8}.legend .l4{border-color:#8a5a2a;color:#e8a45a}.legend .l5{border-color:#8a2a6a;color:#e85ab0}
-.mapwrap{border:1px solid #2c2c2b;border-radius:14px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.55)}
-svg{display:block}
-.node{cursor:pointer}
-.node:hover circle:nth-of-type(2){stroke:#FFFFFF;stroke-width:4}
-#tip{position:fixed;display:none;width:360px;background:#1a1a19;border:1px solid #2c2c2b;border-radius:12px;
-padding:18px 18px 14px;z-index:99;pointer-events:none;font-family:'DM Sans',sans-serif;box-shadow:0 10px 34px rgba(0,0,0,.65)}
+body{background:#0b0f14;background-image:radial-gradient(ellipse 1200px 500px at 50% -100px,#131a24 0%,transparent 60%);
+color:#f8f8f7;font-family:'DM Sans','Segoe UI',system-ui,sans-serif;padding:44px 28px 40px;display:flex;flex-direction:column;align-items:center;gap:44px}
+.page{width:100%;max-width:1360px;display:flex;flex-direction:column;gap:44px}
+/* header */
+.hdr{text-align:center}
+.hdr .eyebrow{font-size:11px;letter-spacing:4px;color:#858481;text-transform:uppercase;margin-bottom:10px}
+.hdr h1{font-size:40px;letter-spacing:3px;text-transform:uppercase;background:linear-gradient(90deg,#f84331,#ff8769);-webkit-background-clip:text;background-clip:text;color:transparent;font-family:Anton,sans-serif}
+.hdr .sub{color:#858481;font-size:13.5px;margin-top:8px}
+.playerbar{display:flex;justify-content:center;gap:26px;margin-top:18px;font-size:12.5px;color:#a9a8a5;flex-wrap:wrap}
+.playerbar b{color:#ff8769;font-weight:700}
+/* legend */
+.legend{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+.legend span{font-size:10.5px;padding:3px 11px;border-radius:20px;border:1px solid #2b2b2a;color:#858481}
+.l0{border-color:#444;color:#999}.l1{border-color:#666;color:#aaa}.l2{border-color:#4a7a2a;color:#8fce5a}.l3{border-color:#2a6fa8;color:#5ab0e8}.l4{border-color:#8a5a2a;color:#e8a45a}.l5{border-color:#8a2a6a;color:#e85ab0}
+/* class sections */
+.class{background:#10151c;border:1px solid #1f2733;border-radius:18px;padding:34px 34px 30px;box-shadow:0 14px 44px rgba(0,0,0,.45)}
+.chead{text-align:center;margin-bottom:26px}
+.eyebrow{font-size:10.5px;letter-spacing:4px;color:#5d6b7d;text-transform:uppercase;margin-bottom:8px}
+.chead h2{font-size:30px;letter-spacing:2px;text-transform:uppercase;font-family:Anton,sans-serif;color:#f2f5f8}
+.chead .cmission{color:#a9b2bf;font-size:13.5px;margin-top:6px}
+.cstats{display:flex;justify-content:center;gap:10px;margin-top:12px;font-size:12px;color:#8a93a1}
+.cstats b{color:#f8c95a}
+.dotsep{color:#3a4451}
+.bcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.branch{background:#0d1219;border:1px solid #1c2530;border-radius:14px;padding:20px 20px 16px;display:flex;flex-direction:column}
+.bhead{padding-bottom:14px;border-bottom:1px solid #1c2530;margin-bottom:6px}
+.bname{font-size:17px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#f3d34c;font-family:Anton,sans-serif}
+.bmission{font-size:12px;color:#93a0af;line-height:1.5;margin-top:5px}
+.bcount{font-size:11px;color:#5d6b7d;margin-top:6px}
+/* skill rows — clean straight chain */
+.chain{display:flex;flex-direction:column}
+.skill{display:flex;align-items:center;gap:14px;padding:11px 10px;border-radius:10px;cursor:pointer;position:relative}
+.skill:hover{background:#141b24}
+.dot{width:42px;height:42px;border-radius:50%;background:#31404f;border:2px solid #4a5a6a;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700;color:#dfe6ec;letter-spacing:.5px}
+.skill.mine .dot{background:#f3d34c;border-color:#ffe9a8;color:#0b1219}
+.sinfo{flex:1;min-width:0}
+.sname{font-size:13.5px;font-weight:700;color:#eef2f5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.smeta{font-size:10.5px;color:#7c8896;margin-top:2px;letter-spacing:.4px}
+.star{color:#f8c95a;margin-left:6px;font-size:11px}
+.slv{font-size:9.5px;font-weight:700;padding:3px 9px;border-radius:12px;white-space:nowrap;letter-spacing:.5px}
+.slv.lv0{background:#232a33;color:#8a93a1}.slv.lv1{background:#2e2e2e;color:#bbb}.slv.lv2{background:#22350f;color:#8fce5a}.slv.lv3{background:#0f2a42;color:#5ab0e8}.slv.lv4{background:#3a2410;color:#e8a45a}.slv.lv5{background:#3a0f2e;color:#e85ab0}
+.conn{width:2px;height:14px;background:#233042;margin:0 auto}
+.conn.mine{background:#8f7c2f}
+.conn.start{background:transparent;height:6px}
+/* footer */
+.foot{text-align:center;color:#5d6b7d;font-size:11.5px;line-height:1.8;padding-bottom:6px}
+.foot b{color:#ff8769}
+/* MapleStory tooltip */
+#tip{position:fixed;display:none;width:360px;background:#161b22;border:1px solid #2c3644;border-radius:12px;
+padding:18px 18px 14px;z-index:99;pointer-events:none;font-family:'DM Sans',sans-serif;box-shadow:0 14px 44px rgba(0,0,0,.7)}
 #tip .ttop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-#tip .tname{font-size:17px;font-weight:700;line-height:1.25}
-#tip .lv{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}
-#tip .lv0{background:#262626;color:#999}#tip .lv1{background:#333;color:#bbb}#tip .lv2{background:#22350f;color:#8fce5a}#tip .lv3{background:#0f2a42;color:#5ab0e8}#tip .lv4{background:#3a2410;color:#e8a45a}#tip .lv5{background:#3a0f2e;color:#e85ab0}
-#tip .type{display:inline-block;font-size:10.5px;letter-spacing:1px;font-weight:700;margin:8px 0 4px;padding:2px 9px;border-radius:4px;text-transform:uppercase}
+#tip .tname{font-size:16px;font-weight:700;line-height:1.3}
+#tip .tlv{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}
+#tip .tlv.lv0{background:#232a33;color:#8a93a1}#tip .tlv.lv1{background:#2e2e2e;color:#bbb}#tip .tlv.lv2{background:#22350f;color:#8fce5a}#tip .tlv.lv3{background:#0f2a42;color:#5ab0e8}#tip .tlv.lv4{background:#3a2410;color:#e8a45a}#tip .tlv.lv5{background:#3a0f2e;color:#e85ab0}
+#tip .type{display:inline-block;font-size:10px;letter-spacing:1px;font-weight:700;margin:8px 0 2px;padding:2px 9px;border-radius:4px;text-transform:uppercase}
 #tip .active{background:#3a1010;color:#ff8769;border:1px solid #5a2020}
 #tip .passive{background:#102a3a;color:#5ab0e8;border:1px solid #20505a}
 #tip .star{color:#f8c95a;font-size:11px;margin-left:8px}
-#tip .tdesc{color:#c9c8c5;font-size:13px;line-height:1.5;margin:6px 0 10px}
-#tip .divider{height:1px;background:#2c2c2b;margin:10px 0}
-#tip .row{display:flex;gap:8px;font-size:12px;line-height:1.6}
-#tip .row .k{color:#858481;min-width:86px;flex-shrink:0}
-#tip .row .v{color:#e8e7e4}
-.foot{text-align:center;color:#858481;font-size:12px;margin-top:26px;line-height:1.7}
-.foot b{color:#ff8769}
+#tip .tdesc{color:#c6cdd6;font-size:12.5px;line-height:1.55;margin:7px 0 10px}
+#tip .divider{height:1px;background:#232d3a;margin:10px 0}
+#tip .row{display:flex;gap:8px;font-size:11.5px;line-height:1.65}
+#tip .row .k{color:#7c8896;min-width:82px;flex-shrink:0}
+#tip .row .v{color:#dfe6ec}
 </style></head><body>
-<div class="hdr"><h1>&#9876; Anson &middot; Skill Tree</h1><div class="sub">Live build &middot; 2026-08-23 &middot; hover any node for its skill card</div></div>
-<div class="playerbar">
-<span>Skills on map: <b>36</b></span>
-<span>&#9733; Your skills: <b>14</b></span>
-<span>Branches: <b>3</b></span>
-<span>Highest level: <b>Lv 4</b></span>
-<span>Auto-refresh: <b>daily 3:30 AM</b></span>
+<div class="page">
+  <div class="hdr">
+    <div class="eyebrow">Anson · Live Build · 2026-08-23</div>
+    <h1>Skill Tree</h1>
+    <div class="sub">Hover any skill for its full card · yellow = you built it</div>
+    <div class="playerbar"><span>Classes: <b>2</b></span><span>&#9733; Your skills: <b>14</b></span><span>Highest level: <b>Lv 4</b></span><span>Auto-refresh: <b>daily 3:30 AM</b></span></div>
+    <div class="legend"><span class="l0">NEW</span><span class="l1">Lv1 IDEA</span><span class="l2">Lv2 WORKING</span><span class="l3">Lv3 PROVEN</span><span class="l4">Lv4 AUTOMATED</span><span class="l5">Lv5 SELF-SUSTAINING</span></div>
+  </div>
+  <section class="class">
+  <div class="chead">
+    <div class="eyebrow">CLASS 01 · SKILL TREE</div>
+    <h2>Marketing</h2>
+    <div class="cmission">Get noticed → get visited → keep them coming back.</div>
+    <div class="cstats"><span>36 skills</span><span class="dotsep">·</span><span><b>7</b> authored by you</span><span class="dotsep">·</span><span>3 branches</span></div>
+  </div>
+  <div class="bcols"><div class="branch">
+  <div class="bhead"><div class="bname">Retention</div><div class="bmission">Keep current guests coming back — reviews, replies, service recovery.</div><div class="bcount">9 skills · 3 yours</div></div>
+  <div class="chain"><div class="conn start"></div><div class="skill" data-name="Retentionworkflow" data-type="ACTIVE" data-lv="3" data-desc="Reviews -&gt; psychology reply draft -&gt; Slack approval -&gt; Google -&gt; tracking." data-trigger="new review alert" data-req="marketing@ token" data-gate="human approves reply in Slack" data-proof="reply posted, 48h SLA" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0">
+  <div class="dot"><span>CO</span></div>
+  <div class="sinfo"><div class="sname">Core Engine</div>
+  <div class="smeta">ACTIVE · LV 3 · OPS</div></div>
+  <div class="slv lv3">LV 3</div>
+</div><div class="conn"></div><div class="skill" data-name="Google Reviews" data-type="ACTIVE" data-lv="3" data-desc="Store-facing morning low-star (&lt;=4) review watch for GMs." data-trigger="daily 8 AM per store" data-req="GBP quota / state files" data-gate="none - flags only" data-proof="morning watch post" data-owner="Anson" data-verified="2026-08-22" data-bot="OPS" data-mine="0">
+  <div class="dot"><span>LO</span></div>
+  <div class="sinfo"><div class="sname">Low-Star Watch</div>
+  <div class="smeta">ACTIVE · LV 3 · OPS</div></div>
+  <div class="slv lv3">LV 3</div>
+</div><div class="conn mine"></div><div class="skill mine" data-name="Google Review Reply" data-type="ACTIVE" data-lv="0" data-desc="Use for Wiserise Google review replies and tracking." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="1">
+  <div class="dot"><span>GO</span></div>
+  <div class="sinfo"><div class="sname">Google Reply<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn mine"></div><div class="skill mine" data-name="Yelp Review Reply" data-type="ACTIVE" data-lv="0" data-desc="Use for Wiserise Yelp review replies and tracking." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="1">
+  <div class="dot"><span>YE</span></div>
+  <div class="sinfo"><div class="sname">Yelp Reply<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn mine"></div><div class="skill mine" data-name="Review Intelligence" data-type="ACTIVE" data-lv="0" data-desc="Collect, reply to, and analyze customer reviews for Wiserise" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="1">
+  <div class="dot"><span>RE</span></div>
+  <div class="sinfo"><div class="sname">Review Intel<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn mine"></div><div class="skill" data-name="Review Contests" data-type="ACTIVE" data-lv="0" data-desc="Use for monthly server contests based on customer reviews." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0">
+  <div class="dot"><span>CO</span></div>
+  <div class="sinfo"><div class="sname">Contests</div>
+  <div class="smeta">ACTIVE · NEW · MKTG</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Google Business Profile Reviews" data-type="ACTIVE" data-lv="0" data-desc="Pull/manage Google Business Profile reviews for Wiserise multi-location restaurants. Covers account mapping (marketing@ vs louis@), GCP project/quota (Basic Access when QPM=0), OAuth tokens, and revie" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>GB</span></div>
+  <div class="sinfo"><div class="sname">GBP Reviews</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Google Business Profile" data-type="ACTIVE" data-lv="0" data-desc="Pull/manage Google Business Profile (GBP) reviews for Wiserise stores. Use when Louis asks for Google reviews, GBP, My Business, store ratings, or owner Google login for listings." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>GB</span></div>
+  <div class="sinfo"><div class="sname">GBP</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Retention Workflow" data-type="ACTIVE" data-lv="0" data-desc="Use for customer retention marketing: reviews, replies, service recovery, reputation, and keeping guests happy so they come back. ReviewFlowz-style workflow across Google, Yelp, Facebook, Instagram." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>LE</span></div>
+  <div class="sinfo"><div class="sname">Legacy</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div></div>
+</div><div class="branch">
+  <div class="bhead"><div class="bname">Acquisition</div><div class="bmission">Get more new customers — Google Ads, PMax, paid channels.</div><div class="bcount">3 skills · 0 yours</div></div>
+  <div class="chain"><div class="conn start"></div><div class="skill" data-name="Acquisitionsworkflow" data-type="ACTIVE" data-lv="3" data-desc="Google Ads + paid channels. Niche-discovery doctrine: broad -&gt; cuisine -&gt; niche tiers." data-trigger="ads build/audit ask" data-req="Composio googleads connection" data-gate="Louis approves any spend change" data-proof="campaign IDs + verified metrics" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0">
+  <div class="dot"><span>CO</span></div>
+  <div class="sinfo"><div class="sname">Core Engine</div>
+  <div class="smeta">ACTIVE · LV 3 · OPS</div></div>
+  <div class="slv lv3">LV 3</div>
+</div><div class="conn"></div><div class="skill" data-name="Pmax Campaign Ops" data-type="ACTIVE" data-lv="2" data-desc="Audit and fix PMax campaigns built by humans in the Ads UI." data-trigger="PMax audit ask" data-req="Ads UI access" data-gate="spend changes = Louis" data-proof="audit findings" data-owner="Anson" data-verified="2026-08-21" data-bot="OPS" data-mine="0">
+  <div class="dot"><span>PM</span></div>
+  <div class="sinfo"><div class="sname">PMax Ops</div>
+  <div class="smeta">ACTIVE · LV 2 · OPS</div></div>
+  <div class="slv lv2">LV 2</div>
+</div><div class="conn"></div><div class="skill" data-name="Acquisition Workflow" data-type="ACTIVE" data-lv="0" data-desc="Use for customer acquisition marketing: Google Ads, Meta/Facebook Ads, Instagram Ads, and other paid or direct channels that bring new guests in at a steady rate." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>LE</span></div>
+  <div class="sinfo"><div class="sname">Legacy</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div></div>
+</div><div class="branch">
+  <div class="bhead"><div class="bname">Awareness</div><div class="bmission">Brand awareness and outreach — social content, video, discovery.</div><div class="bcount">24 skills · 4 yours</div></div>
+  <div class="chain"><div class="conn start"></div><div class="skill" data-name="Marketing" data-type="ACTIVE" data-lv="4" data-desc="Marketing class hub - handbooks, plans, promos, gates, branch routing." data-trigger="any marketing ask" data-req="-" data-gate="money/brand = Louis" data-proof="work product in #05" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0">
+  <div class="dot"><span>HU</span></div>
+  <div class="sinfo"><div class="sname">Hub</div>
+  <div class="smeta">ACTIVE · LV 4 · OPS</div></div>
+  <div class="slv lv4">LV 4</div>
+</div><div class="conn"></div><div class="skill" data-name="Awarenessworkflow" data-type="ACTIVE" data-lv="2" data-desc="Organic FB/social creatives from the Gangnam brand kit, composite builds, vision QA gate." data-trigger="make post / creative ask" data-req="brand kit + real store photo" data-gate="vision QA must pass before ship" data-proof="delivered PNG + caption" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0">
+  <div class="dot"><span>CO</span></div>
+  <div class="sinfo"><div class="sname">Core Engine</div>
+  <div class="smeta">ACTIVE · LV 2 · OPS</div></div>
+  <div class="slv lv2">LV 2</div>
+</div><div class="conn mine"></div><div class="skill mine" data-name="Daily Digest" data-type="ACTIVE" data-lv="4" data-desc="One-glance morning report of all marketing work in #05-marketing." data-trigger="daily 8:00 AM cron" data-req="Brain + Gmail data" data-gate="none - advisory" data-proof="digest post" data-owner="Anson" data-verified="2026-08-14" data-bot="OPS" data-mine="1">
+  <div class="dot"><span>DA</span></div>
+  <div class="sinfo"><div class="sname">Daily Digest<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · LV 4 · OPS</div></div>
+  <div class="slv lv4">LV 4</div>
+</div><div class="conn mine"></div><div class="skill mine" data-name="Auto Skill Dojo Anson Marketing" data-type="ACTIVE" data-lv="3" data-desc="Use for Anson&#x27;s Ops/Marketing workflow pattern detection." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="OPS" data-mine="1">
+  <div class="dot"><span>DO</span></div>
+  <div class="sinfo"><div class="sname">Dojo<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · LV 3 · OPS</div></div>
+  <div class="slv lv3">LV 3</div>
+</div><div class="conn mine"></div><div class="skill" data-name="Social Copy" data-type="ACTIVE" data-lv="0" data-desc="Use when an approved offer needs social copy." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0">
+  <div class="dot"><span>SO</span></div>
+  <div class="sinfo"><div class="sname">Social Copy</div>
+  <div class="smeta">ACTIVE · NEW · MKTG</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Content Creation" data-type="ACTIVE" data-lv="0" data-desc="Use for Wiserise flyers, posts, ads, offers, and hiring." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>CO</span></div>
+  <div class="sinfo"><div class="sname">Content</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Video Marketing" data-type="ACTIVE" data-lv="0" data-desc="Restaurant video marketing system for Wiserise. Generates viral social media video prompts from store photos, analyzes performance for iteration, and runs monthly competitor teardowns." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>VI</span></div>
+  <div class="sinfo"><div class="sname">Video</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn mine"></div><div class="skill mine" data-name="Instagram Comment Reply" data-type="ACTIVE" data-lv="0" data-desc="Use for Wiserise Instagram comment replies and tracking." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="1">
+  <div class="dot"><span>IG</span></div>
+  <div class="sinfo"><div class="sname">IG Reply<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn mine"></div><div class="skill mine" data-name="Facebook Comment Reply" data-type="ACTIVE" data-lv="0" data-desc="Use for Wiserise Facebook comment replies and tracking." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="1">
+  <div class="dot"><span>FB</span></div>
+  <div class="sinfo"><div class="sname">FB Reply<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn mine"></div><div class="skill" data-name="Hq Marketing" data-type="ACTIVE" data-lv="0" data-desc="—" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0">
+  <div class="dot"><span>HQ</span></div>
+  <div class="sinfo"><div class="sname">HQ Marketing</div>
+  <div class="smeta">ACTIVE · NEW · MKTG</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Source Research" data-type="ACTIVE" data-lv="0" data-desc="Use when finding all marketing offers or playbooks." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0">
+  <div class="dot"><span>RE</span></div>
+  <div class="sinfo"><div class="sname">Research</div>
+  <div class="smeta">ACTIVE · NEW · MKTG</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Customer Feedback Landing Page" data-type="ACTIVE" data-lv="0" data-desc="Use when sales drop and Wiserise needs a feedback page." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0">
+  <div class="dot"><span>FE</span></div>
+  <div class="sinfo"><div class="sname">Feedback Page</div>
+  <div class="smeta">ACTIVE · NEW · MKTG</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Customer Feedback Operations" data-type="ACTIVE" data-lv="0" data-desc="Use for customer feedback triage, replies, and learning." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0">
+  <div class="dot"><span>FE</span></div>
+  <div class="sinfo"><div class="sname">Feedback Ops</div>
+  <div class="smeta">ACTIVE · NEW · MKTG</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Customer Research" data-type="ACTIVE" data-lv="0" data-desc="Landing page survey to diagnose restaurant sales drops." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0">
+  <div class="dot"><span>SU</span></div>
+  <div class="sinfo"><div class="sname">Survey</div>
+  <div class="smeta">ACTIVE · NEW · MKTG</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Customer Research" data-type="ACTIVE" data-lv="0" data-desc="Find how one store can get more profitable weekly guests." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>ST</span></div>
+  <div class="sinfo"><div class="sname">Store Survey</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Health Review" data-type="ACTIVE" data-lv="0" data-desc="Use when Louis/GM asks store health, how is my store, which store is worst, daily/weekly store review, People/Process/Profit snapshot. Pulls proven Brain facts (sales, roster, fraud flags), ranks top " data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>HE</span></div>
+  <div class="sinfo"><div class="sname">Health Review</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="App Icon Branding" data-type="ACTIVE" data-lv="0" data-desc="Use when changing Wiserise Slack or Hermes icons." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>IC</span></div>
+  <div class="sinfo"><div class="sname">Icon</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Brand Assets" data-type="ACTIVE" data-lv="0" data-desc="Use when saving brand books, logo kits, or first-principles rebrands to Drive/Brain." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0">
+  <div class="dot"><span>BR</span></div>
+  <div class="sinfo"><div class="sname">Brand Kit</div>
+  <div class="smeta">ACTIVE · NEW · MKTG</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Facebook Ads" data-type="ACTIVE" data-lv="0" data-desc="Use when Louis wants Wiserise Facebook hiring ads, job ads, flyers, Indeed posts, recruit posters, or rates an ad/flyer on first principles. Covers restaurant + HQ roles (trainer, GM, server, etc.). N" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>FB</span></div>
+  <div class="sinfo"><div class="sname">FB Hiring</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Google Business Reviews" data-type="ACTIVE" data-lv="0" data-desc="Pull/manage Google Business Profile reviews for Wiserise multi-location restaurants. Covers account mapping (marketing@ vs louis@), GCP project/quota (Basic Access when QPM=0), OAuth tokens, and revie" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>GO</span></div>
+  <div class="sinfo"><div class="sname">Google Business Reviews</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Artifact Sync" data-type="ACTIVE" data-lv="0" data-desc="Use when syncing marketing files across profiles." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0">
+  <div class="dot"><span>SY</span></div>
+  <div class="sinfo"><div class="sname">Sync</div>
+  <div class="smeta">ACTIVE · NEW · MKTG</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Department Roadmap" data-type="ACTIVE" data-lv="0" data-desc="Use when publishing Marketing department roadmap HTML." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0">
+  <div class="dot"><span>RO</span></div>
+  <div class="sinfo"><div class="sname">Roadmap</div>
+  <div class="smeta">ACTIVE · NEW · MKTG</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Nightly Review" data-type="ACTIVE" data-lv="0" data-desc="Nightly work review for Louis. Checks all Wiserise work against 10 rules. Runs via cron at 1 AM. Reviews sessions, cron health, data integrity, and skill accuracy. Posts scorecard to #02-executive Sla" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>NI</span></div>
+  <div class="sinfo"><div class="sname">Night Rev</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div><div class="conn"></div><div class="skill" data-name="Awareness Workflow" data-type="ACTIVE" data-lv="0" data-desc="Use for brand awareness marketing: TikTok, Instagram, Facebook content, short-form video, and other discovery content that helps people find and remember Wiserise restaurants." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0">
+  <div class="dot"><span>LE</span></div>
+  <div class="sinfo"><div class="sname">Legacy</div>
+  <div class="smeta">ACTIVE · NEW · BRAIN</div></div>
+  <div class="slv lv0">NEW</div>
+</div></div>
+</div></div>
+</section>
+  <section class="class">
+  <div class="chead">
+    <div class="eyebrow">CLASS 02 · SKILL TREE</div>
+    <h2>Operations</h2>
+    <div class="cmission">Store problems in → routed tickets, compliance and night watch out.</div>
+    <div class="cstats"><span>5 skills</span><span class="dotsep">·</span><span><b>5</b> authored by you</span><span class="dotsep">·</span><span>3 branches</span></div>
+  </div>
+  <div class="bcols"><div class="branch">
+  <div class="bhead"><div class="bname">Intake</div><div class="bmission">Turn any plain problem into a routed, tracked ticket.</div><div class="bcount">1 skills · 1 yours</div></div>
+  <div class="chain"><div class="conn start"></div><div class="skill mine" data-name="Issue Intake" data-type="ACTIVE" data-lv="4" data-desc="Manager writes any plain problem; it becomes a formatted, routed Brain ticket." data-trigger="@WISE OPS plain ask" data-req="manager identity" data-gate="humans own fixes" data-proof="Brain ticket + ack" data-owner="Anson" data-verified="daily" data-bot="BRAIN" data-mine="1">
+  <div class="dot"><span>TI</span></div>
+  <div class="sinfo"><div class="sname">Ticket Intake<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · LV 4 · BRAIN</div></div>
+  <div class="slv lv4">LV 4</div>
+</div></div>
+</div><div class="branch">
+  <div class="bhead"><div class="bname">Compliance</div><div class="bmission">Licenses, inspections, food and alcohol safety.</div><div class="bcount">3 skills · 3 yours</div></div>
+  <div class="chain"><div class="conn start"></div><div class="skill mine" data-name="Compliance" data-type="ACTIVE" data-lv="3" data-desc="Tracks each store&#x27;s 7-document compliance packet until complete." data-trigger="1st of month" data-req="SAF-F-001" data-gate="GM completes" data-proof="checklist ticket" data-owner="Anson" data-verified="monthly" data-bot="OPS" data-mine="1">
+  <div class="dot"><span>ST</span></div>
+  <div class="sinfo"><div class="sname">Store Compliance<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · LV 3 · OPS</div></div>
+  <div class="slv lv3">LV 3</div>
+</div><div class="conn mine"></div><div class="skill mine" data-name="Health Inspector Guidance" data-type="ACTIVE" data-lv="3" data-desc="Inspection-ready packets and food-safety answers. Proven in a real inspection." data-trigger="inspection / safety ask" data-req="store docs" data-gate="GM executes" data-proof="Masa inspection 8/10 pass" data-owner="Anson" data-verified="2026-08-10" data-bot="BRAIN" data-mine="1">
+  <div class="dot"><span>IN</span></div>
+  <div class="sinfo"><div class="sname">Inspector Pack<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · LV 3 · BRAIN</div></div>
+  <div class="slv lv3">LV 3</div>
+</div><div class="conn mine"></div><div class="skill mine" data-name="Alcohol Guidance" data-type="ACTIVE" data-lv="2" data-desc="Alcohol ordering, compliance, sales and inventory answers." data-trigger="alcohol ask" data-req="state rules" data-gate="buys via buy-flow" data-proof="guidance in thread" data-owner="Anson" data-verified="on use" data-bot="OPS" data-mine="1">
+  <div class="dot"><span>AL</span></div>
+  <div class="sinfo"><div class="sname">Alcohol Guide<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · LV 2 · OPS</div></div>
+  <div class="slv lv2">LV 2</div>
+</div></div>
+</div><div class="branch">
+  <div class="bhead"><div class="bname">Watch</div><div class="bmission">Nightly all-store checks and anomaly flags.</div><div class="bcount">1 skills · 1 yours</div></div>
+  <div class="chain"><div class="conn start"></div><div class="skill mine" data-name="Nightly Check" data-type="ACTIVE" data-lv="4" data-desc="All stores checked overnight; anomalies become tickets before morning." data-trigger="nightly cron" data-req="Brain + POS data" data-gate="flags only" data-proof="HEALTH/OPS tickets" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="1">
+  <div class="dot"><span>NI</span></div>
+  <div class="sinfo"><div class="sname">Night Watch<span class="star">&#9733;</span></div>
+  <div class="smeta">ACTIVE · LV 4 · OPS</div></div>
+  <div class="slv lv4">LV 4</div>
+</div></div>
+</div></div>
+</section>
+  <div class="foot"><b>Skill Card format locked 2026-08-23</b> · Class → Branch → Skill → Active/Passive → Level (max 5)<br>Detection: author tag + claims (say "claim &lt;skill&gt;") · rebuilt daily 3:30 AM · Operations class added 2026-08-23</div>
 </div>
-<div class="legend"><span class="l1">Lv1 IDEA</span><span class="l2">Lv2 WORKING</span><span class="l3">Lv3 PROVEN</span><span class="l4">Lv4 AUTOMATED</span><span class="l5">Lv5 SELF-SUSTAINING</span><span style="color:#f8c95a">&#9733; = you made it</span></div>
-<div class="mapwrap">
-<svg width="2000" height="1150" viewBox="0 0 2000 1150" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
-<path d="M 80 0 L 0 0 0 80" fill="none" stroke="#102A3E" stroke-width="1"/>
-</pattern>
-</defs>
-<rect width="2000" height="1150" fill="url(#grid)" opacity="0.6"/>
-<polygon points="0,0 420,0 0,420" fill="#0E2637" opacity="0.65"/>
-<polygon points="2000,1150 1580,1150 2000,730" fill="#0E2637" opacity="0.65"/>
-<polygon points="500,0 1400,0 950,520" fill="#122C40" opacity="0.4"/>
-<polygon points="700,180 1500,300 1200,700 800,640" fill="#0F2436" opacity="0.35"/>
-<circle cx="150" cy="132" r="64" fill="#0A0D10" stroke="#E8ECE7" stroke-width="3"/><text x="150" y="146" text-anchor="middle" font-size="64" font-weight="800" fill="#E8ECE7" font-family="Anton">W</text><text x="80" y="287" text-anchor="start" font-size="34" letter-spacing="6" font-weight="800" fill="#F3D34C" font-family="Anton">RETENTION</text><text x="1020" y="69" text-anchor="middle" font-size="40" letter-spacing="6" font-weight="800" fill="#F3D34C" font-family="Anton">ACQUISITION</text><text x="1920" y="287" text-anchor="end" font-size="34" letter-spacing="6" font-weight="800" fill="#F3D34C" font-family="Anton">AWARENESS</text><circle cx="130" cy="639" r="38" fill="#6E8496" stroke="#B8BCB6" stroke-width="3"/><text x="130" y="640" text-anchor="middle" font-size="17" font-weight="800" fill="#F2F5F1" font-family="DM Sans">R</text><circle cx="1020" cy="151" r="38" fill="#6E8496" stroke="#B8BCB6" stroke-width="3"/><text x="1020" y="152" text-anchor="middle" font-size="17" font-weight="800" fill="#F2F5F1" font-family="DM Sans">A</text><circle cx="1908" cy="639" r="38" fill="#6E8496" stroke="#B8BCB6" stroke-width="3"/><text x="1908" y="640" text-anchor="middle" font-size="17" font-weight="800" fill="#F2F5F1" font-family="DM Sans">S</text><line x1="130" y1="639" x2="622" y2="542" stroke="#A6ACA8" stroke-width="2.5"/><line x1="130" y1="639" x2="276" y2="445" stroke="#A6ACA8" stroke-width="2.5"/><line x1="276" y1="445" x2="432" y2="342" stroke="#A6ACA8" stroke-width="2.5"/><line x1="276" y1="445" x2="432" y2="445" stroke="#F3D34C" stroke-width="4"/><line x1="276" y1="445" x2="432" y2="542" stroke="#F3D34C" stroke-width="4"/><line x1="432" y1="342" x2="622" y2="342" stroke="#F3D34C" stroke-width="4"/><line x1="432" y1="445" x2="622" y2="445" stroke="#F3D34C" stroke-width="4"/><line x1="622" y1="542" x2="276" y2="639" stroke="#A6ACA8" stroke-width="2.5"/><line x1="622" y1="445" x2="846" y2="638" stroke="#A6ACA8" stroke-width="2.5"/><line x1="276" y1="639" x2="846" y2="638" stroke="#A6ACA8" stroke-width="2.5"/><line x1="622" y1="342" x2="622" y2="445" stroke="#F3D34C" stroke-width="4"/><line x1="1020" y1="151" x2="1020" y2="342" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1020" y1="342" x2="1020" y2="638" stroke="#A6ACA8" stroke-width="2.5"/><line x1="920" y1="543" x2="1020" y2="638" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1702" y1="445" x2="1815" y2="445" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1702" y1="542" x2="1815" y2="542" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1702" y1="639" x2="1815" y2="639" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1702" y1="740" x2="1815" y2="740" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1702" y1="839" x2="1815" y2="839" stroke="#F3D34C" stroke-width="4"/><line x1="1608" y1="342" x2="1702" y2="342" stroke="#F3D34C" stroke-width="4"/><line x1="1608" y1="445" x2="1702" y2="445" stroke="#F3D34C" stroke-width="4"/><line x1="1608" y1="542" x2="1702" y2="542" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1510" y1="639" x2="1702" y2="639" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1608" y1="740" x2="1702" y2="740" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1608" y1="839" x2="1702" y2="839" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1608" y1="936" x2="1702" y2="936" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1510" y1="445" x2="1608" y2="342" stroke="#F3D34C" stroke-width="4"/><line x1="1510" y1="445" x2="1608" y2="445" stroke="#F3D34C" stroke-width="4"/><line x1="1408" y1="542" x2="1608" y2="542" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1510" y1="740" x2="1608" y2="740" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1510" y1="936" x2="1608" y2="839" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1510" y1="936" x2="1608" y2="936" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1408" y1="542" x2="1510" y2="445" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1408" y1="542" x2="1510" y2="639" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1408" y1="542" x2="1232" y2="638" stroke="#A6ACA8" stroke-width="2.5"/><line x1="1908" y1="639" x2="1815" y2="639" stroke="#A6ACA8" stroke-width="2.5"/><g class="node" data-skill="ops-google-reviews" data-name="Google Reviews" data-type="ACTIVE" data-lv="3" data-desc="Store-facing morning low-star (&lt;=4) review watch for GMs." data-trigger="daily 8 AM per store" data-req="GBP quota / state files" data-gate="none - flags only" data-proof="morning watch post" data-owner="Anson" data-verified="2026-08-22" data-bot="OPS" data-mine="0"><circle cx="276" cy="445" r="40" fill="transparent"/><circle cx="276" cy="445" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="276" y="446" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">WA</text></g><g class="node" data-skill="marketing-retention-workflow" data-name="Retention Workflow" data-type="ACTIVE" data-lv="0" data-desc="Use for customer retention marketing: reviews, replies, service recovery, reputation, and keeping guests happy so they come back. ReviewFlowz-style workflow across Google, Yelp, Facebook, Instagram." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="432" cy="342" r="40" fill="transparent"/><circle cx="432" cy="342" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="432" y="343" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">LE</text></g><g class="node" data-skill="wiserise-google-review-reply" data-name="Google Review Reply" data-type="ACTIVE" data-lv="0" data-desc="Use for Wiserise Google review replies and tracking." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="1"><circle cx="432" cy="445" r="40" fill="transparent"/><circle cx="432" cy="445" r="26" fill="#F3D34C" stroke="#FFE9A8" stroke-width="2.5"/><text x="432" y="446" text-anchor="middle" font-size="13" font-weight="700" fill="#0B1219" font-family="DM Sans">GR</text></g><g class="node" data-skill="wiserise-yelp-review-reply" data-name="Yelp Review Reply" data-type="ACTIVE" data-lv="0" data-desc="Use for Wiserise Yelp review replies and tracking." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="1"><circle cx="432" cy="542" r="40" fill="transparent"/><circle cx="432" cy="542" r="26" fill="#F3D34C" stroke="#FFE9A8" stroke-width="2.5"/><text x="432" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#0B1219" font-family="DM Sans">YR</text></g><g class="node" data-skill="wiserise-review-intelligence" data-name="Review Intelligence" data-type="ACTIVE" data-lv="0" data-desc="Collect, reply to, and analyze customer reviews for Wiserise" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="1"><circle cx="622" cy="342" r="40" fill="transparent"/><circle cx="622" cy="342" r="26" fill="#F3D34C" stroke="#FFE9A8" stroke-width="2.5"/><text x="622" y="343" text-anchor="middle" font-size="13" font-weight="700" fill="#0B1219" font-family="DM Sans">IN</text></g><g class="node" data-skill="wiserise-review-contests" data-name="Review Contests" data-type="ACTIVE" data-lv="0" data-desc="Use for monthly server contests based on customer reviews." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0"><circle cx="622" cy="445" r="40" fill="transparent"/><circle cx="622" cy="445" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="622" y="446" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">CO</text></g><g class="node" data-skill="google-business-profile-reviews" data-name="Google Business Profile Reviews" data-type="ACTIVE" data-lv="0" data-desc="Pull/manage Google Business Profile reviews for Wiserise multi-location restaurants. Covers account mapping (marketing@ vs louis@), GCP project/quota (Basic Access when QPM=0), OAuth tokens, and revie" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="622" cy="542" r="40" fill="transparent"/><circle cx="622" cy="542" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="622" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">GP</text></g><g class="node" data-skill="google-business-profile" data-name="Google Business Profile" data-type="ACTIVE" data-lv="0" data-desc="Pull/manage Google Business Profile (GBP) reviews for Wiserise stores. Use when Louis asks for Google reviews, GBP, My Business, store ratings, or owner Google login for listings." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="276" cy="639" r="40" fill="transparent"/><circle cx="276" cy="639" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="276" y="640" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">GB</text></g><g class="node" data-skill="retentionworkflow" data-name="Retentionworkflow" data-type="ACTIVE" data-lv="3" data-desc="Reviews -&gt; psychology reply draft -&gt; Slack approval -&gt; Google -&gt; tracking." data-trigger="new review alert" data-req="marketing@ token" data-gate="human approves reply in Slack" data-proof="reply posted, 48h SLA" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0"><circle cx="846" cy="638" r="52" fill="transparent"/><circle cx="846" cy="638" r="38" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="846" y="639" text-anchor="middle" font-size="17" font-weight="700" fill="#E8ECE7" font-family="DM Sans">CO</text></g><g class="node" data-skill="pmax-campaign-ops" data-name="Pmax Campaign Ops" data-type="ACTIVE" data-lv="2" data-desc="Audit and fix PMax campaigns built by humans in the Ads UI." data-trigger="PMax audit ask" data-req="Ads UI access" data-gate="spend changes = Louis" data-proof="audit findings" data-owner="Anson" data-verified="2026-08-21" data-bot="OPS" data-mine="0"><circle cx="1020" cy="342" r="40" fill="transparent"/><circle cx="1020" cy="342" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1020" y="343" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">PO</text></g><g class="node" data-skill="marketing-acquisition-workflow" data-name="Acquisition Workflow" data-type="ACTIVE" data-lv="0" data-desc="Use for customer acquisition marketing: Google Ads, Meta/Facebook Ads, Instagram Ads, and other paid or direct channels that bring new guests in at a steady rate." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="920" cy="543" r="40" fill="transparent"/><circle cx="920" cy="543" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="920" y="544" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">LE</text></g><g class="node" data-skill="acquisitionsworkflow" data-name="Acquisitionsworkflow" data-type="ACTIVE" data-lv="3" data-desc="Google Ads + paid channels. Niche-discovery doctrine: broad -&gt; cuisine -&gt; niche tiers." data-trigger="ads build/audit ask" data-req="Composio googleads connection" data-gate="Louis approves any spend change" data-proof="campaign IDs + verified metrics" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0"><circle cx="1020" cy="638" r="52" fill="transparent"/><circle cx="1020" cy="638" r="38" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1020" y="639" text-anchor="middle" font-size="17" font-weight="700" fill="#E8ECE7" font-family="DM Sans">CO</text></g><g class="node" data-skill="marketing-awareness-workflow" data-name="Awareness Workflow" data-type="ACTIVE" data-lv="0" data-desc="Use for brand awareness marketing: TikTok, Instagram, Facebook content, short-form video, and other discovery content that helps people find and remember Wiserise restaurants." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="1815" cy="445" r="40" fill="transparent"/><circle cx="1815" cy="445" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1815" y="446" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">LE</text></g><g class="node" data-skill="wiserise-social-copy" data-name="Social Copy" data-type="ACTIVE" data-lv="0" data-desc="Use when an approved offer needs social copy." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0"><circle cx="1815" cy="542" r="40" fill="transparent"/><circle cx="1815" cy="542" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1815" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">SC</text></g><g class="node" data-skill="wiserise-content-creation" data-name="Content Creation" data-type="ACTIVE" data-lv="0" data-desc="Use for Wiserise flyers, posts, ads, offers, and hiring." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="1815" cy="639" r="40" fill="transparent"/><circle cx="1815" cy="639" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1815" y="640" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">CO</text></g><g class="node" data-skill="wiserise-video-marketing" data-name="Video Marketing" data-type="ACTIVE" data-lv="0" data-desc="Restaurant video marketing system for Wiserise. Generates viral social media video prompts from store photos, analyzes performance for iteration, and runs monthly competitor teardowns." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="1815" cy="740" r="40" fill="transparent"/><circle cx="1815" cy="740" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1815" y="741" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">VI</text></g><g class="node" data-skill="wiserise-instagram-comment-reply" data-name="Instagram Comment Reply" data-type="ACTIVE" data-lv="0" data-desc="Use for Wiserise Instagram comment replies and tracking." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="1"><circle cx="1815" cy="839" r="40" fill="transparent"/><circle cx="1815" cy="839" r="26" fill="#F3D34C" stroke="#FFE9A8" stroke-width="2.5"/><text x="1815" y="840" text-anchor="middle" font-size="13" font-weight="700" fill="#0B1219" font-family="DM Sans">IR</text></g><g class="node" data-skill="wiserise-facebook-comment-reply" data-name="Facebook Comment Reply" data-type="ACTIVE" data-lv="0" data-desc="Use for Wiserise Facebook comment replies and tracking." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="1"><circle cx="1702" cy="342" r="40" fill="transparent"/><circle cx="1702" cy="342" r="26" fill="#F3D34C" stroke="#FFE9A8" stroke-width="2.5"/><text x="1702" y="343" text-anchor="middle" font-size="13" font-weight="700" fill="#0B1219" font-family="DM Sans">FR</text></g><g class="node" data-skill="wiserise-hq-marketing" data-name="Hq Marketing" data-type="ACTIVE" data-lv="0" data-desc="—" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0"><circle cx="1702" cy="445" r="40" fill="transparent"/><circle cx="1702" cy="445" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1702" y="446" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">HM</text></g><g class="node" data-skill="wiserise-source-marketing-research" data-name="Source Research" data-type="ACTIVE" data-lv="0" data-desc="Use when finding all marketing offers or playbooks." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0"><circle cx="1702" cy="542" r="40" fill="transparent"/><circle cx="1702" cy="542" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1702" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">RE</text></g><g class="node" data-skill="wiserise-customer-feedback-landing-page" data-name="Customer Feedback Landing Page" data-type="ACTIVE" data-lv="0" data-desc="Use when sales drop and Wiserise needs a feedback page." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0"><circle cx="1702" cy="639" r="40" fill="transparent"/><circle cx="1702" cy="639" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1702" y="640" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">FP</text></g><g class="node" data-skill="wiserise-customer-feedback-operations" data-name="Customer Feedback Operations" data-type="ACTIVE" data-lv="0" data-desc="Use for customer feedback triage, replies, and learning." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0"><circle cx="1702" cy="740" r="40" fill="transparent"/><circle cx="1702" cy="740" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1702" y="741" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">FO</text></g><g class="node" data-skill="wiserise-customer-research" data-name="Customer Research" data-type="ACTIVE" data-lv="0" data-desc="Landing page survey to diagnose restaurant sales drops." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0"><circle cx="1702" cy="839" r="40" fill="transparent"/><circle cx="1702" cy="839" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1702" y="840" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">SU</text></g><g class="node" data-skill="store-customer-research" data-name="Customer Research" data-type="ACTIVE" data-lv="0" data-desc="Find how one store can get more profitable weekly guests." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="1702" cy="936" r="40" fill="transparent"/><circle cx="1702" cy="936" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1702" y="937" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">SS</text></g><g class="node" data-skill="auto-skill-dojo-anson-ops-marketing" data-name="Auto Skill Dojo Anson Marketing" data-type="ACTIVE" data-lv="3" data-desc="Use for Anson&#x27;s Ops/Marketing workflow pattern detection." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="OPS" data-mine="1"><circle cx="1608" cy="342" r="40" fill="transparent"/><circle cx="1608" cy="342" r="26" fill="#F3D34C" stroke="#FFE9A8" stroke-width="2.5"/><text x="1608" y="343" text-anchor="middle" font-size="13" font-weight="700" fill="#0B1219" font-family="DM Sans">DO</text></g><g class="node" data-skill="marketing-daily-digest" data-name="Daily Digest" data-type="ACTIVE" data-lv="4" data-desc="One-glance morning report of all marketing work in #05-marketing." data-trigger="daily 8:00 AM cron" data-req="Brain + Gmail data" data-gate="none - advisory" data-proof="digest post" data-owner="Anson" data-verified="2026-08-14" data-bot="OPS" data-mine="1"><circle cx="1608" cy="445" r="40" fill="transparent"/><circle cx="1608" cy="445" r="26" fill="#F3D34C" stroke="#FFE9A8" stroke-width="2.5"/><text x="1608" y="446" text-anchor="middle" font-size="13" font-weight="700" fill="#0B1219" font-family="DM Sans">DI</text></g><g class="node" data-skill="ops-marketing" data-name="Marketing" data-type="ACTIVE" data-lv="4" data-desc="Marketing class hub - handbooks, plans, promos, gates, branch routing." data-trigger="any marketing ask" data-req="-" data-gate="money/brand = Louis" data-proof="work product in #05" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0"><circle cx="1608" cy="542" r="40" fill="transparent"/><circle cx="1608" cy="542" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1608" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">HU</text></g><g class="node" data-skill="store-health-review" data-name="Health Review" data-type="ACTIVE" data-lv="0" data-desc="Use when Louis/GM asks store health, how is my store, which store is worst, daily/weekly store review, People/Process/Profit snapshot. Pulls proven Brain facts (sales, roster, fraud flags), ranks top " data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="1608" cy="740" r="40" fill="transparent"/><circle cx="1608" cy="740" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1608" y="741" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">HR</text></g><g class="node" data-skill="wiserise-app-icon-branding" data-name="App Icon Branding" data-type="ACTIVE" data-lv="0" data-desc="Use when changing Wiserise Slack or Hermes icons." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="1608" cy="839" r="40" fill="transparent"/><circle cx="1608" cy="839" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1608" y="840" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">IC</text></g><g class="node" data-skill="wiserise-brand-assets" data-name="Brand Assets" data-type="ACTIVE" data-lv="0" data-desc="Use when saving brand books, logo kits, or first-principles rebrands to Drive/Brain." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0"><circle cx="1608" cy="936" r="40" fill="transparent"/><circle cx="1608" cy="936" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1608" y="937" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">BK</text></g><g class="node" data-skill="wiserise-facebook-ads" data-name="Facebook Ads" data-type="ACTIVE" data-lv="0" data-desc="Use when Louis wants Wiserise Facebook hiring ads, job ads, flyers, Indeed posts, recruit posters, or rates an ad/flyer on first principles. Covers restaurant + HQ roles (trainer, GM, server, etc.). N" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="1510" cy="445" r="40" fill="transparent"/><circle cx="1510" cy="445" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1510" y="446" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">FH</text></g><g class="node" data-skill="wiserise-google-business-reviews" data-name="Google Business Reviews" data-type="ACTIVE" data-lv="0" data-desc="Pull/manage Google Business Profile reviews for Wiserise multi-location restaurants. Covers account mapping (marketing@ vs louis@), GCP project/quota (Basic Access when QPM=0), OAuth tokens, and revie" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="1510" cy="639" r="40" fill="transparent"/><circle cx="1510" cy="639" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1510" y="640" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">GR</text></g><g class="node" data-skill="wiserise-marketing-artifact-sync" data-name="Artifact Sync" data-type="ACTIVE" data-lv="0" data-desc="Use when syncing marketing files across profiles." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0"><circle cx="1510" cy="740" r="40" fill="transparent"/><circle cx="1510" cy="740" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1510" y="741" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">SY</text></g><g class="node" data-skill="wiserise-marketing-department-roadmap" data-name="Department Roadmap" data-type="ACTIVE" data-lv="0" data-desc="Use when publishing Marketing department roadmap HTML." data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="MKTG" data-mine="0"><circle cx="1510" cy="936" r="40" fill="transparent"/><circle cx="1510" cy="936" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1510" y="937" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">RO</text></g><g class="node" data-skill="wiserise-nightly-review" data-name="Nightly Review" data-type="ACTIVE" data-lv="0" data-desc="Nightly work review for Louis. Checks all Wiserise work against 10 rules. Runs via cron at 1 AM. Reviews sessions, cron health, data integrity, and skill accuracy. Posts scorecard to #02-executive Sla" data-trigger="—" data-req="—" data-gate="—" data-proof="—" data-owner="—" data-verified="—" data-bot="BRAIN" data-mine="0"><circle cx="1408" cy="542" r="40" fill="transparent"/><circle cx="1408" cy="542" r="26" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1408" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#E8ECE7" font-family="DM Sans">NR</text></g><g class="node" data-skill="awarenessworkflow" data-name="Awarenessworkflow" data-type="ACTIVE" data-lv="2" data-desc="Organic FB/social creatives from the Gangnam brand kit, composite builds, vision QA gate." data-trigger="make post / creative ask" data-req="brand kit + real store photo" data-gate="vision QA must pass before ship" data-proof="delivered PNG + caption" data-owner="Anson" data-verified="2026-08-23" data-bot="OPS" data-mine="0"><circle cx="1232" cy="638" r="52" fill="transparent"/><circle cx="1232" cy="638" r="38" fill="#596F7F" stroke="#B8BCB6" stroke-width="2.5"/><text x="1232" y="639" text-anchor="middle" font-size="17" font-weight="700" fill="#E8ECE7" font-family="DM Sans">CO</text></g><text x="1150" y="874" text-anchor="middle" font-size="46" font-weight="800" fill="#F3D34C" font-family="Anton">14</text><text x="1150" y="904" text-anchor="middle" font-size="15" letter-spacing="4" fill="#F3D34C" font-family="DM Sans">AUTHORED SKILLS</text><rect x="60" y="778" width="910" height="170" fill="#F5F5F2"/><text x="90" y="922" font-size="72" letter-spacing="3" font-weight="800" fill="#0B1219" font-family="Anton">SKILL TREE</text><rect x="60" y="964" width="1234" height="128" fill="#090B0D"/><text x="90" y="1070" font-size="44" letter-spacing="4" font-weight="800" fill="#FFFFFF" font-family="Anton">MARKETING CLASS · ANSON BUILD</text><text x="1960" y="1132" text-anchor="end" font-size="14" fill="#82919E" font-family="DM Sans">2026-08-23 · YELLOW = YOURS · GRAY = OTHER · auto-refresh 3:30 AM</text><circle cx="926" cy="573" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="1040" cy="601" r="1" fill="#7896B4" opacity="0.45"/><circle cx="1646" cy="524" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="1257" cy="190" r="1" fill="#7896B4" opacity="0.45"/><circle cx="621" cy="145" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="1658" cy="710" r="1" fill="#96AABE" opacity="0.45"/><circle cx="1219" cy="405" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="1513" cy="630" r="1" fill="#96AABE" opacity="0.45"/><circle cx="1276" cy="15" r="1" fill="#96AABE" opacity="0.45"/><circle cx="121" cy="36" r="1" fill="#7896B4" opacity="0.45"/><circle cx="1228" cy="30" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="902" cy="605" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="478" cy="655" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="9" cy="678" r="1" fill="#7896B4" opacity="0.45"/><circle cx="1341" cy="284" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="1908" cy="85" r="1" fill="#96AABE" opacity="0.45"/><circle cx="645" cy="235" r="1" fill="#96AABE" opacity="0.45"/><circle cx="60" cy="71" r="1" fill="#96AABE" opacity="0.45"/><circle cx="820" cy="110" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="136" cy="17" r="1" fill="#96AABE" opacity="0.45"/><circle cx="437" cy="214" r="1" fill="#7896B4" opacity="0.45"/><circle cx="768" cy="406" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="1159" cy="644" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="552" cy="344" r="1" fill="#7896B4" opacity="0.45"/><circle cx="681" cy="15" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="275" cy="252" r="1" fill="#96AABE" opacity="0.45"/><circle cx="22" cy="61" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="363" cy="698" r="1" fill="#96AABE" opacity="0.45"/><circle cx="916" cy="521" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="1575" cy="134" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="785" cy="119" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="435" cy="0" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="622" cy="20" r="1" fill="#7896B4" opacity="0.45"/><circle cx="807" cy="616" r="1.6" fill="#96AABE" opacity="0.45"/><circle cx="205" cy="43" r="1" fill="#7896B4" opacity="0.45"/><circle cx="904" cy="264" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="673" cy="303" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="152" cy="92" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="1303" cy="248" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="755" cy="380" r="1" fill="#96AABE" opacity="0.45"/><circle cx="260" cy="601" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="277" cy="395" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="315" cy="318" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="510" cy="194" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="1288" cy="567" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="1945" cy="397" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="160" cy="431" r="1" fill="#7896B4" opacity="0.45"/><circle cx="223" cy="39" r="1" fill="#96AABE" opacity="0.45"/><circle cx="488" cy="401" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="1686" cy="610" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="1065" cy="179" r="1" fill="#96AABE" opacity="0.45"/><circle cx="258" cy="233" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="1338" cy="630" r="1" fill="#96AABE" opacity="0.45"/><circle cx="573" cy="217" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="33" cy="70" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="912" cy="255" r="1" fill="#7896B4" opacity="0.45"/><circle cx="360" cy="288" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="1171" cy="134" r="1" fill="#7896B4" opacity="0.45"/><circle cx="283" cy="461" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="1500" cy="707" r="1.6" fill="#96AABE" opacity="0.45"/><circle cx="1939" cy="143" r="1" fill="#96AABE" opacity="0.45"/><circle cx="1891" cy="18" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="1435" cy="319" r="1" fill="#7896B4" opacity="0.45"/><circle cx="1225" cy="651" r="1" fill="#7896B4" opacity="0.45"/><circle cx="137" cy="318" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="148" cy="77" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="753" cy="45" r="1.6" fill="#96AABE" opacity="0.45"/><circle cx="1441" cy="132" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="173" cy="701" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="1784" cy="427" r="1" fill="#7896B4" opacity="0.45"/><circle cx="1173" cy="14" r="1.6" fill="#96AABE" opacity="0.45"/><circle cx="783" cy="388" r="1" fill="#96AABE" opacity="0.45"/><circle cx="1246" cy="73" r="1" fill="#7896B4" opacity="0.45"/><circle cx="1309" cy="118" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="1491" cy="338" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="1421" cy="594" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="947" cy="554" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="1536" cy="526" r="1" fill="#7896B4" opacity="0.45"/><circle cx="1231" cy="89" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="471" cy="115" r="1.6" fill="#B48C5A" opacity="0.45"/><circle cx="1351" cy="497" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="753" cy="308" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="1252" cy="207" r="1" fill="#96AABE" opacity="0.45"/><circle cx="1543" cy="350" r="1" fill="#96AABE" opacity="0.45"/><circle cx="1020" cy="247" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="1363" cy="256" r="1.6" fill="#7896B4" opacity="0.45"/><circle cx="882" cy="205" r="1" fill="#7896B4" opacity="0.45"/><circle cx="449" cy="597" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="278" cy="137" r="1" fill="#B48C5A" opacity="0.45"/><circle cx="1714" cy="41" r="1" fill="#96AABE" opacity="0.45"/>
-</svg>
-</div>
-<div class="foot"><b>Skill Card format locked 2026-08-23</b> &middot; Class &rarr; Branch &rarr; Skill &rarr; Active/Passive &rarr; Level (max 5)<br>Detection: author tag + claims (say "claim &lt;skill&gt;") &middot; rebuilt daily 3:30 AM</div>
 <div id="tip"></div>
 <script>
 const tip = document.getElementById('tip');
 const LVNAME = {1:'IDEA',2:'WORKING',3:'PROVEN',4:'AUTOMATED',5:'SELF-SUSTAINING'};
-document.querySelectorAll('.node').forEach(n => {
+document.querySelectorAll('.skill').forEach(n => {
   n.addEventListener('mousemove', e => {
     const d = n.dataset;
     const lv = parseInt(d.lv || '0', 10);
-    const lvTxt = lv ? `LV ${lv} &middot; ${LVNAME[lv] || ''}` : 'NO CARD YET';
-    tip.innerHTML = `<div class="ttop"><div class="tname">${d.name}${d.mine === '1' ? '<span class="star">&#9733; YOURS</span>' : ''}</div><div class="lv lv${lv}">${lvTxt}</div></div>
+    const lvTxt = lv ? `LV ${lv} · ${LVNAME[lv] || ''}` : 'NO CARD YET';
+    tip.innerHTML = `<div class="ttop"><div class="tname">${d.name}${d.mine === '1' ? '<span class="star">&#9733; YOURS</span>' : ''}</div><div class="tlv lv${lv}">${lvTxt}</div></div>
 <span class="type ${d.type === 'PASSIVE' ? 'passive' : 'active'}">${d.type}</span>
 <div class="tdesc">${d.desc}</div>
 <div class="divider"></div>
@@ -78,11 +337,11 @@ document.querySelectorAll('.node').forEach(n => {
 <div class="row"><span class="k">Gate</span><span class="v">${d.gate}</span></div>
 <div class="row"><span class="k">Proof</span><span class="v">${d.proof}</span></div>
 <div class="row"><span class="k">Owner</span><span class="v">${d.owner}</span></div>
-<div class="row"><span class="k">Verified</span><span class="v">${d.verified} &middot; bot: ${d.bot}</span></div>`;
+<div class="row"><span class="k">Verified</span><span class="v">${d.verified} · bot: ${d.bot}</span></div>`;
     tip.style.display = 'block';
     let tx = e.clientX + 18, ty = e.clientY + 14;
     if (tx + 380 > window.innerWidth) tx = e.clientX - 380;
-    if (ty + 340 > window.innerHeight) ty = e.clientY - 320;
+    if (ty + 360 > window.innerHeight) ty = e.clientY - 340;
     tip.style.left = tx + 'px'; tip.style.top = ty + 'px';
   });
   n.addEventListener('mouseleave', () => tip.style.display = 'none');
