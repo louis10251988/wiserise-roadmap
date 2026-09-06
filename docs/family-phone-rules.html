@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Phone Rules & Schedule | 家庭手机极简管理指南</title>
+<style>
+  :root {
+    --primary: #0f172a;
+    --accent: #2563eb;
+    --success: #16a34a;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --bg-card: #ffffff;
+    --bg-page: #f8fafc;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 24px 16px;
+  }
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  /* Top Navigation & Language Bar */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+  .system-brand {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lang-switcher {
+    display: flex;
+    gap: 8px;
+  }
+  .lang-btn {
+    border: 1px solid var(--border);
+    background: #ffffff;
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    transition: all 0.2s ease;
+  }
+  .lang-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+    box-shadow: 0 2px 5px rgba(37,99,235,0.25);
+  }
+
+  /* Language Visibility Engine */
+  body.lang-zh .en-text { display: none !important; }
+  body.lang-en .zh-text { display: none !important; }
+
+  /* Subtitle & Scope */
+  .scope-banner {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    color: #1e40af;
+    margin-bottom: 20px;
+  }
+
+  /* Main Tabs Bar */
+  .tabs-nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab-btn {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+  }
+  .tab-btn:hover {
+    color: var(--accent);
+    background: #f8fafc;
+  }
+  .tab-btn.active {
+    background: #ffffff;
+    color: var(--accent);
+    border-color: var(--border);
+    border-top: 3px solid var(--accent);
+    margin-bottom: -1px;
+    padding-top: 8px;
+    font-weight: 700;
+  }
+
+  /* Tab Content Panels */
+  .tab-panel {
+    display: none;
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  .tab-panel.active {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 10px;
+  }
+
+  /* Kid-friendly Bullet Points */
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .bullet-item {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 16px;
+    font-size: 14.5px;
+    color: #1e293b;
+    line-height: 1.6;
+  }
+  .bullet-item::before {
+    content: "👉";
+    position: absolute;
+    left: 0;
+    top: 1px;
+    font-size: 15px;
+  }
+  .bullet-item strong {
+    color: var(--primary);
+    font-size: 15px;
+  }
+
+  .sub-bullet-list {
+    list-style: none;
+    padding-left: 12px;
+    margin-top: 6px;
+  }
+  .sub-bullet-list li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 6px;
+    font-size: 13.5px;
+    color: #475569;
+  }
+  .sub-bullet-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    top: 0px;
+    font-size: 16px;
+    color: var(--accent);
+  }
+
+  .box-quote {
+    background: #f8fafc;
+    border-left: 4px solid var(--accent);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 18px;
+    color: #334155;
+  }
+
+  .box-warning {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 18px;
+    color: #92400e;
+  }
+
+  .tag-green { background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 12px; }
+  .tag-yellow { background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 12px; }
+  .tag-red { background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 12px; }
+
+  /* Quick Summary Card */
+  .kid-summary {
+    background: #0f172a;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 15px;
+  }
+  .kid-summary h4 {
+    font-size: 15px;
+    color: #38bdf8;
+    margin-bottom: 10px;
+  }
+  .kid-summary ul {
+    list-style: none;
+    padding: 0;
+  }
+  .kid-summary li {
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+    font-size: 13.5px;
+    color: #f1f5f9;
+  }
+  .kid-summary li::before {
+    content: "✅";
+    position: absolute;
+    left: 0;
+    top: 1px;
+    font-size: 12px;
+  }
+</style>
+</head>
+<body class="lang-zh">
+
+<div class="container">
+
+  <!-- Top Bar: Brand & Language Toggle Buttons -->
+  <div class="top-bar">
+    <div class="system-brand">
+      <span>📱</span>
+      <span>
+        <span class="zh-text">家庭手机极简规则 (10岁秒懂版)</span>
+        <span class="en-text">Simple Family Phone Rules (10-Yr-Old Plain English)</span>
+      </span>
+    </div>
+    <div class="lang-switcher">
+      <button type="button" class="lang-btn active" id="btn-zh" onclick="setLanguage('zh')">中文 (Chinese)</button>
+      <button type="button" class="lang-btn" id="btn-en" onclick="setLanguage('en')">English</button>
+    </div>
+  </div>
+
+  <!-- Scope Banner -->
+  <div class="scope-banner">
+    <span class="zh-text">💡 <strong>写给 13 岁和 14 岁：</strong> 这不是惩罚，而是帮你睡好觉、不被手机算法控制的简单家规。（5岁弟弟/妹妹还太小，严禁拥有个人手机）。</span>
+    <span class="en-text">💡 <strong>For 13 & 14-year-olds:</strong> This is not a punishment. It's a simple system to protect your sleep and keep you from getting hooked by algorithms. (5-year-olds do not get personal phones).</span>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="switchTab('tab-principles')">
+      <span>🏛️</span>
+      <span class="zh-text">三条铁律</span>
+      <span class="en-text">3 Simple Rules</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-schedule')">
+      <span>📅</span>
+      <span class="zh-text">每天什么时候用</span>
+      <span class="en-text">When Can I Use It?</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-apps')">
+      <span>🚦</span>
+      <span class="zh-text">哪些软件能玩</span>
+      <span class="en-text">Allowed Apps</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-setup')">
+      <span>⚙️</span>
+      <span class="zh-text">手机怎么设置</span>
+      <span class="en-text">How to Set Up</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-roadmap')">
+      <span>🗺️</span>
+      <span class="zh-text">四步落地法</span>
+      <span class="en-text">How We Start</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-scorecard')">
+      <span>📊</span>
+      <span class="zh-text">做到了有什么奖励</span>
+      <span class="en-text">Rewards & What Ifs</span>
+    </button>
+  </div>
+
+  <!-- TAB 1: 3 SIMPLE RULES -->
+  <div id="tab-principles" class="tab-panel active">
+    <div class="card">
+      <div class="card-title">
+        <span>🏛️</span>
+        <span class="zh-text">全家必须遵守的三条简单铁律</span>
+        <span class="en-text">The 3 Big Rules You Need to Know</span>
+      </div>
+
+      <div class="box-quote">
+        <span class="zh-text">🎯 <strong>一句话道理：</strong> 就像你不会把“游戏厅投币机”搬到床上睡觉一样，手机也不能带进卧室。</span>
+        <span class="en-text">🎯 <strong>The Big Idea:</strong> You wouldn't put an arcade slot machine right next to your pillow at night. The same goes for your phone.</span>
+      </div>
+
+      <ul class="bullet-list">
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">规则 1：睡觉前手机必须放厨房（卧室严禁放手机）</span>
+            <span class="en-text">Rule 1: Phones Sleep in the Kitchen (No Phones in Bed)</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text">每晚 <strong>9:00</strong>（周末 10:00），把手机插在厨房中央充电桩上充电。</span>
+              <span class="en-text">Every night by <strong>9:00 PM</strong> (10:00 PM on weekends), plug your phone into the kitchen charging dock.</span>
+            </li>
+            <li>
+              <span class="zh-text">卧室床头放一个真正的物理小闹钟，负责叫你起床。</span>
+              <span class="en-text">You get a real alarm clock on your nightstand to wake you up in the morning.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>为什么：</strong> 手机屏幕的蓝光会欺骗你的大脑，让你睡不着、长不高、第二天上课头晕。</span>
+              <span class="en-text"><strong>Why:</strong> Blue screen light tricks your brain into staying awake, ruining your sleep and focus.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">规则 2：放学写作业时，手机不能放书桌上</span>
+            <span class="en-text">Rule 2: No Phone at the Desk During Homework Time</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text">下午 <strong>3:30 到 5:30</strong> 写作业期间，手机留在厨房充电。</span>
+              <span class="en-text">From <strong>3:30 to 5:30 PM</strong>, your phone stays in the kitchen dock.</span>
+            </li>
+            <li>
+              <span class="zh-text">如果写作业需要查资料、写作文，用带键盘的电脑。</span>
+              <span class="en-text">Need to do school research or type an essay? Use a computer with a real keyboard.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>为什么：</strong> 手机屏幕每闪一次消息弹窗，你刚刚建立的专注力就彻底归零。</span>
+              <span class="en-text"><strong>Why:</strong> Every notification ding resets your brain and makes homework take twice as long.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">规则 3：手机里彻底删掉“短视频老虎机”</span>
+            <span class="en-text">Rule 3: Delete the Video Slot Machines</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text">手机上彻底删掉 TikTok、Instagram Reels、YouTube Shorts。</span>
+              <span class="en-text">Delete TikTok, Instagram Reels, and YouTube Shorts from your personal phone.</span>
+            </li>
+            <li>
+              <span class="zh-text">发短信、打电话、听歌（Spotify）、查地图、学校软件全部正常可用。</span>
+              <span class="en-text">Texting, calling friends, Spotify music, maps, and school apps stay 100% open.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>为什么：</strong> 短视频软件是几千个工程师故意设计的诱饵，专门偷走你的时间和精力。</span>
+              <span class="en-text"><strong>Why:</strong> Infinite-scroll videos are engineered like casino games to trap your brain in an endless loop.</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="kid-summary">
+        <h4>
+          <span class="zh-text">10秒记住三句话：</span>
+          <span class="en-text">Remember in 10 Seconds:</span>
+        </h4>
+        <ul>
+          <li>
+            <span class="zh-text">晚上 9 点放厨房充电，卧室只放小闹钟。</span>
+            <span class="en-text">Phone goes to kitchen dock at 9:00 PM. Alarm clock in bedroom.</span>
+          </li>
+          <li>
+            <span class="zh-text">做作业手机不进书房，打字查题用电脑。</span>
+            <span class="en-text">Homework is done on a laptop with a keyboard, not on your phone.</span>
+          </li>
+          <li>
+            <span class="zh-text">短视频删干净，朋友短信随你发。</span>
+            <span class="en-text">No endless video feeds; texting and music are always fine.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: WEEKLY SCHEDULE -->
+  <div id="tab-schedule" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>📅</span>
+        <span class="zh-text">每天什么时候可以用手机？</span>
+        <span class="en-text">When Can I Use My Phone Every Day?</span>
+      </div>
+
+      <ul class="bullet-list">
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">周一到周四（上学日作息）：</span>
+            <span class="en-text">Monday to Thursday (School Days):</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>07:00 – 08:30（早晨出门）：</strong> 从厨房拿起手机。可以听音乐、看天气、给爸妈发消息。不刷娱乐视频。</span>
+              <span class="en-text"><strong>7:00 – 8:30 AM (Morning):</strong> Grab phone from dock. Listen to music, check weather, message parents. No games/fun videos.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>08:30 – 15:30（学校上课）：</strong> 手机拉好拉链放书包里。只有紧急情况或放学接送才拿出来。</span>
+              <span class="en-text"><strong>8:30 AM – 3:30 PM (School):</strong> Stays zipped in your backpack. Emergency and pickup calls only.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>15:30 – 17:30（作业体能）：</strong> 手机放回厨房充电桩。安安静静写作业、运动。严肃查资料用电脑。</span>
+              <span class="en-text"><strong>3:30 – 5:30 PM (Homework):</strong> Phone rests on kitchen dock. Focus on homework and sports. Use computers for schoolwork.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>17:30 – 18:30（整理放松）：</strong> 可以听歌、做家务、整理房间、出门走走。</span>
+              <span class="en-text"><strong>5:30 – 6:30 PM (Chores/Break):</strong> Music, chores, cleaning your room, going outside.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>18:30 – 19:30（全家晚饭）：</strong> 手机放厨房。餐桌上大家一起开心吃饭聊天，零屏幕。</span>
+              <span class="en-text"><strong>6:30 – 7:30 PM (Dinner):</strong> Phone in kitchen. Zero phones at the table. Talk with family.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>19:30 – 21:00（自由放松时间）：</strong> 你的自由时间！打游戏、看长视频、和朋友聊天（黄灯软件限额2小时）。</span>
+              <span class="en-text"><strong>7:30 – 9:00 PM (Fun Time):</strong> Your free window! Play games, watch videos, chat with friends (2-hour limit).</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>21:00 起（熄灯停泊）：</strong> 手机放回厨房充电。上床睡觉，保证 9 小时充足好睡眠。</span>
+              <span class="en-text"><strong>9:00 PM (Bedtime Dock):</strong> Phone plugs into kitchen dock. Sleep time.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">周五（放假轻松日）：</span>
+            <span class="en-text">Friday (Weekend Kickoff):</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text">放学先花一点时间把周五作业写完，周末就没有心理负担。</span>
+              <span class="en-text">Finish homework right after school so you have zero stress all weekend.</span>
+            </li>
+            <li>
+              <span class="zh-text">晚上可以看电影、聚会。手机停泊时间顺延到 <strong>晚上 10:00 (22:00)</strong>。</span>
+              <span class="en-text">Watch movies or hang out. Curfew is extended to <strong>10:00 PM</strong> at the kitchen dock.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">周六（运动与朋友日）：</span>
+            <span class="en-text">Saturday (Sports & Friends):</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text">白天多去户外运动、打球、和朋友逛街。</span>
+              <span class="en-text">Spend the day outdoors, playing sports, or with friends.</span>
+            </li>
+            <li>
+              <span class="zh-text">娱乐游戏总时间最多 3 小时。晚上 <strong>10:00 (22:00)</strong> 放厨房充电。</span>
+              <span class="en-text">Total game/fun screen time capped at 3 hours. Kitchen dock at <strong>10:00 PM</strong>.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">周日（归位重置日）：</span>
+            <span class="en-text">Sunday (Reset & Ready for School):</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>下午 5:00 任务关卡：</strong> 把周一书包收拾好、校服找好、检查 Canvas 没有欠交作业。</span>
+              <span class="en-text"><strong>5:00 PM Check:</strong> Pack your backpack, lay out school clothes, make sure zero homework is missing.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>晚间奖励：</strong> 任务过关，晚上 7:30 到 9:00 正常解锁玩手机！没做完就扣除娱乐时间。</span>
+              <span class="en-text"><strong>Reward:</strong> Pass the 5 PM check, and you unlock normal phone fun from 7:30 to 9:00 PM!</span>
+            </li>
+            <li>
+              <span class="zh-text">晚上 <strong>9:00</strong> 准时放厨房充电，准备周一精力充沛起床。</span>
+              <span class="en-text">Strictly back to <strong>9:00 PM</strong> kitchen dock to be ready for school Monday.</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB 3: APP TIERS -->
+  <div id="tab-apps" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>🚦</span>
+        <span class="zh-text">哪些软件能用？像看红绿灯一样简单</span>
+        <span class="en-text">Which Apps Can I Use? The Traffic Light Rule</span>
+      </div>
+
+      <ul class="bullet-list">
+        <li class="bullet-item">
+          <span class="tag-green">
+            <span class="zh-text">🟢 绿灯软件：全天随便用（好工具）</span>
+            <span class="en-text">🟢 Green Tier: Always Open (Helpful Tools)</span>
+          </span>
+          <ul class="sub-bullet-list" style="margin-top: 8px;">
+            <li>
+              <span class="zh-text"><strong>联系爸妈和朋友：</strong> 打电话、发短信、iMessage。</span>
+              <span class="en-text"><strong>Communication:</strong> Phone calls, SMS, iMessage.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>出门工具：</strong> 谷歌地图、苹果地图、计算器、备忘录。</span>
+              <span class="en-text"><strong>Daily Tools:</strong> Google Maps, Apple Maps, Calculator, Notes.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>听音乐与学习：</strong> Spotify、Apple Music、学校 Canvas 查成绩。</span>
+              <span class="en-text"><strong>Music & School:</strong> Spotify, Apple Music, Canvas school portal.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>规则：</strong> 这些软件不限时间，晚上 9 点后也保留打电话求助功能。</span>
+              <span class="en-text"><strong>Rule:</strong> Unlimited daytime use. Emergency calls stay open even during bedtime downtime.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <span class="tag-yellow">
+            <span class="zh-text">🟡 黄灯软件：每天限时 2 小时（纯娱乐）</span>
+            <span class="en-text">🟡 Yellow Tier: Capped at 2 Hours (Entertainment)</span>
+          </span>
+          <ul class="sub-bullet-list" style="margin-top: 8px;">
+            <li>
+              <span class="zh-text"><strong>软件列表：</strong> Roblox、Minecraft（我的世界）、普通长视频 YouTube、国际象棋。</span>
+              <span class="en-text"><strong>Apps:</strong> Roblox, Minecraft, standard long-form YouTube, Chess, puzzle games.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>规则：</strong> 每天一共最多玩 <strong>2 个小时</strong>，只能在晚上 19:30 – 21:00 期间玩。</span>
+              <span class="en-text"><strong>Rule:</strong> Hard limit of <strong>2 hours/day</strong>. Allowed during the evening 7:30 – 9:00 PM block.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <span class="tag-red">
+            <span class="zh-text">🔴 红灯软件：手机上彻底删除（老虎机垃圾）</span>
+            <span class="en-text">🔴 Red Tier: Completely Deleted (Addictive Slot Machines)</span>
+          </span>
+          <ul class="sub-bullet-list" style="margin-top: 8px;">
+            <li>
+              <span class="zh-text"><strong>黑名单：</strong> TikTok、Instagram Reels、YouTube Shorts（短视频）。</span>
+              <span class="en-text"><strong>Banned Apps:</strong> TikTok, Instagram Reels, YouTube Shorts feeds.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>规则：</strong> 个人手机上彻底卸载，电脑浏览器也加上封锁。</span>
+              <span class="en-text"><strong>Rule:</strong> Deleted from phones. Blocked in computer browsers too so they don't follow you to your desk.</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB 4: SETUP GUIDE -->
+  <div id="tab-setup" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>⚙️</span>
+        <span class="zh-text">手机怎么设置？爸妈 10 分钟搞定指南</span>
+        <span class="en-text">How to Set Up the Phone (Parents 10-Min Guide)</span>
+      </div>
+
+      <div class="box-warning">
+        <span class="zh-text">🔒 <strong>防偷窥第一铁律：</strong> 永远不要在孩子面前输入 4 位屏幕时间密码！小孩看一眼反光或手指动作就能猜出来。</span>
+        <span class="en-text">🔒 <strong>Rule #1 for Parents:</strong> NEVER type the 4-digit Parent PIN while your kids are in the room. They will memorize your finger taps instantly.</span>
+      </div>
+
+      <ul class="bullet-list">
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">苹果 iPhone 设置步骤：</span>
+            <span class="en-text">Apple iPhone Setup Steps:</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>设密码：</strong> 打开“屏幕使用时间” ➔ 开启“锁定设置” ➔ 输一个孩子绝对猜不到的 4 位密码。</span>
+              <span class="en-text"><strong>Set PIN:</strong> Go to Screen Time ➔ Lock Screen Time Settings ➔ Enter a secret 4-digit PIN.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>定熄灯时间：</strong> 点“停用时间” ➔ 周日至周四设为 21:00 到 07:00，周五周六设为 22:00 到 07:00 ➔ 勾选“阻止设备”。</span>
+              <span class="en-text"><strong>Set Downtime:</strong> Tap Downtime ➔ Set 9:00 PM – 7:00 AM (10:00 PM on weekends) ➔ Check "Block at Downtime".</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>加始终允许：</strong> 点“始终允许” ➔ 勾上电话、短信、地图、音乐、学校软件。</span>
+              <span class="en-text"><strong>Always Allowed:</strong> Add Phone, Messages, Maps, Spotify, Canvas.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>定娱乐限额：</strong> 点“App 限额” ➔ 选“游戏与娱乐” ➔ 设 2 小时 ➔ 勾选“达到限额时阻止”。</span>
+              <span class="en-text"><strong>App Limits:</strong> Add Limit ➔ Select Games/Entertainment ➔ Set 2 Hours ➔ Check "Block at End of Limit".</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>禁止乱下载：</strong> 点“内容访问限制” ➔ “App Store 购买” ➔ 将“安装 App”设为“需要家长批准”。</span>
+              <span class="en-text"><strong>Block Downloads:</strong> Content Restrictions ➔ Store Purchases ➔ Set "Installing Apps" to Require Parent Approval.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">安卓手机 (Google Family Link) 设置步骤：</span>
+            <span class="en-text">Android (Google Family Link) Setup:</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>绑定账号：</strong> 家长用 Family Link 把孩子 Google 账号连在一起。</span>
+              <span class="en-text"><strong>Link Account:</strong> Connect your teen's Google account to Google Family Link on parent's phone.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>就寝锁定：</strong> 设成就寝时间（周日至周四 21:00，周末 22:00），时间一到自动锁屏。</span>
+              <span class="en-text"><strong>Bedtime Lock:</strong> Set Bedtime (9:00 PM weekdays, 10:00 PM weekends) to auto-lock the phone.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>游戏限额：</strong> 游戏和 YouTube 限额 2 小时。</span>
+              <span class="en-text"><strong>Daily Limits:</strong> Set 2-hour daily caps on games and video apps.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>下载审批：</strong> 开启 Google Play 所有应用下载必须家长点赞同意。</span>
+              <span class="en-text"><strong>Approval:</strong> Require parent approval for every app installation from Google Play.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">买齐 3 样便宜好用的硬件工具：</span>
+            <span class="en-text">3 Cheap Hardware Tools You Need:</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>厨房多口排插（$15）：</strong> 放在厨房最显眼地方，贴上“手机停泊站”。</span>
+              <span class="en-text"><strong>Kitchen Charging Hub ($15):</strong> A multi-port USB charger right on the kitchen counter.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>两个床头闹钟（$10/个）：</strong> 两个孩子房间各放一个，彻底废除“手机放床头当闹钟”的借口。</span>
+              <span class="en-text"><strong>Two Alarm Clocks ($10 each):</strong> Put one in each bedroom so they never need a phone to wake up.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>带键盘的电脑：</strong> 做作业打字查资料用电脑，手机在厨房。电脑浏览器顺手屏蔽 TikTok 网页。</span>
+              <span class="en-text"><strong>Computer with Keyboard:</strong> Homework is typed on a PC. Block TikTok website in the browser too.</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB 5: ROLLOUT ROADMAP -->
+  <div id="tab-roadmap" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>🗺️</span>
+        <span class="zh-text">怎么开始做？简单四步走路线图</span>
+        <span class="en-text">How We Start: The 4-Step Rollout</span>
+      </div>
+
+      <ul class="bullet-list">
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">第 1 步：第 0 天 · 爸妈偷偷准备好（耗时 15 分钟）</span>
+            <span class="en-text">Step 1: Day 0 · Secret Parent Prep (15 Mins)</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text">买好小闹钟，在卧室床头摆好。</span>
+              <span class="en-text">Buy the two alarm clocks and place them in the bedrooms.</span>
+            </li>
+            <li>
+              <span class="zh-text">在厨房插好多口充电插座。</span>
+              <span class="en-text">Set up the charging dock on the kitchen counter.</span>
+            </li>
+            <li>
+              <span class="zh-text">在手机上把“停用时间”和 App 限制悄悄设好。</span>
+              <span class="en-text">Privately set up Screen Time Downtime (9:00 PM) and delete slot-machine apps.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">第 2 步：第 1 天 · 周日开个 5 分钟家庭短会</span>
+            <span class="en-text">Step 2: Day 1 · 5-Minute Sunday Family Talk</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>爸妈怎么说：</strong> “我们爱你们，绝对支持你们和朋友联系。但短视频是偷走睡眠的老虎机，我们砍掉老虎机，不砍你们的朋友。今晚开始，手机 9 点放厨房充电，卧室是睡觉的地方。”</span>
+              <span class="en-text"><strong>What Parents Say:</strong> "We love you and trust you. This isn't about taking your friends away. It's about protecting your sleep from casino-like apps. Phones charge in the kitchen at 9:00 PM."</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>定好唯一的规则：</strong> 9:01 爸妈只看一眼厨房。手机在上面 ➔ 没有任何唠叨，享有完全自由；手机不在 ➔ 明天保管 24 小时。</span>
+              <span class="en-text"><strong>The One Rule:</strong> At 9:01 PM, parents glance at the counter. Phone is there ➔ zero nagging. Phone missing ➔ 24-hr lock tomorrow.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">第 3 步：第 2 到 14 天 · 两周习惯适应期</span>
+            <span class="en-text">Step 3: Days 2 to 15 · Two-Week Habit Reset</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>第一周：</strong> 可能会觉得有点无聊。别担心，无聊正是开始看书、运动、找新兴趣的开始。</span>
+              <span class="en-text"><strong>Week 1:</strong> You might feel bored. That's normal! Boredom is where hobbies, sports, and reading begin.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>第二周：</strong> 早晨起床不再觉得累，晚上上床不再磨蹭。</span>
+              <span class="en-text"><strong>Week 2:</strong> Morning waking becomes much easier, and bedtime arguments disappear.</span>
+            </li>
+            <li>
+              <span class="zh-text"><strong>第 14 天小庆祝：</strong> 两周都做到了，全家吃顿大餐，宣布系统正式常态化！</span>
+              <span class="en-text"><strong>Day 14 Review:</strong> Made it through 2 weeks? Celebrate with a family meal and make the system permanent!</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">第 4 步：第 16 天起 · 长期自动运行（爸妈每天只花 5 秒钟）</span>
+            <span class="en-text">Step 4: Day 16+ · Permanent Autopilot (5 Seconds a Day)</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text">只要学习和睡眠正常，爸妈绝对不查你的私人聊天记录，尊重你的隐私。</span>
+              <span class="en-text">As long as sleep and school are good, parents NEVER read your private messages. Total trust.</span>
+            </li>
+            <li>
+              <span class="zh-text">爸妈每天只要在 21:01 瞥一眼厨房台面，省心又省力。</span>
+              <span class="en-text">Parents spend only 5 seconds glancing at the kitchen counter at 9:01 PM.</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB 6: SCORECARD & WHAT IFS -->
+  <div id="tab-scorecard" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>📊</span>
+        <span class="zh-text">做到了有什么好处？犯规了怎么办？</span>
+        <span class="en-text">What Happens If... (Clear Cause & Effect)</span>
+      </div>
+
+      <div class="box-quote">
+        <span class="zh-text">⚖️ <strong>零吵架原则：</strong> 规则提前写好，不用生气、不用骂人，发生了什么就按规矩办。</span>
+        <span class="en-text">⚖️ <strong>Zero-Argument Rule:</strong> The rules are clear in advance. No yelling, no lectures. Just simple cause and effect.</span>
+      </div>
+
+      <ul class="bullet-list">
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">情况 A：每晚 9:00 按时把手机放厨房充电</span>
+            <span class="en-text">Case A: Phone Docked in Kitchen on Time (9:00 PM)</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>结果：满分！</strong> 爸妈一句唠叨都没有，充分信任你，给你绝对的社交与聊天隐私。</span>
+              <span class="en-text"><strong>Result: Full Pass!</strong> Zero parental nagging, 100% trust, and full privacy for your texting.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">情况 B：9:01 手机没放厨房（超时了/忘记了）</span>
+            <span class="en-text">Case B: Phone Missing from Kitchen at 9:01 PM</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>结果：次日保管 24 小时。</strong> 明天整天手机由爸妈保管。不批评、不吵架，后天恢复正常。</span>
+              <span class="en-text"><strong>Result: 24-Hour Confiscation.</strong> Parents hold the phone tomorrow. No yelling, returns the next day.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">情况 C：偷偷把手机带进卧室睡觉</span>
+            <span class="en-text">Case C: Sneaking the Phone into the Bedroom Overnight</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>结果：红线惩罚！没收 48 小时。</strong> 卧室是神圣的睡眠领地，必须严格守护。</span>
+              <span class="en-text"><strong>Result: Red Line Ban! 48-Hour Lock.</strong> The bedroom is sacred for sleep and rest only.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">情况 D：做作业时间（15:30 – 17:30）偷偷玩手机</span>
+            <span class="en-text">Case D: Using Phone During Homework Block (3:30 – 5:30 PM)</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>结果：取消今晚娱乐。</strong> 今晚 19:30 – 21:00 的 2 小时游戏/视频时间全部取消。</span>
+              <span class="en-text"><strong>Result: Evening Window Forfeit.</strong> Tonight's 7:30 – 9:00 PM leisure screen time is canceled.</span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="bullet-item">
+          <strong>
+            <span class="zh-text">情况 E：试图偷看或破解爸妈的 4 位管理密码</span>
+            <span class="en-text">Case E: Trying to Guess or Shoulder-Surf Parent PIN</span>
+          </strong>
+          <ul class="sub-bullet-list">
+            <li>
+              <span class="zh-text"><strong>结果：改密码 + 停用娱乐 3 天。</strong> 密码立即重置，停用黄灯娱乐软件 3 天。</span>
+              <span class="en-text"><strong>Result: PIN Reset + 3-Day Screen Ban.</strong> Passcode changed immediately; games locked for 3 days.</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="kid-summary">
+        <h4>
+          <span class="zh-text">最终成效（全家都轻松）：</span>
+          <span class="en-text">The Final Scorecard:</span>
+        </h4>
+        <ul>
+          <li>
+            <span class="zh-text"><strong>爸妈每天管理时间：</strong> 只有 5 秒钟（21:01 瞄一眼厨房）。</span>
+            <span class="en-text"><strong>Parent Daily Effort:</strong> Exactly 5 seconds (glance at the counter at 9:01 PM).</span>
+          </li>
+          <li>
+            <span class="zh-text"><strong>孩子睡眠保障：</strong> 每天 8-9 小时高品质深睡，白天精神饱满。</span>
+            <span class="en-text"><strong>Teen Sleep:</strong> 8–9 hours of deep sleep, energized for school.</span>
+          </li>
+          <li>
+            <span class="zh-text"><strong>家庭争吵减少：</strong> 降为零！全凭系统和清晰因果，告别日常催促。</span>
+            <span class="en-text"><strong>Daily Friction:</strong> Drops to ZERO. Clear rules replace constant nagging.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(tabId) {
+    // Update tab contents
+    const panels = document.querySelectorAll('.tab-panel');
+    panels.forEach(panel => panel.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+
+    // Update tab buttons
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+  }
+
+  function setLanguage(lang) {
+    if (lang === 'en') {
+      document.body.className = 'lang-en';
+      document.getElementById('btn-en').classList.add('active');
+      document.getElementById('btn-zh').classList.remove('active');
+    } else {
+      document.body.className = 'lang-zh';
+      document.getElementById('btn-zh').classList.add('active');
+      document.getElementById('btn-en').classList.remove('active');
+    }
+  }
+</script>
+
+</body>
+</html>
