@@ -1,508 +1,1176 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Wiserise First-Principles Financial Tower</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiserise Money Control Room | 钱的红灯控制室</title>
+<script>history.scrollRestoration='manual';window.addEventListener('load',function(){window.scrollTo(0,0);});</script>
 <style>
-:root{
-  --ink:#122019;--muted:#5e6d65;--paper:#f5f7f2;--card:#ffffff;
-  --line:#d8e2d8;--green:#12563f;--mint:#d8eee3;--gold:#e2b04a;
-  --red:#a8402f;--blue:#2d668c;--shadow:0 8px 30px rgba(18,86,63,0.06);
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:1280px;margin:auto;padding:28px 24px 60px}
+  :root {
+    --primary: #0b1f33;
+    --accent: #b58a3a;
+    --success: #176b52;
+    --warning: #b27b24;
+    --danger: #a4473a;
+    --bg-page: #eef2f1;
+    --text-main: #132333;
+    --text-muted: #61717a;
+    --border: #d7e0df;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(180deg, #e9efed 0%, #f7f9f7 420px);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 24px 16px 48px;
+  }
+  .container { max-width: 1040px; margin: 0 auto; }
 
-/* 顶部导航与语言切换 */
-header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:24px}
-.eyebrow{font-size:11px;font-weight:800;letter-spacing:.15em;color:var(--green);text-transform:uppercase;margin-bottom:8px}
-h1{font:700 clamp(28px,4.5vw,46px)/1.08 Georgia,serif;letter-spacing:-.04em;margin:0 0 6px}
-h2{font:700 22px Georgia,serif;margin:0 0 6px}
-h3{font-size:16px;margin:0 0 4px}
-p{margin:0;color:var(--muted)}
-.lang-btn{border:1.5px solid var(--green);background:#fff;border-radius:99px;padding:8px 16px;color:var(--green);font-weight:800;cursor:pointer;transition:.2s}
-.lang-btn:hover{background:var(--green);color:#fff}
+  /* Top bar */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #cbd7d5;
+  }
+  .system-brand {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.02em;
+  }
+  .system-brand > span:first-child {
+    background: var(--primary);
+    color: #f3d38b;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    font-size: 18px;
+  }
+  .lang-switcher { display: flex; gap: 8px; }
+  .lang-btn {
+    border: 1px solid #bdcbc8;
+    background: rgba(255,255,255,.82);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .lang-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #f8dda0;
+  }
+  body.lang-zh .en-text { display: none !important; }
+  body.lang-en .zh-text { display: none !important; }
 
-/* 彻底双语隔离机制 */
-.en,.zh{display:inline}
-.zh{display:none}
-body.chinese .en{display:none!important}
-body.chinese .zh{display:inline!important}
+  /* Unified Time Range Filter Bar */
+  .filter-section {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 18px rgba(11,31,51,.04);
+  }
+  .filter-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .filter-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .filter-date-badge {
+    font-size: 12px;
+    font-weight: 700;
+    background: #eef2f1;
+    color: var(--primary);
+    padding: 3px 10px;
+    border-radius: 99px;
+    border: 1px solid #cbd7d5;
+  }
+  .time-filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .tf-btn {
+    background: #f8fafc;
+    border: 1px solid #cbd7d5;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .tf-btn:hover {
+    color: var(--primary);
+    background: #eef2f1;
+  }
+  .tf-btn.active {
+    background: var(--primary);
+    color: #f8dda0;
+    border-color: var(--primary);
+    box-shadow: 0 3px 8px rgba(11,31,51,0.18);
+  }
+  .comp-banner {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eef2f1;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 
-/* 卡片与第一性原理框架 */
-.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
-.hero-box,.panel,.kpi{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
-.hero-main{padding:28px}
-.hero-main .big-fact{font-size:20px;font-weight:600;margin:16px 0;line-height:1.4}
-.hero-side{background:var(--green)!important;color:#fff;padding:26px}
-.hero-side p{color:#c9e7da}
-.big-num{font-size:42px;font-weight:850;letter-spacing:-.05em;margin:10px 0 2px}
-.pill{background:var(--mint);color:var(--green);font-size:11px;font-weight:850;border-radius:99px;padding:4px 10px;display:inline-block}
+  .scope-banner {
+    background: rgba(255,255,255,.78);
+    border: 1px solid #cbd8d5;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    color: #3d5860;
+    box-shadow: 0 5px 18px rgba(11,31,51,.04);
+    margin-bottom: 20px;
+  }
 
-/* KPI 指标行 */
-.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:16px 0 24px}
-.kpi{padding:16px}
-.kpi label{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}
-.kpi b{font-size:22px;letter-spacing:-.03em}
+  /* Tabs Nav */
+  .tabs-nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid #cbd7d5;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 9px 9px 0 0;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #63737b;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+  }
+  .tab-btn:hover {
+    color: var(--primary);
+    background: rgba(255,255,255,.65);
+  }
+  .tab-btn.active {
+    color: #ffffff;
+    background: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 5px 12px rgba(11,31,51,.16);
+    font-weight: 700;
+  }
 
-/* Tab 切换 */
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
-.tab{border:0;background:transparent;color:var(--muted);padding:10px 14px;border-radius:12px;font-weight:750;cursor:pointer;transition:.15s}
-.tab:hover{background:#e8eee8;color:var(--ink)}
-.tab.active{background:var(--ink);color:#fff}
-.view{display:none}
-.view.active{display:block}
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
 
-/* 栅格与面板 */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.panel{padding:24px}
-.wide{grid-column:1/-1}
+  .card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #d4dfdc;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 7px 22px rgba(11,31,51,.045);
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 10px;
+    letter-spacing: -0.015em;
+  }
 
-/* 进度条与数据行 */
-.bar-row{margin:18px 0}
-.bar-top{display:flex;justify-content:space-between;gap:10px;font-weight:650;margin-bottom:5px}
-.track{height:12px;background:#eef2ee;border-radius:99px;overflow:hidden}
-.track i{display:block;height:100%;background:var(--green);border-radius:99px}
+  .bullet-list { list-style: none; }
+  .bullet-item {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 16px;
+    font-size: 14.5px;
+    color: #1e293b;
+  }
+  .bullet-item::before {
+    content: "👉";
+    position: absolute;
+    left: 0;
+    top: 1px;
+  }
+  .sub-bullet-list { list-style: none; padding-left: 12px; margin-top: 6px; }
+  .sub-bullet-list li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 6px;
+    font-size: 13.5px;
+    color: #475569;
+  }
+  .sub-bullet-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    color: var(--accent);
+  }
 
-/* 表格与筛选 */
-.search-box{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;margin:14px 0}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:760px}
-th,td{text-align:left;border-bottom:1px solid var(--line);padding:12px 10px;vertical-align:top}
-th{font-size:12px;color:var(--muted);background:#f9fbf8;position:sticky;top:0}
-.money{text-align:right;font-variant-numeric:tabular-nums;font-weight:750}
+  .box-quote {
+    background: #f6f8f7;
+    border-left: 4px solid var(--accent);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 18px;
+    color: #334155;
+  }
+  .box-warning {
+    background: #fff9ed;
+    border-left: 4px solid var(--accent);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 18px;
+    color: #72541d;
+  }
+  .box-danger {
+    background: #fff6f4;
+    border-left: 4px solid var(--danger);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 18px;
+    color: #991b1b;
+  }
+  .box-ok {
+    background: #f1f8f5;
+    border-left: 4px solid var(--success);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 18px;
+    color: #166534;
+  }
 
-/* 状态标签 */
-.tag{display:inline-block;border-radius:99px;padding:3px 8px;font-size:11px;font-weight:800}
-.tag.red{background:#fae5e1;color:var(--red)}
-.tag.gold{background:#fff1cb;color:#78530b}
-.tag.blue{background:#e6f0f7;color:var(--blue)}
-.tag.green{background:var(--mint);color:var(--green)}
+  .tag-green { background: #e0f1ea; color: #176b52; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 12px; }
+  .tag-yellow { background: #fff0cc; color: #805b18; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 12px; }
+  .tag-red { background: #f8e2de; color: #963e34; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 12px; }
+  .tag-gray { background: #e7eded; color: #53656c; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 12px; }
 
-/* 动作卡 */
-.action-box{border-left:4px solid var(--green);padding:14px 16px;background:#f6fbf8;margin:12px 0;border-radius:0 12px 12px 0}
-.action-box.red{border-color:var(--red);background:#fdf6f5}
-.action-box.gold{border-color:var(--gold);background:#fefbf4}
+  .kid-summary {
+    background: linear-gradient(135deg, #0b1f33 0%, #123d46 100%);
+    border: 1px solid #183d4d;
+    box-shadow: 0 10px 24px rgba(11,31,51,.14);
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 15px;
+  }
+  .kid-summary h4 {
+    font-size: 15px;
+    color: #f1cb79;
+    margin-bottom: 10px;
+    letter-spacing: .02em;
+  }
+  .kid-summary ul { list-style: none; }
+  .kid-summary li {
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+    font-size: 13.5px;
+    color: #f1f5f9;
+  }
+  .kid-summary li::before {
+    content: "✅";
+    position: absolute;
+    left: 0;
+    top: 1px;
+    font-size: 12px;
+  }
 
-/* 10岁物理比喻说明框 */
-.analogy-card{background:#fdfaf2;border:1.5px solid #ecd8aa;border-radius:16px;padding:18px;margin:16px 0}
-.analogy-card b{color:#7a540f}
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .kpi {
+    background: rgba(255,255,255,.86);
+    border: 1px solid #d4dfdc;
+    box-shadow: 0 4px 12px rgba(11,31,51,.035);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .kpi label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .055em;
+    color: var(--text-muted);
+  }
+  .kpi b {
+    font-size: 20px;
+    color: var(--primary);
+    letter-spacing: -0.03em;
+  }
 
-footer{color:var(--muted);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
-@media(max-width:860px){.hero,.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}}
+  .six-lines { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .line-row { display: grid; grid-template-columns: 92px 1fr; gap: 10px; font-size: 14px; }
+  .line-label { font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); padding-top: 3px; }
+
+  .bar { padding: 8px 10px; cursor: pointer; border-radius: 8px; transition: background 0.15s ease; }
+  .bar:hover { background: #eef2f1; }
+  .bar.active { background: #e6edec; border: 1px solid #cbd7d5; }
+  .barTop { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; font-weight: 700; }
+  .track { height: 8px; background: #dfe8e5; border-radius: 99px; margin: 6px 0 4px; overflow: hidden; }
+  .track i { display: block; height: 100%; background: linear-gradient(90deg, #176b52, #b58a3a); border-radius: 99px; }
+  .small { font-size: 12px; color: var(--text-muted); }
+
+  .drill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+  .drill-list { list-style: none; }
+  .drill-list li {
+    display: flex; justify-content: space-between; gap: 10px;
+    padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+  }
+  #spendDetail { display: none; margin-top: 16px; }
+
+  .search {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    margin: 8px 0 14px;
+  }
+  .vendor-card {
+    border: 1px solid #d7e0df;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    background: rgba(255,255,255,.85);
+    transition: all 0.15s ease;
+  }
+  .vendor-card:hover {
+    border-color: #b9a16c;
+    box-shadow: 0 5px 16px rgba(11,31,51,.06);
+  }
+  .vendor-top { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+  .vendor-meta { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; }
+  .vendor-nums { display: flex; justify-content: space-between; gap: 8px; margin-top: 10px; font-size: 13px; }
+  
+  .acct-row {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid #f1f5f9;
+  }
+  .acct-row:last-child { border-bottom: 0; }
+  footer {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 18px;
+    border-top: 1px solid #d4dfdc;
+    padding-top: 14px;
+  }
+
+  @media (max-width: 800px) {
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .drill-grid, .line-row { grid-template-columns: 1fr; }
+    .card { padding: 18px 16px; }
+    .vendor-top { flex-direction: column; }
+  }
 </style>
 </head>
-<body>
-<main class="wrap">
-  <header>
-    <div>
-      <div class="eyebrow">Wiserise Hospitality · First-Principles Engine</div>
-      <h1>
-        <span class="en">The True Cash & Leak Engine</span>
-        <span class="zh">真实资金与漏水控制台</span>
-      </h1>
-      <p>
-        <span class="en">Built on first principles: separate moving money from real spending, then stop quiet leaks.</span>
-        <span class="zh">基于第一性原理：区分“账户倒钱”与“真实烧钱”，用硬约束堵住无声漏水。</span>
-      </p>
+<body class="lang-zh">
+<div class="container">
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="system-brand">
+      <span>💰</span>
+      <span>
+        <span class="zh-text">钱的红灯控制室（10岁秒懂版）</span>
+        <span class="en-text">Money Red-Light Control Room (10-Yr-Old Plain English)</span>
+      </span>
     </div>
-    <button class="lang-btn" onclick="document.body.classList.toggle('chinese')">
-      <span class="en">切换为中文 (ZH)</span>
-      <span class="zh">Switch to English</span>
+    <div class="lang-switcher">
+      <button type="button" class="lang-btn active" id="btn-zh" onclick="setLanguage('zh')">中文 (Chinese)</button>
+      <button type="button" class="lang-btn" id="btn-en" onclick="setLanguage('en')">English</button>
+    </div>
+  </div>
+
+  <!-- Unified Time Range Filter Bar (First Principles) -->
+  <div class="filter-section">
+    <div class="filter-head">
+      <div class="filter-title">
+        <span>⏱️</span>
+        <span class="zh-text">时间筛选器（全站统一，第一性原理）</span>
+        <span class="en-text">Unified Time Filter (First Principles)</span>
+      </div>
+      <div class="filter-date-badge" id="filterDateRange">2026-09-04 → 2026-09-10</div>
+    </div>
+    
+    <div class="time-filters">
+      <button class="tf-btn" data-window="today" onclick="setTimeWindow('today')">
+        <span>📅</span>
+        <span class="zh-text">今天</span>
+        <span class="en-text">Today</span>
+      </button>
+      <button class="tf-btn active" data-window="week" onclick="setTimeWindow('week')">
+        <span>⚡</span>
+        <span class="zh-text">最近7天 (默认)</span>
+        <span class="en-text">Last 7 Days (Default)</span>
+      </button>
+      <button class="tf-btn" data-window="month" onclick="setTimeWindow('month')">
+        <span>🗓️</span>
+        <span class="zh-text">本月至今</span>
+        <span class="en-text">Month to Date</span>
+      </button>
+      <button class="tf-btn" data-window="quarter" onclick="setTimeWindow('quarter')">
+        <span>📊</span>
+        <span class="zh-text">本季至今</span>
+        <span class="en-text">Quarter to Date</span>
+      </button>
+      <button class="tf-btn" data-window="year" onclick="setTimeWindow('year')">
+        <span>📈</span>
+        <span class="zh-text">本年至今</span>
+        <span class="en-text">Year to Date</span>
+      </button>
+      <button class="tf-btn" data-window="all" onclick="setTimeWindow('all')">
+        <span>📚</span>
+        <span class="zh-text">完整12个月</span>
+        <span class="en-text">Full 12 Months</span>
+      </button>
+    </div>
+
+    <div class="comp-banner" id="compBanner">
+      <span id="compText">
+        <span class="zh-text">对比前7天：真实经营支出变化</span>
+        <span class="en-text">vs Prior 7 Days: True Burn Change</span>
+      </span>
+      <span id="compBadge" class="tag-green">-27.8%</span>
+    </div>
+  </div>
+
+  <div class="scope-banner">
+    <span class="zh-text">💡 <strong>只读审计，不是取消按钮。</strong> 全站根据上方时间筛选器同步联动。未知店号写 UNKNOWN，不猜店号。银行流水期：2025-09-10 → 2026-09-10；活期余额同步：2026-09-11。</span>
+    <span class="en-text">💡 <strong>Read-only audit, not a cancel button.</strong> All views synchronize to the time filter above. Unknown stores stay UNKNOWN. Transaction window: 2025-09-10 → 2026-09-10; live balance sync: 2026-09-11.</span>
+  </div>
+
+  <!-- 6 First-Principles Tabs -->
+  <div class="tabs-nav">
+    <!-- First-principles order: rules → accounts → true spend → leaks → decisions → proof -->
+    <button class="tab-btn active" onclick="switchTab('tab-rules')">
+      <span>🏛️</span>
+      <span class="zh-text">三条铁律</span>
+      <span class="en-text">3 Money Rules</span>
     </button>
-  </header>
+    <button class="tab-btn" onclick="switchTab('tab-accounts')">
+      <span>🏦</span>
+      <span class="zh-text">账户真相</span>
+      <span class="en-text">Account Truth</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-spend')">
+      <span>💸</span>
+      <span class="zh-text">真实支出</span>
+      <span class="en-text">True Spending</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-leaks')">
+      <span>🚦</span>
+      <span class="zh-text">漏水清单</span>
+      <span class="en-text">Leak List</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-decisions')">
+      <span>⭐</span>
+      <span class="zh-text">4项硬决定</span>
+      <span class="en-text">4 Big Decisions</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-proof')">
+      <span>📋</span>
+      <span class="zh-text">证据与边界</span>
+      <span class="en-text">Proof & Limits</span>
+    </button>
+  </div>
 
-  <!-- 10岁物理隐喻与第一性穿透卡 -->
-  <section class="hero">
-    <div class="hero-box hero-main">
-      <div class="pill">
-        <span class="en">FIRST PRINCIPLE 1: MOVING MONEY IS NOT SPENDING</span>
-        <span class="zh">第一性原理 1：左右口袋倒钱不是真正花钱</span>
+  <!-- TAB 1: RULES -->
+  <div id="tab-rules" class="tab-panel active">
+    <div class="card">
+      <div class="card-title">
+        <span>🏛️</span>
+        <span class="zh-text">看钱的三条铁律</span>
+        <span class="en-text">The 3 Money Rules</span>
       </div>
-      <div class="big-fact">
-        <span class="en">The bank showed $14.7M leaving accounts, but <b>$6.96M was just transfers between your own stores</b>. Real operating burn is <b>$7.28M</b>.</span>
-        <span class="zh">银行流水显示总出账 1470 万美元，但其中 <b>696 万只是自己门店账户互倒或还信用卡</b>。企业真实消耗其实是 <b>728 万美元</b>。</span>
+      <div class="box-quote">
+        <span class="zh-text">🎯 <strong>一句话道理：</strong> 左口袋倒到右口袋，不是花钱。真烧的钱，才叫支出。</span>
+        <span class="en-text">🎯 <strong>The Big Idea:</strong> Moving $10 from the left pocket to the right pocket is not spending.</span>
       </div>
-      <div class="analogy-card">
-        <b><span class="en">10-Year-Old Toy Box Analogy:</span><span class="zh">10岁小朋友的比喻：</span></b><br>
-        <span class="en">If you take $10 from your left pocket and put it in your right pocket, you didn't spend $10. We stripped out internal transfers so you see real business expenses only.</span>
-        <span class="zh">如果你把 10 块钱从左边裤兜掏出来塞进右边裤兜，你并没有花掉 10 块钱。我们帮你在底层剔除了账户内部倒钱，只计算买肉、付电费、交税的真花销。</span>
-      </div>
-    </div>
-    <div class="hero-box hero-side">
-      <div class="eyebrow" style="color:#c5ead7">
-        <span class="en">REAL BOTTOM LINE</span>
-        <span class="zh">真实净剩余</span>
-      </div>
-      <div class="big-num" id="netNum"></div>
-      <p>
-        <span class="en">Gross inflows minus gross outflows across all 12 accounts</span>
-        <span class="zh">过去 12 个月 12 个账户总进账减总出账的真实留存</span>
-      </p>
-      <div style="margin-top:22px">
-        <p><span class="en">Real Operating Burn:</span><span class="zh">真实经营消耗：</span></p>
-        <b style="font-size:22px" id="trueBurn"></b>
-        <p style="margin-top:10px"><span class="en">Inter-Account Transfers (Stripped):</span><span class="zh">被剔除的内部转账：</span></p>
-        <b style="font-size:18px;color:#c5ead7" id="transferElim"></b>
-      </div>
-    </div>
-  </section>
 
-  <!-- 核心 KPI 仪表盘 -->
-  <section class="kpis">
-    <div class="kpi">
-      <label><span class="en">Checked Accounts</span><span class="zh">检查的银行账户</span></label>
-      <b id="accCount">12</b>
-    </div>
-    <div class="kpi">
-      <label><span class="en">Cleaned Transactions</span><span class="zh">穿透交易总笔数</span></label>
-      <b id="txCount">12,967</b>
-    </div>
-    <div class="kpi">
-      <label><span class="en">Cash In Accounts Today</span><span class="zh">当前活期现金总储备</span></label>
-      <b id="cashReserve">$463,069.85</b>
-    </div>
-    <div class="kpi">
-      <label><span class="en">Audited Subscriptions</span><span class="zh">被解剖的重复账单组</span></label>
-      <b>15 <span class="en">groups</span><span class="zh">组</span></b>
-    </div>
-    <div class="kpi">
-      <label><span class="en">Annual Leak Potential</span><span class="zh">可拦截的静默漏水年化</span></label>
-      <b style="color:var(--red)">~$39,735</b>
-    </div>
-  </section>
+      <!-- Dynamic KPIs linked to Filter -->
+      <div class="kpi-row">
+        <div class="kpi">
+          <label><span class="zh-text">真经营消耗</span><span class="en-text">True burn</span></label>
+          <b id="kpiBurn">$130,623.90</b>
+        </div>
+        <div class="kpi">
+          <label><span class="zh-text">银行净现金</span><span class="en-text">Net cash</span></label>
+          <b id="kpiNet">+$74,934.65</b>
+        </div>
+        <div class="kpi">
+          <label><span class="zh-text">剔除内部转账</span><span class="en-text">Transfers cut</span></label>
+          <b id="kpiTransfer">$73,207.68</b>
+        </div>
+        <div class="kpi">
+          <label><span class="zh-text">周期交易笔数</span><span class="en-text">Tx count</span></label>
+          <b id="kpiTx">246</b>
+        </div>
+      </div>
 
-  <!-- 导航标签 -->
-  <nav class="tabs">
-    <button class="tab active" data-view="principles"><span class="en">1. 4 First Principles</span><span class="zh">1. 四大第一性原理</span></button>
-    <button class="tab" data-view="leaks"><span class="en">2. Subscriptions & Tokens</span><span class="zh">2. 订阅与 Token 解剖</span></button>
-    <button class="tab" data-view="realspend"><span class="en">3. Real Spending Only</span><span class="zh">3. 真实纯支出结构</span></button>
-    <button class="tab" data-view="stores"><span class="en">4. Accounts & Stores</span><span class="zh">4. 门店与账户物理绑定</span></button>
-    <button class="tab" data-view="engine"><span class="en">5. Live Engine Setup</span><span class="zh">5. 常驻看板与自动化</span></button>
-  </nav>
-
-  <!-- 模块 1：第一性原理四大升级 -->
-  <section id="principles" class="view active">
-    <div class="grid">
-      <div class="panel">
-        <h2>
-          <span class="en">The 4 Fundamental Truths</span>
-          <span class="zh">系统四大根本改进（第一性原理）</span>
-        </h2>
-        <div class="action-box">
-          <b>1. <span class="en">Inter-account elimination:</span><span class="zh">对冲对销内部转账：</span></b><br>
-          <span class="en">$6.96M of transfers are zeroed out. You never set savings targets on fake volume.</span>
-          <span class="zh">剔除 696 万美元的内部倒钱，只抓真正离开集团的资金，杜绝虚假支出被当成节流目标。</span>
-        </div>
-        <div class="action-box red">
-          <b>2. <span class="en">Hard spend limit on tokens (not after-the-fact):</span><span class="zh">AI Token 改为事前硬顶：</span></b><br>
-          <span class="en">Anthropic billed 206 micro-charges ($10.6k). Lock hard limits at $500/month in the developer console.</span>
-          <span class="zh">Anthropic 产生 206 次小额扣费（$10.6k）。直接在开发者后台锁死每月上限，不再事后看账单。</span>
-        </div>
-        <div class="action-box gold">
-          <b>3. <span class="en">Physical store & owner tagging:</span><span class="zh">按门店绑定物理责任人：</span></b><br>
-          <span class="en">QuickBooks, 7shifts, and Facebook are tied to specific store IDs (00001, 00002, 00003). If a store closes, its tools get cut instantly.</span>
-          <span class="zh">每个软件明确标注归属哪家店和哪个 GM。门店如果关停或调整，系统立刻预警切断对应扣款。</span>
-        </div>
-        <div class="action-box">
-          <b>4. <span class="en">30-day unused kill engine:</span><span class="zh">30天无活跃度直接处死：</span></b><br>
-          <span class="en">Zombie subscriptions (Grok, Higgsfield, Zapier) with zero usage in 30 days are automatically queued for termination.</span>
-          <span class="zh">连续 30 天无登录、无调用的工具（如 Grok、Higgsfield），系统直接标红亮出退订通道。</span>
-        </div>
+      <ul class="bullet-list">
+        <li class="bullet-item">
+          <strong><span class="zh-text">规则 1：口袋搬家 ≠ 花钱</span><span class="en-text">Rule 1: Pocket-move is not spend</span></strong>
+          <ul class="sub-bullet-list">
+            <li><span class="zh-text">当前所选期间内，银行出账包含账户间内部调度资金与还卡转账。</span><span class="en-text">During this period, bank outflows include internal transfers and card payments.</span></li>
+            <li><span class="zh-text">只有真正付给外部供应商的钱，才计入真实运营消耗（True Burn）。</span><span class="en-text">Only real money paid to outside vendors is counted as True Operating Burn.</span></li>
+            <li><span class="zh-text"><strong>为什么：</strong> 用总出账当成本，会把公司看成严重失血。那是假数字。</span><span class="en-text"><strong>Why:</strong> Gross outflow distorts your real profit and loss.</span></li>
+          </ul>
+        </li>
+        <li class="bullet-item">
+          <strong><span class="zh-text">规则 2：未知不是绿色</span><span class="en-text">Rule 2: Unknown is not green</span></strong>
+          <ul class="sub-bullet-list">
+            <li><span class="zh-text">店号对不上，就写 UNKNOWN。禁止把 0333 / 1357 标成 00002。</span><span class="en-text">If the store ID is unclear, write UNKNOWN. Do not tag 0333 or 1357 as 00002.</span></li>
+            <li><span class="zh-text">00002 的锁定店名是 Masa Greenville。这 12 个银行户里，没有一个户名写 Masa。</span><span class="en-text">Locked name for 00002 is Masa Greenville. None of these 12 bank accounts say Masa.</span></li>
+            <li><span class="zh-text"><strong>为什么：</strong> 猜错店号，就会把一家店的两张账单当成重复付费，误砍软件。</span><span class="en-text"><strong>Why:</strong> A wrong store tag can make one store look like two bills, and you cancel a needed tool.</span></li>
+          </ul>
+        </li>
+        <li class="bullet-item">
+          <strong><span class="zh-text">规则 3：没有证明 = 没做完</span><span class="en-text">Rule 3: No proof = not done</span></strong>
+          <ul class="sub-bullet-list">
+            <li><span class="zh-text">工资、税、食材、房租、保险、关键餐厅系统 = 绿灯保护，不进取消清单。</span><span class="en-text">Payroll, tax, food, rent, insurance, and key restaurant systems are protected. Not a cancel list.</span></li>
+            <li><span class="zh-text">软件和 Token：谁在用、做什么、有没有客人/店员用到，要有证据。</span><span class="en-text">Software and tokens need an owner, a job, and proof someone uses them.</span></li>
+            <li><span class="zh-text"><strong>为什么：</strong> 银行只能看见扣款，看不见登录。流水不是使用证明。</span><span class="en-text"><strong>Why:</strong> The bank sees charges, not logins. A charge is not proof of value.</span></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="box-ok">
+        <span class="zh-text">🟢 先保留：Gusto 工资、税、食材供应商、房租水电。这些不是省钱目标。</span>
+        <span class="en-text">🟢 Keep first: Gusto payroll, tax, food vendors, rent and utilities. These are not savings targets.</span>
       </div>
-      <div class="panel">
-        <h2>
-          <span class="en">Decision Framework</span>
-          <span class="zh">四步决策模型</span>
-        </h2>
-        <div class="action-box">
-          <b>KEEP / 保留：</b><br>
-          <span class="en">Wages, food supply, taxes, lease, utilities, safety. Crucial to restaurant operations.</span>
-          <span class="zh">工资、食材供应、税、房租、水电煤网、安全保障。不可盲目砍除的底盘。</span>
-        </div>
-        <div class="action-box gold">
-          <b>SET HARD LIMIT / 设硬顶：</b><br>
-          <span class="en">Anthropic ($10.6k), OpenAI ($1k). Switch from auto-reload to fixed prepaid caps.</span>
-          <span class="zh">Anthropic、OpenAI 等大额 API。从无感自动充值切换为固定充值限额。</span>
-        </div>
-        <div class="action-box gold">
-          <b>ELIMINATE DUPS / 查重复：</b><br>
-          <span class="en">QuickBooks (47 charges across 5 accounts), 7shifts. Consolidate to company billing.</span>
-          <span class="zh">QuickBooks（5个账户47次扣款）、7shifts。排查是否多付或存在闲置店务系统。</span>
-        </div>
-        <div class="action-box red">
-          <b>30-DAY KILL / 处死沉睡项：</b><br>
-          <span class="en">YouTube TV ($1.69k on 6 accounts), Spotify, Grok, Zapier. Cancel if no guest or ops value.</span>
-          <span class="zh">分散在 6 张卡上的 YouTube、Spotify、Grok、Zapier。凡是不给堂食或运营赋能的全部退订。</span>
-        </div>
+      <div class="kid-summary">
+        <h4><span class="zh-text">10秒记住：</span><span class="en-text">Remember in 10 Seconds:</span></h4>
+        <ul>
+          <li><span class="zh-text">看当前周期真实消耗，不看银行毛流出。</span><span class="en-text">Watch True Burn for the period, not gross bank outflow.</span></li>
+          <li><span class="zh-text">对不上的店号写 UNKNOWN，不要猜 00002。</span><span class="en-text">Unmapped stores stay UNKNOWN. Do not guess 00002.</span></li>
+          <li><span class="zh-text">工资税房租食材不砍。没证明的订阅才进黄灯。</span><span class="en-text">Do not cut payroll, tax, rent, or food. Only unproven bills go yellow.</span></li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- 模块 2：重复账单与 Token 深度解剖 -->
-  <section id="leaks" class="view">
-    <div class="panel wide">
-      <h2>
-        <span class="en">Audit Every Repeating Dollar</span>
-        <span class="zh">重复扣款与 Token 深度剖析</span>
-      </h2>
-      <p>
-        <span class="en">Search any tool to see exact account sources, risk levels, and first-principles action.</span>
-        <span class="zh">输入任何供应商名称，查看扣款账户、风险评级和第一性处置建议。</span>
-      </p>
-      <input type="text" class="search-box" id="vendorInput" placeholder="Filter vendors (e.g. Anthropic, 7shifts, QuickBooks)... / 搜索供应商...">
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th><span class="en">Vendor & Source Accounts</span><span class="zh">供应商与出账卡号</span></th>
-              <th><span class="en">Category</span><span class="zh">费用类型</span></th>
-              <th><span class="en">First-Principles Action</span><span class="zh">第一性行动</span></th>
-              <th><span class="en">12-Mo Total</span><span class="zh">12个月总额</span></th>
-              <th><span class="en">Monthly Avg</span><span class="zh">月均消耗</span></th>
-              <th><span class="en">Risk Reason & Prescription</span><span class="zh">漏水病因与药方</span></th>
-            </tr>
-          </thead>
-          <tbody id="vendorTableBody"></tbody>
-        </table>
+  <!-- TAB 2: ACCOUNTS -->
+  <div id="tab-accounts" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>🏦</span>
+        <span class="zh-text">钱现在放在哪</span>
+        <span class="en-text">Where the Money Sits Right Now</span>
+      </div>
+      <div class="box-quote">
+        <span class="zh-text">🎯 <strong>一句话道理：</strong> 每个账户都要有主人。没有店号，就写未知。</span>
+        <span class="en-text">🎯 <strong>The Big Idea:</strong> Every account needs an owner. No store number? Write UNKNOWN.</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi"><label><span class="zh-text">存款（含 8517）</span><span class="en-text">Cash (incl. 8517)</span></label><b>$467,155.43</b></div>
+        <div class="kpi"><label><span class="zh-text">信用卡欠款</span><span class="en-text">Card debt</span></label><b>$5,167.27</b></div>
+        <div class="kpi"><label><span class="zh-text">净资产（OpenBudget）</span><span class="en-text">Net worth (OpenBudget)</span></label><b>$462,988.16</b></div>
+        <div class="kpi"><label><span class="zh-text">账户数</span><span class="en-text">Accounts</span></label><b>12</b></div>
+      </div>
+      <div class="box-danger">
+        <span class="zh-text">🔴 门店映射警告：00002 Masa Greenville 在这 12 个户名里找不到 Masa。0333、1357、0368、8517 全部 UNKNOWN。在 Yumi / Louis 核实前，禁止用店号做取消决定。</span>
+        <span class="en-text">🔴 Store-map warning: 00002 Masa Greenville does not appear on any of these 12 account names. 0333, 1357, 0368, and 8517 are UNKNOWN. No cancel decision from a guessed store ID.</span>
+      </div>
+      <div id="accountList"></div>
+      <div class="kid-summary">
+        <h4><span class="zh-text">10秒记住：</span><span class="en-text">Remember in 10 Seconds:</span></h4>
+        <ul>
+          <li><span class="zh-text">00001 = Fayetteville 3511 / 3538 / 8429。00003 = Wilmington 2574。</span><span class="en-text">00001 = Fayetteville 3511 / 3538 / 8429. 00003 = Wilmington 2574.</span></li>
+          <li><span class="zh-text">00002 对不上。Greenville 两个户 + Boil 0368 + 8517 = 未知。</span><span class="en-text">00002 does not match. Greenville pair + Boil 0368 + 8517 = UNKNOWN.</span></li>
+          <li><span class="zh-text">0368 现金最多（约 $22.9 万），更要先贴对店号。</span><span class="en-text">0368 holds the most cash (~$229k). Map it before anything else.</span></li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- 模块 3：剔除内部转账后的纯真实支出 -->
-  <section id="realspend" class="view">
-    <div class="grid">
-      <div class="panel">
-        <h2>
-          <span class="en">Real Operating Spend Breakdown</span>
-          <span class="zh">真实纯运营支出结构（已对销转账）</span>
-        </h2>
-        <p>
-          <span class="en">Showing only true cash burned to run the business ($7.28M total).</span>
-          <span class="zh">只展示离开企业的真实资金消耗（总计 728 万美元）。</span>
-        </p>
-        <div id="realCatBars"></div>
+  <!-- TAB 3: TRUE SPENDING -->
+  <div id="tab-spend" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>💸</span>
+        <span class="zh-text">真实支出去向（动态联动时间筛选器）</span>
+        <span class="en-text">Where True Spending Goes (Linked to Filter)</span>
       </div>
-      <div class="panel">
-        <h2>
-          <span class="en">Where True Cash Goes</span>
-          <span class="zh">资金真去向与第一性评价</span>
-        </h2>
-        <div class="action-box">
-          <b><span class="en">1. Food & Beverage ($2.50M):</span><span class="zh">1. 食材与酒水（250 万美元）：</span></b><br>
-          <span class="en">Foodservice, PFG, A&D Foods, Sam's Club. Core restaurant COGS. Optimize supplier volume rebates, not starving kitchens.</span>
-          <span class="zh">主要的食材供应商包括 PFG、A&D Foods、Sam's Club 等。这是餐饮基本盘，核心在谈大宗返点而非克扣出品。</span>
-        </div>
-        <div class="action-box">
-          <b><span class="en">2. Labor & Outsourcing ($1.33M):</span><span class="zh">2. 人工外包与通用服务（133 万美元）：</span></b><br>
-          <span class="en">Gusto payroll service, local accounting, professional labor. Must match POS sales volume.</span>
-          <span class="zh">包含 Gusto 薪酬代发服务、会计报税与专业人员支持。第一性要求：人工成本率必须严格匹配 POS 实际营业额。</span>
-        </div>
-        <div class="action-box">
-          <b><span class="en">3. Government & Taxes ($1.11M):</span><span class="zh">3. 税款与政府法定规费（111 万美元）：</span></b><br>
-          <span class="en">NC Dept of Revenue, IRS. Legally protected. Never mislabel as savings.</span>
-          <span class="zh">北卡税务局、IRS 联邦税。法律红线专款，绝对不可算作“节流省钱”对象。</span>
-        </div>
-        <div class="action-box">
-          <b><span class="en">4. Rent & Power ($476k):</span><span class="zh">4. 房租与水电煤气（47.6 万美元）：</span></b><br>
-          <span class="en">Duke Energy, Piedmont Natural Gas, City Utilities. Fixed store infrastructure costs.</span>
-          <span class="zh">杜克电力、皮埃蒙特天然气等。实体门店经营的基础设施固定成本。</span>
-        </div>
+      <div class="box-quote">
+        <span class="zh-text">🎯 <strong>一句话道理：</strong> 点一下柱子，就能看到该时间段内的具体名字与占比。名字从大到小排。</span>
+        <span class="en-text">🎯 <strong>The Big Idea:</strong> Click a bar. Names in this time window appear largest to smallest.</span>
+      </div>
+      <div class="box-warning">
+        <span class="zh-text">⚠️ 内部转账和贷款还款已剔除。点击柱状图查看具体供应商、月度趋势环比、扣款账户。</span>
+        <span class="en-text">⚠️ Transfers and loan payments removed. Click any bar for merchants, trends, and accounts.</span>
+      </div>
+      <div id="bars"></div>
+      <div id="spendDetail"></div>
+      <div class="kid-summary">
+        <h4><span class="zh-text">10秒记住：</span><span class="en-text">Remember in 10 Seconds:</span></h4>
+        <ul>
+          <li><span class="zh-text">食材通常是最大的经营支出，重在控损和比价，不可盲砍。</span><span class="en-text">Food is typically the largest burn. Control waste and price; do not cancel.</span></li>
+          <li><span class="zh-text">税和政府支出为刚性法定专款，受保护。</span><span class="en-text">Taxes and government fees are statutory and protected.</span></li>
+          <li><span class="zh-text">切换上方筛选器（今天/7天/月/季/年），柱子和明细将自动重新统计。</span><span class="en-text">Switching the filter above instantly recalculates categories and drilldowns.</span></li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- 模块 4：门店与账户物理绑定 -->
-  <section id="stores" class="view">
-    <div class="grid">
-      <div class="panel">
-        <h2>
-          <span class="en">12 Accounts Mapped to Stores</span>
-          <span class="zh">12 个账户物理绑定矩阵</span>
-        </h2>
-        <p>
-          <span class="en">Every account must serve a physical restaurant entity or HQ.</span>
-          <span class="zh">每个银行账户与信用卡必须对齐到具体实体或总部。</span>
-        </p>
-        <div id="accountCards"></div>
+  <!-- TAB 4: LEAKS -->
+  <div id="tab-leaks" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>🚦</span>
+        <span class="zh-text">重复账单红绿灯</span>
+        <span class="en-text">Repeating Bills: Green / Yellow / Red</span>
       </div>
-      <div class="panel">
-        <h2>
-          <span class="en">Account Governance Rules</span>
-          <span class="zh">账户治理第一性规则</span>
-        </h2>
-        <div class="action-box">
-          <b><span class="en">Strict separation:</span><span class="zh">公私严格隔离：</span></b><br>
-          <span class="en">Account 8517 contains mixed usage. Isolate company cash into pure business depository accounts to prevent audit risks.</span>
-          <span class="zh">尾号 8517 账户存在混合性质。必须将公司资金严格归集到企业支票户，防止税务与审计穿透风险。</span>
-        </div>
-        <div class="action-box red">
-          <b><span class="en">Dedicated tax reserve:</span><span class="zh">税款独立锁死：</span></b><br>
-          <span class="en">Account 3538 (Payroll & Tax) must always maintain a rolling 30-day payroll and sales tax buffer.</span>
-          <span class="zh">尾号 3538 专户内永远保留至少 30 天的工资与销售税储备金，任何日常采购严禁向此户划账。</span>
-        </div>
-        <div class="action-box gold">
-          <b><span class="en">Credit card sanity:</span><span class="zh">信用卡零余额管理：</span></b><br>
-          <span class="en">Credit limits are $2.5k–$15k. Pay off monthly via autopay to avoid high interest charges.</span>
-          <span class="zh">信用卡额度为 2,500 至 15,000 美元。每月全额自动还清，杜绝利息与滞纳金损耗。</span>
-        </div>
+      <div class="box-quote">
+        <span class="zh-text">🎯 <strong>一句话道理：</strong> 每个月都扣的钱，要能回答：谁在用？干什么？证据在哪？</span>
+        <span class="en-text">🎯 <strong>The Big Idea:</strong> Every repeating bill must answer: who uses it, what it does, and where the proof is.</span>
+      </div>
+      <div class="box-ok">
+        <span class="zh-text">🟢 绿灯：工资、税、食材、房租、保险、7shifts/QuickBooks（先对店，不退订）。</span>
+        <span class="en-text">🟢 Green: payroll, tax, food, rent, insurance. 7shifts/QuickBooks stay until the store map is real.</span>
+      </div>
+      <div class="box-warning">
+        <span class="zh-text">🟡 黄灯：广告、招聘、Slack、Notion。要结果，不自动关。</span>
+        <span class="en-text">🟡 Yellow: ads, hiring, Slack, Notion. Need results. No auto-off.</span>
+      </div>
+      <div class="box-danger">
+        <span class="zh-text">🔴 红灯：Anthropic 无上限；Grok / Higgsfield 只活了 2 个月。仍需人工确认后才能退。</span>
+        <span class="en-text">🔴 Red: uncapped Anthropic; Grok/Higgsfield only billed 2 months. Still human-confirm before cancel.</span>
+      </div>
+      <input class="search" id="search" placeholder="搜索 / Search: Anthropic, 7shifts, Spotify...">
+      <div id="vendors"></div>
+      <div class="kid-summary">
+        <h4><span class="zh-text">10秒记住：</span><span class="en-text">Remember in 10 Seconds:</span></h4>
+        <ul>
+          <li><span class="zh-text">15 个重复供应商要证据，不是 15 个取消按钮。</span><span class="en-text">15 repeating vendors need proof, not 15 cancel clicks.</span></li>
+          <li><span class="zh-text">手机上一张卡片就能同时看见名字和金额，不用左右滑。</span><span class="en-text">On a phone, each vendor is a card: name and dollars on one screen.</span></li>
+          <li><span class="zh-text">店号没对齐前，7shifts / QuickBooks 保持黄灯。</span><span class="en-text">Until stores are mapped, 7shifts and QuickBooks stay yellow.</span></li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- 模块 5：常驻自动化配置 -->
-  <section id="engine" class="view">
-    <div class="panel wide">
-      <h2>
-        <span class="en">How to Keep This Dashboard Live All the Time</span>
-        <span class="zh">如何让这个看板 24 小时保持实时活跃？</span>
-      </h2>
-      <p>
-        <span class="en">The pipeline is ready. Here is the exact automated machinery that keeps it refreshed without manual work:</span>
-        <span class="zh">底层数据通道已完全打通。以下是无需人工干预、常年自动刷新的第一性闭环：</span>
-      </p>
-      <div class="grid" style="margin-top:16px">
-        <div class="action-box">
-          <b><span class="en">Step 1: Nightly Plaid Sync (Automatic):</span><span class="zh">第一步：Plaid 自动拉取流水：</span></b><br>
-          <span class="en">Every night at 11:30 PM, OpenBudget pulls yesterday's transactions from Truist for all 12 accounts.</span>
-          <span class="zh">每晚 11:30，OpenBudget 自动从 Truist 银行同步所有 12 个账户的昨天最新流水。</span>
+  <!-- TAB 5: 4 HARD DECISIONS -->
+  <div id="tab-decisions" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>⭐</span>
+        <span class="zh-text">现在只拍这 4 个板</span>
+        <span class="en-text">Only These 4 Decisions Matter Now</span>
+      </div>
+      <div class="box-quote">
+        <span class="zh-text">🎯 <strong>一句话道理：</strong> 先关还在漏的水龙头，再谈省钱。没有证明，就不算做完。</span>
+        <span class="en-text">🎯 <strong>The Big Idea:</strong> Turn off open faucets first. No proof = not done.</span>
+      </div>
+      <div class="box-danger">
+        <span class="zh-text">🔴 这一页不能自动退订、不能转账、不能关户。Louis 或 Yumi 点头 + 截图证明，才算完成。</span>
+        <span class="en-text">🔴 This page cannot auto-cancel, transfer, or close accounts. Louis or Yumi plus screenshot proof = done.</span>
+      </div>
+
+      <div class="card" style="padding:18px;margin:0 0 16px;border-left:4px solid var(--danger)">
+        <div class="card-title" style="border:0;margin:0 0 8px;padding:0">
+          <span class="zh-text">决定 1 · AI 硬顶</span>
+          <span class="en-text">Decision 1 · AI Hard Cap</span>
+          <span class="tag-red">RED</span>
         </div>
-        <div class="action-box gold">
-          <b><span class="en">Step 2: Morning Hermes Audit Worker (7:30 AM):</span><span class="zh">第二步：Hermes 定时审计计算（7:30 AM）：</span></b><br>
-          <span class="en">A dedicated Python script cleans internal transfers, aggregates vendor totals, and renders the updated HTML.</span>
-          <span class="zh">系统定时任务执行 Python 脚本，自动对冲内部转账，计算最新的净现金流并生成最新 HTML。</span>
-        </div>
-        <div class="action-box">
-          <b><span class="en">Step 3: Auto-Commit to GitHub Pages:</span><span class="zh">第三步：自动推送 GitHub 更新网页：</span></b><br>
-          <span class="en">Hermes pushes the new file to the <code>wiserise-roadmap</code> repo. The live web link updates automatically in under 60 seconds.</span>
-          <span class="zh">更新后的看板自动提交并推送到 GitHub。手机或电脑打开网页直接就是最新数据。</span>
-        </div>
-        <div class="action-box red">
-          <b><span class="en">Step 4: Slack Over-Limit Guard:</span><span class="zh">第四步：Slack 异常报警兜底：</span></b><br>
-          <span class="en">If token spend or unexpected recurring bills spike above $100 in 24 hours, Hermes DMs Louis on Slack immediately.</span>
-          <span class="zh">如果某项 API 或意外扣款单日超过 100 美元，Hermes 立即在 Slack 私聊发送红卡报警，无需被动查账。</span>
+        <div class="six-lines">
+          <div class="line-row"><span class="line-label"><span class="zh-text">1. 事实</span><span class="en-text">1. FACT</span></span><span><span class="zh-text">Anthropic 12 个月扣了 <b>$10,625.40</b>，206 笔小额自动充值，平均约每 36 小时 $51。卡：Visa 4030、Visa 6492。</span><span class="en-text">Anthropic charged <b>$10,625.40</b> in 206 micro auto-reloads (about $51 every 36 hours). Cards: Visa 4030 and Visa 6492.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">2. 判断</span><span class="en-text">2. JUDGMENT</span></span><span><span class="zh-text">没上限的自动充值 = 开着的水龙头。编码机器人会静默烧钱。</span><span class="en-text">Auto-reload with no monthly cap is an open faucet. Coding agents can spend silently.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">3. 负责人</span><span class="en-text">3. DRI</span></span><span><b>Louis</b></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">4. 行动</span><span class="en-text">4. ACTION</span></span><span><span class="zh-text">登录 console.anthropic.com → Billing → 月上限 <b>$500</b> → 关掉 Auto-Reload。</span><span class="en-text">console.anthropic.com → Billing → hard cap <b>$500/month</b> → Auto-Reload OFF.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">5. 截止日</span><span class="en-text">5. DATE</span></span><span><b><span class="zh-text">今天 24 小时内</span><span class="en-text">Today (24h)</span></b></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">6. 证明</span><span class="en-text">6. PROOF</span></span><span><span class="zh-text">计费页截图：月限额 $500，自动充值已关。</span><span class="en-text">Billing screenshot: $500 cap and auto-reload disabled.</span></span></div>
         </div>
       </div>
+
+      <div class="card" style="padding:18px;margin:0 0 16px;border-left:4px solid var(--warning)">
+        <div class="card-title" style="border:0;margin:0 0 8px;padding:0">
+          <span class="zh-text">决定 2 · 30 天僵尸订阅</span>
+          <span class="en-text">Decision 2 · 30-Day Zombie Bills</span>
+          <span class="tag-yellow">YELLOW</span>
+        </div>
+        <div class="six-lines">
+          <div class="line-row"><span class="line-label"><span class="zh-text">1. 事实</span><span class="en-text">1. FACT</span></span><span><span class="zh-text">Grok $1,198 和 Higgsfield $228 只出现 2 个月。Zapier $944、Spotify $133 每月扣。合计 <b>$2,502.65</b>。</span><span class="en-text">Grok $1,198 and Higgsfield $228 billed in only 2 months. Zapier $944 and Spotify $133 bill monthly. Total <b>$2,502.65</b>.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">2. 判断</span><span class="en-text">2. JUDGMENT</span></span><span><span class="zh-text">银行流水不能证明有没有人在用。没人用才是浪费。先查活跃，再退订。</span><span class="en-text">Bank data cannot prove login activity. Unused tools are waste. Check use, then cancel.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">3. 负责人</span><span class="en-text">3. DRI</span></span><span><b>Louis</b></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">4. 行动</span><span class="en-text">4. ACTION</span></span><span><span class="zh-text">48 小时内：Grok / Higgsfield 无使用就退订；Zapier 查有没有活跃流程；Spotify 查门店是否在播。</span><span class="en-text">Within 48h: cancel Grok/Higgsfield if unused; check Zapier zaps; check if any store plays Spotify.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">5. 截止日</span><span class="en-text">5. DATE</span></span><span><b><span class="zh-text">48 小时内</span><span class="en-text">Within 48 hours</span></b></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">6. 证明</span><span class="en-text">6. PROOF</span></span><span><span class="zh-text">退订邮件，或“保留 + 谁在用”的一句话。</span><span class="en-text">Cancel email, or one sentence: keep + who uses it.</span></span></div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:18px;margin:0 0 16px;border-left:4px solid var(--warning)">
+        <div class="card-title" style="border:0;margin:0 0 8px;padding:0">
+          <span class="zh-text">决定 3 · 可能重复，先对店号</span>
+          <span class="en-text">Decision 3 · Possible Duplicate · Map Stores First</span>
+          <span class="tag-yellow">YELLOW</span>
+        </div>
+        <div class="box-warning">
+          <span class="zh-text">⚠️ 0333（Gangnam Greenville）和 1357（Tokugawa Greenville）可能是同一家店的两个旧名字。Yumi 核实前，<b>禁止退订 QuickBooks / 7shifts</b>。</span>
+          <span class="en-text">⚠️ 0333 (Gangnam Greenville) and 1357 (Tokugawa Greenville) may be one store under two old names. <b>Do not cancel QuickBooks or 7shifts</b> until Yumi maps them.</span>
+        </div>
+        <div class="six-lines">
+          <div class="line-row"><span class="line-label"><span class="zh-text">1. 事实</span><span class="en-text">1. FACT</span></span><span><span class="zh-text">QuickBooks 5 个户扣 47 次，共 $2,877。7shifts 6 个户扣 34 次，共 $4,629。合计 <b>$7,506.13</b>。</span><span class="en-text">QuickBooks: 47 charges on 5 accounts, $2,877. 7shifts: 34 charges on 6 accounts, $4,629. Total <b>$7,506.13</b>.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">2. 判断</span><span class="en-text">2. JUDGMENT</span></span><span><span class="zh-text">这可能是重复付费，也可能只是一家店两个户名。未知不是绿色。</span><span class="en-text">This might be double billing, or one store counted twice. Unknown is not green.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">3. 负责人</span><span class="en-text">3. DRI</span></span><span><b>Yumi / Louis</b></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">4. 行动</span><span class="en-text">4. ACTION</span></span><span><span class="zh-text">先做一张店号对照表：每个扣费账户 → 00001 / 00002 / 00003 / HQ / UNKNOWN。对不上的先标未知。</span><span class="en-text">Make a store map first: each billed account → 00001 / 00002 / 00003 / HQ / UNKNOWN.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">5. 截止日</span><span class="en-text">5. DATE</span></span><span><b><span class="zh-text">下周五前</span><span class="en-text">Next Friday</span></b></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">6. 证明</span><span class="en-text">6. PROOF</span></span><span><span class="zh-text">一张表：每家在营业的店只有 1 份有效软件扣费。对不上的保持 UNKNOWN。</span><span class="en-text">One table: 1 live license per open store. Unmapped rows stay UNKNOWN.</span></span></div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:18px;margin:0;border-left:4px solid var(--danger)">
+        <div class="card-title" style="border:0;margin:0 0 8px;padding:0">
+          <span class="zh-text">决定 4 · 隔离 8517</span>
+          <span class="en-text">Decision 4 · Isolate 8517</span>
+          <span class="tag-red">RED</span>
+        </div>
+        <div class="six-lines">
+          <div class="line-row"><span class="line-label"><span class="zh-text">1. 事实</span><span class="en-text">1. FACT</span></span><span><span class="zh-text">Checking 8517（Truist One Checking）余额 <b>$13,254.55</b>。户名不像门店户，却和公司户互转、还信用卡。</span><span class="en-text">Checking 8517 (Truist One Checking) holds <b>$13,254.55</b>. The name does not look like a store account, but it moves cash with company accounts and pays cards.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">2. 判断</span><span class="en-text">2. JUDGMENT</span></span><span><span class="zh-text">公私混用会刺破公司面纱，税务也难看清。先隔离，再定性。</span><span class="en-text">Mixing personal and business cash is a corporate-veil risk. Isolate first, then label.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">3. 负责人</span><span class="en-text">3. DRI</span></span><span><b>Louis</b></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">4. 行动</span><span class="en-text">4. ACTION</span></span><span><span class="zh-text">立刻停止用 8517 付公司账单。股东拿钱走正规分红/工资。8517 先移出干净经营账。</span><span class="en-text">Stop business spend on 8517 now. Owner draws only via payroll/distribution. Keep 8517 out of the clean P&L.</span></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">5. 截止日</span><span class="en-text">5. DATE</span></span><span><b><span class="zh-text">立即</span><span class="en-text">Immediate</span></b></span></div>
+          <div class="line-row"><span class="line-label"><span class="zh-text">6. 证明</span><span class="en-text">6. PROOF</span></span><span><span class="zh-text">连续 30 天 8517 无公司扣款。</span><span class="en-text">30 straight days with 0 business debits on 8517.</span></span></div>
+        </div>
+      </div>
+
+      <div class="kid-summary">
+        <h4><span class="zh-text">10秒记住：</span><span class="en-text">Remember in 10 Seconds:</span></h4>
+        <ul>
+          <li><span class="zh-text">AI 今天设 $500 硬顶，关掉自动充值。</span><span class="en-text">Cap Anthropic at $500 today. Auto-reload off.</span></li>
+          <li><span class="zh-text">僵尸订阅 48 小时内查清：没用就退，有用就写谁在用。</span><span class="en-text">Zombie bills: prove use in 48h, or cancel.</span></li>
+          <li><span class="zh-text">0333 和 1357 先问 Yumi，不要退订 7shifts / QuickBooks。</span><span class="en-text">Ask Yumi before touching 7shifts or QuickBooks.</span></li>
+          <li><span class="zh-text">8517 立刻隔离，30 天无公司扣款才算干净。</span><span class="en-text">Isolate 8517 now. 30 clean days = proof.</span></li>
+        </ul>
+      </div>
     </div>
-  </section>
+  </div>
+
+  <!-- TAB 6: PROOF -->
+  <div id="tab-proof" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>📋</span>
+        <span class="zh-text">什么叫完成，数据边界在哪</span>
+        <span class="en-text">What Counts as Done, and Data Limits</span>
+      </div>
+      <div class="box-quote">
+        <span class="zh-text">🎯 <strong>一句话道理：</strong> 截图、邮件、30 天干净流水，才是完成。聊天记录不算。</span>
+        <span class="en-text">🎯 <strong>The Big Idea:</strong> Screenshots, emails, and 30 clean bank days count. Chat talk does not.</span>
+      </div>
+      <ul class="bullet-list">
+        <li class="bullet-item">
+          <strong><span class="zh-text">绿灯完成</span><span class="en-text">Done = green</span></strong>
+          <ul class="sub-bullet-list">
+            <li><span class="zh-text">Anthropic：Billing 截图，月限额 $500，Auto-Reload 关闭。</span><span class="en-text">Anthropic: billing screenshot, $500 cap, auto-reload off.</span></li>
+            <li><span class="zh-text">退订：官方确认邮件。</span><span class="en-text">Cancels: vendor confirmation email.</span></li>
+            <li><span class="zh-text">8517：连续 30 天无公司扣款。</span><span class="en-text">8517: 30 days with zero business debits.</span></li>
+            <li><span class="zh-text">店号表：Yumi 签字或 Slack 确认，每行有 00001/00002/00003/HQ/UNKNOWN。</span><span class="en-text">Store map: Yumi confirms each row as 00001 / 00002 / 00003 / HQ / UNKNOWN.</span></li>
+          </ul>
+        </li>
+        <li class="bullet-item">
+          <strong><span class="zh-text">数据还脏的地方（UNKNOWN）</span><span class="en-text">Still dirty (UNKNOWN)</span></strong>
+          <ul class="sub-bullet-list">
+            <li><span class="zh-text">7 笔银行删除交易、89 笔疑似重复。核对账单前，总额不是最终数。</span><span class="en-text">7 bank-removed transactions and 89 possible duplicates. Totals are not final until statements match.</span></li>
+            <li><span class="zh-text">内部转账还没一对一轧差。分类剔除不是已对账。</span><span class="en-text">Internal transfers are not one-to-one matched. A category cut is not a reconciled net.</span></li>
+            <li><span class="zh-text">银行看不见软件登录。不能用扣款证明“有人在用”。</span><span class="en-text">Bank data cannot prove app logins. A charge is not usage.</span></li>
+            <li><span class="zh-text">清理完成前，不设最终节省目标。AI 不自动退订。</span><span class="en-text">No final savings number until cleanup is done. AI will not auto-cancel.</span></li>
+          </ul>
+        </li>
+        <li class="bullet-item">
+          <strong><span class="zh-text">这一页做不到的事</span><span class="en-text">What this page will not do</span></strong>
+          <ul class="sub-bullet-list">
+            <li><span class="zh-text">不转账、不付款、不关户、不改供应商。</span><span class="en-text">No transfers, payments, account closures, or vendor changes.</span></li>
+            <li><span class="zh-text">不把真余额当公开实时看板。这是本地只读快照。</span><span class="en-text">This is not a public live bank board. It is a local read-only snapshot.</span></li>
+            <li><span class="zh-text">跨设备请直接下载或双击本地文件。</span><span class="en-text">For local use, double click the file directly.</span></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="kid-summary">
+        <h4><span class="zh-text">10秒记住：</span><span class="en-text">Remember in 10 Seconds:</span></h4>
+        <ul>
+          <li><span class="zh-text">完成 = 截图 / 邮件 / 30 天干净流水。</span><span class="en-text">Done = screenshot, email, or 30 clean days.</span></li>
+          <li><span class="zh-text">7 笔删除 + 89 笔可能重复 = 数字还不能当最终账。</span><span class="en-text">7 removed + 89 possible dups = totals are not final books.</span></li>
+          <li><span class="zh-text">只读。省多少钱，等映射和证明做完再算。</span><span class="en-text">Read-only. Count savings after mapping and proof.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <footer>
-    <span class="en">Wiserise Hospitality Group · First-Principles Financial Governance · Generated via Wise Brain</span>
-    <span class="zh">Wiserise 餐饮集团 · 第一性原理财务操作系统 · 由 Wise Brain 驱动</span>
+    <span class="zh-text">只读审计 · 没有自动取消 · 交易 12,967 笔 · 余额同步 2026-09-11</span>
+    <span class="en-text">Read-only audit · No cancellations made · 12,967 transactions · Balances synced 2026-09-11</span>
   </footer>
-</main>
+</div>
 
 <script>
-const D = {"inflows": 14825058.72, "outflows": 14705440.35, "net": 119618.37, "true_operating": 7279713.35, "transfer_out": 6964112.67, "loan_payments": 461614.33, "transactions": 12967, "categories": [{"category": "TRANSFER_OUT", "total": 6964112.67, "monthly_avg": 580342.72}, {"category": "FOOD_AND_DRINK", "total": 2502144.34, "monthly_avg": 208512.03}, {"category": "GENERAL_SERVICES", "total": 1328999.89, "monthly_avg": 110749.99}, {"category": "GOVERNMENT_AND_NON_PROFIT", "total": 1106397.51, "monthly_avg": 92199.79}, {"category": "TRANSPORTATION", "total": 1017689.15, "monthly_avg": 84807.43}, {"category": "GENERAL_MERCHANDISE", "total": 506089.25, "monthly_avg": 42174.1}, {"category": "RENT_AND_UTILITIES", "total": 476020.26, "monthly_avg": 39668.35}, {"category": "LOAN_PAYMENTS", "total": 461614.33, "monthly_avg": 38467.86}, {"category": "HOME_IMPROVEMENT", "total": 237568.12, "monthly_avg": 19797.34}, {"category": "BANK_FEES", "total": 60910.69, "monthly_avg": 5075.89}, {"category": "TRAVEL", "total": 26363.51, "monthly_avg": 2196.96}, {"category": "ENTERTAINMENT", "total": 11978.53, "monthly_avg": 998.21}, {"category": "PERSONAL_CARE", "total": 3336.45, "monthly_avg": 278.04}, {"category": "MEDICAL", "total": 2215.65, "monthly_avg": 184.64}], "vendors": [{"vendor": "AI/API · Anthropic", "total": 10625.4, "count": 206, "active_months": 8, "monthly_avg": 885.45, "accounts": {"Visa 4030": 10037.719999999998, "Visa 6492": 587.6800000000001}, "cat_zh": "AI Token", "decision": "SET HARD LIMIT", "decision_zh": "设置硬限额", "risk": "HIGH", "leak_reason": "206次碎片自动充值，无月度硬顶。建议 Anthropic 后台锁死 $500/月。"}, {"vendor": "Hiring · Indeed", "total": 8036.21, "count": 20, "active_months": 13, "monthly_avg": 669.68, "accounts": {"Gangnam Fay Two 8429": 4022.4500000000003, "Visa 4030": 3038.76, "Wiserise Hospitality 7449": 975.0}, "cat_zh": "广告与招聘", "decision": "ROI AUDIT", "decision_zh": "ROI 结果复盘", "risk": "MED", "leak_reason": "长期月度消耗。第一性检查：岗位缺口填满后广告是否已自动熔断？"}, {"vendor": "Ads · Facebook", "total": 5998.28, "count": 153, "active_months": 12, "monthly_avg": 499.86, "accounts": {"Visa 5280": 28.31, "Tokugawa Greenville 1357": 5176.430000000002, "Visa 4030": 793.54}, "cat_zh": "广告与招聘", "decision": "ROI AUDIT", "decision_zh": "ROI 结果复盘", "risk": "MED", "leak_reason": "长期月度消耗。第一性检查：岗位缺口填满后广告是否已自动熔断？"}, {"vendor": "Software · 7shifts", "total": 4629.13, "count": 34, "active_months": 12, "monthly_avg": 385.76, "accounts": {"Gangnam Fayetteville 3511": 1955.8, "Tokugawa Greenville 1357": 1488.26, "Visa 4030": 174.75, "Gangnam Fay Two 8429": 599.89, "Gangnam Wilmington 2574": 299.98, "Gangnam Greenville 0333": 110.45}, "cat_zh": "店务软件", "decision": "ELIMINATE DUPS", "decision_zh": "排查多店重复计费", "risk": "HIGH", "leak_reason": "每个店独立扣费。需核对是否有已撤店或试用期结束转正的重复扣费。"}, {"vendor": "Software · QuickBooks", "total": 2877.0, "count": 47, "active_months": 13, "monthly_avg": 239.75, "accounts": {"Gangnam Greenville 0333": 560.0, "Gangnam Fayetteville 3511": 572.0, "Boil Wilmington 0368": 835.0, "Tokugawa Greenville 1357": 610.0, "Gangnam Wilmington 2574": 300.0}, "cat_zh": "店务软件", "decision": "ELIMINATE DUPS", "decision_zh": "排查多店重复计费", "risk": "HIGH", "leak_reason": "每个店独立扣费。需核对是否有已撤店或试用期结束转正的重复扣费。"}, {"vendor": "Media · YouTube", "total": 1693.19, "count": 46, "active_months": 12, "monthly_avg": 141.1, "accounts": {"Gangnam Fayetteville 3511": 342.26, "Gangnam Fay Two 8429": 118.22, "Tokugawa Greenville 1357": 999.2799999999999, "Visa 4030": 116.55999999999999, "Gangnam Wilmington 2574": 68.44, "Visa 6492": 48.43}, "cat_zh": "多媒体娱乐", "decision": "AUDIT OR CANCEL", "decision_zh": "核实门店或取消", "risk": "MED", "leak_reason": "散落在 6 个不同卡号中扣款。非餐厅堂食播放用途的一律退订。"}, {"vendor": "Software · Slack", "total": 1602.04, "count": 7, "active_months": 7, "monthly_avg": 133.5, "accounts": {"Tokugawa Greenville 1357": 1602.04}, "cat_zh": "协作软件", "decision": "PRUNE SEATS", "decision_zh": "清理离职席位", "risk": "LOW", "leak_reason": "排查离职经理或前员工账号，避免按席位每月产生空转费用。"}, {"vendor": "AI/API · Grok", "total": 1198.0, "count": 7, "active_months": 2, "monthly_avg": 99.83, "accounts": {"Visa 4030": 200.0, "Tokugawa Greenville 1357": 198.0, "Visa 6492": 800.0}, "cat_zh": "AI 探索", "decision": "30-DAY KILL", "decision_zh": "30天无用即杀", "risk": "HIGH", "leak_reason": "仅活跃 2 个月即沉睡，属于典型的“僵尸订阅”。若无实机产出立即取消。"}, {"vendor": "AI/API · OpenAI", "total": 1024.78, "count": 8, "active_months": 8, "monthly_avg": 85.4, "accounts": {"Tokugawa Greenville 1357": 1024.78}, "cat_zh": "AI Token", "decision": "SET HARD LIMIT", "decision_zh": "设置硬限额", "risk": "MED", "leak_reason": "多平台分散扣款。建议合并到单一团队账户并设警戒线。"}, {"vendor": "Software · Zapier", "total": 944.07, "count": 8, "active_months": 6, "monthly_avg": 78.67, "accounts": {"Visa 4030": 944.0699999999999}, "cat_zh": "效率工具", "decision": "30-DAY KILL", "decision_zh": "30天无用即杀", "risk": "MED", "leak_reason": "若系统内无活跃自动流（Zaps），属于沉睡漏水，应降级免费版。"}, {"vendor": "AI/API · Claude", "total": 400.0, "count": 2, "active_months": 2, "monthly_avg": 33.33, "accounts": {"Visa 4030": 400.0}, "cat_zh": "AI Token", "decision": "SET HARD LIMIT", "decision_zh": "设置硬限额", "risk": "MED", "leak_reason": "多平台分散扣款。建议合并到单一团队账户并设警戒线。"}, {"vendor": "AI/API · Higgsfield", "total": 228.0, "count": 2, "active_months": 2, "monthly_avg": 19.0, "accounts": {"Visa 6492": 228.0}, "cat_zh": "AI 探索", "decision": "30-DAY KILL", "decision_zh": "30天无用即杀", "risk": "HIGH", "leak_reason": "仅活跃 2 个月即沉睡，属于典型的“僵尸订阅”。若无实机产出立即取消。"}, {"vendor": "AI/API · Google Cloud", "total": 200.0, "count": 1, "active_months": 1, "monthly_avg": 16.67, "accounts": {"Visa 6492": 200.0}, "cat_zh": "AI Token", "decision": "SET HARD LIMIT", "decision_zh": "设置硬限额", "risk": "MED", "leak_reason": "多平台分散扣款。建议合并到单一团队账户并设警戒线。"}, {"vendor": "Software · Notion", "total": 145.99, "count": 7, "active_months": 6, "monthly_avg": 12.17, "accounts": {"Visa 4030": 96.0, "Visa 6492": 49.99}, "cat_zh": "效率工具", "decision": "30-DAY KILL", "decision_zh": "30天无用即杀", "risk": "MED", "leak_reason": "若系统内无活跃自动流（Zaps），属于沉睡漏水，应降级免费版。"}, {"vendor": "Media · Spotify", "total": 132.58, "count": 10, "active_months": 10, "monthly_avg": 11.05, "accounts": {"Gangnam Greenville 0333": 51.32, "Gangnam Fay Two 8429": 25.66, "Tokugawa Greenville 1357": 55.6}, "cat_zh": "多媒体娱乐", "decision": "AUDIT OR CANCEL", "decision_zh": "核实门店或取消", "risk": "MED", "leak_reason": "散落在 6 个不同卡号中扣款。非餐厅堂食播放用途的一律退订。"}], "accounts": [{"name": "Visa Card 4030", "type": "Credit card", "type_zh": "企业信用卡", "balance": 1195.52, "status": "active", "status_zh": "正常使用 · 主要扣款卡", "store": "HQ / 全局"}, {"name": "Gangnam Greenville Oper 0333", "type": "Operating checking", "type_zh": "门店运营支票户", "balance": 70396.79, "status": "active", "status_zh": "正常使用", "store": "00002 Greenville"}, {"name": "Boil Wilmington Operate 0368", "type": "Operating checking", "type_zh": "门店运营支票户", "balance": 222744.94, "status": "active", "status_zh": "正常使用 · 现金主力", "store": "00008 Wilmington Boil"}, {"name": "Tokugawa Greenville NC 1357", "type": "Operating checking", "type_zh": "门店运营支票户", "balance": 20257.8, "status": "active", "status_zh": "正常使用", "store": "00002 Tokugawa"}, {"name": "Gangnam Wilmington NC 2574", "type": "Operating checking", "type_zh": "门店运营支票户", "balance": 32162.31, "status": "active", "status_zh": "正常使用", "store": "00003 Wilmington"}, {"name": "Gangnam Fayetteville 3511", "type": "Operating checking", "type_zh": "门店运营支票户", "balance": 63463.82, "status": "active", "status_zh": "正常使用", "store": "00001 Fayetteville"}, {"name": "Payroll & Tax 3538", "type": "Payroll / tax reserve", "type_zh": "薪酬与税收专户", "balance": 37739.7, "status": "protected", "status_zh": "严禁挪用 · 专款专用", "store": "00001 Fayetteville"}, {"name": "Visa Card 5280", "type": "Credit card", "type_zh": "企业信用卡", "balance": 2665.75, "status": "active", "status_zh": "正常使用", "store": "HQ / 全局"}, {"name": "Visa Card 6492", "type": "Credit card", "type_zh": "企业信用卡", "balance": 1267.01, "status": "active", "status_zh": "正常使用", "store": "HQ / 全局"}, {"name": "WISERISE HOSPITALITY 7449", "type": "Company checking", "type_zh": "集团总管理账户", "balance": 3049.94, "status": "active", "status_zh": "正常使用", "store": "HQ 总部"}, {"name": "Gangnam Fay Two 8429", "type": "Credit card", "type_zh": "企业信用卡", "balance": 0, "status": "review balance", "status_zh": "额度 10k · 需核对", "store": "00001 Fayetteville"}, {"name": "Checking 8517", "type": "Checking", "type_zh": "个人关联支票户", "balance": 13254.55, "status": "verify business use", "status_zh": "需核实是否包含公账", "store": "个人 / 需隔离"}]};
+const D = {"inflows": 14825058.72, "outflows": 14705440.35, "net": 119618.37, "true_burn": 7279713.35, "transfer": 6964112.67, "tx": 12967, "vendors": [{"name": "AI/API · Anthropic", "total": 10625.4, "monthly": 885.45, "count": 206, "months": 8, "action": "Set limit", "action_zh": "设硬限额", "risk": "HIGH", "accounts": "Visa 4030, Visa 6492"}, {"name": "Hiring · Indeed", "total": 8036.21, "monthly": 669.68, "count": 20, "months": 13, "action": "Check results", "action_zh": "查效果", "risk": "MED", "accounts": "Gangnam Fay Two 8429, Visa 4030, Wiserise Hospitality 7449"}, {"name": "Ads · Facebook", "total": 5998.28, "monthly": 499.86, "count": 153, "months": 12, "action": "Check results", "action_zh": "查效果", "risk": "MED", "accounts": "Visa 5280, Tokugawa Greenville 1357, Visa 4030"}, {"name": "Software · 7shifts", "total": 4629.13, "monthly": 385.76, "count": 34, "months": 12, "action": "Check duplicates", "action_zh": "查重复", "risk": "MED", "accounts": "Gangnam Fayetteville 3511, Tokugawa Greenville 1357, Visa 4030, Gangnam Fay Two 8429, Gangnam Wilmington 2574, Gangnam Greenville 0333"}, {"name": "Software · QuickBooks", "total": 2877.0, "monthly": 239.75, "count": 47, "months": 13, "action": "Check duplicates", "action_zh": "查重复", "risk": "MED", "accounts": "Gangnam Greenville 0333, Gangnam Fayetteville 3511, Boil Wilmington 0368, Tokugawa Greenville 1357, Gangnam Wilmington 2574"}, {"name": "Media · YouTube", "total": 1693.19, "monthly": 141.1, "count": 46, "months": 12, "action": "30-day review", "action_zh": "30天复核", "risk": "HIGH", "accounts": "Gangnam Fayetteville 3511, Gangnam Fay Two 8429, Tokugawa Greenville 1357, Visa 4030, Gangnam Wilmington 2574, Visa 6492"}, {"name": "Software · Slack", "total": 1602.04, "monthly": 133.5, "count": 7, "months": 7, "action": "Check duplicates", "action_zh": "查重复", "risk": "MED", "accounts": "Tokugawa Greenville 1357"}, {"name": "AI/API · Grok", "total": 1198.0, "monthly": 99.83, "count": 7, "months": 2, "action": "30-day review", "action_zh": "30天复核", "risk": "HIGH", "accounts": "Visa 4030, Tokugawa Greenville 1357, Visa 6492"}, {"name": "AI/API · OpenAI", "total": 1024.78, "monthly": 85.4, "count": 8, "months": 8, "action": "Set limit", "action_zh": "设硬限额", "risk": "HIGH", "accounts": "Tokugawa Greenville 1357"}, {"name": "Software · Zapier", "total": 944.07, "monthly": 78.67, "count": 8, "months": 6, "action": "30-day review", "action_zh": "30天复核", "risk": "HIGH", "accounts": "Visa 4030"}, {"name": "AI/API · Claude", "total": 400.0, "monthly": 33.33, "count": 2, "months": 2, "action": "Set limit", "action_zh": "设硬限额", "risk": "HIGH", "accounts": "Visa 4030"}, {"name": "AI/API · Higgsfield", "total": 228.0, "monthly": 19.0, "count": 2, "months": 2, "action": "30-day review", "action_zh": "30天复核", "risk": "HIGH", "accounts": "Visa 6492"}, {"name": "AI/API · Google Cloud", "total": 200.0, "monthly": 16.67, "count": 1, "months": 1, "action": "Set limit", "action_zh": "设硬限额", "risk": "HIGH", "accounts": "Visa 6492"}, {"name": "Software · Notion", "total": 145.99, "monthly": 12.17, "count": 7, "months": 6, "action": "Verify", "action_zh": "人工确认", "risk": "LOW", "accounts": "Visa 4030, Visa 6492"}, {"name": "Media · Spotify", "total": 132.58, "monthly": 11.05, "count": 10, "months": 10, "action": "30-day review", "action_zh": "30天复核", "risk": "HIGH", "accounts": "Gangnam Greenville 0333, Gangnam Fay Two 8429, Tokugawa Greenville 1357"}], "categories": [{"category": "TRANSFER_OUT", "total": 6964112.67, "monthly_avg": 580342.72}, {"category": "FOOD_AND_DRINK", "total": 2502144.34, "monthly_avg": 208512.03}, {"category": "GENERAL_SERVICES", "total": 1328999.89, "monthly_avg": 110749.99}, {"category": "GOVERNMENT_AND_NON_PROFIT", "total": 1106397.51, "monthly_avg": 92199.79}, {"category": "TRANSPORTATION", "total": 1017689.15, "monthly_avg": 84807.43}, {"category": "GENERAL_MERCHANDISE", "total": 506089.25, "monthly_avg": 42174.1}, {"category": "RENT_AND_UTILITIES", "total": 476020.26, "monthly_avg": 39668.35}, {"category": "LOAN_PAYMENTS", "total": 461614.33, "monthly_avg": 38467.86}, {"category": "HOME_IMPROVEMENT", "total": 237568.12, "monthly_avg": 19797.34}, {"category": "BANK_FEES", "total": 60910.69, "monthly_avg": 5075.89}, {"category": "TRAVEL", "total": 26363.51, "monthly_avg": 2196.96}, {"category": "ENTERTAINMENT", "total": 11978.53, "monthly_avg": 998.21}, {"category": "PERSONAL_CARE", "total": 3336.45, "monthly_avg": 278.04}, {"category": "MEDICAL", "total": 2215.65, "monthly_avg": 184.64}], "accounts": [["Visa Card 4030", "Credit card", "企业信用卡", "$1,195.52", "HQ / 总部"], ["Gangnam Greenville Oper 0333", "Operating checking", "门店运营支票户", "$70,396.79", "UNKNOWN · verify with Yumi / 未知 · 需 Yumi 核实"], ["Boil Wilmington Operate 0368", "Operating checking", "门店运营支票户", "$222,744.94", "UNKNOWN · LCB Wilmington / 未知 · LCB Wilmington 待核实"], ["Tokugawa Greenville NC 1357", "Operating checking", "门店运营支票户", "$20,257.80", "UNKNOWN · legacy name / 未知 · Legacy 名称"], ["Gangnam Wilmington NC 2574", "Operating checking", "门店运营支票户", "$32,162.31", "00003 Wilmington"], ["Gangnam Fayetteville 3511", "Operating checking", "门店运营支票户", "$63,463.82", "00001 Fayetteville"], ["Payroll & Tax 3538", "Payroll / tax reserve", "工资税专户", "$37,739.70", "00001 Fayetteville"], ["Visa Card 5280", "Credit card", "企业信用卡", "$2,665.75", "HQ / 总部"], ["Visa Card 6492", "Credit card", "企业信用卡", "$1,267.01", "HQ / 总部"], ["WISERISE HOSPITALITY 7449", "Company checking", "公司总部账户", "$3,049.94", "HQ / 总部"], ["Gangnam Fay Two 8429", "Credit card", "企业信用卡", "$0.00", "00001 Fayetteville"], ["Checking 8517", "Checking", "普通支票户", "$13,254.55", "UNKNOWN / 未知用途"]], "ai_total": 13676.18, "accounts_live": [{"name": "Visa Card 4030", "type_en": "Business credit card", "type_zh": "企业信用卡", "balance": 1195.52, "kind": "debt", "store_en": "HQ", "store_zh": "总部", "flag": "ok"}, {"name": "Gangnam Greenville Oper 0333", "type_en": "Operating checking", "type_zh": "门店运营支票户", "balance": 71329.09, "kind": "cash", "store_en": "UNKNOWN · Yumi must map", "store_zh": "未知 · 需 Yumi 核实", "flag": "unknown", "note_en": "Name says Gangnam Greenville. Company lock says 00002 = Masa Greenville. Do not tag 00002.", "note_zh": "户名是 Gangnam Greenville。公司锁定 00002 = Masa Greenville。不能标成 00002。"}, {"name": "Boil Wilmington Operate 0368", "type_en": "Operating checking", "type_zh": "门店运营支票户", "balance": 229435.22, "kind": "cash", "store_en": "UNKNOWN · LCB Wilmington", "store_zh": "未知 · LCB Wilmington 待核实", "flag": "unknown", "note_en": "Largest cash pile. No store number in the bank name.", "note_zh": "现金最多的账户。银行户名没有店号。"}, {"name": "Tokugawa Greenville NC 1357", "type_en": "Operating checking", "type_zh": "门店运营支票户", "balance": 14560.45, "kind": "cash", "store_en": "UNKNOWN · legacy name", "store_zh": "未知 · 历史旧名", "flag": "unknown", "note_en": "Tokugawa is not a current brand. May be the same Greenville store as 0333. Yumi must confirm before any software cancel.", "note_zh": "Tokugawa 不是现在的品牌名。可能和 0333 是同一家 Greenville 店的旧名。Yumi 核实前不得退订软件。"}, {"name": "Gangnam Wilmington NC 2574", "type_en": "Operating checking", "type_zh": "门店运营支票户", "balance": 33705.22, "kind": "cash", "store_en": "00003 Wilmington", "store_zh": "00003 威尔明顿", "flag": "ok"}, {"name": "Gangnam Fayetteville 3511", "type_en": "Operating checking", "type_zh": "门店运营支票户", "balance": 64723.98, "kind": "cash", "store_en": "00001 Fayetteville", "store_zh": "00001 费耶特维尔", "flag": "ok"}, {"name": "Payroll & Tax - Gangnam F 3538", "type_en": "Payroll / tax reserve", "type_zh": "工资税专户", "balance": 37739.7, "kind": "cash", "store_en": "00001 Fayetteville", "store_zh": "00001 费耶特维尔", "flag": "protected"}, {"name": "Visa Card 5280", "type_en": "Business credit card", "type_zh": "企业信用卡", "balance": 2665.75, "kind": "debt", "store_en": "HQ", "store_zh": "总部", "flag": "ok"}, {"name": "Visa Card 6492", "type_en": "Business credit card", "type_zh": "企业信用卡", "balance": 1306.0, "kind": "debt", "store_en": "HQ", "store_zh": "总部", "flag": "ok"}, {"name": "WISERISE HOSPITALITY 7449", "type_en": "Company checking", "type_zh": "公司总部账户", "balance": 3407.22, "kind": "cash", "store_en": "HQ", "store_zh": "总部", "flag": "ok"}, {"name": "Gangnam Fay Two 8429", "type_en": "Business credit card", "type_zh": "企业信用卡", "balance": 0.0, "kind": "debt", "store_en": "00001 Fayetteville", "store_zh": "00001 费耶特维尔", "flag": "ok"}, {"name": "Checking 8517", "type_en": "Truist One Checking", "type_zh": "普通支票户", "balance": 13254.55, "kind": "cash", "store_en": "UNKNOWN · personal vs business", "store_zh": "未知 · 个人还是公司", "flag": "red", "note_en": "Do not mix with store operating cash until Louis labels it.", "note_zh": "Louis 定性之前，不要混进门店经营现金。"}], "net_worth": 462988.16, "cash_total": 467155.43, "debt_total": 5167.27, "sync": "2026-09-11"};
+const TIME_WINDOWS = {"today": {"id": "today", "name_en": "Today", "name_zh": "今天", "date_range": "2026-09-10 → 2026-09-10", "data": {"tx_count": 15, "outflows": 14847.51, "inflows": 18100.85, "transfer_out": 5, "loan_pmt": 0, "true_burn": 14842.51, "net": 3253.34, "categories": [{"category": "FOOD_AND_DRINK", "total": 10846.84}, {"category": "RENT_AND_UTILITIES", "total": 3875.71}, {"category": "GENERAL_SERVICES", "total": 75.57}, {"category": "GENERAL_MERCHANDISE", "total": 44.39}], "drill": {"GENERAL_MERCHANDISE": {"merchants": [{"name": "Amazon", "total": 44.39}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 44.39}], "months": [{"month": "2026-09", "total": 44.39}]}, "FOOD_AND_DRINK": {"merchants": [{"name": "Vendor", "total": 10846.84}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 10846.84}], "months": [{"month": "2026-09", "total": 10846.84}]}, "RENT_AND_UTILITIES": {"merchants": [{"name": "Greenv", "total": 3535.25}, {"name": "Duke Energy", "total": 340.46}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 3875.71}], "months": [{"month": "2026-09", "total": 3875.71}]}, "GENERAL_SERVICES": {"merchants": [{"name": "Facebook", "total": 75.57}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 75.57}], "months": [{"month": "2026-09", "total": 75.57}]}}}, "comp": {"prev_true_burn": 50864.16, "diff": -36021.65, "pct": -70.8, "prev_label_en": "vs Yesterday", "prev_label_zh": "对比昨日", "prev_range": "2026-09-09 → 2026-09-09"}}, "week": {"id": "week", "name_en": "Last 7 Days", "name_zh": "最近7天", "date_range": "2026-09-04 → 2026-09-10", "data": {"tx_count": 246, "outflows": 220404.57, "inflows": 295339.22, "transfer_out": 73207.68, "loan_pmt": 16572.99, "true_burn": 130623.9, "net": 74934.65, "categories": [{"category": "FOOD_AND_DRINK", "total": 74022.84}, {"category": "TRANSPORTATION", "total": 22598.18}, {"category": "HOME_IMPROVEMENT", "total": 11936.18}, {"category": "RENT_AND_UTILITIES", "total": 6681.0}, {"category": "GOVERNMENT_AND_NON_PROFIT", "total": 6369.42}, {"category": "GENERAL_MERCHANDISE", "total": 6076.02}, {"category": "GENERAL_SERVICES", "total": 2528.27}, {"category": "ENTERTAINMENT", "total": 411.99}], "drill": {"FOOD_AND_DRINK": {"merchants": [{"name": "Foodservice", "total": 26509.2}, {"name": "Gusto", "total": 20845.75}, {"name": "Vendor", "total": 10846.84}, {"name": "A & D Foods Xxxx Gangnamkoreanbbq", "total": 8227.79}, {"name": "A & D Foods Xxxx Gangnam", "total": 2174.45}, {"name": "New Hanover Abc", "total": 1123.5}, {"name": "CHEF'STORE", "total": 977.48}, {"name": "Chowbus Gangnam", "total": 799.96}, {"name": "Sigonfile Minges Bottling Tokugawa Sushi", "total": 596.63}, {"name": "Chowbus Chowbus Gangnam Korean Bbq Hot", "total": 423.64}, {"name": "Chowbus", "total": 318.35}, {"name": "Asian Life Market", "total": 214.11}, {"name": "H Mart", "total": 195.16}, {"name": "Toyars BBQ& HotPot", "total": 189.03}, {"name": "Cape Fear Restaurant Equipment", "total": 179.76}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 74022.84}], "months": [{"month": "2026-09", "total": 74022.84}]}, "GENERAL_MERCHANDISE": {"merchants": [{"name": "Unknown Merchant", "total": 1685.1}, {"name": "Sam's Club", "total": 1590.01}, {"name": "Amazon", "total": 659.86}, {"name": "Chowbus", "total": 499.0}, {"name": "Walmart", "total": 398.35}, {"name": "Gucci", "total": 275.72}, {"name": "Canada Goose", "total": 229.77}, {"name": "Unifirst Corporati", "total": 189.51}, {"name": "Yami.comyamibuy", "total": 187.35}, {"name": "Psycho Bunny", "total": 178.92}, {"name": "Lululemon", "total": 163.48}, {"name": "Spinx", "total": 18.95}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 6076.02}], "months": [{"month": "2026-09", "total": 6076.02}]}, "TRANSPORTATION": {"merchants": [{"name": "Unknown Merchant", "total": 22150.0}, {"name": "ExxonMobil", "total": 118.55}, {"name": "Circle K", "total": 104.45}, {"name": "Spinx", "total": 100.0}, {"name": "Costco", "total": 60.42}, {"name": "Sheetz", "total": 57.85}, {"name": "Railwayrailway", "total": 6.91}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 22598.18}], "months": [{"month": "2026-09", "total": 22598.18}]}, "GENERAL_SERVICES": {"merchants": [{"name": "Facebook", "total": 609.7}, {"name": "Rainbow Mga Insu Gangnam", "total": 535.76}, {"name": "Google Ads", "total": 510.0}, {"name": "Google Cloud", "total": 200.0}, {"name": "Amtrust Na Tokugawa Sushi", "total": 138.0}, {"name": "Anthropic", "total": 125.0}, {"name": "Fivestars Loyalty", "total": 118.0}, {"name": "P.skool", "total": 87.0}, {"name": "Qbooks Onl Intuit", "total": 75.0}, {"name": "Next Insur Ap I Low Country Boil", "total": 47.0}, {"name": "U.S. Post Office", "total": 35.64}, {"name": "Supa Base Singapore Sg", "total": 25.0}, {"name": "Tesla", "total": 22.17}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 2528.27}], "months": [{"month": "2026-09", "total": 2528.27}]}, "HOME_IMPROVEMENT": {"merchants": [{"name": "Caraway Fire And Safetylexingt", "total": 7277.25}, {"name": "Clear Run", "total": 2447.32}, {"name": "The Webstaurant St", "total": 1922.51}, {"name": "The Home Depot", "total": 155.95}, {"name": "Terminix", "total": 85.0}, {"name": "Lowe's", "total": 48.15}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 11936.18}], "months": [{"month": "2026-09", "total": 11936.18}]}, "ENTERTAINMENT": {"merchants": [{"name": "Stars & Strikes", "total": 396.0}, {"name": "Audible", "total": 15.99}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 411.99}], "months": [{"month": "2026-09", "total": 411.99}]}, "GOVERNMENT_AND_NON_PROFIT": {"merchants": [{"name": "Gusto", "total": 6369.42}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 6369.42}], "months": [{"month": "2026-09", "total": 6369.42}]}, "RENT_AND_UTILITIES": {"merchants": [{"name": "Greenv", "total": 3535.25}, {"name": "Piedmont Natural Gas", "total": 1232.74}, {"name": "Waste Management", "total": 713.21}, {"name": "Util Pmnt Cape Fear Pua", "total": 574.9}, {"name": "Duke Energy", "total": 340.46}, {"name": "Spectrum", "total": 95.34}, {"name": "Eastern Pines Water Cor", "total": 90.4}, {"name": "T-Mobile", "total": 70.0}, {"name": "Natl Exemp National Exempti", "total": 28.7}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 6681.0}], "months": [{"month": "2026-09", "total": 6681.0}]}}}, "comp": {"prev_true_burn": 180986.04, "diff": -50362.14, "pct": -27.8, "prev_label_en": "vs Prior 7 Days", "prev_label_zh": "对比前7天", "prev_range": "2026-08-28 → 2026-09-03"}}, "month": {"id": "month", "name_en": "Month to Date", "name_zh": "本月至今", "date_range": "2026-09-01 → 2026-09-10", "data": {"tx_count": 481, "outflows": 511236.13, "inflows": 506835.09, "transfer_out": 205611.95, "loan_pmt": 16572.99, "true_burn": 289051.19, "net": -4401.04, "categories": [{"category": "FOOD_AND_DRINK", "total": 105693.35}, {"category": "GOVERNMENT_AND_NON_PROFIT", "total": 43086.65}, {"category": "GENERAL_MERCHANDISE", "total": 41384.8}, {"category": "TRANSPORTATION", "total": 34331.9}, {"category": "HOME_IMPROVEMENT", "total": 29733.2}, {"category": "RENT_AND_UTILITIES", "total": 26660.26}, {"category": "GENERAL_SERVICES", "total": 7439.44}, {"category": "ENTERTAINMENT", "total": 421.99}, {"category": "MEDICAL", "total": 299.6}], "drill": {"RENT_AND_UTILITIES": {"merchants": [{"name": "Valor Residentia Gangnam", "total": 4268.0}, {"name": "Greenv", "total": 3535.25}, {"name": "Duke Energy", "total": 2618.91}, {"name": "Unknown Merchant", "total": 2582.92}, {"name": "Jade Realty LLC", "total": 2410.0}, {"name": "Pmts Seacoast Rentals Gangnam Bbq", "total": 2100.0}, {"name": "Fortisprop-harpo", "total": 1726.94}, {"name": "Util Pmnt Cape Fear Pua", "total": 1694.89}, {"name": "Cape Cottages Re Low Country Boil", "total": 1650.0}, {"name": "Valor Residentia Gangnam Bbq", "total": 1356.0}, {"name": "Piedmont Natural Gas", "total": 1232.74}, {"name": "Waste Management", "total": 713.21}, {"name": "W Workstream.us", "total": 297.0}, {"name": "Spectrum", "total": 195.34}, {"name": "Eastern Pines Water Cor", "total": 90.4}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 26660.26}], "months": [{"month": "2026-09", "total": 26660.26}]}, "FOOD_AND_DRINK": {"merchants": [{"name": "Foodservice", "total": 37625.58}, {"name": "Gusto", "total": 25096.11}, {"name": "Vendor", "total": 10846.84}, {"name": "A & D Foods Xxxx Gangnamkoreanbbq", "total": 8227.79}, {"name": "Cheung Kong Gangnam Bbq Nc", "total": 7293.13}, {"name": "Cheung Kong Tokugawa Sushi", "total": 2766.6}, {"name": "Cons Coll Han Feng Xxxx Tokugawa Sushi", "total": 2602.71}, {"name": "A & D Foods Xxxx Gangnam", "total": 2174.45}, {"name": "Cons Coll Han Feng", "total": 2101.0}, {"name": "CHEF'STORE", "total": 1335.4}, {"name": "Sigonfile Minges Bottling Tokugawa Sushi", "total": 1140.61}, {"name": "New Hanover Abc", "total": 1123.5}, {"name": "Chowbus Gangnam", "total": 799.96}, {"name": "ECH", "total": 512.48}, {"name": "Chowbus Chowbus Gangnam Korean Bbq Hot", "total": 423.64}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 105693.35}], "months": [{"month": "2026-09", "total": 105693.35}]}, "GENERAL_MERCHANDISE": {"merchants": [{"name": "Brixmor Oper Hefeng Liu", "total": 32393.0}, {"name": "Sam's Club", "total": 2551.06}, {"name": "Unknown Merchant", "total": 1685.1}, {"name": "Amazon", "total": 766.84}, {"name": "The Webstaurant St", "total": 729.42}, {"name": "Chowbus", "total": 499.0}, {"name": "Costco", "total": 465.99}, {"name": "Walmart", "total": 465.79}, {"name": "Taobao", "total": 421.2}, {"name": "Gucci", "total": 275.72}, {"name": "Canada Goose", "total": 229.77}, {"name": "Unifirst Corporati", "total": 189.51}, {"name": "Yami.comyamibuy", "total": 187.35}, {"name": "Psycho Bunny", "total": 178.92}, {"name": "Staples", "total": 163.7}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 41384.8}], "months": [{"month": "2026-09", "total": 41384.8}]}, "GENERAL_SERVICES": {"merchants": [{"name": "Youngmanageme", "total": 1502.95}, {"name": "Google Ads", "total": 1061.39}, {"name": "Facebook", "total": 844.84}, {"name": "Rainbow Mga Insu Gangnam", "total": 535.76}, {"name": "Westguard Ins Co Tokugawa Sushi", "total": 486.0}, {"name": "Indeed", "total": 475.0}, {"name": "Todoisttodoist", "total": 288.0}, {"name": "Darling Ingredients", "total": 275.0}, {"name": "Public Storage", "total": 229.37}, {"name": "Google Workspace", "total": 225.6}, {"name": "Deepseekhong Kong Hk", "total": 212.0}, {"name": "Google Cloud", "total": 200.0}, {"name": "Hostinger Us Inc", "total": 149.75}, {"name": "Gusto", "total": 145.0}, {"name": "Amtrust Na Tokugawa Sushi", "total": 138.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 7439.44}], "months": [{"month": "2026-09", "total": 7439.44}]}, "TRANSPORTATION": {"merchants": [{"name": "Unknown Merchant", "total": 33722.05}, {"name": "ExxonMobil", "total": 118.55}, {"name": "Sheetz", "total": 116.83}, {"name": "Circle K", "total": 104.45}, {"name": "Spinx", "total": 100.0}, {"name": "Passny Tollbymail", "total": 60.86}, {"name": "Costco", "total": 60.42}, {"name": "Wawa", "total": 41.83}, {"name": "Railwayrailway", "total": 6.91}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 34331.9}], "months": [{"month": "2026-09", "total": 34331.9}]}, "GOVERNMENT_AND_NON_PROFIT": {"merchants": [{"name": "Gusto", "total": 41586.65}, {"name": "Internal Revenue Service", "total": 1500.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 43086.65}], "months": [{"month": "2026-09", "total": 43086.65}]}, "MEDICAL": {"merchants": [{"name": "Dimone", "total": 299.6}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 299.6}], "months": [{"month": "2026-09", "total": 299.6}]}, "HOME_IMPROVEMENT": {"merchants": [{"name": "Brixmor Oper Low Country Boil", "total": 13589.4}, {"name": "Caraway Fire And Safetylexingt", "total": 7277.25}, {"name": "Clear Run", "total": 2447.32}, {"name": "The Webstaurant St", "total": 1922.51}, {"name": "Lane Ltrr Proper", "total": 1800.99}, {"name": "Achtrans Top Rail Fence", "total": 1624.5}, {"name": "Bluewater Bluewater Plumbi", "total": 682.13}, {"name": "Terminix", "total": 185.0}, {"name": "The Home Depot", "total": 155.95}, {"name": "Lowe's", "total": 48.15}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 29733.2}], "months": [{"month": "2026-09", "total": 29733.2}]}, "ENTERTAINMENT": {"merchants": [{"name": "Stars & Strikes", "total": 396.0}, {"name": "Audible", "total": 15.99}, {"name": "Trigger.devcheshire", "total": 10.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 421.99}], "months": [{"month": "2026-09", "total": 421.99}]}}}, "comp": {"prev_true_burn": 208701.5, "diff": 80349.69, "pct": 38.5, "prev_label_en": "vs Prior Month MTD", "prev_label_zh": "对比上月同期", "prev_range": "2026-08-01 → 2026-08-10"}}, "quarter": {"id": "quarter", "name_en": "Quarter to Date", "name_zh": "本季度至今", "date_range": "2026-07-01 → 2026-09-10", "data": {"tx_count": 2965, "outflows": 3569026.82, "inflows": 3462500.71, "transfer_out": 1544849.33, "loan_pmt": 88183.92, "true_burn": 1935993.57, "net": -106526.11, "categories": [{"category": "FOOD_AND_DRINK", "total": 709878.42}, {"category": "TRANSPORTATION", "total": 310024.94}, {"category": "GOVERNMENT_AND_NON_PROFIT", "total": 301696.75}, {"category": "GENERAL_SERVICES", "total": 232603.22}, {"category": "GENERAL_MERCHANDISE", "total": 164697.95}, {"category": "RENT_AND_UTILITIES", "total": 111834.95}, {"category": "HOME_IMPROVEMENT", "total": 92999.42}, {"category": "ENTERTAINMENT", "total": 6921.17}, {"category": "MEDICAL", "total": 1774.97}, {"category": "TRAVEL", "total": 1684.1}, {"category": "BANK_FEES", "total": 1451.73}, {"category": "PERSONAL_CARE", "total": 425.95}], "drill": {"FOOD_AND_DRINK": {"merchants": [{"name": "Foodservice", "total": 306874.72}, {"name": "Gusto", "total": 71554.2}, {"name": "Cheung Kong Gangnam Bbq Nc", "total": 49115.38}, {"name": "A & D Foods Xxxx Gangnambbq", "total": 46648.37}, {"name": "A & D Foods Xxxx Gangnamkoreanbbq", "total": 46052.68}, {"name": "Pfg Pfg", "total": 38230.97}, {"name": "A & D Foods Xxxx Gangnam", "total": 26633.39}, {"name": "A & D Foods Xxxx To", "total": 23799.83}, {"name": "Cons Coll Han Feng", "total": 14369.56}, {"name": "Cheung Kong Tokugawa Sushi", "total": 13546.25}, {"name": "Cons Coll Han Feng Xxxx Tokugawa Sushi", "total": 11356.25}, {"name": "Vendor", "total": 10846.84}, {"name": "Sigonfile Minges Bottling Tokugawa Sushi", "total": 6097.22}, {"name": "CHEF'STORE", "total": 5856.22}, {"name": "New Hanover Abc", "total": 4803.95}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 709878.42}], "months": [{"month": "2026-07", "total": 294805.33}, {"month": "2026-08", "total": 309379.74}, {"month": "2026-09", "total": 105693.35}]}, "GENERAL_MERCHANDISE": {"merchants": [{"name": "Brixmor Oper Hefeng Liu", "total": 97717.78}, {"name": "Sam's Club", "total": 17952.28}, {"name": "Unknown Merchant", "total": 7304.3}, {"name": "Amazon", "total": 6229.0}, {"name": "Corporationnvidia", "total": 5027.93}, {"name": "Walmart", "total": 4674.57}, {"name": "Macy's", "total": 4322.31}, {"name": "The Webstaurant St", "total": 3183.81}, {"name": "Best Buy", "total": 2771.02}, {"name": "Salesmagni", "total": 2680.0}, {"name": "Costco", "total": 2621.07}, {"name": "Anthropicanthropic", "total": 1969.25}, {"name": "Unifirst Corporati", "total": 1220.1}, {"name": "Chowbus", "total": 1061.51}, {"name": "Morgan Printers In", "total": 951.23}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 164697.95}], "months": [{"month": "2026-07", "total": 69029.26}, {"month": "2026-08", "total": 54283.89}, {"month": "2026-09", "total": 41384.8}]}, "RENT_AND_UTILITIES": {"merchants": [{"name": "Duke Energy", "total": 19029.18}, {"name": "PPL Electric Utilities", "total": 12646.8}, {"name": "Valor Residentia Gangnam", "total": 11348.0}, {"name": "Greenv Greenville Utili", "total": 10431.53}, {"name": "Jade Realty LLC", "total": 7230.0}, {"name": "Util Pmnt Cape Fear Pua", "total": 7072.26}, {"name": "Pmts Seacoast Rentals Gangnam Bbq", "total": 6300.0}, {"name": "Piedmont Natural Gas", "total": 6013.19}, {"name": "Fortisprop-harpo", "total": 5187.01}, {"name": "Cape Cottages Re Low Country Boil", "total": 4950.0}, {"name": "Valor Residentia Gangnam Bbq", "total": 4068.0}, {"name": "Greenv", "total": 3535.25}, {"name": "Unknown Merchant", "total": 2905.57}, {"name": "Spectrum", "total": 2176.8}, {"name": "Waste Management", "total": 2130.41}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 111834.95}], "months": [{"month": "2026-07", "total": 43487.89}, {"month": "2026-08", "total": 41686.8}, {"month": "2026-09", "total": 26660.26}]}, "TRANSPORTATION": {"merchants": [{"name": "Unknown Merchant", "total": 307209.61}, {"name": "Deluxe Bus", "total": 910.55}, {"name": "Costco", "total": 485.33}, {"name": "BP", "total": 378.94}, {"name": "Sheetz", "total": 280.71}, {"name": "Short Stop", "total": 236.3}, {"name": "ExxonMobil", "total": 122.71}, {"name": "Circle K", "total": 104.45}, {"name": "Spinx", "total": 100.0}, {"name": "Uber", "total": 62.21}, {"name": "Passny Tollbymail", "total": 60.86}, {"name": "Wawa", "total": 41.83}, {"name": "LAZ Parking", "total": 15.0}, {"name": "Railwayrailway", "total": 13.44}, {"name": "Jbgs Parking - Parks", "total": 3.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 310024.94}], "months": [{"month": "2026-07", "total": 209195.83}, {"month": "2026-08", "total": 66497.21}, {"month": "2026-09", "total": 34331.9}]}, "GENERAL_SERVICES": {"merchants": [{"name": "Gusto", "total": 166458.23}, {"name": "Google Ads", "total": 7785.65}, {"name": "Cobb Hammett", "total": 7413.33}, {"name": "Trainual.comtrainual", "total": 5376.0}, {"name": "Prog Northern Pol", "total": 3791.51}, {"name": "Facebook", "total": 3047.13}, {"name": "Youngmanageme", "total": 3005.9}, {"name": "U.S. Post Office", "total": 2630.07}, {"name": "Rainbow Mga Insu", "total": 2294.27}, {"name": "Rainbow Mga Insu Gangnam", "total": 2253.15}, {"name": "Tesla", "total": 1863.65}, {"name": "Progressive Insurance", "total": 1598.96}, {"name": "Youngmanageme Cksby", "total": 1502.95}, {"name": "Indeed", "total": 1475.0}, {"name": "Westguard Ins Co Tokugawa Sushi", "total": 1458.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 232603.22}], "months": [{"month": "2026-07", "total": 194054.9}, {"month": "2026-08", "total": 31108.88}, {"month": "2026-09", "total": 7439.44}]}, "HOME_IMPROVEMENT": {"merchants": [{"name": "Brixmor Oper Low Country Boil", "total": 40768.2}, {"name": "A.m. Manufacturi Wiserise Hospitality", "total": 10000.0}, {"name": "Clear Run", "total": 7341.96}, {"name": "The Webstaurant St", "total": 7332.17}, {"name": "Caraway Fire And Safetylexingt", "total": 7277.25}, {"name": "Lane Ltrr Proper", "total": 5402.97}, {"name": "Hamilton's Refri Hefeng Liu", "total": 2540.98}, {"name": "Precision Air Hv Tokugawa Sushi", "total": 2514.5}, {"name": "Lowe's", "total": 2458.87}, {"name": "Achtrans Top Rail Fence", "total": 1624.5}, {"name": "Fire Protection", "total": 1259.47}, {"name": "BTS", "total": 1111.12}, {"name": "The Home Depot", "total": 1004.68}, {"name": "Terminix", "total": 725.0}, {"name": "Bluewater Bluewater Plumbi", "total": 682.13}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 92999.42}], "months": [{"month": "2026-07", "total": 30012.81}, {"month": "2026-08", "total": 33253.41}, {"month": "2026-09", "total": 29733.2}]}, "PERSONAL_CARE": {"merchants": [{"name": "Manus Aisingapore Sg", "total": 319.15}, {"name": "Planet Fitness", "total": 99.8}, {"name": "CSC Serviceworks", "total": 7.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 425.95}], "months": [{"month": "2026-07", "total": 74.4}, {"month": "2026-08", "total": 351.55}]}, "GOVERNMENT_AND_NON_PROFIT": {"merchants": [{"name": "Nc Dept Revenue", "total": 173047.23}, {"name": "Gusto", "total": 115148.1}, {"name": "Pitttax", "total": 5322.25}, {"name": "Internal Revenue Service", "total": 4500.0}, {"name": "Unknown Merchant", "total": 2038.0}, {"name": "Uscis Elgin Lockbox", "total": 675.0}, {"name": "Nc Dmv", "total": 401.16}, {"name": "Dennc Court", "total": 266.0}, {"name": "Nc Dph Food & Lodg", "total": 240.0}, {"name": "National Exemption", "total": 35.7}, {"name": "Ncdmv Driver Swilmingt", "total": 16.95}, {"name": "BLA", "total": 6.36}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 301696.75}], "months": [{"month": "2026-07", "total": 91344.64}, {"month": "2026-08", "total": 167265.46}, {"month": "2026-09", "total": 43086.65}]}, "ENTERTAINMENT": {"merchants": [{"name": "Chumba Casino", "total": 5162.31}, {"name": "Unknown Merchant", "total": 800.0}, {"name": "Stars & Strikes", "total": 396.0}, {"name": "YouTube", "total": 227.55}, {"name": "YouTube Premium", "total": 160.74}, {"name": "YouTube TV", "total": 88.8}, {"name": "Audible", "total": 47.97}, {"name": "Spotify", "total": 27.8}, {"name": "Trigger.devcheshire", "total": 10.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 6921.17}], "months": [{"month": "2026-07", "total": 205.53}, {"month": "2026-08", "total": 6293.65}, {"month": "2026-09", "total": 421.99}]}, "MEDICAL": {"merchants": [{"name": "Nous Research Inc.", "total": 800.0}, {"name": "Longbeachapr", "total": 604.55}, {"name": "Dimone", "total": 299.6}, {"name": "Duane Reade", "total": 70.82}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 1774.97}], "months": [{"month": "2026-07", "total": 1275.37}, {"month": "2026-08", "total": 200.0}, {"month": "2026-09", "total": 299.6}]}, "TRAVEL": {"merchants": [{"name": "Expedia", "total": 645.69}, {"name": "Delta Air Lines", "total": 533.4}, {"name": "Rodeway Inn", "total": 248.57}, {"name": "Super", "total": 199.44}, {"name": "The Farrington", "total": 50.0}, {"name": "Four Points By Sheraton", "total": 6.0}, {"name": "Wilmington International Airport", "total": 1.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 1684.1}], "months": [{"month": "2026-07", "total": 736.63}, {"month": "2026-08", "total": 947.47}]}, "BANK_FEES": {"merchants": [{"name": "Unknown Merchant", "total": 1451.73}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 1451.73}], "months": [{"month": "2026-07", "total": 707.13}, {"month": "2026-08", "total": 744.6}]}}}, "comp": {"prev_true_burn": 1464471.25, "diff": 471522.32, "pct": 32.2, "prev_label_en": "vs Prior Quarter QTD", "prev_label_zh": "对比上季同期", "prev_range": "2026-04-01 → 2026-06-10"}}, "year": {"id": "year", "name_en": "Year to Date", "name_zh": "本年至今", "date_range": "2026-01-01 → 2026-09-10", "data": {"tx_count": 9727, "outflows": 11397997.01, "inflows": 11524927.78, "transfer_out": 5494242.53, "loan_pmt": 295506.72, "true_burn": 5608247.76, "net": 126930.77, "categories": [{"category": "FOOD_AND_DRINK", "total": 1973641.06}, {"category": "GENERAL_SERVICES", "total": 1078078.18}, {"category": "GOVERNMENT_AND_NON_PROFIT", "total": 817629.64}, {"category": "TRANSPORTATION", "total": 700279.87}, {"category": "GENERAL_MERCHANDISE", "total": 391113.22}, {"category": "RENT_AND_UTILITIES", "total": 358024.24}, {"category": "HOME_IMPROVEMENT", "total": 195934.7}, {"category": "BANK_FEES", "total": 55161.23}, {"category": "TRAVEL", "total": 22799.82}, {"category": "ENTERTAINMENT", "total": 10796.05}, {"category": "PERSONAL_CARE", "total": 2697.06}, {"category": "MEDICAL", "total": 2092.69}], "drill": {"GENERAL_SERVICES": {"merchants": [{"name": "Gusto", "total": 682191.58}, {"name": "Brixmor Property Liu Hefeng", "total": 107114.82}, {"name": "Brixmor Property Country Boil", "total": 66929.33}, {"name": "Google Ads", "total": 49158.52}, {"name": "Tesla", "total": 22745.0}, {"name": "Cobb Hammett", "total": 16482.83}, {"name": "Youngmanageme", "total": 10520.65}, {"name": "Li's Tax And Boo Gangnam", "total": 5995.0}, {"name": "Indeed", "total": 5603.34}, {"name": "Facebook", "total": 5400.13}, {"name": "Trainual.comtrainual", "total": 5376.0}, {"name": "Li's Tax And Boo Low Country Boil", "total": 5185.0}, {"name": "Prog Northern Pol", "total": 4738.14}, {"name": "CarMax", "total": 4687.57}, {"name": "Li's Tax And Boo Tokugawa", "total": 4350.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 1078078.18}], "months": [{"month": "2026-01", "total": 129113.15}, {"month": "2026-02", "total": 118828.83}, {"month": "2026-03", "total": 159519.04}, {"month": "2026-04", "total": 176426.93}, {"month": "2026-05", "total": 130200.54}, {"month": "2026-06", "total": 131386.47}, {"month": "2026-07", "total": 194054.9}, {"month": "2026-08", "total": 31108.88}, {"month": "2026-09", "total": 7439.44}]}, "GENERAL_MERCHANDISE": {"merchants": [{"name": "Brixmor Oper Hefeng Liu", "total": 127583.89}, {"name": "Sam's Club", "total": 68812.02}, {"name": "Unknown Merchant", "total": 58516.28}, {"name": "Amazon", "total": 24253.17}, {"name": "Walmart", "total": 16613.74}, {"name": "The Webstaurant Store Inc", "total": 12599.95}, {"name": "The Webstaurant St", "total": 10064.2}, {"name": "Best Buy", "total": 7391.52}, {"name": "Salesmagni", "total": 6950.0}, {"name": "Dior House Of Dior Nycnew", "total": 6750.3}, {"name": "Macy's", "total": 6179.37}, {"name": "Anthropicanthropic", "total": 5795.08}, {"name": "Corporationnvidia", "total": 5027.93}, {"name": "Costco", "total": 4485.41}, {"name": "Salesmagnit", "total": 3350.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 391113.22}], "months": [{"month": "2026-01", "total": 20233.81}, {"month": "2026-02", "total": 30901.87}, {"month": "2026-03", "total": 25901.49}, {"month": "2026-04", "total": 47566.84}, {"month": "2026-05", "total": 41546.44}, {"month": "2026-06", "total": 60264.82}, {"month": "2026-07", "total": 69029.26}, {"month": "2026-08", "total": 54283.89}, {"month": "2026-09", "total": 41384.8}]}, "FOOD_AND_DRINK": {"merchants": [{"name": "Foodservice", "total": 986742.31}, {"name": "A & D Foods Xxxx Gangnamkoreanbbq", "total": 179803.45}, {"name": "A & D Foods Xxxx Gangnam", "total": 117713.37}, {"name": "A & D Foods Xxxx Gangnambbq", "total": 84207.66}, {"name": "A & D Foods Xxxx To", "total": 81477.2}, {"name": "Pfg Pfg", "total": 81077.38}, {"name": "Cheung Kong Gangnam Bbq Nc", "total": 78386.65}, {"name": "Gusto", "total": 71554.2}, {"name": "Cons Coll Han Feng Xxxx Tokugawa Sushi", "total": 33478.66}, {"name": "Cons Coll Han Feng", "total": 24124.63}, {"name": "Cheung Kong Tokugawa Sushi", "total": 24074.5}, {"name": "CHEF'STORE", "total": 19647.04}, {"name": "Sigonfile Minges Bottling Tokugawa Sushi", "total": 16783.31}, {"name": "True World Foods", "total": 16580.59}, {"name": "New Hanover Abc", "total": 15933.9}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 1973641.06}], "months": [{"month": "2026-01", "total": 173425.05}, {"month": "2026-02", "total": 181876.47}, {"month": "2026-03", "total": 217645.74}, {"month": "2026-04", "total": 212177.41}, {"month": "2026-05", "total": 197924.76}, {"month": "2026-06", "total": 280713.21}, {"month": "2026-07", "total": 294805.33}, {"month": "2026-08", "total": 309379.74}, {"month": "2026-09", "total": 105693.35}]}, "TRANSPORTATION": {"merchants": [{"name": "Unknown Merchant", "total": 689807.64}, {"name": "Deluxe Bus", "total": 1414.7}, {"name": "BP", "total": 1033.76}, {"name": "Short Stop", "total": 1024.15}, {"name": "Sheetz", "total": 934.22}, {"name": "Speedway", "total": 806.3}, {"name": "Circle K", "total": 752.44}, {"name": "ExxonMobil", "total": 705.08}, {"name": "Costco", "total": 685.52}, {"name": "Shell", "total": 578.54}, {"name": "Rduaa Public Parking", "total": 361.0}, {"name": "Royal Farms", "total": 310.23}, {"name": "Wawa", "total": 285.28}, {"name": "Spinx", "total": 271.67}, {"name": "Uber", "total": 260.82}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 700279.87}], "months": [{"month": "2026-01", "total": 43272.5}, {"month": "2026-02", "total": 52681.58}, {"month": "2026-03", "total": 21621.82}, {"month": "2026-04", "total": 113583.74}, {"month": "2026-05", "total": 50569.54}, {"month": "2026-06", "total": 108525.75}, {"month": "2026-07", "total": 209195.83}, {"month": "2026-08", "total": 66497.21}, {"month": "2026-09", "total": 34331.9}]}, "HOME_IMPROVEMENT": {"merchants": [{"name": "Brixmor Oper Low Country Boil", "total": 54021.6}, {"name": "The Webstaurant St", "total": 37433.22}, {"name": "Lowe's", "total": 15038.3}, {"name": "Lane Ltrr Proper", "total": 12606.93}, {"name": "Clear Run", "total": 12371.05}, {"name": "Cregger Company", "total": 11652.93}, {"name": "A.m. Manufacturi Wiserise Hospitality", "total": 10000.0}, {"name": "Caraway Fire And Safetylexingt", "total": 7277.25}, {"name": "The Home Depot", "total": 5726.14}, {"name": "Hamilton's Refri", "total": 4155.36}, {"name": "Fire Protection", "total": 4002.58}, {"name": "Precision Air Hv Tokugawa Sushi", "total": 3921.55}, {"name": "Achtrans Top Rail Fence", "total": 3039.0}, {"name": "Hamilton's Refri Hefeng Liu", "total": 2540.98}, {"name": "Sentinel Security", "total": 2375.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 195934.7}], "months": [{"month": "2026-01", "total": 15993.1}, {"month": "2026-02", "total": 15101.03}, {"month": "2026-03", "total": 15223.8}, {"month": "2026-04", "total": 15495.2}, {"month": "2026-05", "total": 13221.69}, {"month": "2026-06", "total": 27900.46}, {"month": "2026-07", "total": 30012.81}, {"month": "2026-08", "total": 33253.41}, {"month": "2026-09", "total": 29733.2}]}, "BANK_FEES": {"merchants": [{"name": "Unknown Merchant", "total": 55161.23}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 55161.23}], "months": [{"month": "2026-01", "total": 50700.04}, {"month": "2026-02", "total": 301.77}, {"month": "2026-03", "total": 755.81}, {"month": "2026-04", "total": 764.03}, {"month": "2026-05", "total": 802.43}, {"month": "2026-06", "total": 385.42}, {"month": "2026-07", "total": 707.13}, {"month": "2026-08", "total": 744.6}]}, "TRAVEL": {"merchants": [{"name": "Airbnb", "total": 6468.64}, {"name": "Expedia", "total": 5419.38}, {"name": "Delta Air Lines", "total": 3574.87}, {"name": "American Airlines", "total": 3540.27}, {"name": "Southwest", "total": 1921.6}, {"name": "Bellagio", "total": 485.02}, {"name": "JetBlue", "total": 411.8}, {"name": "Rodeway Inn", "total": 248.57}, {"name": "Super", "total": 199.44}, {"name": "Home2 Suites by Hilton", "total": 160.13}, {"name": "Hampton Inn", "total": 139.15}, {"name": "Air China", "total": 100.0}, {"name": "Wilmington International Airport", "total": 64.0}, {"name": "The Farrington", "total": 50.0}, {"name": "Priceln", "total": 10.95}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 22799.82}], "months": [{"month": "2026-01", "total": 928.36}, {"month": "2026-02", "total": 8397.4}, {"month": "2026-03", "total": 8960.41}, {"month": "2026-04", "total": 160.51}, {"month": "2026-05", "total": 957.06}, {"month": "2026-06", "total": 1711.98}, {"month": "2026-07", "total": 736.63}, {"month": "2026-08", "total": 947.47}]}, "RENT_AND_UTILITIES": {"merchants": [{"name": "PPL Electric Utilities", "total": 46531.24}, {"name": "Greenv Greenville Utili", "total": 41233.47}, {"name": "Robuck Homes Tri", "total": 36350.0}, {"name": "Duke Energy", "total": 33874.27}, {"name": "Valor Residentia Gangnam", "total": 32073.03}, {"name": "Piedmont Natural Gas", "total": 21470.11}, {"name": "Jade Realty LLC", "total": 16870.0}, {"name": "Util Pmnt Cape Fear Pua", "total": 14059.0}, {"name": "Cape Cottages Re Low Country Boil", "total": 13200.0}, {"name": "Waste Management", "total": 11565.71}, {"name": "Pmts Seacoast Rentals Gangnam Bbq", "total": 11178.17}, {"name": "Druckerfalk", "total": 11140.93}, {"name": "Unknown Merchant", "total": 9623.88}, {"name": "Fortisprop-harpo", "total": 8554.85}, {"name": "Spectrum", "total": 7929.54}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 358024.24}], "months": [{"month": "2026-01", "total": 30021.76}, {"month": "2026-02", "total": 31799.19}, {"month": "2026-03", "total": 79018.84}, {"month": "2026-04", "total": 31530.45}, {"month": "2026-05", "total": 37122.65}, {"month": "2026-06", "total": 36696.4}, {"month": "2026-07", "total": 43487.89}, {"month": "2026-08", "total": 41686.8}, {"month": "2026-09", "total": 26660.26}]}, "ENTERTAINMENT": {"merchants": [{"name": "Chumba Casino", "total": 7896.15}, {"name": "Unknown Merchant", "total": 800.0}, {"name": "YouTube TV", "total": 691.14}, {"name": "YouTube Premium", "total": 439.66}, {"name": "Stars & Strikes", "total": 396.0}, {"name": "YouTube", "total": 227.55}, {"name": "Audible", "total": 143.91}, {"name": "Spotify", "total": 81.26}, {"name": "lower antelope", "total": 47.7}, {"name": "Sphere-concessionsmashlas", "total": 28.18}, {"name": "Xg.co", "total": 22.0}, {"name": "Railwayrailway", "total": 10.0}, {"name": "Trigger.devcheshire", "total": 10.0}, {"name": "Facebook", "total": 2.5}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 10796.05}], "months": [{"month": "2026-01", "total": 173.92}, {"month": "2026-02", "total": 260.5}, {"month": "2026-03", "total": 2902.17}, {"month": "2026-04", "total": 164.83}, {"month": "2026-05", "total": 180.51}, {"month": "2026-06", "total": 192.95}, {"month": "2026-07", "total": 205.53}, {"month": "2026-08", "total": 6293.65}, {"month": "2026-09", "total": 421.99}]}, "GOVERNMENT_AND_NON_PROFIT": {"merchants": [{"name": "Nc Dept Revenue", "total": 599670.65}, {"name": "Gusto", "total": 115148.1}, {"name": "Internal Revenue Service", "total": 74343.97}, {"name": "Unknown Merchant", "total": 8718.75}, {"name": "Sc Dept Revenue", "total": 7229.0}, {"name": "Pitttax", "total": 5322.25}, {"name": "ABC Commission", "total": 1800.0}, {"name": "Tax New Hanover Cnty Low Country Boil", "total": 1046.55}, {"name": "Internet Nc Dept Of Labor", "total": 925.0}, {"name": "North Carolin Gangnam", "total": 691.59}, {"name": "Uscis Elgin Lockbox", "total": 675.0}, {"name": "Nc Dmv", "total": 401.16}, {"name": "Dennc Court", "total": 266.0}, {"name": "Nc Dph Food & Lodg", "total": 240.0}, {"name": "Filings Nc Secretary Of Gangnam", "total": 202.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 817629.64}], "months": [{"month": "2026-01", "total": 103118.11}, {"month": "2026-02", "total": 62606.55}, {"month": "2026-03", "total": 79758.94}, {"month": "2026-04", "total": 108022.02}, {"month": "2026-05", "total": 79219.84}, {"month": "2026-06", "total": 83207.43}, {"month": "2026-07", "total": 91344.64}, {"month": "2026-08", "total": 167265.46}, {"month": "2026-09", "total": 43086.65}]}, "MEDICAL": {"merchants": [{"name": "Nous Research Inc.", "total": 800.0}, {"name": "Longbeachapr", "total": 604.55}, {"name": "Dimone", "total": 299.6}, {"name": "Duane Reade", "total": 146.05}, {"name": "Walgreens", "total": 131.19}, {"name": "Mmw Laslas", "total": 57.15}, {"name": "Siren", "total": 29.12}, {"name": "CVS", "total": 25.03}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 2092.69}], "months": [{"month": "2026-02", "total": 186.53}, {"month": "2026-04", "total": 94.83}, {"month": "2026-06", "total": 36.36}, {"month": "2026-07", "total": 1275.37}, {"month": "2026-08", "total": 200.0}, {"month": "2026-09", "total": 299.6}]}, "PERSONAL_CARE": {"merchants": [{"name": "Manus Aisingapore Sg", "total": 2539.46}, {"name": "Planet Fitness", "total": 150.6}, {"name": "CSC Serviceworks", "total": 7.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 2697.06}], "months": [{"month": "2026-03", "total": 1364.74}, {"month": "2026-04", "total": 477.9}, {"month": "2026-05", "total": 325.41}, {"month": "2026-06", "total": 103.06}, {"month": "2026-07", "total": 74.4}, {"month": "2026-08", "total": 351.55}]}}}, "comp": {"prev_true_burn": 1671465.59, "diff": 3936782.17, "pct": 235.5, "prev_label_en": "vs Prior Period", "prev_label_zh": "对比前期", "prev_range": "2025-09-10 → 2025-12-31"}}, "all": {"id": "all", "name_en": "Full 12 Months", "name_zh": "完整12个月", "date_range": "2025-09-10 → 2026-09-10", "data": {"tx_count": 12967, "outflows": 14705440.35, "inflows": 14825058.72, "transfer_out": 6964112.67, "loan_pmt": 461614.33, "true_burn": 7279713.35, "net": 119618.37, "categories": [{"category": "FOOD_AND_DRINK", "total": 2502144.34}, {"category": "GENERAL_SERVICES", "total": 1328999.89}, {"category": "GOVERNMENT_AND_NON_PROFIT", "total": 1106397.51}, {"category": "TRANSPORTATION", "total": 1017689.15}, {"category": "GENERAL_MERCHANDISE", "total": 506089.25}, {"category": "RENT_AND_UTILITIES", "total": 476020.26}, {"category": "HOME_IMPROVEMENT", "total": 237568.12}, {"category": "BANK_FEES", "total": 60910.69}, {"category": "TRAVEL", "total": 26363.51}, {"category": "ENTERTAINMENT", "total": 11978.53}, {"category": "PERSONAL_CARE", "total": 3336.45}, {"category": "MEDICAL", "total": 2215.65}], "drill": {"GENERAL_MERCHANDISE": {"merchants": [{"name": "Brixmor Oper Hefeng Liu", "total": 127583.89}, {"name": "Sam's Club", "total": 96814.25}, {"name": "Unknown Merchant", "total": 83196.06}, {"name": "Amazon", "total": 44582.83}, {"name": "The Webstaurant Store Inc", "total": 23607.36}, {"name": "Walmart", "total": 20706.14}, {"name": "The Webstaurant St", "total": 13758.53}, {"name": "Salesmagni", "total": 11550.0}, {"name": "Best Buy", "total": 8975.44}, {"name": "Macy's", "total": 7736.4}, {"name": "Dior House Of Dior Nycnew", "total": 6750.3}, {"name": "Anthropicanthropic", "total": 5795.08}, {"name": "Corporationnvidia", "total": 5027.93}, {"name": "Costco", "total": 4533.51}, {"name": "Salesmagnit", "total": 4020.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 506089.25}], "months": [{"month": "2025-09", "total": 11084.35}, {"month": "2025-10", "total": 41592.11}, {"month": "2025-11", "total": 27988.58}, {"month": "2025-12", "total": 34310.99}, {"month": "2026-01", "total": 20233.81}, {"month": "2026-02", "total": 30901.87}, {"month": "2026-03", "total": 25901.49}, {"month": "2026-04", "total": 47566.84}, {"month": "2026-05", "total": 41546.44}, {"month": "2026-06", "total": 60264.82}, {"month": "2026-07", "total": 69029.26}, {"month": "2026-08", "total": 54283.89}, {"month": "2026-09", "total": 41384.8}]}, "TRANSPORTATION": {"merchants": [{"name": "Unknown Merchant", "total": 1004724.51}, {"name": "Deluxe Bus", "total": 1414.7}, {"name": "Sheetz", "total": 1371.8}, {"name": "BP", "total": 1345.58}, {"name": "Short Stop", "total": 1238.41}, {"name": "Circle K", "total": 1235.46}, {"name": "Speedway", "total": 1005.1}, {"name": "ExxonMobil", "total": 838.08}, {"name": "Shell", "total": 811.29}, {"name": "Costco", "total": 685.52}, {"name": "Royal Farms", "total": 420.63}, {"name": "Rduaa Public Parking", "total": 361.0}, {"name": "Wawa", "total": 285.28}, {"name": "Spinx", "total": 271.67}, {"name": "Uber", "total": 260.82}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 1017689.15}], "months": [{"month": "2025-09", "total": 31404.19}, {"month": "2025-10", "total": 163507.73}, {"month": "2025-11", "total": 18761.47}, {"month": "2025-12", "total": 103735.89}, {"month": "2026-01", "total": 43272.5}, {"month": "2026-02", "total": 52681.58}, {"month": "2026-03", "total": 21621.82}, {"month": "2026-04", "total": 113583.74}, {"month": "2026-05", "total": 50569.54}, {"month": "2026-06", "total": 108525.75}, {"month": "2026-07", "total": 209195.83}, {"month": "2026-08", "total": 66497.21}, {"month": "2026-09", "total": 34331.9}]}, "GENERAL_SERVICES": {"merchants": [{"name": "Gusto", "total": 713167.45}, {"name": "Brixmor Property Liu Hefeng", "total": 178767.91}, {"name": "Brixmor Property Country Boil", "total": 117534.25}, {"name": "Google Ads", "total": 77084.13}, {"name": "Tesla", "total": 22745.0}, {"name": "Cobb Hammett", "total": 20683.83}, {"name": "CarMax", "total": 17633.23}, {"name": "Prog Northern Pol", "total": 15283.62}, {"name": "Youngmanageme", "total": 12023.6}, {"name": "Indeed", "total": 8036.21}, {"name": "Next Insur Gen L Hefeng Liu", "total": 7092.54}, {"name": "Li's Tax And Boo Low Country Boil", "total": 6360.0}, {"name": "GEICO", "total": 6180.7}, {"name": "Li's Tax And Boo Gangnam", "total": 5995.0}, {"name": "Next Insur Workc Hefeng Liu", "total": 5825.22}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 1328999.89}], "months": [{"month": "2025-09", "total": 23124.7}, {"month": "2025-10", "total": 78349.3}, {"month": "2025-11", "total": 66220.89}, {"month": "2025-12", "total": 83226.82}, {"month": "2026-01", "total": 129113.15}, {"month": "2026-02", "total": 118828.83}, {"month": "2026-03", "total": 159519.04}, {"month": "2026-04", "total": 176426.93}, {"month": "2026-05", "total": 130200.54}, {"month": "2026-06", "total": 131386.47}, {"month": "2026-07", "total": 194054.9}, {"month": "2026-08", "total": 31108.88}, {"month": "2026-09", "total": 7439.44}]}, "FOOD_AND_DRINK": {"merchants": [{"name": "Foodservice", "total": 1275166.8}, {"name": "A & D Foods Xxxx Gangnamkoreanbbq", "total": 258111.38}, {"name": "A & D Foods Xxxx Gangnam", "total": 170974.61}, {"name": "Pfg Pfg", "total": 99317.99}, {"name": "A & D Foods Xxxx To", "total": 97587.39}, {"name": "A & D Foods Xxxx Gangnambbq", "total": 84207.66}, {"name": "Cheung Kong Gangnam Bbq Nc", "total": 78386.65}, {"name": "Gusto", "total": 71554.2}, {"name": "Cons Coll Han Feng Xxxx Tokugawa Sushi", "total": 33478.66}, {"name": "CHEF'STORE", "total": 33089.89}, {"name": "Cons Coll Han Feng", "total": 29210.93}, {"name": "Cheung Kong Tokugawa Sushi", "total": 24074.5}, {"name": "Sigonfile Minges Bottling Tokugawa Sushi", "total": 23759.43}, {"name": "New Hanover Abc", "total": 19701.8}, {"name": "True World Foods", "total": 16580.59}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 2502144.34}], "months": [{"month": "2025-09", "total": 49979.58}, {"month": "2025-10", "total": 160527.37}, {"month": "2025-11", "total": 135043.27}, {"month": "2025-12", "total": 182953.06}, {"month": "2026-01", "total": 173425.05}, {"month": "2026-02", "total": 181876.47}, {"month": "2026-03", "total": 217645.74}, {"month": "2026-04", "total": 212177.41}, {"month": "2026-05", "total": 197924.76}, {"month": "2026-06", "total": 280713.21}, {"month": "2026-07", "total": 294805.33}, {"month": "2026-08", "total": 309379.74}, {"month": "2026-09", "total": 105693.35}]}, "HOME_IMPROVEMENT": {"merchants": [{"name": "Brixmor Oper Low Country Boil", "total": 54021.6}, {"name": "The Webstaurant St", "total": 46976.84}, {"name": "Lowe's", "total": 29268.22}, {"name": "Cregger Company", "total": 13573.3}, {"name": "Lane Ltrr Proper", "total": 12606.93}, {"name": "Clear Run", "total": 12371.05}, {"name": "A.m. Manufacturi Wiserise Hospitality", "total": 10000.0}, {"name": "Caraway Fire And Safetylexingt", "total": 7277.25}, {"name": "The Home Depot", "total": 6649.9}, {"name": "Fire Protection", "total": 5673.16}, {"name": "Hamilton's Refri", "total": 4155.36}, {"name": "Precision Air Hv Tokugawa Sushi", "total": 3921.55}, {"name": "Katomrestau", "total": 3653.2}, {"name": "Achtrans Top Rail Fence", "total": 3039.0}, {"name": "Ferguson Ent Hvac", "total": 2776.57}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 237568.12}], "months": [{"month": "2025-09", "total": 7982.21}, {"month": "2025-10", "total": 12741.58}, {"month": "2025-11", "total": 9363.01}, {"month": "2025-12", "total": 11546.62}, {"month": "2026-01", "total": 15993.1}, {"month": "2026-02", "total": 15101.03}, {"month": "2026-03", "total": 15223.8}, {"month": "2026-04", "total": 15495.2}, {"month": "2026-05", "total": 13221.69}, {"month": "2026-06", "total": 27900.46}, {"month": "2026-07", "total": 30012.81}, {"month": "2026-08", "total": 33253.41}, {"month": "2026-09", "total": 29733.2}]}, "GOVERNMENT_AND_NON_PROFIT": {"merchants": [{"name": "Nc Dept Revenue", "total": 783495.3}, {"name": "Internal Revenue Service", "total": 175269.81}, {"name": "Gusto", "total": 115148.1}, {"name": "Unknown Merchant", "total": 9518.75}, {"name": "Sc Dept Revenue", "total": 7229.0}, {"name": "Pitttax", "total": 5322.25}, {"name": "North Carolin Gangnam", "total": 1967.43}, {"name": "ABC Commission", "total": 1800.0}, {"name": "Tax New Hanover Cnty Low Country Boil", "total": 1046.55}, {"name": "Internet Nc Dept Of Labor", "total": 925.0}, {"name": "Sc Dept Revenue Hefeng Liu", "total": 808.16}, {"name": "Uscis Elgin Lockbox", "total": 675.0}, {"name": "Nc Dmv", "total": 401.16}, {"name": "Nc Dph Food & Lodg", "total": 360.0}, {"name": "Ina Dept O Lgbs South Carol", "total": 287.59}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 1106397.51}], "months": [{"month": "2025-09", "total": 70963.83}, {"month": "2025-10", "total": 77029.03}, {"month": "2025-11", "total": 66468.86}, {"month": "2025-12", "total": 74306.15}, {"month": "2026-01", "total": 103118.11}, {"month": "2026-02", "total": 62606.55}, {"month": "2026-03", "total": 79758.94}, {"month": "2026-04", "total": 108022.02}, {"month": "2026-05", "total": 79219.84}, {"month": "2026-06", "total": 83207.43}, {"month": "2026-07", "total": 91344.64}, {"month": "2026-08", "total": 167265.46}, {"month": "2026-09", "total": 43086.65}]}, "ENTERTAINMENT": {"merchants": [{"name": "Chumba Casino", "total": 7896.15}, {"name": "Unknown Merchant", "total": 1466.0}, {"name": "YouTube TV", "total": 927.58}, {"name": "YouTube Premium", "total": 538.06}, {"name": "Stars & Strikes", "total": 396.0}, {"name": "YouTube", "total": 227.55}, {"name": "Audible", "total": 143.91}, {"name": "Spotify", "total": 132.58}, {"name": "ESPN", "total": 78.46}, {"name": "Supersonich", "total": 50.0}, {"name": "lower antelope", "total": 47.7}, {"name": "Sphere-concessionsmashlas", "total": 28.18}, {"name": "Xg.co", "total": 22.0}, {"name": "Railwayrailway", "total": 10.0}, {"name": "Trigger.devcheshire", "total": 10.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 11978.53}], "months": [{"month": "2025-09", "total": 37.43}, {"month": "2025-10", "total": 53.57}, {"month": "2025-11", "total": 237.74}, {"month": "2025-12", "total": 853.74}, {"month": "2026-01", "total": 173.92}, {"month": "2026-02", "total": 260.5}, {"month": "2026-03", "total": 2902.17}, {"month": "2026-04", "total": 164.83}, {"month": "2026-05", "total": 180.51}, {"month": "2026-06", "total": 192.95}, {"month": "2026-07", "total": 205.53}, {"month": "2026-08", "total": 6293.65}, {"month": "2026-09", "total": 421.99}]}, "RENT_AND_UTILITIES": {"merchants": [{"name": "PPL Electric Utilities", "total": 71672.76}, {"name": "Greenv Greenville Utili", "total": 50331.84}, {"name": "Valor Residentia Gangnam", "total": 43907.03}, {"name": "Duke Energy", "total": 42025.79}, {"name": "Robuck Homes Tri", "total": 36350.0}, {"name": "Piedmont Natural Gas", "total": 28631.72}, {"name": "Cape Cottages Re Low Country Boil", "total": 19800.0}, {"name": "Util Pmnt Cape Fear Pua", "total": 18081.71}, {"name": "Druckerfalk", "total": 17003.29}, {"name": "Jade Realty LLC", "total": 16870.0}, {"name": "Waste Management", "total": 16867.94}, {"name": "Funding Jade Realty LLC", "total": 12050.0}, {"name": "Unknown Merchant", "total": 11475.26}, {"name": "Pmts Seacoast Rentals Gangnam Bbq", "total": 11178.17}, {"name": "Spectrum", "total": 10370.7}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 476020.26}], "months": [{"month": "2025-09", "total": 12892.19}, {"month": "2025-10", "total": 35031.13}, {"month": "2025-11", "total": 33696.52}, {"month": "2025-12", "total": 36376.18}, {"month": "2026-01", "total": 30021.76}, {"month": "2026-02", "total": 31799.19}, {"month": "2026-03", "total": 79018.84}, {"month": "2026-04", "total": 31530.45}, {"month": "2026-05", "total": 37122.65}, {"month": "2026-06", "total": 36696.4}, {"month": "2026-07", "total": 43487.89}, {"month": "2026-08", "total": 41686.8}, {"month": "2026-09", "total": 26660.26}]}, "TRAVEL": {"merchants": [{"name": "Airbnb", "total": 6468.64}, {"name": "Expedia", "total": 5523.52}, {"name": "American Airlines", "total": 4725.37}, {"name": "Delta Air Lines", "total": 4490.32}, {"name": "Southwest", "total": 1921.6}, {"name": "JetBlue", "total": 1477.68}, {"name": "Bellagio", "total": 485.02}, {"name": "Home2 Suites by Hilton", "total": 307.78}, {"name": "Rodeway Inn", "total": 248.57}, {"name": "Super", "total": 199.44}, {"name": "Hampton Inn", "total": 139.15}, {"name": "Frontier Airlines", "total": 131.97}, {"name": "Air China", "total": 100.0}, {"name": "Wilmington International Airport", "total": 64.0}, {"name": "The Farrington", "total": 50.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 26363.51}], "months": [{"month": "2025-09", "total": 580.45}, {"month": "2025-10", "total": 900.88}, {"month": "2025-12", "total": 2082.36}, {"month": "2026-01", "total": 928.36}, {"month": "2026-02", "total": 8397.4}, {"month": "2026-03", "total": 8960.41}, {"month": "2026-04", "total": 160.51}, {"month": "2026-05", "total": 957.06}, {"month": "2026-06", "total": 1711.98}, {"month": "2026-07", "total": 736.63}, {"month": "2026-08", "total": 947.47}]}, "BANK_FEES": {"merchants": [{"name": "Unknown Merchant", "total": 60910.69}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 60910.69}], "months": [{"month": "2025-09", "total": 37.0}, {"month": "2025-10", "total": 5012.58}, {"month": "2025-11", "total": 409.12}, {"month": "2025-12", "total": 290.76}, {"month": "2026-01", "total": 50700.04}, {"month": "2026-02", "total": 301.77}, {"month": "2026-03", "total": 755.81}, {"month": "2026-04", "total": 764.03}, {"month": "2026-05", "total": 802.43}, {"month": "2026-06", "total": 385.42}, {"month": "2026-07", "total": 707.13}, {"month": "2026-08", "total": 744.6}]}, "PERSONAL_CARE": {"merchants": [{"name": "Manus Aisingapore Sg", "total": 2539.46}, {"name": "Jason Studiof", "total": 239.0}, {"name": "Dexin Yuan Zai Bing Inc", "total": 160.0}, {"name": "Planet Fitness", "total": 150.6}, {"name": "Ny Bling Nail & Beauty", "total": 142.0}, {"name": "Loccitane", "total": 98.39}, {"name": "CSC Serviceworks", "total": 7.0}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 3336.45}], "months": [{"month": "2025-10", "total": 302.0}, {"month": "2025-12", "total": 337.39}, {"month": "2026-03", "total": 1364.74}, {"month": "2026-04", "total": 477.9}, {"month": "2026-05", "total": 325.41}, {"month": "2026-06", "total": 103.06}, {"month": "2026-07", "total": 74.4}, {"month": "2026-08", "total": 351.55}]}, "MEDICAL": {"merchants": [{"name": "Nous Research Inc.", "total": 800.0}, {"name": "Longbeachapr", "total": 604.55}, {"name": "Dimone", "total": 299.6}, {"name": "Walgreens", "total": 184.67}, {"name": "Duane Reade", "total": 146.05}, {"name": "CVS", "total": 63.53}, {"name": "Mmw Laslas", "total": 57.15}, {"name": "123 Pharmacy Inc", "total": 30.98}, {"name": "Siren", "total": 29.12}], "accounts": [{"account": "UNKNOWN_ACCT", "total": 2215.65}], "months": [{"month": "2025-10", "total": 30.98}, {"month": "2025-11", "total": 38.5}, {"month": "2025-12", "total": 53.48}, {"month": "2026-02", "total": 186.53}, {"month": "2026-04", "total": 94.83}, {"month": "2026-06", "total": 36.36}, {"month": "2026-07", "total": 1275.37}, {"month": "2026-08", "total": 200.0}, {"month": "2026-09", "total": 299.6}]}}}, "comp": {"prev_true_burn": null, "diff": null, "pct": null, "prev_label_en": "Baseline 12M", "prev_label_zh": "全量基准", "prev_range": ""}}};
+let currentWindowKey = 'week'; // Default to Last 7 Days
 
-const fmtMoney = n => n < 0 
-  ? '-$' + Math.abs(n).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})
-  : '$' + n.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+const money = n => '$' + Math.abs(n || 0).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
-// 绑定顶部核心大字
-document.getElementById('netNum').textContent = fmtMoney(D.net);
-document.getElementById('trueBurn').textContent = fmtMoney(D.true_operating);
-document.getElementById('transferElim').textContent = fmtMoney(D.transfer_out);
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  if (window.event && event.currentTarget) event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
 
-// Tab 切换逻辑
-document.querySelectorAll('.tab').forEach(btn => {
-  btn.onclick = () => {
-    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.view).classList.add('active');
-  };
-});
+function setLanguage(lang) {
+  if (lang === 'en') {
+    document.body.className = 'lang-en';
+    document.getElementById('btn-en').classList.add('active');
+    document.getElementById('btn-zh').classList.remove('active');
+  } else {
+    document.body.className = 'lang-zh';
+    document.getElementById('btn-zh').classList.add('active');
+    document.getElementById('btn-en').classList.remove('active');
+  }
+}
 
-// 渲染订阅解剖表格（支持中英文即时切换）
-const renderVendors = () => {
-  const query = (document.getElementById('vendorInput').value || '').toLowerCase();
-  const filtered = D.vendors.filter(v => v.vendor.toLowerCase().includes(query));
-  
-  const html = filtered.map(v => {
-    const accountsText = Object.keys(v.accounts).join(', ');
-    const tagClass = v.risk === 'HIGH' ? 'red' : (v.risk === 'MED' ? 'gold' : 'blue');
+const categoryZh = {
+  FOOD_AND_DRINK: '食材与酒水',
+  GENERAL_SERVICES: '通用服务',
+  GOVERNMENT_AND_NON_PROFIT: '税与政府规费',
+  TRANSPORTATION: '运输物流',
+  GENERAL_MERCHANDISE: '日用品采购',
+  RENT_AND_UTILITIES: '房租水电',
+  HOME_IMPROVEMENT: '维修维保',
+  BANK_FEES: '银行手续费',
+  TRAVEL: '差旅',
+  ENTERTAINMENT: '娱乐媒体',
+  PERSONAL_CARE: '个人杂支',
+  MEDICAL: '医疗'
+};
+const categoryEn = {
+  FOOD_AND_DRINK: 'Food & Drink',
+  GENERAL_SERVICES: 'General Services',
+  GOVERNMENT_AND_NON_PROFIT: 'Government & Taxes',
+  TRANSPORTATION: 'Transportation',
+  GENERAL_MERCHANDISE: 'General Merchandise',
+  RENT_AND_UTILITIES: 'Rent & Utilities',
+  HOME_IMPROVEMENT: 'Maintenance',
+  BANK_FEES: 'Bank Fees',
+  TRAVEL: 'Travel',
+  ENTERTAINMENT: 'Entertainment',
+  PERSONAL_CARE: 'Personal Care',
+  MEDICAL: 'Medical'
+};
+
+const actNameMap = {
+  'ACT-000001': 'Visa 4030 · HQ',
+  'ACT-000002': 'Checking 8517 · UNKNOWN',
+  'ACT-000003': 'Gangnam Greenville 0333 · UNKNOWN',
+  'ACT-000004': 'Tokugawa Greenville 1357 · UNKNOWN',
+  'ACT-000005': 'Gangnam Wilmington 2574 · 00003',
+  'ACT-000006': 'Gangnam Fay Two 8429 · 00001',
+  'ACT-000007': 'Visa 5280 · HQ',
+  'ACT-000008': 'Boil Wilmington 0368 · UNKNOWN',
+  'ACT-000009': 'Visa 6492 · HQ',
+  'ACT-000010': 'Gangnam Fayetteville 3511 · 00001',
+  'ACT-000011': 'Wiserise HQ 7449 · HQ',
+  'ACT-000012': 'Payroll & Tax 3538 · 00001'
+};
+
+function renderTimeWindow(key) {
+  currentWindowKey = key;
+  const win = TIME_WINDOWS[key];
+  if (!win) return;
+
+  // 1. Update Filter Active Buttons
+  document.querySelectorAll('.tf-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.window === key);
+  });
+  document.getElementById('filterDateRange').textContent = win.date_range;
+
+  // 2. Update Comparison Banner
+  const comp = win.comp;
+  const compBanner = document.getElementById('compBanner');
+  if (comp && comp.diff !== null) {
+    const isUp = comp.diff > 0;
+    const badgeCls = isUp ? 'tag-red' : 'tag-green';
+    const sign = isUp ? '+' : '';
+    const pctStr = comp.pct !== null ? ` (${sign}${comp.pct}%)` : '';
+    const diffStr = `${sign}${money(comp.diff)}${pctStr}`;
+
+    compBanner.innerHTML = `
+      <span>
+        <span class="zh-text">${comp.prev_label_zh} (${comp.prev_range})：真实经营支出变化</span>
+        <span class="en-text">${comp.prev_label_en} (${comp.prev_range}): True Burn Change</span>
+      </span>
+      <span class="${badgeCls}">${diffStr}</span>
+    `;
+    compBanner.style.display = 'flex';
+  } else {
+    compBanner.innerHTML = `
+      <span>
+        <span class="zh-text">基准全审计周期：共 12 个月全量流水</span>
+        <span class="en-text">Full 12-Month Baseline Audit Period</span>
+      </span>
+      <span class="tag-gray">BASELINE</span>
+    `;
+    compBanner.style.display = 'flex';
+  }
+
+  // 3. Update Rule Tab KPIs
+  const d = win.data;
+  document.getElementById('kpiBurn').textContent = money(d.true_burn);
+  document.getElementById('kpiNet').textContent = (d.net >= 0 ? '+' : '-') + money(d.net);
+  document.getElementById('kpiTransfer').textContent = money(d.transfer_out);
+  document.getElementById('kpiTx').textContent = d.tx_count.toLocaleString();
+
+  // 4. Update Spend Bars
+  const cats = d.categories;
+  const totalBurn = d.true_burn || 1;
+  const max = cats.length ? Math.max(...cats.map(x => x.total)) : 1;
+
+  if (!cats.length) {
+    document.getElementById('bars').innerHTML = '<div class="box-warning"><span class="zh-text">此时间段内无外部经营支出。</span><span class="en-text">No operating expenses in this period.</span></div>';
+    document.getElementById('spendDetail').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('bars').innerHTML = cats.map(x => {
+    const pct = (x.total / totalBurn * 100).toFixed(1);
     return `
-      <tr>
-        <td>
-          <b>${v.vendor}</b>
-          <div style="font-size:12px;color:var(--muted)">${accountsText}</div>
-        </td>
-        <td>
-          <span class="en">${v.vendor.split(' · ')[0]}</span>
-          <span class="zh">${v.cat_zh}</span>
-        </td>
-        <td>
-          <span class="tag ${tagClass}">
-            <span class="en">${v.decision}</span>
-            <span class="zh">${v.decision_zh}</span>
+      <div class="bar" data-cat="${x.category}">
+        <div class="barTop">
+          <span>
+            <span class="en-text">${categoryEn[x.category] || x.category}</span>
+            <span class="zh-text">${categoryZh[x.category] || x.category}</span>
           </span>
-        </td>
-        <td class="money">${fmtMoney(v.total)}</td>
-        <td class="money">${fmtMoney(v.monthly_avg)}</td>
-        <td>
-          <div style="font-size:13px">${v.leak_reason}</div>
-        </td>
-      </tr>
+          <b>${money(x.total)} <span class="small">(${pct}%)</span></b>
+        </div>
+        <div class="track"><i style="width:${Math.max(4, x.total / max * 100)}%"></i></div>
+        <div class="small">${pct}% <span class="en-text">of true spend in this period</span><span class="zh-text">占本期真实经营支出</span></div>
+      </div>
     `;
   }).join('');
-  document.getElementById('vendorTableBody').innerHTML = html;
-};
-renderVendors();
-document.getElementById('vendorInput').oninput = renderVendors;
 
-// 渲染真实运营支出进度条（对销转账后）
-const catMapZh = {
-  'FOOD_AND_DRINK': '食材与酒水餐饮 (COGS)',
-  'GENERAL_SERVICES': '通用服务与人工支持',
-  'GOVERNMENT_AND_NON_PROFIT': '税款与政府规费 (北卡/IRS)',
-  'TRANSPORTATION': '物流与冷链配送',
-  'GENERAL_MERCHANDISE': '日用品与商超补充采购',
-  'RENT_AND_UTILITIES': '房租与水电煤气基础设施',
-  'HOME_IMPROVEMENT': '维修维保与易耗品更新',
-  'BANK_FEES': '银行手续费与刷卡终端费',
-  'TRAVEL': '公务差旅',
-  'ENTERTAINMENT': '多媒体与娱乐支出',
-  'PERSONAL_CARE': '杂项个人杂支',
-  'MEDICAL': '医疗应急'
-};
+  // Re-attach click events to bars
+  document.querySelectorAll('#bars .bar').forEach(el => {
+    el.onclick = () => showSpendCategory(el.dataset.cat, el);
+  });
 
-const pureCats = D.categories.filter(c => !['TRANSFER_OUT','TRANSFER_IN','LOAN_PAYMENTS'].includes(c.category));
-const maxCat = Math.max(...pureCats.map(c => c.total));
+  // Automatically drill into the top category of this window
+  if (cats.length) {
+    const firstBar = document.querySelector('#bars .bar');
+    showSpendCategory(cats[0].category, firstBar);
+  } else {
+    document.getElementById('spendDetail').style.display = 'none';
+  }
+}
 
-document.getElementById('realCatBars').innerHTML = pureCats.map(c => `
-  <div class="bar-row">
-    <div class="bar-top">
-      <span>
-        <span class="en">${c.category.replaceAll('_',' ')}</span>
-        <span class="zh">${catMapZh[c.category] || c.category}</span>
-      </span>
-      <span>${fmtMoney(c.total)}</span>
+function setTimeWindow(key) {
+  renderTimeWindow(key);
+}
+
+function showSpendCategory(category, el) {
+  document.querySelectorAll('#bars .bar').forEach(x => x.classList.remove('active'));
+  if (el) el.classList.add('active');
+
+  const win = TIME_WINDOWS[currentWindowKey];
+  const d = win && win.data && win.data.drill ? win.data.drill[category] : null;
+  const panel = document.getElementById('spendDetail');
+  
+  if (!d || !d.merchants || !d.merchants.length) {
+    panel.innerHTML = '<div class="box-warning"><span class="zh-text">该分类在当前选定时间段内没有商户明细。</span><span class="en-text">No merchant breakdown available for this category in the selected window.</span></div>';
+    panel.style.display = 'block';
+    return;
+  }
+
+  const categoryTotal = d.merchants.reduce((sum, x) => sum + x.total, 0);
+  const pct = n => categoryTotal ? (n / categoryTotal * 100).toFixed(1) + '%' : '0.0%';
+
+  const top = d.merchants.slice(0, 12).map((x, i) =>
+    `<li><span>${i + 1}. ${x.name}</span><b>${money(x.total)} <span class="small">(${pct(x.total)})</span></b></li>`
+  ).join('');
+
+  const trend = (d.months || []).slice(-6);
+  const months = trend.map((x, i) => {
+    const previous = i === 0 ? null : trend[i - 1].total;
+    const change = previous && previous !== 0 ? ((x.total - previous) / previous * 100) : null;
+    const cls = change === null ? 'tag-gray' : (change > 0 ? 'tag-red' : (change < 0 ? 'tag-green' : 'tag-gray'));
+    const changeText = change === null
+      ? '<span class="tag-gray"><span class="en-text">BASELINE</span><span class="zh-text">基准月</span></span>'
+      : `<span class="${cls}">${change > 0 ? '+' : ''}${change.toFixed(1)}%</span>`;
+    return `<li><span>${x.month}<br><span class="small"><span class="en-text">trend</span><span class="zh-text">趋势</span></span></span><span style="text-align:right"><b>${money(x.total)}</b><br>${changeText}</span></li>`;
+  }).join('');
+
+  const accts = (d.accounts || []).slice(0, 8).map(x => {
+    const label = actNameMap[x.account] || x.account;
+    return `<li><span>${label}</span><b>${money(x.total)} <span class="small">(${pct(x.total)})</span></b></li>`;
+  }).join('');
+
+  panel.innerHTML = `
+    <div class="box-quote">
+      <b>
+        <span class="en-text">${categoryEn[category] || category}</span>
+        <span class="zh-text">${categoryZh[category] || category}</span>
+      </b> · 
+      <span class="en-text">In this time window: Amounts include % of category</span>
+      <span class="zh-text">当前时间段内：金额同时显示占该类别的百分比</span>
     </div>
-    <div class="track"><i style="width:${Math.max(4, c.total/maxCat*100)}%"></i></div>
-    <div style="font-size:12px;color:var(--muted);margin-top:3px">
-      ${fmtMoney(c.monthly_avg)} / <span class="en">month</span><span class="zh">月</span>
-    </div>
-  </div>
-`).join('');
-
-// 渲染 12 个账户及门店绑定矩阵
-document.getElementById('accountCards').innerHTML = D.accounts.map(a => `
-  <div style="display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)">
-    <div>
-      <b>${a.name}</b>
-      <div style="font-size:12px;color:var(--muted);margin-top:2px">
-        <span class="en">${a.type} · ${a.status}</span>
-        <span class="zh">${a.type_zh} · ${a.status_zh}</span>
-        <span style="display:inline-block;margin-left:6px;font-weight:700;color:var(--green)">[${a.store}]</span>
+    <div class="drill-grid">
+      <div>
+        <b>
+          <span class="en-text">Top names in window, largest first</span>
+          <span class="zh-text">本期具体名字，金额从高到低</span>
+        </b>
+        <ul class="drill-list">${top}</ul>
+      </div>
+      <div>
+        <b>
+          <span class="en-text">Monthly trend in dataset</span>
+          <span class="zh-text">历史月度走势与环比</span>
+        </b>
+        <ul class="drill-list">${months}</ul>
+        <br>
+        <b>
+          <span class="en-text">Accounts used in window + share</span>
+          <span class="zh-text">本期扣款账户 + 占比</span>
+        </b>
+        <ul class="drill-list">${accts}</ul>
       </div>
     </div>
-    <div style="text-align:right">
-      <b style="font-variant-numeric:tabular-nums">${fmtMoney(a.balance)}</b>
+  `;
+  panel.style.display = 'block';
+}
+
+// Render Vendor Leaks Cards
+const proofEn = {
+  'Set limit': 'Vendor console budget',
+  '30-day review': '30-day activity proof',
+  'Check duplicates': 'Store billing list first',
+  'Check results': 'Sales or hiring result',
+  'Verify': 'Owner + purpose'
+};
+const proofZh = {
+  'Set limit': '供应商后台预算',
+  '30-day review': '30天活跃证据',
+  'Check duplicates': '先出门店计费对照表',
+  'Check results': '销售或招聘结果',
+  'Verify': '负责人 + 用途'
+};
+
+function renderVendors() {
+  const q = (document.getElementById('search').value || '').toLowerCase();
+  document.getElementById('vendors').innerHTML = D.vendors.filter(x => x.name.toLowerCase().includes(q)).map(x => {
+    const tag = x.risk === 'HIGH' ? 'tag-red' : (x.risk === 'MED' ? 'tag-yellow' : 'tag-green');
+    return `
+      <div class="vendor-card">
+        <div class="vendor-top">
+          <div>
+            <b>${x.name}</b>
+            <div class="vendor-meta">${x.accounts}</div>
+          </div>
+          <span class="${tag}">
+            <span class="en-text">${x.action}</span>
+            <span class="zh-text">${x.action_zh}</span>
+          </span>
+        </div>
+        <div class="vendor-nums">
+          <span><span class="en-text">Total (12M)</span><span class="zh-text">12个月总额</span> <b>${money(x.total)}</b></span>
+          <span><span class="en-text">Monthly</span><span class="zh-text">月均</span> <b>${money(x.monthly)}</b></span>
+        </div>
+        <div class="vendor-meta">
+          <span class="en-text">Proof: ${proofEn[x.action] || 'Action proof'}</span>
+          <span class="zh-text">证明：${proofZh[x.action] || '行动证据'}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+renderVendors();
+document.getElementById('search').oninput = renderVendors;
+
+// Render Accounts
+const flagTag = { ok: 'tag-green', unknown: 'tag-yellow', protected: 'tag-green', red: 'tag-red' };
+document.getElementById('accountList').innerHTML = D.accounts_live.map(a => {
+  const tag = flagTag[a.flag] || 'tag-gray';
+  const note = a.note_en
+    ? `<div class="vendor-meta"><span class="en-text">${a.note_en}</span><span class="zh-text">${a.note_zh}</span></div>`
+    : '';
+  const kind = a.kind === 'debt'
+    ? '<span class="en-text">owed</span><span class="zh-text">欠款</span>'
+    : '<span class="en-text">cash</span><span class="zh-text">现金</span>';
+  return `
+    <div class="acct-row">
+      <div>
+        <b>${a.name}</b>
+        <div class="vendor-meta"><span class="en-text">${a.type_en}</span><span class="zh-text">${a.type_zh}</span> · ${kind}</div>
+        ${note}
+      </div>
+      <div style="text-align:right">
+        <b>${money(a.balance)}</b>
+        <div class="vendor-meta"><span class="${tag}"><span class="en-text">${a.store_en}</span><span class="zh-text">${a.store_zh}</span></span></div>
+      </div>
     </div>
-  </div>
-`).join('');
+  `;
+}).join('');
+
+// Initial load: start with week (Last 7 Days)
+renderTimeWindow('week');
 </script>
 </body>
 </html>
